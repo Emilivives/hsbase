@@ -200,15 +200,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-                        <li class="nav-item">
-                            <a href="<?php echo $URL; ?>/admin/calendar" class="nav-link">
-                                <i class="nav-icon fas fa-calendar-alt"></i>
-                                <p>
-                                    Agenda
-                                    <span class="right badge badge-danger">New</span>
-                                </p>
-                            </a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-graduation-cap"></i>
@@ -262,6 +254,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     </a>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo $URL; ?>/admin/accidentes" class="nav-link">
+                                <i class="nav-icon fas bi-person-x-fill"></i>
+                                <p>
+                                    Accidentes
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">

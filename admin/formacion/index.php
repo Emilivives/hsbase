@@ -23,7 +23,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                     <li class="breadcrumb-item active">Control formaciones</li>
                 </ol>
             </div><!-- /.col -->
-            <hr>
+
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
@@ -32,7 +32,27 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 </html>
 
 <div class="row">
-    
+
+    <!-- ./col -->
+    <div class="col-lg-2 col-6">
+        <!-- small box -->
+        <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+                <?php $fechahoraentera = strtotime($fechahora);
+                $anio = date("Y", $fechahoraentera);
+                $contador_de_formaciones = count(array_filter($formaciones_datos, fn ($n) => date("Y", strtotime($n['fecha_fr'])) == $anio)); ?>
+                <h2><?php echo $contador_de_formaciones; ?><sup style="font-size: 20px"></h2>
+                <p>Formaciones año: <?php echo $anio; ?></p>
+
+            </div>
+            <div class="icon">
+                <i class="ion bi-person-arms-up"></i>
+            </div>
+
+        </div>
+    </div>
+
+
     <!-- ./col -->
     <div class="col-lg-2 col-6">
         <!-- small box -->
@@ -94,7 +114,9 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                     text-align: right;
                 }
             </style>
-
+            <div class="btn-text-right">
+            <a href="../formacion/create.php" class="btn btn-primary btn-sm"><i class="bi bi-person-lines-fill"></i>Nueva Formación</a>
+            </div>
 
 
         </div>

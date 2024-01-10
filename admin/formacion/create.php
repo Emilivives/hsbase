@@ -310,13 +310,22 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                         var fechacad_fr = $('#fechacad_fr').val();
                                         var formador_fr = $('#formador_fr').val();
 
-                                   
+
                                         if (fecha_fr == "") {
                                             alert("debe indicar la fecha de formacion");
 
+                                        } else if (nroformacion == "") {
+                                            alert("debe indicar el numero de formacion");
+
                                         } else {
                                             var url = "../../app/controllers/formaciones/registrar_formacion.php";
-                                            $.get(url, {nroformacion:nroformacion, tipo_fr:tipo_fr, fecha_fr:fecha_fr, fechacad_fr:fechacad_fr, formador_fr:formador_fr}, function(datos) {
+                                            $.get(url, {
+                                                nroformacion: nroformacion,
+                                                tipo_fr: tipo_fr,
+                                                fecha_fr: fecha_fr,
+                                                fechacad_fr: fechacad_fr,
+                                                formador_fr: formador_fr
+                                            }, function(datos) {
                                                 $('#respuesta_registro_formacion').html(datos);
                                             })
 

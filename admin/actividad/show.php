@@ -281,6 +281,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                     <table id="example1" class="table tabe-hover table-condensed">
                         <colgroup>
                             <col width="5%">
+                            <col width="7%">
                             <col width="25%">
                             <col width="10%">
                             <col width="5%">
@@ -289,12 +290,12 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                             <col width="7%">
                             <col width="7%">
                             <col width="7%">
-                            <col width="7%">
 
                         </colgroup>
                         <thead class="table-secondary">
                             <tr>
                                 <th style="text-align: center">#</th>
+                                <th style="text-align: left">Estado</th>
                                 <th style="text-align: left">Tarea</th>
                                 <th style="text-align: left">Centro</th>
                                 <th style="text-align: left">Prioridad</th>
@@ -302,7 +303,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                                 <th style="text-align: left">Categoria</th>
                                 <th style="text-align: left">Fecha Venci.</th>
                                 <th style="text-align: left">Fecha realiz.</th>
-                                <th style="text-align: left">Estado</th>
+
                                 <th style="text-align: center"></th>
                             </tr>
                         </thead>
@@ -320,13 +321,6 @@ include('../../app/controllers/actividad/listado_accionprl.php');
 
                                 <tr>
                                     <td style="text-align: center"><b><?php echo $contador; ?></b></td>
-                                    <td style="text-align: left"><b><?php echo $tarea_proyecto['nombre_ta']; ?></b></td>
-                                    <td style="text-align: left"><?php echo $tarea_proyecto['nombre_cen']; ?></td>
-                                    <td style="text-align: left"><?php echo $tarea_proyecto['prioridad_ta']; ?></td>
-                                    <td style="text-align: left"><?php echo $tarea_proyecto['nombre_resp']; ?></td>
-                                    <td style="text-align: left"><?php echo $tarea_proyecto['categoria_ta']; ?></td>
-                                    <td style="text-align: left"><?php echo $newdate = date("d-m-Y", strtotime($tarea_proyecto['fecha_ta'])) ?></td>
-                                    <td style="text-align: left"><?php echo $newdate = date("d-m-Y", strtotime($tarea_proyecto['fechareal_ta'])) ?></td>
                                     <td style="text-align: left"><?php $tarea_proyecto['estado_ta'];
                                                                     if ($tarea_proyecto['estado_ta'] == 'En curso') { ?>
                                             <span class='badge badge-info'>En Curso</span>
@@ -346,6 +340,14 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                                                                     }
                                         ?>
                                     </td>
+                                    <td style="text-align: left"><b><?php echo $tarea_proyecto['nombre_ta']; ?></b></td>
+                                    <td style="text-align: left"><?php echo $tarea_proyecto['nombre_cen']; ?></td>
+                                    <td style="text-align: left"><?php echo $tarea_proyecto['prioridad_ta']; ?></td>
+                                    <td style="text-align: left"><?php echo $tarea_proyecto['nombre_resp']; ?></td>
+                                    <td style="text-align: left"><?php echo $tarea_proyecto['categoria_ta']; ?></td>
+                                    <td style="text-align: left"><?php echo $newdate = date("d-m-Y", strtotime($tarea_proyecto['fecha_ta'])) ?></td>
+                                    <td style="text-align: left"><?php echo $newdate = date("d-m-Y", strtotime($tarea_proyecto['fechareal_ta'])) ?></td>
+                                    
 
 
 

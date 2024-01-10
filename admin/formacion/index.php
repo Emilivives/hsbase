@@ -99,90 +99,12 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 <div class="col-md-8">
     <div class="card card-outline card-primary">
         <div class="card-header col-md-12">
-            <h3 class="card-title"><b>Trabajadores registrados</b></h3>
+            <h3 class="card-title"><b>Formaciones Realizadas</b></h3>
             <style>
                 .btn-text-right {
                     text-align: right;
                 }
             </style>
-            <!-- Button trigger modal -->
-            <div class="btn-text-right">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevaformacion">
-                    Nueva formación
-                </button>
-            </div>
-
-            <!-- Modal -->
-            <form action="../../../app/controllers/formaciones/create.php" method="post" enctype="multipart/form-data">
-
-                <div class="modal fade" id="modal-nuevaformacion">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header" style="background-color:#808000 ;color:white">
-                                <h5 class="modal-title" id="modal-nuevaformacion">Formación realizada</h5>
-                                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Formación</label>
-                                        <select name="tipo_fr" id="" class="form-control">
-                                            <?php
-                                            foreach ($tipoformaciones_datos as $tipoformaciones_dato) { ?>
-                                                <option value="<?php echo $tipoformaciones_dato['id_tipoformacion']; ?>"><?php echo $tipoformaciones_dato['nombre_tf']; ?></option>
-                                            <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Trabajadores</label>
-                                        <select name="trabajador_fr" id="" class="form-control">
-                                            <?php
-                                            foreach ($trabajadores as $trabajador) { ?>
-                                                <option value="<?php echo $trabajador['id_trabajador']; ?>"><?php echo $trabajador['nombre_tr']; ?></option>
-                                            <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="">Fecha Formacion</label>
-                                            <input type="date" value="<?php echo $formacion['fecha_fr']; ?>" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="">Valido hasta</label>
-                                            <input type="date" value="<?php echo $formacion['fechacad_fr']; ?>" class="form-control">
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                            <div class="modal-footer">
-
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <!--fin modal-->
 
 
 
@@ -192,6 +114,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                 <thead>
                     <tr>
                         <th style="text-align: center">Num.</th>
+                        <th style="text-align: center">Formacion nº</th>
                         <th style="text-align: center">Tipo Form.</th>
                         <th style="text-align: center">Nombre trab.</th>
                         <th style="text-align: center">Fecha Form.</th>
@@ -202,17 +125,18 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                 <tbody>
                     <?php
                     $contador = 0;
-                    foreach ($formaciones as $formacion) {
+                    foreach ($formaciones_datos as $formaciones_dato) {
                         $contador = $contador + 1;
-                        $id_formacion = $formacion['id_formacion'];
+                        $id_formacion = $formaciones_dato['id_formacion'];
                     ?>
 
                         <tr>
                             <td style="text-align: center"><?php echo $contador; ?></td>
+                            <td style="text-align: center"><?php echo $formaciones_dato['nroformacion'];; ?></td>
                             <td>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-tipoformacion<?php echo $id_formacion; ?>">
-                                    <?php echo $formacion['nombre_tf']; ?>
+                                    <?php echo $formaciones_dato['nombre_tf']; ?>
                                 </button>
 
                                 <!-- Modal -->
@@ -220,7 +144,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                     <div class="modal-dialog modal-xl">
                                         <div class="modal-content">
                                             <div class="modal-header" style="background-color:#808000 ;color:white">
-                                                <h5 class="modal-title" id="modal-tipoformacion<?php echo $formacion['nombre_tf']; ?>">Tipo de Formación</h5>
+                                                <h5 class="modal-title" id="modal-tipoformacion<?php echo $formaciones_dato['nombre_tf']; ?>">Tipo de Formación</h5>
                                                 <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -231,26 +155,26 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                                     <div class="col-md-9">
                                                         <div class="form-group">
                                                             <label for="">Nombre formación</label>
-                                                            <input type="text" value="<?php echo $formacion['nombre_tf']; ?>" class="form-control" disabled>
+                                                            <input type="text" value="<?php echo $formaciones_dato['nombre_tf']; ?>" class="form-control" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="">Duracion</label>
-                                                            <input type="text" value="<?php echo $formacion['duracion_tf']; ?>" class="form-control" disabled>hrs.
+                                                            <input type="text" value="<?php echo $formaciones_dato['duracion_tf']; ?>" class="form-control" disabled>hrs.
                                                         </div>
 
                                                     </div>
                                                     <div class="col-md-1">
                                                         <div class="form-group">
                                                             <label for="">Validez</label>
-                                                            <input type="text" value="<?php echo $formacion['validez_tf']; ?>" class="form-control" disabled>
+                                                            <input type="text" value="<?php echo $formaciones_dato['validez_tf']; ?>" class="form-control" disabled>
                                                         </div>
 
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label for="">Contenido formación</label>
-                                                        <textarea class="form-control" id="<?php echo $formacion['detalles_tf']; ?>" name="$id_formacion" rows="20" disabled><?php echo $formacion['detalles_tf']; ?></textarea>
+                                                        <textarea class="form-control" id="<?php echo $formaciones_dato['detalles_tf']; ?>" name="$id_formacion" rows="20" disabled><?php echo $formaciones_dato['detalles_tf']; ?></textarea>
 
                                                     </div>
                                                 </div>
@@ -270,9 +194,9 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 
 
                             </td>
-                            <td style="text-align: center"><?php echo $formacion['nombre_tr']; ?></td>
-                            <td style="text-align: center"><?php echo $formacion['fecha_fr']; ?></td>
-                            <td style="text-align: center"><?php echo $formacion['fechacad_fr']; ?></td>
+                            <td style="text-align: center"><?php echo $formaciones_dato['nombre_tr']; ?></td>
+                            <td style="text-align: center"><?php echo $formaciones_dato['fecha_fr']; ?></td>
+                            <td style="text-align: center"><?php echo $formaciones_dato['fechacad_fr']; ?></td>
 
                             </td>
 

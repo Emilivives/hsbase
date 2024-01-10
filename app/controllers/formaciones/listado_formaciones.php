@@ -5,6 +5,7 @@ fas.idtrabajador_fas as idtrabajador_fas, tf.duracion_tf as duracion_tf, tf.deta
 INNER JOIN tipoformacion as tf ON fr.tipo_fr = tf.id_tipoformacion
 INNER JOIN form_asistencia as fas ON fas.nroformacion = fr.nroformacion
 INNER JOIN trabajadores as tr ON tr.id_trabajador = fas.idtrabajador_fas
+ORDER BY fecha_fr DESC
 ";
 
 $query_formaciones = $pdo->prepare($sql);

@@ -359,7 +359,6 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                 include('../../app/controllers/trabajadores/trabajador_formacion.php');
                                                 include('../../app/controllers/trabajadores/trabajador_reconocimiento.php'); ?>
 
-                                                <a href="delete.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-danger btn-sm" title="Eliminar"><i class="bi bi-trash3-fill"></i></a>
 
                                                 <!--boton modal-->
 
@@ -676,7 +675,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                             <?php
                                                                             foreach ($categorias_datos as $categorias_dato) {
                                                                                 $categoria_tabla = $categorias_dato['nombre_cat'];
-                                                                                $id_centro = $categorias_dato['id_centro']; ?>
+                                                                                $id_categoria= $categorias_dato['id_categoria']; ?>
                                                                                 <option value="<?php echo $id_categoria; ?>" <?php if ($categoria_tabla == $categoria_tr) { ?> selected="selected" <?php } ?>>
                                                                                     <?php echo  $categoria_tabla; ?>
                                                                                 </option>

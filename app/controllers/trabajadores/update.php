@@ -23,6 +23,7 @@ $sentencia->bindParam('codigo_tr', $codigo_tr);
 $sentencia->bindParam('nombre_tr', $nombre_tr);
 $sentencia->bindParam('dni_tr', $dni_tr);
 $sentencia->bindParam('fechanac_tr', $fechanac_tr);
+$sentencia->bindParam('inicio_tr', $inicio_tr);
 $sentencia->bindParam('categoria_tr', $categoria_tr);
 $sentencia->bindParam('centro_tr', $centro_tr);
 $sentencia->bindParam('activo_tr', $activo_tr);

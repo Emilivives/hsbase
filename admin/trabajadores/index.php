@@ -325,10 +325,10 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                         <td><?php echo $trabajador['nombre_cat']; ?></td>
                                         <td style="text-align: center;"><?php $trabajador['activo_tr'];
                                                                         if ($trabajador['activo_tr'] == 1) { ?>
-                                                <span class='badge badge-success'>activo</span>
+                                                <span class='badge badge-success'>Activo</span>
                                             <?php
                                                                         } else { ?>
-                                                <span class='badge badge-danger'>inactivo</span>
+                                                <span class='badge badge-danger'>Baja</span>
                                             <?php
                                                                         }
                                             ?>

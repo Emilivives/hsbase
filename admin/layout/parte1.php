@@ -167,40 +167,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             
                         </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas bi bi-calendar3"></i>
-                                <p>
-                                    Actividad
-                                    <i class="right fas fas fa-angle-left"></i>
-
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $URL; ?>/admin/actividad/proyectos.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Proyectos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                <a href="<?php echo $URL; ?>/admin/actividad/tareas.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tareas</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                <a href="<?php echo $URL; ?>/admin/actividad/accionprl.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Accion preventiva</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-
-
-                        
+                                                
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-graduation-cap"></i>
@@ -290,6 +257,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="<?php echo $URL; ?>/admin/maestros/varios" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>varios</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas bi bi-calendar3"></i>
+                                <p>
+                                    Actividad
+                                    <i class="right fas fas fa-angle-left"></i>
+
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo $URL; ?>/admin/actividad/proyectos.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Proyectos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                <a href="<?php echo $URL; ?>/admin/actividad/tareas.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tareas</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                <a href="<?php echo $URL; ?>/admin/actividad/accionprl.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Accion preventiva</p>
                                     </a>
                                 </li>
                             </ul>

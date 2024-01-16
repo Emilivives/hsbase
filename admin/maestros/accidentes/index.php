@@ -9,6 +9,7 @@ include('../../../app/controllers/maestros/accidentes/listado_gravedad.php');
 include('../../../app/controllers/maestros/accidentes/listado_partecuerpo.php');
 include('../../../app/controllers/maestros/accidentes/listado_tipolesion.php');
 include('../../../app/controllers/maestros/accidentes/listado_tipotrabajo.php');
+include('../../../app/controllers/maestros/accidentes/listado_tipolugar.php');
 
 
 ?>
@@ -237,7 +238,7 @@ include('../../../app/controllers/maestros/accidentes/listado_tipotrabajo.php');
 
 
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card card-outline card-primary">
                 <div class="card-header col-md-12">
                     <h3 class="card-title"><b>Desviacion</b></h3>
@@ -336,10 +337,10 @@ include('../../../app/controllers/maestros/accidentes/listado_tipotrabajo.php');
 
 
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card card-outline card-primary">
                 <div class="card-header col-md-12">
-                    <h3 class="card-title"><b>Gravedad</b></h3>
+                    <h3 class="card-title"><b>Tipo de lugar</b></h3>
                     <style>
                         .btn-text-right {
                             text-align: right;
@@ -404,20 +405,20 @@ include('../../../app/controllers/maestros/accidentes/listado_tipotrabajo.php');
                         <thead>
                             <tr>
                                 <th style="text-align: center">Cód.</th>
-                                <th style="text-align: center">Tipo gravedad</th>
+                                <th style="text-align: center">Tipo de lugar</th>
 
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $contador = 0;
-                            foreach ($ace_gravedad_datos as $ace_gravedad_dato) {
+                            foreach ($ace_tipolugar_datos as $ace_tipolugar_dato) {
                                 $contador = $contador + 1;
-                                $id_gravedad = $ace_gravedad_dato['id_gravedad'];
+                                $id_tipolugar = $ace_tipolugar_dato['id_tipolugar'];
                             ?>
                                 <tr>
-                                    <td><?php echo $ace_gravedad_dato['codgravedad_gr']; ?></td>
-                                    <td><?php echo $ace_gravedad_dato['gravedad_gr']; ?></td>
+                                    <td><?php echo $ace_tipolugar_dato['codtipolugar_tl']; ?></td>
+                                    <td><?php echo $ace_tipolugar_dato['tipolugar_tl']; ?></td>
 
                                 </tr>
                             <?php

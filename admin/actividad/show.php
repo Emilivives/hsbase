@@ -353,7 +353,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
 
                                     <td style="text-align: center">
                                         <div class="btn-text-right">
-                                            <a href="showtareas.php?id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-secondary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-eye"></i> </a>
+                                            <a href="showtareas.php?id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i> entrar</a>
 
                                             <!--boton modal-->
                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" title="Copiar/Duplicar" data-target="#modal-duplicartarea<?php echo $id_tarea; ?>"><i class="bi bi-copy"></i></button>

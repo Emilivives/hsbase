@@ -44,6 +44,7 @@ include('../../../app/controllers/maestros/categorias/listado_categorias.php');
                     <tr>
                         <th style="text-align: center">Num.</th>
                         <th style="text-align: center">Nombre categoria</th>
+                        <th style="text-align: center">Departamento</th>
                         <th style="text-align: center">Descripcion categoria</th>
                         <th style="text-align: center">Acciones</th>
                     </tr>
@@ -58,6 +59,7 @@ include('../../../app/controllers/maestros/categorias/listado_categorias.php');
                         <tr>
                             <td><?php echo $contador; ?></td>
                             <td><?php echo $categorias_dato['nombre_cat']; ?></td>
+                            <td><?php echo $categorias_dato['departamento_cat']; ?></td>
                             <td><?php echo $categorias_dato['descripcion_cat']; ?></td>
                             <td>
                                 <div class="d-grid gap-2 d-flex content-sm-end">

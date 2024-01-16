@@ -12,9 +12,14 @@
 
                     <div class="row">
                         <div class="col-md-12">
+                            
                             <div class="form-group">
                                 <label for="">Nombre categoria <b>*</b></label>
                                 <input type="text" name="nombre_cat" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Departamento <b>*</b></label>
+                                <input type="text" name="departamento_cat" class="form-control" required>
                             </div>
                             <br>
 

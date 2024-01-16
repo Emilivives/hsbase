@@ -304,34 +304,42 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                 <div id="respuesta_registro_formacion"></div>
                                 <script>
                                     $('#btn_guardar_formacion').click(function() {
-                                        var nroformacion = '<?php echo $contador_formaciones ?>';
-                                        var tipo_fr = $('#tipo_fr').val();
-                                        var fecha_fr = $('#fecha_fr').val();
-                                        var fechacad_fr = $('#fechacad_fr').val();
-                                        var formador_fr = $('#formador_fr').val();
+                                            var nroformacion = '<?php echo $contador_formaciones ?>';
+                                            var tipo_fr = $('#tipo_fr').val();
+                                            var fecha_fr = $('#fecha_fr').val();
+                                            var fechacad_fr = $('#fechacad_fr').val();
+                                            var formador_fr = $('#formador_fr').val();
 
 
-                                        if (fecha_fr == "") {
-                                            alert("debe indicar la fecha de formacion");
+                                            if (fecha_fr == "") {
+                                                alert("debe indicar la fecha de formacion");
 
-                                        } else if (nroformacion == "") {
-                                            alert("debe indicar el numero de formacion");
+                                            } else if (nroformacion == "") {
+                                                alert("debe indicar el numero de formacion");
 
-                                        } else {
-                                            var url = "../../app/controllers/formaciones/registrar_formacion.php";
-                                            $.get(url, {
-                                                nroformacion: nroformacion,
-                                                tipo_fr: tipo_fr,
-                                                fecha_fr: fecha_fr,
-                                                fechacad_fr: fechacad_fr,
-                                                formador_fr: formador_fr
-                                            }, function(datos) {
-                                                $('#respuesta_registro_formacion').html(datos);
-                                            })
+                                            } else{
+                                                var url = "../../app/controllers/formaciones/registrar_formacion.php";
+                                                $.get(url, {
+                                                    nroformacion: nroformacion,
+                                                    tipo_fr: tipo_fr,
+                                                    fecha_fr: fecha_fr,
+                                                    fechacad_fr: fechacad_fr,
+                                                    formador_fr: formador_fr
+                                                }, function(datos) {
+                                                    $('#respuesta_registro_formacion').html(datos);
+                                                })
+                                            /*} else($tipo_fr == 1) {
+                                                <?php
+                                                $sentencia2 = $pdo -> prepare("UPDATE trabajadores as tr SET tr.formacionpdt_tr = $fecha_tr 
+                                                INNER JOIN form_asistencia as fas ON tr.id_trabajador = fas.idtrabajador_fas
+                                                INNER JOIN formacion as fr ON fas.nroformacion = fr.nroformacion WHERE tr.id_trabajador = fas.idtrabajador_fas");
+                                                $sentencia2 -> bindParam('formacionpdt_tr', $fecha_fr);
+                                                ?>
+                                            }*/
 
                                         }
-
-                                    });
+                                    }
+                                    );
                                 </script>
 
                             </div>

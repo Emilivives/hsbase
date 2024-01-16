@@ -127,121 +127,17 @@ include('../../app/controllers/actividad/listado_tareas.php');
     <div class="col-md-12">
         <div class="card card-outline card-success">
             <div class="card-header col-md-12">
-                <h3 class="card-title"><b>Proyectos</b></h3>
+                <h3 class="card-title"><b>Accidentes laborales</b></h3>
                 <style>
                     .btn-text-right {
                         text-align: right;
                     }
                 </style>
-                <!--boton modal-->
-                <div class="btn-text-right">
-                    <button type="button" class="btn btn-primary btn-sm btn-font-size" data-toggle="modal" data-target="#modal-nuevotrabajador">Añadir Proyecto</button>
-                </div>
+               
+               <div class="btn-text-right">
+            <a href="../accidentes/create.php" class="btn btn-primary"><i class="bi bi-list-ul"></i> Nueva Investigacion accidente</a>
+            </div>
 
-                <!--inicio modal nuevo trabajador-->
-                <div class="modal fade" id="modal-nuevotrabajador">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header" style="background-color:#0000a0 ;color:white">
-                                <h5 class="modal-title" id="modal-nuevtrabajador">Nuevo Proyecto</h5>
-                                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-                                <form action="../../app/controllers/pruebas/create.php" method="post" enctype="multipart/form-data">
-
-
-
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="">Codigo</label>
-                                                <input type="text" name="codigo_tr" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="">DNI/NIE</label>
-                                                <input type="text" name="dni_tr" class="form-control" required>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <label for="">APELLIDOS, NOMBRE</label>
-                                                <input type="text" name="nombre_tr" class="form-control" required>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="">Fecha Nacimiento</label>
-                                                <input type="date" name="fechanac_tr" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="">Fecha Inicio</label>
-                                                <input type="date" name="inicio_tr" class="form-control" required>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label for="">Centro Trabajo</label>
-                                                <select name="centro_tr" id="" class="form-control">
-                                                    <?php
-                                                    foreach ($centros_datos as $centros_dato) { ?>
-                                                        <option value="<?php echo $centros_dato['id_centro']; ?>"><?php echo $centros_dato['nombre_cen']; ?></option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label for="">Categoria</label>
-                                                <select name="categoria_tr" id="" class="form-control">
-                                                    <?php
-                                                    foreach ($categorias_datos as $categorias_dato) { ?>
-                                                        <option value="<?php echo $categorias_dato['id_categoria']; ?>"><?php echo $categorias_dato['nombre_cat']; ?></option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                    <div class="modal-footer">
-
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                        <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
-
-                                    </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!--fin modal-->
-
-
-                </div>
                 <div class="card-body">
                     <table id="example1" class="table tabe-hover table-condensed table-striped">
                         <colgroup>

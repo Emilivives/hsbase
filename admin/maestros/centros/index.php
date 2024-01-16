@@ -115,6 +115,7 @@ include('../../../app/controllers/maestros/empresas/listado_empresas.php');
                                 <th style="text-align: center">Nombre empresa</th>
                                 <th style="text-align: center">CIF</th>
                                 <th style="text-align: center">Dirección empresa</th>
+                                <th style="text-align: center">Modalidad PRL</th>
                                 <th style="text-align: center">Acciones</th>
                             </tr>
                         </thead>
@@ -130,6 +131,7 @@ include('../../../app/controllers/maestros/empresas/listado_empresas.php');
                                     <td><?php echo $empresas_dato['nombre_emp']; ?></td>
                                     <td><?php echo $empresas_dato['cif_emp']; ?></td>
                                     <td><?php echo $empresas_dato['direccion_emp']; ?></td>
+                                    <td><?php echo $empresas_dato['modalidadprl_emp']; ?></td>
 
 
 

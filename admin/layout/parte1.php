@@ -28,10 +28,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo $URL; ?>/path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/templates/AdminLTE/dist/css/adminlte.min.css">
     <!-- icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+
+
     <!-- jQuery -->
     <script src="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/jquery/jquery.min.js"></script>
     <!-- libreria de mensajes sweetalert2 -->
@@ -110,7 +114,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#001d24;">
             <!-- Brand Logo -->
             <a href="<?php echo $URL; ?>/public/templates/AdminLTE/index3.html" class="brand-link">
                 <img src="<?php echo $URL; ?>/public/img/icono-2.png" alt="HS Base Logo" class="brand-image" style="opacity: .9">
@@ -224,7 +228,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo $URL; ?>/admin/accidentes" class="nav-link">
-                                <i class="nav-icon fas bi-person-x-fill"></i>
+                                <i class="nav-icon fa bi bi-cone-striped"></i>
                                 <p>
                                     Accidentes
                                     <span class="right badge badge-danger">New</span>

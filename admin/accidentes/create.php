@@ -141,7 +141,7 @@ include('../../app/controllers/maestros/accidentes/listado_tipoaccidente.php');
                     <div class="form-group row">
                         <label for="centro" class="col-form-label col-sm-2">Centro:</label>
                         <div class="col-sm-7">
-                            <select name="btn_centro" id="btn_centro" class="form-control" onchange="selectIdcen(event)">
+                            <select name="centro_ace" id="btn_centro" class="form-control" onchange="selectIdcen(event)">
                                 <option value="0">--Seleccione centro--</option>
                                 <?php
                                 foreach ($centros_datos as $centros_dato) { ?>
@@ -177,7 +177,7 @@ include('../../app/controllers/maestros/accidentes/listado_tipoaccidente.php');
 
                 <div class="card card-outline card-primary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fa fa-book" style="text-align: left;"></i> Datos trabajador</h3>
+                        <h3 class="card-title"><i class="bi bi-person-fill" style="text-align: left;"></i> Datos trabajador</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
@@ -344,14 +344,14 @@ include('../../app/controllers/maestros/accidentes/listado_tipoaccidente.php');
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group row">
-                                            <label for="nombre_emp" class="col-form-label col-sm-2">Lugar</label>
+                                            <label for="lugar" class="col-form-label col-sm-2">Lugar</label>
                                             <div class="col-sm-8">
                                                 <select class="form-select" aria-label="Default select example">
                                                     <option selected>Selecciona lugar</option>
                                                     <option value="1">En el propio centro</option>
                                                     <option value="2">En otro centro de trabajo</option>
                                                     <option value="3">In itinero</option>
-                                                    <option value="3">Desplazamiento entre centros</option>
+                                                    <option value="4">Desplazamiento entre centros</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -387,10 +387,10 @@ include('../../app/controllers/maestros/accidentes/listado_tipoaccidente.php');
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <div class="form-group row">
                                             <label for="tipoaccidente_ta" class="col-form-label col-sm-2">Tipo</label>
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-7">
                                                 <input type="text" id="tipoaccidente_ta" class="form-control" disabled>
                                             </div>
                                         </div>
@@ -399,27 +399,157 @@ include('../../app/controllers/maestros/accidentes/listado_tipoaccidente.php');
                                         <div class="form-group row">
                                             <label for="nombre" class="col-form-label col-sm-3">Fecha:</label>
                                             <div class="col-sm-6">
-                                                <input type="date" id="fecha_ace2" name="fecha_ace2" class="form-control" tabindex="1" disabled>
+                                                <input type="date" id="fecha_ace2" name="fecha_ace2" class="form-control" tabindex="1" onchange="diaSemana()" disabled>
+                                            </div>
+                                            <script>
+                                                function diaSemana() {
+                                                    var x = document.getElementById("fecha_ace2");
+                                                    let date = new Date(x.value.replace(/-+/g, '/'));
+
+                                                    let options = {
+                                                        weekday: 'long',
+                                                        year: 'numeric',
+                                                        month: 'long',
+                                                        day: 'numeric'
+                                                    };
+                                                    console.log(date.toLocaleDateString('es-MX', options));
+
+                                                    $('#diaSemana').trigger('input')
+                                                }
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group row">
+                                            <label for="nombre" class="col-form-label col-sm-4">Fecha Baja medica:</label>
+                                            <div class="col-sm-6">
+                                                <input type="date" id="fechabaja_ace" name="fechabaja_ace" class="form-control" tabindex="1">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-2">
                                         <div class="form-group row">
-                                            <label for="modalidadprl_emp" class="col-form-label col-sm-2">Modalidad PRL</label>
-                                            <div class="col-sm-7">
-                                                <input type="text" id="modalidadprl_emp" class="form-control" disabled>
+                                            <label for="diaSemana" class="col-form-label col-sm-3">Dia</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" id="diaSemana" class="form-control" value="" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group row">
+                                            <label for="nombre" class="col-form-label col-sm-3">Hora:</label>
+                                            <div class="col-sm-4">
+                                                <input type="time" name="hora_ace" class="form-control" tabindex="1">
                                             </div>
                                         </div>
                                     </div>
 
+                                    <div class="col-sm-2">
+                                        <div class="form-group row">
+                                            <label for="nombre" class="col-form-label col-sm-5">Hora trabajo:</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-select" name="horatrabajo_ace" aria-label="Default select example">
+                                                    <option selected>-</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-sm-3">
+                                        <div class="form-group row">
+                                            <label for="trabajohabitual_ace" class="col-form-label col-sm-4">Trabajo habitual:</label>
+                                            <div class="col-sm-3">
+                                                <select class="form-select" name="trabajohabitual_ace" aria-label="Default select example">
+                                                    <option selected>-</option>
+                                                    <option value="SI">SI</option>
+                                                    <option value="NO">NO</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+           
+                                <div class="col-sm-3">
+                                    <div class="form-group row">
+                                        <label for="diadescanso_ace" class="col-form-label col-sm-4">Dia ult. descanso:</label>
+                                        <div class="col-sm-3">
+                                            <select class="form-select" name="diadescanso_ace" aria-label="Default select example">
+                                                <option selected>Seleccione</option>
+                                                <option value="Lunes">Lunes</option>
+                                                <option value="Martes">Martes</option>
+                                                <option value="Miércoles">Miércoles</option>
+                                                <option value="Jueves">Jueves</option>
+                                                <option value="Viernes">Viernes</option>
+                                                <option value="Sábado">Sábado</option>
+                                                <option value="Domingo">Domingo</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                  
+                                <div class="col-sm-2">
+                                        <div class="form-group row">
+                                            <label for="nombre" class="col-form-label col-sm-5">Semanas descanso:</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-select" name="semanadescanso_ace" aria-label="Default select example">
+                                                    <option selected>-</option>
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+              
+                        <div class="col-sm-3">
+                            <div class="form-group row">
+                                <label for="trabajohabitual_ace" class="col-form-label col-sm-4">Trabajo habitual:</label>
+                                <div class="col-sm-3">
+                                    <select class="form-select" name="trabajohabitual_ace" aria-label="Default select example">
+                                        <option selected>-</option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+
+                                    </select>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
 
-    </form>
+            </div>
+        </div>
+</div>
+
+</div>
+
+</form>
 </div>
 
 

@@ -1,10 +1,8 @@
 <?php
 include('../../app/config.php');
 include('../../admin/layout/parte1.php');
-include('../../app/controllers/pruebas/listado_trabajadores.php');
-include('../../app/controllers/maestros/centros/listado_centros.php');
-include('../../app/controllers/actividad/listado_proyectos.php');
-include('../../app/controllers/actividad/listado_tareas.php');
+include('../../app/controllers/accidentes/listado_accidentes.php');
+
 ?>
 <html>
 <!-- Font Awesome -->
@@ -43,85 +41,6 @@ include('../../app/controllers/actividad/listado_tareas.php');
 </html>
 
 
-<div class="row">
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-light shadow-sm border">
-            <div class="inner">
-            <?php
-                            $contador_de_proyectos = 0;
-                            foreach ($proyectos as $proyecto){
-                                $contador_de_proyectos = $contador_de_proyectos + 1;
-                            }
-                            ?>
-                            <h2><?php echo $contador_de_proyectos;?><sup style="font-size: 20px"></h2>
-                    <p>Proyectos disponibles</p>
-            </div>
-            <div class="icon">
-                <i class="ion bi-layers-fill"></i>
-            </div>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-light shadow-sm border">
-            <div class="inner">
-            <?php
-                            $contador_de_tareas = 0;
-                            foreach ($tareas as $tarea){
-                                $contador_de_tareas = $contador_de_tareas + 1;
-                            }
-                            ?>
-                            <h2><?php echo $contador_de_tareas;?><sup style="font-size: 20px"></h2>
-                    <p>Tareas programadas</p>
-            </div>
-            <div class="icon">
-                <i class="ion bi-list-task"></i>
-            </div>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-light shadow-sm border">
-            <div class="inner">
-            <?php
-                            $contador_de_tareas = 0;
-                            foreach ($tareas as $tarea){
-                                if($tarea['estado_ta']=='En curso'){
-                                    $contador_de_tareas = $contador_de_tareas + 1;
-                            }
-                        }
-
-                            ?>
-                            <h2><?php echo $contador_de_tareas;?><sup style="font-size: 20px"></h2>
-                    <p>Tareas en curso</p>
-            </div>
-            <div class="icon">
-                <i class="ion bi-check2-square"></i>
-            </div>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box">
-            <div class="inner">
-                <h2>65</h2>
-
-                <p>Unique Visitors</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-
-        </div>
-    </div>
-    <!-- ./col -->
-</div>
-<!-- /.content-header -->
-
 
 <div class="row">
     <div class="col-md-12">
@@ -142,8 +61,10 @@ include('../../app/controllers/actividad/listado_tareas.php');
                     <table id="example1" class="table tabe-hover table-condensed table-striped">
                         <colgroup>
                             <col width="5%">
-                            <col width="35%">
+                            <col width="5%">
                             <col width="10%">
+                            <col width="10%">
+                            <col width="20%">
                             <col width="10%">
                             <col width="20%">
                             <col width="10%">
@@ -153,43 +74,47 @@ include('../../app/controllers/actividad/listado_tareas.php');
                         <thead class="table-dark">
                             <tr>
                                 <th style="text-align: center">#</th>
-                                <th style="text-align: left">Proyecto</th>
-                                <th style="text-align: left">Fecha In.</th>
-                                <th style="text-align: left">Fecha Fin</th>
-                                <th style="text-align: left">Avance</th>
-                                <th style="text-align: left">Estado</th>
+                                <th style="text-align: left">Nro.</th>
+                                <th style="text-align: left">Fecha</th>
+                                <th style="text-align: left">Tipo accidente</th>
+                                <th style="text-align: left">Trabajador</th>
+                                <th style="text-align: left">Centro</th>
+                                <th style="text-align: left">Tipo lesion</th>
+                                <th style="text-align: left">Gravedad</th>
                                 <th style="text-align: center">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $contador = 0;
-                            foreach ($proyectos as $proyecto) {
+                            foreach ($accidentes_datos as $accidentes_dato) {
                                 $contador = $contador + 1;
-                                $id_proyecto = $proyecto['id_proyecto'];
+                                $id_accidente = $accidentes_dato['id_accidente'];
                             ?>
 
                                 <tr>
                                     <td style="text-align: center"><b><?php echo $contador; ?></b></td>
-                                    <td style="text-align: left"><b><?php echo $proyecto['nombre_py']; ?></b>
-
-                                    </td>
-                                    <td style="text-align: left"><?php echo $newdate = date("d-m-Y", strtotime($proyecto['fechainicio_py'])) ?></td>
-                                    <td style="text-align: left"><?php echo $newdate = date("d-m-Y", strtotime($proyecto['fechafin_py'])) ?></td>
-                                    <td style="text-align: left"><?php echo $proyecto['responsable_py']; ?></td>
-
-                                    <td style="text-align: left;"><?php $proyecto['estado_py'];
-                                                                    if ($proyecto['estado_py'] == 1) { ?>
-                                            <span class='badge badge-success'>activo</span>
+                                    <td style="text-align: left"><b><?php echo $accidentes_dato['nroaccidente_ace']; ?></b></td>
+                                    <td style="text-align: left"><b><?php echo $accidentes_dato['fecha_ace']; ?></b></td>
+                                    <td style="text-align: left;"><?php $accidentes_dato['tipoaccidente_ta'];
+                                                                    if ($accidentes_dato['tipoaccidente_ta'] == "Accidente sin baja") { ?>
+                                            <span class='badge badge-warning'>ACC. SIN BAJA</span>
                                         <?php
-                                                                    } else { ?>
-                                            <span class='badge badge-danger'>inactivo</span>
+                                                                    } else if ($accidentes_dato['tipoaccidente_ta'] == "Accidente con baja"){ ?>
+                                            <span class='badge badge-danger'>ACC. CON BAJA</span>
                                         <?php
-                                                                    }
+                                              } else if ($accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere"){ ?>
+                                                <span class='badge badge-secondary'>ACC. IN ITINERE</span>
+                                            <?php                       }
                                         ?>
 
 
                                     </td>
+                                    <td style="text-align: left"><?php echo $accidentes_dato['nombre_tr']; ?></td>
+                                    <td style="text-align: left"><?php echo $accidentes_dato['nombre_cen']; ?></td>
+                                    <td style="text-align: left"><?php echo $accidentes_dato['tipolesion_tl']; ?></td>
+                                    <td style="text-align: left"><?php echo $accidentes_dato['gravedad_gr']; ?></td>
+                                    
 
 
                                     <td style="text-align: center">
@@ -263,12 +188,12 @@ include('../../admin/layout/mensaje.php');
             "pageLength": 5,
             "language": {
                 "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ Tareas",
-                "infoEmpty": "Mostrando 0 a 0 de 0 Usuarios",
-                "infoFiltered": "(Filtrado de MAX total Usuarios)",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ expedientes investigación",
+                "infoEmpty": "Mostrando 0 a 0 de 0 Accidentes",
+                "infoFiltered": "(Filtrado de MAX total Accidentes)",
                 "infoPostFix": "",
                 "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Usuarios",
+                "lengthMenu": "Mostrar _MENU_ Accidentes",
                 "loadingRecords": "Cargando...",
                 "processing": "Procesando...",
                 "search": "Buscador:",

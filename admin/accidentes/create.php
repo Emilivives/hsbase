@@ -5,12 +5,14 @@ include('../../app/controllers/trabajadores/listado_trabajadores.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
 include('../../app/controllers/maestros/accidentes/listado_actividadfisica.php');
 include('../../app/controllers/maestros/accidentes/listado_agentematerial.php');
+include('../../app/controllers/maestros/accidentes/listado_agentematerialdesv.php');
+include('../../app/controllers/maestros/accidentes/listado_agentematerialles.php');
 include('../../app/controllers/maestros/accidentes/listado_desviacion.php');
 include('../../app/controllers/maestros/accidentes/listado_formacontacto.php');
 include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 include('../../app/controllers/maestros/accidentes/listado_partecuerpo.php');
 include('../../app/controllers/maestros/accidentes/listado_tipolesion.php');
-include('../../app/controllers/maestros/accidentes/listado_tipotrabajo.php');
+include('../../app/controllers/maestros/accidentes/listado_procesotrabajo.php');
 include('../../app/controllers/maestros/accidentes/listado_tipolugar.php');
 include('../../app/controllers/maestros/accidentes/listado_tipoaccidente.php');
 include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
@@ -227,6 +229,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                     <label for="fechanac_tr" class="col-form-label col-sm-4">Fecha Nac.</label>
                                     <div class="col-sm-6">
                                         <input type="text" id="fechanac_tr" class="form-control" disabled>
+
                                     </div>
                                 </div>
                             </div>
@@ -237,6 +240,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                     <label for="categoria_tr" class="col-form-label col-sm-2">Puesto</label>
                                     <div class="col-sm-7">
                                         <input type="text" id="categoria_tr" class="form-control" disabled>
+
                                     </div>
                                 </div>
                             </div>
@@ -252,10 +256,9 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 
                             <div class="col-sm-3">
                                 <div class="form-group row">
-                                    <label for="edad" class="col-form-label col-sm-2">Edad</label>
-                                    <div class="col-sm-2">
-
-                                        <input type="text" id="edad" class="form-control" disabled>
+                             
+                                
+                                        <input type="date" id="edad_tr" class="form-control" value="edad_tr" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -664,8 +667,8 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                         <select name="procesotrabajo_ace" id="tipolugar_ace" class="form-control">
                                             <option value="0">--Seleccione proceso--</option>
                                             <?php
-                                            foreach ($ace_tipotrabajo_datos as $ace_tipotrabajo_dato) { ?>
-                                                <option value="<?php echo $ace_tipotrabajo_dato['id_tipotrabajo']; ?>"><?php echo $ace_tipotrabajo_dato['codigo_tt']; ?> | <?php echo $ace_tipotrabajo_dato['tipotrabajo_tt']; ?> </option>
+                                            foreach ($ace_procesotrabajo_datos as $ace_procesotrabajo_dato) { ?>
+                                                <option value="<?php echo $ace_procesotrabajo_dato['id_procesotrabajo']; ?>"><?php echo $ace_procesotrabajo_dato['codigo_pt']; ?> | <?php echo $ace_procesotrabajo_dato['procesotrabajo_pt']; ?> </option>
                                             <?php
                                             }
                                             ?>
@@ -780,8 +783,8 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                         <select name="agmaterdesv_ace" class="form-control">
                                             <option value="0">--Seleccione el agente material asociado a la actividad--</option>
                                             <?php
-                                            foreach ($ace_agentematerial_datos as $ace_agentematerial_dato) { ?>
-                                                <option value="<?php echo $ace_agentematerial_dato['id_agentematerial']; ?>"><?php echo $ace_agentematerial_dato['codagentemat_am']; ?> | <?php echo $ace_agentematerial_dato['agentematerial_am']; ?> </option>
+                                            foreach ($ace_agentematerialdesv_datos as $ace_agentematerialdesv_dato) { ?>
+                                                <option value="<?php echo $ace_agentematerialdesv_dato['id_agentematerialdesv']; ?>"><?php echo $ace_agentematerialdesv_dato['codagentematdesv_amd']; ?> | <?php echo $ace_agentematerialdesv_dato['agentematerialdesv_amd']; ?> </option>
                                             <?php
                                             }
                                             ?>
@@ -838,8 +841,8 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                         <select name="matercasusalesi_ace" class="form-control">
                                             <option value="0">--Seleccione el agente material que ha causado la lesion--</option>
                                             <?php
-                                            foreach ($ace_agentematerial_datos as $ace_agentematerial_dato) { ?>
-                                                <option value="<?php echo $ace_agentematerial_dato['id_agentematerial']; ?>"><?php echo $ace_agentematerial_dato['codagentemat_am']; ?> | <?php echo $ace_agentematerial_dato['agentematerial_am']; ?> </option>
+                                            foreach ($ace_agentematerialles_datos as $ace_agentematerialles_dato) { ?>
+                                                <option value="<?php echo $ace_agentematerialles_dato['id_agentematerialles']; ?>"><?php echo $ace_agentematerial_dato['codagentematles_aml']; ?> | <?php echo $ace_agentematerial_dato['agentematerialles_aml']; ?> </option>
                                             <?php
                                             }
                                             ?>
@@ -1194,11 +1197,11 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                         <div class="row">
 
-                        <div class="col-sm-7">
+                            <div class="col-sm-7">
                                 <div class="form-group row">
                                     <label for="medidasprev_ace" class="col-form-label col-sm-2">Medidas preventivas:</label>
                                     <div class="col-sm-9">

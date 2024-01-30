@@ -3,6 +3,10 @@ include('../../app/config.php');
 include('../../admin/layout/parte1.php');
 include('../../app/controllers/usuarios/listado_usuarios.php');
 include('../../app/controllers/actividad/listado_tareas.php');
+include('../../app/controllers/trabajadores/listado_trabajadores.php');
+include('../../app/controllers/formaciones/listado_formaciones.php');
+include('../../app/controllers/accidentes/listado_accidentes.php');
+
 ?>
 <html>
 <!-- Font Awesome -->
@@ -11,7 +15,75 @@ include('../../app/controllers/actividad/listado_tareas.php');
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
    <!-- Main content -->
    <div class="content">
+    <hr>
       <div class="container-fluid">
+<div class="row">
+  <!-- ./col -->
+  <div class="col-lg-2 col-6">
+        <!-- small box -->
+        <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+                <?php
+                $contador_de_trabajadores = 0;
+                foreach ($trabajadores as $trabajador) {
+                    if ($trabajador['activo_tr'] == 1) {
+                        $contador_de_trabajadores = $contador_de_trabajadores + 1;
+                    }
+                }
+                ?>
+
+                <h2><?php echo $contador_de_trabajadores; ?><sup style="font-size: 20px"></h2>
+                <p>Trabajadores activos</p>
+            </div>
+            <div class="icon">
+                <i class="ion bi-person-arms-up"></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-2 col-6">
+        <!-- small box -->
+        <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+                <?php $fechahoraentera = strtotime($fechahora);
+                $anio = date("Y", $fechahoraentera);
+                $contador_de_formaciones = count(array_filter($formaciones_datos, fn ($n) => date("Y", strtotime($n['fecha_fr'])) == $anio)); ?>
+                <h2><?php echo $contador_de_formaciones; ?><sup style="font-size: 20px"></h2>
+                <p>Formaciones año: <?php echo $anio; ?></p>
+
+            </div>
+            <div class="icon">
+                <i class="ion bi-person-arms-up"></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-2 col-6">
+        <!-- small box -->
+        <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+                <?php
+                $fechahoraentera = strtotime($fechahora);
+                $anio = date("Y", $fechahoraentera);
+                $contador_de_accidentes = 0;
+                foreach ($accidentes_datos as $accidentes_dato) {
+                    if ((date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+                        $contador_de_accidentes = $contador_de_accidentes + 1;
+                    }
+                }
+                ?>
+
+                <h2><?php echo $contador_de_accidentes; ?><sup style="font-size: 20px"></h2>
+                <p>Accidentes en <?php echo  $anio ?></p>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-person-falling-burst"></i>
+            </div>
+
+        </div>
+
+</div>
+
         <div class="row">
           <div class="col-lg-6">
             <div class="card">

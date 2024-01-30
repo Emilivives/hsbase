@@ -105,7 +105,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 <!-- /.content-header -->
 
 
-<div class="col-md-8">
+<div class="col-md-12">
     <div class="card card-outline card-primary">
         <div class="card-header col-md-12">
             <h3 class="card-title"><b>Formaciones Realizadas</b></h3>

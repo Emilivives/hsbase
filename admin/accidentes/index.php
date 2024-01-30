@@ -5,19 +5,18 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
 
 ?>
 <html>
-<!-- Font Awesome -->
-<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <style>
     .dropdown-font-size {
-      font-size: 12px;
-    }
-    .btn-font-size{
-      font-size: 12px;
+        font-size: 12px;
     }
 
-  </style>
+    .btn-font-size {
+        font-size: 12px;
+    }
+</style>
 
 
 <div class="content-header">
@@ -39,7 +38,106 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
 
 
 </html>
+<div class="row">
+    <!-- ./col -->
+    <div class="col-lg-2 col-6">
+        <!-- small box -->
+        <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+                <?php
+                $fechahoraentera = strtotime($fechahora);
+                $anio = date("Y", $fechahoraentera);
+                $contador_de_accidentes = 0;
+                foreach ($accidentes_datos as $accidentes_dato) {
+                    if ((date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+                        $contador_de_accidentes = $contador_de_accidentes + 1;
+                    }
+                }
+                ?>
 
+                <h2><?php echo $contador_de_accidentes; ?><sup style="font-size: 20px"></h2>
+                <p>Accidentes en <?php echo  $anio ?></p>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-person-falling-burst"></i>
+            </div>
+
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-2 col-6">
+        <!-- small box -->
+        <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+                <?php
+                $fechahoraentera = strtotime($fechahora);
+                $anio = date("Y", $fechahoraentera);
+                $contador_de_accidentesconbaja = 0;
+                foreach ($accidentes_datos as $accidentes_dato) {
+                    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente con baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+                        $contador_de_accidentesconbaja = $contador_de_accidentesconbaja + 1;
+                    }
+                }
+                ?>
+
+                <h2><?php echo $contador_de_accidentesconbaja; ?><sup style="font-size: 20px"></h2>
+                <p>Accidentes con Baja en <?php echo  $anio ?></p>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-hospital-user"></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-2 col-6">
+        <!-- small box -->
+        <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+                <?php
+                $fechahoraentera = strtotime($fechahora);
+                $anio = date("Y", $fechahoraentera);
+                $contador_de_accidentessinbaja = 0;
+                foreach ($accidentes_datos as $accidentes_dato) {
+                    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente sin baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+                        $contador_de_accidentessinbaja = $contador_de_accidentessinbaja + 1;
+                    }
+                }
+                ?>
+
+                <h2><?php echo $contador_de_accidentessinbaja; ?><sup style="font-size: 20px"></h2>
+                <p>Accidentes sin Baja en <?php echo  $anio ?></p>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-person-chalkboard"></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-2 col-6">
+        <!-- small box -->
+        <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+                <?php
+                $fechahoraentera = strtotime($fechahora);
+                $anio = date("Y", $fechahoraentera);
+                $contador_de_accidentessinbaja = 0;
+                foreach ($accidentes_datos as $accidentes_dato) {
+                    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente sin baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+                        $contador_de_accidentessinbaja = $contador_de_accidentessinbaja + 1;
+                    }
+                }
+                ?>
+
+                <h2><?php echo $contador_de_accidentessinbaja; ?><sup style="font-size: 20px"></h2>
+                <p>Jornadas de trabajo perdidas <?php echo  $anio ?></p>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-person-chalkboard"></i>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
 <div class="row">
@@ -52,10 +150,10 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
                         text-align: right;
                     }
                 </style>
-               
-               <div class="btn-text-right">
-            <a href="../accidentes/create.php" class="btn btn-primary"><i class="bi bi-list-ul"></i> Nueva Investigacion accidente</a>
-            </div>
+
+                <div class="btn-text-right">
+                    <a href="../accidentes/create.php" class="btn btn-primary"><i class="bi bi-list-ul"></i> Nueva Investigacion accidente</a>
+                </div>
 
                 <div class="card-body">
                     <table id="example1" class="table tabe-hover table-condensed table-striped">
@@ -100,12 +198,12 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
                                                                     if ($accidentes_dato['tipoaccidente_ta'] == "Accidente sin baja") { ?>
                                             <span class='badge badge-warning'>ACC. SIN BAJA</span>
                                         <?php
-                                                                    } else if ($accidentes_dato['tipoaccidente_ta'] == "Accidente con baja"){ ?>
+                                                                    } else if ($accidentes_dato['tipoaccidente_ta'] == "Accidente con baja") { ?>
                                             <span class='badge badge-danger'>ACC. CON BAJA</span>
                                         <?php
-                                              } else if ($accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere"){ ?>
-                                                <span class='badge badge-secondary'>ACC. IN ITINERE</span>
-                                            <?php                       }
+                                                                    } else if ($accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere") { ?>
+                                            <span class='badge badge-secondary'>ACC. IN ITINERE</span>
+                                        <?php                       }
                                         ?>
 
 
@@ -114,26 +212,14 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
                                     <td style="text-align: left"><?php echo $accidentes_dato['nombre_cen']; ?></td>
                                     <td style="text-align: left"><?php echo $accidentes_dato['tipolesion_tl']; ?></td>
                                     <td style="text-align: left"><?php echo $accidentes_dato['gravedad_gr']; ?></td>
-                                    
+
 
 
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                            <a href="show.php?id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
-                       
-                                            <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-font-size" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Opciones
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-dark dropdown-font-size" aria-labelledby="dropdownMenuButton2">
-                                                <li><a class="dropdown-item active" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item" href="#">Separated link</a></li>
-                                            </ul>
-                        
+                                            <a href="show.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
+                                            <a href="../../app/controllers/accidentes/delete.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar el registro?')" title="Eliminar investigación"><i class="bi bi-trash-fill"></i> Eliminar</a>
+                                           
 
                                     </td>
 

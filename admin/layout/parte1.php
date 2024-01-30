@@ -154,7 +154,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="<?php echo $URL; ?>/admin/dashboard" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Panel Informacion
+                                    Dashboard
                                     <span class="right badge badge-warning">Info</span>
                                 </p>
                             </a>
@@ -231,6 +231,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i class="nav-icon fa bi bi-cone-striped"></i>
                                 <p>
                                     Accidentes
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo $URL; ?>/admin/accionprl" class="nav-link">
+                                <i class="nav-icon fa bi bi-exclamation-triangle-fill"></i>
+                                <p>
+                                    Acciones PRL
                                     <span class="right badge badge-danger">New</span>
                                 </p>
                             </a>
@@ -411,7 +420,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
 
-
-
+           
             <!-- Main content -->
             <div class="content">

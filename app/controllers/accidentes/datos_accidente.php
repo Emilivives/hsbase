@@ -4,7 +4,7 @@ $id_accidente = $_GET['id_accidente'];
 
 
 $sql = "SELECT ace.id_accidente as id_accidente, 
-ace.nroaccidente_ace as nroaccidente_ace, pt.procesotrabajo_pt as procesotrabajo_pt, 
+ace.nroaccidente_ace as nroaccidente_ace, pt.procesotrabajo_pt as procesotrabajo_pt, ace.comunicado_ace as comunicado_ace,
 tr.nombre_tr as nombre_tr, tr.dni_tr as dni_tr, tr.sexo_tr as sexo_tr, tr.fechanac_tr as fechanac_tr, tr.inicio_tr as inicio_tr, cat.nombre_cat as nombre_cat, cat.departamento_cat as departamento_cat, 
 cen.nombre_cen as nombre_cen, emp.nombre_emp as nombre_emp, emp.razonsocial_emp as razonsocial_emp, emp.modalidadprl_emp as modalidadprl_emp,
 ace.lugar_ace as lugar_ace, ace.detalleslugar_ace as detalleslugar_ace, ta.tipoaccidente_ta as tipoaccidente_ta, 
@@ -55,6 +55,7 @@ $accidentes_datos = $query->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($accidentes_datos as $accidentes_dato) {
     $nroaccidente_ace = $accidentes_dato['nroaccidente_ace'];
+    $comunicado_ace = $accidentes_dato['comunicado_ace'];
     $trabajador_ace = $accidentes_dato['nombre_tr'];
     $dni_trabajador_ace = $accidentes_dato['dni_tr'];
     $sexo_trabajador_ace = $accidentes_dato['sexo_tr'];

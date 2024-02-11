@@ -206,8 +206,8 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 
                             </td>
                             <td style="text-align: center"><?php echo $formaciones_dato['nombre_tr']; ?></td>
-                            <td style="text-align: center"><?php echo $formaciones_dato['fecha_fr']; ?></td>
-                            <td style="text-align: center"><?php echo $formaciones_dato['fechacad_fr']; ?></td>
+                            <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($formaciones_dato['fecha_fr'])); ?></td>
+                            <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($formaciones_dato['fechacad_fr'])); ?></td>
 
                             </td>
 

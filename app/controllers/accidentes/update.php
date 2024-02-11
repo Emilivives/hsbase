@@ -4,6 +4,7 @@ include('../../../app/config.php');
 
 $id_accidente = $_POST['id_accidente'];
 $nroaccidente_ace = $_POST['nroaccidente_ace'];
+$comunicado_ace = $_POST['comunicado_ace'];
 $trabajador_ace = $_POST['trabajador_ace'];
 $centro_ace = $_POST['centro_ace'];
 $lugar_ace = $_POST['lugar_ace'];
@@ -83,6 +84,7 @@ $fecharevision_ace = $_POST['fecharevision_ace'];
 $sentencia = $pdo->prepare("UPDATE accidentes SET 
 id_accidente=:id_accidente,
 nroaccidente_ace=:nroaccidente_ace,
+comunicado_ace=:comunicado_ace,
 trabajador_ace=:trabajador_ace,
 centro_ace=:centro_ace,
 lugar_ace=:lugar_ace,

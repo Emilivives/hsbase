@@ -160,19 +160,21 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
                         <colgroup>
                             <col width="5%">
                             <col width="5%">
-                            <col width="10%">
+                            <col width="8%">
+                            <col width="7%">
                             <col width="10%">
                             <col width="20%">
                             <col width="10%">
                             <col width="20%">
-                            <col width="10%">
-                            <col width="10%">
+                            <col width="7%">
+                            <col width="13%">
 
                         </colgroup>
                         <thead class="table-dark">
                             <tr>
                                 <th style="text-align: center">#</th>
                                 <th style="text-align: left">Nro.</th>
+                                <th style="text-align: center">Comunicado</th>      
                                 <th style="text-align: left">Fecha</th>
                                 <th style="text-align: left">Tipo accidente</th>
                                 <th style="text-align: left">Trabajador</th>
@@ -193,6 +195,17 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
                                 <tr>
                                     <td style="text-align: center"><b><?php echo $contador; ?></b></td>
                                     <td style="text-align: left"><b><?php echo $accidentes_dato['nroaccidente_ace']; ?></b></td>
+                                    <td style="text-align: center;"><?php $accidentes_dato['comunicado_ace'];
+                                                                    if ($accidentes_dato['comunicado_ace'] == "SI") { ?>
+                                            <span class='badge badge-success'>SI</span>
+                                        <?php
+                                                                    } else if ($accidentes_dato['comunicado_ace'] == "NO") { ?>
+                                            <span class='badge badge-warning'>NO</span>
+                                        <?php                       }
+                                        ?>
+
+
+                                    </td>
                                     <td style="text-align: left"><b><?php echo $accidentes_dato['fecha_ace']; ?></b></td>
                                     <td style="text-align: left;"><?php $accidentes_dato['tipoaccidente_ta'];
                                                                     if ($accidentes_dato['tipoaccidente_ta'] == "Accidente sin baja") { ?>

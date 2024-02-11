@@ -80,7 +80,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                 <?php
                 $contador_de_trabajadores = 0;
                 foreach ($trabajadores as $trabajador) {
-                    if ($trabajador['nombre_tc'] == 'Edificio') {
+                    if ($trabajador['nombre_tc'] == 'Edificio' and $trabajador['activo_tr'] == 1) {
                         $contador_de_trabajadores = $contador_de_trabajadores + 1;
                     }
                 }
@@ -103,7 +103,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                 <?php
                 $contador_de_trabajadores = 0;
                 foreach ($trabajadores as $trabajador) {
-                    if ($trabajador['nombre_tc'] == 'Embarcacion') {
+                    if ($trabajador['nombre_tc'] == 'Embarcacion' and $trabajador['activo_tr'] == 1) {
                         $contador_de_trabajadores = $contador_de_trabajadores + 1;
                     }
                 }
@@ -335,12 +335,13 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
 
                                         </td>
+                                        
                                         <td style="text-align: center;"><?php $trabajador['activo_tr'];
                                                                         if ($trabajador['activo_tr'] == 1) { ?>
-                                                <span class='badge badge-success'>SI</span>
+                                                <span class='badge badge-success'>Activo</span>
                                             <?php
                                                                         } else { ?>
-                                                <span class='badge badge-danger'>NO</span>
+                                                <span class='badge badge-danger'>Baja</span>
                                             <?php
                                                                         }
                                             ?>
@@ -353,10 +354,12 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" title="Detalles trabajador" data-target="#modal-detallestrabajador<?php echo $id_trabajador; ?>"><i class="bi bi-person-lines-fill"></i></button>
                                                 <?php include('../../app/controllers/trabajadores/datos_trabajador.php');
                                                 include('../../app/controllers/trabajadores/trabajador_formacion.php');
+                                                include('../../app/controllers/trabajadores/trabajador_accidentes.php');
                                                 include('../../app/controllers/trabajadores/trabajador_reconocimiento.php'); ?>
                                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" title="Modificar detalles" data-target="#modal-modificartrabajador<?php echo $id_trabajador; ?>"><i class="bi bi-pencil-square"></i></button>
                                                 <?php include('../../app/controllers/trabajadores/datos_trabajador.php');
                                                 include('../../app/controllers/trabajadores/trabajador_formacion.php');
+                                                include('../../app/controllers/trabajadores/trabajador_accidentes.php');
                                                 include('../../app/controllers/trabajadores/trabajador_reconocimiento.php'); ?>
 
 
@@ -455,9 +458,8 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                                 ?>
                                                                         </tbody>
                                                                     </table>
-                                                                    <br>
                                                                     <hr>
-                                                                    <br>
+
                                                                 </div>
                                                                 <div class="col-md-12">
 
@@ -513,37 +515,27 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                     <table id="example1" class="table table-sm">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th style="text-align: center">Vigente</th>
                                                                                 <th style="text-align: center">Fecha</th>
-                                                                                <th style="text-align: center">Fecha Caduc.</th>
-                                                                                <th style="text-align: center">Citado</th>
+                                                                                <th style="text-align: center">Tipo Acc.</th>
+                                                                                <th style="text-align: center">Centro</th>
+                                                                                <th style="text-align: center">Fecha Baja</th>
                                                                                 <th style="text-align: center">Acciones</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
                                                                             <?php
-                                                                            foreach ($trabajador_reconocimientos as $trabajador_reconocimiento) {
+                                                                            $contadoracc = 0;
+                                                                            foreach ($trabajador_accidentes as $trabajador_accidente) {
+                                                                                $contadoracc = $contadoracc + 1;
                                                                             ?>
 
                                                                                 <tr>
-                                                                                    <td style="text-align: center"><?php $trabajador_reconocimiento['vigente_rm'];
-                                                                                                                    if ($trabajador_reconocimiento['vigente_rm'] == 1 and $trabajador_reconocimiento['caducidad_rm'] > $fechahora) { ?>
-                                                                                            <span class='badge badge-success'>VIGENTE</span>
-                                                                                        <?php
-                                                                                                                    } elseif ($trabajador_reconocimiento['vigente_rm'] == 1 and $trabajador_reconocimiento['caducidad_rm'] < $fechahora) { ?>
-                                                                                            <span class='badge badge-warning'>VIGENTE - CADUCADO</span>
-                                                                                        <?php
-                                                                                                                    } else { ?>
-                                                                                            <span class='badge badge-danger'>NO VIGENTE</span>
-                                                                                        <?php
-                                                                                                                    }
-                                                                                        ?>
-                                                                                    </td>
-                                                                                    <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($trabajador_reconocimiento['fecha_rm'])) ?></td>
-                                                                                    <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($trabajador_reconocimiento['caducidad_rm'])) ?></td>
-                                                                                    <td style="text-align: center"><?php echo $trabajador_reconocimiento['cita_rm']; ?></td>
+                                                                                    <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($trabajador_accidente['fecha_ace'])) ?></td>
+                                                                                    <td style="text-align: center"><?php echo $trabajador_accidente['tipoaccidente_ta']; ?></td>
+                                                                                    <td style="text-align: center"><?php echo $trabajador_accidente['nombre_cen']; ?></td>
+                                                                                    <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($trabajador_accidente['fechabaja_ace'])) ?></td>
                                                                                     <td style="text-align: center">
-                                                                                        <a href="../reconocimientos/index.php" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
+                                                                                        <a href="../accidentes/show.php?id_accidente=<?php echo $trabajador_accidente['id_accidente']?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
                                                                                     </td>
                                                                                 <?php
                                                                             }
@@ -558,7 +550,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <textarea class="form-control" rows="10" disabled><?php echo $trabajador['anotaciones_tr']; ?></textarea>
+                                                                        <textarea class="form-control" rows="6" disabled><?php echo $trabajador['anotaciones_tr']; ?></textarea>
                                                                     </div>
 
                                                                 </div>
@@ -591,148 +583,153 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                         </div>
                                                         <div class="modal-body">
 
-                                                        <form action="../../app/controllers/trabajadores/update.php" method="post" enctype="multipart/form-data">
+                                                            <form action="../../app/controllers/trabajadores/update.php" method="post" enctype="multipart/form-data">
 
-
-                                                            <div class="row">
-                                                            <div class="col-md-2">
-                                                                    <label for="">Estado</label>
-                                                                    <select class="form-select form-select-sm" name="activo_tr" aria-label=".form-select-sm example">
-                                                                        <option value="<?php echo $trabajador['activo_tr'] ?>" selected="selected"><?php echo $trabajador['activo_tr'] ?></option>
-                                                                        <option>Seleccione</option>
-                                                                        <option value="1">Activo</option>
-                                                                        <option value="0">Inactivo</option>
-                                                                    </select>
-                                                                </div>
-                                                                <hr>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-2">
-                                                                    <div class="form-group">
-                                                                        <label for="">Codigo</label>
-                                                                        <input type="text" value="<?php echo $trabajador['codigo_tr'] ?>" name="codigo_tr" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-1" hidden>
-                                                                  <div class="form-group">
-                                                                         <input type="text" value="<?php echo $trabajador['id_trabajador'] ?>" name="id_trabajador" class="form-control">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-5">
-                                                                    <div class="form-group">
-                                                                        <label for="">Apellidos, Nombre</label>
-                                                                        <input type="text" value="<?php echo $trabajador['nombre_tr'] ?>" name="nombre_tr" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="form-group">
-                                                                        <label for="">DNI/NIE</label>
-                                                                        <input type="text" value="<?php echo $trabajador['dni_tr'] ?>" name="dni_tr" class="form-control">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-2">
-                                                                    <div class="form-group">
-                                                                        <label for="">Fecha Nacimiento</label>
-                                                                        <input type="date" value="<?php echo $trabajador['fechanac_tr'] ?>" name="fechanac_tr" class="form-control">
-                                                                    </div>
-                                                                </div>
 
                                                                 <div class="row">
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="form-group">
-                                                                        <label for="">Fecha Inicio</label>
-                                                                        <input type="date" value="<?php echo $trabajador['inicio_tr'] ?>" name="inicio_tr" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-1"> </div>
-                                                                <div class="col-md-5">
-                                                                    <div class="form-group">
-                                                                        <label for="">Centro Trabajo</label>
-                                                                        <select name="centro_tr" id="" class="form-control">
-                                                                            <?php
-                                                                            foreach ($centros_datos as $centros_dato) {
-                                                                                $centro_tabla = $centros_dato['nombre_cen'];
-                                                                                $id_centro = $centros_dato['id_centro']; ?>
-                                                                                <option value="<?php echo $id_centro; ?>" <?php if ($centro_tabla == $centro_tr) { ?> selected="selected" <?php } ?>>
-                                                                                    <?php echo  $centro_tabla; ?>
-                                                                                </option>
-                                                                            <?php
-                                                                            }
-                                                                            ?>
+                                                                    <div class="col-md-2">
+                                                                        <label for="">Estado</label>
+                                                                        <select class="form-select form-select-sm" name="activo_tr" aria-label=".form-select-sm example">
+                                                                            <option value="<?php echo $trabajador['activo_tr'] ?>" selected="selected"><?php echo $trabajador['activo_tr'] ?></option>
+                                                                            <option>Seleccione</option>
+                                                                            <option value="1">Activo</option>
+                                                                            <option value="0">Inactivo</option>
                                                                         </select>
+
                                                                     </div>
 
                                                                 </div>
+                                                                <hr>
 
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="">Codigo</label>
+                                                                            <input type="text" value="<?php echo $trabajador['codigo_tr'] ?>" name="codigo_tr" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-1" hidden>
+                                                                        <div class="form-group">
+                                                                            <input type="text" value="<?php echo $trabajador['id_trabajador'] ?>" name="id_trabajador" class="form-control">
+                                                                        </div>
+                                                                    </div>
 
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="">Categoria</label>
-                                                                        <select name="categoria_tr" id="" class="form-control">
-                                                                            <?php
-                                                                            foreach ($categorias_datos as $categorias_dato) {
-                                                                                $categoria_tabla = $categorias_dato['nombre_cat'];
-                                                                                $id_categoria= $categorias_dato['id_categoria']; ?>
-                                                                                <option value="<?php echo $id_categoria; ?>" <?php if ($categoria_tabla == $categoria_tr) { ?> selected="selected" <?php } ?>>
-                                                                                    <?php echo  $categoria_tabla; ?>
-                                                                                </option>
-                                                                            <?php
-                                                                            }
-                                                                            ?>
-                                                                        </select>
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group">
+                                                                            <label for="">Apellidos, Nombre</label>
+                                                                            <input type="text" value="<?php echo $trabajador['nombre_tr'] ?>" name="nombre_tr" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="">DNI/NIE</label>
+                                                                            <input type="text" value="<?php echo $trabajador['dni_tr'] ?>" name="dni_tr" class="form-control">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="">Fecha Nacimiento</label>
+                                                                            <input type="date" value="<?php echo $trabajador['fechanac_tr'] ?>" name="fechanac_tr" class="form-control">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+                                                                <div class="row">
 
-                                                            </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="">Fecha Inicio</label>
+                                                                            <input type="date" value="<?php echo $trabajador['inicio_tr'] ?>" name="inicio_tr" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-1"> </div>
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group">
+                                                                            <label for="">Centro Trabajo</label>
+                                                                            <select name="centro_tr" id="" class="form-control">
+                                                                                <?php
+                                                                                foreach ($centros_datos as $centros_dato) {
+                                                                                    $centro_tabla = $centros_dato['nombre_cen'];
+                                                                                    $id_centro = $centros_dato['id_centro']; ?>
+                                                                                    <option value="<?php echo $id_centro; ?>" <?php if ($centro_tabla == $centro_tr) { ?> selected="selected" <?php } ?>>
+                                                                                        <?php echo  $centro_tabla; ?>
+                                                                                    </option>
+                                                                                <?php
+                                                                                }
+                                                                                ?>
+                                                                            </select>
+                                                                        </div>
 
-                                                            <hr>
-                                                            
-                                                            <strong style="text-align: left"><i class="far fa-file-alt mr-1"></i> Notas / Detalles</strong>
+                                                                    </div>
 
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <textarea class="form-control" name="anotaciones_tr" rows="10"><?php echo $trabajador['anotaciones_tr']; ?></textarea>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label for="">Categoria</label>
+                                                                            <select name="categoria_tr" id="" class="form-control">
+                                                                                <?php
+                                                                                foreach ($categorias_datos as $categorias_dato) {
+                                                                                    $categoria_tabla = $categorias_dato['nombre_cat'];
+                                                                                    $id_categoria = $categorias_dato['id_categoria']; ?>
+                                                                                    <option value="<?php echo $id_categoria; ?>" <?php if ($categoria_tabla == $categoria_tr) { ?> selected="selected" <?php } ?>>
+                                                                                        <?php echo  $categoria_tabla; ?>
+                                                                                    </option>
+                                                                                <?php
+                                                                                }
+                                                                                ?>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+                                                                <hr>
+                                                                <div class="row">
+
+                                                                    <strong style="text-align: left"><i class="far fa-file-alt mr-1"></i> Notas / Detalles</strong>
+
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <textarea class="form-control" name="anotaciones_tr" rows="10"><?php echo $trabajador['anotaciones_tr']; ?></textarea>
+                                                                        </div>
 
 
-                                                        <div class="modal-footer">
+                                                                        <div class="modal-footer">
 
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                            <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                            <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
 
 
-                                                        </div>
-                                                                        </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
-
-                                            <!--fin modal-->
-
-
-
                     </div>
-                    </td>
-
-                    </tr>
-                <?php
-                                }
-                ?>
-
-                </tbody>
-
-                </table>
 
                 </div>
 
+                <!--fin modal-->
+
+
+
             </div>
+            </td>
+
+            </tr>
+        <?php
+                                }
+        ?>
+
+        </tbody>
+
+        </table>
+
         </div>
+
     </div>
+</div>
+</div>
 </div>
 </div>
 

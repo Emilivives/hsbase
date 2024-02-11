@@ -163,17 +163,8 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                     <td style="text-align: left"><?php echo $accionprl_dato['estado_acc']; ?></td>
                     <td style="text-align: center">
                         <div class="dropdown">
-                            <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-font-size" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                Opciones
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-dark dropdown-font-size" aria-labelledby="dropdownMenuButton2">
-                                <li><a class="dropdown-item" href="#">Ver</a></li>
-                                <li><a class="dropdown-item" href="#">Editar</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Eliminar</a></li>
-                            </ul>
+                        <a href="show.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i> entrar</a>
+
                         </div>
 
                     </td>

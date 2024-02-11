@@ -29,11 +29,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="<?php echo $URL; ?>/path/to/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/templates/AdminLTE/dist/css/adminlte.min.css">
     <!-- icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+    <!-- libreria iconos fontawesome -->
+    <script src="https://kit.fontawesome.com/f1e1a05e58.js" crossorigin="anonymous"></script>
 
 
     <!-- jQuery -->
@@ -161,17 +163,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                         </br>
                         <li class="nav-item">
-                        <a href="<?php echo $URL; ?>/admin/trabajadores" class="nav-link">
+                            <a href="<?php echo $URL; ?>/admin/trabajadores" class="nav-link">
                                 <i class="nav-icon fas fa-people-arrows"></i>
                                 <p>
                                     Trabajadores
-                                    
+
                                 </p>
                             </a>
-                            
+
                         </li>
 
-                                                
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-graduation-cap"></i>
@@ -204,28 +206,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-heartbeat"></i>
+                            <a href="<?php echo $URL; ?>/admin/reconocimientos" class="nav-link">
+                                <i class="nav-icon fa-solid fa-notes-medical"></i>
                                 <p>
-                                    Vigilancia Salud
-                                    <i class="right fas fa-angle-left"></i>
+                                    Vigilancia salud
+                                    <span class="right badge badge-danger">New</span>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $URL; ?>/admin/reconocimientos" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Reconocimientos Med.</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Nuevo Reconocimiento</p>
-
-                                    </a>
-                            </ul>
                         </li>
+
                         <li class="nav-item">
                             <a href="<?php echo $URL; ?>/admin/accidentes" class="nav-link">
                                 <i class="nav-icon fa bi bi-cone-striped"></i>
@@ -250,7 +239,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <p>
                                     Tablas maestras
                                     <i class="right fas fa-angle-left"></i>
-                                 
+
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
@@ -298,13 +287,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                <a href="<?php echo $URL; ?>/admin/actividad/tareas.php" class="nav-link">
+                                    <a href="<?php echo $URL; ?>/admin/actividad/tareas.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Tareas</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                <a href="<?php echo $URL; ?>/admin/actividad/accionprl.php" class="nav-link">
+                                    <a href="<?php echo $URL; ?>/admin/actividad/accionprl.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Accion preventiva</p>
                                     </a>
@@ -330,22 +319,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <p>Listado de usuarios</p>
                                     </a>
                                 </li>
-                              <!--  PONEMOS MODALES PARA EVITAR MAS MENU
+                                <!--  PONEMOS MODALES PARA EVITAR MAS MENU
                                 <li class="nav-item">
                                     <a href="<?php echo $URL; ?>/admin/usuarios/create.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Nuevo usuario</p>
                                     </a> -->
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo $URL; ?>/admin/perfiles" class="nav-link">
-                                        <i class="far bi-person-workspace nav-icon"></i>
-                                        <p> Perfiles</p>
-                                    </a>
-                                </li> 
-                            </ul>
                         </li>
-                           <!--  PONEMOS MODALES PARA EVITAR MAS MENU
+                        <li class="nav-item">
+                            <a href="<?php echo $URL; ?>/admin/perfiles" class="nav-link">
+                                <i class="far bi-person-workspace nav-icon"></i>
+                                <p> Perfiles</p>
+                            </a>
+                        </li>
+                    </ul>
+                    </li>
+                    <!--  PONEMOS MODALES PARA EVITAR MAS MENU
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class=" nav-icon fas bi bi-person-workspace"></i>
@@ -370,46 +359,46 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
                         -->
-                        <br>
-                        <br>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class=" nav-icon fas bi bi-person-workspace"></i>
-                                <p>
-                                    Pruebas
-                                    <i class="right fas fa-angle-left"></i>
-                                    <span class="right badge badge-success">Demo</span>
+                    <br>
+                    <br>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class=" nav-icon fas bi bi-person-workspace"></i>
+                            <p>
+                                Pruebas
+                                <i class="right fas fa-angle-left"></i>
+                                <span class="right badge badge-success">Demo</span>
 
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $URL; ?>/admin/pruebas" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Prueba formacion</p>
-                                    </a>
-                                </li>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?php echo $URL; ?>/admin/pruebas" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Prueba formacion</p>
+                                </a>
+                            </li>
 
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $URL; ?>/admin/pruebas/create.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Nuegva formacion</p>
-                                    </a>
-                                </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?php echo $URL; ?>/admin/pruebas/create.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Nuegva formacion</p>
+                                </a>
+                            </li>
 
-                            </ul>
-                        </li>
-                        </br>
-                        </br>
-                        </br>
-                        <li class="nav-item">
-                            <a href="<?php echo $URL; ?>/app/controllers/login/cerrar_sesion.php" style="background-color:crimson" class="nav-link">
-                                <i class="nav-icon fa fa-door-open"></i>
-                                <p>Cerrar sesión</p>
-                            </a>
-                        </li>
+                        </ul>
+                    </li>
+                    </br>
+                    </br>
+                    </br>
+                    <li class="nav-item">
+                        <a href="<?php echo $URL; ?>/app/controllers/login/cerrar_sesion.php" style="background-color:crimson" class="nav-link">
+                            <i class="nav-icon fa fa-door-open"></i>
+                            <p>Cerrar sesión</p>
+                        </a>
+                    </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -420,6 +409,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
 
-           
+
             <!-- Main content -->
             <div class="content">

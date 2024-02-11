@@ -1,6 +1,6 @@
 <?php
 
-$sql = "SELECT ace.id_accidente as id_accidente, ace.nroaccidente_ace as nroaccidente_ace,
+$sql = "SELECT ace.id_accidente as id_accidente, ace.nroaccidente_ace as nroaccidente_ace, ace.comunicado_ace as comunicado_ace,
 tr.nombre_tr as nombre_tr, cen.nombre_cen as nombre_cen, ta.tipoaccidente_ta as tipoaccidente_ta,ace.fecha_ace as fecha_ace,
 tl.tipolesion_tl as tipolesion_tl, gr.gravedad_gr as gravedad_gr,partecuerpo_ace as partecuerpo_ace
 FROM `accidentes`as ace 

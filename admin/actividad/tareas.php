@@ -143,6 +143,7 @@ include('../../app/controllers/actividad/listado_tareas.php');
             foreach ($tareas as $tarea) {
                 $contador = $contador + 1;
                 $id_tarea = $tarea['id_tarea'];
+                $id_proyecto = $tarea['id_proyecto'];
             ?>
 
                 <tr>
@@ -161,18 +162,8 @@ include('../../app/controllers/actividad/listado_tareas.php');
 
 
                     <td style="text-align: center">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-font-size" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                Opciones
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-dark dropdown-font-size" aria-labelledby="dropdownMenuButton2">
-                                <li><a class="dropdown-item" href="#">Ver</a></li>
-                                <li><a class="dropdown-item" href="#">Editar</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Eliminar</a></li>
-                            </ul>
+                    <a href="showtareas.php?id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i> entrar</a>
+
                         </div>
 
                     </td>

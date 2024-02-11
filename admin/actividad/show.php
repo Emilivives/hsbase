@@ -359,7 +359,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" title="Copiar/Duplicar" data-target="#modal-duplicartarea<?php echo $id_tarea; ?>"><i class="bi bi-copy"></i></button>
                                             <?php include('../../app/controllers/actividad/datos_tarea.php'); ?>
                                         </div>
-                                        <!--inicio modal nuevo trabajador-->
+                                        <!--inicio modal nuevo tarea-->
                                         <div class="modal fade" id="modal-duplicartarea<?php echo $id_tarea; ?>" tabindex="-1" aria-labelledby="exampleModalLabel">
                                             <div class="modal-dialog modal-xl">
                                                 <div class="modal-content">

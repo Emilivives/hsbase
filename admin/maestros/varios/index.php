@@ -2,6 +2,7 @@
 include('../../../app/config.php');
 include('../../../admin/layout/parte1.php');
 include('../../../app/controllers/maestros/responsables/listado_responsables.php');
+include('../../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php');
 include('../../../app/controllers/maestros/empresas/listado_empresas.php');
 
 ?>
@@ -141,6 +142,116 @@ include('../../../app/controllers/maestros/empresas/listado_empresas.php');
         </div>
 
 
+        <div class="col-md-6">
+            <div class="card card-outline card-primary">
+                <div class="card-header col-md-12">
+                    <h3 class="card-title"><b>Direcciones interés</b></h3>
+                    <style>
+                        .btn-text-right {
+                            text-align: right;
+                        }
+                    </style>
+                    <!-- Button trigger modal -->
+                    <div class="btn-text-right">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevodirecciones">Añadir Responsable</button>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="modal-nuevodirecciones">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#808000 ;color:white">
+                                <h5 class="modal-title" id="modal-nuevodirecciones">Direcciones interes</h5>
+                                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form action="../../../app/controllers/maestros/emailsinteres/create.php" method="post" enctype="multipart/form-data">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Nombre Responsable <b>*</b></label>
+                                                <input type="text" name="nombre_ei" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Email</label>
+                                                <input type="text" name="email_ei" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <label for="">Telefono <b>*</b></label>
+                                                <input type="text" name="telefono_ei" class="form-control" required>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!--fin modal-->
+
+                <div class="card-body">
+                    <table id="example1" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Num.</th>
+                                <th style="text-align: center">Nombre contacto</th>
+                                <th style="text-align: center">Email</th>
+                                <th style="text-align: center">Telefono</th>
+                                <th style="text-align: center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $contadoremailsinteres_dato = 0;
+                            foreach ($emailsinteres_datos as $emailsinteres_dato) {
+                                $contadoremailsinteres_dato = $contadoremailsinteres_dato + 1;
+                                $id_emailinteres = $emailsinteres_dato['id_emailinteres'];
+                            ?>
+                                <tr>
+                                    <td><?php echo $contadoremailsinteres_dato; ?></td>
+                                    <td><?php echo $emailsinteres_dato['nombre_ei']; ?></td>
+                                    <td><?php echo $emailsinteres_dato['email_ei']; ?></td>
+                                    <td><?php echo $emailsinteres_dato['telefono_ei']; ?></td>
+
+                                    <td style="text-align: center">
+                                        <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
+                                            <a href="update.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                            <a href="delete.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            <?php
+                            }
+                            ?>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+        </div>
 
     </div>
 

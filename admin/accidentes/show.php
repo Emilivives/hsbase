@@ -50,7 +50,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 <div class="content">
     <form action="../../app/controllers/accidentes/update.php" method="post">
 
-    <input type="text" name="id_accidente" value="<?php echo $id_accidente; ?>" hidden>
+        <input type="text" name="id_accidente" value="<?php echo $id_accidente; ?>" hidden>
 
         <div class="well">
             <div class="row">
@@ -63,12 +63,26 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-2">
+                    <div class="form-group row">
+                        <label for="comunicado_ace" class="col-form-label col-sm-3">Comunicado:</label>
+                        <div class="col-sm-3">
+                            <select class="form-select" name="comunicado_ace" aria-label="Default select example">
+                                <option value="<?php echo $comunicado_ace ?>"><?php echo $comunicado_ace ?></option>
+                                <option>-</option>
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
 
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group row">
                         <label for="nombre" class="col-form-label col-sm-3">Tipo acc:</label>
-                        <div class="col-sm-5">
+                        <div class="col-sm-6">
                             <select name="tipoaccidente_ace" id="tipoaccidente_ace" class="form-control" onchange="selectIdta(event)">
                                 <option value="0">--Seleccione tipo--</option>
                                 <?php
@@ -109,7 +123,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         }
                     </script>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group row">
                         <label for="nombre" class="col-form-label col-sm-2">Nombre:</label>
                         <div class="col-sm-8">
@@ -973,7 +987,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                     <label for="istestigos_ace" class="col-form-label col-sm-4">Hubo testigos:</label>
                                     <div class="col-sm-3">
                                         <select class="form-select" name="istestigos_ace" aria-label="Default select example">
-                                        <option value="<?php echo $istestigos_ace ?>"><?php echo $istestigos_ace ?></option>
+                                            <option value="<?php echo $istestigos_ace ?>"><?php echo $istestigos_ace ?></option>
 
                                             <option>-</option>
                                             <option value="SI">SI</option>
@@ -1029,18 +1043,18 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                         <select name="tipolesion_ace" class="form-control">
                                             <option value="0">--Seleccione el tipo lesion--</option>
                                             <?php
-                                        foreach ($ace_tipolesion_datos as $ace_tipolesion_dato) {
-                                            $ace_tipolesion_datos_tabla = $ace_tipolesion_dato['tipolesion_tl'];
-                                            $ace_tipolesion_datos_tabla2 = $ace_tipolesion_dato['codtipolesion_tl'];
-                                            $id_tipolesion = $ace_tipolesion_dato['id_tipolesion'];
-                                        ?>
-                                            <option value="<?php echo $id_tipolesion; ?>" <?php if ($ace_tipolesion_datos_tabla == $tipolesion_ace) { ?> selected="selected" <?php } ?> tipolesion_tl="<?php echo $ace_tipolesion_dato['codtipolesion_tl']; ?>" codactivfis_af="<?php echo $ace_tipolesion_dato['codtipolesion_tl']; ?>">
-                                                <?php echo $ace_tipolesion_datos_tabla2 ?> | <?php echo $ace_tipolesion_datos_tabla ?> </option>
-                                        <?php
-                                        }
-                                        ?>
+                                            foreach ($ace_tipolesion_datos as $ace_tipolesion_dato) {
+                                                $ace_tipolesion_datos_tabla = $ace_tipolesion_dato['tipolesion_tl'];
+                                                $ace_tipolesion_datos_tabla2 = $ace_tipolesion_dato['codtipolesion_tl'];
+                                                $id_tipolesion = $ace_tipolesion_dato['id_tipolesion'];
+                                            ?>
+                                                <option value="<?php echo $id_tipolesion; ?>" <?php if ($ace_tipolesion_datos_tabla == $tipolesion_ace) { ?> selected="selected" <?php } ?> tipolesion_tl="<?php echo $ace_tipolesion_dato['codtipolesion_tl']; ?>" codactivfis_af="<?php echo $ace_tipolesion_dato['codtipolesion_tl']; ?>">
+                                                    <?php echo $ace_tipolesion_datos_tabla2 ?> | <?php echo $ace_tipolesion_datos_tabla ?> </option>
+                                            <?php
+                                            }
+                                            ?>
                                         </select>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -1051,18 +1065,18 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                         <select name="gradolesion_ace" class="form-control">
                                             <option value="0">--Seleccione gravedad--</option>
                                             <?php
-                                        foreach ($ace_gravedad_datos as $ace_gravedad_dato) {
-                                            $ace_gravedad_datos_tabla = $ace_gravedad_dato['gravedad_gr'];
-                                            $ace_gravedad_datos_tabla2 = $ace_gravedad_dato['codgravedad_gr'];
-                                            $id_gravedad = $ace_gravedad_dato['id_gravedad'];
-                                        ?>
-                                            <option value="<?php echo $id_gravedad; ?>" <?php if ($ace_gravedad_datos_tabla == $gradolesion_ace) { ?> selected="selected" <?php } ?> gravedad_gr="<?php echo $ace_gravedad_dato['gravedad_gr']; ?>" codgravedad_gr="<?php echo $ace_gravedad_dato['codgravedad_gr']; ?>">
-                                                <?php echo $ace_gravedad_datos_tabla2 ?> | <?php echo $ace_gravedad_datos_tabla ?> </option>
-                                        <?php
-                                        }
-                                        ?>
+                                            foreach ($ace_gravedad_datos as $ace_gravedad_dato) {
+                                                $ace_gravedad_datos_tabla = $ace_gravedad_dato['gravedad_gr'];
+                                                $ace_gravedad_datos_tabla2 = $ace_gravedad_dato['codgravedad_gr'];
+                                                $id_gravedad = $ace_gravedad_dato['id_gravedad'];
+                                            ?>
+                                                <option value="<?php echo $id_gravedad; ?>" <?php if ($ace_gravedad_datos_tabla == $gradolesion_ace) { ?> selected="selected" <?php } ?> gravedad_gr="<?php echo $ace_gravedad_dato['gravedad_gr']; ?>" codgravedad_gr="<?php echo $ace_gravedad_dato['codgravedad_gr']; ?>">
+                                                    <?php echo $ace_gravedad_datos_tabla2 ?> | <?php echo $ace_gravedad_datos_tabla ?> </option>
+                                            <?php
+                                            }
+                                            ?>
                                         </select>
-                                 
+
                                     </div>
                                 </div>
                             </div>
@@ -1073,18 +1087,18 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                         <select name="partecuerpo_ace" class="form-control">
                                             <option value="0">--Seleccione la parte del cuerpo afectada--</option>
                                             <?php
-                                        foreach ($ace_partecuerpo_datos as $ace_partecuerpo_dato) {
-                                            $ace_partecuerpo_datos_tabla = $ace_partecuerpo_dato['partecuerpo_pc'];
-                                            $ace_partecuerpo_datos_tabla2 = $ace_partecuerpo_dato['codpartecuerpo_pc'];
-                                            $id_partecuerpo = $ace_partecuerpo_dato['id_partecuerpo'];
-                                        ?>
-                                            <option value="<?php echo $id_partecuerpo; ?>" <?php if ($ace_partecuerpo_datos_tabla == $partecuerpo_ace) { ?> selected="selected" <?php } ?> partecuerpo_pc="<?php echo $ace_partecuerpo_dato['partecuerpo_pc']; ?>" codpartecuerpo_pc="<?php echo $ace_partecuerpo_dato['codpartecuerpo_pc']; ?>">
-                                                <?php echo $ace_partecuerpo_datos_tabla2 ?> | <?php echo $ace_partecuerpo_datos_tabla ?> </option>
-                                        <?php
-                                        }
-                                        ?>
+                                            foreach ($ace_partecuerpo_datos as $ace_partecuerpo_dato) {
+                                                $ace_partecuerpo_datos_tabla = $ace_partecuerpo_dato['partecuerpo_pc'];
+                                                $ace_partecuerpo_datos_tabla2 = $ace_partecuerpo_dato['codpartecuerpo_pc'];
+                                                $id_partecuerpo = $ace_partecuerpo_dato['id_partecuerpo'];
+                                            ?>
+                                                <option value="<?php echo $id_partecuerpo; ?>" <?php if ($ace_partecuerpo_datos_tabla == $partecuerpo_ace) { ?> selected="selected" <?php } ?> partecuerpo_pc="<?php echo $ace_partecuerpo_dato['partecuerpo_pc']; ?>" codpartecuerpo_pc="<?php echo $ace_partecuerpo_dato['codpartecuerpo_pc']; ?>">
+                                                    <?php echo $ace_partecuerpo_datos_tabla2 ?> | <?php echo $ace_partecuerpo_datos_tabla ?> </option>
+                                            <?php
+                                            }
+                                            ?>
                                         </select>
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -1097,8 +1111,8 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                     <label for="isevacuacion_ace" class="col-form-label col-sm-4">Ha sido evacuado:</label>
                                     <div class="col-sm-3">
                                         <select class="form-select" name="isevacuacion_ace" aria-label="Default select example">
-                                        <option value="<?php echo $isevacuacion_ace ?>"><?php echo $isevacuacion_ace ?></option>
-                                            <option >-</option>
+                                            <option value="<?php echo $isevacuacion_ace ?>"><?php echo $isevacuacion_ace ?></option>
+                                            <option>-</option>
                                             <option value="SI">SI</option>
                                             <option value="NO">NO</option>
 
@@ -1123,7 +1137,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                     <label for="centromedico_ace" class="col-form-label col-sm-4">Asistido en centro médico:</label>
                                     <div class="col-sm-3">
                                         <select class="form-select" name="centromedico_ace" value="<?php echo $centromedico_ace ?>" aria-label="Default select example">
-                                        <option value="<?php echo $centromedico_ace ?>"><?php echo $centromedico_ace ?></option>
+                                            <option value="<?php echo $centromedico_ace ?>"><?php echo $centromedico_ace ?></option>
                                             <option>-</option>
                                             <option value="SI">SI</option>
                                             <option value="NO">NO</option>
@@ -1185,9 +1199,9 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                 <div class="form-group row">
                                     <label for="istrinformado_ace" class="col-form-label col-sm-4">Ha recibido informacion (Art. 18 LPRL):</label>
                                     <div class="col-sm-3">
-                                            <select class="form-select" name="istrinformado_ace" value="<?php echo $istrinformado_ace ?>" aria-label="Default select example">
+                                        <select class="form-select" name="istrinformado_ace" value="<?php echo $istrinformado_ace ?>" aria-label="Default select example">
                                             <option value="<?php echo $istrinformado_ace ?>"><?php echo $istrinformado_ace ?></option>
-                                            <option >-</option>
+                                            <option>-</option>
                                             <option value="SI">SI</option>
                                             <option value="NO">NO</option>
 
@@ -1200,8 +1214,8 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                 <div class="form-group row">
                                     <label for="istrformado_ace" class="col-form-label col-sm-4">Ha recibido formacion (Art. 19 LPRL):</label>
                                     <div class="col-sm-3">
-                                        <select class="form-select" name="istrformado_ace"  value="<?php echo $istrformado_ace ?>" aria-label="Default select example">
-                                        <option value="<?php echo $istrformado_ace ?>"><?php echo $istrformado_ace ?></option>
+                                        <select class="form-select" name="istrformado_ace" value="<?php echo $istrformado_ace ?>" aria-label="Default select example">
+                                            <option value="<?php echo $istrformado_ace ?>"><?php echo $istrformado_ace ?></option>
 
                                             <option>-</option>
                                             <option value="SI">SI</option>
@@ -1359,8 +1373,8 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                     <label for="histaccult12mes_ace" class="col-form-label col-sm-4">Accidentes ultimos 12 meses:</label>
                                     <div class="col-sm-3">
                                         <select class="form-select" name="histaccult12mes_ace" value="<?php echo $histaccult12mes_ace ?>" aria-label="Default select example">
-                                        <option value="<?php echo $histaccult12mes_ace ?>"><?php echo $histaccult12mes_ace ?></option>
-                                            <option >-</option>
+                                            <option value="<?php echo $histaccult12mes_ace ?>"><?php echo $histaccult12mes_ace ?></option>
+                                            <option>-</option>
                                             <option value="SI">SI</option>
                                             <option value="NO">NO</option>
 

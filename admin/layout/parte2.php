@@ -38,7 +38,10 @@
 <script src="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script src="<?php echo $URL; ?>/public/js/bootstrap.bundle.min.js"></script>
-<script src="<?php echo $URL; ?>/public/css/bootstrap.min.css"></script>
+
+<script src="<?php echo $URL; ?>/public/dist/js/adminlte.min.js"></script>
+<script src="<?php echo $URL; ?>/public/plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="../../public/templates/AdminLTE/plugins/jquery-knob/jquery.knob.min.js"></script>
 
 </body>
 

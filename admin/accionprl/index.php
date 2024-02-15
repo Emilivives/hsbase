@@ -156,14 +156,32 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                     <td style="text-align: left"><?php echo $accionprl_dato['nombre_cen']; ?></td>
                     <td style="text-align: left"><?php echo $accionprl_dato['descripcion_acc']; ?></td>
                     <td style="text-align: left"><?php echo $accionprl_dato['responsable_acc']; ?></td>
-                    <td style="text-align: left"><?php echo $accionprl_dato['medida_acc']; ?></td>
+                    <td style="text-align: left"><?php echo $accionprl_dato['accpropuesta_acc']; ?></td>
                     <td style="text-align: left"><?php echo $accionprl_dato['fechaprevista_acc']; ?></td>
                     <td style="text-align: left"><?php echo $accionprl_dato['fecharea_acc']; ?></td>
                     <td style="text-align: left"><?php echo $accionprl_dato['avance_acc']; ?></td>
-                    <td style="text-align: left"><?php echo $accionprl_dato['estado_acc']; ?></td>
+                    <td style="text-align: left"><?php $accionprl_dato['estado_acc']; ?>
+                        <?php if ($accionprl_dato['estado_acc'] == "Cerrada") { ?>
+                            <span class='badge badge-success'>Cerrada</span>
+                        <?php
+                        } else if ($accionprl_dato['estado_acc'] == "En curso") { ?>
+                            <span class='badge badge-info'>En curso</span>
+                        <?php                       } else if ($accionprl_dato['estado_acc'] == "Comunicada") { ?>
+                            <span class='badge badge-secondary'>Comunicada</span>
+                        <?php                       } else if ($accionprl_dato['estado_acc'] == "Abierta") { ?>
+                            <span class='badge badge-warning'>Abierta</span>
+                        <?php                       } else if ($accionprl_dato['estado_acc'] == "Finalizada") { ?>
+                            <span class='badge badge-primary'>Finalizada</span>
+                        <?php                       }
+                        ?>
+
+
+                    </td>
+
+
                     <td style="text-align: center">
                         <div class="dropdown">
-                        <a href="show.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i> entrar</a>
+                            <a href="show.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i> entrar</a>
 
                         </div>
 

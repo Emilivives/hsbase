@@ -210,7 +210,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i class="nav-icon fa-solid fa-notes-medical"></i>
                                 <p>
                                     Vigilancia salud
-                                    <span class="right badge badge-danger">New</span>
+                             
                                 </p>
                             </a>
                         </li>
@@ -220,7 +220,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i class="nav-icon fa bi bi-cone-striped"></i>
                                 <p>
                                     Accidentes
-                                    <span class="right badge badge-danger">New</span>
+            
                                 </p>
                             </a>
                         </li>
@@ -228,8 +228,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="<?php echo $URL; ?>/admin/accionprl" class="nav-link">
                                 <i class="nav-icon fa bi bi-exclamation-triangle-fill"></i>
                                 <p>
-                                    Acciones PRL
-                                    <span class="right badge badge-danger">New</span>
+                                    Acción PRL
                                 </p>
                             </a>
                         </li>
@@ -292,12 +291,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <p>Tareas</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo $URL; ?>/admin/actividad/accionprl.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Accion preventiva</p>
-                                    </a>
-                                </li>
+
                             </ul>
                         </li>
                         <br>

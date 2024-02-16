@@ -20,8 +20,7 @@ $recursos_acc = $_POST['recursos_acc'];
 $seguimiento_acc = $_POST['seguimiento_acc'];
 $avance_acc = $_POST['avance_acc'];
 $estado_acc = $_POST['estado_acc'];
-$imagen1_acc = $_POST['imagen1_acc'];
-$imagen2_acc = $_POST['imagen2_acc'];
+
 
 
 $sentencia = $pdo->prepare("UPDATE ag_acciones
@@ -43,8 +42,7 @@ recursos_acc=:recursos_acc,
 seguimiento_acc=:seguimiento_acc,
 avance_acc=:avance_acc, 
 estado_acc=:estado_acc, 
-imagen1_acc=:imagen1_acc,
-imagen2_acc=:imagen2_acc    
+
 WHERE id_accion =:id_accion");
 
 $sentencia->bindParam('id_accion', $id_accion);  
@@ -65,19 +63,18 @@ $sentencia->bindParam('accrealizada_acc', $accrealizada_acc);
 $sentencia->bindParam('accpropuesta_acc', $accpropuesta_acc);
 $sentencia->bindParam('seguimiento_acc', $seguimiento_acc);    
 $sentencia->bindParam('recursos_acc', $recursos_acc);
-$sentencia->bindParam('imagen1_acc', $imagen1_acc);
-$sentencia->bindParam('imagen2_acc', $imagen2_acc);
+
 
 if ($sentencia->execute()) {
 session_start();
 $_SESSION['mensaje'] = "Tarea editada correctamente";
 $_SESSION['icono'] = 'success';
-header("Location: " . $URL . "/admin/actividad/show.php?id_proyecto=$id_proyecto");
+header("Location: " . $URL . "/admin/accionprl/index.php");
 } else {
 session_start();
 $_SESSION['mensaje'] = "Tarea NO editada";
 $_SESSION['icono'] = 'warning';
-header("Location: " . $URL . "/admin/actividad/show.php?id_proyecto=$id_proyecto");
+header("Location: " . $URL . "/admin/accionprl/index.php");
 }
 
 

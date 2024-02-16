@@ -6,6 +6,7 @@ acc.fechaveri_acc as fechaveri_acc, acc.avance_acc as avance_acc, acc.estado_acc
 acc.accrealizada_acc as accrealizada_acc, acc.seguimiento_acc as seguimiento_acc, acc.recursos_acc as recursos_acc, acc.imagen1_acc as imagen1_acc, acc.imagen2_acc as imagen2_acc
 FROM ag_acciones as acc 
 INNER JOIN centros as cen ON acc.centro_acc = cen.id_centro 
+INNER JOIN responsables as resp ON acc.responsable_acc = resp.id_responsable 
 WHERE id_accion = $id_accion"; 
 
 $query_accionprl_datos = $pdo->prepare($sql);
@@ -16,12 +17,12 @@ $accionprl_datos = $query_accionprl_datos->fetchAll(PDO::FETCH_ASSOC);
 foreach ($accionprl_datos as $accionprl_dato) {
     $codigo_acc = $accionprl_dato['codigo_acc'];
     $fecha_acc = $accionprl_dato['fecha_acc'];
-    $nombre_cen = $accionprl_dato['nombre_cen'];
+    $centro_acc = $accionprl_dato['nombre_cen'];
     $origen_acc = $accionprl_dato['origen_acc'];
     $detalleorigen_acc = $accionprl_dato['detalleorigen_acc'];
     $prioridad_acc = $accionprl_dato['prioridad_acc'];
     $descripcion_acc = $accionprl_dato['descripcion_acc'];
-    $responsable_acc = $accionprl_dato['responsable_acc'];
+    $responsable_acc = $accionprl_dato['nombre_resp'];
     $fechaprevista_acc = $accionprl_dato['fechaprevista_acc'];
     $fechaprevista_acc = $accionprl_dato['fechaprevista_acc'];
     $fecharea_acc = $accionprl_dato['fecharea_acc'];

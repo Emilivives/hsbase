@@ -46,32 +46,56 @@ include('../../app/controllers/actividad/listado_accionprl.php');
 
 
 <div class="row">
-    <div class="col-lg-3 col-6">
+    <div class="col-lg-2 col-6">
         <!-- small box -->
         <div class="small-box bg-light shadow-sm border">
             <div class="inner">
-                <h2>150</h2>
+                <?php
+                $fechahoraentera = strtotime($fechahora);
+                $anio = date("Y", $fechahoraentera);
+                $contador_de_acciones = 0;
+                foreach ($accionprl_datos as $accionprl_dato) {
+                    if ((date("Y", strtotime($accionprl_dato['fecha_acc'])) == $anio)) {
+                        $contador_de_acciones = $contador_de_acciones + 1;
+                    }
+                }
+                ?>
 
-                <p>New Orders</p>
+                <h2><?php echo $contador_de_acciones; ?><sup style="font-size: 20px"></h2>
+                <p>Acciones Preventivas en <?php echo  $anio ?></p>
             </div>
             <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fa-solid fa-list"></i>
             </div>
+
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-3 col-6">
+    <div class="col-lg-1 col-6">
         <!-- small box -->
         <div class="small-box bg-light shadow-sm border">
             <div class="inner">
-                <h2>53<sup style="font-size: 20px">%</sup></h2>
-                <p>Bounce Rate</p>
+                <?php
+                $fechahoraentera = strtotime($fechahora);
+                $anio = date("Y", $fechahoraentera);
+                $contador_de_acciones_abiertas = 0;
+                foreach ($accionprl_datos as $accionprl_dato) {
+                    if ($accionprl_dato['estado_acc'] != 'Cerrada') {
+                        $contador_de_acciones_abiertas = $contador_de_acciones_abiertas + 1;
+                    }
+                }
+                ?>
+
+                <h2><?php echo $contador_de_acciones_abiertas; ?><sup style="font-size: 20px"></h2>
+                <p>Acciones abiertas</p>
             </div>
             <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fa-solid fa-clock"></i>
             </div>
+
         </div>
     </div>
+    
     <!-- ./col -->
     <div class="col-lg-3 col-6">
         <!-- small box -->
@@ -155,7 +179,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                     <td style="text-align: left"><b><?php echo $accionprl_dato['fecha_acc']; ?></b></td>
                     <td style="text-align: left"><?php echo $accionprl_dato['nombre_cen']; ?></td>
                     <td style="text-align: left"><?php echo $accionprl_dato['descripcion_acc']; ?></td>
-                    <td style="text-align: left"><?php echo $accionprl_dato['responsable_acc']; ?></td>
+                    <td style="text-align: left"><?php echo $accionprl_dato['nombre_resp']; ?></td>
                     <td style="text-align: left"><?php echo $accionprl_dato['accpropuesta_acc']; ?></td>
                     <td style="text-align: left"><?php echo $accionprl_dato['fechaprevista_acc']; ?></td>
                     <td style="text-align: left"><?php echo $accionprl_dato['fecharea_acc']; ?></td>
@@ -181,7 +205,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
 
                     <td style="text-align: center">
                         <div class="dropdown">
-                            <a href="show.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i> entrar</a>
+                            <a href="show.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-warning btn-sm" title="Accede" > <i class="bi bi-pencil-square"></i> Detalles</a></a>
 
                         </div>
 

@@ -70,9 +70,15 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                         <label for="centro" class="col-form-label col-sm-2">Centro:</label>
                         <div class="col-sm-7">
                             <select name="centro_acc" id="" class="form-control">
+                                <option value="0">--Seleccione centro--</option>
                                 <?php
-                                foreach ($centros_datos as $centros_dato) { ?>
-                                    <option value="<?php echo $centros_dato['id_centro']; ?>"><?php echo $centros_dato['nombre_cen']; ?></option>
+                                foreach ($centros_datos as $centros_dato) {
+                                    $centros_dato_tabla = $centros_dato['nombre_cen'];
+                                    $id_centro = $centros_dato['id_centro'];
+
+                                ?>
+                                    <option value="<?php echo $id_centro ?>" <?php if ($centros_dato_tabla == $centro_acc) { ?> selected="selected" <?php } ?> nombre_cen="<?php echo $centros_dato['nombre_cen']; ?>">
+                                        <?php echo $centros_dato_tabla; ?> </option>
                                 <?php
                                 }
                                 ?>
@@ -194,27 +200,27 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                         </div>
                         <div class="row">
                             <div class="col-sm-5">
-                                <div class="form-group row">
-                                    <label for="responsable_acc" class="col-form-label col-sm-2">Responsable:</label>
+                                <div class="form-group">
+                                    <label for="" class="col-form-label col-sm-2">Responsable:</label>
                                     <div class="col-sm-9">
-                                        <select name="responsable_acc" id="responsable_acc" class="form-control">
-                                            <option value="0">--Seleccione responsable--</option>
+                                        <select name="responsable_acc" id="" class="form-control">
                                             <?php
-                                            foreach ($responsables_datos as $responsables_dato) {
-                                                $responsables_dato_tabla = $responsables_dato['nombre_resp'];
-                                                $responsables_dato_tabla2 = $responsables_dato['cargo_resp'];
-                                                $id_responsable = $responsables_dato['id_responsable'];
-                                            ?>
-                                                <option value="<?php echo $id_responsable; ?>" <?php if ($responsables_dato_tabla == $responsable_acc) { ?> selected="selected" <?php } ?> nompre_resp="<?php echo $acc_responsable_dato['nombre_resp']; ?>" cargo_resp="<?php echo $acc_responsable_dato2['cargo_resp']; ?>">
-                                                    <?php echo $responsables_dato_tabla ?> | <?php echo $responsables_dato_tabla2 ?> </option>
+                                            foreach ($responsables_datos as $responsable_dato) {
+                                                $responsable_tabla = $responsable_dato['nombre_resp'];
+                                                $id_responsable = $responsable_dato['id_responsable']; ?>
+                                                <option value="<?php echo $id_responsable; ?>" <?php if ($responsable_tabla == $responsable_acc) { ?> selected="selected" <?php } ?> nombre_resp="<?php echo $responsable_dato['nombre_resp']; ?>">
+                                                    <?php echo  $responsable_tabla; ?>
+                                                </option>
                                             <?php
                                             }
                                             ?>
                                         </select>
-
+                                       
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
@@ -393,7 +399,8 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                                 <div class="form-group row">
                                     <tr>
                                         <td width="5%">Imagen 1</td>
-                                        <td><?php echo "<img width='150' height='150' src='$imagen1_acc'" ?> </td>
+                                        <!-- /
+                                        <td><?php echo "<img width='150' height='150' src='$imagen1_acc'" ?> </td> -->
                                     </tr>
                                 </div>
                             </div>
@@ -404,7 +411,7 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                                 <div class="form-group row">
                                     <tr>
                                         <td width="5%">Imagen 2</td>
-                                        <td><?php echo "<img width='150' height='150' src='$imagen1_acc'" ?> </td>
+                                        <!-- /<td><?php echo "<img width='150' height='150' src='$imagen2_acc'" ?> </td> -->
                                     </tr>
                                 </div>
                             </div>
@@ -429,10 +436,10 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                 <input type="submit" class="btn btn-primary" value="Guardar">
             </div>
         </div>
-
+    </form>
 
 </div>
-</form>
+
 </div>
 
 

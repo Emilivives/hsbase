@@ -141,7 +141,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                 </style>
                 <!--boton modal-->
                 <div class="btn-text-right">
-                    <button type="button" class="btn btn-primary btn-sm btn-font-size" data-toggle="modal" data-target="#modal-nuevaaccion">Añadir Proyecto</button>
+                    <button type="button" class="btn btn-primary btn-sm btn-font-size" data-toggle="modal" data-target="#modal-nuevaaccion">NUEVA ACCIÓN</button>
                 </div>
 
                 <!--inicio modal nuevo trabajador-->

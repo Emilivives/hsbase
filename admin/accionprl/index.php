@@ -167,7 +167,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                 <div class="form-group row">
                                                     <label for="nombre" class="col-form-label col-sm-3">Accion Nº:</label>
                                                     <div class="col-sm-6">
-                                                        <input type="text" class="form-control" name="codigo_acc" id="codigo_acc" value="" placeholder="nro. accdidente" tabindex="1">
+                                                        <input type="text" class="form-control" name="codigo_acc" id="" value="" placeholder="" tabindex="1">
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,16 +191,12 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                 <div class="form-group row">
                                                     <label for="centro" class="col-form-label col-sm-2">Centro:</label>
                                                     <div class="col-sm-7">
-                                                        <select name="centro_acc" id="" class="form-control">
+                                                        <select name="centro_acc" id="btn_centro" class="form-control">
                                                             <option value="0">--Seleccione centro--</option>
                                                             <?php
-                                                            foreach ($centros_datos as $centros_dato) {
-                                                                $centros_dato_tabla = $centros_dato['nombre_cen'];
-                                                                $id_centro = $centros_dato['id_centro'];
-
-                                                            ?>
-                                                                <option value="<?php echo $id_centro ?>" <?php if ($centros_dato_tabla == $centro_acc) { ?> selected="selected" <?php } ?> nombre_cen="<?php echo $centros_dato['nombre_cen']; ?>">
-                                                                    <?php echo $centros_dato_tabla; ?> </option>
+                                                            foreach ($centros_datos as $centros_dato) { ?>
+                                                                <option value="<?php echo $centros_dato['id_centro']; ?>" nombre_cen="<?php echo $centros_dato['nombre_cen']; ?>">
+                                                                    <?php echo $centros_dato['nombre_cen']; ?> </option>
                                                             <?php
                                                             }
                                                             ?>
@@ -216,7 +212,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                     <label for="prioridad" class="col-form-label col-sm-3">Prioridad:</label>
                                                     <div class="col-sm-6">
                                                         <select class="form-select" name="prioridad_acc" aria-label="Default select example">
-                                                            <option value="0">Selecciona lugar</option>
+                                                            <option value="-">Selecciona lugar</option>
 
                                                             <option value="Baja">Baja (< 3 meses)</option>
                                                             <option value="Media">Media (< 1 meses)</option>
@@ -232,12 +228,12 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                             </div>
                                             <div id="accordion">
 
-                                                <div class="card card-outline card-primary" id="headingone">
+                                                <div class="card card-outline card-primary" id="panelsStayOpen-headingone">
                                                     <div class="card-header">
                                                         <h3 class="card-title"><i class="bi bi-person-fill" style="text-align: left;"></i> 1. Detalles / Descripción</h3>
                                                         <div class="card-tools">
-                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                                <i class="fas fa-minus"></i>
+                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                                                            <i class="fas fa-list"></i>
                                                             </button>
                                                         </div>
 
@@ -246,7 +242,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                         </div>
 
                                                     </div>
-                                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
 
 
                                                         <div class="card-body">
@@ -270,7 +266,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                         <div class="col-sm-9">
                                                                             <select class="form-select" name="origen_acc" aria-label="Default select example">
 
-                                                                                <option value="0">Seleccione</option>
+                                                                                <option value="-">Seleccione</option>
 
                                                                                 <option value="Evaluacion de riesgos">Evaluacion de riesgos</option>
                                                                                 <option value="Accidente de trabajo">Accidente de trabajo</option>
@@ -311,7 +307,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                         </div>
 
                                                     </div>
-                                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-sm-12">
@@ -327,10 +323,10 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                             <div class="row">
                                                                 <div class="col-sm-12">
                                                                     <div class="form-group">
-                                                                        <label for="" class="col-form-label col-sm-4">Formador</label>
+                                                                        <label for="" class="col-form-label col-sm-4">Responsable</label>
                                                                         <div class="col-sm-8">
-                                                                            <select name="formador_fr" id="formador_fr" class="form-control">
-                                                                                <option value="0">--Seleccione Responsable--</option>
+                                                                            <select name="responsable_acc" id="" class="form-control">
+                                                                                <option value="">--Seleccione Responsable--</option>
                                                                                 <?php
                                                                                 foreach ($responsables_datos as $responsables_dato) { ?>
                                                                                     <option value="<?php echo $responsables_dato['id_responsable']; ?>"><?php echo $responsables_dato['nombre_resp']; ?> | <?php echo $responsables_dato['cargo_resp']; ?> </option>
@@ -375,7 +371,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                         </div>
 
                                                     </div>
-                                                    <div id="collapseThree" class="collapse" aria-labelledby="headingthree" data-parent="#accordion">
+                                                    <div id="collapseThree" class="collapse" aria-labelledby="headingthree" >
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-sm-4">
@@ -416,7 +412,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                     <div class="form-group row">
                                                                         <label for="recursos_acc" class="col-form-label col-sm-5">Recursos (Eur):</label>
                                                                         <div class="col-sm-4">
-                                                                            <input type="text" name="recursos_acc" id="recursos_acc" value="<?php echo $recursos_acc ?>" class="form-control" tabindex="1">
+                                                                            <input type="text" name="recursos_acc" id="" value="" class="form-control" tabindex="1">
                                                                         </div>
 
                                                                     </div>
@@ -426,7 +422,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                         <label for="avance_acc" class="col-form-label col-sm-3">Avance:</label>
                                                                         <div class="col-sm-6">
                                                                             <select class="form-select" name="avance_acc" aria-label="Default select example">
-                                                                                <option value="0">-</option>
+                                                                                <option value="-">-</option>
 
                                                                                 <option value="0%">0%</option>
                                                                                 <option value="25%">25%</option>
@@ -442,7 +438,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                         <label for="estado_acc" class="col-form-label col-sm-3">Estado:</label>
                                                                         <div class="col-sm-7">
                                                                             <select class="form-select" name="estado_acc" aria-label="Default select example">
-                                                                                <option value="0">-</option>
+                                                                                <option value="-">-</option>
 
                                                                                 <option value="Abierta">Abierta</option>
                                                                                 <option value="Comunicada">Comunicada</option>
@@ -472,7 +468,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                         </div>
                                                     </div>
                                                 </div>
-                                      
+
 
 
                                                 <div class="card card-outline card-primary" id="headingfour">
@@ -484,7 +480,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <div id="collapseFour" class="collapse" aria-labelledby="headingfour" data-parent="#accordion">
+                                                    <div id="collapseFour" class="collapse" aria-labelledby="headingfour">
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-sm-12">

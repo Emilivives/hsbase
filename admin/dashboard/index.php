@@ -395,43 +395,24 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
             </div>
             <div class="card-body">
               <div class="d-flex">
-                <p class="d-flex flex-column">
-                  <span class="text-bold text-lg">$18,230.00</span>
-                  <span>Sales Over Time</span>
-                </p>
-                <p class="ml-auto d-flex flex-column text-right">
-                  <span class="text-success">
-                    <i class="fas fa-arrow-up"></i> 33.1%
-                  </span>
-                  <span class="text-muted">Since last month</span>
-                </p>
-              </div>
-              <!-- /.d-flex -->
-
-              <div class="position-relative mb-4">
-                <canvas id="sales-chart" height="200"></canvas>
-              </div>
-
-              <div class="d-flex flex-row justify-content-end">
-                <span class="mr-2">
-                  <i class="fas fa-square text-primary"></i> This year
-                </span>
-
-                <span>
-                  <i class="fas fa-square text-gray"></i> Last year
-                </span>
-              </div>
+                1. Número de charlas de seguridad en el periodo <hr>
+                2. Número de personas que participan en la gestión <hr>
+                3. Número de inspecciones, revisiones o auditorías <hr>
+                4. Tiempo que lleva implementar una acción correctiva <hr>
+                5. Número de programas de capacitación y formación, y sus asistentes <hr>
+                6. Número de personas que utilizan los EPP <hr>
+                7. Número de incidentes, casi accidentes y accidentes <hr>
+                8. Número de metas y objetivos propuestos </div>
             </div>
           </div>
         </div>
+        <!-- /.card -->
       </div>
-      <!-- /.card -->
+      <!-- /.col-md-6 -->
     </div>
-    <!-- /.col-md-6 -->
+    <!-- /.row -->
   </div>
-  <!-- /.row -->
-</div>
-<!-- /.container-fluid -->
+  <!-- /.container-fluid -->
 </div>
 <!-- /.content -->
 <!--</div>

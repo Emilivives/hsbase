@@ -39,7 +39,7 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
 <div class="content">
     <form action="../../app/controllers/actividad/update_accion.php" method="post">
 
-        <input type="text" name="id_accion" value="<?php echo $id_accion; ?>" hidden>
+        <input type="text" name="id_accion" value="<?php echo $id_accion; ?>" >
 
         <div class="well">
             <div class="row">

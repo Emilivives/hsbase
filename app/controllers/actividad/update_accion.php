@@ -24,8 +24,7 @@ $estado_acc = $_POST['estado_acc'];
 
 
 $sentencia = $pdo->prepare("UPDATE ag_acciones
-SET id_accion=:id_accion, 
-codigo_acc=:codigo_acc, 
+SET codigo_acc=:codigo_acc, 
 fecha_acc=:fecha_acc, 
 centro_acc=:centro_acc, 
 responsable_acc=:responsable_acc, 
@@ -41,11 +40,9 @@ fecharea_acc=:fecharea_acc;
 recursos_acc=:recursos_acc, 
 seguimiento_acc=:seguimiento_acc,
 avance_acc=:avance_acc, 
-estado_acc=:estado_acc, 
+estado_acc=:estado_acc
+WHERE id_accion =: id_accion");
 
-WHERE id_accion =:id_accion");
-
-$sentencia->bindParam('id_accion', $id_accion);  
 $sentencia->bindParam('codigo_acc', $codigo_acc);    
 $sentencia->bindParam('fecha_acc', $fecha_acc);    
 $sentencia->bindParam('centro_acc', $centro_acc);

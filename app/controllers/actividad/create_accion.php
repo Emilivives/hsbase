@@ -2,7 +2,7 @@
 
 include('../../config.php');
 
-$id_accion = $_POST['id_accion'];
+
 $codigo_acc = $_POST['codigo_acc'];
 $fecha_acc = $_POST['fecha_acc'];
 $centro_acc = $_POST['centro_acc'];
@@ -23,12 +23,12 @@ $estado_acc = $_POST['estado_acc'];
 
 
 
-$sentencia = $pdo->prepare("INSERT INTO ag_acciones (id_accion, codigo_acc, fecha_acc, centro_acc, responsable_acc, prioridad_acc, descripcion_acc, origen_acc, 
-detalleorigen_acc, accpropuesta_acc, accrealizada_acc, fechaprevista_acc, fechaveri_acc, fecharea_acc; recursos_acc, seguimiento_acc, avance_acc, estado_acc,) 
-VALUES (NULL, :codigo_acc, :fecha_acc, :centro_acc, :responsable_acc, :prioridad_acc, :descripcion_acc, :origen_acc, 
-:detalleorigen_acc, :accpropuesta_acc, :accrealizada_acc, :fechaprevista_acc, :fechaveri_acc, :fecharea_acc; :recursos_acc, :seguimiento_acc, :avance_acc, :estado_acc,)"); 
+$sentencia = $pdo->prepare("INSERT INTO ag_acciones (codigo_acc, fecha_acc, centro_acc, responsable_acc, prioridad_acc, descripcion_acc, origen_acc, 
+detalleorigen_acc, accpropuesta_acc, accrealizada_acc, fechaprevista_acc, fechaveri_acc, fecharea_acc, recursos_acc, seguimiento_acc, avance_acc, estado_acc) 
+VALUES (:codigo_acc, :fecha_acc, :centro_acc, :responsable_acc, :prioridad_acc, :descripcion_acc, :origen_acc, 
+:detalleorigen_acc, :accpropuesta_acc, :accrealizada_acc, :fechaprevista_acc, :fechaveri_acc, :fecharea_acc, :recursos_acc, :seguimiento_acc, :avance_acc, :estado_acc)"); 
 
-$sentencia->bindParam('id_accion', $id_accion);  
+
 $sentencia->bindParam('codigo_acc', $codigo_acc);    
 $sentencia->bindParam('fecha_acc', $fecha_acc);    
 $sentencia->bindParam('centro_acc', $centro_acc);

@@ -1,9 +1,11 @@
 <?php
 include('../../app/config.php');
 include('../../admin/layout/parte1.php');
-include('../../app/controllers/formaciones/listado_formaciones.php');
 include('../../app/controllers/pruebas/listado_trabajadores.php');
-include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones.php');
+include('../../app/controllers/maestros/centros/listado_centros.php');
+include('../../app/controllers/actividad/listado_proyectos.php');
+include('../../app/controllers/actividad/listado_accionprl.php');
+include('../../app/controllers/maestros/responsables/listado_responsables.php');
 ?>
 <html>
 <!-- Font Awesome -->
@@ -11,19 +13,31 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
+<style>
+    .dropdown-font-size {
+        font-size: 12px;
+    }
+
+    .btn-font-size {
+        font-size: 12px;
+    }
+</style>
+
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h5 class="m-0"><b>Formaciones Realizadas</b></h5>
+                <h3 class="m-0">Acciones PRL (correctoras o preventivas)</h3>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                    <li class="breadcrumb-item active">Control formaciones</li>
+                    <li class="breadcrumb-item"><a href="#">Actividades</a></li>
+                    <li class="breadcrumb-item active">Acciones PRL</li>
                 </ol>
             </div><!-- /.col -->
-            <hr>
+            <hr class="border-primary">
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
@@ -31,64 +45,85 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 
 </html>
 
+
 <div class="row">
     <div class="col-lg-2 col-6">
         <!-- small box -->
-        <div class="small-box bg-info">
+        <div class="small-box bg-light shadow-sm border">
             <div class="inner">
-                <h3>150</h3>
+                <?php
+                $fechahoraentera = strtotime($fechahora);
+                $anio = date("Y", $fechahoraentera);
+                $contador_de_acciones = 0;
+                foreach ($accionprl_datos as $accionprl_dato) {
+                    if ((date("Y", strtotime($accionprl_dato['fecha_acc'])) == $anio)) {
+                        $contador_de_acciones = $contador_de_acciones + 1;
+                    }
+                }
+                ?>
 
-                <p>New Orders</p>
+                <h2><?php echo $contador_de_acciones; ?><sup style="font-size: 20px"></h2>
+                <p>Acciones Preventivas en <?php echo  $anio ?></p>
             </div>
             <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fa-solid fa-list"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-2 col-6">
+    <div class="col-lg-1 col-6">
         <!-- small box -->
-        <div class="small-box bg-success">
+        <div class="small-box bg-light shadow-sm border">
             <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <?php
+                $fechahoraentera = strtotime($fechahora);
+                $anio = date("Y", $fechahoraentera);
+                $contador_de_acciones_abiertas = 0;
+                foreach ($accionprl_datos as $accionprl_dato) {
+                    if ($accionprl_dato['estado_acc'] != 'Cerrada') {
+                        $contador_de_acciones_abiertas = $contador_de_acciones_abiertas + 1;
+                    }
+                }
+                ?>
 
-                <p>Bounce Rate</p>
+                <h2><?php echo $contador_de_acciones_abiertas; ?><sup style="font-size: 20px"></h2>
+                <p>Acciones abiertas</p>
             </div>
             <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fa-solid fa-clock"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+
         </div>
     </div>
+
     <!-- ./col -->
-    <div class="col-lg-2 col-6">
+    <div class="col-lg-3 col-6">
         <!-- small box -->
-        <div class="small-box bg-warning">
+        <div class="small-box">
             <div class="inner">
-                <h3>44</h3>
+                <h2>44</h2>
 
                 <p>User Registrations</p>
             </div>
             <div class="icon">
                 <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-2 col-6">
+    <div class="col-lg-3 col-6">
         <!-- small box -->
-        <div class="small-box bg-danger">
+        <div class="small-box">
             <div class="inner">
-                <h3>65</h3>
+                <h2>65</h2>
 
                 <p>Unique Visitors</p>
             </div>
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+
         </div>
     </div>
     <!-- ./col -->
@@ -96,10 +131,10 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 <!-- /.content-header -->
 
 
-<div class="col-md-8">
+<div class="col-md-12">
     <div class="card card-outline card-primary">
         <div class="card-header col-md-12">
-            <h3 class="card-title"><b>Trabajadores registrados</b></h3>
+            <h3 class="card-title"><b>Acciones preventivas / correctoras registradas</b></h3>
             <style>
                 .btn-text-right {
                     text-align: right;
@@ -107,183 +142,523 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
             </style>
             <!-- Button trigger modal -->
             <div class="btn-text-right">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevaformacion">
-                    Nueva formación
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevaacciion">
+                    Nueva Acción
                 </button>
             </div>
 
             <!-- Modal -->
-            <form action="../../../app/controllers/formaciones/create.php" method="post" enctype="multipart/form-data">
+            <div class="modal fade" id="modal-nuevaacciion">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#ffff1a ;color:black">
+                            <h5 class="modal-title" id="modal-nuevaacciion">Accion Preventiva o Correctora</h5>
+                            <button type="button" class="close" style="color:black;" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="../../app/controllers/actividad/create_accion.php" method="post" enctype="multipart/form-data">
 
-                <div class="modal fade" id="modal-nuevaformacion">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header" style="background-color:#808000 ;color:white">
-                                <h5 class="modal-title" id="modal-nuevaformacion">Formación realizada</h5>
-                                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Formación</label>
-                                        <select name="tipo_fr" id="" class="form-control">
-                                            <?php
-                                            foreach ($tipoformaciones_datos as $tipoformaciones_dato) { ?>
-                                                <option value="<?php echo $tipoformaciones_dato['id_tipoformacion']; ?>"><?php echo $tipoformaciones_dato['nombre_tf']; ?></option>
-                                            <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Trabajadores</label>
-                                        <select name="trabajador_fr" id="" class="form-control">
-                                            <?php
-                                            foreach ($trabajadores as $trabajador) { ?>
-                                                <option value="<?php echo $trabajador['id_trabajador']; ?>"><?php echo $trabajador['nombre_tr']; ?></option>
-                                            <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="">Fecha Formacion</label>
-                                            <input type="date" value="<?php echo $formacion['fecha_fr']; ?>" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="">Valido hasta</label>
-                                            <input type="date" value="<?php echo $formacion['fechacad_fr']; ?>" class="form-control">
+                                <div class="well">
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group row">
+                                                <label for="nombre" class="col-form-label col-sm-3">Accion Nº:</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="codigo_acc" id="" value="" placeholder="" tabindex="1">
+                                                </div>
+                                            </div>
                                         </div>
 
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group row">
+                                                <label for="nombre" class="col-form-label col-sm-3">Fecha:</label>
+                                                <div class="col-sm-5">
+                                                    <input type="date" name="fecha_acc" id="fecha_acc" value="" class="form-control" tabindex="1">
+                                                </div>
+                                            </div>
+
+
+                                        </div>
                                     </div>
+
+                                    <div class="row">
+
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group row">
+                                                <label for="centro" class="col-form-label col-sm-2">Centro:</label>
+                                                <div class="col-sm-7">
+                                                    <select name="centro_acc" id="btn_centro" class="form-control">
+                                                        <option value="0">--Seleccione centro--</option>
+                                                        <?php
+                                                        foreach ($centros_datos as $centros_dato) { ?>
+                                                            <option value="<?php echo $centros_dato['id_centro']; ?>" nombre_cen="<?php echo $centros_dato['nombre_cen']; ?>">
+                                                                <?php echo $centros_dato['nombre_cen']; ?> </option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group row">
+                                                <label for="prioridad" class="col-form-label col-sm-3">Prioridad:</label>
+                                                <div class="col-sm-6">
+                                                    <select class="form-select" name="prioridad_acc" aria-label="Default select example">
+                                                        <option value="-">Selecciona lugar</option>
+
+                                                        <option value="Baja">Baja (< 3 meses)</option>
+                                                        <option value="Media">Media (< 1 meses)</option>
+                                                        <option value="Alta">Alta (< 10 dias)</option>
+                                                        <option value="Urgente">Urgente (< 24 - 48 hrs)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="accordion">
+
+                                        <div class="card card-outline card-primary" id="panelsStayOpen-headingone">
+                                            <div class="card-header">
+                                                <h3 class="card-title"><i class="bi bi-person-fill" style="text-align: left;"></i> 1. Detalles / Descripción</h3>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+
+                                                <div class="row">
+
+                                                </div>
+
+                                            </div>
+                                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+
+
+                                                <div class="card-body">
+                                                    <div class="row">
+
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group row">
+                                                                    <label for="descripcion_acc" class="col-form-label col-sm-2">Descripcion:*</label>
+                                                                    <div class="col-sm-12">
+                                                                        <textarea class="form-control" name="descripcion_acc" value="" rows="3" required></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-5">
+                                                            <div class="form-group row">
+                                                                <label for="origen_acc" class="col-form-label col-sm-3">Origen:</label>
+                                                                <div class="col-sm-9">
+                                                                    <select class="form-select" name="origen_acc" aria-label="Default select example">
+
+                                                                        <option value="-">Seleccione</option>
+
+                                                                        <option value="Evaluacion de riesgos">Evaluacion de riesgos</option>
+                                                                        <option value="Accidente de trabajo">Accidente de trabajo</option>
+                                                                        <option value="Propuesta de mejora">Propuesta de mejora</option>
+                                                                        <option value="Comunicado de riesgos">Comunicado de riesgos</option>
+                                                                        <option value="Otros">Otros</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-7">
+                                                            <div class="form-group row">
+                                                                <label for="detalleorigen_acc" class="col-form-label col-sm-5">Informe procedencia / detalles:</label>
+                                                                <div class="col-sm-7">
+                                                                    <input type="text" name="detalleorigen_acc" id="" class="form-control" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card card-outline card-primary" id="headingtwo">
+                                            <div class="card-header">
+                                                <h3 class="card-title"><i class="fa fa-book" style="text-align: left;"></i> 2. Medidas preventivas / correctoras</h3>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+
+                                                <div class="row">
+
+                                                </div>
+
+                                            </div>
+                                            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group row">
+                                                                <label for="accpropuesta_acc" class="col-form-label col-sm-2">Accion propuesta:*</label>
+                                                                <div class="col-sm-12">
+                                                                    <textarea class="form-control" name="accpropuesta_acc" value="" rows="2" required></textarea>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label for="" class="col-form-label col-sm-4">Responsable*</label>
+                                                                <div class="col-sm-8">
+                                                                    <select name="responsable_acc" id="" class="form-control" required>
+                                                                        <option value="">--Seleccione Responsable--</option>
+                                                                        <?php
+                                                                        foreach ($responsables_datos as $responsables_dato) { ?>
+                                                                            <option value="<?php echo $responsables_dato['id_responsable']; ?>"><?php echo $responsables_dato['nombre_resp']; ?> | <?php echo $responsables_dato['cargo_resp']; ?> </option>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group row">
+                                                                <label for="accrealizada_acc" class="col-form-label col-sm-2">Acción realizada:</label>
+                                                                <div class="col-sm-12">
+                                                                    <textarea class="form-control" name="accrealizada_acc" value="" rows="2"></textarea>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card card-outline card-primary" id="headingthree">
+                                            <div class="card-header">
+                                                <h3 class="card-title"><i class="bi bi-geo-alt-fill" style="text-align: left;"></i> 3. Seguimiento</h3>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+
+                                                <div class="row">
+
+                                                </div>
+
+                                            </div>
+                                            <div id="collapseThree" class="collapse" aria-labelledby="headingthree">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group row">
+
+                                                                <label for="fechaprevista_acc" class="col-form-label col-sm-6">Fecha cierre prevista:</label>
+                                                                <div class="col-sm-6">
+                                                                    <input type="date" name="fechaprevista_acc" id="fechaprevista_acc" value="" class="form-control" tabindex="1">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group row">
+
+                                                                <label for="fechaprevista_acc" class="col-form-label col-sm-6">Fecha cierre real:</label>
+                                                                <div class="col-sm-6">
+                                                                    <input type="date" name="fecharea_acc" id="fecharea_acc" value="" class="form-control" tabindex="1">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group row">
+
+                                                                <label for="fechaveri_acc" class="col-form-label col-sm-6">Fecha verificación:</label>
+                                                                <div class="col-sm-6">
+                                                                    <input type="date" name="fechaveri_acc" id="fechaveri_acc" value="<?php echo $fechaveri_acc ?>" class="form-control" tabindex="1">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group row">
+                                                                <label for="recursos_acc" class="col-form-label col-sm-5">Recursos (Eur):</label>
+                                                                <div class="col-sm-4">
+                                                                    <input type="text" name="recursos_acc" id="" value="" class="form-control" tabindex="1">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group row">
+                                                                <label for="avance_acc" class="col-form-label col-sm-3">Avance:</label>
+                                                                <div class="col-sm-6">
+                                                                    <select class="form-select" name="avance_acc" aria-label="Default select example">
+                                                                        <option value="-">-</option>
+
+                                                                        <option value="0%">0%</option>
+                                                                        <option value="25%">25%</option>
+                                                                        <option value="50%">50%</option>
+                                                                        <option value="85%">85%</option>
+                                                                        <option value="100%">100%</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group row">
+                                                                <label for="estado_acc" class="col-form-label col-sm-3">Estado:</label>
+                                                                <div class="col-sm-7">
+                                                                    <select class="form-select" name="estado_acc" aria-label="Default select example">
+                                                                        <option value="-">-</option>
+
+                                                                        <option value="Abierta">Abierta</option>
+                                                                        <option value="Comunicada">Comunicada</option>
+                                                                        <option value="En curso">En curso</option>
+                                                                        <option value="Finalizada">Finalizada</option>
+                                                                        <option value="Cerrada">Cerrada</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group row">
+                                                                <label for="seguimiento_acc" class="col-form-label col-sm-3">Seguimiento acción: (fecha y detalles)</label>
+                                                                <div class="col-sm-9">
+                                                                    <textarea class="form-control" name="seguimiento_acc" value="" rows="4"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="card card-outline card-primary" id="headingfour">
+                                            <div class="card-header">
+                                                <h3 class="card-title"><i class="bi bi-plus-square-fill" style="text-align: left;"></i> 4. Comentarios y imagenes</h3>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div id="collapseFour" class="collapse" aria-labelledby="headingfour">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group row">
+                                                                <label for="accrealizada_acc" class="col-form-label col-sm-6">Comentarios y anotaciones:</label>
+                                                                <div class="col-sm-12">
+                                                                    <textarea class="form-control" name="accrealizada_acc" value="" rows="2"></textarea>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+
+                                                        <div class="container-fluid">
+                                                            <div class="row mb-2">
+                                                                <div class="col-sm-6">
+                                                                    <h6 class="m-0"><b>Imágenes:</b></h>
+                                                                </div><!-- /.col -->
+                                                                <hr>
+                                                            </div><!-- /.row -->
+                                                        </div><!-- /.container-fluid -->
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="form-group row">
+                                                                <tr>
+                                                                    <td width="5%">Imagen 1</td>
+                                                                    <!-- /
+                                                     <td><?php echo "<img width='150' height='150' src='$imagen1_acc'" ?> </td> -->
+                                                                </tr>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                        </div>
+
+                                                        <div class="col-sm-2">
+                                                            <div class="form-group row">
+                                                                <tr>
+                                                                    <td width="5%">Imagen 2</td>
+                                                                    <!-- /<td><?php echo "<img width='150' height='150' src='$imagen2_acc'" ?> </td> -->
+                                                                </tr>
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
 
                                 </div>
 
 
-                            </div>
-                            <div class="modal-footer">
+                                <div class="modal-footer">
 
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
 
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
 
-
-
-                <!--fin modal-->
+            <!--fin modal-->
 
 
 
         </div>
         <div class="card-body">
-            <table id="example1" class="table table-striped table-bordered table-hover">
-                <thead>
+            <table id="example1" class="table tabe-hover table-condensed">
+                <colgroup>
+                    <col width="3%">
+                    <col width="4%">
+                    <col width="4%">
+                    <col width="4%">
+                    <col width="7%">
+                    <col width="12%">
+                    <col width="5%">
+                    <col width="12%">
+                    <col width="5%">
+                    <col width="5%">
+                    <col width="5%">
+                    <col width="3%">
+
+
+                </colgroup>
+                <thead class="table-dark">
                     <tr>
-                        <th style="text-align: center">Num.</th>
-                        <th style="text-align: center">Tipo Form.</th>
-                        <th style="text-align: center">Nombre trab.</th>
-                        <th style="text-align: center">Fecha Form.</th>
-                        <th style="text-align: center">Fecha Caduc.</th>
-                        <th style="text-align: center">Acciones</th>
+                        <th style="text-align: center">#</th>
+                        <th style="text-align: left">Codigo</th>
+                        <th style="text-align: left">Fecha</th>
+                        <th style="text-align: center">Prioridad</th>
+                        <th style="text-align: left">Centro</th>
+                        <th style="text-align: left">Descripción</th>
+                        <th style="text-align: left">Responsable</th>
+                        <th style="text-align: left">Medida</th>
+                        <th style="text-align: left">Fecha prevista</th>
+                        <th style="text-align: left">Fecha realizada</th>
+                        <th style="text-align: left">Estado</th>
+                        <th style="text-align: left">ACCIONES
+
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $contador = 0;
-                    foreach ($formaciones as $formacion) {
+                    foreach ($accionprl_datos as $accionprl_dato) {
                         $contador = $contador + 1;
-                        $id_formacion = $formacion['id_formacion'];
+                        $id_accion = $accionprl_dato['id_accion'];
                     ?>
 
                         <tr>
-                            <td style="text-align: center"><?php echo $contador; ?></td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-tipoformacion<?php echo $id_formacion; ?>">
-                                    <?php echo $formacion['nombre_tf']; ?>
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="modal-tipoformacion<?php echo $id_formacion; ?>">
-                                    <div class="modal-dialog modal-xl">
-                                        <div class="modal-content">
-                                            <div class="modal-header" style="background-color:#808000 ;color:white">
-                                                <h5 class="modal-title" id="modal-tipoformacion<?php echo $formacion['nombre_tf']; ?>">Tipo de Formación</h5>
-                                                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                <div class="row">
-                                                    <div class="col-md-9">
-                                                        <div class="form-group">
-                                                            <label for="">Nombre formación</label>
-                                                            <input type="text" value="<?php echo $formacion['nombre_tf']; ?>" class="form-control" disabled>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="">Duracion</label>
-                                                            <input type="text" value="<?php echo $formacion['duracion_tf']; ?>" class="form-control" disabled>hrs.
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="">Validez</label>
-                                                            <input type="text" value="<?php echo $formacion['validez_tf']; ?>" class="form-control" disabled>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label for="">Contenido formación</label>
-                                                        <textarea class="form-control" id="<?php echo $formacion['detalles_tf']; ?>" name="$id_formacion" rows="20" disabled><?php echo $formacion['detalles_tf']; ?></textarea>
-
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <!--fin modal-->
+                            <td style="text-align: center"><b><?php echo $contador; ?></b></td>
+                            <td style="text-align: left"><b><?php echo $accionprl_dato['codigo_acc']; ?></b></td>
+                            <td style="text-align: left"><b><?php echo $accionprl_dato['fecha_acc']; ?></b></td>
+                            <td style="text-align: center"><?php $accionprl_dato['prioridad_acc']; ?>
+                                <?php if ($accionprl_dato['prioridad_acc'] == "Baja") { ?>
+                                    <span class='badge badge-secondary'>Baja</span>
+                                <?php
+                                } else if ($accionprl_dato['prioridad_acc'] == "Media") { ?>
+                                    <span class='badge badge-info'>Media</span>
+                                <?php                       } else if ($accionprl_dato['prioridad_acc'] == "Alta") { ?>
+                                    <span class='badge badge-warning'>Alta</span>
+                                <?php                       } else if ($accionprl_dato['prioridad_acc'] == "Urgente") { ?>
+                                    <span class='badge badge-danger'>Urgente</span>
+                                <?php                       }
+                                ?>
 
 
                             </td>
-                            <td style="text-align: center"><?php echo $formacion['nombre_tr']; ?></td>
-                            <td style="text-align: center"><?php echo $formacion['fecha_fr']; ?></td>
-                            <td style="text-align: center"><?php echo $formacion['fechacad_fr']; ?></td>
+                            <td style="text-align: left"><?php echo $accionprl_dato['nombre_cen']; ?></td>
+                            <td style="text-align: left"><?php echo $accionprl_dato['descripcion_acc']; ?></td>
+                            <td style="text-align: left"><?php echo $accionprl_dato['nombre_resp']; ?></td>
+                            <td style="text-align: left"><?php echo $accionprl_dato['accpropuesta_acc']; ?></td>
+                            <td style="text-align: left"><?php echo $accionprl_dato['fechaprevista_acc']; ?></td>
+                            <td style="text-align: left"><?php echo $accionprl_dato['fecharea_acc']; ?></td>
+
+                            <td style="text-align: left"><?php $accionprl_dato['estado_acc']; ?>
+                                <?php if ($accionprl_dato['estado_acc'] == "Cerrada") { ?>
+                                    <span class='badge badge-success'>Cerrada</span>
+                                <?php
+                                } else if ($accionprl_dato['estado_acc'] == "En curso") { ?>
+                                    <span class='badge badge-info'>En curso</span>
+                                <?php                       } else if ($accionprl_dato['estado_acc'] == "Comunicada") { ?>
+                                    <span class='badge badge-secondary'>Comunicada</span>
+                                <?php                       } else if ($accionprl_dato['estado_acc'] == "Abierta") { ?>
+                                    <span class='badge badge-warning'>Abierta</span>
+                                <?php                       } else if ($accionprl_dato['estado_acc'] == "Finalizada") { ?>
+                                    <span class='badge badge-primary'>Finalizada</span>
+                                <?php                       }
+                                ?>
+
 
                             </td>
 
 
                             <td style="text-align: center">
-                                <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                    <a href="show.php?id_usuario=<?php echo $id_usuario; ?>" class="btn btn-secondary btn-sm" title="Ver detalles"><i class="bi bi-person-lines-fill"></i></a>
-                                    <a href="update.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-warning btn-sm" title="Editar"><i class="bi bi-pencil-square"></i></a>
-                                    <a href="delete.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-danger btn-sm" title="Eliminar"><i class="bi bi-trash3-fill"></i></a>
+                                <div class="dropdown">
+                                    <a href="detallesaccion.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-warning btn-sm" title="Accede"> <i class="fa-solid fa-folder-open"></i> Detalles</a></a>
 
                                 </div>
+
+
                             </td>
 
                         </tr>
@@ -294,6 +669,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                 </tbody>
 
             </table>
+
 
         </div>
 

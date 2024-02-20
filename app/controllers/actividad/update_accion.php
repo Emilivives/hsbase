@@ -43,6 +43,7 @@ avance_acc=:avance_acc,
 estado_acc=:estado_acc
 WHERE id_accion =: id_accion");
 
+
 $sentencia->bindParam('codigo_acc', $codigo_acc);    
 $sentencia->bindParam('fecha_acc', $fecha_acc);    
 $sentencia->bindParam('centro_acc', $centro_acc);

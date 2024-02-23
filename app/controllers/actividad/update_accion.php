@@ -36,14 +36,14 @@ accpropuesta_acc=:accpropuesta_acc,
 accrealizada_acc=:accrealizada_acc, 
 fechaprevista_acc=:fechaprevista_acc,
 fechaveri_acc=:fechaveri_acc,
-fecharea_acc=:fecharea_acc; 
+fecharea_acc=:fecharea_acc, 
 recursos_acc=:recursos_acc, 
 seguimiento_acc=:seguimiento_acc,
 avance_acc=:avance_acc, 
 estado_acc=:estado_acc
-WHERE id_accion =: id_accion");
+WHERE id_accion =:id_accion");
 
-
+$sentencia->bindParam('id_accion', $id_accion);   
 $sentencia->bindParam('codigo_acc', $codigo_acc);    
 $sentencia->bindParam('fecha_acc', $fecha_acc);    
 $sentencia->bindParam('centro_acc', $centro_acc);

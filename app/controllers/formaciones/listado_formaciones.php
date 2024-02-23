@@ -1,10 +1,12 @@
 <?php
 
 $sql = "SELECT *, tf.nombre_tf as nombre_tf, fr.fecha_fr as fecha_fr, fr.fechacad_fr as fechacad_fr, 
-fas.idtrabajador_fas as idtrabajador_fas, tf.duracion_tf as duracion_tf, tf.detalles_tf as detalles_tf FROM formacion as fr 
+fas.idtrabajador_fas as idtrabajador_fas, tf.duracion_tf as duracion_tf, tf.detalles_tf as detalles_tf, 
+resp.nombre_resp as nombre_resp FROM formacion as fr 
 INNER JOIN tipoformacion as tf ON fr.tipo_fr = tf.id_tipoformacion
 INNER JOIN form_asistencia as fas ON fas.nroformacion = fr.nroformacion
 INNER JOIN trabajadores as tr ON tr.id_trabajador = fas.idtrabajador_fas
+INNER JOIN responsables as resp ON fr.formador_fr = resp.id_responsable
 ORDER BY fecha_fr DESC
 ";
 

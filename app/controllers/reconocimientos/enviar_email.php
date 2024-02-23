@@ -11,6 +11,7 @@ $nombre_tr = $_POST['nombre_tr'];
 $dni_tr = $_POST['dni_tr'];
 $categoria_tr = $_POST['categoria_tr'];
 $centro_tr = $_POST['centro_tr'];
+$razonsocial_emp = $_POST['razonsocial_emp'];
 $destinatario = $_POST['destinatario'];
 $anotaciones_crm = $_POST['anotaciones_crm'];
 
@@ -30,30 +31,39 @@ try {
 
     //Recipients
     $mail->setFrom('emilivives@gmail.com', 'Prevencion Trasmapi');
-    $mail->addAddress('emilivives@gmail.com', 'User');     //Add a recipient
-    $mail->addAddress('prevencion@trasmapi.com');               //Name is optional
+    $mail->addAddress($destinatario);     //Add a recipient
+    //Name is optional
 
     //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Asunto';
+    $mail->isHTML(true);
+    $mail->CharSet = 'UTF-8';                             //Set email format to HTML
+    $mail->Subject = 'SOLICITUD CITA RECONOCIMIENTO MÉDICO';
     $mail->Body    = "<html>
     <body>
-    <h3>Destinatario: $destinatario</h3>
+    <h6>
     <br>
+    Buenos dias,
+ <br> 
+    Agradezco que nos den cita para el trabajador:  
+     <br>
+    EMPRESA:$razonsocial_emp
     <br>
-    <h3>Centro: $centro_tr</h3>
+    NOMBRE TRABAJADOR: $nombre_tr
     <br>
+    DNI: $dni_tr
     <br>
-        <h3>Nombre: $nombre_tr</h3>
-        <br>
-        <h3>Apellido: $dni_tr</h3>
-        <br>
-        <br>
-        <h3>Correo: $categoria_tr</h3>
-        <br>
-        <br>
-        <h3>Mensaje: </h3>
-        <p>$anotaciones_crm</p>
+    Puesto: $categoria_tr
+<br>
+**Anotaciones/restricciones: $anotaciones_crm **
+<br>
+
+Emili Vives Garcia
+Depto. PRL 
+
+
+
+
+
     </body>
     </html>";
 

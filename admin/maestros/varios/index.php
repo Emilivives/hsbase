@@ -196,6 +196,7 @@ include('../../../app/controllers/maestros/empresas/listado_empresas.php');
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                         <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
                                     </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -206,7 +207,7 @@ include('../../../app/controllers/maestros/empresas/listado_empresas.php');
                 <!--fin modal-->
 
                 <div class="card-body">
-                    <table id="example1" class="table table-striped table-bordered table-hover">
+                    <table id="example2" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th style="text-align: center">Num.</th>
@@ -342,5 +343,65 @@ include('../../../admin/layout/mensaje.php');
                 }
             ],
         }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
+    });
+</script>
+
+<script>
+    $(function() {
+        $("#example2").DataTable({
+            "pageLength": 5,
+            "language": {
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",
+                "infoEmpty": "Mostrando 0 a 0 de 0 Usuarios",
+                "infoFiltered": "(Filtrado de MAX total Usuarios)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Usuarios",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscador:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            buttons: [{
+                    extend: "collection",
+                    text: "Reportes",
+                    orientation: "landscape",
+                    buttons: [{
+                            text: "Copiar",
+                            extend: "copy"
+                        },
+                        {
+                            extend: "pdf"
+                        },
+                        {
+                            extend: "csv"
+                        },
+                        {
+                            extend: "excel"
+                        },
+                        {
+                            text: "Imprimir",
+                            extend: "print"
+                        }
+                    ]
+                },
+                {
+                    extend: "colvis",
+                    text: "Visor de columnas",
+                    /*collectionLayout: "fixed three-column" */
+
+                }
+            ],
+        }).buttons().container().appendTo("#example2_wrapper .col-md-6:eq(0)");
     });
 </script>

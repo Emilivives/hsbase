@@ -143,11 +143,11 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
         <div class="small-box bg-light shadow-sm border">
             <div class="inner">
                 <?php
-               $contadorcitas = 0;
-               foreach ($citasrm as $citasrm_dato) {
-                   $contadorcitas = $contadorcitas + 1;
-                   $id_citarm = $citasrm_dato['id_citarm'];
-               }?>
+                $contadorcitas = 0;
+                foreach ($citasrm as $citasrm_dato) {
+                    $contadorcitas = $contadorcitas + 1;
+                    $id_citarm = $citasrm_dato['id_citarm'];
+                } ?>
 
                 <h2><?php echo $contadorcitas; ?><sup style="font-size: 20px"></h2>
                 <p>Citas programadas</p>
@@ -599,7 +599,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                 <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
                                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" title="Email Cita RM" data-target="#modal-emailcita<?php echo $id_citarm; ?>"><i class="fa-regular fa-envelope"></i></i></button>
                                     <a href="update.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-warning btn-sm" title="Editar"><i class="bi bi-pencil-square"></i></a>
-                                    <a href="../../app/controllers/reconocimientos/delete.php?id_reconocimiento=<?php echo $id_citarm; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar el registro?')" title="Eliminar investigación"><i class="bi bi-trash-fill"></i> </a>
+                                    <a href="../../app/controllers/reconocimientos/delete_cita.php?id_citarm=<?php echo $id_citarm; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar el registro?')" title="Eliminar cita RM"><i class="bi bi-trash-fill"></i> </a>
 
                                 </div>
                             </td>
@@ -616,7 +616,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                         </div>
                                         <div class="modal-body">
 
-                                            <form action="../../app/controllers/reconocimientos/enviar_email.php" method="post" enctype="multipart/form-data">
+                                            <form id="contactoForm">
 
                                                 <div class="row">
 
@@ -624,7 +624,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                         <div class="form-group row">
                                                             <label for="nombre_tr" class="col-form-label col-sm-2">Nombre</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" id="" name="nombre_tr" value="<?php echo $citasrm_dato['nombre_tr'] ?>" class="form-control" disabled>
+                                                                <input type="text" id="nombre_tr" name="nombre_tr" value="<?php echo $citasrm_dato['nombre_tr'] ?>" class="form-control" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -632,7 +632,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                         <div class="form-group row">
                                                             <label for="dni_tr" class="col-form-label col-sm-4">DNI/NIE</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" id="" name="dni_tr" class="form-control" value="<?php echo $citasrm_dato['dni_tr'] ?>" disabled>
+                                                                <input type="text" id="dni_tr" name="dni_tr" class="form-control" value="<?php echo $citasrm_dato['dni_tr'] ?>" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -643,7 +643,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                         <div class="form-group row">
                                                             <label for="categoria_tr" class="col-form-label col-sm-2">Puesto</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" id="" name="categoria_tr" class="form-control" value="<?php echo $citasrm_dato['nombre_cat'] ?>" disabled>
+                                                                <input type="text" id="categoria_tr" name="categoria_tr" class="form-control" value="<?php echo $citasrm_dato['nombre_cat'] ?>" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -651,7 +651,15 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                         <div class="form-group row">
                                                             <label for="centro_tr" class="col-form-label col-sm-4">Centro</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" id="" name="centro_tr" class="form-control" value="<?php echo $citasrm_dato['nombre_cen'] ?>" disabled>
+                                                                <input type="text" id="centro_tr" name="centro_tr" class="form-control" value="<?php echo $citasrm_dato['nombre_cen'] ?>" disabled>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-group row">
+                                                            <label for="centro_tr" class="col-form-label col-sm-2">Empresa</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" id="razonsocial_emp" name="razonsocial_emp" class="form-control" value="<?php echo $citasrm_dato['razonsocial_emp'] ?>" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -667,10 +675,10 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">Destinatario email</label>
-                                                            <select name="destinatario" id="" class="form-control">
+                                                            <select name="destinatario" id="destinatario" class="form-control">
                                                                 <?php
                                                                 foreach ($emailsinteres_datos as $emailsinteres_dato) { ?>
-                                                                    <option value="<?php echo $emailsinteres_dato['id_emailinteres']; ?>"><?php echo $emailsinteres_dato['nombre_ei'] ?> | <?php echo $emailsinteres_dato['email_ei'] ?></option>
+                                                                    <option value="<?php echo $emailsinteres_dato['email_ei']; ?>"><?php echo $emailsinteres_dato['nombre_ei'] ?> | <?php echo $emailsinteres_dato['email_ei'] ?></option>
                                                                 <?php
                                                                 }
                                                                 ?>
@@ -683,26 +691,25 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <label for="">Anotaciones / restricciones</label>
-                                                        <textarea class="form-control" name="anotaciones_crm" rows="6"></textarea>
+                                                        <textarea class="form-control" id="anotaciones_crm" name="anotaciones_crm" rows="6"></textarea>
                                                     </div>
                                                 </div>
 
+                                                <div class="modal-footer">
 
-                                        </div>
-                                        <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                    <button type="submit" class="btn btn-primary"><i class="bi bi-envelope-arrow-up"></i></i> Enviar</button>
 
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                            <button type="submit" class="btn btn-primary"><i class="bi bi-envelope-arrow-up"></i></i> Enviar</button>
-
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
+
                                 </div>
-                                </form>
-                            </div>
 
 
 
-                            <!--fin modal-->
+                                <!--fin modal-->
 
 
                         </tr>
@@ -721,7 +728,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
 
 </div>
 
-</div>
+
 
 
 <?php
@@ -863,5 +870,49 @@ include('../../admin/layout/mensaje.php');
                 }
             ],
         }).buttons().container().appendTo("#example2_wrapper .col-md-6:eq(0)");
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#contactoForm').submit(function(e) {
+            e.preventDefault();
+
+            var nombre_tr = $('#nombre_tr').val();
+            var dni_tr = $('#dni_tr').val();
+            var categoria_tr = $('#categoria_tr').val();
+            var centro_tr = $('#centro_tr').val();
+            var razonsocial_emp = $('#razonsocial_emp').val();
+            var destinatario = $('#destinatario').val();
+            var anotaciones_crm = $('#anotaciones_crm').val();
+
+
+
+
+
+            // Datos del formulario
+            var datos = {
+                nombre_tr: nombre_tr,
+                dni_tr: dni_tr,
+                categoria_tr: categoria_tr,
+                centro_tr: centro_tr,
+                razonsocial_emp: razonsocial_emp,
+                destinatario: destinatario,
+                anotaciones_crm: anotaciones_crm
+            };
+
+            // Enviar datos a través de AJAX
+            $.ajax({
+                type: 'POST',
+                url: '../../app/controllers/reconocimientos/enviar_email.php',
+                data: datos,
+                success: function(response) {
+                    alert(response);
+                    $('#contactoForm')[0].reset();
+                },
+                error: function() {
+                    alert('Hubo un error al enviar el correo');
+                }
+            });
+        });
     });
 </script>

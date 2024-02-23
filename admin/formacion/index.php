@@ -115,7 +115,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                 }
             </style>
             <div class="btn-text-right">
-            <a href="../formacion/create.php" class="btn btn-primary btn-sm"><i class="bi bi-person-lines-fill"></i>Nueva Formación</a>
+                <a href="../formacion/create.php" class="btn btn-primary btn-sm"><i class="bi bi-person-lines-fill"></i>Nueva Formación</a>
             </div>
 
 

@@ -67,9 +67,9 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
 
                 <div class="col-sm-3">
                     <div class="form-group row">
-                        <label for="centro" class="col-form-label col-sm-2">Centro:</label>
+                        <label for="centro" class="col-form-label col-sm-2">Centro:*</label>
                         <div class="col-sm-7">
-                            <select name="centro_acc" id="" class="form-control">
+                            <select name="centro_acc" id="" class="form-control" required>
                                 <option value="0">--Seleccione centro--</option>
                                 <?php
                                 foreach ($centros_datos as $centros_dato) {
@@ -203,7 +203,7 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                                 <div class="form-group">
                                     <label for="" class="col-form-label col-sm-2">Responsable:</label>
                                     <div class="col-sm-9">
-                                        <select name="responsable_acc" id="" class="form-control">
+                                        <select name="responsable_acc" id="" class="form-control" required>
                                             <?php
                                             foreach ($responsables_datos as $responsable_dato) {
                                                 $responsable_tabla = $responsable_dato['nombre_resp'];

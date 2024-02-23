@@ -550,56 +550,63 @@ include('../../app/controllers/reconocimientos/listado_reconocimientos.php');
   }
 </script>
 <script>
-  $(function() {
-    $("#example1").DataTable({
-      "pageLength": 5,
-      "language": {
-        "emptyTable": "No hay información",
-        "infoFiltered": "(Filtrado de MAX total Usuarios)",
-        "infoPostFix": "",
-        "thousands": ",",
+    $(function() {
+        $("#example1").DataTable({
+            "pageLength": 10,
+            "language": {
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",
+                "infoEmpty": "Mostrando 0 a 0 de 0 Usuarios",
+                "infoFiltered": "(Filtrado de MAX total Usuarios)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Usuarios",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscador:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            buttons: [{
+                    extend: "collection",
+                    text: "Reportes",
+                    orientation: "landscape",
+                    buttons: [{
+                            text: "Copiar",
+                            extend: "copy"
+                        },
+                        {
+                            extend: "pdf"
+                        },
+                        {
+                            extend: "csv"
+                        },
+                        {
+                            extend: "excel"
+                        },
+                        {
+                            text: "Imprimir",
+                            extend: "print"
+                        }
+                    ]
+                },
+                {
+                    extend: "colvis",
+                    text: "Visor de columnas",
+                    /*collectionLayout: "fixed three-column" */
 
-        "loadingRecords": "Cargando...",
-        "processing": "Procesando...",
-        "search": "Buscador:",
-        "zeroRecords": "Sin resultados encontrados",
-        "paginate": {
-          "first": "Primero",
-          "last": "Ultimo",
-          "next": "Siguiente",
-          "previous": "Anterior"
-        }
-      },
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      buttons: [{
-          extend: "collection",
-          text: "Reportes",
-          orientation: "landscape",
-          buttons: [{
-              text: "Copiar",
-              extend: "copy"
-            },
-            {
-              extend: "pdf"
-            },
-            {
-              extend: "csv"
-            },
-            {
-              extend: "excel"
-            },
-            {
-              text: "Imprimir",
-              extend: "print"
-            }
-          ]
-        },
-
-      ],
-    }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
-  });
+                }
+            ],
+        }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
+    });
 </script>
 
 <?php include('../../admin/layout/parte2.php');

@@ -40,12 +40,12 @@ try {
     $mail->Subject = 'SOLICITUD CITA RECONOCIMIENTO MÉDICO';
     $mail->Body    = "<html>
     <body>
-    <h6>
+    <h5>
     <br>
     Buenos dias,
- <br> 
+ <br> <br>
     Agradezco que nos den cita para el trabajador:  
-     <br>
+     <br><br>
     EMPRESA:$razonsocial_emp
     <br>
     NOMBRE TRABAJADOR: $nombre_tr
@@ -53,9 +53,9 @@ try {
     DNI: $dni_tr
     <br>
     Puesto: $categoria_tr
-<br>
+<br><br>
 **Anotaciones/restricciones: $anotaciones_crm **
-<br>
+<br><br><br>
 
 Emili Vives Garcia
 Depto. PRL 

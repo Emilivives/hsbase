@@ -52,7 +52,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/js/bootstrap.bundle.min.js">
     <!-- css bootstrap -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/css/bootstrap.min.css">
-
+   <!-- chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 

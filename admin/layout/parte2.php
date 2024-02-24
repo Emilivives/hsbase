@@ -41,7 +41,7 @@
 
 <script src="<?php echo $URL; ?>/public/dist/js/adminlte.min.js"></script>
 <script src="<?php echo $URL; ?>/public/plugins/jquery-knob/jquery.knob.min.js"></script>
-<script src="../../public/templates/AdminLTE/plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/jquery-knob/jquery.knob.min.js"></script>
 
 </body>
 

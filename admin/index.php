@@ -3,92 +3,11 @@ include('../app/config.php');
 include('../admin/layout/parte1.php');
 include('../app/controllers/trabajadores/listado_trabajadores.php'); ?>
 
-<h1>HOLA</h1>
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load("current", {
-    packages: ['corechart']
-  });
-  google.charts.setOnLoadCallback(drawChart);
-
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ["Element", "Density", {
-        role: "style"
-      }],
-      ["Copper", 8.94, "#b87333"],
-      ["Silver", 10.49, "silver"],
-      ["Gold", 19.30, "gold"],
-      ["Platinum", 21.45, "color: #e5e4e2"]
-    ]);
-
-    var view = new google.visualization.DataView(data);
-    view.setColumns([0, 1,
-      {
-        calc: "stringify",
-        sourceColumn: 1,
-        type: "string",
-        role: "annotation"
-      },
-      2
-    ]);
-
-    var options = {
-      title: "Density of Precious Metals, in g/cm^3",
-      width: 600,
-      height: 400,
-      bar: {
-        groupWidth: "95%"
-      },
-      legend: {
-        position: "none"
-      },
-    };
-    var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-    chart.draw(view, options);
-  }
-</script>
-<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
-
-</br>
-</br>
-</br>
-</br>
-
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load("current", {
-    packages: ["corechart"]
-  });
-  google.charts.setOnLoadCallback(drawChart);
-
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work', 5],
-      ['Eat', 2],
-      ['Commute', 2],
-      ['Watch TV', 2],
-      ['Sleep', 7]
-    ]);
-
-    var options = {
-      title: 'My Daily Activities',
-      pieHole: 0.4,
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-    chart.draw(data, options);
-  }
-</script>
-</head>
-
 <body>
 
 
-  <div id="donutchart" style="width: 900px; height: 500px;"></div>
+
+
 
   <hr>
   <div class="row">
@@ -113,6 +32,8 @@ include('../app/controllers/trabajadores/listado_trabajadores.php'); ?>
         <div class="card-header">
           <h3 class="card-title">Donut Chart</h3>
 
+
+
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse">
               <i class="fas fa-minus"></i>
@@ -131,6 +52,35 @@ include('../app/controllers/trabajadores/listado_trabajadores.php'); ?>
     </div>
 
   </div>
+  <div class="row">
+    <div class="col-6 col-md-6 text-center">
+      <!-- Donut chart -->
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="far fa-chart-bar"></i>
+            Donut Chart
+          </h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="donut-chart" style="height: 300px;"></div>
+        </div>
+        <!-- /.card-body-->
+      </div>
+
+    </div>
+
+  </div>
+
 </body>
 <?php
 include('../admin/layout/parte2.php'); ?>
@@ -143,15 +93,19 @@ include('../admin/layout/parte2.php'); ?>
   var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
   var donutData = {
     labels: [
-      'Chrome',
-      'IE',
-      'FireFox',
-      'Safari',
-      'Opera',
-      'Navigator',
+      'Administración',
+      'Taquilla',
+      'Marinero',
+      'Marinero Máquinas',
+      'Amarrador',
+      'Mantenimiento',
+      'Limpieza',
+      'Comercial',
+      'Capitan',
+      'Jefe de Máquinas',
     ],
     datasets: [{
-      data: [700, 500, 400, 600, 300, 100],
+      data: [700, 500, 400, 600, 300, 100, 400, 600, 300, 100],
       backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
     }]
   }
@@ -262,25 +216,47 @@ include('../admin/layout/parte2.php'); ?>
 
 
 <script>
-  //-------------
-  //- BAR CHART -
-  //-------------
-  var barChartCanvas = $('#barChart').get(0).getContext('2d')
-  var barChartData = $.extend(true, {}, areaChartData)
-  var temp0 = areaChartData.datasets[0]
-  var temp1 = areaChartData.datasets[1]
-  barChartData.datasets[0] = temp1
-  barChartData.datasets[1] = temp0
+  /*
+   * DONUT CHART
+   * -----------
+   */
 
-  var barChartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    datasetFill: false
-  }
+  var donutData = [{
+      label: 'Series2',
+      data: 30,
+      color: '#3c8dbc'
+    },
+    {
+      label: 'Series3',
+      data: 20,
+      color: '#0073b7'
+    },
+    {
+      label: 'Series4',
+      data: 50,
+      color: '#00c0ef'
+    }
+  ]
+  $.plot('#donut-chart', donutData, {
+    series: {
+      pie: {
+        show: true,
+        radius: 1,
+        innerRadius: 0.5,
+        label: {
+          show: true,
+          radius: 2 / 3,
+          formatter: labelFormatter,
+          threshold: 0.1
+        }
 
-  new Chart(barChartCanvas, {
-    type: 'bar',
-    data: barChartData,
-    options: barChartOptions
+      }
+    },
+    legend: {
+      show: false
+    }
   })
+  /*
+   * END DONUT CHART
+   */
 </script>

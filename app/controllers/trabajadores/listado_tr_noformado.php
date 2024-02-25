@@ -7,6 +7,7 @@ INNER JOIN `categorias` as cat ON tr.categoria_tr = cat.id_categoria
 INNER JOIN `centros` as cen ON tr.centro_tr = cen.id_centro
 INNER JOIN `empresa` as emp ON cen.empresa_cen = emp.id_empresa
 INNER JOIN `tipocentros` as tc ON cen.tipo_cen = tc.id_tipocentro
+WHERE tr.formacionpdt_tr == 'Si'
 ORDER BY tr.codigo_tr DESC";
 $query = $pdo->prepare($sql);
 $query ->execute();

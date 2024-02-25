@@ -43,6 +43,8 @@
 <script src="<?php echo $URL; ?>/public/plugins/jquery-knob/jquery.knob.min.js"></script>
 <script src="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/jquery-knob/jquery.knob.min.js"></script>
 
+<!-- FLOT CHARTS -->
+<script src="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/flot/jquery.flot.js"></script>
 </body>
 
 </html>

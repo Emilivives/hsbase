@@ -336,12 +336,12 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                                         </td>
                                         
-                                        <td style="text-align: center;"><?php $trabajador['activo_tr'];
-                                                                        if ($trabajador['activo_tr'] == 1) { ?>
-                                                <span class='badge badge-success'>Activo</span>
+                                        <td style="text-align: center;"><?php $trabajador['formacionpdt_tr'];
+                                                                        if ($trabajador['formacionpdt_tr'] == 'Si') { ?>
+                                                <span class='badge badge-success'>SI</span>
                                             <?php
                                                                         } else { ?>
-                                                <span class='badge badge-danger'>Baja</span>
+                                                <span class='badge badge-danger'>NO</span>
                                             <?php
                                                                         }
                                             ?>

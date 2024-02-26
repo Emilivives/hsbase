@@ -164,6 +164,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                         </br>
                         <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas bi bi-calendar3"></i>
+                                <p>
+                                    Actividad
+                                    <i class="right fas fas fa-angle-left"></i>
+
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo $URL; ?>/admin/actividad/proyectos.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Proyectos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo $URL; ?>/admin/actividad/tareas.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tareas</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <br>
+                        <li class="nav-item">
                             <a href="<?php echo $URL; ?>/admin/trabajadores" class="nav-link">
                                 <i class="nav-icon fas fa-people-arrows"></i>
                                 <p>
@@ -208,7 +234,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <li class="nav-item">
                             <a href="<?php echo $URL; ?>/admin/reconocimientos" class="nav-link">
-                                <i class="nav-icon fa-solid fa-notes-medical"></i>
+                                <i class="nav-icon fa-solid fa-book-medical"></i>
                                 <p>
                                     Vigilancia salud
                              
@@ -218,7 +244,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <li class="nav-item">
                             <a href="<?php echo $URL; ?>/admin/accidentes" class="nav-link">
-                                <i class="nav-icon fa bi bi-cone-striped"></i>
+                                <i class="nav-icon fa-solid fa-person-falling-burst"></i>
                                 <p>
                                     Accidentes
             
@@ -235,7 +261,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon 	fas fa-exclamation-circle"></i>
+                                <i class="nav-icon 	fas fa-solid fa-gear"></i>
                                 <p>
                                     Tablas maestras
                                     <i class="right fas fa-angle-left"></i>
@@ -270,32 +296,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
                         <br>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas bi bi-calendar3"></i>
-                                <p>
-                                    Actividad
-                                    <i class="right fas fas fa-angle-left"></i>
-
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $URL; ?>/admin/actividad/proyectos.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Proyectos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo $URL; ?>/admin/actividad/tareas.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tareas</p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
-                        <br>
+                      
                         <br>
 
                         <li class="nav-item">

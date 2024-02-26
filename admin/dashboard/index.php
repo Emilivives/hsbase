@@ -221,11 +221,10 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
       <div class="row">
         <div class="col-lg-6">
-          <div class="card border mb-0">
-            <div class="card-header bg-primary border-3">
+        <div class="card">
+            <div class="card-header bg-secondary border-3">
               <div class="d-flex justify-content-between">
                 <h3 class="card-title text-center"> <b> TRABAJADORES </b></h3>
-            
                 <style>
                   .btn-text-right {
                     text-align: right;
@@ -256,8 +255,9 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                 </thead>
                 <tbody>
                   <?php
-                  $contadorrm = 0;
+                  $contadortr = 0;
                   foreach ($trabajadores as $trabajador) {
+                    if($trabajador['activo_tr']==1){
                     $contadortr = $contadortr + 1;
                     $id_trabajador = $trabajador['id_trabajador'];
                   ?>
@@ -288,6 +288,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                     </tr>
                   <?php
                   }
+                  }
                   ?>
 
                 </tbody>
@@ -302,7 +303,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
         </div>
         <!-- /.col-md-6 -->
         <div class="col-lg-4">
-          <div class="card">
+        <div class="card">
             <div class="card-header bg-secondary border-3">
               <div class="d-flex justify-content-between">
                 <h3 class="card-title text-center"> <b> RECONOCIMIENTOS MÉDICOS </b></h3>
@@ -397,10 +398,19 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
           </div>
         </div>
         <div class="col-lg-2">
-          <div class="card">
-            <div class="card-header border-0">
+        <div class="card">
+            <div class="card-header bg-secondary border-3">
               <div class="d-flex justify-content-between">
-                <h3 class="card-title">Reconocimientos médicos</h3>
+                <h3 class="card-title text-center"> <b> CITAS RM </b></h3>
+                <style>
+                  .btn-text-right {
+                    text-align: right;
+                  }
+                </style>
+
+                <div class="btn-text-right">
+                  <a href="../reconocimientos/index.php" class="btn btn-sm btn-secondary"><i class="bi bi-list-ul"></i> acceder</a>
+                </div>
               </div>
             </div>
             <div class="card-body">
@@ -443,14 +453,26 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
           </div>
         </div>
       </div>
+      <div class="row">
+      </div>
+      <br>
       <!-- /.card -->
       <!-- /.card -->
       <div class="row">
         <div class="col-lg-6">
-          <div class="card">
-            <div class="card-header border-0">
+        <div class="card">
+            <div class="card-header bg-secondary border-3">
               <div class="d-flex justify-content-between">
-                <h3 class="card-title">Tareas PRL</h3>
+                <h3 class="card-title text-center"> <b> TAREAS PRL </b></h3>
+                <style>
+                  .btn-text-right {
+                    text-align: right;
+                  }
+                </style>
+
+                <div class="btn-text-right">
+                  <a href="../actividad/tareas.php" class="btn btn-sm btn-secondary"><i class="bi bi-list-ul"></i> acceder</a>
+                </div>
               </div>
             </div>
             <div class="card-body">
@@ -532,10 +554,19 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
         <!-- /.col-md-3 -->
         <div class="col-lg-3">
-          <div class="card">
-            <div class="card-header border-0">
+        <div class="card">
+            <div class="card-header bg-secondary border-3">
               <div class="d-flex justify-content-between">
-                <h3 class="card-title">Acciones Preventivas</h3>
+                <h3 class="card-title text-center"> <b> ACCIONES PRL </b></h3>
+                <style>
+                  .btn-text-right {
+                    text-align: right;
+                  }
+                </style>
+
+                <div class="btn-text-right">
+                  <a href="../accionprl/index.php" class="btn btn-sm btn-secondary"><i class="bi bi-list-ul"></i> acceder</a>
+                </div>
               </div>
             </div>
             <div class="card-body">
@@ -629,10 +660,19 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
         <!-- /.card -->
         <!-- /.col-md-3 -->
         <div class="col-lg-3">
-          <div class="card">
-            <div class="card-header border-0">
+        <div class="card">
+            <div class="card-header bg-secondary border-3">
               <div class="d-flex justify-content-between">
-                <h3 class="card-title">Accidente laborales</h3>
+                <h3 class="card-title text-center"> <b> ACCIDENTES LABORALES </b></h3>
+                <style>
+                  .btn-text-right {
+                    text-align: right;
+                  }
+                </style>
+
+                <div class="btn-text-right">
+                  <a href="../accidentes/index.php" class="btn btn-sm btn-secondary"><i class="bi bi-list-ul"></i> acceder</a>
+                </div>
               </div>
             </div>
             <div class="card-body">

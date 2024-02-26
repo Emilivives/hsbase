@@ -60,7 +60,7 @@ include('../app/config.php');
                     <hr>
                     <button type="submit" class="btn btn-primary" style="width: 100% ;">Acceder</button>
                     <br><br>
-                    <button class="btn btn-secondary" style="width: 100%">Cancelar</button>
+                    <button class="btn btn-secondary" href="<?php echo $URL;?>hsbase/index.html" style="width: 100%">Cancelar</button>
                 </form>
 
                 

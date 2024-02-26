@@ -1,10 +1,11 @@
 <?php
 
-include ('../../config.php');
+include('../../config.php');
 
 session_start();
 
 if (isset($_SESSION['sesion_email'])) {
     session_destroy();
-    header('location:'.$URL.'/login');
+    header('location:' . $URL . '/index.html');
+
 }

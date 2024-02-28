@@ -1,38 +1,135 @@
 <?php
 include('../app/config.php');
 include('../admin/layout/parte1.php');
-include('../app/controllers/trabajadores/listado_trabajadores.php'); ?>
+include('../app/controllers/trabajadores/listado_trabajadores.php');
+include('../app/controllers/formaciones/listado_formaciones.php'); ?>
 
 <body>
 
+  <!-- CALCULOS ESTADISTICO -->
+
+  <?php
+  $contador_de_trabajadores = 0;
+  foreach ($trabajadores as $trabajador) {
+    if ($trabajador['activo_tr'] == 1) {
+      $contador_de_trabajadores = $contador_de_trabajadores + 1;
+    }
+  }
+  ?>
+  <?php
+  $contador_tr_formados = 0;
+  foreach ($trabajadores as $trabajador) {
+    if ($trabajador['activo_tr'] == 1 and $trabajador['formacionpdt_tr'] == 'Si') {
+      $contador_tr_formados = $contador_tr_formados + 1;
+    }
+  }
+  ?>
+  <?php
+  $contador_de_trabajadores;
+  $contador_tr_formados;
+  $porcentage_formados = ($contador_tr_formados * 100) / $contador_de_trabajadores;
+  $porcentage_formados = round($porcentage_formados, 1);
+  $porcentage_formados;
+  ?>
+  <?php
+  $contador_embarcados = 0;
+  foreach ($trabajadores as $trabajador) {
+    if ($trabajador['nombre_tc'] == 'Embarcacion' and $trabajador['activo_tr'] == 1) {
+      $contador_embarcados = $contador_embarcados + 1;
+    }
+  }
+  $contador_embarcados;
+  $porcentage_embarcados = ($contador_embarcados * 100) / $contador_de_trabajadores;
+  $porcentage_embarcados = round($porcentage_embarcados, 1)
+  ?>
+
+
+  <?php $fechahoraentera = strtotime($fechahora);
+  $anio = date("Y", $fechahoraentera);
+  $contador_tr_anio = count(array_filter($trabajadores, fn ($n) => date("Y", strtotime($n['inicio_tr'])) == $anio)); ?>
+
+
+  <?php $fechahoraentera = strtotime($fechahora);
+  $anio = date("Y", $fechahoraentera);
+  $contador_de_formaciones = count(array_filter($formaciones_datos, fn ($n) => date("Y", strtotime($n['fecha_fr'])) == $anio)); ?>
 
 
 
+  
+  <?php $fechahoraentera = strtotime($fechahora);
+  $anio = date("Y", $fechahoraentera);
+  $contador_formacion_pdt = 0;
+  foreach ($formaciones_datos as $formaciones_dato) {
+    if (date("Y", strtotime($formaciones_dato['fecha_fr'] == $anio))and $formaciones_dato['tipo_fr'] == 1) {
+      $contador_formacion_pdt = $contador_formacion_pdt + 1;
+    }
+  }
+  $porcentage_formpdt = ($contador_formacion_pdt * 100) / $contador_de_formaciones;
+  $porcentage_formpdt = round($porcentage_formpdt, 2);?>
 
-  <hr>
+
+  <!-- FIN  CALCULOS ESTADISTICO -->
+  <br>
   <div class="row">
-    <div class="col-6 col-md-6 text-center">
-      <p><b>Registro trabajadores</b></p>
 
-      <?php
-      $contador_de_trabajadores = 0;
-      foreach ($trabajadores as $trabajador) {
-        if ($trabajador['activo_tr'] == 1) {
-          $contador_de_trabajadores = $contador_de_trabajadores + 1;
-        }
-      }
-      ?>
+    <!-- ./col -->
+    <div class="col-lg-1 col-6">
+      <!-- small box -->
+      <div class="small-box bg-light shadow-sm border">
+        <div class="inner">
+          <?php
+          $contador_de_trabajadores = 0;
+          foreach ($trabajadores as $trabajador) {
+            if ($trabajador['activo_tr'] == 1) {
+              $contador_de_trabajadores = $contador_de_trabajadores + 1;
+            }
+          }
+          ?>
 
-      <div style="display:inline;width:120px;height:120px;"><canvas width="80" height="80" style="width: 120px; height: 120px;"></canvas><input type="text" class="knob" data-thickness="0.2" data-anglearc="250" data-angleoffset="-125" value="<?php echo $contador_de_trabajadores; ?>" data-width="120" data-height="120" data-fgcolor="#00c0ef" style="width: 64px; height: 40px; position: absolute; vertical-align: middle; margin-top: 40px; margin-left: -92px; border: 0px; background: none; font: bold 24px Arial; text-align: left; color: rgb(0, 192, 239); padding: 0px; appearance: none;"></div>
+          <h2><?php echo $contador_de_trabajadores; ?><sup style="font-size: 20px"></h2>
+          <p>Trabajadores activos</p>
+        </div>
+        <div class="icon">
+          <i class="ion bi-person-arms-up"></i>
+        </div>
 
-
+      </div>
     </div>
-    <div class="col-6 col-md-6 text-center">
-      <div class="card card-danger">
+
+  </div>
+  <div class="col-6 col-md-6 text-center">
+    <div class="card card-danger">
+      <div class="card-header">
+        <h3 class="card-title">Donut Chart</h3>
+
+
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-tool" data-card-widget="remove">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-6 col-md-3 text-center">
+      <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Donut Chart</h3>
-
-
+          <h3 class="card-title">
+          <i class="fa-solid fa-chart-simple"></i>            Estadísticas trabajadores
+          </h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -43,16 +140,90 @@ include('../app/controllers/trabajadores/listado_trabajadores.php'); ?>
             </button>
           </div>
         </div>
+        <!-- /.card-header -->
         <div class="card-body">
-          <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+          <div class="row">
+
+            <div class="col-6 col-md-4 text-center">
+              <input type="text" class="knob" data-thickness="0.3" data-angleArc="250" data-angleOffset="-125" value="<?php echo $contador_tr_anio ?>" data-width="90" data-height="90" data-fgColor="#00c0ef">
+              <div class="knob-label"><b>Nuevos en <?php echo $anio ?></b></div>
+            </div>
+            <!-- ./col -->
+
+            <div class="col-6 col-md-4 text-center">
+              <input type="text" class="knob" value="<?php echo $porcentage_formados; ?>" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+              <div class="knob-label"><b>% Formados</b></div>
+            </div>
+            <!-- ./col -->
+            <div class="col-6 col-md-4 text-center">
+
+
+              <input type="text" class="knob" value="<?php echo $porcentage_embarcados; ?>" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+
+              <div class="knob-label"><b>% Embarcados</b></div>
+            </div>
+            <!-- ./col -->
+
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <div class="col-6 col-md-3 text-center">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">
+            <i class="fa-solid fa-chart-pie"></i>
+            <b> Kpi's Formaciones</b>
+          </h4>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="row">
+
+            <div class="col-6 col-md-3 text-center">
+              <input type="text" class="knob" data-thickness="0.3" data-angleArc="250" data-angleOffset="-125" value="<?php echo $contador_de_formaciones ?>" data-width="90" data-height="90" data-fgColor="#00c0ef">
+
+              <div class="knob-label"><b>Form. en <?php echo $anio ?></b></div>
+            </div>
+
+            <!-- ./col -->
+            <div class="col-6 col-md-4 text-center">
+
+              <input type="text" class="knob" value="<?php echo $porcentage_formpdt; ?>" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+
+              <div class="knob-label"><b>% Puesto Tº</b></div>
+            </div>
+            <!-- ./col -->
+            <div class="col-6 col-md-4 text-center">
+
+
+              <input type="text" class="knob" value="<?php echo $porcentage_embarcados; ?>" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+
+              <div class="knob-label"><b>% Embarcados</b></div>
+            </div>
+            <!-- ./col -->
+
+
+          </div>
+          <!-- /.row -->
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
     </div>
 
-  </div>
-  <div class="row">
     <div class="col-6 col-md-6 text-center">
       <!-- Donut chart -->
       <div class="card card-primary card-outline">

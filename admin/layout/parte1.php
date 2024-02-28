@@ -157,8 +157,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="<?php echo $URL; ?>/admin/dashboard" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Dashboard
+                                 Panel Control
                                     <span class="right badge badge-warning">Info</span>
+                                 
                                 </p>
                             </a>
                         </li>

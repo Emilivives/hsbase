@@ -50,7 +50,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-2 col-6">
+    <div class="col-lg-1 col-6">
         <!-- small box -->
         <div class="small-box bg-light shadow-sm border">
             <div class="inner">

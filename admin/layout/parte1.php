@@ -154,15 +154,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         </br>
                         <li class="nav-item">
-                            <a href="<?php echo $URL; ?>/admin/dashboard" class="nav-link">
+                            <a href="<?php echo $URL; ?>/admin" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                 Panel Control
+                                 Dashboard
                                     <span class="right badge badge-warning">Info</span>
                                  
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?php echo $URL; ?>/admin/dashboard" class="nav-link">
+                                <i class="nav-icon fas bi-clipboard2-data-fill"></i>
+                                <p>
+                                 Panel control
+                                    <span class="right badge badge-warning">Info</span>
+                                 
+                                </p>
+                            </a>
+                        </li>
+              
                         </br>
                         <li class="nav-item">
                             <a href="#" class="nav-link">

@@ -10,6 +10,8 @@
                 <!--cuerpo del modal-->
                 <form action="../../../app/controllers/maestros/categorias/create.php" method="post" enctype="multipart/form-data">
 
+                    <?php include('../../../app/controllers/maestros/departamentos/listado_departamentos.php') ?>
+
                     <div class="row">
                         <div class="col-md-12">
 
@@ -17,9 +19,10 @@
                                 <label for="">Nombre categoria <b>*</b></label>
                                 <input type="text" name="nombre_cat" class="form-control" required>
                             </div>
-
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="">Departamento</label>
+                                <label for="">Departamento* (selecciona)</label>
                                 <select name="departamento_cat" id="" class="form-control">
                                     <?php
                                     foreach ($departamentos_datos as $departamentos_dato) { ?>
@@ -29,28 +32,28 @@
                                     ?>
                                 </select>
                             </div>
-
-                            <br>
-
-                            <div class="form-group">
-                                <label for="">Descripcion categoria</label>
-                                <textarea class="form-control" name="descripcion_cat" rows="15"></textarea>
-                            </div>
                         </div>
+                        <br>
 
+                        <div class="form-group">
+                            <label for="">Descripcion categoria</label>
+                            <textarea class="form-control" name="descripcion_cat" rows="15"></textarea>
+                        </div>
                     </div>
-
-                    <hr>
-                    <div class="">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
-                    </div>
-
-                </form>
-                <!-- Pie del Modal -->
 
             </div>
 
+            <hr>
+            <div class="">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+            </div>
+
+            </form>
+            <!-- Pie del Modal -->
+
         </div>
+
     </div>
+</div>
 </div>

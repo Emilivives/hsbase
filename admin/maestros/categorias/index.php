@@ -59,7 +59,7 @@ include('../../../app/controllers/maestros/categorias/listado_categorias.php');
                         <tr>
                             <td><?php echo $contador; ?></td>
                             <td><?php echo $categorias_dato['nombre_cat']; ?></td>
-                            <td><?php echo $categorias_dato['departamento_cat']; ?></td>
+                            <td><?php echo $categorias_dato['nombre_dpo']; ?></td>
                             <td><?php echo $categorias_dato['descripcion_cat']; ?></td>
                             <td>
                                 <div class="d-grid gap-2 d-flex content-sm-end">

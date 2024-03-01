@@ -4,6 +4,8 @@ include('../../../admin/layout/parte1.php');
 include('../../../app/controllers/maestros/responsables/listado_responsables.php');
 include('../../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php');
 include('../../../app/controllers/maestros/empresas/listado_empresas.php');
+include('../../../app/controllers/maestros/departamentos/listado_departamentos.php');
+
 
 ?>
 <br>
@@ -173,14 +175,14 @@ include('../../../app/controllers/maestros/empresas/listado_empresas.php');
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Nombre Responsable <b>*</b></label>
-                                                <input type="text" name="nombre_ei" class="form-control" required>
+                                                <label for="">Nombre departamento <b>*</b></label>
+                                                <input type="text" name="nombre_dpo" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Email</label>
-                                                <input type="text" name="email_ei" class="form-control" required>
+                                                <label for="">Descripción</label>
+                                                <input type="text" name="descripcion_dpo" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-9">
@@ -211,13 +213,14 @@ include('../../../app/controllers/maestros/empresas/listado_empresas.php');
                         <thead>
                             <tr>
                                 <th style="text-align: center">Num.</th>
-                                <th style="text-align: center">Nombre contacto</th>
-                                <th style="text-align: center">Email</th>
-                                <th style="text-align: center">Telefono</th>
+                                <th style="text-align: center">Nombre departamento</th>
+                                <th style="text-align: center">Descripción</th>
                                 <th style="text-align: center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
+
+
                             <?php
                             $contadoremailsinteres_dato = 0;
                             foreach ($emailsinteres_datos as $emailsinteres_dato) {
@@ -254,6 +257,114 @@ include('../../../app/controllers/maestros/empresas/listado_empresas.php');
 
         </div>
 
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-outline card-primary">
+                <div class="card-header col-md-12">
+                    <h3 class="card-title"><b>Departamentos</b></h3>
+                    <style>
+                        .btn-text-right {
+                            text-align: right;
+                        }
+                    </style>
+                    <!-- Button trigger modal -->
+                    <div class="btn-text-right">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevodepartamento">Añadir Departamento</button>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="modal-nuevodepartamento">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#808000 ;color:white">
+                                <h5 class="modal-title" id="modal-nuevodepartamento">Departamento empresa</h5>
+                                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form action="../../../app/controllers/maestros/departamentos/create.php" method="post" enctype="multipart/form-data">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Nombre Departamento <b>*</b></label>
+                                                <input type="text" name="nombre_dpo" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Descripcion</label>
+                                                <input type="text" name="descripcion_dpo" class="form-control" required>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!--fin modal-->
+
+                <div class="card-body">
+                    <table id="example3" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Num.</th>
+                                <th style="text-align: center">Departamento</th>
+                                <th style="text-align: center">Descripcion</th>
+                                <th style="text-align: center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $contadordepartamentos_dato = 0;
+                            foreach ($departamentos_datos as $departamentos_dato) {
+                                $contadordepartamentos_dato = $contadordepartamentos_dato + 1;
+                                $id_departamento = $departamentos_dato['id_departamento'];
+                            ?>
+                                <tr>
+                                    <td><?php echo $contadordepartamentos_dato; ?></td>
+                                    <td><?php echo $departamentos_dato['nombre_dpo']; ?></td>
+                                    <td><?php echo $departamentos_dato['descripcion_dpo']; ?></td>
+
+                                    <td style="text-align: center">
+                                        <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
+                                            <a href="update.php?id_departamento=<?php echo $id_departamento ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                            <a href="delete.php?id_departamento=<?php echo $id_departameto ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            <?php
+                            }
+                            ?>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+        </div>
     </div>
 
 </div>
@@ -403,5 +514,65 @@ include('../../../admin/layout/mensaje.php');
                 }
             ],
         }).buttons().container().appendTo("#example2_wrapper .col-md-6:eq(0)");
+    });
+</script>
+
+<script>
+    $(function() {
+        $("#example3").DataTable({
+            "pageLength": 5,
+            "language": {
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",
+                "infoEmpty": "Mostrando 0 a 0 de 0 Usuarios",
+                "infoFiltered": "(Filtrado de MAX total Usuarios)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Usuarios",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscador:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            buttons: [{
+                    extend: "collection",
+                    text: "Reportes",
+                    orientation: "landscape",
+                    buttons: [{
+                            text: "Copiar",
+                            extend: "copy"
+                        },
+                        {
+                            extend: "pdf"
+                        },
+                        {
+                            extend: "csv"
+                        },
+                        {
+                            extend: "excel"
+                        },
+                        {
+                            text: "Imprimir",
+                            extend: "print"
+                        }
+                    ]
+                },
+                {
+                    extend: "colvis",
+                    text: "Visor de columnas",
+                    /*collectionLayout: "fixed three-column" */
+
+                }
+            ],
+        }).buttons().container().appendTo("#example3_wrapper .col-md-6:eq(0)");
     });
 </script>

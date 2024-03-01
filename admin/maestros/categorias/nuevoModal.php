@@ -7,20 +7,29 @@
             </div>
             <div class="modal-body">
 
-            <!--cuerpo del modal-->
+                <!--cuerpo del modal-->
                 <form action="../../../app/controllers/maestros/categorias/create.php" method="post" enctype="multipart/form-data">
 
                     <div class="row">
                         <div class="col-md-12">
-                            
+
                             <div class="form-group">
                                 <label for="">Nombre categoria <b>*</b></label>
                                 <input type="text" name="nombre_cat" class="form-control" required>
                             </div>
+
                             <div class="form-group">
-                                <label for="">Departamento <b>*</b></label>
-                                <input type="text" name="departamento_cat" class="form-control" required>
+                                <label for="">Departamento</label>
+                                <select name="departamento_cat" id="" class="form-control">
+                                    <?php
+                                    foreach ($departamentos_datos as $departamentos_dato) { ?>
+                                        <option value="<?php echo $departamentos_dato['id_departamento']; ?>"><?php echo $departamentos_dato['nombre_dpo']; ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
                             </div>
+
                             <br>
 
                             <div class="form-group">
@@ -38,10 +47,10 @@
                     </div>
 
                 </form>
-            <!-- Pie del Modal -->
+                <!-- Pie del Modal -->
 
             </div>
-           
+
         </div>
     </div>
 </div>

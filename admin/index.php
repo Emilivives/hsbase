@@ -2,11 +2,14 @@
 include('../app/config.php');
 include('../admin/layout/parte1.php');
 include('../app/controllers/trabajadores/listado_trabajadores.php');
-include('../app/controllers/formaciones/listado_formaciones.php'); ?>
+include('../app/controllers/formaciones/listado_formaciones.php');
+include('../app/controllers/accidentes/listado_accidentes.php') ?>
 
 <body>
 
   <!-- CALCULOS ESTADISTICO -->
+
+    <!-- CALCULOS num trabajadores activos -->
 
   <?php
   $contador_de_trabajadores = 0;
@@ -16,6 +19,9 @@ include('../app/controllers/formaciones/listado_formaciones.php'); ?>
     }
   }
   ?>
+
+    <!-- CALCULOS trabajadores formados -->
+
   <?php
   $contador_tr_formados = 0;
   foreach ($trabajadores as $trabajador) {
@@ -31,6 +37,10 @@ include('../app/controllers/formaciones/listado_formaciones.php'); ?>
   $porcentage_formados = round($porcentage_formados, 1);
   $porcentage_formados;
   ?>
+
+  
+    <!-- CALCULOS trabajadores embarcados -->
+
   <?php
   $contador_embarcados = 0;
   foreach ($trabajadores as $trabajador) {
@@ -43,29 +53,142 @@ include('../app/controllers/formaciones/listado_formaciones.php'); ?>
   $porcentage_embarcados = round($porcentage_embarcados, 1)
   ?>
 
+  <!-- CALCULOS trabajadores nuevos año vigente -->
 
   <?php $fechahoraentera = strtotime($fechahora);
   $anio = date("Y", $fechahoraentera);
   $contador_tr_anio = count(array_filter($trabajadores, fn ($n) => date("Y", strtotime($n['inicio_tr'])) == $anio)); ?>
 
+  <!-- CALCULOS formaciones realizadas en 2024 -->
 
   <?php $fechahoraentera = strtotime($fechahora);
   $anio = date("Y", $fechahoraentera);
   $contador_de_formaciones = count(array_filter($formaciones_datos, fn ($n) => date("Y", strtotime($n['fecha_fr'])) == $anio)); ?>
 
 
+  <!-- CALCULOS formaciones por mes de año vigente -->
 
-  
+
   <?php $fechahoraentera = strtotime($fechahora);
   $anio = date("Y", $fechahoraentera);
   $contador_formacion_pdt = 0;
   foreach ($formaciones_datos as $formaciones_dato) {
-    if (date("Y", strtotime($formaciones_dato['fecha_fr'] == $anio))and $formaciones_dato['tipo_fr'] == 1) {
+    if (date("Y", strtotime($formaciones_dato['fecha_fr'] == $anio)) and $formaciones_dato['tipo_fr'] == 1) {
       $contador_formacion_pdt = $contador_formacion_pdt + 1;
     }
   }
   $porcentage_formpdt = ($contador_formacion_pdt * 100) / $contador_de_formaciones;
-  $porcentage_formpdt = round($porcentage_formpdt, 2);?>
+  $porcentage_formpdt = round($porcentage_formpdt, 2); ?>
+
+
+  <?php
+  $fechahoraentera = strtotime($fechahora);
+  $anio = date("Y", $fechahoraentera);
+  $mes = date("m", $fechahoraentera);
+  $contador_de_formaciones_en = 0;
+  $contador_de_formaciones_fe = 0;
+  $contador_de_formaciones_mr = 0;
+  $contador_de_formaciones_ab = 0;
+  $contador_de_formaciones_my = 0;
+  $contador_de_formaciones_jn = 0;
+  $contador_de_formaciones_jl = 0;
+  $contador_de_formaciones_ag = 0;
+  $contador_de_formaciones_st = 0;
+  $contador_de_formaciones_oc = 0;
+  $contador_de_formaciones_no = 0;
+  $contador_de_formaciones_di = 0;
+
+
+  foreach ($formaciones_datos as $formaciones_dato) {
+    $mesformacion = date("m", strtotime($formaciones_dato['fecha_fr']));
+    $anioformacion = date("Y", strtotime($formaciones_dato['fecha_fr']));
+   
+      if ($anioformacion == $anio and $mesformacion == 1) {
+        $contador_de_formaciones_en = $contador_de_formaciones_en + 1;
+      }
+      if ($anioformacion == $anio and $mesformacion == 2) {
+        $contador_de_formaciones_fe = $contador_de_formaciones_fe + 1;
+      }
+      if ($anioformacion == $anio and $mesformacion == 3) {
+        $contador_de_formaciones_mr = $contador_de_formaciones_mr + 1;
+      }
+      if ($anioformacion == $anio and $mesformacion == 4) {
+        $contador_de_formaciones_ab = $contador_de_formaciones_ab + 1;
+      }
+      if ($anioformacion == $anio and $mesformacion == 5) {
+        $contador_de_formaciones_my = $contador_de_formaciones_my + 1;
+      }
+      if ($anioformacion == $anio and $mesformacion == 6) {
+        $contador_de_formaciones_jn = $contador_de_formaciones_jn + 1;
+      }
+      if ($anioformacion == $anio and $mesformacion == 7) {
+        $contador_de_formaciones_jl = $contador_de_formaciones_jl + 1;
+      }
+      if ($anioformacion == $anio and $mesformacion == 8) {
+        $contador_de_formaciones_ag = $contador_de_formaciones_ag + 1;
+      }
+      if ($anioformacion == $anio and $mesformacion == 9) {
+        $contador_de_formaciones_st = $contador_de_formaciones_st + 1;
+      }
+      if ($anioformacion == $anio and $mesformacion == 10) {
+        $contador_de_formaciones_oc = $contador_de_formaciones_oc + 1;
+      }
+      if ($anioformacion == $anio and $mesformacion == 11) {
+        $contador_de_formaciones_no = $contador_de_formaciones_no + 1;
+      }
+      if ($anioformacion == $anio and $mesformacion == 12) {
+        $contador_de_formaciones_di = $contador_de_formaciones_di + 1;
+      }
+    }
+  ?>
+
+    <!-- CALCULOS trabajadores por puesto -->
+
+    <?php
+  $tr_marineros = 0;
+  $tr_administracion = 0;
+  $tr_marineromaquinas = 0;
+  $tr_opermantenimiento = 0;
+  $tr_taquilla = 0;
+  $tr_amarrador = 0;
+  $tr_carga = 0;
+  $tr_jefedpto = 0;
+  $tr_comercial = 0;
+  $tr_tecnicobuque = 0;
+  $tr_tecnicoprl = 0;
+  $tr_gerencia = 0;
+  $tr_primeroficial = 0;
+  $tr_jefemaquinas= 0;
+  $tr_primeromaquinas = 0;
+  $tr_mecaniconaval = 0;
+  $tr_azafatapuerto = 0;
+  $tr_taquillacarga = 0;
+  $tr_vigilante = 0;
+  $tr_informatico = 0;
+  $tr_auxiliarpasaje = 0;
+  $tr_sobrecargo = 0;
+  $tr_coordinadorpuerto = 0;
+  $tr_azafatapuerto = 0;
+  $tr_contramaestre = 0;
+
+  foreach ($trabajadores as $trabajador) {
+    if ($trabajador['activo_tr'] == 1 and $trabajador['formacionpdt_tr'] == 'Si') {
+      $contador_tr_formados = $contador_tr_formados + 1;
+    }
+  }
+  ?>
+  <?php
+  $contador_de_trabajadores;
+  $contador_tr_formados;
+  $porcentage_formados = ($contador_tr_formados * 100) / $contador_de_trabajadores;
+  $porcentage_formados = round($porcentage_formados, 1);
+  $porcentage_formados;
+  ?>
+
+
+
+
+
 
 
   <!-- FIN  CALCULOS ESTADISTICO -->
@@ -128,7 +251,7 @@ include('../app/controllers/formaciones/listado_formaciones.php'); ?>
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">
-          <i class="fa-solid fa-chart-simple"></i>            Estadísticas trabajadores
+            <i class="fa-solid fa-chart-simple"></i> Estadísticas trabajadores
           </h3>
 
           <div class="card-tools">
@@ -224,13 +347,13 @@ include('../app/controllers/formaciones/listado_formaciones.php'); ?>
       <!-- /.card -->
     </div>
 
-    <div class="col-6 col-md-6 text-center">
+    <div class="col-6 col-md-4 text-center">
       <!-- Donut chart -->
       <div class="card card-primary card-outline">
         <div class="card-header">
           <h3 class="card-title">
             <i class="far fa-chart-bar"></i>
-            Donut Chart
+            <b>Formaciones por mes del <?php echo $anio ?> </b>
           </h3>
 
           <div class="card-tools">
@@ -242,14 +365,26 @@ include('../app/controllers/formaciones/listado_formaciones.php'); ?>
             </button>
           </div>
         </div>
-        <div class="card-body">
-          <div id="donut-chart" style="height: 300px;"></div>
+        <div class="card-body center">
+          <div style="width: 500px">
+            <canvas id="graficaformaciones"></canvas>
+          </div>
+
         </div>
         <!-- /.card-body-->
       </div>
 
     </div>
 
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+
+    </div>
+
+  </div>
+  <div class="col-md-6">asdf</div>
   </div>
 
 </body>
@@ -427,7 +562,32 @@ include('../admin/layout/parte2.php'); ?>
       show: false
     }
   })
+</script>
+
+
+
+<script>
   /*
-   * END DONUT CHART
+   *  CHART
+   * -----------
    */
+
+  const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+
+  const graph = document.querySelector("#graficaformaciones");
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: "Num. formaciones x mes",
+      data: [<?php echo $contador_de_formaciones_en ?>, <?php echo $contador_de_formaciones_fe ?>, <?php echo $contador_de_formaciones_mr ?>, <?php echo $contador_de_formaciones_ab ?>, <?php echo $contador_de_formaciones_my ?>, <?php echo $contador_de_formaciones_jn ?>, <?php echo $contador_de_formaciones_jl ?>, <?php echo $contador_de_formaciones_ag ?>, <?php echo $contador_de_formaciones_st ?>, <?php echo $contador_de_formaciones_oc ?>, <?php echo $contador_de_formaciones_no ?>, <?php echo $contador_de_formaciones_di ?>],
+      backgroundColor: 'rgba(9, 129, 176, 0.2)'
+    }]
+  };
+
+  const config = {
+    type: 'bar',
+    data: data,
+  };
+  new Chart(graph, config);
 </script>

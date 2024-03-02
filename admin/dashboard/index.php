@@ -33,126 +33,120 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
       <!-- ./col -->
       <div class="col-lg-2 col-6">
         <!-- small box -->
-        <div class="card">
-          <div class="card-header">
-            <h5 class="card-title">Accesos directos</h5>
-          </div>
-          <div class="card-body">
 
-            <a class="btn btn-sm-app bg-secondary">
+        <div class="dropdown">
+          <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+            Accesos Directos </button>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+            <li><a class="dropdown-item" data-toggle="modal" href="#" data-target="#modal-nuevaactividad">Anadir progreso</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" data-toggle="modal" href="#" data-target="#modal-nuevaactividad">Nuevo trabajador</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
+          </ul>
+        </div>
 
-              <i class="fas fa-regular fa-calendar-plus"></i> Actividad
-
-            </a>
-            <!--boton modal-->
-            <div class="btn-text-right">
+        <!--boton modal-->
+        <!--<div class="btn-text-right">
               <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevaactividad">Añadir progreso</button>
             </div>
 
             <!--inicio modal nueva tarea-->
-            <div class="modal fade" id="modal-nuevaactividad">
-              <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                  <div class="modal-header" style="background-color:#eeeeee ;color:black">
-                    <h5 class="modal-title" id="modal-nuevaactividad">Nueva actividad realizada </h5>
-                    <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-
-                    <form action="../../app/controllers/actividad/create_actividad.php" method="post" enctype="multipart/form-data">
-
-                      <div class="form-group">
-                        <label for="">Proyecto</label>
-                        <select name="id_proyecto" id="listaproyecto" class="form-control">
-                          <?php
-                          foreach ($proyectos as $proyecto) { ?>
-                            <option value="<?php echo $proyecto['nombre_py']; ?>"><?php echo $proyecto['nombre_py'] ?></option>
-                          <?php
-                          }
-                          ?>
-                        </select>
-                      </div>
-                      <hr>
-                      <br>
-                      <div class="form-group">
-                        <label for="">Tarea</label>
-                        <select name="id_proyecto" id="listaproyecto" class="form-control">
-                          <?php
-                          foreach ($tareas as $tarea) { ?>
-                            <option value="<?php echo $tarea['nombre_ta']; ?>"><?php echo $tarea['nombre_ta'] ?> | <?php $tarea['nombre_py'] ?></option>
-                          <?php
-                          }
-                          ?>
-                        </select>
-                      </div>
-                      <br>
-                      <div id="listatarea"></div>
-
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label for="">Fecha <b>*</b></label>
-                            <input type="date" name="fecha_acc" class="form-control" required>
-                          </div>
-                        </div>
-
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label for="">Responsable</label>
-                            <input type="text" name="responsable_acc" class="form-control">
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label for="">Hora Inicio <b>*</b></label>
-                            <input type="time" name="horain_acc" class="form-control" required>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label for="">Hora Fin <b>*</b></label>
-                            <input type="time" name="horafin_acc" class="form-control" required>
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label for="">Detalles <b>*</b></label>
-                            <textarea class="form-control" name="detalles_acc" rows="5"></textarea>
-                          </div>
-                        </div>
-                      </div>
-
-
-                  </div>
-                  <div class="modal-footer">
-
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
-
-                  </div>
-                </div>
+        <div class="modal fade" id="modal-nuevaactividad">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header" style="background-color:#eeeeee ;color:black">
+                <h5 class="modal-title" id="modal-nuevaactividad">Nueva actividad realizada </h5>
+                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
+              <div class="modal-body">
 
+                <form action="../../app/controllers/actividad/create_actividad.php" method="post" enctype="multipart/form-data">
+
+                  <div class="form-group">
+                    <label for="">Proyecto</label>
+                    <select name="id_proyecto" id="listaproyecto" class="form-control">
+                      <?php
+                      foreach ($proyectos as $proyecto) { ?>
+                        <option value="<?php echo $proyecto['nombre_py']; ?>"><?php echo $proyecto['nombre_py'] ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <hr>
+                  <br>
+                  <div class="form-group">
+                    <label for="">Tarea</label>
+                    <select name="id_proyecto" id="listaproyecto" class="form-control">
+                      <?php
+                      foreach ($tareas as $tarea) { ?>
+                        <option value="<?php echo $tarea['nombre_ta']; ?>"><?php echo $tarea['nombre_ta'] ?> | <?php $tarea['nombre_py'] ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <br>
+                  <div id="listatarea"></div>
+
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="">Fecha <b>*</b></label>
+                        <input type="date" name="fecha_acc" class="form-control" required>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="">Responsable</label>
+                        <input type="text" name="responsable_acc" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="">Hora Inicio <b>*</b></label>
+                        <input type="time" name="horain_acc" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="">Hora Fin <b>*</b></label>
+                        <input type="time" name="horafin_acc" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="">Detalles <b>*</b></label>
+                        <textarea class="form-control" name="detalles_acc" rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+
+              </div>
+              <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+
+              </div>
             </div>
-            <a class="btn btn-sm-app bg-secondary">
-
-              <i class="fas fa-solid fa-user-plus"></i> Trabajador
-
-            </a>
-
-            <a class="btn btn-sm-app bg-warning">
-
-              <i class="fas fa-envelope"></i> Inbox
-            </a>
-
           </div>
-          <!-- /.card-body -->
 
         </div>
+
+
       </div>
+
 
       <div class="col-lg-2 col-6">
         <!-- small box -->
@@ -221,7 +215,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
       <div class="row">
         <div class="col-lg-6">
-        <div class="card">
+          <div class="card">
             <div class="card-header bg-secondary border-3">
               <div class="d-flex justify-content-between">
                 <h3 class="card-title text-center"> <b> TRABAJADORES </b></h3>
@@ -257,37 +251,37 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                   <?php
                   $contadortr = 0;
                   foreach ($trabajadores as $trabajador) {
-                    if($trabajador['activo_tr']==1){
-                    $contadortr = $contadortr + 1;
-                    $id_trabajador = $trabajador['id_trabajador'];
+                    if ($trabajador['activo_tr'] == 1) {
+                      $contadortr = $contadortr + 1;
+                      $id_trabajador = $trabajador['id_trabajador'];
                   ?>
 
-                    <tr>
+                      <tr>
 
 
-                      <td><?php echo $trabajador['nombre_tr']; ?></td>
+                        <td><?php echo $trabajador['nombre_tr']; ?></td>
 
-                      <td style="text-align: center"><?php echo $trabajador['inicio_tr']; ?></td>
+                        <td style="text-align: center"><?php echo $trabajador['inicio_tr']; ?></td>
 
-                      <td><?php echo $trabajador['nombre_cat']; ?></td>
+                        <td><?php echo $trabajador['nombre_cat']; ?></td>
 
-                      <td style="text-align: center;"><?php $trabajador['formacionpdt_tr'];
-                                                      if ($trabajador['formacionpdt_tr'] == 'Si') { ?>
-                          <span class='badge badge-success'>SI</span>
-                        <?php
-                                                      } else { ?>
-                          <span class='badge badge-danger'>NO</span>
-                        <?php
-                                                      }
-                        ?>
-
-
-                      </td>
+                        <td style="text-align: center;"><?php $trabajador['formacionpdt_tr'];
+                                                        if ($trabajador['formacionpdt_tr'] == 'Si') { ?>
+                            <span class='badge badge-success'>SI</span>
+                          <?php
+                                                        } else { ?>
+                            <span class='badge badge-danger'>NO</span>
+                          <?php
+                                                        }
+                          ?>
 
 
-                    </tr>
+                        </td>
+
+
+                      </tr>
                   <?php
-                  }
+                    }
                   }
                   ?>
 
@@ -303,7 +297,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
         </div>
         <!-- /.col-md-6 -->
         <div class="col-lg-4">
-        <div class="card">
+          <div class="card">
             <div class="card-header bg-secondary border-3">
               <div class="d-flex justify-content-between">
                 <h3 class="card-title text-center"> <b> RECONOCIMIENTOS MÉDICOS </b></h3>
@@ -398,7 +392,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
           </div>
         </div>
         <div class="col-lg-2">
-        <div class="card">
+          <div class="card">
             <div class="card-header bg-secondary border-3">
               <div class="d-flex justify-content-between">
                 <h3 class="card-title text-center"> <b> CITAS RM </b></h3>
@@ -460,7 +454,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
       <!-- /.card -->
       <div class="row">
         <div class="col-lg-6">
-        <div class="card">
+          <div class="card">
             <div class="card-header bg-secondary border-3">
               <div class="d-flex justify-content-between">
                 <h3 class="card-title text-center"> <b> TAREAS PRL </b></h3>
@@ -554,7 +548,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
         <!-- /.col-md-3 -->
         <div class="col-lg-3">
-        <div class="card">
+          <div class="card">
             <div class="card-header bg-secondary border-3">
               <div class="d-flex justify-content-between">
                 <h3 class="card-title text-center"> <b> ACCIONES PRL </b></h3>
@@ -660,7 +654,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
         <!-- /.card -->
         <!-- /.col-md-3 -->
         <div class="col-lg-3">
-        <div class="card">
+          <div class="card">
             <div class="card-header bg-secondary border-3">
               <div class="d-flex justify-content-between">
                 <h3 class="card-title text-center"> <b> ACCIDENTES LABORALES </b></h3>

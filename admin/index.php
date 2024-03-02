@@ -9,7 +9,7 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
 
   <!-- CALCULOS ESTADISTICO -->
 
-    <!-- CALCULOS num trabajadores activos -->
+  <!-- CALCULOS num trabajadores activos -->
 
   <?php
   $contador_de_trabajadores = 0;
@@ -20,7 +20,7 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
   }
   ?>
 
-    <!-- CALCULOS trabajadores formados -->
+  <!-- CALCULOS trabajadores formados -->
 
   <?php
   $contador_tr_formados = 0;
@@ -38,8 +38,8 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
   $porcentage_formados;
   ?>
 
-  
-    <!-- CALCULOS trabajadores embarcados -->
+
+  <!-- CALCULOS trabajadores embarcados -->
 
   <?php
   $contador_embarcados = 0;
@@ -102,49 +102,49 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
   foreach ($formaciones_datos as $formaciones_dato) {
     $mesformacion = date("m", strtotime($formaciones_dato['fecha_fr']));
     $anioformacion = date("Y", strtotime($formaciones_dato['fecha_fr']));
-   
-      if ($anioformacion == $anio and $mesformacion == 1) {
-        $contador_de_formaciones_en = $contador_de_formaciones_en + 1;
-      }
-      if ($anioformacion == $anio and $mesformacion == 2) {
-        $contador_de_formaciones_fe = $contador_de_formaciones_fe + 1;
-      }
-      if ($anioformacion == $anio and $mesformacion == 3) {
-        $contador_de_formaciones_mr = $contador_de_formaciones_mr + 1;
-      }
-      if ($anioformacion == $anio and $mesformacion == 4) {
-        $contador_de_formaciones_ab = $contador_de_formaciones_ab + 1;
-      }
-      if ($anioformacion == $anio and $mesformacion == 5) {
-        $contador_de_formaciones_my = $contador_de_formaciones_my + 1;
-      }
-      if ($anioformacion == $anio and $mesformacion == 6) {
-        $contador_de_formaciones_jn = $contador_de_formaciones_jn + 1;
-      }
-      if ($anioformacion == $anio and $mesformacion == 7) {
-        $contador_de_formaciones_jl = $contador_de_formaciones_jl + 1;
-      }
-      if ($anioformacion == $anio and $mesformacion == 8) {
-        $contador_de_formaciones_ag = $contador_de_formaciones_ag + 1;
-      }
-      if ($anioformacion == $anio and $mesformacion == 9) {
-        $contador_de_formaciones_st = $contador_de_formaciones_st + 1;
-      }
-      if ($anioformacion == $anio and $mesformacion == 10) {
-        $contador_de_formaciones_oc = $contador_de_formaciones_oc + 1;
-      }
-      if ($anioformacion == $anio and $mesformacion == 11) {
-        $contador_de_formaciones_no = $contador_de_formaciones_no + 1;
-      }
-      if ($anioformacion == $anio and $mesformacion == 12) {
-        $contador_de_formaciones_di = $contador_de_formaciones_di + 1;
-      }
+
+    if ($anioformacion == $anio and $mesformacion == 1) {
+      $contador_de_formaciones_en = $contador_de_formaciones_en + 1;
     }
+    if ($anioformacion == $anio and $mesformacion == 2) {
+      $contador_de_formaciones_fe = $contador_de_formaciones_fe + 1;
+    }
+    if ($anioformacion == $anio and $mesformacion == 3) {
+      $contador_de_formaciones_mr = $contador_de_formaciones_mr + 1;
+    }
+    if ($anioformacion == $anio and $mesformacion == 4) {
+      $contador_de_formaciones_ab = $contador_de_formaciones_ab + 1;
+    }
+    if ($anioformacion == $anio and $mesformacion == 5) {
+      $contador_de_formaciones_my = $contador_de_formaciones_my + 1;
+    }
+    if ($anioformacion == $anio and $mesformacion == 6) {
+      $contador_de_formaciones_jn = $contador_de_formaciones_jn + 1;
+    }
+    if ($anioformacion == $anio and $mesformacion == 7) {
+      $contador_de_formaciones_jl = $contador_de_formaciones_jl + 1;
+    }
+    if ($anioformacion == $anio and $mesformacion == 8) {
+      $contador_de_formaciones_ag = $contador_de_formaciones_ag + 1;
+    }
+    if ($anioformacion == $anio and $mesformacion == 9) {
+      $contador_de_formaciones_st = $contador_de_formaciones_st + 1;
+    }
+    if ($anioformacion == $anio and $mesformacion == 10) {
+      $contador_de_formaciones_oc = $contador_de_formaciones_oc + 1;
+    }
+    if ($anioformacion == $anio and $mesformacion == 11) {
+      $contador_de_formaciones_no = $contador_de_formaciones_no + 1;
+    }
+    if ($anioformacion == $anio and $mesformacion == 12) {
+      $contador_de_formaciones_di = $contador_de_formaciones_di + 1;
+    }
+  }
   ?>
 
-    <!-- CALCULOS trabajadores por puesto -->
+  <!-- CALCULOS trabajadores por puesto -->
 
-    <?php
+  <?php
   $tr_marineros = 0;
   $tr_administracion = 0;
   $tr_marineromaquinas = 0;
@@ -158,7 +158,7 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
   $tr_tecnicoprl = 0;
   $tr_gerencia = 0;
   $tr_primeroficial = 0;
-  $tr_jefemaquinas= 0;
+  $tr_jefemaquinas = 0;
   $tr_primeromaquinas = 0;
   $tr_mecaniconaval = 0;
   $tr_azafatapuerto = 0;
@@ -170,21 +170,63 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
   $tr_coordinadorpuerto = 0;
   $tr_azafatapuerto = 0;
   $tr_contramaestre = 0;
+  $tr_limpieza = 0;
+
 
   foreach ($trabajadores as $trabajador) {
-    if ($trabajador['activo_tr'] == 1 and $trabajador['formacionpdt_tr'] == 'Si') {
-      $contador_tr_formados = $contador_tr_formados + 1;
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Administración') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Marinero') {$tr_marineros = $tr_marineros + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Marinero máquinas') {$tr_marineromaquinas = $tr_marineromaquinas + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Operario mantenimiento') {$tr_opermantenimiento = $tr_opermantenimiento + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Oficial de carga') {$tr_taquilla = $tr_taquilla + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Jefe departamento') {$tr_amarrador = $tr_amarrador + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Comercial') {$tr_carga = $tr_carga + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Técnico de buques') {$tr_jefedpto = $tr_jefedpto + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Técnico de PRL') {$tr_comercial = $tr_comercial + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Gerencia') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Primer oficial') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Jefe de máquinas') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Primero de máquinas') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Mecánico naval') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Azafata de puerto') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Taquilla - Carga') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Vigilante') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Informático') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Auxiliar de pasaje') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Sobrecargo') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Coordinador de puerto') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Azafata de puerto') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Contramaestre') {$tr_administracion = $tr_administracion + 1;}
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Limpieza') {$tr_administracion = $tr_administracion + 1;}
+
+  }
+  ?>
+
+  <!-- CALCULOS tipo accidente -->
+  <?php
+  $contador_de_accidentesconbaja = 0;
+  foreach ($accidentes_datos as $accidentes_dato) {
+    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente con baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+      $contador_de_accidentesconbaja = $contador_de_accidentesconbaja + 1;
     }
   }
   ?>
   <?php
-  $contador_de_trabajadores;
-  $contador_tr_formados;
-  $porcentage_formados = ($contador_tr_formados * 100) / $contador_de_trabajadores;
-  $porcentage_formados = round($porcentage_formados, 1);
-  $porcentage_formados;
+  $contador_de_accidentessinbaja = 0;
+  foreach ($accidentes_datos as $accidentes_dato) {
+    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente sin baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+      $contador_de_accidentessinbaja = $contador_de_accidentessinbaja + 1;
+    }
+  }
   ?>
-
+  <?php
+  $contador_de_accidentesinitinere = 0;
+  foreach ($accidentes_datos as $accidentes_dato) {
+    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+      $contador_de_accidentesinitinere = $contador_de_accidentesinitinere + 1;
+    }
+  }
+  ?>
 
 
 
@@ -218,33 +260,106 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
 
       </div>
     </div>
+    <!-- small box -->
+    <div class="col-lg-1 col-6">
+      <!-- small box -->
+      <div class="small-box bg-light shadow-sm border">
+        <div class="inner">
+          <?php
+          $fechahoraentera = strtotime($fechahora);
+          $anio = date("Y", $fechahoraentera);
+          $contador_de_accidentes = 0;
+          foreach ($accidentes_datos as $accidentes_dato) {
+            if ((date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+              $contador_de_accidentes = $contador_de_accidentes + 1;
+            }
+          }
+          ?>
 
-  </div>
-  <div class="col-6 col-md-6 text-center">
-    <div class="card card-danger">
-      <div class="card-header">
-        <h3 class="card-title">Donut Chart</h3>
-
-
-
-        <div class="card-tools">
-          <button type="button" class="btn btn-tool" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-          <button type="button" class="btn btn-tool" data-card-widget="remove">
-            <i class="fas fa-times"></i>
-          </button>
+          <h2><?php echo $contador_de_accidentes; ?><sup style="font-size: 20px"></h2>
+          <p>Accidentes en <?php echo  $anio ?></p>
         </div>
+        <div class="icon">
+          <i class="fa-solid fa-person-falling-burst"></i>
+        </div>
+
+
+
       </div>
-      <div class="card-body">
-        <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-      </div>
-      <!-- /.card-body -->
     </div>
-    <!-- /.card -->
+
   </div>
+  <div class="row">
+    <div class="col-6 col-md-3 text-center">
+      <div class="card card-danger">
+        <div class="card-header">
+          <h3 class="card-title">Donut Chart</h3>
 
 
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <div class="col-6 col-md-3 text-center">
+      <div class="card card-danger">
+        <div class="card-header">
+          <h3 class="card-title">Distribución de accidentes</h3>
+
+
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="main" style="width:450px;height:250px;"></div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <div class="col-6 col-md-3 text-center">
+      <div class="card card-danger">
+        <div class="card-header">
+          <h3 class="card-title">% Formados Riesgos PDT</h3>
+
+
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="formaciones" style="width:450px;height:250px;"></div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
   <div class="row">
 
     <div class="col-6 col-md-3 text-center">
@@ -347,7 +462,7 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
       <!-- /.card -->
     </div>
 
-    <div class="col-6 col-md-4 text-center">
+    <div class="col-6 col-md-3 text-center">
       <!-- Donut chart -->
       <div class="card card-primary card-outline">
         <div class="card-header">
@@ -590,4 +705,117 @@ include('../admin/layout/parte2.php'); ?>
     data: data,
   };
   new Chart(graph, config);
+</script>
+
+
+
+<script>
+  /* DONUT CHART*/
+
+  const graph = document.querySelector("#doughnutchart");
+
+  const DATA_COUNT = 5;
+  const NUMBER_CFG = {
+    count: DATA_COUNT,
+    min: 0,
+    max: 100
+  };
+
+  const data = {
+    labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
+    datasets: [{
+      label: 'Dataset 1',
+      data: Utils.numbers(NUMBER_CFG),
+      backgroundColor: Object.values(Utils.CHART_COLORS),
+    }]
+  };
+
+  const config = {
+    type: 'doughnut',
+    data: data,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Chart.js Doughnut Chart'
+        }
+      }
+    },
+  };
+</script>
+
+<script type="text/javascript">
+  var chartDom = document.getElementById('main');
+  var myChart = echarts.init(chartDom);
+  var option;
+
+  // This example requires ECharts v5.5.0 or later
+  option = {
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      top: '5%',
+      left: 'center'
+    },
+    series: [{
+      name: '',
+      type: 'pie',
+      radius: ['40%', '70%'],
+      center: ['50%', '70%'],
+      // adjust the start and end angle
+      startAngle: 180,
+      endAngle: 360,
+      data: [{
+          value: <?php echo $contador_de_accidentesconbaja ?>,
+          name: 'Acc. con Baja'
+        },
+        {
+          value: <?php echo $contador_de_accidentessinbaja ?>,
+          name: 'Acc. sin Baja'
+        },
+        {
+          value: <?php echo $contador_de_accidentesinitinere ?>,
+          name: 'Acc. Itinere'
+        },
+       
+      ]
+    }]
+  };
+
+  option && myChart.setOption(option);
+</script>
+
+<script type="text/javascript">
+
+var chartDom = document.getElementById('formaciones');
+var myChart = echarts.init(chartDom);
+var option;
+
+option = {
+  tooltip: {
+    formatter: '{a} <br/>{b} : {c}%'
+  },
+  series: [
+    {
+      name: 'Pressure',
+      type: 'gauge',
+      detail: {
+        formatter: '{value}'
+      },
+      data: [
+        {
+          value: <?php echo $porcentage_formados; ?>,
+          name: '%'
+        }
+      ]
+    }
+  ]
+};
+
+option && myChart.setOption(option);
 </script>

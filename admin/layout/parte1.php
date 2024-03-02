@@ -54,6 +54,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/css/bootstrap.min.css">
    <!-- chart js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <!-- chart js -->
+   <link rel="stylesheet" href="<?php echo $URL; ?>/public/js/echarts.min.js">
+   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+
 
 </head>
 

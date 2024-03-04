@@ -12,6 +12,9 @@ include('../../app/controllers/reconocimientos/listado_reconocimientos.php');
 include('../../app/controllers/reconocimientos/listado_citasrm.php');
 include('../../app/controllers/actividad/listado_accionprl.php');
 include('../../app/controllers/maestros/responsables/listado_responsables.php');
+include('../../app/controllers/maestros/centros/listado_centros.php');
+include('../../app/controllers/maestros/empresas/listado_empresas.php');
+include('../../app/controllers/maestros/categorias/listado_categorias.php');
 ?>
 <html>
 <!-- Google Font: Source Sans Pro -->
@@ -35,14 +38,14 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
         <!-- small box -->
 
         <div class="dropdown">
-          <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+          <button class="btn btn-warning btn-lg dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
             Accesos Directos </button>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
             <li><a class="dropdown-item" data-toggle="modal" href="#" data-target="#modal-nuevaactividad">Anadir progreso</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" data-toggle="modal" href="#" data-target="#modal-nuevaactividad">Nuevo trabajador</a></li>
+            <li><a class="dropdown-item" data-toggle="modal" href="#" data-target="#modal-nuevotrabajador">Nuevo trabajador</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -55,7 +58,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
               <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevaactividad">Añadir progreso</button>
             </div>
 
-            <!--inicio modal nueva tarea-->
+           inicio modal nueva tarea-->
         <div class="modal fade" id="modal-nuevaactividad">
           <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -144,8 +147,114 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
         </div>
 
+        <!-- inicio modal nuevo trabajador-->
+        <div class="modal fade" id="modal-nuevotrabajador">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header" style="background-color:#ffd900 ;color:black">
+                <h5 class="modal-title" id="modal-nuevotrabajador">Nuevo Trabajador</h5>
+                <button type="button" class="close" style="color: black;" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <form action="../../app/controllers/trabajadores/create.php" method="post" enctype="multipart/form-data">
+
+
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="">Codigo</label>
+                        <input type="text" name="codigo_tr" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="">DNI/NIE</label>
+                        <input type="text" name="dni_tr" class="form-control" required>
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-8">
+                      <div class="form-group">
+                        <label for="">APELLIDOS, NOMBRE</label>
+                        <input type="text" name="nombre_tr" class="form-control" required>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="">Fecha Nacimiento</label>
+                        <input type="date" name="fechanac_tr" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="">Fecha Inicio</label>
+                        <input type="date" name="inicio_tr" class="form-control" required>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label for="">Centro Trabajo</label>
+                        <select name="centro_tr" id="" class="form-control">
+                          <?php
+                          foreach ($centros_datos as $centros_dato) { ?>
+                            <option value="<?php echo $centros_dato['id_centro']; ?>"><?php echo $centros_dato['nombre_cen']; ?></option>
+                          <?php
+                          }
+                          ?>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label for="">Categoria</label>
+                        <select name="categoria_tr" id="" class="form-control">
+                          <?php
+                          foreach ($categorias_datos as $categorias_dato) { ?>
+                            <option value="<?php echo $categorias_dato['id_categoria']; ?>"><?php echo $categorias_dato['nombre_cat']; ?></option>
+                          <?php
+                          }
+                          ?>
+                        </select>
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!--fin modal-->
 
       </div>
+
+
+
+
 
 
       <div class="col-lg-2 col-6">

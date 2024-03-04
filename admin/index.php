@@ -174,31 +174,78 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
 
 
   foreach ($trabajadores as $trabajador) {
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Administración') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Marinero') {$tr_marineros = $tr_marineros + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Marinero máquinas') {$tr_marineromaquinas = $tr_marineromaquinas + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Operario mantenimiento') {$tr_opermantenimiento = $tr_opermantenimiento + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Oficial de carga') {$tr_taquilla = $tr_taquilla + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Jefe departamento') {$tr_amarrador = $tr_amarrador + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Comercial') {$tr_carga = $tr_carga + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Técnico de buques') {$tr_jefedpto = $tr_jefedpto + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Técnico de PRL') {$tr_comercial = $tr_comercial + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Gerencia') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Primer oficial') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Jefe de máquinas') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Primero de máquinas') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Mecánico naval') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Azafata de puerto') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Taquilla - Carga') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Vigilante') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Informático') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Auxiliar de pasaje') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Sobrecargo') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Coordinador de puerto') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Azafata de puerto') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Contramaestre') {$tr_administracion = $tr_administracion + 1;}
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Limpieza') {$tr_administracion = $tr_administracion + 1;}
-
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Administración') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Marinero') {
+      $tr_marineros = $tr_marineros + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Marinero máquinas') {
+      $tr_marineromaquinas = $tr_marineromaquinas + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Operario mantenimiento') {
+      $tr_opermantenimiento = $tr_opermantenimiento + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Oficial de carga') {
+      $tr_taquilla = $tr_taquilla + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Jefe departamento') {
+      $tr_amarrador = $tr_amarrador + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Comercial') {
+      $tr_carga = $tr_carga + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Técnico de buques') {
+      $tr_jefedpto = $tr_jefedpto + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Técnico de PRL') {
+      $tr_comercial = $tr_comercial + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Gerencia') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Primer oficial') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Jefe de máquinas') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Primero de máquinas') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Mecánico naval') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Azafata de puerto') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Taquilla - Carga') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Vigilante') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Informático') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Auxiliar de pasaje') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Sobrecargo') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Coordinador de puerto') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Azafata de puerto') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Contramaestre') {
+      $tr_administracion = $tr_administracion + 1;
+    }
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Limpieza') {
+      $tr_administracion = $tr_administracion + 1;
+    }
   }
   ?>
 
@@ -225,6 +272,33 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
     if (($accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
       $contador_de_accidentesinitinere = $contador_de_accidentesinitinere + 1;
     }
+  }
+  ?>
+
+  <!--CALCULOS ACCIDENTES POR MES-->
+  <?php
+  $fechahoraentera = strtotime($fechahora);
+  $anio = date("Y", $fechahoraentera);
+
+  // Array asociativo para almacenar los contadores de formaciones por mes
+  $contador_de_accidentes_mes = array(
+    '01' => 0, '02' => 0, '03' => 0, '04' => 0,
+    '05' => 0, '06' => 0, '07' => 0, '08' => 0,
+    '09' => 0, '10' => 0, '11' => 0, '12' => 0
+  );
+
+  foreach ($accidentes_datos as $accidentes_dato) {
+    $mesaccidente = date("m", strtotime($accidentes_dato['fecha_ace']));
+    $anioaccidente = date("Y", strtotime($accidentes_dato['fecha_ace']));
+
+    if ($anioaccidente == $anio && isset($contador_de_accidentes_mes[$mesaccidente])) {
+      $contador_de_accidentes_mes[$mesaccidente]++;
+    }
+  }
+
+  // Imprimir los contadores de formaciones por mes
+  foreach ($contador_de_accidentes_mes as $mes => $contador) {
+    echo "Mes $mes: $contador formaciones\n";
   }
   ?>
 
@@ -359,6 +433,30 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
       </div>
       <!-- /.card -->
     </div>
+
+    <div class="col-6 col-md-3 text-center">
+      <div class="card card-danger">
+        <div class="card-header">
+          <h3 class="card-title">Indices</h3>
+
+
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="main3" style="width:600px;height:250px;"></div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
   </div>
   <div class="row">
 
@@ -483,6 +581,35 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
         <div class="card-body center">
           <div style="width: 500px">
             <canvas id="graficaformaciones"></canvas>
+          </div>
+
+        </div>
+        <!-- /.card-body-->
+      </div>
+
+    </div>
+
+    <div class="col-6 col-md-3 text-center">
+      <!-- Donut chart -->
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="far fa-chart-bar"></i>
+            <b>Accidentes por mes del <?php echo $anio ?> </b>
+          </h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body center">
+          <div style="width: 500px">
+            <canvas id="graficaaccidentes"></canvas>
           </div>
 
         </div>
@@ -709,6 +836,55 @@ include('../admin/layout/parte2.php'); ?>
 
 
 
+
+<script>
+  /*
+   *  CHART ACCIDENTES POR MES
+   * -----------
+   */
+  var chartDom = document.getElementById('graficaaccidentes');
+  var myChart = echarts.init(chartDom);
+  var option;
+
+  option = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      }
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: [{
+      type: 'category',
+      data: ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Dic'],
+      axisTick: {
+        alignWithLabel: true
+      }
+    }],
+    yAxis: [{
+      type: 'value'
+    }],
+    series: [{
+      name: 'Direct',
+      type: 'bar',
+      barWidth: '60%',
+      data: [<?php foreach ($contador_de_accidentes_mes as $mes => $contador) {
+                echo "$contador";
+              }
+              ?>]
+    }]
+  };
+
+  option && myChart.setOption(option);
+</script>
+
+
+
 <script>
   /* DONUT CHART*/
 
@@ -782,7 +958,7 @@ include('../admin/layout/parte2.php'); ?>
           value: <?php echo $contador_de_accidentesinitinere ?>,
           name: 'Acc. Itinere'
         },
-       
+
       ]
     }]
   };
@@ -791,31 +967,97 @@ include('../admin/layout/parte2.php'); ?>
 </script>
 
 <script type="text/javascript">
+  var chartDom = document.getElementById('formaciones');
+  var myChart = echarts.init(chartDom);
+  var option;
 
-var chartDom = document.getElementById('formaciones');
-var myChart = echarts.init(chartDom);
-var option;
-
-option = {
-  tooltip: {
-    formatter: '{a} <br/>{b} : {c}%'
-  },
-  series: [
-    {
+  option = {
+    tooltip: {
+      formatter: '{a} <br/>{b} : {c}%'
+    },
+    series: [{
       name: 'Pressure',
       type: 'gauge',
       detail: {
         formatter: '{value}'
       },
-      data: [
-        {
-          value: <?php echo $porcentage_formados; ?>,
-          name: '%'
-        }
-      ]
-    }
-  ]
-};
+      data: [{
+        value: <?php echo $porcentage_formados; ?>,
+        name: '%'
+      }]
+    }]
+  };
 
-option && myChart.setOption(option);
+  option && myChart.setOption(option);
+</script>
+
+<script>
+  //indices de siniestralidad, frecuencia  y gravedad
+  var chartDom = document.getElementById('main3');
+  var myChart = echarts.init(chartDom);
+  var option;
+
+  option = {
+    title: {
+      text: ''
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    legend: {
+      data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    toolbox: {
+      feature: {
+        saveAsImage: {}
+      }
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Dic']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+        name: 'Email',
+        type: 'line',
+        stack: 'Total',
+        data: [120, 132, 101, 134, 90, 230, 210, 210, 210, 210, 210, 210]
+      },
+      {
+        name: 'Union Ads',
+        type: 'line',
+        stack: 'Total',
+        data: [220, 182, 191, 234, 290, 330, 310, 290, 290, 290, 290, 290]
+      },
+      {
+        name: 'Video Ads',
+        type: 'line',
+        stack: 'Total',
+        data: [150, 232, 201, 154, 190, 330, 410, 190, 190, 190, 190, 190]
+      },
+      {
+        name: 'Direct',
+        type: 'line',
+        stack: 'Total',
+        data: [320, 332, 301, 334, 390, 330, 320, 334, 334, 334, 334, 334]
+      },
+      {
+        name: 'Search Engine',
+        type: 'line',
+        stack: 'Total',
+        data: [820, 932, 901, 934, 1290, 1330, 1320, 934, 934, 934, 934, 934]
+      }
+    ]
+  };
+
+  option && myChart.setOption(option);
 </script>

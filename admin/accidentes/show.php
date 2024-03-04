@@ -616,6 +616,17 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                             </div>
 
 
+                            <div class="col-sm-2">
+                                <div class="form-group row">
+                                    <label for="diasbaja_ace" class="col-form-label col-sm-6 bg-warning"> <b>DIAS DE BAJA:</b></label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="diasbaja_ace" value="<?php echo $diasbaja_ace ?>" class="form-control " tabindex="1">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
 
                         </div>
                         <hr>

@@ -9,7 +9,7 @@ tr.nombre_tr as nombre_tr, tr.dni_tr as dni_tr, tr.sexo_tr as sexo_tr, tr.fechan
 cen.nombre_cen as nombre_cen, emp.nombre_emp as nombre_emp, emp.razonsocial_emp as razonsocial_emp, emp.modalidadprl_emp as modalidadprl_emp,
 ace.lugar_ace as lugar_ace, ace.detalleslugar_ace as detalleslugar_ace, ta.tipoaccidente_ta as tipoaccidente_ta, 
 ace.fecha_ace as fecha_ace, ace.fechabaja_ace as fechabaja_ace, ace.hora_ace as hora_ace, ace.horatrabajo_ace as horatrabajo_ace, 
-ace.trabajohabitual_ace as trabajohabitual_ace, ace.diadescanso_ace as diadescanso_ace, ace.semanadescanso_ace as semanadescanso_ace, 
+ace.trabajohabitual_ace as trabajohabitual_ace, ace.diadescanso_ace as diadescanso_ace, ace.semanadescanso_ace as semanadescanso_ace, ace.diasbaja_ace as diasbaja_ace,
 ace.isevaluadoriesgo_ace as isevaluadoriesgo_ace, ace.evalconriesgo_ace as evalconriesgo_ace, ace.isrecaida_ace as isrecaida_ace, 
 ace.fechaantesrecaida_ace as fechaantesrecaida_ace, ace.descripcion_ace as descripcion_ace, tlu.tipolugar_tl as tipolugar_tl, 
 ace.zonalugar_ace as zonalugar_ace, ace.observaclugar_ace as observaclugar_ace, pt.procesotrabajo_pt as procesotrabajo_pt, 
@@ -77,6 +77,7 @@ foreach ($accidentes_datos as $accidentes_dato) {
     $trabajohabitual_ace = $accidentes_dato['trabajohabitual_ace'];
     $diadescanso_ace = $accidentes_dato['diadescanso_ace'];
     $semanadescanso_ace = $accidentes_dato['semanadescanso_ace'];
+    $diasbaja_ace = $accidentes_dato['diasbaja_ace'];
     $isevaluadoriesgo_ace = $accidentes_dato['isevaluadoriesgo_ace'];
     $evalconriesgo_ace = $accidentes_dato['evalconriesgo_ace'];
     $isrecaida_ace = $accidentes_dato['isrecaida_ace'];

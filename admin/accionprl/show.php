@@ -34,12 +34,14 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
 
 
 </html>
-
+<div class="col-md-12">
+    <a href="reporte.php?id_accion=<?php echo $id_accion;?>" class="btn btn-warning" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
+</div>
 <!-- /.content- -->
 <div class="content">
     <form action="../../app/controllers/actividad/update_accion.php" method="post">
 
-        <input type="text" name="id_accion" value="<?php echo $id_accion; ?>" >
+        <input type="text" name="id_accion" value="<?php echo $id_accion; ?>">
 
         <div class="well">
             <div class="row">
@@ -215,7 +217,7 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                                             }
                                             ?>
                                         </select>
-                                       
+
                                     </div>
                                 </div>
                             </div>

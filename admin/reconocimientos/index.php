@@ -5,8 +5,8 @@ include('../../app/controllers/reconocimientos/listado_reconocimientos.php');
 include('../../app/controllers/trabajadores/listado_trabajadores.php');
 include('../../app/controllers/reconocimientos/listado_citasrm.php');
 include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php');
-
 ?>
+
 <html>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">

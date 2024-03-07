@@ -35,30 +35,25 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
     <div class="row">
       <!-- ./col -->
       <div class="col-lg-2 col-6">
-        <!-- small box -->
-
-        <div class="dropdown">
-          <button class="btn btn-warning btn-lg dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-            Accesos Directos </button>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-            <li><a class="dropdown-item" data-toggle="modal" href="#" data-target="#modal-nuevaactividad">Anadir progreso</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" data-toggle="modal" href="#" data-target="#modal-nuevotrabajador">Nuevo trabajador</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
-          </ul>
+          <div class="btn-text-center">
+            <button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador" title="Añadir nuevo trabajador"><i class="bi bi-person-plus-fill"></i>AÑADIR NUEVO TRABAJADOR</button>
+            <button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#modal-nuevaactividad" title="Añadir nueva tarea"><i class="fa-solid fa-check"></i>  AÑADIR NUEVA ACTIVIDAD</button>
+            <button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#modal-nuevaactividad" title="Añadir nueva tarea"><i class="fa-solid fa-check"></i>  ACTIVIDAD</button>
+          </div>
+        <div class="row">
+     
+          <div class="btn-text-center">
+         
+          </div>
+  
         </div>
 
-        <!--boton modal-->
-        <!--<div class="btn-text-right">
-              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevaactividad">Añadir progreso</button>
-            </div>
 
-           inicio modal nueva tarea-->
+
+        <!--inicio modal nueva tarea-->
+
+
+           
         <div class="modal fade" id="modal-nuevaactividad">
           <div class="modal-dialog modal-xl">
             <div class="modal-content">

@@ -437,14 +437,6 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group row">
-                                <label for="diaSemana" class="col-form-label col-sm-3">Dia</label>
-                                <div class="col-sm-6">
-                                    <input type="text" id="diaSemana" class="form-control" value="diaSemana.value" disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="form-group row">
                                 <label for="nombre" class="col-form-label col-sm-3">Hora:</label>
                                 <div class="col-sm-4">
                                     <input type="time" name="hora_ace" class="form-control" tabindex="1">
@@ -472,8 +464,17 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    
+                        <div class="col-sm-2">
+                            <div class="form-group row">
+                                <label for="diaSemana" class="col-form-label col-sm-3">Dia</label>
+                                <div class="col-sm-6">
+                                    <input type="text" id="diaSemana" class="form-control" value="diaSemana.value" disabled>
+                                </div>
+                            </div>
+                        </div>
 
+                        </div>
                     <div class="row">
 
                         <div class="col-sm-3">
@@ -533,19 +534,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         </div>
 
 
-                        <div class="col-sm-3">
-                            <div class="form-group row">
-                                <label for="trabajohabitual_ace" class="col-form-label col-sm-4">Trabajo habitual:</label>
-                                <div class="col-sm-3">
-                                    <select class="form-select" name="trabajohabitual_ace" aria-label="Default select example">
-                                        <option selected>-</option>
-                                        <option value="SI">SI</option>
-                                        <option value="NO">NO</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                   
                         
         
 

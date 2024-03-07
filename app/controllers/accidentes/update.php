@@ -19,6 +19,7 @@ $diadescanso_ace = $_POST['diadescanso_ace'];
 $semanadescanso_ace = $_POST['semanadescanso_ace'];
 $isevaluadoriesgo_ace = $_POST['isevaluadoriesgo_ace'];
 $evalconriesgo_ace = $_POST['evalconriesgo_ace'];
+$diasbaja_ace = $_POST['diasbaja_ace'];
 $isrecaida_ace = $_POST['isrecaida_ace'];
 $fechaantesrecaida_ace = $_POST['fechaantesrecaida_ace'];
 $descripcion_ace = $_POST['descripcion_ace'];
@@ -99,6 +100,7 @@ diadescanso_ace=:diadescanso_ace,
 semanadescanso_ace=:semanadescanso_ace,
 isevaluadoriesgo_ace=:isevaluadoriesgo_ace,
 evalconriesgo_ace=:evalconriesgo_ace,
+diasbaja_ace=:diasbaja_ace,
 isrecaida_ace=:isrecaida_ace,
 fechaantesrecaida_ace=:fechaantesrecaida_ace,
 descripcion_ace=:descripcion_ace,
@@ -163,6 +165,7 @@ WHERE id_accidente=:id_accidente");
 
 $sentencia->bindParam(':id_accidente',$id_accidente);
 $sentencia->bindParam(':nroaccidente_ace',$nroaccidente_ace);
+$sentencia->bindParam(':comunicado_ace',$comunicado_ace);
 $sentencia->bindParam(':trabajador_ace',$trabajador_ace);
 $sentencia->bindParam(':centro_ace',$centro_ace);
 $sentencia->bindParam(':lugar_ace',$lugar_ace);
@@ -177,6 +180,7 @@ $sentencia->bindParam(':diadescanso_ace',$diadescanso_ace);
 $sentencia->bindParam(':semanadescanso_ace',$semanadescanso_ace);
 $sentencia->bindParam(':isevaluadoriesgo_ace',$isevaluadoriesgo_ace);
 $sentencia->bindParam(':evalconriesgo_ace',$evalconriesgo_ace);
+$sentencia->bindParam(':diasbaja_ace',$diasbaja_ace);
 $sentencia->bindParam(':isrecaida_ace',$isrecaida_ace);
 $sentencia->bindParam(':fechaantesrecaida_ace',$fechaantesrecaida_ace);
 $sentencia->bindParam(':descripcion_ace',$descripcion_ace);

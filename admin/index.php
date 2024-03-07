@@ -295,13 +295,11 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
       $contador_de_accidentes_mes[$mesaccidente]++;
     }
   }
-
-  // Imprimir los contadores de formaciones por mes
-  foreach ($contador_de_accidentes_mes as $mes => $contador) {
-    echo "Mes $mes: $contador formaciones\n";
-  }
   ?>
-
+<script>
+  $my_json_string = JSON.parse($contador_de_accidentes_mes);
+</script>
+ 
 
 
 
@@ -608,9 +606,8 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
           </div>
         </div>
         <div class="card-body center">
-          <div style="width: 500px">
-            <canvas id="graficaaccidentes"></canvas>
-          </div>
+
+          <canvas id="graficaaccidentes"></canvas>
 
         </div>
         <!-- /.card-body-->
@@ -816,9 +813,9 @@ include('../admin/layout/parte2.php'); ?>
 
   const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
-  const graph = document.querySelector("#graficaformaciones");
+  const graphi = document.querySelector("#graficaformaciones");
 
-  const data = {
+  const data1 = {
     labels: labels,
     datasets: [{
       label: "Num. formaciones x mes",
@@ -827,11 +824,11 @@ include('../admin/layout/parte2.php'); ?>
     }]
   };
 
-  const config = {
+  const config1 = {
     type: 'bar',
-    data: data,
+    data: data1,
   };
-  new Chart(graph, config);
+  new Chart(graphi, config1);
 </script>
 
 
@@ -842,45 +839,24 @@ include('../admin/layout/parte2.php'); ?>
    *  CHART ACCIDENTES POR MES
    * -----------
    */
-  var chartDom = document.getElementById('graficaaccidentes');
-  var myChart = echarts.init(chartDom);
-  var option;
+  const labels2 = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
-  option = {
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow'
-      }
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis: [{
-      type: 'category',
-      data: ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Dic'],
-      axisTick: {
-        alignWithLabel: true
-      }
-    }],
-    yAxis: [{
-      type: 'value'
-    }],
-    series: [{
-      name: 'Direct',
-      type: 'bar',
-      barWidth: '60%',
-      data: [<?php foreach ($contador_de_accidentes_mes as $mes => $contador) {
-                echo "$contador";
-              }
-              ?>]
-    }]
-  };
+const graphi2 = document.querySelector("#graficaaccidentes");
 
-  option && myChart.setOption(option);
+const data2 = {
+  labels: labels,
+  datasets: [{
+    label: "Num. formaciones x mes",
+    data: [JSON.parse($contador_de_accidentes_mes)],
+    backgroundColor: 'rgba(9, 129, 176, 0.2)'
+  }]
+};
+
+const config2 = {
+  type: 'bar',
+  data: data1,
+};
+new Chart(graphi2, config2);
 </script>
 
 

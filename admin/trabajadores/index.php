@@ -451,7 +451,8 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                                     <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($trabajador_formacion['fecha_fr'])) ?></td>
                                                                                     <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($trabajador_formacion['fechacad_fr'])) ?></td>
                                                                                     <td style="text-align: center">
-                                                                                        <a href="../formacion/index.php" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
+                                                                                        <a href="../formacion/show.php?id_formacion=<?php echo  $trabajador_formacion['id_formacion']; ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
+                                                                                        
                                                                                     </td>
                                                                                 <?php
                                                                             }

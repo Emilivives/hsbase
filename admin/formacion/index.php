@@ -19,7 +19,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="../index.php">Inicio</a></li>
                     <li class="breadcrumb-item active">Control formaciones</li>
                 </ol>
             </div><!-- /.col -->
@@ -214,7 +214,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 
                             <td style="text-align: center">
                                 <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                    <a href="show.php?id_usuario=<?php echo $id_usuario; ?>" class="btn btn-secondary btn-sm" title="Ver detalles"><i class="bi bi-person-lines-fill"></i></a>
+                                    <a href="show.php?id_formacion=<?php echo $id_formacion; ?>" class="btn btn-secondary btn-sm" title="Ver detalles"><i class="bi bi-person-lines-fill"></i></a>
                                     <a href="update.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-warning btn-sm" title="Editar"><i class="bi bi-pencil-square"></i></a>
                                     <a href="delete.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-danger btn-sm" title="Eliminar"><i class="bi bi-trash3-fill"></i></a>
 

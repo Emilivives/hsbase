@@ -21,12 +21,20 @@ $seguimiento_acc = $_POST['seguimiento_acc'];
 $avance_acc = $_POST['avance_acc'];
 $estado_acc = $_POST['estado_acc'];
 
+$imagen1_acc = $_POST['image'];
+
+$nombreDelArchivo = date("Y-m-d-h-i-s");
+$filename = $nombreDelArchivo."__".$_FILES['image']['name'];
+$location = "../../../accionprl/imagenes/".$filename;
+
+move_uploaded_file($_FILES['image']['tmp_name'],$location);
+
 
 
 $sentencia = $pdo->prepare("INSERT INTO ag_acciones (codigo_acc, fecha_acc, centro_acc, responsable_acc, prioridad_acc, descripcion_acc, origen_acc, 
-detalleorigen_acc, accpropuesta_acc, accrealizada_acc, fechaprevista_acc, fechaveri_acc, fecharea_acc, recursos_acc, seguimiento_acc, avance_acc, estado_acc) 
+detalleorigen_acc, accpropuesta_acc, accrealizada_acc, fechaprevista_acc, fechaveri_acc, fecharea_acc, recursos_acc, seguimiento_acc, avance_acc, estado_acc, imagen1_acc) 
 VALUES (:codigo_acc, :fecha_acc, :centro_acc, :responsable_acc, :prioridad_acc, :descripcion_acc, :origen_acc, 
-:detalleorigen_acc, :accpropuesta_acc, :accrealizada_acc, :fechaprevista_acc, :fechaveri_acc, :fecharea_acc, :recursos_acc, :seguimiento_acc, :avance_acc, :estado_acc)"); 
+:detalleorigen_acc, :accpropuesta_acc, :accrealizada_acc, :fechaprevista_acc, :fechaveri_acc, :fecharea_acc, :recursos_acc, :seguimiento_acc, :avance_acc, :estado_acc, :imagen1_acc)"); 
 
 
 $sentencia->bindParam('codigo_acc', $codigo_acc);    
@@ -46,6 +54,7 @@ $sentencia->bindParam('accrealizada_acc', $accrealizada_acc);
 $sentencia->bindParam('accpropuesta_acc', $accpropuesta_acc);
 $sentencia->bindParam('seguimiento_acc', $seguimiento_acc);    
 $sentencia->bindParam('recursos_acc', $recursos_acc);
+$sentencia->bindParam('imagen1_acc', $filename);
 
 
 if ($sentencia->execute()) {

@@ -44,12 +44,18 @@ foreach($formaciondetalle_datos as $formaciondetalle_dato){
     $nroformacion = $formaciondetalle_dato['nroformacion'];
     $id_formacion = $formaciondetalle_dato['id_formacion'];
     $tipo_fr = $formaciondetalle_dato['nombre_tf'];
-    $fecha_fr = $formaciondetalle_dato['fecha_fr'];
-    $fechacad_fr = $formaciondetalle_dato['fechacad_fr'];
+    $duracion_fr = $formaciondetalle_dato['duracion_tf'];
+    $fecha_fr = date("d-m-Y", strtotime($formaciondetalle_dato['fecha_fr']));
+    $fecha2_fr = date("Y", strtotime($formaciondetalle_dato['fecha_fr']));
+    $fechacad_fr = date("d-m-Y", strtotime($formaciondetalle_dato['fechacad_fr']));
     $formador_fr = $formaciondetalle_dato['nombre_resp'];
+    $cargoresp_fr = $formaciondetalle_dato['cargo_resp'];
     $detalles_fr = $formaciondetalle_dato['detalles_tf'];
     
     }
+
+    $nroformacion = $formaciondetalle_dato['nroformacion'];
+
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -109,33 +115,68 @@ $html ='
 
 <table border="0">
 <tr>
-<td style="height: 20px; background-color: #ffffff; text-align: left"><b>Num. accion PRL:</b></td>
-<td>'.$nroformacion.'</td>
-<td><b>Fecha apertura:</b></td>
-<td></td>
-<td style="height: 20px; background-color: #ffffff; text-align: right"><b>% Avance:</b></td>
+<td style="height: 30px; background-color: #ffffff; text-align: left"><b>Cod. Formación:</b></td>
+<td>'.$nroformacion.' / '.$fecha2_fr.'</td>
+
+<td style="height: 30px; background-color: #ffffff; text-align: right"><b>Formación:</b></td>
 <td>'.$tipo_fr.'</td>
 </tr>
 <tr>
-<td style="height: 20px; background-color: #ffffff; text-align: left"><b>Num. accion PRL:</b></td>
+<td style="height: 30px; background-color: #ffffff; text-align: left"><b>Fecha formación:</b></td>
 <td>'.$fecha_fr.'</td>
-<td><b>Fecha apertura:</b></td>
-<td></td>
-<td style="height: 20px; background-color: #ffffff; text-align: right"><b>% Avance:</b></td>
+
+<td style="height: 30px; background-color: #ffffff; text-align: right"><b>Vigente hasta:</b></td>
 <td>'.$fechacad_fr.'</td>
 </tr>
 <tr>
-<td style="height: 20px; background-color: #ffffff; text-align: left"><b>Num. accion PRL:</b></td>
-<td>'.$formador_fr.'</td>
+<td style="height: 30px; background-color: #ffffff; text-align: left"><b>Formador:</b></td>
+<td>'.$formador_fr.' / '.$cargoresp_fr.'</td>
+<td style="height: 30px; background-color: #ffffff; text-align: right"><b>Formación:</b></td>
+<td>'.$duracion_fr.' hrs.</td>
 </tr>
 </table>
 <table border="0">
 <tr>
-<td style="width: 630px;  background-color: #ffffff; text-align: left"><b>Comentarios:</b></td>
+<td style="width: 630px;  background-color: #ffffff; text-align: left"><b>Temario:</b></td>
 </tr>
 <tr>
 <td style="width: 630px;height: 100px;">'.$detalles_fr.'</td>
 </tr>
+</table>
+<br><br>
+<hr>
+<h3 style="text-align: left">Asistentes:</h3>
+
+<table border="0">
+<tr>
+<td style="height: 30px; width: 100px; background-color: #ffffff; text-align: center"><b>Nº.</b></td>
+<td style="height: 30px; width: 400px; background-color: #ffffff; text-align: center"><b>APELLIDOS, NOMBRE</b></td>
+<td style="height: 30px; width: 150px; background-color: #ffffff; text-align: center"><b>DNI/NIE</b></td>
+</tr>
+';
+$contador_formasistencia = 0;
+
+$sql_formasistencia = "SELECT *, tr.codigo_tr as codigo_tr FROM form_asistencia AS fas 
+INNER JOIN trabajadores AS tr ON fas.idtrabajador_fas = tr.id_trabajador 
+INNER JOIN categorias as cat ON tr.categoria_tr = cat.id_categoria WHERE nroformacion = '$nroformacion' ORDER BY tr.nombre_tr ASC";
+$query_formasistencia = $pdo->prepare($sql_formasistencia);
+$query_formasistencia->execute();
+$formasistencia_datos = $query_formasistencia->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($formasistencia_datos as $formasistencia_dato) {
+    $id_formasistencia = $formasistencia_dato['id_formasistencia'];
+    $contador_formasistencia = $contador_formasistencia + 1;
+    $html .='
+    <tr>
+<td style="height: 20px; width: 100px; background-color: #ffffff; text-align: center">'.$contador_formasistencia.'</td>
+<td style="height: 20px; width: 400px; background-color: #ffffff; text-align: left">'.$formasistencia_dato['nombre_tr'].'</td>
+<td style="height: 20px; width: 150px; background-color: #ffffff; text-align: center">'.$formasistencia_dato['dni_tr'].'</td>
+</tr>
+    ';
+}
+
+$html .='
+
 </table>
 ';
 

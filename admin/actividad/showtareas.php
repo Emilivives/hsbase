@@ -25,7 +25,7 @@ include('../../app/controllers/actividad/listado_actividades.php');
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h3 class="m-0">Tarea</h3>
+                <h3 class="m-0">Tarea: <?php echo $nombre_ta ?></h3>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -103,11 +103,14 @@ include('../../app/controllers/actividad/listado_actividades.php');
                             </dd>
                             <dt><b class="border-bottom border-primary">Prioridad</b></dt>
                             <dd><?php $prioridad_ta;
-                                if ($prioridad_ta == 'alta') { ?>
+                                if ($prioridad_ta == 'Alta') { ?>
                                     <span class='badge badge-warning'>ALTA</span>
                                 <?php
-                                } else { ?>
+                                } else if ($prioridad_ta == 'Media') { ?>
                                     <span class='badge badge-primary'>MEDIA</span>
+                                <?php
+                                } else { ?>
+                                    <span class='badge badge-secondary'>BAJA</span>
                                 <?php
                                 }
                                 ?>
@@ -182,9 +185,24 @@ include('../../app/controllers/actividad/listado_actividades.php');
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
+                            <form action="../../app/controllers/actividad/create_actividad.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Tarea: <?php echo $id_tarea ?></label>
+                                                <input type="text" value="<?php echo $id_tarea ?>" name="id_tarea" class="form-control" hidden>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Proyecto: <?php echo $id_proyecto ?></label>
+                                                <input type="text" value="<?php echo $id_proyecto ?>" name="id_proyecto" class="form-control" hidden>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <form action="../../app/controllers/actividad/create_actividad.php" method="post" enctype="multipart/form-data">
+
 
 
 
@@ -223,78 +241,15 @@ include('../../app/controllers/actividad/listado_actividades.php');
                                     </div>
 
 
-                            </div>
-                            <div class="modal-footer">
 
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+                                </div>
+                                <div class="modal-footer">
 
-                            </div>
-                        </div>
-                    </div>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
 
-                </div>
-
-                <!--fin modal-->
-
-                <!--inicio modal nueva tarea-->
-                <div class="modal fade" id="modal-nuevaactividad">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header" style="background-color:#eeeeee ;color:black">
-                                <h5 class="modal-title" id="modal-nuevaactividad">Nueva actividad de la tarea - <?php echo $nombre_ta ?></h5>
-                                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-                                <form action="../../app/controllers/actividad/create_actividad.php" method="post" enctype="multipart/form-data">
-
-
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Fecha <b>*</b></label>
-                                                <input type="date" name="fecha_acc" class="form-control" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Responsable</label>
-                                                <input type="text" name="responsable_acc" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Hora Inicio <b>*</b></label>
-                                                <input type="time" name="horain_acc" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Hora Fin <b>*</b></label>
-                                                <input type="time" name="horafin_acc" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Detalles <b>*</b></label>
-                                                <textarea class="form-control" name="detalles_acc" rows="5"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                            </div>
-                            <div class="modal-footer">
-
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
-
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
 
@@ -331,10 +286,11 @@ include('../../app/controllers/actividad/listado_actividades.php');
                     <tbody>
                         <?php
                         $contador = 0;
-
+                        $id_proyecto = $id_proyecto1;
                         foreach ($actividades as $actividad) {
                             $contador = $contador + 1;
-
+                            $id_actividad = $actividad['id_actividad'];
+                         
                         ?>
 
                             <tr>
@@ -358,7 +314,8 @@ include('../../app/controllers/actividad/listado_actividades.php');
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
-                                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                            <li><a class="dropdown-item" href="../../app/controllers/actividad/delete_actividad.php?id_actividad=<?php echo $id_actividad;?>& id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $id_proyecto; ?>" onclick="return confirm('¿Realmente desea eliminar la el proyecto PRL?')">Eliminar</a></li>
+
                                         </ul>
                                     </div>
 

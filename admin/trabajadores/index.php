@@ -598,7 +598,16 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                         </select>
 
                                                                     </div>
+                                                                    <div class="col-md-2">
+                                                                        <label for="">Formado PRL</label>
+                                                                        <select class="form-select form-select-sm" name="formacionpdt_tr" aria-label=".form-select-sm example">
+                                                                            <option value="<?php echo $trabajador['formacionpdt_tr'] ?>" selected="selected"><?php echo $trabajador['formacionpdt_tr'] ?></option>
+                                                                            <option>Seleccione</option>
+                                                                            <option value="Si">SI</option>
+                                                                            <option value="No">NO</option>
+                                                                        </select>
 
+                                                                    </div>
                                                                 </div>
                                                                 <hr>
 

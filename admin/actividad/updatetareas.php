@@ -224,8 +224,6 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                             <div class="col-md-12">
                                 <a href="show.php?id_proyecto=<?php echo $id_proyecto1 ?>" class="btn btn-secondary" role="button">Cancelar</a>
                                 <input type="submit" class="btn btn-warning" value="Actualizar datos">
-                                <button type="button" class="btn btn-primary btn-sm" href="show.php?id_proyecto=<?php echo $id_proyecto1 ?>">Añadir progreso</button>
-
                             </div>
                         </div>
 

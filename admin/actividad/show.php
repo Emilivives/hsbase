@@ -61,11 +61,14 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                         <dl>
                             <dt><b class="border-bottom border-primary">Estado </b></dt>
                             <dd><?php $estado_py;
-                                if ($estado_py == 1) { ?>
+                                if ($estado_py == 'Activo') { ?>
                                     <span class='badge badge-success'>ACTIVO</span>
                                 <?php
-                                } else { ?>
+                                } else if ($estado_py == 'Finalizado') { ?>
                                     <span class='badge badge-danger'>FINALIZADO</span>
+                                <?php
+                                } else if ($estado_py == 'Cancelado') { ?>
+                                    <span class='badge badge-secondary'>CANCELADO</span>
                                 <?php
                                 }
                                 ?>
@@ -97,16 +100,132 @@ include('../../app/controllers/actividad/listado_accionprl.php');
 
 
                         </dl>
+                    </div> <!--boton modal modificar proyecto-->
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" title="Modificar detalles" data-target="#modal-editarproyecto<?php echo $id_proyecto; ?>"><i class="bi bi-pencil-square"></i>Editar</button>
+                        <?php include('../../app/controllers/actividad/datos_proyecto.php');
+                        include('../../app/controllers/maestros/responsables/listado_responsables.php');
+                        ?>
+                    </div>
+                    <!--inicio modal modificar proyecto-->
+                    <div class="modal fade" id="modal-editarproyecto<?php echo $id_proyecto; ?>" tabindex="-1" aria-labelledby="exampleModalLabel">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color:gold">
+                                    <h5 class="modal-title" id="modal-editarproyecto" style="color: black;"><i class="fa-solid fa-hands-holding-circle"></i>Proyecto: <?php echo $proyecto['nombre_py'] ?></h5>
+                                    <button type="button" class="close" style="color:black;" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form action="../../app/controllers/actividad/update_proyecto.php" method="post" enctype="multipart/form-data">
+
+
+                                        <div class="row">
+                                            <div class="form-group row">
+                                                <input type="text" value="<?php echo $proyecto['id_proyecto'] ?>" name="id_proyecto" class="form-control" hidden>
+
+
+                                                <div class="col-md-5">
+                                                    <label for="">Nombre</label>
+                                                    <input type="text" value="<?php echo $proyecto['nombre_py'] ?>" name="nombre_py" class="form-control">
+                                                </div>
+
+
+                                                <div class="col-sm-5">
+                                                    <label for="" class="col-form-label col-sm-3">Responsable:</label>
+                                                    <div class="col-sm-9">
+                                                        <select name="responsable_py" id="" class="form-control" required>
+                                                            <?php
+                                                            foreach ($responsables_datos as $responsable_dato) {
+                                                                $responsable_tabla = $responsable_dato['nombre_resp'];
+                                                                $id_responsable = $responsable_dato['id_responsable']; ?>
+                                                                <option value="<?php echo $id_responsable; ?>" <?php if ($responsable_tabla == $responsable_py) { ?> selected="selected" <?php } ?> nombre_resp="<?php echo $responsable_dato['nombre_resp']; ?>">
+                                                                    <?php echo  $responsable_tabla; ?>
+                                                                </option>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group row">
+                                                                                              <div class="col-md-12">
+                                                    <label for="">Descripción:</label>
+                                                    <input type="text" value="<?php echo $proyecto['descripcion_py'] ?>" name="descripcion_py" class="form-control">
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="">Fecha Inicio</label>
+                                                    <input type="date" value="<?php echo $proyecto['fechainicio_py'] ?>" name="fechainicio_py" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="">Fecha Fin</label>
+                                                    <input type="date" value="<?php echo $proyecto['fechafin_py'] ?>" name="fechafin_py" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1"> </div>
+                                            <div class="col-sm-2">
+
+                                                <label for="estado" class="col-form-label col-sm-2">Estado:</label>
+                                                <div class="col-sm-10">
+                                                    <select class="form-select" name="estado_py" aria-label="Default select example">
+                                                        <option value="<?php echo $estado_py ?>"><?php echo $estado_py ?></option>
+
+                                                        <option value="0">Selecciona estado</option>
+
+                                                        <option value="Activo">Activo</option>
+                                                        <option value="Finalizado">Finalizado</option>
+                                                        <option value="Cancelado">Cancelado</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a href="" class="btn btn-secondary">Cancelar</a>
+                                                <input type="submit" class="btn btn-primary" value="Guardar">
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                </div>
+                    <!--fin modal-->
 
+
+                </div>
             </div>
 
         </div>
 
-
     </div>
+
+
+</div>
 </div>
 
 <div class="row">
@@ -286,10 +405,10 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                             <col width="10%">
                             <col width="5%">
                             <col width="12%">
-                            <col width="10%">
+                            <col width="9%">
                             <col width="7%">
                             <col width="7%">
-                            <col width="7%">
+                            <col width="8%">
 
                         </colgroup>
                         <thead class="table-secondary">
@@ -304,7 +423,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                                 <th style="text-align: left">Fecha Venci.</th>
                                 <th style="text-align: left">Fecha realiz.</th>
 
-                                <th style="text-align: center"></th>
+                                <th style="text-align: center">Opciones</th>
                             </tr>
                         </thead>
 
@@ -342,196 +461,213 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                                     </td>
                                     <td style="text-align: left"><b><?php echo $tarea_proyecto['nombre_ta']; ?></b></td>
                                     <td style="text-align: left"><?php echo $tarea_proyecto['nombre_cen']; ?></td>
-                                    <td style="text-align: left"><?php echo $tarea_proyecto['prioridad_ta']; ?></td>
+                                    <td style="text-align: left"><?php $tarea_proyecto['prioridad_ta'];
+                                                                    if ($tarea_proyecto['prioridad_ta'] == 'Alta') { ?>
+                                            <span class='badge badge-warning'>ALTA</span>
+                                        <?php
+                                                                    } else if ($tarea_proyecto['prioridad_ta'] == 'Media') { ?>
+                                            <span class='badge badge-primary'>MEDIA</span>
+                                        <?php
+                                                                    } else { ?>
+                                            <span class='badge badge-secondary'>BAJA</span>
+                                        <?php
+                                                                    }
+                                        ?>
+
+                                    </td>
                                     <td style="text-align: left"><?php echo $tarea_proyecto['nombre_resp']; ?></td>
                                     <td style="text-align: left"><?php echo $tarea_proyecto['categoria_ta']; ?></td>
                                     <td style="text-align: left"><?php echo $newdate = date("d-m-Y", strtotime($tarea_proyecto['fecha_ta'])) ?></td>
                                     <td style="text-align: left"><?php echo $newdate = date("d-m-Y", strtotime($tarea_proyecto['fechareal_ta'])) ?></td>
-                                    
+                                    <dl>
 
 
 
-                                    <td style="text-align: center">
-                                        <div class="btn-text-right">
-                                            <a href="showtareas.php?id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i> entrar</a>
 
-                                            <!--boton modal-->
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" title="Copiar/Duplicar" data-target="#modal-duplicartarea<?php echo $id_tarea; ?>"><i class="bi bi-copy"></i></button>
-                                            <?php include('../../app/controllers/actividad/datos_tarea.php'); ?>
-                                        </div>
-                                        <!--inicio modal nuevo tarea-->
-                                        <div class="modal fade" id="modal-duplicartarea<?php echo $id_tarea; ?>" tabindex="-1" aria-labelledby="exampleModalLabel">
-                                            <div class="modal-dialog modal-xl">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="background-color:gold">
-                                                        <h5 class="modal-title" id="modal-nuevtrabajador"><i class="bi bi-copy"></i> Copiar / Duplicar Tarea</h5>
-                                                        <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
 
-                                                        <form action="../../app/controllers/actividad/duplicar_tarea.php" method="post" enctype="multipart/form-data">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label for="">Proyecto: <?php echo $nombre_py ?></label>
-                                                                        <input type="text" value="<?php echo $id_proyecto ?>" name="id_proyecto" class="form-control" hidden>
+
+                                        <td style="text-align: center">
+                                            <div class="btn-text-right">
+                                                <a href="showtareas.php?id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i> entrar</a>
+                                                <a href="../../app/controllers/actividad/delete_tarea.php?id_tarea=<?php echo $id_tarea; ?>&id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar la tarea?')" title="Eliminar Tarea PRL"><i class="bi bi-trash-fill"></i></a>
+
+                                                <!--boton modal-->
+                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" title="Copiar/Duplicar" data-target="#modal-duplicartarea<?php echo $id_tarea; ?>"><i class="bi bi-copy"></i></button>
+                                                <?php include('../../app/controllers/actividad/datos_tarea.php'); ?>
+                                            </div>
+                                            <!--inicio modal nuevo tarea-->
+                                            <div class="modal fade" id="modal-duplicartarea<?php echo $id_tarea; ?>" tabindex="-1" aria-labelledby="exampleModalLabel">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="background-color:gold">
+                                                            <h5 class="modal-title" id="modal-nuevtrabajador"><i class="bi bi-copy"></i> Copiar / Duplicar Tarea</h5>
+                                                            <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <form action="../../app/controllers/actividad/duplicar_tarea.php" method="post" enctype="multipart/form-data">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="">Proyecto: <?php echo $nombre_py ?></label>
+                                                                            <input type="text" value="<?php echo $id_proyecto ?>" name="id_proyecto" class="form-control" hidden>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-
-
-                                                            <div class="row">
-                                                                <div class="col-md-7">
-                                                                    <div class="form-group">
-                                                                        <label for="">Tarea</label>
-                                                                        <input type="text" value="<?php echo $nombre_ta ?>" name="nombre_ta" class="form-control" required>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label for="">Centro Trabajo</label>
-                                                                    <select name="centro_ta" id="" class="form-control">
-                                                                        <?php
-                                                                        foreach ($centros_datos as $centro_dato) {
-                                                                            $centro_tabla = $centro_dato['nombre_cen'];
-                                                                            $id_centro = $centro_dato['id_centro']; ?>
-                                                                            <option value="<?php echo $id_centro; ?>" <?php if ($centro_tabla == $centro_ta) { ?> selected="selected" <?php } ?>>
-                                                                                <?php echo  $centro_tabla; ?>
-                                                                            </option>
-                                                                        <?php
-                                                                        }
-                                                                        ?>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <label for="">Responsable</label>
-                                                                    <select name="responsable_ta" id="" class="form-control">
-                                                                        <?php
-                                                                        foreach ($responsables_datos as $responsable_dato) {
-                                                                            $responsable_tabla = $responsable_dato['nombre_resp'];
-                                                                            $id_responsable = $responsable_dato['id_responsable']; ?>
-                                                                            <option value="<?php echo $id_responsable; ?>" <?php if ($responsable_tabla == $responsable_ta) { ?> selected="selected" <?php } ?>>
-                                                                                <?php echo  $responsable_tabla; ?>
-                                                                            </option>
-                                                                        <?php
-                                                                        }
-                                                                        ?>
-                                                                    </select>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-1">
-                                                                    <label for="">Programada</label>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="programada_ta" id="flexRadioDefault1" value="1">
-                                                                        <label class="form-check-label" for="flexRadioDefault1">
-                                                                            SI
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="programada_ta" id="flexRadioDefault2" value="0" checked>
-                                                                        <label class="form-check-label" for="flexRadioDefault2">
-                                                                            NO
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <label for="">Prioridad</label>
-                                                                    <select class="form-select form-select-sm" name="prioridad_ta" aria-label=".form-select-sm example">
-                                                                        <option value="<?php echo $prioridad_ta ?>" selected="selected"><?php echo $prioridad_ta ?></option>
-                                                                        <option>Seleccione</option>
-                                                                        <option value="Baja">BAJA</option>
-                                                                        <option value="Media">MEDIA</option>
-                                                                        <option value="Alta">ALTA</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <label for="">Categoria</label>
-                                                                    <select class="form-select form-select-sm" name="categoria_ta" aria-label=".form-select-sm example">
-                                                                        <option value="<?php echo $categoria_ta ?>" selected="selected"><?php echo $categoria_ta ?></option>
-                                                                        <option>Seleccione</option>
-                                                                        <option value="Documentos">Documentos</option>
-                                                                        <option value="Formación">Formación</option>
-                                                                        <option value="Seguridad">Seguridad</option>
-                                                                        <option value="Higiene">Higiene</option>
-                                                                        <option value="Ergonomia">Ergonomia</option>
-                                                                        <option value="Psicosociologia">Psicosociologia</option>
-                                                                        <option value="Higiene">Higiene</option>
-                                                                    </select>
-                                                                </div>
-
-                                                                <div class="col-md-2">
-                                                                    <div class="form-group">
-                                                                        <label for="">Vencimiento</label>
-                                                                        <input type="date" name="fecha_ta" class="form-control" required>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label for="">Estado</label>
-                                                                    <select class="form-select form-select-sm" name="estado_ta" aria-label=".form-select-sm example">
-                                                                        <option value="<?php echo $estado_ta ?>" selected="selected"><?php echo $estado_ta ?></option>
-                                                                        <option value>Seleccione</option>
-                                                                        <option value="En curso">En curso</option>
-                                                                        <option value="Completado">Completado</option>
-                                                                        <option value="Parcialmente hecho">Parcialmente hecho</option>
-                                                                        <option value="Pospuesto">Pospuesto</option>
-                                                                        <option value="Cancelado">Cancelado</option>
-
-                                                                    </select>
-
-                                                                </div>
-
-                                                                <div class="col-md-3">
-                                                                    <label for="">Accion Preventiva </label>
-                                                                    <select class="form-select form-select-sm" name="accionprl_ta" id="" class="form-control">
-                                                                        <?php
-                                                                        foreach ($accionprl_datos as $accionprl_dato) {
-                                                                            $accionprl_tabla = $accionprl_dato['codigo_acc'];
-                                                                            $id_accion = $accionprl_dato['id_accion']; ?>
-                                                                            <option value="<?php echo $id_accion; ?>" <?php if ($accionprl_tabla == $accionprl_ta) { ?> selected="selected" <?php } ?>>
-                                                                                <?php echo  $accionprl_tabla; ?>
-                                                                            </option>
-                                                                        <?php
-                                                                        }
-                                                                        ?>
-                                                                    </select>
                                                                 </div>
 
 
                                                                 <div class="row">
-                                                                    <div class="form-group">
-                                                                        <label for="">Detalles de tarea</label>
-                                                                        <textarea class="form-control" name="detalles_ta" rows="10"></textarea>
+                                                                    <div class="col-md-7">
+                                                                        <div class="form-group">
+                                                                            <label for="">Tarea</label>
+                                                                            <input type="text" value="<?php echo $nombre_ta ?>" name="nombre_ta" class="form-control" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <label for="">Centro Trabajo</label>
+                                                                        <select name="centro_ta" id="" class="form-control">
+                                                                            <?php
+                                                                            foreach ($centros_datos as $centro_dato) {
+                                                                                $centro_tabla = $centro_dato['nombre_cen'];
+                                                                                $id_centro = $centro_dato['id_centro']; ?>
+                                                                                <option value="<?php echo $id_centro; ?>" <?php if ($centro_tabla == $centro_ta) { ?> selected="selected" <?php } ?>>
+                                                                                    <?php echo  $centro_tabla; ?>
+                                                                                </option>
+                                                                            <?php
+                                                                            }
+                                                                            ?>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <label for="">Responsable</label>
+                                                                        <select name="responsable_ta" id="" class="form-control">
+                                                                            <?php
+                                                                            foreach ($responsables_datos as $responsable_dato) {
+                                                                                $responsable_tabla = $responsable_dato['nombre_resp'];
+                                                                                $id_responsable = $responsable_dato['id_responsable']; ?>
+                                                                                <option value="<?php echo $id_responsable; ?>" <?php if ($responsable_tabla == $responsable_ta) { ?> selected="selected" <?php } ?>>
+                                                                                    <?php echo  $responsable_tabla; ?>
+                                                                                </option>
+                                                                            <?php
+                                                                            }
+                                                                            ?>
+                                                                        </select>
                                                                     </div>
 
                                                                 </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-1">
+                                                                        <label for="">Programada</label>
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="programada_ta" id="flexRadioDefault1" value="1">
+                                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                                                SI
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="programada_ta" id="flexRadioDefault2" value="0" checked>
+                                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                                                NO
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <label for="">Prioridad</label>
+                                                                        <select class="form-select form-select-sm" name="prioridad_ta" aria-label=".form-select-sm example">
+                                                                            <option value="<?php echo $prioridad_ta ?>" selected="selected"><?php echo $prioridad_ta ?></option>
+                                                                            <option>Seleccione</option>
+                                                                            <option value="Baja">BAJA</option>
+                                                                            <option value="Media">MEDIA</option>
+                                                                            <option value="Alta">ALTA</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <label for="">Categoria</label>
+                                                                        <select class="form-select form-select-sm" name="categoria_ta" aria-label=".form-select-sm example">
+                                                                            <option value="<?php echo $categoria_ta ?>" selected="selected"><?php echo $categoria_ta ?></option>
+                                                                            <option>Seleccione</option>
+                                                                            <option value="Documentos">Documentos</option>
+                                                                            <option value="Formación">Formación</option>
+                                                                            <option value="Seguridad">Seguridad</option>
+                                                                            <option value="Higiene">Higiene</option>
+                                                                            <option value="Ergonomia">Ergonomia</option>
+                                                                            <option value="Psicosociologia">Psicosociologia</option>
+                                                                            <option value="Higiene">Higiene</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label for="">Vencimiento</label>
+                                                                            <input type="date" name="fecha_ta" class="form-control" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <label for="">Estado</label>
+                                                                        <select class="form-select form-select-sm" name="estado_ta" aria-label=".form-select-sm example">
+                                                                            <option value="<?php echo $estado_ta ?>" selected="selected"><?php echo $estado_ta ?></option>
+                                                                            <option value>Seleccione</option>
+                                                                            <option value="En curso">En curso</option>
+                                                                            <option value="Completado">Completado</option>
+                                                                            <option value="Parcialmente hecho">Parcialmente hecho</option>
+                                                                            <option value="Pospuesto">Pospuesto</option>
+                                                                            <option value="Cancelado">Cancelado</option>
+
+                                                                        </select>
+
+                                                                    </div>
+
+                                                                    <div class="col-md-3">
+                                                                        <label for="">Accion Preventiva </label>
+                                                                        <select class="form-select form-select-sm" name="accionprl_ta" id="" class="form-control">
+                                                                            <?php
+                                                                            foreach ($accionprl_datos as $accionprl_dato) {
+                                                                                $accionprl_tabla = $accionprl_dato['codigo_acc'];
+                                                                                $id_accion = $accionprl_dato['id_accion']; ?>
+                                                                                <option value="<?php echo $id_accion; ?>" <?php if ($accionprl_tabla == $accionprl_ta) { ?> selected="selected" <?php } ?>>
+                                                                                    <?php echo  $accionprl_tabla; ?>
+                                                                                </option>
+                                                                            <?php
+                                                                            }
+                                                                            ?>
+                                                                        </select>
+                                                                    </div>
+
+
+                                                                    <div class="row">
+                                                                        <div class="form-group">
+                                                                            <label for="">Detalles de tarea</label>
+                                                                            <textarea class="form-control" name="detalles_ta" rows="10"></textarea>
+                                                                        </div>
+
+                                                                    </div>
 
 
 
 
-                                                            </div>
-                                                            <div class="modal-footer">
+                                                                </div>
+                                                                <div class="modal-footer">
 
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                    <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
 
-                                                            </div>
+                                                                </div>
+                                                        </div>
                                                     </div>
+
                                                 </div>
 
-                                            </div>
-
-                                            <!--fin modal-->
+                                                <!--fin modal-->
 
 
 
 
 
 
-                                    </td>
-                                    </ul>
+                                        </td>
+                                        </ul>
                 </div>
                 </tr>
             <?php

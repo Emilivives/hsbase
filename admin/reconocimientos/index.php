@@ -616,7 +616,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                         </div>
                                         <div class="modal-body">
 
-                                            <form id="contactoForm">
+                                            <form action="../../app/controllers/reconocimientos/enviar_email.php" method="post" enctype="multipart/form-data">
 
                                                 <div class="row">
 
@@ -624,7 +624,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                         <div class="form-group row">
                                                             <label for="nombre_tr" class="col-form-label col-sm-2">Nombre</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" id="nombre_tr" name="nombre_tr" value="<?php echo $citasrm_dato['nombre_tr'] ?>" class="form-control" disabled>
+                                                                <input type="text" id="nombre_tr" name="nombre_tr" value="<?php echo $citasrm_dato['nombre_tr'] ?>" class="form-control" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -632,7 +632,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                         <div class="form-group row">
                                                             <label for="dni_tr" class="col-form-label col-sm-4">DNI/NIE</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" id="dni_tr" name="dni_tr" class="form-control" value="<?php echo $citasrm_dato['dni_tr'] ?>" disabled>
+                                                                <input type="text" id="dni_tr" name="dni_tr" class="form-control" value="<?php echo $citasrm_dato['dni_tr'] ?>" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -643,7 +643,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                         <div class="form-group row">
                                                             <label for="categoria_tr" class="col-form-label col-sm-2">Puesto</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" id="categoria_tr" name="categoria_tr" class="form-control" value="<?php echo $citasrm_dato['nombre_cat'] ?>" disabled>
+                                                                <input type="text" id="categoria_tr" name="categoria_tr" class="form-control" value="<?php echo $citasrm_dato['nombre_cat'] ?>" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -651,7 +651,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                         <div class="form-group row">
                                                             <label for="centro_tr" class="col-form-label col-sm-4">Centro</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" id="centro_tr" name="centro_tr" class="form-control" value="<?php echo $citasrm_dato['nombre_cen'] ?>" disabled>
+                                                                <input type="text" id="centro_tr" name="centro_tr" class="form-control" value="<?php echo $citasrm_dato['nombre_cen'] ?>" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -659,7 +659,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                         <div class="form-group row">
                                                             <label for="centro_tr" class="col-form-label col-sm-2">Empresa</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" id="razonsocial_emp" name="razonsocial_emp" class="form-control" value="<?php echo $citasrm_dato['razonsocial_emp'] ?>" disabled>
+                                                                <input type="text" id="razonsocial_emp" name="razonsocial_emp" class="form-control" value="<?php echo $citasrm_dato['razonsocial_emp'] ?>" readonly>
                                                             </div>
                                                         </div>
                                                     </div>

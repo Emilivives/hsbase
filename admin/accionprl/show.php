@@ -35,7 +35,7 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
 
 </html>
 <div class="col-md-12">
-    <a href="reporte.php?id_accion=<?php echo $id_accion;?>" class="btn btn-warning" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
+    <a href="reporte.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-warning" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
 </div>
 <!-- /.content- -->
 <div class="content">
@@ -399,11 +399,35 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group row">
-                                    <tr>
-                                        <td width="5%">Imagen 1</td>
-                                        <!-- /
-                                        <td><?php echo "<img width='150' height='150' src='$imagen1_acc'" ?> </td> -->
-                                    </tr>
+                                    <div class="col-md-5">
+
+                                        <label for="">Imagen 1 </label>
+                                        <input type="file" name="image" class="form-control" id="file">
+                                        <br>
+                                        <output id="list" style=""></output>
+                                        <script>
+                                            function archivo(evt) {
+                                                var files = evt.target.files; // FileList object
+                                                // Obtenemos la imagen del campo "file".
+                                                for (var i = 0, f; f = files[i]; i++) {
+                                                    //Solo admitimos imágenes.
+                                                    if (!f.type.match('image.*')) {
+                                                        continue;
+                                                    }
+                                                    var reader = new FileReader();
+                                                    reader.onload = (function(theFile) {
+                                                        return function(e) {
+                                                            // Insertamos la imagen
+                                                            document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                                        };
+                                                    })(f);
+                                                    reader.readAsDataURL(f);
+                                                }
+                                            }
+                                            document.getElementById('file').addEventListener('change', archivo, false);
+                                        </script>
+
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-3">

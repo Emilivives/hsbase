@@ -37,8 +37,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
       <div class="col-lg-2 col-6">
           <div class="btn-text-center">
             <button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador" title="Añadir nuevo trabajador"><i class="bi bi-person-plus-fill"></i>AÑADIR NUEVO TRABAJADOR</button>
-            <button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#modal-nuevaactividad" title="Añadir nueva tarea"><i class="fa-solid fa-check"></i>  AÑADIR NUEVA ACTIVIDAD</button>
-            <button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#modal-nuevaactividad" title="Añadir nueva tarea"><i class="fa-solid fa-check"></i>  ACTIVIDAD</button>
+
           </div>
         <div class="row">
      
@@ -50,97 +49,6 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
 
 
-        <!--inicio modal nueva tarea-->
-
-
-           
-        <div class="modal fade" id="modal-nuevaactividad">
-          <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-              <div class="modal-header" style="background-color:#eeeeee ;color:black">
-                <h5 class="modal-title" id="modal-nuevaactividad">Nueva actividad realizada </h5>
-                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-
-                <form action="../../app/controllers/actividad/create_actividad.php" method="post" enctype="multipart/form-data">
-
-                  <div class="form-group">
-                    <label for="">Proyecto</label>
-                    <select name="id_proyecto" id="listaproyecto" class="form-control">
-                      <?php
-                      foreach ($proyectos as $proyecto) { ?>
-                        <option value="<?php echo $proyecto['nombre_py']; ?>"><?php echo $proyecto['nombre_py'] ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
-                  </div>
-                  <hr>
-                  <br>
-                  <div class="form-group">
-                    <label for="">Tarea</label>
-                    <select name="id_proyecto" id="listaproyecto" class="form-control">
-                      <?php
-                      foreach ($tareas as $tarea) { ?>
-                        <option value="<?php echo $tarea['nombre_ta']; ?>"><?php echo $tarea['nombre_ta'] ?> | <?php $tarea['nombre_py'] ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
-                  </div>
-                  <br>
-                  <div id="listatarea"></div>
-
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="">Fecha <b>*</b></label>
-                        <input type="date" name="fecha_acc" class="form-control" required>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="">Responsable</label>
-                        <input type="text" name="responsable_acc" class="form-control">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="">Hora Inicio <b>*</b></label>
-                        <input type="time" name="horain_acc" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="">Hora Fin <b>*</b></label>
-                        <input type="time" name="horafin_acc" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="">Detalles <b>*</b></label>
-                        <textarea class="form-control" name="detalles_acc" rows="5"></textarea>
-                      </div>
-                    </div>
-                  </div>
-
-
-              </div>
-              <div class="modal-footer">
-
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
 
         <!-- inicio modal nuevo trabajador-->
         <div class="modal fade" id="modal-nuevotrabajador">
@@ -589,27 +497,29 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                 <thead class="table-dark">
                   <tr>
                     <th style="text-align: center">#</th>
-                    <th style="text-align: left">Proyecto</th>
                     <th style="text-align: left">Tarea</th>
+                    <th style="text-align: left">Proyecto</th>
                     <th style="text-align: left">Centro</th>
                     <th style="text-align: left">Responsable</th>
                     <th style="text-align: left">Fecha Vencim.</th>
                     <th style="text-align: left">Estado</th>
-                    <th style="text-align: left"></th>
+                    <th style="text-align: left">Acc.</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   $contador = 0;
                   foreach ($tareaspendientes as $tareapendiente) {
+                    if ($tareapendiente['estado_ta'] != 'Completado') {
                     $contador = $contador + 1;
                     $id_tarea = $tareapendiente['id_tarea'];
+                    $id_proyecto = $tareapendiente['id_proyecto'];
                   ?>
 
                     <tr>
                       <td style="text-align: center"><b><?php echo $contador; ?></b></td>
-                      <td style="text-align: left"><b><?php echo $tareapendiente['nombre_py']; ?></b></td>
                       <td style="text-align: left"><b><?php echo $tareapendiente['nombre_ta']; ?></b></td>
+                      <td style="text-align: left"><?php echo $tareapendiente['nombre_py']; ?></td>
                       <td style="text-align: left"><?php echo $tareapendiente['nombre_cen']; ?></td>
                       <td style="text-align: left"><?php echo $tareapendiente['nombre_resp']; ?></td>
                       <td style="text-align: left"><?php echo $tareapendiente['fecha_ta']; ?></td>
@@ -620,24 +530,16 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                       <td style="text-align: center">
                         <div class="dropdown">
-                          <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-font-size" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                            Opciones
-                          </button>
-                          <ul class="dropdown-menu dropdown-menu-dark dropdown-font-size" aria-labelledby="dropdownMenuButton2">
-                            <li><a class="dropdown-item" href="#">Ver</a></li>
-                            <li><a class="dropdown-item" href="#">Editar</a></li>
-                            <li>
-                              <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
-                          </ul>
+                        <a href="../actividad/showtareas.php?id_tarea=<?php echo $id_tarea;?>&id_proyecto=<?php echo $id_proyecto;?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i>Ver</a>
+
                         </div>
 
                       </td>
 
                     </tr>
+                    
                   <?php
-                  }
+                  }}
                   ?>
 
                 </tbody>

@@ -2,13 +2,21 @@
 
 include('../../../app/config.php');
 
+$id_proyecto=$_POST['id_proyecto'];
 $id_tarea = $_POST['id_tarea'];
+
 $fecha_acc = $_POST['fecha_acc'];
 $horain_acc = $_POST['horain_acc'];
 $horafin_acc = $_POST['horafin_acc'];
 $responsable_acc = $_POST['responsable_acc'];
 $detalles_acc = $_POST['detalles_acc'];
-$horas_acc = $horain_acc-->diff($horafin_acc);
+$fecha1 = new DateTime($horain_acc);//fecha inicial
+$fecha2 = new DateTime($horafin_acc);//fecha de cierre
+$interval = $fecha1->diff($fecha2);
+$horas_acc = $interval->format('%H:%i:%s');
+
+
+
 
 
 
@@ -27,7 +35,8 @@ if ($sentencia->execute()) {
 session_start();
 $_SESSION['mensaje'] = "Actividad registrada correctamente";
 $_SESSION['icono'] = 'success';
-header("Location: " . $URL . "/admin/actividad/showtareas.php?id_tarea=$id_tarea");
+header("Location: " . $URL . "/admin/actividad/showtareas.php?id_tarea=$id_tarea&id_proyecto=$id_proyecto");
+
 } else {
 session_start();
 $_SESSION['mensaje'] = "Formacion NO creada";

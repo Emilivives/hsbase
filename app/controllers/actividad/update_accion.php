@@ -20,6 +20,14 @@ $recursos_acc = $_POST['recursos_acc'];
 $seguimiento_acc = $_POST['seguimiento_acc'];
 $avance_acc = $_POST['avance_acc'];
 $estado_acc = $_POST['estado_acc'];
+$image = $_POST['image'];
+
+$nombreDelArchivo = date("Y-m-d-h-i-s");
+$filename = $nombreDelArchivo."__".$_FILES['image']['name'];
+$location = "../../../admin/accionprl/image/".$filename;
+
+move_uploaded_file($_FILES['image']['tmp_name'],$location);
+
 
 
 
@@ -40,7 +48,8 @@ fecharea_acc=:fecharea_acc,
 recursos_acc=:recursos_acc, 
 seguimiento_acc=:seguimiento_acc,
 avance_acc=:avance_acc, 
-estado_acc=:estado_acc
+estado_acc=:estado_acc,
+imagen1_acc=:imagen1_acc
 WHERE id_accion =:id_accion");
 
 $sentencia->bindParam('id_accion', $id_accion);   
@@ -61,6 +70,7 @@ $sentencia->bindParam('accrealizada_acc', $accrealizada_acc);
 $sentencia->bindParam('accpropuesta_acc', $accpropuesta_acc);
 $sentencia->bindParam('seguimiento_acc', $seguimiento_acc);    
 $sentencia->bindParam('recursos_acc', $recursos_acc);
+$sentencia->bindParam('imagen1_acc', $filename);
 
 
 if ($sentencia->execute()) {

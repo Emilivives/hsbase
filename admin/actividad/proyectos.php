@@ -13,13 +13,13 @@ include('../../app/controllers/actividad/listado_tareas.php');
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <style>
     .dropdown-font-size {
-      font-size: 12px;
-    }
-    .btn-font-size{
-      font-size: 12px;
+        font-size: 12px;
     }
 
-  </style>
+    .btn-font-size {
+        font-size: 12px;
+    }
+</style>
 
 
 <div class="content-header">
@@ -49,14 +49,14 @@ include('../../app/controllers/actividad/listado_tareas.php');
         <!-- small box -->
         <div class="small-box bg-light shadow-sm border">
             <div class="inner">
-            <?php
-                            $contador_de_proyectos = 0;
-                            foreach ($proyectos as $proyecto){
-                                $contador_de_proyectos = $contador_de_proyectos + 1;
-                            }
-                            ?>
-                            <h2><?php echo $contador_de_proyectos;?><sup style="font-size: 20px"></h2>
-                    <p>Proyectos disponibles</p>
+                <?php
+                $contador_de_proyectos = 0;
+                foreach ($proyectos as $proyecto) {
+                    $contador_de_proyectos = $contador_de_proyectos + 1;
+                }
+                ?>
+                <h2><?php echo $contador_de_proyectos; ?><sup style="font-size: 20px"></h2>
+                <p>Proyectos disponibles</p>
             </div>
             <div class="icon">
                 <i class="ion bi-layers-fill"></i>
@@ -68,14 +68,14 @@ include('../../app/controllers/actividad/listado_tareas.php');
         <!-- small box -->
         <div class="small-box bg-light shadow-sm border">
             <div class="inner">
-            <?php
-                            $contador_de_tareas = 0;
-                            foreach ($tareas as $tarea){
-                                $contador_de_tareas = $contador_de_tareas + 1;
-                            }
-                            ?>
-                            <h2><?php echo $contador_de_tareas;?><sup style="font-size: 20px"></h2>
-                    <p>Tareas programadas</p>
+                <?php
+                $contador_de_tareas = 0;
+                foreach ($tareas as $tarea) {
+                    $contador_de_tareas = $contador_de_tareas + 1;
+                }
+                ?>
+                <h2><?php echo $contador_de_tareas; ?><sup style="font-size: 20px"></h2>
+                <p>Tareas programadas</p>
             </div>
             <div class="icon">
                 <i class="ion bi-list-task"></i>
@@ -87,17 +87,17 @@ include('../../app/controllers/actividad/listado_tareas.php');
         <!-- small box -->
         <div class="small-box bg-light shadow-sm border">
             <div class="inner">
-            <?php
-                            $contador_de_tareas = 0;
-                            foreach ($tareas as $tarea){
-                                if($tarea['estado_ta']=='En curso'){
-                                    $contador_de_tareas = $contador_de_tareas + 1;
-                            }
-                        }
+                <?php
+                $contador_de_tareas = 0;
+                foreach ($tareas as $tarea) {
+                    if ($tarea['estado_ta'] == 'En curso') {
+                        $contador_de_tareas = $contador_de_tareas + 1;
+                    }
+                }
 
-                            ?>
-                            <h2><?php echo $contador_de_tareas;?><sup style="font-size: 20px"></h2>
-                    <p>Tareas en curso</p>
+                ?>
+                <h2><?php echo $contador_de_tareas; ?><sup style="font-size: 20px"></h2>
+                <p>Tareas en curso</p>
             </div>
             <div class="icon">
                 <i class="ion bi-check2-square"></i>
@@ -284,15 +284,17 @@ include('../../app/controllers/actividad/listado_tareas.php');
                                     <td style="text-align: left"><?php echo $proyecto['responsable_py']; ?></td>
 
                                     <td style="text-align: left;"><?php $proyecto['estado_py'];
-                                                                    if ($proyecto['estado_py'] == 1) { ?>
-                                            <span class='badge badge-success'>activo</span>
+                                                                    if ($proyecto['estado_py'] == 'Activo') { ?>
+                                            <span class='badge badge-success'>ACTIVO</span>
                                         <?php
-                                                                    } else { ?>
-                                            <span class='badge badge-danger'>inactivo</span>
+                                                                    } else if ($proyecto['estado_py'] == 'Finalizado') { ?>
+                                            <span class='badge badge-danger'>FINALIZADO</span>
+                                        <?php
+                                                                    } else if ($proyecto['estado_py'] == 'Cancelado') { ?>
+                                            <span class='badge badge-secondary'>CANCELADO</span>
                                         <?php
                                                                     }
                                         ?>
-
 
                                     </td>
 
@@ -300,21 +302,12 @@ include('../../app/controllers/actividad/listado_tareas.php');
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
                                             <a href="show.php?id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
-                       
-                                            <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-font-size" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Opciones
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-dark dropdown-font-size" aria-labelledby="dropdownMenuButton2">
-                                                <li><a class="dropdown-item active" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item" href="#">Separated link</a></li>
-                                            </ul>
-                        
 
+
+                                            <a href="../../app/controllers/actividad/delete_proyecto.php?id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar la el proyecto PRL?')" title="Eliminar Proyecto PRL"><i class="bi bi-trash-fill"></i></a>
+
+
+                                        </div>
                                     </td>
 
                                 </tr>

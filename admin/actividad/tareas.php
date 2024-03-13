@@ -14,13 +14,13 @@ include('../../app/controllers/actividad/listado_tareas.php');
 
 <style>
     .dropdown-font-size {
-      font-size: 12px;
-    }
-    .btn-font-size{
-      font-size: 12px;
+        font-size: 12px;
     }
 
-  </style>
+    .btn-font-size {
+        font-size: 12px;
+    }
+</style>
 
 
 <div class="content-header">
@@ -151,31 +151,62 @@ include('../../app/controllers/actividad/listado_tareas.php');
                     <td style="text-align: left"><b><?php echo $tarea['nombre_py']; ?></b></td>
                     <td style="text-align: left"><b><?php echo $tarea['nombre_ta']; ?></b></td>
                     <td style="text-align: left"><?php echo $tarea['nombre_cen']; ?></td>
-                    <td style="text-align: left"><?php echo $tarea['prioridad_ta']; ?></td>
+                    <td style="text-align: left"><?php $tarea['prioridad_ta'];
+                                                    if ($tarea['prioridad_ta'] == 'Alta') { ?>
+                            <span class='badge badge-warning'>ALTA</span>
+                        <?php
+                                                    } else if ($tarea['prioridad_ta'] == 'Media') { ?>
+                            <span class='badge badge-primary'>MEDIA</span>
+                        <?php
+                                                    } else { ?>
+                            <span class='badge badge-secondary'>BAJA</span>
+                        <?php
+                                                    }
+                        ?>
+                    </td>
+
                     <td style="text-align: left"><?php echo $tarea['nombre_resp']; ?></td>
                     <td style="text-align: left"><?php echo $tarea['categoria_ta']; ?></td>
                     <td style="text-align: left"><?php echo $tarea['fecha_ta']; ?></td>
                     <td style="text-align: left"><?php echo $tarea['fechareal_ta']; ?></td>
-                    <td style="text-align: left"><?php echo $tarea['estado_ta']; ?></td>
+                    <td style="text-align: left"><?php $tarea['estado_ta'];
+                                                    if ($tarea['estado_ta'] == 'En curso') { ?>
+                            <span class='badge badge-info'>En Curso</span>
+                        <?php
+                                                    } else if ($tarea['estado_ta'] == 'Completado') { ?>
+                            <span class='badge badge-success'>Completado</span>
+                        <?php
+                                                    } else if ($tarea['estado_ta'] == 'Parcialmente hecho') { ?>
+                            <span class='badge badge-warning'>Parcialmente hecho</span>
+                        <?php
+                                                    } else if ($tarea['estado_ta'] == 'Pospuesto') { ?>
+                            <span class='badge badge-secondary'>Pospuesto</span>
+                        <?php
+                                                    } else if ($tarea['estado_ta'] == 'Cancelado') { ?>
+                            <span class='badge badge-danger'>Cancelado</span>
+                        <?php
+                                                    }
+                        ?>
+                    </td>
 
                     </td>
 
 
                     <td style="text-align: center">
-                    <a href="showtareas.php?id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i> entrar</a>
+                        <a href="showtareas.php?id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i> entrar</a>
 
-                        </div>
+</div>
 
-                    </td>
+</td>
 
-                </tr>
-            <?php
+</tr>
+<?php
             }
-            ?>
+?>
 
-        </tbody>
+</tbody>
 
-    </table>
+</table>
 
 </div>
 

@@ -69,5 +69,4 @@ $_SESSION['icono'] = 'warning';
 header("Location: " . $URL . "/admin/accionprl/index.php");
 }
 
-
 ?>

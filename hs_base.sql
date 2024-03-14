@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-02-2024 a las 13:32:02
+-- Tiempo de generación: 08-03-2024 a las 15:00:08
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -43,6 +43,7 @@ CREATE TABLE `accidentes` (
   `trabajohabitual_ace` varchar(255) NOT NULL,
   `diadescanso_ace` varchar(255) NOT NULL,
   `semanadescanso_ace` int(11) NOT NULL,
+  `diasbaja_ace` int(11) NOT NULL,
   `isevaluadoriesgo_ace` varchar(255) NOT NULL,
   `evalconriesgo_ace` varchar(255) NOT NULL,
   `isrecaida_ace` varchar(255) NOT NULL,
@@ -111,10 +112,11 @@ CREATE TABLE `accidentes` (
 -- Volcado de datos para la tabla `accidentes`
 --
 
-INSERT INTO `accidentes` (`id_accidente`, `nroaccidente_ace`, `comunicado_ace`, `trabajador_ace`, `centro_ace`, `lugar_ace`, `detalleslugar_ace`, `tipoaccidente_ace`, `fecha_ace`, `fechabaja_ace`, `hora_ace`, `horatrabajo_ace`, `trabajohabitual_ace`, `diadescanso_ace`, `semanadescanso_ace`, `isevaluadoriesgo_ace`, `evalconriesgo_ace`, `isrecaida_ace`, `fechaantesrecaida_ace`, `descripcion_ace`, `tipolugar_ace`, `zonalugar_ace`, `observaclugar_ace`, `procesotrabajo_ace`, `observproceso_ace`, `tipoactividad_ace`, `observtipoactiv_ace`, `agentematerial_ace`, `observagmaterial_ace`, `desviacion_ace`, `observdesviacion_ace`, `agmaterdesv_ace`, `observagendesv_ace`, `formacontacto_ace`, `observformacont_ace`, `matercasusalesi_ace`, `observmatlesi_ace`, `numtrafectados_ace`, `declaraciontrab_ace`, `istestigos_ace`, `detallestestigo_ace`, `declaraciontestigo_ace`, `tipolesion_ace`, `gradolesion_ace`, `partecuerpo_ace`, `isevacuacion_ace`, `lugarevacuacion_ace`, `centromedico_ace`, `detallescentromed_ace`, `recomedincorp_ace`, `recinedtrab_ace`, `istrformado_ace`, `istrinformado_ace`, `protcolectivadisp_ace`, `protcolecnecesa_ace`, `observprotcol_ace`, `episdispon_ace`, `episneces_ace`, `observepis_ace`, `causaaccidente_ace`, `porquecausa_ace`, `quiencontrolcausa_ace`, `conclusionacci_ace`, `medidasprev_ace`, `valoracionmedida_ace`, `histaccult12mes_ace`, `histpuestoacc_ace`, `histtrabajosreal_ace`, `histcausaacc_ace`, `histmedidaacc_ace`, `investigador_ace`, `cargoinvesiga_ace`, `fechainvestiga_ace`, `fechacumplimen_ace`, `revisadopor_ace`, `cargorevisado_ace`, `fecharevision_ace`) VALUES
-(9, '011/2024', 'SI', 8, 5, '1', 'entrada barco', 1, '2024-01-03', '2024-01-30', '15:52:00', 6, 'SI', 'Martes', 1, 'SI', 'SI', 'SI', '2024-01-10', 'En el momento de acceder en el barco nota un fuerto dolor lumbar', 4, 'entrada', 'Acto seguido de la rampa de acceso a la embarcacion', 10, 'detalles Observaciones del proceso', 12, 'detallesObservaciones tipo actividad', 15, 'Observaciones Agente material', 12, 'Observaciones desviacion', 9, 'Observaciones Agente material', 9, 'Observaciones forma contacto:', 3, 'Observaciones Agente material', 1, 'En el momento que subia noto un dolor intenso que me imposibilita trabajar asi como mantener la postura erguida', 'SI', 'Oscar kehrli', 'Lo vio parara de golpe y no poder continuar', 2, 2, 10, 'SI', 'hospital rosario', 'SI', 'can misses', 0, 0, 'SI', 'SI', 'barandilla', 'barandilla', 'disponible', 'calzado', 'calzado', 'desgastados', 'Falta de atencion a la lhora de realizar trabajos forzados', 'falta atencion', 'trabajador', 'El trabajador debe contemplar aquellos trabajos que impliquen esfuerzo', 'Informar al trabajador de aquellos trabajos considerados peligrosos', 'Se entrega ficha de informacion en fecha 15.02.2024', 'SI', 'Marinero', 'Limpieza', 'Falta de atencion 122', 'informacion', 'Emili vives', 'responsable prl', '2024-01-12', '2024-01-10', 'Emili vives', 'Responsable prl', '2024-01-18'),
-(14, '155/2024', 'NO', 6, 6, '3', '', 3, '2024-01-18', '0000-00-00', '00:00:00', 0, '-', 'Seleccione', 0, '-', '-', '-', '0000-00-00', '', 6, '', '', 4, '', 4, '', 4, '', 7, '', 13, '', 13, '', 7, '', 0, '', 'SI', '', '', 8, 3, 8, '-', '', '-', '', 0, 0, '-', '-', '', '', '', '', '', '', '', '', '', '', '', '', '-', '', '', '', '', '', '', '0000-00-00', '0000-00-00', '', '', '0000-00-00'),
-(15, '055/2023', 'SI', 8, 5, '1', '', 1, '2023-03-08', '2023-04-05', '16:53:00', 3, 'SI', 'Martes', 3, 'SI', 'SI', 'SI', '2023-03-03', '', 5, '', '', 5, '', 8, '', 11, '', 12, '', 13, '', 15, '', 5, '', 1, '', '-', '', '', 9, 1, 13, 'SI', 'hospital rosario', 'SI', '', 2023, 2024, 'SI', 'SI', '', '', '', '', '', '', '', '', '', '', '', '', 'SI', '', '', '', '', 'Emili vives', 'responsable prl', '2024-02-15', '2024-02-14', 'Emili vives', 'Responsable prl', '2024-02-13');
+INSERT INTO `accidentes` (`id_accidente`, `nroaccidente_ace`, `comunicado_ace`, `trabajador_ace`, `centro_ace`, `lugar_ace`, `detalleslugar_ace`, `tipoaccidente_ace`, `fecha_ace`, `fechabaja_ace`, `hora_ace`, `horatrabajo_ace`, `trabajohabitual_ace`, `diadescanso_ace`, `semanadescanso_ace`, `diasbaja_ace`, `isevaluadoriesgo_ace`, `evalconriesgo_ace`, `isrecaida_ace`, `fechaantesrecaida_ace`, `descripcion_ace`, `tipolugar_ace`, `zonalugar_ace`, `observaclugar_ace`, `procesotrabajo_ace`, `observproceso_ace`, `tipoactividad_ace`, `observtipoactiv_ace`, `agentematerial_ace`, `observagmaterial_ace`, `desviacion_ace`, `observdesviacion_ace`, `agmaterdesv_ace`, `observagendesv_ace`, `formacontacto_ace`, `observformacont_ace`, `matercasusalesi_ace`, `observmatlesi_ace`, `numtrafectados_ace`, `declaraciontrab_ace`, `istestigos_ace`, `detallestestigo_ace`, `declaraciontestigo_ace`, `tipolesion_ace`, `gradolesion_ace`, `partecuerpo_ace`, `isevacuacion_ace`, `lugarevacuacion_ace`, `centromedico_ace`, `detallescentromed_ace`, `recomedincorp_ace`, `recinedtrab_ace`, `istrformado_ace`, `istrinformado_ace`, `protcolectivadisp_ace`, `protcolecnecesa_ace`, `observprotcol_ace`, `episdispon_ace`, `episneces_ace`, `observepis_ace`, `causaaccidente_ace`, `porquecausa_ace`, `quiencontrolcausa_ace`, `conclusionacci_ace`, `medidasprev_ace`, `valoracionmedida_ace`, `histaccult12mes_ace`, `histpuestoacc_ace`, `histtrabajosreal_ace`, `histcausaacc_ace`, `histmedidaacc_ace`, `investigador_ace`, `cargoinvesiga_ace`, `fechainvestiga_ace`, `fechacumplimen_ace`, `revisadopor_ace`, `cargorevisado_ace`, `fecharevision_ace`) VALUES
+(9, '011/2024', 'SI', 8, 5, '1', 'entrada barco', 1, '2024-01-03', '2024-01-30', '15:52:00', 6, 'SI', 'Martes', 1, 6, 'SI', 'SI', 'SI', '2024-01-10', 'En el momento de acceder en el barco nota un fuerto dolor lumbar', 4, 'entrada', 'Acto seguido de la rampa de acceso a la embarcacion', 10, 'detalles Observaciones del proceso', 12, 'detallesObservaciones tipo actividad', 15, 'Observaciones Agente material', 12, 'Observaciones desviacion', 9, 'Observaciones Agente material', 9, 'Observaciones forma contacto:', 3, 'Observaciones Agente material', 1, 'En el momento que subia noto un dolor intenso que me imposibilita trabajar asi como mantener la postura erguida', 'SI', 'Oscar kehrli', 'Lo vio parara de golpe y no poder continuar', 2, 2, 10, 'SI', 'hospital rosario', 'SI', 'can misses', 0, 0, 'SI', 'SI', 'barandilla', 'barandilla', 'disponible', 'calzado', 'calzado', 'desgastados', 'Falta de atencion a la lhora de realizar trabajos forzados', 'falta atencion', 'trabajador', 'El trabajador debe contemplar aquellos trabajos que impliquen esfuerzo', 'Informar al trabajador de aquellos trabajos considerados peligrosos', 'Se entrega ficha de informacion en fecha 15.02.2024', 'SI', 'Marinero', 'Limpieza', 'Falta de atencion 122', 'informacion', 'Emili vives', 'responsable prl', '2024-01-12', '2024-01-10', 'Emili vives', 'Responsable prl', '2024-01-18'),
+(14, '155/2024', 'NO', 6, 6, '3', '', 2, '2024-01-18', '0000-00-00', '00:00:00', 0, '-', 'Seleccione', 0, 0, '-', '-', '-', '0000-00-00', '', 6, '', '', 4, '', 4, '', 4, '', 7, '', 13, '', 13, '', 7, '', 0, '', 'SI', '', '', 8, 3, 8, '-', '', '-', '', 0, 0, '-', '-', '', '', '', '', '', '', '', '', '', '', '', '', '-', '', '', '', '', '', '', '0000-00-00', '0000-00-00', '', '', '0000-00-00'),
+(15, '055/2023', 'SI', 8, 5, '1', '', 1, '2023-03-08', '2023-04-05', '16:53:00', 3, 'SI', 'Martes', 3, 5, 'SI', 'SI', 'SI', '2023-03-03', '', 5, '', '', 5, '', 8, '', 11, '', 12, '', 13, '', 15, '', 5, '', 1, '', '-', '', '', 9, 1, 13, 'SI', 'hospital rosario', 'SI', '', 2023, 2024, 'SI', 'SI', '', '', '', '', '', '', '', '', '', '', '', '', 'SI', '', '', '', '', 'Emili vives', 'responsable prl', '2024-02-15', '2024-02-14', 'Emili vives', 'Responsable prl', '2024-02-13'),
+(16, '002/2024', 'NO', 11, 5, '1', 'A pie de muelle', 1, '2024-03-01', '0000-00-00', '00:00:00', 0, 'SI', 'Lunes', 8, 1, 'SI', 'SI', 'NO', '0000-00-00', 'El trabajador posiciona una defensa a pie de muelle que le sale escupida y le impacta en la mano', 57, 'Muelle', 'Dia con mucho mal tiempo(fuertes vientos y oleaje)', 26, 'Colocacion defensas', 19, 'Colocacion defensas', 1376, 'Defensas buque', 20, 'defensa escupida por presion y estar mojada', 11, 'Suelo del muelle', 21, '', 39, '', 1, 'Posicionando defensa,', 'SI', '', '', 6, 1, 7, 'NO', '', 'SI', 'Hospital juaneeda', 0, 0, 'SI', 'SI', 'N/A', '', '', 'Guantes y calzado', '', '', 'Procedimiento de forma incorrecta de realizar el trabajo', 'Mal planteamiento de los trabajos', 'Capitan / trabajador', 'Las tareas se deben planificar siempre teniendo en cuenta las probabilidades de que pueda suceder un accidente, en este caso no se hizo', 'Se comunica forma de proceder', 'Implantadas', '-', '', '', '', '', 'Emili vives', 'responsable prl', '2024-03-04', '2024-03-04', 'Emili vives', 'Responsable prl', '2024-03-04');
 
 -- --------------------------------------------------------
 
@@ -5098,22 +5100,22 @@ CREATE TABLE `ag_acciones` (
   `fechaprevista_acc` date NOT NULL,
   `fecharea_acc` date NOT NULL,
   `fechaveri_acc` date NOT NULL,
-  `avance_acc` varchar(5) NOT NULL,
+  `avance_acc` varchar(25) NOT NULL,
   `estado_acc` varchar(255) NOT NULL,
   `accpropuesta_acc` text NOT NULL,
   `accrealizada_acc` text NOT NULL,
   `seguimiento_acc` text NOT NULL,
   `recursos_acc` int(11) NOT NULL,
-  `imagen1_acc` longblob NOT NULL,
-  `imagen2_acc` longblob NOT NULL
+  `imagen1_acc` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `ag_acciones`
 --
 
-INSERT INTO `ag_acciones` (`id_accion`, `codigo_acc`, `fecha_acc`, `centro_acc`, `prioridad_acc`, `origen_acc`, `detalleorigen_acc`, `descripcion_acc`, `responsable_acc`, `fechaprevista_acc`, `fecharea_acc`, `fechaveri_acc`, `avance_acc`, `estado_acc`, `accpropuesta_acc`, `accrealizada_acc`, `seguimiento_acc`, `recursos_acc`, `imagen1_acc`, `imagen2_acc`) VALUES
-(1, 'N/A', '2024-01-04', 8, 'Alta', 'Evaluacion de riesgos', '001/2024', 'Sin accion prueba', 3, '2024-01-04', '2024-01-01', '2024-01-01', '100%', 'En curso', 'n/A', 'n/a', 'n/a', 1, '', '');
+INSERT INTO `ag_acciones` (`id_accion`, `codigo_acc`, `fecha_acc`, `centro_acc`, `prioridad_acc`, `origen_acc`, `detalleorigen_acc`, `descripcion_acc`, `responsable_acc`, `fechaprevista_acc`, `fecharea_acc`, `fechaveri_acc`, `avance_acc`, `estado_acc`, `accpropuesta_acc`, `accrealizada_acc`, `seguimiento_acc`, `recursos_acc`, `imagen1_acc`) VALUES
+(1, 'N/A', '0001-01-01', 4, 'Baja', '0', 'N/A', 'N/A', 1, '2024-01-01', '0000-00-00', '0000-00-00', '0%', 'Comunicada', 'N/A', 'N/A', 'n/a', 1, ''),
+(15, '001/2024', '2024-02-26', 5, 'Media', 'Otros', 'Visita buque', 'Falta señal salida', 2, '2024-02-26', '0000-00-00', '0000-00-00', '50%', 'Abierta', 'Dotar de señal', '', '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -5190,7 +5192,7 @@ CREATE TABLE `ag_tareas` (
   `programada_ta` tinyint(1) NOT NULL,
   `detalles_ta` text NOT NULL,
   `categoria_ta` varchar(255) NOT NULL,
-  `accionprl_ta` int(11) DEFAULT NULL
+  `accionprl_ta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -5214,7 +5216,7 @@ INSERT INTO `ag_tareas` (`id_tarea`, `id_proyecto`, `nombre_ta`, `fecha_ta`, `fe
 CREATE TABLE `categorias` (
   `id_categoria` int(11) NOT NULL,
   `nombre_cat` varchar(50) NOT NULL,
-  `departamento_cat` varchar(50) NOT NULL,
+  `departamento_cat` int(11) NOT NULL,
   `descripcion_cat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -5223,9 +5225,15 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id_categoria`, `nombre_cat`, `departamento_cat`, `descripcion_cat`) VALUES
-(1, 'Administracion', 'Administracion', 'Puestos de trabajo incluidos: Responsable SGI, Responsable RRHH, Administrativo RRHH, Administrativo Técnico, Administrativo comercial, Responsable Opto. Marketing, Administrativo marketing, Diseñador/a gráfico, Responsable Opto. Calidad, Administrativo contable, Responsable Opto. Compras, Administrativo compras, Administrativo Informático, administrativo Call Centre y administrativo.\r\nLa definición de trabajos y funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestión Integrada de la empresa.\r\nEl puesto de trabajo concierne a trabajadores de distintos departamentos con riesgos similares aunque realizan trabajos administrativos de diferentes índoles.\r\nLas funciones genéricas establecidas dentro del puesto de trabajo de administración incluyen: Gestionar (recibir, redactar, transcribir, clasificar, registrar, distribuir, etc.) documentos, informes o escritos, correspondencia, actas administrativas, etc., utilizando para ello ordenador personal, fax, teléfono, etc. Uso de pantallas de visualización de datos. Planificar, dirigir y coordinar diariamente las actividades relativas a la empresa asegurando la utilización racional de los recursos y el cumplimiento de las normas. Negociar, vender y contratar equipos, aparatos e instrumentos técnicos, productos, repuestos, etc., así como servicios\r\ndiversos a empresas y a clientes particulares. Atender llamadas telefónicas y/o correos electrónicos, solicitando información, citas,\r\nentrevistas ... Establecer la comunicación entre el solicitante y la persona a quien va dirigida la llamada . . Asimismo, puede realizar labores\r\nde información, orientación. En ocasiones pueden realizar desplazamientos al exterior mediante vehículos, transporte público o andando.'),
-(2, 'Marinero', 'Embarcado', 'La definicion de trabajos y  funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestion Integrada de la empresa. Actividad:  A las órdenes del primer oficial, tiene asignadas las funciones siguientes asumiendo sus responsabilidades: • Mantenimiento de los equipos de cubierta y casco. • Maniobras de atraque • Embarque y desembarque del pasaje • Estiba del equipaje incluido la ayuda al pasajero con su equipaje en las rampas de acceso. • Atención al pasaje, transmitir cualquier incidencia al primer oficial, • Limpieza general • Otras funciones generales de marinería que le sean encomendadas.  Condiciones de trabajo: Participa de las condiciones generales de la embarcación. En ella, existen distintas zonas: Zonas de cubierta, con distintos niveles a los que se accede por escaleras de servicio. Zonas de proa y popa en donde existen diferentes elementos para hacer firme como molinetes, bozas, cabos, cornamusas, bitas, etc. Zonas de pasaje. Están ubicadas en cubierta principal y superior. Hay una zona abierta y otras cerradas. Todas ellas disponen de hileras de asientos para el pasaje. De manera general, la marinería se encuentra expuesta a las condiciones climáticas exteriores, y por tanto, variables. Disponen de ropa de trabajo adecuada a las inclemencias del tiempo y a las condiciones de las distintas épocas del año. En las operaciones de atraque y desamarre, participan también de las condiciones del muelle, existiendo interacción con pasarelas, defensas del muelle, norays, etc.'),
-(21, 'Informático', 'Administracion', 'Detalles puesto informatico');
+(1, 'Administracion', 1, 'Puestos de trabajo incluidos: Responsable SGI, Responsable RRHH, Administrativo RRHH, Administrativo Técnico, Administrativo comercial, Responsable Opto. Marketing, Administrativo marketing, Diseñador/a gráfico, Responsable Opto. Calidad, Administrativo contable, Responsable Opto. Compras, Administrativo compras, Administrativo Informático, administrativo Call Centre y administrativo.\r\nLa definición de trabajos y funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestión Integrada de la empresa.\r\nEl puesto de trabajo concierne a trabajadores de distintos departamentos con riesgos similares aunque realizan trabajos administrativos de diferentes índoles.\r\nLas funciones genéricas establecidas dentro del puesto de trabajo de administración incluyen: Gestionar (recibir, redactar, transcribir, clasificar, registrar, distribuir, etc.) documentos, informes o escritos, correspondencia, actas administrativas, etc., utilizando para ello ordenador personal, fax, teléfono, etc. Uso de pantallas de visualización de datos. Planificar, dirigir y coordinar diariamente las actividades relativas a la empresa asegurando la utilización racional de los recursos y el cumplimiento de las normas. Negociar, vender y contratar equipos, aparatos e instrumentos técnicos, productos, repuestos, etc., así como servicios\r\ndiversos a empresas y a clientes particulares. Atender llamadas telefónicas y/o correos electrónicos, solicitando información, citas,\r\nentrevistas ... Establecer la comunicación entre el solicitante y la persona a quien va dirigida la llamada . . Asimismo, puede realizar labores\r\nde información, orientación. En ocasiones pueden realizar desplazamientos al exterior mediante vehículos, transporte público o andando.'),
+(2, 'Marinero', 1, 'La definicion de trabajos y  funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestion Integrada de la empresa. Actividad:  A las órdenes del primer oficial, tiene asignadas las funciones siguientes asumiendo sus responsabilidades: • Mantenimiento de los equipos de cubierta y casco. • Maniobras de atraque • Embarque y desembarque del pasaje • Estiba del equipaje incluido la ayuda al pasajero con su equipaje en las rampas de acceso. • Atención al pasaje, transmitir cualquier incidencia al primer oficial, • Limpieza general • Otras funciones generales de marinería que le sean encomendadas.  Condiciones de trabajo: Participa de las condiciones generales de la embarcación. En ella, existen distintas zonas: Zonas de cubierta, con distintos niveles a los que se accede por escaleras de servicio. Zonas de proa y popa en donde existen diferentes elementos para hacer firme como molinetes, bozas, cabos, cornamusas, bitas, etc. Zonas de pasaje. Están ubicadas en cubierta principal y superior. Hay una zona abierta y otras cerradas. Todas ellas disponen de hileras de asientos para el pasaje. De manera general, la marinería se encuentra expuesta a las condiciones climáticas exteriores, y por tanto, variables. Disponen de ropa de trabajo adecuada a las inclemencias del tiempo y a las condiciones de las distintas épocas del año. En las operaciones de atraque y desamarre, participan también de las condiciones del muelle, existiendo interacción con pasarelas, defensas del muelle, norays, etc.'),
+(21, 'Informático', 1, 'Detalles puesto informatico'),
+(22, 'Capitán', 2, 'Detalles puesto capitan'),
+(23, 'Primer oficial', 2, 'Detalles puesto primer oficial'),
+(25, 'Primero máquinas', 2, 'detalles categoria'),
+(26, 'Taquilla', 4, 'Atencion y venta al cliente'),
+(27, 'Amarrador', 4, 'Amarre de embarcaciones'),
+(28, 'Oficial carga', 4, 'Gestion del embarque y desembarque de vehiculos a las embarcaciones');
 
 -- --------------------------------------------------------
 
@@ -5270,8 +5278,30 @@ CREATE TABLE `citas_rm` (
 --
 
 INSERT INTO `citas_rm` (`id_citarm`, `trabajador_crm`, `fecha_crm`, `anotaciones_crm`) VALUES
-(1, 10, '2024-02-22', ''),
-(2, 8, '0000-00-00', '');
+(13, 7, '0000-00-00', ''),
+(14, 4, '0000-00-00', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `departamentos`
+--
+
+CREATE TABLE `departamentos` (
+  `id_departamento` int(11) NOT NULL,
+  `nombre_dpo` varchar(50) NOT NULL,
+  `descripcion_dpo` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `departamentos`
+--
+
+INSERT INTO `departamentos` (`id_departamento`, `nombre_dpo`, `descripcion_dpo`) VALUES
+(1, 'Administración', 'Personal oficinas'),
+(2, 'Embarcado', 'Personal realizando trabajos a bordo de un buque'),
+(3, 'Comercial', 'Trabajador del sistema comercial de la empresa'),
+(4, 'Puerto', 'Personal destinado a la atencion al pasaje, preparacion de entorno para el atraque de buques o embarque de vehiculos.');
 
 -- --------------------------------------------------------
 
@@ -5291,7 +5321,8 @@ CREATE TABLE `emailsinteres` (
 --
 
 INSERT INTO `emailsinteres` (`id_emailinteres`, `nombre_ei`, `email_ei`, `telefono_ei`) VALUES
-(1, 'Emili particular', 'emilivives@gmail.com', '654372089');
+(1, 'Emili particular', 'emilivives@gmail.com', '654372089'),
+(2, 'Emili Prevencion Trasmapi', 'prevencion@trasmapi.com', '673868753');
 
 -- --------------------------------------------------------
 
@@ -5315,6 +5346,28 @@ CREATE TABLE `empresa` (
 INSERT INTO `empresa` (`id_empresa`, `nombre_emp`, `razonsocial_emp`, `cif_emp`, `direccion_emp`, `modalidadprl_emp`) VALUES
 (1, 'TRASMAPI', 'SERVICIOS Y CONCESIONES MARITIMAS IBICENCAS S.A.', 'A07066749', 'C/ Aragón, 71. 07800. Eivissa (Illes Balears)', 'Mixta (Trabajador designado + SPA)'),
 (2, 'FORMENTERA LINES', 'MEDITERRANEA LA NAVIERA DE FORMENTERA S.L.', 'B16620635', 'Ctra. Sant Francesc - La savina', 'SPA (Previs)');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estadisticas`
+--
+
+CREATE TABLE `estadisticas` (
+  `id_estadistica` int(11) NOT NULL,
+  `anio_est` int(11) NOT NULL,
+  `mediatr_est` int(11) NOT NULL,
+  `indinciden_est` int(11) NOT NULL,
+  `horastranual_est` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `estadisticas`
+--
+
+INSERT INTO `estadisticas` (`id_estadistica`, `anio_est`, `mediatr_est`, `indinciden_est`, `horastranual_est`) VALUES
+(1, 2023, 251, 3867, 1826),
+(2, 2022, 216, 3867, 1826);
 
 -- --------------------------------------------------------
 
@@ -5343,7 +5396,7 @@ INSERT INTO `formacion` (`id_formacion`, `nroformacion`, `tipo_fr`, `fecha_fr`, 
 (21, 11, 1, '2024-01-10', '2025-01-10', 1),
 (22, 12, 1, '2023-02-08', '2024-01-11', 1),
 (23, 14, 1, '2024-01-11', '2024-01-23', 1),
-(24, 15, 2, '2024-01-17', '2024-01-24', 1),
+(24, 15, 2, '2024-03-01', '2024-01-24', 1),
 (25, 16, 2, '2024-02-08', '2024-02-23', 1);
 
 -- --------------------------------------------------------
@@ -5403,7 +5456,7 @@ CREATE TABLE `reconocimientos` (
 
 INSERT INTO `reconocimientos` (`id_reconocimiento`, `id_trabajador`, `fecha_rm`, `caducidad_rm`, `vigente_rm`, `cita_rm`, `anotaciones_rm`) VALUES
 (52, 10, '2024-02-08', '2024-03-01', 1, 0, ''),
-(53, 3, '2024-02-06', '2024-03-07', 1, 0, '');
+(54, 4, '2024-05-30', '2024-04-17', 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -5543,7 +5596,7 @@ CREATE TABLE `trabajadores` (
   `inicio_tr` date NOT NULL,
   `centro_tr` int(11) NOT NULL,
   `activo_tr` int(1) NOT NULL DEFAULT 1,
-  `formacionpdt_tr` date NOT NULL,
+  `formacionpdt_tr` varchar(10) NOT NULL,
   `anotaciones_tr` text NOT NULL,
   `fyh_creacion` datetime NOT NULL,
   `fyh_actualizacion` datetime NOT NULL
@@ -5554,14 +5607,18 @@ CREATE TABLE `trabajadores` (
 --
 
 INSERT INTO `trabajadores` (`id_trabajador`, `codigo_tr`, `dni_tr`, `nombre_tr`, `sexo_tr`, `fechanac_tr`, `categoria_tr`, `inicio_tr`, `centro_tr`, `activo_tr`, `formacionpdt_tr`, `anotaciones_tr`, `fyh_creacion`, `fyh_actualizacion`) VALUES
-(3, 110, '47627004F', 'VIVES GARCIA, EMILI', 'H', '1979-10-03', 1, '2021-08-01', 4, 1, '0000-00-00', '0000-00-00', '2023-11-17 09:56:23', '2024-01-30 14:13:39'),
-(4, 221, '12452145F', 'SANCHEZ TORRES, JOSE LUIS', 'H', '1988-11-01', 2, '2023-07-11', 7, 0, '0000-00-00', '0000-00-00', '2023-11-17 09:56:23', '2024-01-31 10:04:46'),
-(5, 98898, '00001000T', 'PEREZ PEREZ, PRUEBA', 'H', '1988-11-09', 1, '2023-10-31', 4, 1, '0000-00-00', '0000-00-00', '2023-11-27 08:32:45', '2024-02-06 14:08:06'),
-(6, 125855, '11244484F', 'RUIZ RUIZ, PEPE', 'H', '2023-11-14', 2, '2023-11-07', 6, 1, '0000-00-00', '0000-00-00', '2023-11-27 08:34:16', '2023-11-27 08:34:16'),
-(7, 1254, '125444587S', 'SANCHEZ PERA, JOSE LUIS', 'H', '1988-06-11', 2, '2021-08-12', 7, 0, '0000-00-00', '0000-00-00', '2023-12-07 12:25:18', '2024-02-06 14:08:13'),
-(8, 1009, '56855222L', 'LUENGO ROJAS, JOSE JAVIER ', 'H', '1988-12-05', 2, '2023-12-15', 7, 1, '0000-00-00', '0000-00-00', '2023-12-12 14:18:59', '2024-01-30 13:41:59'),
-(9, 1885, '65532455R', 'FERNANDEZPEREZ, JOSE', 'H', '1979-12-15', 2, '2023-12-01', 5, 1, '0000-00-00', '0000-00-00', '2023-12-13 11:47:07', '2023-12-13 11:47:07'),
-(10, 2556, '45875454S', 'GARCIA GARCIA, MANUEL', 'H', '1988-12-05', 2, '2023-12-15', 7, 1, '0000-00-00', '0000-00-00', '2023-12-13 11:48:08', '2023-12-13 11:48:08');
+(3, 110, '47627004F', 'VIVES GARCIA, EMILIo', 'H', '1979-10-03', 1, '2021-08-01', 4, 1, 'Si', 'Si', '2023-11-17 09:56:23', '2024-02-19 13:43:24'),
+(4, 221, '12452145F', 'SANCHEZ TORRES, JOSE LUIS', 'H', '1988-11-01', 2, '2023-07-11', 7, 0, 'Si', 'No', '2023-11-17 09:56:23', '2024-01-31 10:04:46'),
+(5, 98898, '00001000T', 'PEREZ PEREZ, PRUEBA', 'H', '1988-11-09', 1, '2023-10-31', 4, 1, 'No', 'Si', '2023-11-27 08:32:45', '2024-02-06 14:08:06'),
+(6, 125855, '11244484F', 'RUIZ RUIZ, PEPE', 'H', '2023-11-14', 2, '2023-11-07', 6, 1, 'Si', 'Si', '2023-11-27 08:34:16', '2023-11-27 08:34:16'),
+(7, 1254, '125444587S', 'SANCHEZ PERA, JOSE LUIS', 'H', '1988-06-11', 2, '2021-08-12', 7, 0, 'No', 'Si', '2023-12-07 12:25:18', '2024-02-06 14:08:13'),
+(8, 1009, '56855222L', 'LUENGO ROJAS, JOSE JAVIER ', 'H', '1988-12-05', 2, '2023-12-15', 7, 1, 'Si', 'No', '2023-12-12 14:18:59', '2024-01-30 13:41:59'),
+(9, 1885, '65532455R', 'FERNANDEZPEREZ, JOSE', 'H', '1979-12-15', 2, '2023-12-01', 5, 1, 'No', 'Si', '2023-12-13 11:47:07', '2023-12-13 11:47:07'),
+(10, 2556, '45875454S', 'GARCIA GARCIA, MANUEL', 'H', '1988-12-05', 2, '2023-12-15', 7, 1, 'Si', 'Si', '2023-12-13 11:48:08', '2023-12-13 11:48:08'),
+(11, 2546, '002486523T', 'LOPEZ SANCHEZ, PEDRO', '', '1995-07-13', 2, '2024-02-14', 7, 1, '', '', '2024-02-28 09:46:03', '2024-02-28 09:46:03'),
+(12, 8767, '99888987K', 'SANCHEZ LIBRE, JERONIMO', '', '1979-01-31', 27, '2024-02-28', 4, 1, '', '', '2024-03-01 19:52:14', '2024-03-01 19:52:36'),
+(13, 1018, '00001000T', 'GUITART FEMENIAS, MARIA HELENA', '', '1983-02-10', 1, '2024-03-01', 4, 1, '', '', '2024-03-05 08:27:43', '2024-03-05 08:27:43'),
+(14, 198888, '11244484F', 'TRUEBA BORRELL, JOSE MARIA', '', '2024-01-04', 1, '2024-02-08', 4, 1, '', '', '2024-03-05 13:06:25', '2024-03-05 13:06:25');
 
 -- --------------------------------------------------------
 
@@ -5708,7 +5765,8 @@ ALTER TABLE `ag_tareas`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`),
-  ADD UNIQUE KEY `id_categoria` (`id_categoria`);
+  ADD UNIQUE KEY `id_categoria` (`id_categoria`),
+  ADD KEY `departamento_cat` (`departamento_cat`);
 
 --
 -- Indices de la tabla `centros`
@@ -5726,6 +5784,12 @@ ALTER TABLE `citas_rm`
   ADD KEY `trabajador_citarm` (`trabajador_crm`);
 
 --
+-- Indices de la tabla `departamentos`
+--
+ALTER TABLE `departamentos`
+  ADD PRIMARY KEY (`id_departamento`);
+
+--
 -- Indices de la tabla `emailsinteres`
 --
 ALTER TABLE `emailsinteres`
@@ -5736,6 +5800,12 @@ ALTER TABLE `emailsinteres`
 --
 ALTER TABLE `empresa`
   ADD PRIMARY KEY (`id_empresa`);
+
+--
+-- Indices de la tabla `estadisticas`
+--
+ALTER TABLE `estadisticas`
+  ADD PRIMARY KEY (`id_estadistica`);
 
 --
 -- Indices de la tabla `formacion`
@@ -5816,7 +5886,7 @@ ALTER TABLE `trabajador_citarm`
 -- AUTO_INCREMENT de la tabla `accidentes`
 --
 ALTER TABLE `accidentes`
-  MODIFY `id_accidente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_accidente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `ace_formacontacto`
@@ -5840,7 +5910,7 @@ ALTER TABLE `ace_tipoaccidente`
 -- AUTO_INCREMENT de la tabla `ag_acciones`
 --
 ALTER TABLE `ag_acciones`
-  MODIFY `id_accion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_accion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `ag_actividad`
@@ -5864,7 +5934,7 @@ ALTER TABLE `ag_tareas`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `centros`
@@ -5876,19 +5946,31 @@ ALTER TABLE `centros`
 -- AUTO_INCREMENT de la tabla `citas_rm`
 --
 ALTER TABLE `citas_rm`
-  MODIFY `id_citarm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_citarm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de la tabla `departamentos`
+--
+ALTER TABLE `departamentos`
+  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `emailsinteres`
 --
 ALTER TABLE `emailsinteres`
-  MODIFY `id_emailinteres` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_emailinteres` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
   MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `estadisticas`
+--
+ALTER TABLE `estadisticas`
+  MODIFY `id_estadistica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `formacion`
@@ -5906,7 +5988,7 @@ ALTER TABLE `form_asistencia`
 -- AUTO_INCREMENT de la tabla `reconocimientos`
 --
 ALTER TABLE `reconocimientos`
-  MODIFY `id_reconocimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_reconocimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `responsables`
@@ -5942,7 +6024,7 @@ ALTER TABLE `tipoformacion`
 -- AUTO_INCREMENT de la tabla `trabajadores`
 --
 ALTER TABLE `trabajadores`
-  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `trabajador_citarm`
@@ -5998,7 +6080,13 @@ ALTER TABLE `ag_tareas`
   ADD CONSTRAINT `ag_tareas_ibfk_1` FOREIGN KEY (`id_proyecto`) REFERENCES `ag_proyecto` (`id_proyecto`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `ag_tareas_ibfk_3` FOREIGN KEY (`centro_ta`) REFERENCES `centros` (`id_centro`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `ag_tareas_ibfk_4` FOREIGN KEY (`responsable_ta`) REFERENCES `responsables` (`id_responsable`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `ag_tareas_ibfk_5` FOREIGN KEY (`accionprl_ta`) REFERENCES `ag_acciones` (`id_accion`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `ag_tareas_ibfk_5` FOREIGN KEY (`accionprl_ta`) REFERENCES `ag_acciones` (`id_accion`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD CONSTRAINT `categorias_ibfk_1` FOREIGN KEY (`departamento_cat`) REFERENCES `departamentos` (`id_departamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `centros`
@@ -6043,8 +6131,8 @@ ALTER TABLE `tb_usuarios`
 -- Filtros para la tabla `trabajadores`
 --
 ALTER TABLE `trabajadores`
-  ADD CONSTRAINT `trabajadores_ibfk_1` FOREIGN KEY (`categoria_tr`) REFERENCES `categorias` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `trabajadores_ibfk_2` FOREIGN KEY (`centro_tr`) REFERENCES `centros` (`id_centro`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `trabajadores_ibfk_2` FOREIGN KEY (`centro_tr`) REFERENCES `centros` (`id_centro`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `trabajadores_ibfk_3` FOREIGN KEY (`categoria_tr`) REFERENCES `categorias` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

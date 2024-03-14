@@ -527,144 +527,182 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                     </div>
                                                                 </div>
                                                             </div>
+<<<<<<< HEAD
+=======
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="">Imagen 1</label>
+                                                                        <input type="file" name="image" class="form-control" id="file">
+                                                                        <br>
+                                                                        <output id="list" style=""></output>
+                                                                        <script>
+                                                                            function archivo(evt) {
+                                                                                var files = evt.target.files; // FileList object
+                                                                                // Obtenemos la imagen del campo "file".
+                                                                                for (var i = 0, f; f = files[i]; i++) {
+                                                                                    //Solo admitimos imágenes.
+                                                                                    if (!f.type.match('image.*')) {
+                                                                                        continue;
+                                                                                    }
+                                                                                    var reader = new FileReader();
+                                                                                    reader.onload = (function(theFile) {
+                                                                                        return function(e) {
+                                                                                            // Insertamos la imagen
+                                                                                            document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="200px" title="', escape(theFile.name), '"/>'].join('');
+                                                                                        };
+                                                                                    })(f);
+                                                                                    reader.readAsDataURL(f);
+                                                                                }
+                                                                            }
+                                                                            document.getElementById('file').addEventListener('change', archivo, false);
+                                                                        </script>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+
+                                                                    <input type="file" name="imagen1_acc">
+                                                                </div>
+
+
+                                                            </div>
+>>>>>>> e31b1a64f8f191b92e4ab9cb25a23d5462103f2b
 
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a href="" class="btn btn-secondary">Cancelar</a>
+                                            <input type="submit" class="btn btn-primary" value="Guardar">
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <a href="" class="btn btn-secondary">Cancelar</a>
-                                    <input type="submit" class="btn btn-primary" value="Guardar">
-                                </div>
-                            </div>
-                            </form>
                         </div>
+
                     </div>
+
+                    <!--fin modal-->
+
 
                 </div>
 
-                <!--fin modal-->
+                <div class="card-body">
+                    <table id="example1" class="table tabe-hover table-condensed">
+                        <colgroup>
+                            <col width="3%">
+                            <col width="4%">
+                            <col width="4%">
+                            <col width="4%">
+                            <col width="7%">
+                            <col width="12%">
+                            <col width="5%">
+                            <col width="12%">
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="3%">
 
 
-            </div>
-
-            <div class="card-body">
-                <table id="example1" class="table tabe-hover table-condensed">
-                    <colgroup>
-                        <col width="3%">
-                        <col width="4%">
-                        <col width="4%">
-                        <col width="4%">
-                        <col width="7%">
-                        <col width="12%">
-                        <col width="5%">
-                        <col width="12%">
-                        <col width="5%">
-                        <col width="5%">
-                        <col width="5%">
-                        <col width="3%">
-
-
-                    </colgroup>
-                    <thead class="table-dark">
-                        <tr>
-                            <th style="text-align: center">#</th>
-                            <th style="text-align: left">Codigo</th>
-                            <th style="text-align: left">Fecha</th>
-                            <th style="text-align: center">Prioridad</th>
-                            <th style="text-align: left">Centro</th>
-                            <th style="text-align: left">Descripción</th>
-                            <th style="text-align: left">Responsable</th>
-                            <th style="text-align: left">Medida</th>
-                            <th style="text-align: left">Fecha prevista</th>
-                            <th style="text-align: left">Fecha realizada</th>
-                            <th style="text-align: left">Estado</th>
-                            <th style="text-align: left">ACCIONES
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $contador = 0;
-                        foreach ($accionprl_datos as $accionprl_dato) {
-                            $contador = $contador + 1;
-                            $id_accion = $accionprl_dato['id_accion'];
-                        ?>
-
+                        </colgroup>
+                        <thead class="table-dark">
                             <tr>
-                                <td style="text-align: center"><b><?php echo $contador; ?></b></td>
-                                <td style="text-align: left"><b><?php echo $accionprl_dato['codigo_acc']; ?></b></td>
-                                <td style="text-align: left"><b><?php echo $accionprl_dato['fecha_acc']; ?></b></td>
-                                <td style="text-align: center"><?php $accionprl_dato['prioridad_acc']; ?>
-                                    <?php if ($accionprl_dato['prioridad_acc'] == "Baja") { ?>
-                                        <span class='badge badge-secondary'>Baja</span>
-                                    <?php
-                                    } else if ($accionprl_dato['prioridad_acc'] == "Media") { ?>
-                                        <span class='badge badge-info'>Media</span>
-                                    <?php                       } else if ($accionprl_dato['prioridad_acc'] == "Alta") { ?>
-                                        <span class='badge badge-warning'>Alta</span>
-                                    <?php                       } else if ($accionprl_dato['prioridad_acc'] == "Urgente") { ?>
-                                        <span class='badge badge-danger'>Urgente</span>
-                                    <?php                       }
-                                    ?>
-
-
-                                </td>
-                                <td style="text-align: left"><?php echo $accionprl_dato['nombre_cen']; ?></td>
-                                <td style="text-align: left"><?php echo $accionprl_dato['descripcion_acc']; ?></td>
-                                <td style="text-align: left"><?php echo $accionprl_dato['nombre_resp']; ?></td>
-                                <td style="text-align: left"><?php echo $accionprl_dato['accpropuesta_acc']; ?></td>
-                                <td style="text-align: left"><?php echo $accionprl_dato['fechaprevista_acc']; ?></td>
-                                <td style="text-align: left"><?php echo $accionprl_dato['fecharea_acc']; ?></td>
-
-                                <td style="text-align: left"><?php $accionprl_dato['estado_acc']; ?>
-                                    <?php if ($accionprl_dato['estado_acc'] == "Cerrada") { ?>
-                                        <span class='badge badge-success'>Cerrada</span>
-                                    <?php
-                                    } else if ($accionprl_dato['estado_acc'] == "En curso") { ?>
-                                        <span class='badge badge-info'>En curso</span>
-                                    <?php                       } else if ($accionprl_dato['estado_acc'] == "Comunicada") { ?>
-                                        <span class='badge badge-secondary'>Comunicada</span>
-                                    <?php                       } else if ($accionprl_dato['estado_acc'] == "Abierta") { ?>
-                                        <span class='badge badge-warning'>Abierta</span>
-                                    <?php                       } else if ($accionprl_dato['estado_acc'] == "Finalizada") { ?>
-                                        <span class='badge badge-primary'>Finalizada</span>
-                                    <?php                       }
-                                    ?>
-
-
-                                </td>
-
-
-                                <td style="text-align: center">
-                                    <div class="dropdown">
-                                        <a href="show.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-warning btn-sm" title="Accede"> <i class="bi bi-folder"></i> Ver</a></a>
-                                        <a href="../../app/controllers/actividad/delete_accion.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar la accion PRL?')" title="Eliminar Accion PRL"><i class="bi bi-trash-fill"></i></a>
-
-                                    </div>
-
-                                </td>
+                                <th style="text-align: center">#</th>
+                                <th style="text-align: left">Codigo</th>
+                                <th style="text-align: left">Fecha</th>
+                                <th style="text-align: center">Prioridad</th>
+                                <th style="text-align: left">Centro</th>
+                                <th style="text-align: left">Descripción</th>
+                                <th style="text-align: left">Responsable</th>
+                                <th style="text-align: left">Medida</th>
+                                <th style="text-align: left">Fecha prevista</th>
+                                <th style="text-align: left">Fecha realizada</th>
+                                <th style="text-align: left">Estado</th>
+                                <th style="text-align: left">ACCIONES
 
                             </tr>
-                        <?php
-                        }
-                        ?>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $contador = 0;
+                            foreach ($accionprl_datos as $accionprl_dato) {
+                                $contador = $contador + 1;
+                                $id_accion = $accionprl_dato['id_accion'];
+                            ?>
 
-                    </tbody>
+                                <tr>
+                                    <td style="text-align: center"><b><?php echo $contador; ?></b></td>
+                                    <td style="text-align: left"><b><?php echo $accionprl_dato['codigo_acc']; ?></b></td>
+                                    <td style="text-align: left"><b><?php echo $accionprl_dato['fecha_acc']; ?></b></td>
+                                    <td style="text-align: center"><?php $accionprl_dato['prioridad_acc']; ?>
+                                        <?php if ($accionprl_dato['prioridad_acc'] == "Baja") { ?>
+                                            <span class='badge badge-secondary'>Baja</span>
+                                        <?php
+                                        } else if ($accionprl_dato['prioridad_acc'] == "Media") { ?>
+                                            <span class='badge badge-info'>Media</span>
+                                        <?php                       } else if ($accionprl_dato['prioridad_acc'] == "Alta") { ?>
+                                            <span class='badge badge-warning'>Alta</span>
+                                        <?php                       } else if ($accionprl_dato['prioridad_acc'] == "Urgente") { ?>
+                                            <span class='badge badge-danger'>Urgente</span>
+                                        <?php                       }
+                                        ?>
 
-                </table>
+
+                                    </td>
+                                    <td style="text-align: left"><?php echo $accionprl_dato['nombre_cen']; ?></td>
+                                    <td style="text-align: left"><?php echo $accionprl_dato['descripcion_acc']; ?></td>
+                                    <td style="text-align: left"><?php echo $accionprl_dato['nombre_resp']; ?></td>
+                                    <td style="text-align: left"><?php echo $accionprl_dato['accpropuesta_acc']; ?></td>
+                                    <td style="text-align: left"><?php echo $accionprl_dato['fechaprevista_acc']; ?></td>
+                                    <td style="text-align: left"><?php echo $accionprl_dato['fecharea_acc']; ?></td>
+
+                                    <td style="text-align: left"><?php $accionprl_dato['estado_acc']; ?>
+                                        <?php if ($accionprl_dato['estado_acc'] == "Cerrada") { ?>
+                                            <span class='badge badge-success'>Cerrada</span>
+                                        <?php
+                                        } else if ($accionprl_dato['estado_acc'] == "En curso") { ?>
+                                            <span class='badge badge-info'>En curso</span>
+                                        <?php                       } else if ($accionprl_dato['estado_acc'] == "Comunicada") { ?>
+                                            <span class='badge badge-secondary'>Comunicada</span>
+                                        <?php                       } else if ($accionprl_dato['estado_acc'] == "Abierta") { ?>
+                                            <span class='badge badge-warning'>Abierta</span>
+                                        <?php                       } else if ($accionprl_dato['estado_acc'] == "Finalizada") { ?>
+                                            <span class='badge badge-primary'>Finalizada</span>
+                                        <?php                       }
+                                        ?>
+
+
+                                    </td>
+
+
+                                    <td style="text-align: center">
+                                        <div class="dropdown">
+                                            <a href="show.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-warning btn-sm" title="Accede"> <i class="bi bi-folder"></i> Ver</a></a>
+                                            <a href="../../app/controllers/actividad/delete_accion.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar la accion PRL?')" title="Eliminar Accion PRL"><i class="bi bi-trash-fill"></i></a>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+                            <?php
+                            }
+                            ?>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
 
             </div>
-
         </div>
     </div>
-</div>
 </div>
 
 <?php

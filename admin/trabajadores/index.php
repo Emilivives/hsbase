@@ -335,7 +335,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
 
                                         </td>
-                                        
+
                                         <td style="text-align: center;"><?php $trabajador['formacionpdt_tr'];
                                                                         if ($trabajador['formacionpdt_tr'] == 'Si') { ?>
                                                 <span class='badge badge-success'>SI</span>
@@ -362,6 +362,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                 include('../../app/controllers/trabajadores/trabajador_accidentes.php');
                                                 include('../../app/controllers/trabajadores/trabajador_reconocimiento.php'); ?>
 
+                                                <a href="../../app/controllers/trabajadores/delete_trabajador.php?id_trabajador=<?php echo $id_trabajador; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar la el proyecto PRL?')" title="Eliminar Proyecto PRL"><i class="bi bi-trash-fill"></i></a>
 
                                                 <!--boton modal-->
 
@@ -452,7 +453,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                                     <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($trabajador_formacion['fechacad_fr'])) ?></td>
                                                                                     <td style="text-align: center">
                                                                                         <a href="../formacion/show.php?id_formacion=<?php echo  $trabajador_formacion['id_formacion']; ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
-                                                                                        
+
                                                                                     </td>
                                                                                 <?php
                                                                             }
@@ -536,7 +537,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                                     <td style="text-align: center"><?php echo $trabajador_accidente['nombre_cen']; ?></td>
                                                                                     <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($trabajador_accidente['fechabaja_ace'])) ?></td>
                                                                                     <td style="text-align: center">
-                                                                                        <a href="../accidentes/show.php?id_accidente=<?php echo $trabajador_accidente['id_accidente']?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
+                                                                                        <a href="../accidentes/show.php?id_accidente=<?php echo $trabajador_accidente['id_accidente'] ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
                                                                                     </td>
                                                                                 <?php
                                                                             }
@@ -605,6 +606,16 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                             <option>Seleccione</option>
                                                                             <option value="Si">SI</option>
                                                                             <option value="No">NO</option>
+                                                                        </select>
+
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <label for="">Sexo</label>
+                                                                        <select class="form-select form-select-sm" name="sexo_tr" aria-label=".form-select-sm example">
+                                                                            <option value="<?php echo $trabajador['sexo_tr'] ?>" selected="selected"><?php echo $trabajador['sexo_tr'] ?></option>
+                                                                            <option>Seleccione</option>
+                                                                            <option value="Hombre">Hombre</option>
+                                                                            <option value="Mujer">Mujer</option>
                                                                         </select>
 
                                                                     </div>

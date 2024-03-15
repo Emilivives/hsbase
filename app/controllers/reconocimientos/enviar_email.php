@@ -25,15 +25,15 @@ try {
     //Server settings
     $mail->SMTPDebug = 0;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->Host       = 'smtp-mail.outlook.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'emilivives@gmail.com';                     //SMTP username
-    $mail->Password   = 'xapi vxtn rcvs ubaf';                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->Username   = 'prevencion@trasmapi.com';                     //SMTP username
+    $mail->Password   = 'S3rcomis@2020/*';                               //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+    $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('emilivives@gmail.com', 'Prevencion Trasmapi');
+    $mail->setFrom('prevencion@trasmapi.com', 'Prevencion Trasmapi');
     $mail->addAddress($destinatario);     //Add a recipient
     //Name is optional
 
@@ -42,9 +42,6 @@ try {
     $mail->isHTML(true);
     $mail->CharSet = 'UTF-8';                             //Set email format to HTML
     $mail->Subject = 'SOLICITUD CITA RECONOCIMIENTO MÉDICO';
-    $mail->addStringEmbeddedImage(file_get_contents('../../../public/img/trasmapi50.png'),'logo');
-    $mail->addStringEmbeddedImage(file_get_contents('../../../public/img/LOGO-eslogan mini.jpg'),'hsbase');
-
     $mail->Body    = "<html>
     <body>
     <h4>
@@ -63,26 +60,12 @@ try {
     <br>
     Centro de trabajo: $centro_tr
 <br><br>
-**Anotaciones/restricciones: $anotaciones_crm **</h5>
+**Anotaciones/restricciones: $anotaciones_crm **
 <br><br><br>
 Quedo a vuestra disposición para cualquier duda o aclaración.
 <br><br>
 Un saludo,
-<br><br>
-
-Emili Vives<br>
-Prevención riesgos laborales<br></h4>
-<h5>Muelle Pesquero, Varadero Ibiza s/n Piso 1 (antiguo Edificio Portuario)<br>
-07800 Ibiza (Islas Baleares) <br>
-Telf.	(+34) 971 87 63 37<br>
-E-mail	prevencion@trasmapi.com <br>
-Web	https://www.trasmapi.com <br>
-
-
-<br><br>
-<img src='cid:logo'>
-<br>powered by </h5>
-<img src='cid:hsbase'>
+<br>
 
     </body>
     </html>";

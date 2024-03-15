@@ -37,7 +37,75 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                         }
                     </style>
                     <div class="btn-text-right">
-                        <a href="" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#nuevoModalperfil"><i class="bi bi-plus-circle"></i> Añadir Nuevo Perfil</a>
+                        <a href="" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#nuevotipoformacion"><i class="bi bi-plus-circle"></i> Añadir tipo formacion</a>
+                    </div>
+                    <div class="modal fade" id="nuevotipoformacion" tabindex="-1" aria-labelledby="nuevotipoformacion" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header bg-success-subtle text-center">
+                                    <h3 class="modal-title w-100 text-center" id="nuevoModalLabel">NUEVA FORMACION</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!--cuerpo del modal-->
+                                    <form action="../../app/controllers/formaciones/tipoformacion/create.php" method="post" enctype="multipart/form-data">
+
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label for="">Nombre de la formación <b>*</b></label>
+                                                    <input type="text" name="nombre_tf" class="form-control" required>
+                                                </div>
+                                                <br>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                              <div class="col-sm-5">
+                                                <div class="form-group row">
+                                                    <label for="nombre" class="col-form-label col-sm-5">Duracion (hrs): *</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" class="form-control" name="duracion_tf" id="" value="" placeholder="" tabindex="1" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-sm-5">
+                                                <div class="form-group row">
+                                                    <label for="nombre" class="col-form-label col-sm-5">Validez (años): *</label>
+                                                    <div class="col-sm-2">
+                                                        <input type="text" class="form-control" name="validez_tf" id="" value="" placeholder="" tabindex="1" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group row">
+                                                    <label for="descripcion_acc" class="col-form-label col-sm-2">Contenido formación:</label>
+                                                    <div class="col-sm-12">
+                                                        <textarea class="form-control" name="detalles_tf" value="" rows="10" required></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                        <div class="">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+                                        </div>
+
+                                    </form>
+                                    <!-- Pie del Modal -->
+
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
 
                 </div>

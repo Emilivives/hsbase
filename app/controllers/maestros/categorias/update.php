@@ -4,12 +4,14 @@ include('../../../../app/config.php');
 
 $id_categoria = $_POST['id_categoria'];
 $nombre_cat = $_POST['nombre_cat'];
+$departamento_cat = $_POST['departamento_cat'];
 $descripcion_cat = $_POST['descripcion_cat'];
 
 
-$sentencia = $pdo->prepare("UPDATE categorias SET nombre_cat=:nombre_cat, descripcion_cat=:descripcion_cat WHERE id_categoria = :id_categoria");
+$sentencia = $pdo->prepare("UPDATE categorias SET nombre_cat=:nombre_cat, departamento_cat=:departamento_cat, descripcion_cat=:descripcion_cat WHERE id_categoria = :id_categoria");
 $sentencia->bindParam('id_categoria', $id_categoria);
 $sentencia->bindParam('nombre_cat', $nombre_cat);
+$sentencia->bindParam('departamento_cat', $departamento_cat);
 $sentencia->bindParam('descripcion_cat', $descripcion_cat);
 
 if ($sentencia->execute()) {

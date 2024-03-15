@@ -6,6 +6,7 @@ include('../../../app/controllers/maestros/categorias/listado_categorias.php');
 
 $id_categoria = $_GET['id_categoria'];
 include('../../../app/controllers/maestros/categorias/datos_categoria.php');
+include('../../../app/controllers/maestros/departamentos/listado_departamentos.php');
 ?>
 
 <div class="container-fluid">
@@ -31,36 +32,51 @@ include('../../../app/controllers/maestros/categorias/datos_categoria.php');
                                     <input type="text" name="nombre_cat" value="<?php echo $nombre_cat; ?>" class="form-control" required>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="">Descripcion categoria <b>*</b></label>
-                                        <textarea class="form-control" id="descripcion_cat" name="descripcion_cat" rows="20"><?php echo $descripcion_cat; ?></textarea>
-
-                                    </div>
-                                </div>
+                       
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="">Departamento</label>
+                                <select name="departamento_cat" id="" class="form-control">
+                                    <?php
+                                    foreach ($departamentos_datos as $departamentos_dato) { ?>
+                                        <option value="<?php echo $departamentos_dato['id_departamento']; ?>"><?php echo $departamentos_dato['nombre_dpo']; ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
                             </div>
+                         
+                        </div>
 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Descripcion categoria <b>*</b></label>
+                                    <textarea class="form-control" id="descripcion_cat" name="descripcion_cat" rows="20"><?php echo $descripcion_cat; ?></textarea>
 
-                            <input type="text" name="id_categoria" value="<?php echo $id_categoria; ?>" hidden>
-                   
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <a href="index.php" class="btn btn-secondary">Cancelar</a>
-                                    <input type="submit" class="btn btn-warning" value="Actualizar datos">
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
 
+
+                        <input type="text" name="id_categoria" value="<?php echo $id_categoria; ?>" hidden>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="index.php" class="btn btn-secondary">Cancelar</a>
+                                <input type="submit" class="btn btn-warning" value="Actualizar datos">
+                            </div>
+                        </div>
+                </div>
+                </form>
             </div>
 
         </div>
 
-
     </div>
+
+
+</div>
 </div>
 
 

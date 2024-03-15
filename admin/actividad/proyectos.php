@@ -5,6 +5,7 @@ include('../../app/controllers/pruebas/listado_trabajadores.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
 include('../../app/controllers/actividad/listado_proyectos.php');
 include('../../app/controllers/actividad/listado_tareas.php');
+include('../../app/controllers/maestros/responsables/listado_responsables.php');
 ?>
 <html>
 <!-- Font Awesome -->
@@ -143,7 +144,7 @@ include('../../app/controllers/actividad/listado_tareas.php');
                 <div class="modal fade" id="modal-nuevotrabajador">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
-                            <div class="modal-header" style="background-color:#0000a0 ;color:white">
+                            <div class="modal-header" style="background-color:#016296 ;color:white">
                                 <h5 class="modal-title" id="modal-nuevtrabajador">Nuevo Proyecto</h5>
                                 <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -151,80 +152,74 @@ include('../../app/controllers/actividad/listado_tareas.php');
                             </div>
                             <div class="modal-body">
 
-                                <form action="../../app/controllers/pruebas/create.php" method="post" enctype="multipart/form-data">
+                                <form action="../../app/controllers/actividad/create_proyecto.php" method="post" enctype="multipart/form-data">
 
 
 
                                     <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="">Codigo</label>
-                                                <input type="text" name="codigo_tr" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="">DNI/NIE</label>
-                                                <input type="text" name="dni_tr" class="form-control" required>
-                                            </div>
-                                        </div>
-
-
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <label for="">APELLIDOS, NOMBRE</label>
-                                                <input type="text" name="nombre_tr" class="form-control" required>
+                                                <label for="">Nombre Proyecto</label>
+                                                <input type="text" name="nombre_py" class="form-control" required>
                                             </div>
+                                        </div>
 
+                                        <div class="col-md-4">
+                                            <label for="">Responsable</label>
+                                            <select name="responsable_py" id="" class="form-control">
+                                                <?php
+                                                foreach ($responsables_datos as $responsables_dato) { ?>
+                                                    <option value="<?php echo $responsables_dato['id_responsable']; ?>"><?php echo $responsables_dato['nombre_resp']; ?></option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="">Fecha Nacimiento</label>
-                                                <input type="date" name="fechanac_tr" class="form-control" required>
-                                            </div>
-                                        </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="">Fecha Inicio</label>
-                                                <input type="date" name="inicio_tr" class="form-control" required>
+                                                <input type="date" name="fechainicio_py" class="form-control" required>
                                             </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="">Fecha fin</label>
+                                                <input type="date" name="fechafin_py" class="form-control" required>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-2">
+                                            
+
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="">Estado</label>
+                                            <select class="form-select form-select" name="estado_py" aria-label=".form-select-sm example">
+                                                <option selected>Seleccione</option>
+                                                <option value="Activo">Activo</option>
+                                                <option value="Finalizado">Finalizado</option>
+                                                <option value="Cancelado">Cancelado</option>
+                                               
+                                            </select>
 
                                         </div>
 
                                     </div>
+                                    <hr>
 
                                     <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label for="">Centro Trabajo</label>
-                                                <select name="centro_tr" id="" class="form-control">
-                                                    <?php
-                                                    foreach ($centros_datos as $centros_dato) { ?>
-                                                        <option value="<?php echo $centros_dato['id_centro']; ?>"><?php echo $centros_dato['nombre_cen']; ?></option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
+                                    <div class="col-sm-12">
+                                                <div class="form-group row">
+                                                    <label for="descripcion_acc" class="col-form-label col-sm-2">Descripción proyecto:</label>
+                                                    <div class="col-sm-12">
+                                                        <textarea class="form-control" name="descripcion_py" value="" rows="3" required></textarea>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label for="">Categoria</label>
-                                                <select name="categoria_tr" id="" class="form-control">
-                                                    <?php
-                                                    foreach ($categorias_datos as $categorias_dato) { ?>
-                                                        <option value="<?php echo $categorias_dato['id_categoria']; ?>"><?php echo $categorias_dato['nombre_cat']; ?></option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
 
 
                                     </div>

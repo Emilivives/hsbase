@@ -1,33 +1,31 @@
 <?php
 
-include('../../../app/config.php');
+include('../../../../app/config.php');
 
-$tipo_fr = $_POST['tipo_fr'];
-$trabajador_fr = $_POST['trabajador_fr'];
-$fecha_fr = $_POST['fecha_fr'];
-$fecha_cad = $_POST['fechacad_fr'];
-$formador_fr = $_POST['formador_fr'];
+$nombre_tf = $_POST['nombre_tf'];
+$duracion_tf = $_POST['duracion_tf'];
+$validez_tf = $_POST['validez_tf'];
+$detalles_tf = $_POST['detalles_tf'];
 
 
-$sentencia = $pdo->prepare("INSERT INTO formacion (tipo_fr, trabajador_fr, fecha_fr, fechacad_fr, formador_fr) 
-VALUES(:tipo_fr, :trabajador_fr, :fecha_fr, :fechacad_fr, :formador_fr)");
+$sentencia = $pdo->prepare("INSERT INTO tipoformacion (nombre_tf, duracion_tf, validez_tf, detalles_tf) 
+VALUES(:nombre_tf, :duracion_tf, :validez_tf, :detalles_tf)");
 
-$sentencia->bindParam('tipo_fr', $tipo_fr);    
-$sentencia->bindParam('trabajador_fr', $trabajador_fr);
-$sentencia->bindParam('fecha_fr', $fecha_fr);
-$sentencia->bindParam('fechacad_fr', $fechacad_fr);
-$sentencia->bindParam('formador_fr', $formador_fr);
+$sentencia->bindParam('nombre_tf', $nombre_tf);    
+$sentencia->bindParam('duracion_tf', $duracion_tf);
+$sentencia->bindParam('validez_tf', $validez_tf);
+$sentencia->bindParam('detalles_tf', $detalles_tf);
 
 if ($sentencia->execute()) {
 session_start();
 $_SESSION['mensaje'] = "Formacion registrada correctamente";
 $_SESSION['icono'] = 'success';
-header('Location: ' . $URL . '/admin/maestros/centros');
+header('Location: ' . $URL . '/admin/formacion/tipoformaciones.php');
 } else {
 session_start();
 $_SESSION['mensaje'] = "Formacion NO creada";
 $_SESSION['icono'] = 'warning';
-header('Location: ' . $URL . '/admin/maestros/centros');
+header('Location: ' . $URL . '/admin/formacion/tipoformaciones.php');
 }
 
 

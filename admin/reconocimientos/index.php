@@ -2,7 +2,7 @@
 include('../../app/config.php');
 include('../../admin/layout/parte1.php');
 include('../../app/controllers/reconocimientos/listado_reconocimientos.php');
-include('../../app/controllers/trabajadores/listado_trabajadores.php');
+include('../../app/controllers/trabajadores/listado_trabajadores_alfabet.php');
 include('../../app/controllers/reconocimientos/listado_citasrm.php');
 include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php');
 ?>
@@ -370,6 +370,8 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                             <td style="text-align: center">
                                 <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
                                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" title="Modificar RM" data-target="#modal-modificareconocimiento<?php echo $id_reconocimiento; ?>"><i class="bi bi-pencil-square"></i></button>
+                                    <?php include('../../app/controllers/reconocimientos/datos_reconocimiento.php'); ?>
+
                                     <a href="../../app/controllers/reconocimientos/delete.php?id_reconocimiento=<?php echo $id_reconocimiento; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar el registro?')" title="Eliminar investigación"><i class="bi bi-trash-fill"></i> </a>
 
                                 </div>
@@ -392,37 +394,46 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
 
                                     <form action="../../app/controllers/reconocimientos/update.php" method="post" enctype="multipart/form-data">
 
+                                        <input type="text" name="id_reconocimiento" value="<?php echo $reconocimientos_dato['id_reconocimiento'] ?>" class="form-control" hidden>
+
+
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">Trabajador</label>
                                                 <select name="id_trabajador" id="" class="form-control">
                                                     <?php
-                                                    foreach ($trabajadores as $trabajador) { ?>
-                                                        <option value="<?php echo $trabajador['id_trabajador']; ?>"><?php echo $trabajador['nombre_tr'] ?></option>
+                                                    foreach ($trabajadores as $trabajador) {
+                                                        $trabajador_tabla = $trabajador['nombre_tr'];
+                                                        $id_trabajador = $trabajador['id_trabajador']; ?>
+                                                        <option value="<?php echo $id_trabajador; ?>" <?php if ($trabajador_tabla == $id_trabajador) { ?> selected="selected" <?php } ?>>
+                                                            <?php echo $trabajador_tabla; ?>
+                                                        </option>
                                                     <?php
                                                     }
                                                     ?>
                                                 </select>
                                             </div>
+
+
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="">Fecha Reconocimiento</label>
-                                                    <input type="date" name="fecha_rm" class="form-control">
+                                                    <input type="date" name="fecha_rm" value="<?php echo $reconocimientos_dato['fecha_rm'] ?>" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="">Valido hasta</label>
-                                                    <input type="date" name="caducidad_rm" class="form-control">
+                                                    <input type="date" name="caducidad_rm" value="<?php echo $reconocimientos_dato['caducidad_rm'] ?>" class="form-control">
                                                 </div>
 
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="">Estado RM</label>
                                                 <div class="form-check ">
-                                                    <input class="form-check-input" type="radio" value="1" name="vigente_rm" id="flexRadioDefault1" checked>
+                                                    <input class="form-check-input" type="radio" value="<?php echo $reconocimientos_dato['vigente_rm'] ?>" name="vigente_rm" id="flexRadioDefault1" checked>
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         <b>Vigente</b>
                                                     </label>
@@ -430,7 +441,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                 </div>
 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value="0" name="vigente_rm" id="flexRadioDefault2">
+                                                    <input class="form-check-input" type="radio" value="<?php echo $reconocimientos_dato['vigente_rm'] ?>" name='vigente_rm' id="flexRadioDefault2">
                                                     <label class="form-check-label" for="flexRadioDefault2">
                                                         <b>No Vigente</b>
                                                     </label>
@@ -587,18 +598,18 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                 <tbody>
                     <?php
                     $contadorcitas = 0;
-                    foreach ($citasrm as $citasrm_dato) {
+                    foreach ($citasrm as $citasrm_lista) {
                         $contadorcitas = $contadorcitas + 1;
-                        $id_citarm = $citasrm_dato['id_citarm'];
+                        $id_citarm = $citasrm_lista['id_citarm'];
                     ?>
 
                         <tr>
-                            <td style="text-align: left"><?php echo $citasrm_dato['nombre_tr']; ?></td>
-                            <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($citasrm_dato['fecha_crm'])) ?></td>
+                            <td style="text-align: left"><?php echo $citasrm_lista['nombre_tr']; ?></td>
+                            <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($citasrm_lista['fecha_crm'])) ?></td>
                             <td style="text-align: center">
                                 <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
                                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" title="Email Cita RM" data-target="#modal-emailcita<?php echo $id_citarm; ?>"><i class="fa-regular fa-envelope"></i></i></button>
-                                    <a href="update.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-warning btn-sm" title="Editar"><i class="bi bi-pencil-square"></i></a>
+                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" title="EDITAR Cita RM" data-target="#modal-modificacita<?php echo $id_citarm; ?>"><i class="bi bi-pencil-square"></i></i></button>
                                     <a href="../../app/controllers/reconocimientos/delete_cita.php?id_citarm=<?php echo $id_citarm; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar el registro?')" title="Eliminar cita RM"><i class="bi bi-trash-fill"></i> </a>
 
                                 </div>
@@ -606,6 +617,8 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
 
 
                             <div class="modal fade" id="modal-emailcita<?php echo $id_citarm; ?>" tabindex="-1" aria-labelledby="exampleModalLabel">
+                            <?php include('../../app/controllers/reconocimientos/datos_citarm.php');?>
+
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header" style="background-color:gold">
@@ -708,8 +721,110 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                 </div>
 
 
+                            </div>
+                            <!--fin modal-->
 
-                                <!--fin modal-->
+                            <div class="modal fade" id="modal-modificacita<?php echo $id_citarm; ?>" tabindex="-1" aria-labelledby="exampleModalLabel">
+                            <?php include('../../app/controllers/reconocimientos/datos_citarm.php');?>
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background-color:gold">
+                                            <h5 class="modal-title" id="modal-modificacita" style="color: black;"><i class="bi bi-person-lines-fill"></i>MODIFICA CITA RM - <?php echo $citasrm_dato['nombre_tr'] ?> </h5>
+                                            <button type="button" class="close" style="color:black;" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <form action="../../app/controllers/reconocimientos/update_cita.php" method="post" enctype="multipart/form-data">
+
+                                                <div class="row">
+                                                <input type="text" id="id_citrm" name="id_citrm" value="<?php echo $citasrm_dato['id_citarm'] ?>" class="form-control" hidden>
+
+
+                                                    <div class="col-sm-8">
+                                                        <div class="form-group row">
+                                                            <label for="nombre_tr" class="col-form-label col-sm-2">Nombre</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" id="nombre_tr" name="nombre_tr" value="<?php echo $citasrm_dato['nombre_tr'] ?>" class="form-control" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group row">
+                                                            <label for="dni_tr" class="col-form-label col-sm-4">DNI/NIE</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" id="dni_tr" name="dni_tr" class="form-control" value="<?php echo $citasrm_dato['dni_tr'] ?>" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+                                                        <div class="form-group row">
+                                                            <label for="categoria_tr" class="col-form-label col-sm-2">Puesto</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" id="categoria_tr" name="categoria_tr" class="form-control" value="<?php echo $citasrm_dato['nombre_cat'] ?>" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group row">
+                                                            <label for="centro_tr" class="col-form-label col-sm-4">Centro</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" id="centro_tr" name="centro_tr" class="form-control" value="<?php echo $citasrm_dato['nombre_cen'] ?>" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-group row">
+                                                            <label for="centro_tr" class="col-form-label col-sm-2">Empresa</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" id="razonsocial_emp" name="razonsocial_emp" class="form-control" value="<?php echo $citasrm_dato['razonsocial_emp'] ?>" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                    </br>
+                                                    <hr>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="">Fecha cita</label>
+                                                            <input type="date" name="fecha_crm" value="<?php echo $citasrm_dato['fecha_crm'] ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </br>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label for="">Anotaciones / restricciones</label>
+                                                        <textarea class="form-control" id="anotaciones_crm" value="<?php echo $citasrm_dato['anotaciones_crm'] ?>" name="anotaciones_crm" rows="6"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                    <button type="submit" class="btn btn-primary"><i class="bi bi-envelope-arrow-up"></i></i> Enviar</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <!--fin modal-->
 
 
                         </tr>

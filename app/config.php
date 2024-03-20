@@ -1,4 +1,17 @@
 <?php
+// para servidor web
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
+
+//define('APP_NAME', 'HS Base');
+//define('SERVIDOR', 'localhost:3306');
+//define('USUARIO', 'emilivives');
+//define('PASSWORD', 'c3obG#vsx8ryR1T$');
+//define('BD', 'hs_base');
+// fin para servidor web
+
 
 define('APP_NAME', 'HS Base');
 define('SERVIDOR', 'localhost');

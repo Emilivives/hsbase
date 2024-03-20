@@ -1,18 +1,22 @@
 <?php
 
-$sql = "SELECT fr.id_formacion as id_formacion, fr.fecha_fr as fecha_fr, fr.fechacad_fr as fechacad_fr, 
-tr.nombre_tf as nombre_tf, tr.nombre_tr as nombre_tr
-FROM formacion as fr INNER JOIN trabajadores as tr ON fr.trabajador_fr = tr.id_trabajador
-INNER JOIN tipoformacion as tr ON fr.tipo_fr = tf.id_tipoformacion WHERE id_formacion = $id_formacion";
+$sql = "SELECT rm.id_reconocimiento as id_reconocimiento, rm.fecha_rm as fecha_rm, rm.caducidad_rm as caducidad_rm, 
+tr.nombre_tr as nombre_tr, rm.vigente_rm as vigente_rm, rm.cita_rm as cita_rm, rm.anotaciones_rm as anotaciones_rm
+FROM reconocimientos as rm INNER JOIN trabajadores as tr ON rm.id_trabajador = tr.id_trabajador 
+WHERE id_reconocimiento = $id_reconocimiento";
 $query = $pdo->prepare($sql);
 $query->execute();
-$formaciones = $query->fetchAll(PDO::FETCH_ASSOC);
+$reconocimientos_datos = $query->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($formaciones as $formacion) {
-    $tipo_fr = $formacion['nombre_tf'];
-    $trabajador_fr = $formacion['nombre_tr'];
-    $fecha_fr = $formacion['fecha_fr'];
-    $fechacad_fr = $formacion['fechacad_fr'];
+foreach ($reconocimientos_datos as $reconocimientos_dato) {
+    $id_trabajador = $reconocimientos_dato['nombre_tr'];
+    $fecha_rm = $reconocimientos_dato['fecha_rm'];
+    $caducidad_rm = $reconocimientos_dato['caducidad_rm'];
+    $vigente_rm = $reconocimientos_dato['vigente_rm'];
+    $cita_rm = $reconocimientos_dato['cita_rm'];
+    $anotaciones_rm = $reconocimientos_dato['anotaciones_rm'];
      
 
 }
+
+

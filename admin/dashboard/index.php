@@ -35,16 +35,16 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
     <div class="row">
       <!-- ./col -->
       <div class="col-lg-2 col-6">
+        <div class="btn-text-center">
+          <button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador" title="Añadir nuevo trabajador"><i class="bi bi-person-plus-fill"></i>AÑADIR NUEVO TRABAJADOR</button>
+
+        </div>
+        <div class="row">
+
           <div class="btn-text-center">
-            <button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador" title="Añadir nuevo trabajador"><i class="bi bi-person-plus-fill"></i>AÑADIR NUEVO TRABAJADOR</button>
 
           </div>
-        <div class="row">
-     
-          <div class="btn-text-center">
-         
-          </div>
-  
+
         </div>
 
 
@@ -63,7 +63,6 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
               <div class="modal-body">
 
                 <form action="../../app/controllers/trabajadores/create.php" method="post" enctype="multipart/form-data">
-
 
 
                   <div class="row">
@@ -104,6 +103,24 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                       </div>
 
                     </div>
+                    <div class="col-md-2">
+                      <label for="">Sexo</label>
+                      <select class="form-select form-select-sm" name="sexo_tr" aria-label=".form-select-sm example">
+                        <option>Seleccione</option>
+                        <option value="Hombre">Hombre</option>
+                        <option value="Mujer">Mujer</option>
+                      </select>
+
+                    </div>
+                    <div class="col-md-2">
+                      <label for="">Formacion PRL</label>
+                      <select class="form-select form-select-sm" name="formacionpdt_tr" aria-label=".form-select-sm example">
+                        <option>Seleccione</option>
+                        <option value="Si">Si</option>
+                        <option value="No">No</option>
+                      </select>
+
+                    </div>
 
                   </div>
 
@@ -127,17 +144,29 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                       <div class="form-group">
                         <label for="">Categoria</label>
                         <select name="categoria_tr" id="" class="form-control">
+                          <option value="0">--Seleccione categoria--</option>
                           <?php
                           foreach ($categorias_datos as $categorias_dato) { ?>
-                            <option value="<?php echo $categorias_dato['id_categoria']; ?>"><?php echo $categorias_dato['nombre_cat']; ?></option>
+                            <option value="<?php echo $categorias_dato['id_categoria']; ?>"><?php echo $categorias_dato['nombre_cat']; ?> </option>
+                            </option>
                           <?php
                           }
                           ?>
                         </select>
+
                       </div>
                     </div>
 
 
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="form-group">
+                        <label for="">ANOTACIONES</label>
+                        <input type="text" name="anotaciones_tr" class="form-control">
+                      </div>
+
+                    </div>
                   </div>
                   <div class="modal-footer">
 
@@ -511,35 +540,36 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                   $contador = 0;
                   foreach ($tareaspendientes as $tareapendiente) {
                     if ($tareapendiente['estado_ta'] != 'Completado') {
-                    $contador = $contador + 1;
-                    $id_tarea = $tareapendiente['id_tarea'];
-                    $id_proyecto = $tareapendiente['id_proyecto'];
+                      $contador = $contador + 1;
+                      $id_tarea = $tareapendiente['id_tarea'];
+                      $id_proyecto = $tareapendiente['id_proyecto'];
                   ?>
 
-                    <tr>
-                      <td style="text-align: center"><b><?php echo $contador; ?></b></td>
-                      <td style="text-align: left"><b><?php echo $tareapendiente['nombre_ta']; ?></b></td>
-                      <td style="text-align: left"><?php echo $tareapendiente['nombre_py']; ?></td>
-                      <td style="text-align: left"><?php echo $tareapendiente['nombre_cen']; ?></td>
-                      <td style="text-align: left"><?php echo $tareapendiente['nombre_resp']; ?></td>
-                      <td style="text-align: left"><?php echo $tareapendiente['fecha_ta']; ?></td>
-                      <td style="text-align: left"><?php echo $tareapendiente['estado_ta']; ?></td>
+                      <tr>
+                        <td style="text-align: center"><b><?php echo $contador; ?></b></td>
+                        <td style="text-align: left"><b><?php echo $tareapendiente['nombre_ta']; ?></b></td>
+                        <td style="text-align: left"><?php echo $tareapendiente['nombre_py']; ?></td>
+                        <td style="text-align: left"><?php echo $tareapendiente['nombre_cen']; ?></td>
+                        <td style="text-align: left"><?php echo $tareapendiente['nombre_resp']; ?></td>
+                        <td style="text-align: left"><?php echo $tareapendiente['fecha_ta']; ?></td>
+                        <td style="text-align: left"><?php echo $tareapendiente['estado_ta']; ?></td>
 
-                      </td>
+                        </td>
 
 
-                      <td style="text-align: center">
-                        <div class="dropdown">
-                        <a href="../actividad/showtareas.php?id_tarea=<?php echo $id_tarea;?>&id_proyecto=<?php echo $id_proyecto;?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i>Ver</a>
+                        <td style="text-align: center">
+                          <div class="dropdown">
+                            <a href="../actividad/showtareas.php?id_tarea=<?php echo $id_tarea; ?>&id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-success btn-sm btn-font-size" title="Accede"><i class="bi bi-box-arrow-in-right"></i>Ver</a>
 
-                        </div>
+                          </div>
 
-                      </td>
+                        </td>
 
-                    </tr>
-                    
+                      </tr>
+
                   <?php
-                  }}
+                    }
+                  }
                   ?>
 
                 </tbody>

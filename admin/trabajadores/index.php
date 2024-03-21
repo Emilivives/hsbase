@@ -5,7 +5,7 @@ include('../../app/controllers/trabajadores/listado_trabajadores.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
 include('../../app/controllers/maestros/categorias/listado_categorias.php');
 ?>
-
+<html>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
@@ -27,7 +27,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
     </div><!-- /.container-fluid -->
 </div>
 
-
+</html>
 
 
 <div class="row">
@@ -280,11 +280,11 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                             <div class="form-group">
                                                 <label for="">Categoria</label>
                                                 <select name="categoria_tr" id="" class="form-control">
-                                                <option value="0">--Seleccione categoria--</option>
+                                                    <option value="0">--Seleccione categoria--</option>
                                                     <?php
                                                     foreach ($categorias_datos as $categorias_dato) { ?>
                                                         <option value="<?php echo $categorias_dato['id_categoria']; ?>"><?php echo $categorias_dato['nombre_cat']; ?> </option>
-                                                    </option>
+                                                        </option>
                                                     <?php
                                                     }
                                                     ?>
@@ -350,8 +350,8 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                     <td style="text-align: center"><?php echo $trabajador['codigo_tr']; ?></td>
                                     <td style="text-align: center"><?php echo $trabajador['dni_tr']; ?></td>
                                     <td><?php echo $trabajador['nombre_tr']; ?></td>
-                                    <td style="text-align: center"><?php echo $trabajador['fechanac_tr']; ?></td>
-                                    <td style="text-align: center"><?php echo $trabajador['inicio_tr']; ?></td>
+                                    <td style="text-align: center"><?php echo $newdate1 = date("d-m-Y", strtotime($trabajador['fechanac_tr'])); ?></td>
+                                    <td style="text-align: center"><?php echo $newdate2 = date("d-m-Y", strtotime($trabajador['inicio_tr'])); ?></td>
                                     <td><?php echo $trabajador['nombre_emp']; ?></td>
                                     <td><?php echo $trabajador['nombre_cen']; ?></td>
                                     <td><?php echo $trabajador['nombre_cat']; ?></td>
@@ -382,18 +382,14 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                     </td>
 
                                     <td style="text-align: center">
+                                    <?php include('../../app/controllers/trabajadores/datos_trabajador.php');
+                                            include('../../app/controllers/trabajadores/trabajador_formacion.php');
+                                            include('../../app/controllers/trabajadores/trabajador_accidentes.php');
+                                            include('../../app/controllers/trabajadores/trabajador_reconocimiento.php'); ?>
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
                                             <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" title="Detalles trabajador" data-target="#modal-detallestrabajador<?php echo $id_trabajador; ?>"><i class="bi bi-person-lines-fill"></i></button>
-                                            <?php include('../../app/controllers/trabajadores/datos_trabajador.php');
-                                            include('../../app/controllers/trabajadores/trabajador_formacion.php');
-                                            include('../../app/controllers/trabajadores/trabajador_accidentes.php');
-                                            include('../../app/controllers/trabajadores/trabajador_reconocimiento.php'); ?>
+                                      
                                             <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" title="Modificar detalles" data-target="#modal-modificartrabajador<?php echo $id_trabajador; ?>"><i class="bi bi-pencil-square"></i></button>
-                                            <?php include('../../app/controllers/trabajadores/datos_trabajador.php');
-                                            include('../../app/controllers/trabajadores/trabajador_formacion.php');
-                                            include('../../app/controllers/trabajadores/trabajador_accidentes.php');
-                                            include('../../app/controllers/trabajadores/trabajador_reconocimiento.php'); ?>
-
                                             <a href="../../app/controllers/trabajadores/delete_trabajador.php?id_trabajador=<?php echo $id_trabajador; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar la el proyecto PRL?')" title="Eliminar Proyecto PRL"><i class="bi bi-trash-fill"></i></a>
 
                                             <!--boton modal-->
@@ -402,6 +398,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                         </div>
                                         <!--inicio modal detalles trabajador-->
                                         <div class="modal fade" id="modal-detallestrabajador<?php echo $id_trabajador; ?>" tabindex="-1" aria-labelledby="exampleModalLabel">
+         
                                             <div class="modal-dialog modal-xl">
                                                 <div class="modal-content">
                                                     <div class="modal-header" style="background-color:lightslategray">
@@ -758,6 +755,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                 </div>
                                             </div>
                                         </div>
+                                    </td>
                 </div>
 
             </div>

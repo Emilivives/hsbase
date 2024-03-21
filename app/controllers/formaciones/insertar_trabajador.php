@@ -17,7 +17,7 @@ if ($sentencia->execute()) {
     session_start();
 ?>
     <script>
-            location.href = "<?php echo $URL; ?>/admin/pruebas/create.php";
+            location.href = "<?php echo $URL; ?>/admin/formacion/create.php";
     </script>
 
 <?php
@@ -27,7 +27,7 @@ if ($sentencia->execute()) {
     $_SESSION['icono'] = 'warning';
     ?>
     <script>
-            location.href = "<?php echo $URL; ?>/admin/pruebas/create.php";
+            location.href = "<?php echo $URL; ?>/admin/formacion/create.php";
     </script>
 
 <?php

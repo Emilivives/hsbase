@@ -274,8 +274,9 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
             <div class="card-body">
               <table id="example3" class="table tabe-hover table-condensed">
                 <colgroup>
-                  <col width="40%">
-                  <col width="5%">
+                  <col width="30%">
+                  <col width="10%">
+                  <col width="25%">
                   <col width="10%">
                   <col width="10%">
 
@@ -285,7 +286,8 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                     <th style="text-align: left">Trabajador</th>
                     <th style="text-align: left">Inicio</th>
                     <th style="text-align: left">Categoria</th>
-                    <th style="text-align: left">Formado</th>
+                    <th style="text-align: center">Formado</th>
+                    <th style="text-align: center">+</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -302,7 +304,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                         <td><?php echo $trabajador['nombre_tr']; ?></td>
 
-                        <td style="text-align: center"><?php echo $trabajador['inicio_tr']; ?></td>
+                        <td style="text-align: left"><?php echo $newdate1 = date("d-m-Y", strtotime($trabajador['inicio_tr'])); ?></td>
 
                         <td><?php echo $trabajador['nombre_cat']; ?></td>
 
@@ -318,9 +320,13 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
 
                         </td>
-
+                     
+                        <td>
+                        <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $id_trabajador; ?>" class="btn btn-danger btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-plus"></i></a>
+                        </td>
 
                       </tr>
+
                   <?php
                     }
                   }
@@ -333,6 +339,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
 
             </div>
+          
 
           </div>
         </div>

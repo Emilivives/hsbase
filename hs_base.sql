@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-03-2024 a las 15:00:08
+-- Tiempo de generación: 20-03-2024 a las 13:40:31
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -107,16 +107,6 @@ CREATE TABLE `accidentes` (
   `cargorevisado_ace` varchar(255) NOT NULL,
   `fecharevision_ace` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `accidentes`
---
-
-INSERT INTO `accidentes` (`id_accidente`, `nroaccidente_ace`, `comunicado_ace`, `trabajador_ace`, `centro_ace`, `lugar_ace`, `detalleslugar_ace`, `tipoaccidente_ace`, `fecha_ace`, `fechabaja_ace`, `hora_ace`, `horatrabajo_ace`, `trabajohabitual_ace`, `diadescanso_ace`, `semanadescanso_ace`, `diasbaja_ace`, `isevaluadoriesgo_ace`, `evalconriesgo_ace`, `isrecaida_ace`, `fechaantesrecaida_ace`, `descripcion_ace`, `tipolugar_ace`, `zonalugar_ace`, `observaclugar_ace`, `procesotrabajo_ace`, `observproceso_ace`, `tipoactividad_ace`, `observtipoactiv_ace`, `agentematerial_ace`, `observagmaterial_ace`, `desviacion_ace`, `observdesviacion_ace`, `agmaterdesv_ace`, `observagendesv_ace`, `formacontacto_ace`, `observformacont_ace`, `matercasusalesi_ace`, `observmatlesi_ace`, `numtrafectados_ace`, `declaraciontrab_ace`, `istestigos_ace`, `detallestestigo_ace`, `declaraciontestigo_ace`, `tipolesion_ace`, `gradolesion_ace`, `partecuerpo_ace`, `isevacuacion_ace`, `lugarevacuacion_ace`, `centromedico_ace`, `detallescentromed_ace`, `recomedincorp_ace`, `recinedtrab_ace`, `istrformado_ace`, `istrinformado_ace`, `protcolectivadisp_ace`, `protcolecnecesa_ace`, `observprotcol_ace`, `episdispon_ace`, `episneces_ace`, `observepis_ace`, `causaaccidente_ace`, `porquecausa_ace`, `quiencontrolcausa_ace`, `conclusionacci_ace`, `medidasprev_ace`, `valoracionmedida_ace`, `histaccult12mes_ace`, `histpuestoacc_ace`, `histtrabajosreal_ace`, `histcausaacc_ace`, `histmedidaacc_ace`, `investigador_ace`, `cargoinvesiga_ace`, `fechainvestiga_ace`, `fechacumplimen_ace`, `revisadopor_ace`, `cargorevisado_ace`, `fecharevision_ace`) VALUES
-(9, '011/2024', 'SI', 8, 5, '1', 'entrada barco', 1, '2024-01-03', '2024-01-30', '15:52:00', 6, 'SI', 'Martes', 1, 6, 'SI', 'SI', 'SI', '2024-01-10', 'En el momento de acceder en el barco nota un fuerto dolor lumbar', 4, 'entrada', 'Acto seguido de la rampa de acceso a la embarcacion', 10, 'detalles Observaciones del proceso', 12, 'detallesObservaciones tipo actividad', 15, 'Observaciones Agente material', 12, 'Observaciones desviacion', 9, 'Observaciones Agente material', 9, 'Observaciones forma contacto:', 3, 'Observaciones Agente material', 1, 'En el momento que subia noto un dolor intenso que me imposibilita trabajar asi como mantener la postura erguida', 'SI', 'Oscar kehrli', 'Lo vio parara de golpe y no poder continuar', 2, 2, 10, 'SI', 'hospital rosario', 'SI', 'can misses', 0, 0, 'SI', 'SI', 'barandilla', 'barandilla', 'disponible', 'calzado', 'calzado', 'desgastados', 'Falta de atencion a la lhora de realizar trabajos forzados', 'falta atencion', 'trabajador', 'El trabajador debe contemplar aquellos trabajos que impliquen esfuerzo', 'Informar al trabajador de aquellos trabajos considerados peligrosos', 'Se entrega ficha de informacion en fecha 15.02.2024', 'SI', 'Marinero', 'Limpieza', 'Falta de atencion 122', 'informacion', 'Emili vives', 'responsable prl', '2024-01-12', '2024-01-10', 'Emili vives', 'Responsable prl', '2024-01-18'),
-(14, '155/2024', 'NO', 6, 6, '3', '', 2, '2024-01-18', '0000-00-00', '00:00:00', 0, '-', 'Seleccione', 0, 0, '-', '-', '-', '0000-00-00', '', 6, '', '', 4, '', 4, '', 4, '', 7, '', 13, '', 13, '', 7, '', 0, '', 'SI', '', '', 8, 3, 8, '-', '', '-', '', 0, 0, '-', '-', '', '', '', '', '', '', '', '', '', '', '', '', '-', '', '', '', '', '', '', '0000-00-00', '0000-00-00', '', '', '0000-00-00'),
-(15, '055/2023', 'SI', 8, 5, '1', '', 1, '2023-03-08', '2023-04-05', '16:53:00', 3, 'SI', 'Martes', 3, 5, 'SI', 'SI', 'SI', '2023-03-03', '', 5, '', '', 5, '', 8, '', 11, '', 12, '', 13, '', 15, '', 5, '', 1, '', '-', '', '', 9, 1, 13, 'SI', 'hospital rosario', 'SI', '', 2023, 2024, 'SI', 'SI', '', '', '', '', '', '', '', '', '', '', '', '', 'SI', '', '', '', '', 'Emili vives', 'responsable prl', '2024-02-15', '2024-02-14', 'Emili vives', 'Responsable prl', '2024-02-13'),
-(16, '002/2024', 'NO', 11, 5, '1', 'A pie de muelle', 1, '2024-03-01', '0000-00-00', '00:00:00', 0, 'SI', 'Lunes', 8, 1, 'SI', 'SI', 'NO', '0000-00-00', 'El trabajador posiciona una defensa a pie de muelle que le sale escupida y le impacta en la mano', 57, 'Muelle', 'Dia con mucho mal tiempo(fuertes vientos y oleaje)', 26, 'Colocacion defensas', 19, 'Colocacion defensas', 1376, 'Defensas buque', 20, 'defensa escupida por presion y estar mojada', 11, 'Suelo del muelle', 21, '', 39, '', 1, 'Posicionando defensa,', 'SI', '', '', 6, 1, 7, 'NO', '', 'SI', 'Hospital juaneeda', 0, 0, 'SI', 'SI', 'N/A', '', '', 'Guantes y calzado', '', '', 'Procedimiento de forma incorrecta de realizar el trabajo', 'Mal planteamiento de los trabajos', 'Capitan / trabajador', 'Las tareas se deben planificar siempre teniendo en cuenta las probabilidades de que pueda suceder un accidente, en este caso no se hizo', 'Se comunica forma de proceder', 'Implantadas', '-', '', '', '', '', 'Emili vives', 'responsable prl', '2024-03-04', '2024-03-04', 'Emili vives', 'Responsable prl', '2024-03-04');
 
 -- --------------------------------------------------------
 
@@ -5114,8 +5104,7 @@ CREATE TABLE `ag_acciones` (
 --
 
 INSERT INTO `ag_acciones` (`id_accion`, `codigo_acc`, `fecha_acc`, `centro_acc`, `prioridad_acc`, `origen_acc`, `detalleorigen_acc`, `descripcion_acc`, `responsable_acc`, `fechaprevista_acc`, `fecharea_acc`, `fechaveri_acc`, `avance_acc`, `estado_acc`, `accpropuesta_acc`, `accrealizada_acc`, `seguimiento_acc`, `recursos_acc`, `imagen1_acc`) VALUES
-(1, 'N/A', '0001-01-01', 4, 'Baja', '0', 'N/A', 'N/A', 1, '2024-01-01', '0000-00-00', '0000-00-00', '0%', 'Comunicada', 'N/A', 'N/A', 'n/a', 1, ''),
-(15, '001/2024', '2024-02-26', 5, 'Media', 'Otros', 'Visita buque', 'Falta señal salida', 2, '2024-02-26', '0000-00-00', '0000-00-00', '50%', 'Abierta', 'Dotar de señal', '', '', 0, '');
+(1, 'N/A', '0001-01-01', 23, 'Baja', '0', 'N/A', 'N/A', 1, '0001-01-01', '0000-00-00', '0000-00-00', '0%', 'Comunicada', 'N/A', 'N/A', 'n/a', 1, 0x323032342d30332d31322d30322d35362d31385f5f);
 
 -- --------------------------------------------------------
 
@@ -5134,21 +5123,6 @@ CREATE TABLE `ag_actividad` (
   `detalles_acc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `ag_actividad`
---
-
-INSERT INTO `ag_actividad` (`id_actividad`, `id_tarea`, `fecha_acc`, `horain_acc`, `horafin_acc`, `horas_acc`, `responsable_acc`, `detalles_acc`) VALUES
-(1, 6, '2023-12-06', '17:33:40', '20:33:40', '00:00:00', 'Emili Vives', 'Realizar listados de siniestralidad, busqueda de valores segun mutua'),
-(2, 4, '2023-12-18', '20:53:49', '22:53:49', '00:00:00', 'Emili Vives', 'Crear programacion anual'),
-(3, 4, '2023-12-06', '15:42:25', '18:42:25', '00:00:00', 'Emili', 'Imprimir y colgar en servidor'),
-(4, 4, '2023-12-07', '13:43:00', '15:43:00', '00:00:00', 'Emili', 'Proga'),
-(5, 4, '2023-12-15', '12:45:00', '14:45:00', '00:00:00', 'Maria Jose', 'Detalles proba'),
-(6, 4, '2023-12-14', '13:47:00', '16:47:00', '00:00:00', 'Emili', ''),
-(7, 4, '2023-12-07', '14:52:00', '20:52:00', '00:00:00', 'Emili', 'Proba 2'),
-(8, 4, '2023-12-14', '12:12:00', '13:13:00', '00:00:00', 'Maria Jose', 'Progba 55'),
-(9, 4, '2023-12-15', '14:43:00', '19:40:00', '00:00:00', 'Maria Jose', '');
-
 -- --------------------------------------------------------
 
 --
@@ -5160,7 +5134,7 @@ CREATE TABLE `ag_proyecto` (
   `nombre_py` varchar(255) NOT NULL,
   `responsable_py` int(11) NOT NULL,
   `descripcion_py` text NOT NULL,
-  `estado_py` int(11) NOT NULL,
+  `estado_py` varchar(25) NOT NULL,
   `fechainicio_py` date NOT NULL,
   `fechafin_py` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -5170,8 +5144,7 @@ CREATE TABLE `ag_proyecto` (
 --
 
 INSERT INTO `ag_proyecto` (`id_proyecto`, `nombre_py`, `responsable_py`, `descripcion_py`, `estado_py`, `fechainicio_py`, `fechafin_py`) VALUES
-(1, 'Actividad Anual 2024', 1, 'Actividad preventiva de TRASMAPI (servicios y concesiones maritimas ibicencas S.A.)', 1, '2024-01-01', '2024-12-31'),
-(2, 'Revision equipos', 2, 'REvision equipos de trabjo', 1, '2023-11-07', '2023-11-22');
+(3, 'Actividad PRL 2024 - SERCOMISA', 1, 'Actividad preventiva de la empresa SERVICIOS Y CONCESIONES MARITIMAS IBICENCAS S.A.', 'Activo', '2024-01-01', '2024-12-31');
 
 -- --------------------------------------------------------
 
@@ -5200,12 +5173,7 @@ CREATE TABLE `ag_tareas` (
 --
 
 INSERT INTO `ag_tareas` (`id_tarea`, `id_proyecto`, `nombre_ta`, `fecha_ta`, `fechareal_ta`, `centro_ta`, `responsable_ta`, `prioridad_ta`, `estado_ta`, `programada_ta`, `detalles_ta`, `categoria_ta`, `accionprl_ta`) VALUES
-(4, 1, 'Programacion anual', '2023-11-09', '2023-11-09', 4, 1, 'alta', 'Completado', 1, 'detalles de la tarea con su descripciones', 'documentos', 1),
-(5, 1, 'Listar equipos', '2023-11-15', '2023-11-15', 5, 1, 'Baja', 'Parcialmente hecho', 1, 'Listar aquellos equipos de trabajo que haya en el centro', 'Seguridad', 1),
-(6, 1, 'Listado siniestralidad', '2023-11-09', '2023-11-21', 4, 1, 'Media', 'En curso', 1, 'Mostrar datos estadisticos de la siniestralidad del año anterior', 'Documentos', 1),
-(14, 1, 'Revision extintores', '2023-12-19', '2023-12-19', 4, 5, 'Media', 'Completado', 0, 'Revision extintores de co2', 'Seguridad', 1),
-(15, 1, 'Evaluacion buque', '2023-12-12', '2023-12-12', 5, 3, 'Media', 'En curso', 1, '', 'Seguridad', 1),
-(16, 2, 'Visita instalaciones', '2024-02-29', '0000-00-00', 6, 1, 'Baja', 'En curso', 0, '', 'Psicosociologia', 1);
+(18, 3, 'Formacion PRL', '2024-03-12', '2024-03-12', 18, 1, 'Media', 'Completado', 0, 'Formacion trabajador Joan Sales', 'Formación', 1);
 
 -- --------------------------------------------------------
 
@@ -5226,14 +5194,35 @@ CREATE TABLE `categorias` (
 
 INSERT INTO `categorias` (`id_categoria`, `nombre_cat`, `departamento_cat`, `descripcion_cat`) VALUES
 (1, 'Administracion', 1, 'Puestos de trabajo incluidos: Responsable SGI, Responsable RRHH, Administrativo RRHH, Administrativo Técnico, Administrativo comercial, Responsable Opto. Marketing, Administrativo marketing, Diseñador/a gráfico, Responsable Opto. Calidad, Administrativo contable, Responsable Opto. Compras, Administrativo compras, Administrativo Informático, administrativo Call Centre y administrativo.\r\nLa definición de trabajos y funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestión Integrada de la empresa.\r\nEl puesto de trabajo concierne a trabajadores de distintos departamentos con riesgos similares aunque realizan trabajos administrativos de diferentes índoles.\r\nLas funciones genéricas establecidas dentro del puesto de trabajo de administración incluyen: Gestionar (recibir, redactar, transcribir, clasificar, registrar, distribuir, etc.) documentos, informes o escritos, correspondencia, actas administrativas, etc., utilizando para ello ordenador personal, fax, teléfono, etc. Uso de pantallas de visualización de datos. Planificar, dirigir y coordinar diariamente las actividades relativas a la empresa asegurando la utilización racional de los recursos y el cumplimiento de las normas. Negociar, vender y contratar equipos, aparatos e instrumentos técnicos, productos, repuestos, etc., así como servicios\r\ndiversos a empresas y a clientes particulares. Atender llamadas telefónicas y/o correos electrónicos, solicitando información, citas,\r\nentrevistas ... Establecer la comunicación entre el solicitante y la persona a quien va dirigida la llamada . . Asimismo, puede realizar labores\r\nde información, orientación. En ocasiones pueden realizar desplazamientos al exterior mediante vehículos, transporte público o andando.'),
-(2, 'Marinero', 1, 'La definicion de trabajos y  funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestion Integrada de la empresa. Actividad:  A las órdenes del primer oficial, tiene asignadas las funciones siguientes asumiendo sus responsabilidades: • Mantenimiento de los equipos de cubierta y casco. • Maniobras de atraque • Embarque y desembarque del pasaje • Estiba del equipaje incluido la ayuda al pasajero con su equipaje en las rampas de acceso. • Atención al pasaje, transmitir cualquier incidencia al primer oficial, • Limpieza general • Otras funciones generales de marinería que le sean encomendadas.  Condiciones de trabajo: Participa de las condiciones generales de la embarcación. En ella, existen distintas zonas: Zonas de cubierta, con distintos niveles a los que se accede por escaleras de servicio. Zonas de proa y popa en donde existen diferentes elementos para hacer firme como molinetes, bozas, cabos, cornamusas, bitas, etc. Zonas de pasaje. Están ubicadas en cubierta principal y superior. Hay una zona abierta y otras cerradas. Todas ellas disponen de hileras de asientos para el pasaje. De manera general, la marinería se encuentra expuesta a las condiciones climáticas exteriores, y por tanto, variables. Disponen de ropa de trabajo adecuada a las inclemencias del tiempo y a las condiciones de las distintas épocas del año. En las operaciones de atraque y desamarre, participan también de las condiciones del muelle, existiendo interacción con pasarelas, defensas del muelle, norays, etc.'),
+(2, 'Marinero', 2, 'La definicion de trabajos y  funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestion Integrada de la empresa. Actividad:  A las órdenes del primer oficial, tiene asignadas las funciones siguientes asumiendo sus responsabilidades: • Mantenimiento de los equipos de cubierta y casco. • Maniobras de atraque • Embarque y desembarque del pasaje • Estiba del equipaje incluido la ayuda al pasajero con su equipaje en las rampas de acceso. • Atención al pasaje, transmitir cualquier incidencia al primer oficial, • Limpieza general • Otras funciones generales de marinería que le sean encomendadas.  Condiciones de trabajo: Participa de las condiciones generales de la embarcación. En ella, existen distintas zonas: Zonas de cubierta, con distintos niveles a los que se accede por escaleras de servicio. Zonas de proa y popa en donde existen diferentes elementos para hacer firme como molinetes, bozas, cabos, cornamusas, bitas, etc. Zonas de pasaje. Están ubicadas en cubierta principal y superior. Hay una zona abierta y otras cerradas. Todas ellas disponen de hileras de asientos para el pasaje. De manera general, la marinería se encuentra expuesta a las condiciones climáticas exteriores, y por tanto, variables. Disponen de ropa de trabajo adecuada a las inclemencias del tiempo y a las condiciones de las distintas épocas del año. En las operaciones de atraque y desamarre, participan también de las condiciones del muelle, existiendo interacción con pasarelas, defensas del muelle, norays, etc.'),
 (21, 'Informático', 1, 'Detalles puesto informatico'),
 (22, 'Capitán', 2, 'Detalles puesto capitan'),
 (23, 'Primer oficial', 2, 'Detalles puesto primer oficial'),
-(25, 'Primero máquinas', 2, 'detalles categoria'),
+(25, 'Primer Of. máquinas', 1, 'detalles categoria'),
 (26, 'Taquilla', 4, 'Atencion y venta al cliente'),
 (27, 'Amarrador', 4, 'Amarre de embarcaciones'),
-(28, 'Oficial carga', 4, 'Gestion del embarque y desembarque de vehiculos a las embarcaciones');
+(29, 'Gerente', 1, 'Descripcion puesto Gerente'),
+(30, 'Operario/a mantenimiento', 5, 'Descripcion puesto Operario mantenimiento'),
+(31, 'Mecánico', 5, 'Descripción puesto Mecanico'),
+(32, 'Jefe de máquinas', 2, 'Descripción puesto Jefe de máquinas'),
+(33, 'Vigilante', 1, 'Descripción puesto Vigilante'),
+(34, 'Marinero de máquinas', 2, 'Descripción puesto  marinero de maquinas'),
+(35, 'Comercial', 3, 'Descripción puesto comercial'),
+(36, 'Auxiliar de pasaje', 2, 'Descripción puesto auxiliar de pasaje'),
+(37, 'Contramaestre', 1, 'Descripción puesto contramaestre'),
+(38, 'Oficial de puente', 2, 'Descripción puesto oficial de puente'),
+(39, 'Oficial de máquinas', 2, 'Oficial de maquinas'),
+(40, 'Sobrecargo', 2, 'Descripción puesto sobrecargo'),
+(41, 'Limpiador/a', 1, 'Descripción puesto limpiador/a'),
+(42, 'Responsable dpto ', 1, 'Descripción puesto responsable dpto.'),
+(43, 'Coordinador puerto', 4, 'Descripción puesto coordinador puerto'),
+(44, 'Mecánico naval', 5, 'Descripción puesto mecánico naval'),
+(45, 'Mecánico naval 2ª', 5, 'Descripción puesto mecanico naval 2ª'),
+(46, 'Oficial de carga', 4, 'Descripción puesto oficial de carga'),
+(47, 'Azafata puerto', 4, 'Descripción puesto azafata puerto'),
+(48, 'Oficial operaciones puerto', 4, 'Descripción puesto oficial operaciones puerto'),
+(49, 'Taquilla - Amarrador - carga', 4, 'Descripción puesto  Taquilla - Amarrador - carga'),
+(50, 'Patrón', 2, 'Descripcion puesto Patrón');
 
 -- --------------------------------------------------------
 
@@ -5258,7 +5247,33 @@ INSERT INTO `centros` (`id_centro`, `nombre_cen`, `empresa_cen`, `tipo_cen`, `di
 (5, 'Castavi Jet', 1, 2, 'C/ Aragon, 71 - Eivissa'),
 (6, 'Aires de Formentera', 2, 2, 'Ctra Sant Francesc s/n - La savina'),
 (7, 'Espalmador Jet', 1, 2, 'C/ Aragón, 71 - Eivissa'),
-(8, 'Illetas Jet', 1, 2, 'C/ Aragón, 71 - Eivissa');
+(8, 'Illetas Jet', 1, 2, 'C/ Aragón, 71 - Eivissa'),
+(9, 'PRINCESA DEL MAR', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(10, 'NAUTICA VARADERO', 1, 1, 'Pol. Montecristo s/n'),
+(11, 'SUN CAT', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(12, 'CASTAVI JET', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(13, 'MEDITERRANE', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(14, 'ESPALMADOR JET', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(15, 'SEABUS I', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(16, 'ILLETAS JET', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(17, 'MIGJORN JET', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(18, 'FAIRWEATHER', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(19, 'CHENEGA', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(20, 'INCAT 045', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(21, 'EIVISSA JET', 2, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(22, 'FORMENTERA JET', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(23, 'OFICINAS  CONSIGNA DE BUQUES', 1, 1, 'Muelle pesquero s/n - Eivissa'),
+(24, 'TODOS LOS CENTROS', 1, 1, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(25, 'OFICINAS- Taquilla Ibiza', 1, 1, 'Estacion maritima Ibiza - 07800 - Eivissa (I. Balears)'),
+(26, 'OFICINAS- Taquilla Alcudia', 1, 1, 'Estacion maritima Alcudia - 07800 - Alcudia (I. Balears)'),
+(27, 'OFICINAS- Taquilla Formentera', 1, 1, 'Estacion maritima Formentera - 07800 - La Savina (I. Balears)'),
+(28, 'OFICINAS- Taquilla Ciutadella', 1, 1, 'Estacion maritima Ciutadella - 07800 - Ciutadella (I. Balears)'),
+(29, 'OFICINAS- Puerto Ibiza', 1, 1, 'Estacion maritima Ibiza - 07800 - Ibiza (I. Balears)'),
+(30, 'OFICINAS- Puerto Formentera', 1, 1, 'Estacion maritima Formentera - 07800 - La Savoma (I. Balears)'),
+(31, 'IBIZA JET', 1, 1, 'Embarcacion'),
+(32, 'OFICINAS- Benidorm', 1, 1, 'Oficina Benidorm (Alicante)'),
+(33, 'SEABUS II', 1, 1, 'Embarcaci?n'),
+(34, 'OFICINAS- Ikebana', 2, 1, 'C/ S\'hort de sa fruita, 5, 1? - 07800 - Eivissa (I. Balears)');
 
 -- --------------------------------------------------------
 
@@ -5272,14 +5287,6 @@ CREATE TABLE `citas_rm` (
   `fecha_crm` date NOT NULL,
   `anotaciones_crm` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `citas_rm`
---
-
-INSERT INTO `citas_rm` (`id_citarm`, `trabajador_crm`, `fecha_crm`, `anotaciones_crm`) VALUES
-(13, 7, '0000-00-00', ''),
-(14, 4, '0000-00-00', '');
 
 -- --------------------------------------------------------
 
@@ -5301,7 +5308,8 @@ INSERT INTO `departamentos` (`id_departamento`, `nombre_dpo`, `descripcion_dpo`)
 (1, 'Administración', 'Personal oficinas'),
 (2, 'Embarcado', 'Personal realizando trabajos a bordo de un buque'),
 (3, 'Comercial', 'Trabajador del sistema comercial de la empresa'),
-(4, 'Puerto', 'Personal destinado a la atencion al pasaje, preparacion de entorno para el atraque de buques o embarque de vehiculos.');
+(4, 'Puerto', 'Personal destinado a la atencion al pasaje, preparacion de entorno para el atraque de buques o embarque de vehiculos.'),
+(5, 'Taller - mantenimiento', 'Personal destinado a la reparación y mantenimiento de embarcaciones, maquinaria y otros.');
 
 -- --------------------------------------------------------
 
@@ -5389,15 +5397,10 @@ CREATE TABLE `formacion` (
 --
 
 INSERT INTO `formacion` (`id_formacion`, `nroformacion`, `tipo_fr`, `fecha_fr`, `fechacad_fr`, `formador_fr`) VALUES
-(14, 1, 2, '2024-01-10', '2024-01-17', 2),
-(15, 2, 1, '2024-01-09', '2024-01-10', 1),
-(17, 3, 1, '2024-01-18', '2024-01-26', 1),
-(20, 4, 1, '2024-01-25', '2024-01-25', 1),
-(21, 11, 1, '2024-01-10', '2025-01-10', 1),
-(22, 12, 1, '2023-02-08', '2024-01-11', 1),
-(23, 14, 1, '2024-01-11', '2024-01-23', 1),
-(24, 15, 2, '2024-03-01', '2024-01-24', 1),
-(25, 16, 2, '2024-02-08', '2024-02-23', 1);
+(26, 1, 3, '2024-03-12', '2024-03-12', 1),
+(27, 2, 1, '2024-03-20', '2027-03-20', 1),
+(28, 3, 3, '2024-03-20', '2025-03-21', 1),
+(29, 4, 3, '2024-03-13', '2024-03-14', 1);
 
 -- --------------------------------------------------------
 
@@ -5416,23 +5419,25 @@ CREATE TABLE `form_asistencia` (
 --
 
 INSERT INTO `form_asistencia` (`id_formasistencia`, `nroformacion`, `idtrabajador_fas`) VALUES
-(1, 1, 3),
-(6, 1, 4),
-(8, 1, 8),
-(10, 1, 5),
-(11, 1, 6),
-(12, 2, 3),
-(13, 2, 4),
-(14, 2, 6),
-(15, 3, 10),
-(16, 4, 4),
-(17, 11, 6),
-(18, 12, 6),
-(19, 12, 4),
-(20, 14, 6),
-(21, 15, 5),
-(22, 16, 3),
-(23, 16, 9);
+(24, 1, 408),
+(25, 2, 408),
+(27, 3, 101),
+(29, 4, 1),
+(30, 4, 101),
+(31, 4, 102);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `logformacion_trabajadores`
+--
+
+CREATE TABLE `logformacion_trabajadores` (
+  `id` int(11) NOT NULL,
+  `trabajador` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `actualizacion` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -5455,8 +5460,7 @@ CREATE TABLE `reconocimientos` (
 --
 
 INSERT INTO `reconocimientos` (`id_reconocimiento`, `id_trabajador`, `fecha_rm`, `caducidad_rm`, `vigente_rm`, `cita_rm`, `anotaciones_rm`) VALUES
-(52, 10, '2024-02-08', '2024-03-01', 1, 0, ''),
-(54, 4, '2024-05-30', '2024-04-17', 1, 0, '');
+(57, 318, '2024-03-11', '2024-03-15', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -5577,7 +5581,8 @@ CREATE TABLE `tipoformacion` (
 
 INSERT INTO `tipoformacion` (`id_tipoformacion`, `nombre_tf`, `duracion_tf`, `validez_tf`, `detalles_tf`) VALUES
 (1, 'Puesto de trabajo 1h', 1, 3, 'Formacion de los riesgos segun el puesto de trabajo que realiza el trabajador:(LPRL 31/1995) \r\nExposición y medidas frente a los riesgos que esta expuesto el trabajador según el puesto de trabajoque realice (Conceptos generales LPRL: Normativa, derechos y obligaciones, Siniestralidad departamento / Centro /Grupo\r\nCaidas al mismo nivel\r\nCaidas a distinto nivel\r\nCaida de objetos en manipulación\r\nCorte por herramientas / útiles\r\nGolpes por objetos o herramientas\r\nProyección de fragmentos o partículas\r\nAtrapamiento por elementos de máquinas / vehículos\r\nSobresfuerzos\r\nContáctos térmicos\r\nContactos eléctricos\r\nExposición a sustancias tóxicas o nocivas, causticas o corrosivas\r\nExposicición a altas temperaturas (actuación ante el golpe de calor)\r\nIncendios – Emergneicas (uso extintores, evacuación, señalización)\r\nRuido – Vibraciones\r\nOperativas de trabajo seguro (rampas, accesos, atraque)\r\nRiesgos Psicosociales \r\nActuacion en caso de accidente\r\nRiesgos y medidas frente COVID-19 \r\nEquipos de protección individual (EPI’s)\r\nActuacion en caso de accidente\r\nVigilancia de la salud'),
-(2, 'Equipos de trabajo', 2, 5, 'Detalles formacion equipos trabajo 2h');
+(2, 'Equipos de trabajo', 2, 5, 'Detalles formacion equipos trabajo 2h'),
+(3, 'Puesto de trabajo (Art.19 LPRL) 2 hrs', 2, 3, 'Formacion de los riesgos segun el puesto de trabajo que realiza el trabajador:(LPRL 31/1995) \r\nExposición y medidas frente a los riesgos que esta expuesto el trabajador según el puesto de trabajo que realice\r\nConceptos generales LPRL: Normativa, derechos y obligaciones, \r\nSiniestralidad departamento / Centro /Grupo \r\nCaidas al mismo nivel\r\n Caidas a distinto nivel \r\nCaida de objetos en manipulación \r\nCorte por herramientas / útiles \r\nGolpes por objetos o herramientas\r\nProyección de fragmentos o partículas \r\nAtrapamiento por elementos de máquinas / vehículos \r\nSobresfuerzos \r\nContáctos térmicos \r\nContactos eléctricos \r\nExposición a sustancias tóxicas o nocivas, causticas o corrosivas \r\nExposicición a altas temperaturas (actuación ante el golpe de calor) \r\nIncendios – Emergneicas (uso extintores, evacuación, señalización)\r\nRuido – Vibraciones\r\nOperativas de trabajo seguro (rampas, accesos, atraque, etc) \r\nRiesgos Psicosociales \r\nActuacion en caso de accidente Riesgos y medidas frente COVID-19 \r\nEquipos de protección individual (EPI’s) \r\nActuacion en caso de accidente \r\nVigilancia de la salud\r\n--\r\nAspectos medioambientales (tratamiento residuos, contaminacion y determinacion de contaminantes peligrosos,etc)');
 
 -- --------------------------------------------------------
 
@@ -5590,14 +5595,14 @@ CREATE TABLE `trabajadores` (
   `codigo_tr` int(11) NOT NULL,
   `dni_tr` varchar(25) NOT NULL,
   `nombre_tr` varchar(250) NOT NULL,
-  `sexo_tr` varchar(1) NOT NULL,
+  `sexo_tr` varchar(10) NOT NULL,
   `fechanac_tr` date NOT NULL,
   `categoria_tr` int(11) NOT NULL,
   `inicio_tr` date NOT NULL,
   `centro_tr` int(11) NOT NULL,
   `activo_tr` int(1) NOT NULL DEFAULT 1,
-  `formacionpdt_tr` varchar(10) NOT NULL,
-  `anotaciones_tr` text NOT NULL,
+  `formacionpdt_tr` varchar(10) DEFAULT NULL,
+  `anotaciones_tr` text DEFAULT NULL,
   `fyh_creacion` datetime NOT NULL,
   `fyh_actualizacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -5607,18 +5612,417 @@ CREATE TABLE `trabajadores` (
 --
 
 INSERT INTO `trabajadores` (`id_trabajador`, `codigo_tr`, `dni_tr`, `nombre_tr`, `sexo_tr`, `fechanac_tr`, `categoria_tr`, `inicio_tr`, `centro_tr`, `activo_tr`, `formacionpdt_tr`, `anotaciones_tr`, `fyh_creacion`, `fyh_actualizacion`) VALUES
-(3, 110, '47627004F', 'VIVES GARCIA, EMILIo', 'H', '1979-10-03', 1, '2021-08-01', 4, 1, 'Si', 'Si', '2023-11-17 09:56:23', '2024-02-19 13:43:24'),
-(4, 221, '12452145F', 'SANCHEZ TORRES, JOSE LUIS', 'H', '1988-11-01', 2, '2023-07-11', 7, 0, 'Si', 'No', '2023-11-17 09:56:23', '2024-01-31 10:04:46'),
-(5, 98898, '00001000T', 'PEREZ PEREZ, PRUEBA', 'H', '1988-11-09', 1, '2023-10-31', 4, 1, 'No', 'Si', '2023-11-27 08:32:45', '2024-02-06 14:08:06'),
-(6, 125855, '11244484F', 'RUIZ RUIZ, PEPE', 'H', '2023-11-14', 2, '2023-11-07', 6, 1, 'Si', 'Si', '2023-11-27 08:34:16', '2023-11-27 08:34:16'),
-(7, 1254, '125444587S', 'SANCHEZ PERA, JOSE LUIS', 'H', '1988-06-11', 2, '2021-08-12', 7, 0, 'No', 'Si', '2023-12-07 12:25:18', '2024-02-06 14:08:13'),
-(8, 1009, '56855222L', 'LUENGO ROJAS, JOSE JAVIER ', 'H', '1988-12-05', 2, '2023-12-15', 7, 1, 'Si', 'No', '2023-12-12 14:18:59', '2024-01-30 13:41:59'),
-(9, 1885, '65532455R', 'FERNANDEZPEREZ, JOSE', 'H', '1979-12-15', 2, '2023-12-01', 5, 1, 'No', 'Si', '2023-12-13 11:47:07', '2023-12-13 11:47:07'),
-(10, 2556, '45875454S', 'GARCIA GARCIA, MANUEL', 'H', '1988-12-05', 2, '2023-12-15', 7, 1, 'Si', 'Si', '2023-12-13 11:48:08', '2023-12-13 11:48:08'),
-(11, 2546, '002486523T', 'LOPEZ SANCHEZ, PEDRO', '', '1995-07-13', 2, '2024-02-14', 7, 1, '', '', '2024-02-28 09:46:03', '2024-02-28 09:46:03'),
-(12, 8767, '99888987K', 'SANCHEZ LIBRE, JERONIMO', '', '1979-01-31', 27, '2024-02-28', 4, 1, '', '', '2024-03-01 19:52:14', '2024-03-01 19:52:36'),
-(13, 1018, '00001000T', 'GUITART FEMENIAS, MARIA HELENA', '', '1983-02-10', 1, '2024-03-01', 4, 1, '', '', '2024-03-05 08:27:43', '2024-03-05 08:27:43'),
-(14, 198888, '11244484F', 'TRUEBA BORRELL, JOSE MARIA', '', '2024-01-04', 1, '2024-02-08', 4, 1, '', '', '2024-03-05 13:06:25', '2024-03-05 13:06:25');
+(1, 2, '41443686D', 'CARDONA VIUDA, RAFAEL', 'Hombre', '1964-04-16', 50, '1983-03-24', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(2, 6, '41451668X', 'FERRER TORRES, JOSE ANTONIO', 'Hombre', '1974-03-17', 31, '1995-05-15', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(3, 813, '77016973R', 'ABDELKADER BLANCO, DUNIA', 'Mujer', '1997-10-07', 36, '2022-05-23', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(4, 23, '41451240L', 'JUAN TORRES, JOSE ANTONIO', 'Hombre', '1969-05-29', 2, '2005-05-03', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(5, 26, '41445521G', 'GUASCH FERRER, VICENTE', 'Hombre', '1965-03-03', 32, '2014-10-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(6, 28, '41448434L', 'BONET RIERA, JOSE ANTONIO', 'Hombre', '1969-06-18', 32, '2008-01-01', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(7, 30, '41451861L', 'SERRA SERRA, JUAN', 'Hombre', '1970-06-29', 2, '1999-07-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(8, 1015, '47405158L', 'ALBA CALDER?N, CRISTINA', 'Mujer', '1993-07-06', 26, '2024-02-05', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(9, 44, '41461463F', 'ORTIZ BARBERA, ALEJANDRO', 'Hombre', '1980-07-05', 50, '1999-06-04', 13, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(10, 48, '41454605A', 'MARI SERRA, JUAN ANTONIO', 'Hombre', '1977-12-07', 22, '1999-06-27', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(11, 52, '41455077S', 'TUR RIBAS, VICENTE', 'Hombre', '1974-11-14', 32, '2000-08-24', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(12, 113, '46956466B', 'FERRER BONED, EDGAR', 'Hombre', '1985-02-23', 32, '2004-05-03', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(13, 119, '41450426X', 'COSTA ROIG, ANTONIO', 'Hombre', '1968-08-07', 2, '2005-04-04', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(14, 121, '41453566E', 'GARCIA SERRA, ALEXANDRE', 'Hombre', '1972-02-03', 2, '2004-10-25', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(15, 129, '47251238S', 'COLOMAR LIX, GREGORI', 'Hombre', '1986-10-15', 22, '2014-08-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(16, 135, '41454248Z', 'TORRES TORRES, SERGIO', 'Hombre', '1973-09-27', 32, '2005-04-11', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(17, 140, '41458075T', 'MARI FERRER, JOSE VICENTE', 'Hombre', '1978-02-14', 22, '2005-05-16', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(18, 144, '46951202Z', 'GRACIA MARTINEZ, JOSE ANTONIO', 'Hombre', '1980-10-27', 34, '2005-05-19', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(19, 155, '10838430W', 'MU?IZ RODRIGUEZ, GABRIEL', 'Hombre', '1964-01-09', 34, '2006-12-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(20, 156, '41461863Q', 'CLAPES PRATS, JUAN', 'Hombre', '1975-08-20', 42, '2006-02-02', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(21, 170, '46955505Q', 'COSTA ESCANDELL, FRANCISCO JAVIER', 'Hombre', '1985-07-30', 50, '2013-07-01', 13, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(22, 174, '41450474N', 'MARIN MILES, DAVID', 'Hombre', '1974-12-23', 50, '2007-10-01', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(23, 175, '41459089W', 'GIL MARI, JOS? MIGUEL', 'Hombre', '1976-12-16', 50, '2007-04-23', 11, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(24, 192, '21682866F', 'VENTEO MASIA, ROC', 'Hombre', '1981-05-21', 27, '2007-10-10', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(25, 908, '47252607G', 'ALBA CALDERON, IRENE', 'Mujer', '1987-07-06', 1, '2023-03-13', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(26, 200, '47251838V', 'COSTA SERRA, JORGE', 'Hombre', '1986-10-23', 31, '2008-03-03', 10, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(27, 201, '41459188D', 'MARI GUASCH, JUAN ANTONIO', 'Hombre', '1975-11-20', 2, '2008-04-01', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(28, 203, '43180310H', 'LORENZO FERNANDEZ, MIGUEL ALBERTO', 'Hombre', '1973-10-15', 2, '2008-04-07', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(29, 204, '41455968D', 'RIERA SU?ER, JOSE', 'Hombre', '1973-10-23', 2, '2012-08-12', 13, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(30, 209, '41461892E', 'YERN RAMON, JAVIER', 'Hombre', '1981-05-21', 31, '2008-05-05', 10, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(31, 214, '47165760M', 'QUERALT GOMEZ, ALBERT', 'Hombre', '1991-11-15', 2, '2010-12-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(32, 216, '47252260W', 'MENDEZ INFANTE, LORENZO', 'Hombre', '1987-10-20', 32, '2015-07-06', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(33, 225, '47253362T', 'TUR JUAN, MARCOS', 'Hombre', '1990-11-01', 31, '2016-06-01', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(34, 365, '09434532R', 'ALVAREZ LORENCES, PATRICIA', 'Mujer', '1976-12-14', 22, '2015-08-15', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(35, 227, '46959506S', 'SALAZAR PAGUIRIGAN, ALLAN JAMES', 'Hombre', '1972-08-21', 2, '2010-03-02', 13, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(36, 229, '41448429Z', 'VERDERA FERRER, SANTIAGO', 'Hombre', '1969-02-02', 22, '2011-12-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(37, 234, '46955207V', 'FERNANDEZ RODRIGUEZ, ALEJANDRO', 'Hombre', '1986-09-04', 27, '2018-02-15', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(38, 240, 'Y1179592M', 'XAVIER DA VEIGA, PABLO DANIEL', 'Hombre', '1983-02-11', 27, '2022-05-27', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(39, 793, '75900122F', 'ALVAREZ MADERAL, ESTHER', 'Mujer', '1994-05-29', 2, '2022-05-03', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(40, 160, '11417528Y', 'ALVAREZ MENES, DELFINA', 'Mujer', '0000-00-00', 26, '0000-00-00', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(41, 226, '76947568X', 'ALVAREZ PEREZ, ALEJANDRA', 'Mujer', '1978-08-04', 1, '2010-07-05', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(42, 690, '02519411Z', 'ARRIBAS FERNANDEZ, MARIA JOSEFA', 'Mujer', '1959-10-12', 41, '2019-08-21', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(43, 276, '46134871E', 'MENDEZ GONZALEZ, NORTO', 'Hombre', '1971-10-28', 2, '2015-08-15', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(44, 962, 'Y7248169D', 'ARRIETA, BERENICE DINA MARIA', 'Mujer', '1986-11-05', 26, '2023-05-31', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(45, 278, '47251534N', 'BONED VARGAS, JOAN', 'Hombre', '1989-09-25', 42, '2022-04-19', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(46, 279, '41461615K', 'FERNANDEZ RODRIGUEZ, ROBERTO', 'Hombre', '1978-06-28', 27, '2012-11-30', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(47, 288, '48397906H', 'NICOLAS ARCE, SERGIO', 'Hombre', '1982-09-14', 2, '2018-04-01', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(48, 295, '46959279H', 'MARI GUASCH, VICENT', 'Hombre', '1992-12-08', 2, '2018-03-20', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(49, 302, '47256498P', 'URETA JUAN, JAVIER', 'Hombre', '1987-08-31', 34, '2015-10-26', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(50, 830, 'Y3410568G', 'BANDEIRA DO NASCIMENTO DE AMORIN, ELISABETH', 'Mujer', '1967-04-24', 41, '2022-06-03', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(51, 315, '41738301V', 'TORRES CERDA, DAMIAN', 'Hombre', '1974-11-26', 22, '2015-08-15', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(52, 317, '47260464H', 'JIMENEZ TUR, DANIEL', 'Hombre', '1993-06-29', 27, '2016-02-26', 30, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(53, 818, '75919048G', 'BARRANCO VERDEJO, LETICIA', 'Mujer', '1994-02-23', 36, '2022-05-30', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(54, 322, '46951850H', 'MARI MOYA, ARNALDO', 'Hombre', '1988-10-30', 2, '2014-11-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(55, 362, '41448394W', 'BELTRAN RIBAS, MARIA', 'Mujer', '1968-12-20', 1, '2015-11-01', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(56, 340, '47250209K', 'JUAN BONED, ANTONIO', 'Hombre', '1986-06-08', 32, '2015-03-02', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(57, 342, '47255357V', 'JUAN PALERM, JAUME', 'Hombre', '1995-05-28', 32, '2020-06-20', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(58, 346, '46958139M', 'GARCIA TORRES, DANIEL', 'Hombre', '1989-09-09', 22, '2015-05-01', 12, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(59, 349, '41510306K', 'AMARO JIMENEZ, CARLOS', 'Hombre', '1991-10-20', 23, '2016-03-30', 14, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(60, 352, '41458257K', 'ORTIZ CASTRO, JAVIER', 'Hombre', '1986-12-28', 21, '2014-10-22', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(61, 353, '48323417A', 'CASTRO ZARCO, JUAN JOSE', 'Hombre', '1981-10-14', 42, '2014-11-03', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(62, 354, '41449044P', 'MARI FERRER, ALEJANDRO', 'Hombre', '1969-02-03', 42, '2014-11-10', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(63, 356, '47405628Y', 'ALVAREZ ROBREDO, LUIS ANGEL', 'Hombre', '1996-10-24', 2, '2017-06-13', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(64, 357, '43162330R', 'MANZANARES BA?OS, DAVID', 'Hombre', '1982-09-08', 34, '2015-02-07', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(65, 820, '75884019G', 'BENITEZ SUBIAS, VANESA', 'Mujer', '1981-05-04', 40, '2022-06-01', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(66, 323, '74850412V', 'BERMEJO EXPOSITO, SARA', 'Mujer', '1980-11-03', 2, '2016-04-25', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(67, 373, '41460327K', 'DOMINGUEZ BAENA, DAVID', 'Hombre', '1980-05-09', 50, '2016-04-04', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(68, 379, '41456576L', 'BLASCO BARRERO, ISABEL MARIA', 'Mujer', '1982-07-18', 2, '2016-03-14', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(69, 376, '41454714C', 'MARIN CORTES, OSCAR', 'Hombre', '1977-01-06', 32, '2018-04-23', 13, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(70, 378, 'X8973539C', 'FERRARIS, DIEGO', 'Hombre', '1975-04-01', 48, '2017-04-03', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(71, 805, '47257531Y', 'BOGNANI, PAOLA', 'Mujer', '1993-10-21', 26, '2022-05-15', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(72, 380, '47256098E', 'BONED ROIG, CARLES', 'Hombre', '1991-10-30', 34, '2017-07-30', 22, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(73, 382, '41524562V', 'SEGUI JUAN, JOSEP', 'Hombre', '1990-07-11', 22, '2017-05-01', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(74, 387, '32875243D', 'SUAREZ GARCIA, MARINO', 'Hombre', '1972-07-03', 31, '2016-04-07', 10, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(75, 397, '41445077C', 'FERRER RIBAS, JOSE', 'Hombre', '1963-11-13', 50, '2016-04-13', 15, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(76, 403, '42861727P', 'SANTANA SAAVEDRA, JOSE MANUEL', 'Hombre', '1971-01-01', 2, '2017-04-18', 11, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(77, 859, '43709565C', 'BONASTRA DE CASTRO, MARIA CARMEN', 'Mujer', '1970-07-01', 1, '2022-07-13', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(78, 410, '46993698Y', 'CONEJERO BERNAL, CRISTIAN', 'Hombre', '1990-04-29', 2, '2017-03-27', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(79, 907, '47259965W', 'BONET TRUJILLO, MARTA', 'Mujer', '1992-02-15', 26, '2023-03-13', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(80, 785, '43210704Y', 'BUGALLO ODELLA, SILVINA YANET', 'Mujer', '1982-12-26', 1, '2022-04-25', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(81, 423, '47251833N', 'MARI RIERA, JUAN', 'Hombre', '1991-11-29', 34, '2019-04-23', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(82, 807, '30557702V', 'BURGOA ARANTZAMENDI, MIREN LORE', 'Mujer', '1963-03-01', 26, '2022-05-16', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(83, 968, 'Y9980683P', 'CALVARI, MARIA FLORENCIA', 'Mujer', '1992-10-22', 26, '2023-06-05', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(84, 438, '53244067X', 'CARBONELL MONZO, BORJA', 'Hombre', '1989-03-01', 2, '2017-05-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(85, 443, '78919718W', 'BASTERRECHEA CABALLERO, IRAITZ', 'Hombre', '1986-01-23', 23, '2019-04-10', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(86, 897, '43167690W', 'CANAVES ROS, EVA MARIA', 'Mujer', '1984-03-30', 26, '2022-12-12', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(87, 551, '41451673S', 'COSTA TUR, JOSE', 'Hombre', '1971-11-27', 32, '2019-01-31', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(88, 554, '47260066B', 'SERRA RIERA, JOSEP SALVADOR', 'Hombre', '1988-07-24', 27, '2017-04-22', 30, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(89, 559, '47253295W', 'ROMERO GARCIA, CESAR', 'Hombre', '1993-01-02', 1, '2017-04-29', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(90, 38, '41461842H', 'CARAYOL NAVARRO, MARIA ROSARIO', 'Mujer', '1978-07-27', 1, '2003-05-05', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(91, 569, '47258460S', 'KEHRLI ESCANDELL, OSCAR ENRIQUE', 'Hombre', '1993-02-12', 34, '2017-05-29', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(92, 572, '47407097A', 'TEJADO DELGADO, DAVID', 'Hombre', '1995-10-24', 2, '2020-05-13', 15, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(93, 573, '46959646V', 'PERELLO GUASCH, JOSE ANTONIO', 'Hombre', '1981-04-01', 2, '2018-04-23', 13, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(94, 575, '47251776R', 'LINERO ALVAREZ, DAVID', 'Hombre', '1990-02-05', 2, '2018-03-19', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(95, 576, '47259122X', 'RAMON COSTA, JAUME', 'Hombre', '1996-05-21', 32, '2018-04-16', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(96, 585, '47256454X', 'JUAN FERRER, JUAN ANTONIO', 'Hombre', '1992-02-05', 32, '2017-08-08', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(97, 937, '47406526F', 'CARBONELL MOYA, AINA', 'Mujer', '2000-10-07', 26, '2023-04-24', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(98, 588, '52726339N', 'JIMENEZ CAMPOS, JOAQUIN', 'Hombre', '1971-12-27', 27, '2017-12-04', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(99, 593, '76904134T', 'ALVAREZ MARTINEZ, MIGUEL ANGEL', 'Hombre', '1979-08-13', 2, '2018-03-19', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(100, 598, '76635815E', 'PERAL SANCHEZ, JOSE MIGUEL', 'Hombre', '1990-01-01', 2, '2018-05-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(101, 601, '47258959P', 'ARABI GUINART, JOSEP', 'Hombre', '1994-12-11', 34, '2018-05-17', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(102, 607, '47406814L', 'RODRIGUEZ TORRES, JOEL', 'Hombre', '1996-05-10', 2, '2019-04-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(103, 608, '47259429H', 'CARDONA TORRES, JOAN LUIS', 'Hombre', '1998-05-25', 2, '2018-05-31', 9, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(104, 12, '41450383J', 'CARDONA TUR, CARMEN', 'Mujer', '1969-04-24', 1, '1995-04-20', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(105, 619, '47433721Q', 'TORRES GUASCH, ANDREU', 'Hombre', '1999-02-17', 34, '2021-06-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(106, 621, '47257449Q', 'MARI FERNANDEZ, ALEX', 'Hombre', '1997-08-15', 2, '2020-05-20', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(107, 938, '48606017W', 'CEBRIAN OLCINA, MARIA', 'Mujer', '1993-06-07', 26, '2023-04-25', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(108, 635, '20194068E', 'LOPEZ CAMUS, RAFAEL', 'Hombre', '1973-08-14', 32, '2021-06-09', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(109, 808, '75902018V', 'CERRO MARTINEZ, ISABEL MARIA', 'Mujer', '1986-12-03', 49, '2022-05-17', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(110, 1000, 'X6877939L', 'CHENTOUF, HANAN', 'Mujer', '1975-11-15', 41, '2023-10-09', 27, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(111, 639, '58056578R', 'SESAH ARTHUR, ROBERT KWESI', 'Hombre', '1965-08-09', 34, '2019-04-01', 12, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(112, 643, '41455802G', 'RIBAS RIBAS, JOSE VICENTE', 'Hombre', '1976-02-02', 50, '2021-07-12', 9, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(113, 849, 'Y7506494K', 'CHRIFI ALAOUI, MERYEM', 'Mujer', '1991-03-19', 40, '2022-06-29', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(114, 833, '41751244B', 'COLL DIAZ, MARTA', 'Mujer', '1997-02-08', 49, '2022-06-07', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(115, 561, '48199132X', 'COSTA ROIG, MARIA NIEVES', 'Mujer', '1999-02-11', 2, '2019-05-13', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(116, 672, '39892709Z', 'GRANDA GONZALEZ, JULIO CESAR', 'Hombre', '1979-03-29', 2, '2022-05-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(117, 674, 'Y0890212B', 'SPIESER JALBAUD, LOUIS ROBERT PIERRE', 'Hombre', '1994-04-28', 34, '2020-02-10', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(118, 675, '47405810G', 'FERRER FERRER, ADRIAN', 'Hombre', '1997-04-08', 2, '2022-07-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(119, 684, '47430090L', 'GIMENEZ TORRES, JUAN', 'Hombre', '2000-09-21', 2, '2022-07-01', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(120, 685, '47430809W', 'ESCANDELL ESCANDELL, LUIS', 'Hombre', '1997-12-07', 2, '2022-06-13', 15, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(121, 8, '22719306K', 'DE LA FUENTE TORRES, FRANCISCA', 'Mujer', '1962-04-18', 27, '2023-03-31', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(122, 691, '36011742K', 'MARTINEZ COBA, JULIO', 'Hombre', '1956-01-06', 42, '2021-07-17', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(123, 696, '47406340M', 'TRELIS CARDONA, KILIAN', 'Hombre', '1989-01-31', 1, '2020-01-29', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(124, 698, 'X8221056M', 'MARZAK, AHMED', 'Hombre', '1975-06-23', 33, '2020-03-01', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(125, 699, '47251531D', 'PRIOR BONED, DAVID', 'Hombre', '1991-04-04', 1, '2020-03-03', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(126, 703, '54103381K', 'LECHUGA ESCUDERO, KEVIN', 'Hombre', '1992-10-02', 27, '2020-03-13', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(127, 705, '47255834B', 'COSTA ALBA, JAVIER', 'Hombre', '1995-07-17', 26, '2021-05-12', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(128, 706, '47258183Z', 'TUR HOMAR, GERARD', 'Hombre', '1996-11-18', 27, '2021-05-17', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(129, 277, '46956710W', 'DE LA TORRE BLANQUEZ, NURIA', 'Mujer', '1981-01-05', 42, '2012-11-20', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(130, 708, '47432117E', 'GONZALEZ GONZALEZ, RAFAEL', 'Hombre', '1994-09-06', 2, '2021-12-09', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(131, 709, '51428229E', 'PEREZ MORENO, SAMUEL', 'Hombre', '1979-06-20', 27, '2022-04-01', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(132, 710, '47408010L', 'MU?OZ GUASCH, MARC', 'Hombre', '1997-08-25', 2, '2022-02-01', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(133, 711, '47406466Q', 'RAMON RIERA, IVAN', 'Hombre', '1997-07-11', 34, '2022-02-01', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(134, 712, '72180413L', 'SANCHEZ - VALVERDE LOPE, JAVIER', 'Hombre', '1991-04-29', 2, '2022-05-02', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(135, 274, '46954609V', 'DELGADO ROIG, NOELIA', 'Mujer', '1981-07-29', 26, '2014-03-03', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(136, 716, '79326166V', 'AGEITOS BLANCO, MARCIAL', 'Hombre', '1978-10-31', 34, '2022-01-03', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(137, 717, '47250165T', 'CABRERA VEGA, MARIA', 'Hombre', '1985-11-05', 26, '2022-06-20', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(138, 723, '47627004F', 'VIVES GARCIA, EMILI', 'Hombre', '1979-10-03', 42, '2021-08-01', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(139, 728, '41745970G', 'MORCILLO MORAN, AAR?N', 'Hombre', '1998-05-21', 27, '2022-07-04', 30, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(140, 731, '36088927H', 'COSTAS ALONSO, GERMAN', 'Hombre', '1967-04-17', 30, '2022-01-03', 10, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(141, 732, '53183489Z', 'ORTIZ GARCIA, GABRIEL', 'Hombre', '1983-03-03', 44, '2022-01-03', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(142, 734, '47252943H', 'SORIANO TORRES, ALVARO', 'Hombre', '1993-06-09', 2, '2021-09-01', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(143, 735, '47826297M', 'VAZQUEZ GALLART, JORDI', 'Hombre', '1998-10-25', 39, '2022-02-04', 22, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(144, 736, '75814283G', 'ORTA ARIZA, JORGE', 'Hombre', '1978-06-22', 34, '2021-09-06', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(145, 739, '47259147N', 'MARTINEZ GARCIA, RODRIGO', 'Hombre', '1994-06-03', 31, '2021-09-06', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(146, 742, 'Y7375907M', 'RIVERA VEGA, OSCAR ANDRES', 'Hombre', '1976-04-02', 27, '2021-09-17', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(147, 744, '31257938H', 'LEON ALFEREZ, MANUEL', 'Hombre', '1968-04-15', 32, '2021-10-01', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(148, 746, '36040236H', 'COLLAZO VIDAL, CLAUDIO', 'Hombre', '1961-01-07', 30, '2022-01-03', 10, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(149, 747, '48320161J', 'RODES GARCIA, JORDI', 'Hombre', '1977-01-26', 34, '2022-06-03', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(150, 748, '41452880A', 'FERRER FERRER, FRANCISCO', 'Hombre', '1970-07-11', 26, '2022-01-13', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(151, 749, '47259563Z', 'CARDONA BONET, GUILLEM', 'Hombre', '1996-10-23', 21, '2021-11-02', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(152, 750, '47253016E', 'SANCHO PE?A, VICENTE', 'Hombre', '1992-09-20', 1, '2021-11-17', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(153, 752, '53552292N', 'LLANEZA NIETO, DAVID', 'Hombre', '1983-03-02', 34, '2021-11-30', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(154, 754, '43387524W', 'RODRIGUEZ DOMINGUEZ, YERAY', 'Hombre', '1996-05-05', 23, '2021-12-02', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(155, 755, '53647496L', 'SOTO URIA, DANIEL', 'Hombre', '1993-09-08', 38, '2021-12-26', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(156, 757, '45595342G', 'GOMEZ AVILES, MARIO', 'Hombre', '1975-06-25', 22, '2022-01-01', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(157, 759, '31694831A', 'ORTIZ MORILLAS, MANUEL JESUS', 'Hombre', '1976-04-06', 22, '2022-01-17', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(158, 761, '75874658G', 'SALVATIERRA HOYOS, DAVID', 'Hombre', '1975-03-20', 37, '2022-01-28', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(159, 762, '22986182M', 'TABOADA DURRUTY, SEM JUAN ETIENN', 'Hombre', '1969-09-06', 23, '2022-01-31', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(160, 763, '32042371J', 'TOLEDO SERRATO, JORGE CARLOS', 'Hombre', '1971-02-21', 23, '2022-02-04', 20, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(161, 765, '75888668F', 'CASTRO MARIN, DANIEL', 'Hombre', '1982-03-05', 37, '2022-02-11', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(162, 909, 'Y0022563Z', 'DI NUNZIO, SANDRA', 'Mujer', '1981-10-12', 26, '2023-03-20', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(163, 767, '51810146R', 'RODRIGUEZ NU?EZ, VLADIMIR OMAR', 'Hombre', '1961-05-13', 32, '2022-02-21', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(164, 769, '75750319A', 'SABORIDO URIA, FRANCISCO JAVIER', 'Hombre', '1978-02-23', 32, '2022-03-25', 20, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(165, 770, '47406754M', 'ALBERT TUR, VICTOR', 'Hombre', '1999-05-13', 2, '2022-03-25', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(166, 771, '30570187J', 'GALDOS BARRANCO, CARLOS SABINO', 'Hombre', '1965-06-03', 22, '2022-04-05', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(167, 772, '47252226Z', 'HERRERA BERLANGA, SAMUEL', 'Hombre', '1989-10-13', 27, '2022-04-09', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(168, 963, 'Y5341537P', 'EL BAKKALI, SOUKAINA', 'Mujer', '1990-10-08', 41, '2023-06-01', 27, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(169, 777, '43158414H', 'DOMINGUEZ GONZALEZ-MIRAND, LUIS BART.', 'Hombre', '1987-08-24', 23, '2022-04-13', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(170, 779, '43199194L', 'MICO CARBALLO, ALEJANDRO', 'Hombre', '1990-04-05', 27, '2022-04-22', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(171, 304, '41455361T', 'ESCANDELL ROIG, EVA MARIA', 'Mujer', '1976-02-12', 2, '2015-03-30', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(172, 781, '34095769V', 'GABARAIN SAIZ, MIKEL', 'Hombre', '1969-03-06', 27, '2022-04-25', 30, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(173, 783, '47406595F', 'GONZALEZ PRATS, SERGIO', 'Hombre', '1998-07-09', 34, '2022-04-25', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(174, 644, 'Y3107583K', 'ESCOBAR ORTIZ, NELLY ELIZABETH', 'Mujer', '1989-05-10', 41, '2019-04-23', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(175, 950, '41753819X', 'ESCOBAR VAZQUEZ, DORA GRISELDA', 'Mujer', '1985-05-19', 49, '2023-05-11', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(176, 787, '41740667Z', 'ORFILA PONS, PEDRO', 'Hombre', '1990-03-18', 26, '2022-04-25', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(177, 788, '43176283Q', 'ALEMANY SASTRE, TOMAS', 'Hombre', '1991-12-22', 2, '2022-05-16', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(178, 789, '43051137J', 'SANCHEZ SANCHEZ, FRANCISCO', 'Hombre', '1969-06-20', 35, '2022-05-09', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(179, 790, '05394205S', 'BARTHELEMY PAZ, FERNANDO', 'Hombre', '1962-10-11', 35, '2022-05-02', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(180, 791, '72438626B', 'LERTXUNDI MURGIONDO, MIKEL AINGERU', 'Hombre', '1966-12-23', 2, '2022-05-02', 15, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(181, 792, '05929119H', 'GARCIA LUENGO, JAIME', 'Hombre', '1986-08-06', 34, '2022-05-03', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(182, 1019, 'Y8579851Z', 'ESCOBAR VAZQUEZ, KARIN GISSELLA', 'Mujer', '1998-06-12', 49, '2024-03-11', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(183, 794, '53645317W', 'VALDEMORO BRAVO, ANGEL JOSE', 'Hombre', '1986-09-09', 2, '2022-05-03', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(184, 795, '47253251G', 'BOUZON SANCHEZ, NOEL', 'Hombre', '1986-11-06', 2, '2022-05-02', 11, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(185, 796, '31853714W', 'CORDOBA MORQUILLA, JORGE ALBERTO', 'Hombre', '1971-02-12', 37, '2022-05-03', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(186, 797, '32794348M', 'PEREZ ARES, JORGE AGUSTIN', 'Hombre', '1968-12-01', 40, '2022-05-03', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(187, 798, '31862676V', 'ROSA RIOS, VICTOR MANUEL', 'Hombre', '1975-11-19', 34, '2022-05-04', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(188, 804, 'Y3494139Q', 'F VARGAS, JOANIMARLY', 'Mujer', '1989-05-29', 26, '2022-05-12', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(189, 800, '41455438P', 'TORRES TUR, VICENTE', 'Hombre', '1973-09-02', 2, '2022-05-12', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(190, 801, '41746429A', 'VILLALONGA ENENTO, ENRIC', 'Hombre', '1992-08-06', 49, '2022-05-11', 28, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(191, 1009, '41752411M', 'FEBRER LLORENS, FRANCINA', 'Mujer', '2003-01-31', 49, '2023-12-05', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(192, 979, '43476721M', 'FEMENIAS SUAREZ, CRISTINA', 'Mujer', '2000-11-08', 26, '2023-07-03', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(193, 895, '47406769C\n', 'GARCIA GOMEZ, ANA MARIA', 'Mujer', '2001-02-18', 26, '2022-12-05', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(194, 803, '30698172A', 'GARCIA LOPEZ, NAZARET', 'Mujer', '1997-10-21', 26, '2022-05-11', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(195, 802, '46952173L', 'GARCIA MARTINEZ, JESSICA', 'Mujer', '1978-10-29', 1, '2022-05-16', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(196, 424, '49413954H', 'GARCIA RAMON, TATIANA', 'Mujer', '1992-10-12', 36, '2018-03-28', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(197, 809, '47406641F', 'MORENO RODRIGUEZ, ANTONIO', 'Hombre', '1999-08-20', 46, '2022-05-17', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(198, 811, '31849554M', 'GOMEZ GIL, MARIA LUISA', 'Mujer', '1967-12-05', 36, '2022-05-23', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(199, 812, 'X6867018T', 'EBIYON, BRIKINN', 'Hombre', '1974-07-14', 36, '2022-05-23', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(200, 951, '26243345T', 'G?MEZ NEBRERA, VANESA', 'Mujer', '1985-06-30', 26, '2023-05-15', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(201, 815, '47407071T', 'GUASCH MARI, VICENT', 'Hombre', '1994-12-12', 34, '2022-05-30', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(202, 816, '41447901S', 'TORRES RIBAS, JESUS', 'Hombre', '1966-11-07', 50, '2022-05-26', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(203, 817, '71157001S', 'CANTO VALLINA, FRANCISCO JOSE', 'Hombre', '1987-07-15', 22, '2022-05-28', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(204, 1007, 'Z1469612D', 'GUERRA, TAMARA', 'Mujer', '1968-12-26', 41, '2023-11-28', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(205, 1017, '37342121B', 'GUITART FEMENIAS, MARIA HELENA', 'Mujer', '1982-09-10', 42, '2024-03-01', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(206, 766, '41461994D', 'GUTIERREZ VILAR, NOELIA', 'Mujer', '1982-05-18', 1, '2022-04-11', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(207, 821, '55143984N', 'CINSTITU UNGUREANU, MIHAI', 'Hombre', '1967-11-28', 2, '2022-06-27', 20, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(208, 822, '41455465N', 'RIERA JUAN, ANTONIO', 'Hombre', '1973-12-08', 1, '2022-05-30', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(209, 823, '49569144G', 'GONZALEZ RUIZ, EDUARDO ASNALDO', 'Hombre', '1964-09-15', 2, '2022-06-06', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(210, 824, '41738666Z', 'HURTADO ROMERO, JOSE', 'Hombre', '1972-10-29', 49, '2022-05-31', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(211, 825, '50415682G', 'MARTINEZ GIRONES, JOAQUIN GERMAN', 'Hombre', '1958-06-10', 50, '2022-05-31', 15, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(212, 827, '40533957E', 'GARCIA BARCELO, ROGER', 'Hombre', '1980-11-16', 34, '2022-06-10', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(213, 828, '48763537H', 'MORENO NAVARRO, ALEJANDRO', 'Hombre', '1995-02-01', 34, '2022-06-02', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(214, 829, 'Y4746951H', 'CRICCO, MAURO JOSE', 'Hombre', '1978-10-30', 2, '2022-06-02', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(215, 9, 'X9374424S\n', 'HURTADO GUTIERREZ, JOSELIN', 'Mujer', '1998-04-20', 26, '2023-03-02', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(216, 831, '47431270A', 'MA?EZ PLANELLS, ADRIA', 'Hombre', '2001-08-10', 2, '2022-06-16', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(217, 832, '47408354H', 'COSTA TUMBACO, VICENTE ADRIAN', 'Hombre', '2002-12-02', 2, '2022-06-16', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(218, 1004, '47745858C', 'ISART ESTEVA, HELENA', 'Mujer', '1994-04-24', 26, '2023-11-15', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(219, 835, '47406114D', 'ESCANDELL BONET, VICENTE', 'Hombre', '1997-08-21', 34, '2022-06-20', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(220, 836, '41604189H', 'ORTIZ GARCIA, FRANK', 'Hombre', '1994-07-20', 2, '2022-06-15', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(221, 838, '41529072L', 'MIRANDA EXPOSITO, IVAN', 'Hombre', '1995-05-29', 2, '2022-06-13', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(222, 839, '75897162Z', 'TRIGUEROS GARCIA, DAVID', 'Hombre', '1994-12-15', 34, '2022-06-13', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(223, 840, '43480537A', 'FERNANDEZ SELS, PHILLIPP ALEXANDER', 'Hombre', '1988-05-17', 23, '2022-06-14', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(224, 841, '75916337F', 'ALCALDE CAMPOS, ISMAEL', 'Hombre', '1992-02-09', 2, '2022-06-17', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(225, 842, 'Y1475040H', 'SOTO ARCILA, CRISTIAN ANDRES', 'Hombre', '1994-09-25', 2, '2022-06-17', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(226, 843, '45184490R', 'GALDOS BURGOA, AITOR', 'Hombre', '2003-08-25', 26, '2022-06-17', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(227, 957, 'Y6149069X', 'LEIVA, MARIA EUGENIA', 'Mujer', '1982-10-11', 26, '2023-05-22', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(228, 986, '42264813J', 'LE?N TRAVIESO, MELANI VICTORIA', 'Mujer', '1998-10-24', 36, '2023-09-07', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(229, 846, '78221701N', 'COLL CARRETERO, MACIA', 'Hombre', '1997-10-03', 26, '2022-06-20', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(230, 847, '75960085D', 'JIMENEZ ANDRADES, JESUS', 'Hombre', '1986-10-15', 22, '2022-06-21', 20, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(231, 848, '42285827M', 'GARCIA GIMIENEZ, POL', 'Hombre', '1999-05-19', 2, '2022-06-30', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(232, 434, '34851226Q', 'LOPEZ DIAZ, ENCARNACION', 'Mujer', '1964-08-04', 41, '2017-03-30', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(233, 850, '43460370F', 'MORENO CORRAL, MARC', 'Hombre', '2002-05-01', 34, '2022-06-29', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(234, 851, '14592581R', 'RODRIGUEZ GONZALEZ, LUIS MIGUEL', 'Hombre', '1964-06-25', 2, '2022-07-01', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(235, 852, '47381207B', 'BARROS VALI?A, JESUS MANUEL', 'Hombre', '0000-00-00', 32, '2022-07-05', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(236, 853, '47408692B', 'ZITO MARIN, ALEXANDRO', 'Hombre', '1994-08-27', 2, '2022-07-07', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(237, 854, '48172744A', 'BIELSA GARCIA, CARLOS', 'Hombre', '1999-08-31', 34, '2022-07-08', 22, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(238, 855, '41524046F', 'JUAN FUSTER, JOSEP', 'Hombre', '1991-01-31', 23, '2022-07-10', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(239, 856, '18993007K', 'GARCIA RODRIGUEZ, JAVIER', 'Hombre', '1972-07-25', 36, '2022-07-14', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(240, 857, '53557520L', 'VAZQUEZ GUTIERREZ, PABLO', 'Hombre', '1987-03-21', 36, '2022-07-14', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(241, 858, '41755126Y', 'BURDILES VERA, DENIS ANDRES', 'Hombre', '2001-05-18', 49, '2022-07-12', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(242, 646, '72079142V', 'LOPEZ GONZALEZ, ALEXANDRA', 'Mujer', '1986-05-05', 36, '2019-04-24', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(243, 860, '43208729D', 'REYNES GALLEGO, FRANCISCO ALEJANDRO', 'Hombre', '2001-07-18', 36, '2022-07-18', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(244, 242, '45590835M', 'MA?AS RODRIGUEZ, MARIA DEL CARMEN', 'Mujer', '1976-10-16', 1, '2011-04-04', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(245, 862, '41752434M', 'SIERRA JARAMILLO, JEHINER ALEXANDER', 'Hombre', '1983-07-12', 2, '2022-07-25', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(246, 863, '75916933M', 'VALVERDE MARIN, LUIS MANUEL', 'Hombre', '1992-06-29', 2, '2022-07-25', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(247, 864, '78710782K', 'GORRIN ARMAS, RAMON ENRIQUE', 'Hombre', '1979-09-03', 37, '2022-07-27', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(248, 865, '10222676G', 'AATTAR BELKHYR, YASSINE', 'Hombre', '1994-01-08', 39, '2022-07-28', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(249, 866, '48109447W', 'ROMERO FRANCO, LUIS', 'Hombre', '2001-04-30', 2, '2022-07-28', 12, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(250, 873, 'X4792566X', 'MARIN MARTINEZ, TATIANA   ', 'Mujer', '1997-01-18', 49, '2022-08-22', 28, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(251, 876, '78585873W', 'GARCIA PERESTELO, GUILLERMO  ', 'Hombre', '1990-11-17', 34, '2022-09-10', 14, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(252, 877, '34748377T', 'MORA VALERO, ORIOL', 'Hombre', '1978-12-13', 49, '2022-09-20', 28, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(253, 878, '75880541E', 'TOLEDO DIAZ, DANIEL', 'Hombre', '1976-10-23', 34, '2022-10-03', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(254, 871, '41751177J', 'PONS SANCHEZ, MARC', 'Hombre', '1999-06-26', 49, '2022-08-18', 28, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(255, 319, '46957487C', 'MARIN ROMERO, EVA MARIA', 'Mujer', '1981-09-24', 1, '2014-03-03', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(256, 879, '45865637A', 'RAMOS BARROSO, MARCOS', 'Hombre', '1996-10-28', 23, '2022-10-07', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(257, 880, '78805146Q', 'AGEITOS BLANCO, MARTIN', 'Hombre', '1991-09-20', 34, '2022-10-12', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(258, 875, '71901257Z', 'ROCES MORAN, JAVIER', 'Hombre', '1995-09-05', 34, '2022-08-27', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(259, 874, '41502433Z', 'VALVERDE HERNANDO, RAUL', 'Hombre', '1976-04-17', 34, '2022-08-31', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(260, 881, '75900843S', 'RUIZ ESTRADA, MANUEL', 'Hombre', '1984-09-09', 34, '2022-10-14', 12, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(261, 647, '55469005C', 'MARQUES RIBEIRO, FERNANDA', 'Mujer', '1982-09-05', 26, '2019-04-25', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(262, 883, '54148126P\n', 'ROSS SANTANA, ALEXEI', 'Hombre', '1969-09-22', 34, '2022-10-27', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(263, 884, '43156293J', 'BALEANI-SPRINGOLO SERRA, IGNACIO', 'Hombre', '1988-05-09', 23, '2022-10-28', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(264, 885, '48762559Y', 'MOLINA GRANIZO, PABLO', 'Hombre', '1997-04-17', 34, '2022-10-30', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(265, 886, '32862720K', 'RUIZ CEBADA, JOSE MARIA', 'Hombre', '1969-11-03', 34, '2022-11-07', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(266, 887, '13979231S', 'GOMEZ GOMEZ, JOSE RAMON', 'Hombre', '1975-08-21', 32, '2022-11-03', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(267, 745, '30657987E', 'MARTINEZ PERALTA, RUBEN ESTEBAN', 'Hombre', '0000-00-00', 32, '2021-10-04', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(268, 56, '41447907K', 'TORRES MU?OZ, JAIME', 'Hombre', '1969-02-03', 34, '2022-11-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(269, 753, '47260233V', 'VERDERA JUAN, FRANCISCO JAVIER', 'Hombre', '0000-00-00', 23, '2022-05-02', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(270, 707, '76260828G', 'MARTINEZ BARRERO, FELISA', 'Mujer', '1993-08-20', 26, '2021-12-29', 27, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(271, 888, '36528166A\n', 'RUBERT JIMENEZ, DIEGO JAVIER\n', 'Hombre', '1975-10-09', 22, '2022-11-21', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(272, 891, '47260039F', 'MAYANS TORRES, PAU\n', 'Hombre', '1996-11-02', 23, '2022-12-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(273, 942, '47258302H', 'SANCHEZ ARIAS, ERIC JOSE', 'Hombre', '1995-05-11', 2, '2022-11-23', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(274, 893, '73397330Y', 'FERN?NDEZ ROCA, JOAN', 'Hombre', '1996-11-30', 34, '2022-12-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(275, 882, '43038474T', 'MARTINEZ ROTGER, MARIA ANGELES', 'Mujer', '1996-11-03', 26, '2022-10-18', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(276, 845, 'Y6047308R', 'MEZA ILARRAZA, LISSETTE ANAIS', 'Mujer', '1985-08-28', 49, '2022-06-20', 28, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(277, 896, '78640257Z', 'RODRIGUEZ GONZALEZ, DANIEL', 'Hombre', '1995-02-24', 39, '2022-12-03', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(278, 844, '18222644C', 'MIRALLES ARMERO, MARIA DEL MAR', 'Mujer', '1972-10-16', 26, '2022-06-20', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(279, 892, '71657450F\n', 'LOPEZ MONTERO, GONZALO RAFAEL\n', 'Hombre', '1987-08-29', 44, '2022-12-02', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(280, 890, '78519795A', 'RODRIGUEZ SANTANA, ALEJANDRO MANUEL', 'Hombre', '1984-10-10', 34, '2022-12-17', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(281, 898, '78769677J', 'MARTIN NU?EZ, MIGUEL ANGEL', 'Hombre', '0000-00-00', 34, '2022-12-17', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(282, 900, '71639279Y', 'ESCALADA MARIN, DAVID', 'Hombre', '0000-00-00', 25, '2023-01-04', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(283, 899, 'Y9449622V', 'CANDELO CUERO, FAVER ODIMAR', 'Hombre', '1984-05-08', 27, '2022-01-03', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(284, 901, '47409255E', 'SALOMON PADILLA, JOAN', 'Hombre', '1985-08-21', 27, '2022-01-17', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(285, 902, '47432042Q\n', 'FERRER FERRER, SERGI EDUARD', 'Hombre', '0000-00-00', 27, '2023-01-18', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(286, 903, '47433117X', 'RODRIGUEZ RODRIGUEZ, JOSE MARIA\n', 'Hombre', '1993-05-17', 27, '2023-02-01', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(287, 7, '48198156T', 'FERRER ESCANDELL, DANIEL', 'Hombre', '2000-09-03', 1, '2023-02-05', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(288, 905, '76361137X', 'PEREZ ABELLEIRA, JOSE RAMON\n', 'Hombre', '1965-12-16', 34, '2023-02-22', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(289, 906, '51118002L\n', 'ANGLADA REVENGA, JAIME\n', 'Hombre', '1991-05-09', 34, '2023-03-01', 12, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(290, 904, '79063365Z\n', 'MESA BASTIDA, CLAUDIO ARTURO', 'Hombre', '1993-09-11', 34, '2023-02-28', 12, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(291, 778, '22962290X', 'DONATE MARTINEZ, JOSE DOMINGO', 'Hombre', '1999-01-01', 2, '2022-01-15', 20, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(292, 556, '0002t', 'MIRANDA VILLACRESES, JOCELYNE PAMELA', 'Mujer', '0000-00-00', 26, '0000-00-00', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(293, 715, '47259258P', 'MORENO PLATA, NATALIA', 'Mujer', '1993-07-08', 26, '2022-04-29', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(294, 775, '46953726P', 'MORENO RODRIGUEZ, PROVIDENCIA', 'Mujer', '1977-03-05', 26, '2022-04-11', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(295, 870, '47664389V\n', 'LOZANO MORATA, JOSE', 'Hombre', '1989-11-08', 46, '2023-03-31', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(296, 965, '78720363B', 'NAVARRO BARRERA, JESICA', 'Mujer', '1983-08-27', 36, '2023-06-03', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(297, 634, '41461877F', 'NIETO ARRIBAS, EVA MARIA', 'Mujer', '1975-11-13', 26, '2019-02-20', 27, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(298, 910, '47405523Q', 'ARRIAZA RINCON, PATRICIO', 'Hombre', '1998-08-18', 46, '2023-03-29', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(299, 911, '48198061C', 'FERNANDEZ SERRANO, ADRIAN', 'Hombre', '2001-02-12', 27, '2023-03-31', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(300, 915, '29198514Z', 'CARRIO GARCIA, JAIME', 'Hombre', '1977-07-23', 27, '2023-03-31', 30, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(301, 912, 'X2746193Q', 'PASTANO, LUCA', 'Hombre', '1972-04-08', 46, '2023-03-31', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(302, 917, '24373813T', 'CORTINA SALVAGO, GIOVANA', 'Hombre', '1977-09-25', 46, '2023-04-05', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(303, 919, '47260798F ', 'GARCIOLO MARTOS, JUAN ANDRES', 'Hombre', '1995-08-14', 26, '2023-03-27', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(304, 920, 'X9240193N', 'GONZALEZ ANDRADE, JESUS ABEL', 'Hombre', '1994-12-26', 27, '2023-03-29', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(305, 921, '47431252P', 'ALVADO BATLLORI, CARLOS', 'Hombre', '2004-03-17', 27, '2023-03-31', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(306, 922, '52899577Z', 'CASAS S?NCHEZ, DAVID', 'Hombre', '1992-02-07', 27, '2023-03-31', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(307, 923, 'Y2276896W', 'EL ABDELLAOUI, ALI', 'Hombre', '1994-02-01', 27, '2023-03-31', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(308, 916, '52454673E', 'PI?EIRO SANCHEZ, JOSE LUIS', 'Hombre', '1967-10-15', 34, '2023-03-31', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(309, 918, '78625879B\n', 'GONZ?LEZ YANES, JONATHAN', 'Hombre', '1986-08-31', 34, '2023-04-14', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(310, 924, '47406183D', 'TORRES PRATS, JOAN MARC', 'Hombre', '1997-05-06', 23, '2023-04-11', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(311, 925, '47259650D', 'COLOMAR MARTIN, DAVID', 'Hombre', '1997-07-03', 2, '2023-04-11', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(312, 926, '47431439B', 'CABEZUELO DELGADO, JAVIER', 'Hombre', '2004-01-05', 27, '2023-04-10', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(313, 868, '18217528X', 'OBRADOR FUSTER, MARGARITA', 'Mujer', '1967-04-24', 26, '2022-08-09', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00');
+INSERT INTO `trabajadores` (`id_trabajador`, `codigo_tr`, `dni_tr`, `nombre_tr`, `sexo_tr`, `fechanac_tr`, `categoria_tr`, `inicio_tr`, `centro_tr`, `activo_tr`, `formacionpdt_tr`, `anotaciones_tr`, `fyh_creacion`, `fyh_actualizacion`) VALUES
+(314, 928, '11783785B', 'IGLESIAS CRUZ, JOSE MANUEL', 'Hombre', '1972-11-30', 34, '2023-04-14', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(315, 929, '39951732L', 'GARCIA CORTES, MIGUEL', 'Hombre', '2004-03-22', 46, '2023-04-17', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(316, 930, '47260660F', 'VERDERA SANCHEZ, ALEJANDRO', 'Hombre', '2003-03-14', 46, '2023-04-15', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(317, 931, 'Y9751913L', 'DELLE ROSE, GIULIO', 'Hombre', '1991-07-10', 46, '2023-04-15', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(318, 932, '71892660L', '?LVAREZ SANCHEZ, MARIANO', 'Hombre', '1986-09-04', 34, '2023-04-26', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(319, 933, '41746000B', 'FULLANA AMOR?S, FRANCESC', 'Hombre', '1994-07-20', 49, '2023-04-24', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(320, 934, '43199959W', 'URIBE PANIAGUA, ANTONIO', 'Hombre', '1989-11-23', 2, '2023-04-20', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(321, 935, '75906268N', 'SALVADOR HERNANDEZ, JOAQUIN', 'Hombre', '1990-05-01', 2, '2023-04-28', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(322, 972, '78219399X', 'OLIVA MONTA?EZ, ALBA', 'Mujer', '1996-07-27', 26, '2023-06-12', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(323, 251, '75266050E', 'PALMA GARCIA, CARMEN MARIA', 'Mujer', '1983-06-01', 2, '2016-08-15', 9, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(324, 786, '77322820V', 'PAREJA BRAVO, MERCEDES', 'Mujer', '1978-04-17', 26, '2022-04-25', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(325, 936, '32695701M', 'RIVEIROS GUZMAN, RAMIRO', 'Hombre', '1980-11-21', 21, '2023-04-17', 32, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(326, 940, '47251062T', 'SOMOZA VICO, GONZALO\n', 'Hombre', '1967-10-30', 50, '2023-05-03', 15, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(327, 939, '10847465K', 'TRIGUERO MENDEZ, JESUS AVELINO', 'Hombre', '1965-12-08', 50, '2023-05-02', 9, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(328, 953, '54147855J????????????????', 'P?REZ HERN?NDEZ, EVELYN DESIREE', 'Mujer', '1996-10-01', 36, '2023-05-23', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(329, 999996, 'X6922346J', 'BONERBA, LUCA', 'Hombre', '1979-11-09', 2, '2023-05-10', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(330, 999995, '46957433N', 'RAMON PEREZ, JOSE OMAR', 'Hombre', '1989-11-19', 2, '2023-05-10', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(331, 999947, 'Y8015386S', 'ZAHI, ADAM', 'Hombre', '2003-10-02', 2, '2023-05-10', 16, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(332, 943, '47431281Z', 'TORRES RAMON, JORDI', 'Hombre', '2002-02-10', 2, '2023-05-08', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(333, 587, '50903232T', 'PEREZ RUBIO, MARIA', 'Mujer', '1988-04-29', 43, '2017-10-17', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(334, 945, 'X3241976B', 'ROMANUTTI, WALTER RAUL', 'Hombre', '1973-06-11', 46, '2023-05-09', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(335, 946, '45896444J', 'CANO DOMINGUES, RAUL', 'Hombre', '1997-04-21', 46, '2023-05-15', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(336, 374, '46958026F', 'PLANELLS ROSELLO, MARIA JOSE', 'Mujer', '1983-07-17', 42, '2015-11-11', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(337, 1018, 'Y0611359X', 'POPA, DIANA CRISTINA', 'Mujer', '1993-07-29', 26, '2024-03-04', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(338, 948, 'X8501909M', 'BOTCA, SERGIU-ANDREI', 'Hombre', '1985-10-02', 2, '2023-05-08', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(339, 947, '47257718D', 'BONED CARBAJAL, SIMON', 'Hombre', '2001-12-19', 2, '2023-05-08', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(340, 417, '43545801Q', 'PORRAS AGUILERA, BEATRIZ', 'Mujer', '1979-07-07', 22, '2016-06-15', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(341, 819, '17490024L', 'QUINTERO JIMENEZ, DOLORES', 'Mujer', '0000-00-00', 36, '2022-05-30', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(342, 1016, '04575262X', 'REDONDO IBA?EZ, EMILIA', 'Mujer', '1965-12-26', 41, '2024-12-17', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(343, 956, '51069273G', 'MONTES SAIZ, ENRIQUE', 'Hombre', '1978-10-26', 27, '2023-05-25', 30, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(344, 799, '47409058D', 'RIBAS HINOJOSA, LETICIA', 'Mujer', '1994-07-08', 47, '2022-05-12', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(345, 955, '41746933R', 'SAETA TAYLOR, ISRAEL', 'Hombre', '2004-12-02', 49, '2023-05-22', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(346, 952, '76629342N', 'HERN?NDEZ ORTU?O, ISIDRO', 'Hombre', '1991-12-23', 2, '2023-05-15', 16, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(347, 636, '47252926R', 'RIBAS JUAN, MARGARITA', 'Mujer', '1986-08-22', 26, '2019-03-21', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(348, 758, '0033s', 'SALINAS CUBERO, SAUL', 'Hombre', '0000-00-00', 22, '0000-00-00', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(349, 756, '00044s', 'ARRIBAS SAMPER, BORIS', 'Hombre', '0000-00-00', 23, '0000-00-00', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(350, 445, '47254308A', 'RIBAS TORRES, SILVIA', 'Mujer', '1990-05-01', 1, '2018-01-19', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(351, 605, '0003t', 'VECCHIATO, DAMIANO', 'Hombre', '0000-00-00', 27, '0000-00-00', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(352, 768, '4888s', 'ESPINILLA PE?A, FRANCISCO JAVIER', 'Hombre', '0000-00-00', 39, '0000-00-00', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(353, 961, '52902342L', 'MARTIN GONZALEZ, DAVID', 'Hombre', '1992-01-10', 46, '2023-05-25', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(354, 958, '76413239V', 'COUSO BARBEITO, PABLO', 'Hombre', '1984-11-14', 27, '2023-05-23', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(355, 959, '48202081S', 'GARCIA RODRIGUEZ, ALVARO', 'Hombre', '2002-09-10', 46, '2023-05-23', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(356, 960, 'Y4454019Z', 'MORENO, JUSTIN MANKAGNA NATEDHIOU', 'Hombre', '1997-04-24', 46, '2023-05-23', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(357, 198, '48550447T', 'ROBLES NAVARRO, MARIA', 'Mujer', '1983-07-08', 42, '2008-01-14', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(358, 944, 'Y2575156K', 'ROCA AGRAMONT, ESTEFANY', 'Mujer', '1997-07-19', 26, '2023-05-08', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(359, 613, '47408691X', 'RODRIGUEZ CANALES, RAQUEL', 'Mujer', '2000-01-11', 26, '2022-01-03', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(360, 966, '43478512W????????????????', 'RIBAS CAPLLONCH, MART?', 'Hombre', '2001-05-08', 34, '2023-06-02', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(361, 969, '41587673Q???? ', 'S?NCHEZ ARANDA, LU?S', 'Hombre', '2002-01-14', 2, '2023-06-12', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(362, 211, '46950344F', 'CALLE GARCIA, DAVID', 'Hombre', '0000-00-00', 2, '0000-00-00', 17, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(363, 409, '46959276S', 'RODRIGUEZ VENTURA, BEATRIZ', 'Mujer', '1985-10-20', 1, '2017-03-02', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(364, 974, '49417864H', 'SANCHEZ ATAHUI, ADELA', 'Mujer', '1974-06-08', 1, '2023-07-03', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(365, 971, '47433774T', 'MARIN ALCOBA, IKER', 'Hombre', '2004-08-08', 1, '2023-06-12', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(366, 988, 'Y0775250A', 'SANTOS QUI?ONES, MARIA', 'Mujer', '0000-00-00', 41, '2023-09-18', 27, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(367, 973, '41747630P', 'MOLL SALORD, MARC', 'Hombre', '2000-11-30', 34, '2023-06-13', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(368, 970, '41624312Q', 'HERRERO CHICANO, IZAN', 'Hombre', '2004-04-01', 26, '2023-06-09', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(369, 421, 'Y0735535D', 'SAPONE, MARIA GIOVANNA', 'Mujer', '1983-01-26', 1, '2017-01-04', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(370, 975, '47255373X', 'PERELLO DIEZ, MATEO', 'Hombre', '2000-07-21', 2, '2023-06-23', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(371, 976, '47433343Y', 'TUR ORVAY, MARC', 'Hombre', '2003-12-08', 2, '2023-06-23', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(372, 760, '0200s', 'SEARA CABO, ANDREA', 'Mujer', '0000-00-00', 47, '0000-00-00', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(373, 980, '47260535C', 'SERENO DOBRICK, JORGE', 'Hombre', '1998-10-23', 21, '2023-07-03', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(374, 981, 'Y8575787K', 'TARRAZO FARIAS, ERIC LUCAS', 'Hombre', '1997-11-16', 46, '2023-07-10', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(375, 982, '43192243Z', 'PASCUAL SEGURA, ADRIA', 'Hombre', '1988-01-05', 23, '2023-07-14', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(376, 978, '47260576S', 'MARI MAYANS, ESTEVE', 'Hombre', '1992-09-02', 2, '2023-07-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(377, 983, 'X4561906V', 'BASAN, MAURA', 'Hombre', '1977-07-11', 1, '2023-08-07', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(378, 984, '54879544A', 'JUWARA GUAMANEH, KANTARA', 'Hombre', '2003-06-01', 27, '2023-08-15', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(379, 967, '48435055E', 'VI?UELA VILCHEZ, SERGIO', 'Hombre', '1979-01-22', 49, '2023-06-05', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(380, 985, '47409834A', 'HIDALGO SANCHEZ, ANTONIO MIGUEL', 'Hombre', '1999-08-28', 46, '2023-09-07', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(381, 941, '47408054V', 'SOMOZA ARTS, LAURA', 'Mujer', '2002-01-31', 36, '2023-05-04', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(382, 637, '47253089A', 'SORIA PIEDRA, RAQUEL', 'Mujer', '1987-09-02', 26, '2019-03-20', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(383, 987, '46142863X', 'BERNUS BLANCH, CARLOS', 'Hombre', '1977-11-13', 42, '2023-09-11', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(384, 999, '43202267X\n', 'NICOLAU DUCKETT, EDUARD? \n', 'Hombre', '1990-06-25', 2, '2023-10-02', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(385, 1013, 'Z0925704M', 'SOSA INSFRAN, LIZ PAOLA', 'Mujer', '2002-01-24', 41, '2024-01-25', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(386, 780, 'Y8807536E', 'SOUZA SILVA, RANDALE', 'Mujer', '1994-11-10', 26, '2022-04-23', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(387, 1002, '41747270Q', 'RODRIGUEZ CONTRERAS, ALEXANDER', 'Hombre', '1997-11-01', 49, '2023-11-02', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(388, 999995, '04305074A', 'IGLESIAS, AGUSTIN', 'Hombre', '2024-03-20', 34, '2024-03-20', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-20 09:49:06'),
+(390, 999993, '45692552Q', 'GUALDA ELFMARK, SAMUEL', 'Hombre', '2005-02-09', 34, '2024-03-20', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-20 09:56:39'),
+(391, 1003, 'X4299925Y', 'BOGDAN DORIAN, ALEXANDRU', 'Hombre', '1978-04-07', 2, '2023-11-10', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(392, 248, '34973158W', 'SUAREZ CABO, MARIA BELEN', 'Mujer', '1968-06-07', 26, '2011-06-01', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(393, 1005, '45440111T', 'FIGUERO LEON, ANTONIO TOMAS', 'Hombre', '1970-11-24', 34, '2023-11-17', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(394, 1006, '43166977W', 'MARROIG SANCHEZ, PEDRO', 'Hombre', '1982-01-16', 23, '2023-11-27', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(395, 964, '51150313S', 'SUAREZ RAMOS, SHEILA', 'Mujer', '1999-06-18', 36, '2023-06-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(396, 1008, 'X5622510E', 'LEIVA, JONATHAN SAUL', 'Hombre', '1984-08-05', 34, '2023-12-05', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(397, 861, 'X6543893W', 'TANASE, NICOLETA', 'Mujer', '1978-10-05', 36, '2022-07-21', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(398, 1010, '47881150A', 'MOYA CORNET, BORJA', 'Hombre', '1988-09-03', 23, '2023-12-26', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(399, 1011, '53377271k', 'CALPE DOBON, JESUS', 'Hombre', '1983-06-07', 34, '2024-01-03', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(400, 1012, 'Z0150541B', 'LAMOURI, ADAM', 'Hombre', '1997-02-10', 27, '2024-01-11', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(401, 954, '48582161C', 'TEBAR TOLEDO, NURIA', 'Mujer', '1985-07-25', 2, '2023-05-26', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(402, 1014, '47407793D', 'P?REZ TORRES, ALEJANDRO', 'Hombre', '1993-06-19', 2, '2024-02-01', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(403, 949, '47257419D', 'TUR ESCANDELL, LIDIA', 'Mujer', '2000-10-01', 2, '2023-05-08', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(404, 927, '75919619T', 'VELASCO ALMAGRO, MARINA', 'Mujer', '1998-11-25', 1, '2023-04-11', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(405, 1001, '46955550S', 'VICH MARI, LAURA\n', 'Mujer', '1983-07-06', 1, '2023-10-23', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(406, 894, '47407636J\n', 'VILLAR DEL SAZ GARCIA, MARTA\n', 'Mujer', '1996-01-10', 26, '2022-12-05', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(407, 999997, 'X7373408E', 'VON KLOT TRAUTVETTER, JOEL', 'Mujer', '2005-03-20', 21, '2023-03-28', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(408, 999993, '000554s', 'SALES CASALI, JOAN', 'Hombre', '2024-03-06', 2, '2024-03-11', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-20 09:55:28'),
+(409, 999994, '47258867P', 'VALDEZ CIUTAD, NICOLAS', 'Hombre', '2024-03-13', 21, '2024-04-08', 23, 1, 'No', 'n.a.', '2014-03-24 13:51:00', '2024-03-20 09:54:50'),
+(410, 999992, 'Y8989058M', 'BRATI, ALBAN', 'Hombre', '2000-03-28', 21, '2024-04-08', 23, 1, 'No', 'n.a.', '2014-03-24 13:51:00', '2024-03-20 09:48:09'),
+(411, 1020, '43805973N', 'PEREZ ANDREU RUBIO, JOSE ANTONIO', 'Hombre', '1971-12-29', 2, '2024-03-20', 11, 1, 'No', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00');
 
 -- --------------------------------------------------------
 
@@ -5765,7 +6169,6 @@ ALTER TABLE `ag_tareas`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`),
-  ADD UNIQUE KEY `id_categoria` (`id_categoria`),
   ADD KEY `departamento_cat` (`departamento_cat`);
 
 --
@@ -5825,6 +6228,12 @@ ALTER TABLE `form_asistencia`
   ADD KEY `trabajadores_fas` (`idtrabajador_fas`);
 
 --
+-- Indices de la tabla `logformacion_trabajadores`
+--
+ALTER TABLE `logformacion_trabajadores`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `reconocimientos`
 --
 ALTER TABLE `reconocimientos`
@@ -5867,8 +6276,8 @@ ALTER TABLE `tipoformacion`
 --
 ALTER TABLE `trabajadores`
   ADD PRIMARY KEY (`id_trabajador`),
-  ADD KEY `FK_categoria_tr` (`categoria_tr`),
-  ADD KEY `FK_centro_tr` (`centro_tr`) USING BTREE;
+  ADD KEY `FK_centro_tr` (`centro_tr`) USING BTREE,
+  ADD KEY `categoria_tr` (`categoria_tr`);
 
 --
 -- Indices de la tabla `trabajador_citarm`
@@ -5910,49 +6319,49 @@ ALTER TABLE `ace_tipoaccidente`
 -- AUTO_INCREMENT de la tabla `ag_acciones`
 --
 ALTER TABLE `ag_acciones`
-  MODIFY `id_accion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_accion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `ag_actividad`
 --
 ALTER TABLE `ag_actividad`
-  MODIFY `id_actividad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_actividad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `ag_proyecto`
 --
 ALTER TABLE `ag_proyecto`
-  MODIFY `id_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `ag_tareas`
 --
 ALTER TABLE `ag_tareas`
-  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `centros`
 --
 ALTER TABLE `centros`
-  MODIFY `id_centro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_centro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `citas_rm`
 --
 ALTER TABLE `citas_rm`
-  MODIFY `id_citarm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_citarm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `emailsinteres`
@@ -5976,19 +6385,25 @@ ALTER TABLE `estadisticas`
 -- AUTO_INCREMENT de la tabla `formacion`
 --
 ALTER TABLE `formacion`
-  MODIFY `id_formacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_formacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `form_asistencia`
 --
 ALTER TABLE `form_asistencia`
-  MODIFY `id_formasistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_formasistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT de la tabla `logformacion_trabajadores`
+--
+ALTER TABLE `logformacion_trabajadores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `reconocimientos`
 --
 ALTER TABLE `reconocimientos`
-  MODIFY `id_reconocimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_reconocimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `responsables`
@@ -6018,13 +6433,13 @@ ALTER TABLE `tipocentros`
 -- AUTO_INCREMENT de la tabla `tipoformacion`
 --
 ALTER TABLE `tipoformacion`
-  MODIFY `id_tipoformacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_tipoformacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `trabajadores`
 --
 ALTER TABLE `trabajadores`
-  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=445;
 
 --
 -- AUTO_INCREMENT de la tabla `trabajador_citarm`
@@ -6043,10 +6458,10 @@ ALTER TABLE `accidentes`
   ADD CONSTRAINT `accidentes_ibfk_1` FOREIGN KEY (`procesotrabajo_ace`) REFERENCES `ace_procesotrabajo` (`id_procesotrabajo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `accidentes_ibfk_11` FOREIGN KEY (`partecuerpo_ace`) REFERENCES `ace_partecuerpo` (`id_partecuerpo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `accidentes_ibfk_12` FOREIGN KEY (`tipoaccidente_ace`) REFERENCES `ace_tipoaccidente` (`id_tipoaccidente`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `accidentes_ibfk_13` FOREIGN KEY (`trabajador_ace`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `accidentes_ibfk_14` FOREIGN KEY (`desviacion_ace`) REFERENCES `ace_desviacion` (`id_desviacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `accidentes_ibfk_15` FOREIGN KEY (`tipolesion_ace`) REFERENCES `ace_tipolesion` (`id_tipolesion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `accidentes_ibfk_16` FOREIGN KEY (`agmaterdesv_ace`) REFERENCES `ace_agentematerialdesv` (`id_agentematerialdesv`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `accidentes_ibfk_17` FOREIGN KEY (`trabajador_ace`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `accidentes_ibfk_2` FOREIGN KEY (`tipoactividad_ace`) REFERENCES `ace_actividadfisica` (`id_actividadfisica`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `accidentes_ibfk_3` FOREIGN KEY (`tipolugar_ace`) REFERENCES `ace_tipolugar` (`id_tipolugar`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `accidentes_ibfk_4` FOREIGN KEY (`agentematerial_ace`) REFERENCES `ace_agentematerial` (`id_agentematerial`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -6099,7 +6514,7 @@ ALTER TABLE `centros`
 -- Filtros para la tabla `citas_rm`
 --
 ALTER TABLE `citas_rm`
-  ADD CONSTRAINT `citas_rm_ibfk_1` FOREIGN KEY (`trabajador_crm`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `citas_rm_ibfk_1` FOREIGN KEY (`id_citarm`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `formacion`
@@ -6119,7 +6534,7 @@ ALTER TABLE `form_asistencia`
 -- Filtros para la tabla `reconocimientos`
 --
 ALTER TABLE `reconocimientos`
-  ADD CONSTRAINT `reconocimientos_ibfk_1` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `reconocimientos_ibfk_1` FOREIGN KEY (`id_reconocimiento`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tb_usuarios`

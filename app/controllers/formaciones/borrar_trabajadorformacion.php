@@ -12,7 +12,7 @@ $sentencia = $pdo->prepare("DELETE FROM form_asistencia WHERE id_formasistencia 
 if ($sentencia->execute()) {
 ?>
     <script>
-        location.href = "<?php echo $URL; ?>/admin/pruebas/create.php";
+        location.href = "<?php echo $URL; ?>/admin/formacion/create.php";
     </script>
 
 
@@ -20,7 +20,7 @@ if ($sentencia->execute()) {
 } else {
 ?>
     <script>
-        location.href = "<?php echo $URL; ?>/admin/pruebas/create.php";
+        location.href = "<?php echo $URL; ?>/admin/formacion/create.php";
     </script>
 
 

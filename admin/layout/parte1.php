@@ -52,11 +52,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/js/bootstrap.bundle.min.js">
     <!-- css bootstrap -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/css/bootstrap.min.css">
-   <!-- chart js -->
+    <!-- chart js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-   <!-- chart js -->
-   <link rel="stylesheet" href="<?php echo $URL; ?>/public/js/echarts.min.js">
-   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <!-- chart js -->
+    <link rel="stylesheet" href="<?php echo $URL; ?>/public/js/echarts.min.js">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 
 
 </head>
@@ -85,12 +85,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
+           
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
+                               <i class="bi bi-bell"></i>
+                    <span class="badge badge-warning navbar-badge" title="Avisos">15</span>
                     </a>
+
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-header">15 Notifications</span>
+                        <span class="dropdown-item dropdown-header">15 Notifications</span>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
                             <i class="fas fa-envelope mr-2"></i> 4 new messages
@@ -115,9 +117,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-
+               
             </ul>
         </nav>
+        <!-- /.navbar -->
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
@@ -161,9 +164,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="<?php echo $URL; ?>/admin" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                 Dashboard
+                                    Dashboard
                                     <span class="right badge badge-warning">Info</span>
-                                 
+
                                 </p>
                             </a>
                         </li>
@@ -171,13 +174,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="<?php echo $URL; ?>/admin/dashboard" class="nav-link">
                                 <i class="nav-icon fas bi-clipboard2-data-fill"></i>
                                 <p>
-                                 Panel control
+                                    Panel control
                                     <span class="right badge badge-warning">Info</span>
-                                 
+
                                 </p>
                             </a>
                         </li>
-              
+
                         </br>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -253,7 +256,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i class="nav-icon fa-solid fa-book-medical"></i>
                                 <p>
                                     Vigilancia salud
-                             
+
                                 </p>
                             </a>
                         </li>
@@ -263,7 +266,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i class="nav-icon fa-solid fa-person-falling-burst"></i>
                                 <p>
                                     Accidentes
-            
+
                                 </p>
                             </a>
                         </li>
@@ -312,7 +315,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
                         <br>
-                      
+
                         <br>
 
                         <li class="nav-item">
@@ -392,7 +395,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
 
                         </ul>
-                       
+
                     </li>
                     </br>
                     </br>

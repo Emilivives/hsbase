@@ -278,7 +278,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                   <col width="10%">
                   <col width="25%">
                   <col width="10%">
-                  <col width="10%">
+                  <col width="7%">
 
                 </colgroup>
                 <thead class="table-dark">
@@ -287,7 +287,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                     <th style="text-align: left">Inicio</th>
                     <th style="text-align: left">Categoria</th>
                     <th style="text-align: center">Formado</th>
-                    <th style="text-align: center">+</th>
+                    <th style="text-align: center"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -321,8 +321,8 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                         </td>
                      
-                        <td>
-                        <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $id_trabajador; ?>" class="btn btn-danger btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-plus"></i></a>
+                        <td style="text-align: center;">
+                        <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $id_trabajador; ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
                         </td>
 
                       </tr>

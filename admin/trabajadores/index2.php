@@ -169,12 +169,11 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 </div>
 <!-- /.content-header -->
 
-
 <div class="row">
     <div class="col-md-12">
-        <div class="card card-outline card-primary">
+        <div class="card card-outline card-success">
             <div class="card-header col-md-12">
-                <h3 class="card-title"><b>Trabajadores registrados</b></h3>
+                <h3 class="card-title"><b>Trabajadores</b></h3>
                 <style>
                     .btn-text-right {
                         text-align: right;
@@ -182,7 +181,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                 </style>
                 <!--boton modal-->
                 <div class="btn-text-right">
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador"><i class="bi bi-person-plus-fill"></i> Añadir Trabajador</button>
+                    <button type="button" class="btn btn-primary btn-sm btn-font-size" data-toggle="modal" data-target="#modal-nuevotrabajador">Nuevo trabajador</button>
                 </div>
 
                 <!--inicio modal nuevo trabajador-->
@@ -316,14 +315,26 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                         </div>
                     </div>
-
-                    <!--fin modal-->
-
-
                 </div>
+                <!--fin modal-->
                 <div class="card-body">
-                    <table id="example1" class="table table-striped table-bordered table-hover">
-                        <thead>
+                    <table id="example1" class="table tabe-hover table-condensed table-striped">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="20%">
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="10%">
+                            <col width="15%">
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="10%">
+
+
+                        </colgroup>
+                        <thead class="table-dark">
                             <tr>
                                 <th style="text-align: center">N. Cod.</th>
                                 <th style="text-align: center">DNI</th>
@@ -345,7 +356,6 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                 $contador = $contador + 1;
                                 $id_trabajador = $trabajador['id_trabajador'];
                             ?>
-
                                 <tr>
                                     <td style="text-align: center"><?php echo $trabajador['codigo_tr']; ?></td>
                                     <td style="text-align: center"><?php echo $trabajador['dni_tr']; ?></td>
@@ -380,7 +390,6 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
 
                                     </td>
-
                                     <td style="text-align: center">
                                     <?php include('../../app/controllers/trabajadores/datos_trabajador.php');
                                             include('../../app/controllers/trabajadores/trabajador_formacion.php');
@@ -415,34 +424,34 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                             <div class="col-md-2">
                                                                 <div class="form-group">
                                                                     <label for="">DNI/NIE</label>
-                                                                    <input type="text" value="<?php echo $trabajador['dni_tr'] ?>" name="dni_tr" class="form-control" disabled>
+                                                                    <input type="text" value="<?php echo $trabajador_dato['dni_tr'] ?>" name="dni_tr" class="form-control" disabled>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-2">
                                                                 <div class="form-group">
                                                                     <label for="">Fecha Nacimiento</label>
-                                                                    <input type="date" value="<?php echo $trabajador['fechanac_tr'] ?>" name="fechanac_tr" class="form-control" disabled>
+                                                                    <input type="date" value="<?php echo $trabajador_dato['fechanac_tr'] ?>" name="fechanac_tr" class="form-control" disabled>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <div class="form-group">
                                                                     <label for="">Fecha Inicio</label>
-                                                                    <input type="date" value="<?php echo $trabajador['inicio_tr'] ?>" name="inicio_tr" class="form-control" disabled>
+                                                                    <input type="date" value="<?php echo $trabajador_dato['inicio_tr'] ?>" name="inicio_tr" class="form-control" disabled>
                                                                 </div>
 
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="">Centro Trabajo</label>
-                                                                    <input type="text" value="<?php echo $trabajador['nombre_cen'] ?>" name="centro_tr" class="form-control" disabled>
+                                                                    <input type="text" value="<?php echo $trabajador_dato['nombre_cen'] ?>" name="centro_tr" class="form-control" disabled>
 
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="">Categoria</label>
-                                                                    <input type="text" value="<?php echo $trabajador['nombre_cat'] ?>" name="categoria_tr" class="form-control" disabled>
+                                                                    <input type="text" value="<?php echo $trabajador_dato['nombre_cat'] ?>" name="categoria_tr" class="form-control" disabled>
 
                                                                 </div>
                                                             </div>
@@ -581,7 +590,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <textarea class="form-control" rows="6" disabled><?php echo $trabajador['anotaciones_tr']; ?></textarea>
+                                                                    <textarea class="form-control" rows="6" disabled><?php echo $trabajador_dato['anotaciones_tr']; ?></textarea>
                                                                 </div>
 
                                                             </div>
@@ -621,7 +630,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                 <div class="col-md-2">
                                                                     <label for="">Estado</label>
                                                                     <select class="form-select form-select-sm" name="activo_tr" aria-label=".form-select-sm example">
-                                                                        <option value="<?php echo $trabajador['activo_tr'] ?>" selected="selected"><?php echo $trabajador['activo_tr'] ?></option>
+                                                                        <option value="<?php echo $trabajador_dato['activo_tr'] ?>" selected="selected"><?php echo $trabajador['activo_tr'] ?></option>
                                                                         <option>Seleccione</option>
                                                                         <option value="1">Activo</option>
                                                                         <option value="0">Inactivo</option>
@@ -631,7 +640,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                 <div class="col-md-2">
                                                                     <label for="">Formado PRL</label>
                                                                     <select class="form-select form-select-sm" name="formacionpdt_tr" aria-label=".form-select-sm example">
-                                                                        <option value="<?php echo $trabajador['formacionpdt_tr'] ?>" selected="selected"><?php echo $trabajador['formacionpdt_tr'] ?></option>
+                                                                        <option value="<?php echo $trabajador_dato['formacionpdt_tr'] ?>" selected="selected"><?php echo $trabajador['formacionpdt_tr'] ?></option>
                                                                         <option>Seleccione</option>
                                                                         <option value="Si">SI</option>
                                                                         <option value="No">NO</option>
@@ -641,7 +650,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                 <div class="col-md-2">
                                                                     <label for="">Sexo</label>
                                                                     <select class="form-select form-select-sm" name="sexo_tr" aria-label=".form-select-sm example">
-                                                                        <option value="<?php echo $trabajador['sexo_tr'] ?>" selected="selected"><?php echo $trabajador['sexo_tr'] ?></option>
+                                                                        <option value="<?php echo $trabajador_dato['sexo_tr'] ?>" selected="selected"><?php echo $trabajador['sexo_tr'] ?></option>
                                                                         <option>Seleccione</option>
                                                                         <option value="Hombre">Hombre</option>
                                                                         <option value="Mujer">Mujer</option>
@@ -655,32 +664,32 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                 <div class="col-md-2">
                                                                     <div class="form-group">
                                                                         <label for="">Codigo</label>
-                                                                        <input type="text" value="<?php echo $trabajador['codigo_tr'] ?>" name="codigo_tr" class="form-control">
+                                                                        <input type="text" value="<?php echo $trabajador_dato['codigo_tr'] ?>" name="codigo_tr" class="form-control">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-1" hidden>
                                                                     <div class="form-group">
-                                                                        <input type="text" value="<?php echo $trabajador['id_trabajador'] ?>" name="id_trabajador" class="form-control">
+                                                                        <input type="text" value="<?php echo $trabajador_dato['id_trabajador'] ?>" name="id_trabajador" class="form-control">
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
                                                                         <label for="">Apellidos, Nombre</label>
-                                                                        <input type="text" value="<?php echo $trabajador['nombre_tr'] ?>" name="nombre_tr" class="form-control">
+                                                                        <input type="text" value="<?php echo $trabajador_dato['nombre_tr'] ?>" name="nombre_tr" class="form-control">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <div class="form-group">
                                                                         <label for="">DNI/NIE</label>
-                                                                        <input type="text" value="<?php echo $trabajador['dni_tr'] ?>" name="dni_tr" class="form-control">
+                                                                        <input type="text" value="<?php echo $trabajador_dato['dni_tr'] ?>" name="dni_tr" class="form-control">
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-md-2">
                                                                     <div class="form-group">
                                                                         <label for="">Fecha Nacimiento</label>
-                                                                        <input type="date" value="<?php echo $trabajador['fechanac_tr'] ?>" name="fechanac_tr" class="form-control">
+                                                                        <input type="date" value="<?php echo $trabajador_dato['fechanac_tr'] ?>" name="fechanac_tr" class="form-control">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -689,7 +698,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                 <div class="col-md-2">
                                                                     <div class="form-group">
                                                                         <label for="">Fecha Inicio</label>
-                                                                        <input type="date" value="<?php echo $trabajador['inicio_tr'] ?>" name="inicio_tr" class="form-control">
+                                                                        <input type="date" value="<?php echo $trabajador_dato['inicio_tr'] ?>" name="inicio_tr" class="form-control">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-1"> </div>
@@ -737,7 +746,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <textarea class="form-control" name="anotaciones_tr" rows="10"><?php echo $trabajador['anotaciones_tr']; ?></textarea>
+                                                                        <textarea class="form-control" name="anotaciones_tr" rows="10"><?php echo $trabajador_dato['anotaciones_tr']; ?></textarea>
                                                                     </div>
 
 
@@ -756,29 +765,19 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                             </div>
                                         </div>
                                     </td>
-                </div>
-
-            </div>
-
-            <!--fin modal-->
-
-
-
-        </div>
-        </td>
-
-        </tr>
-    <?php
+                                </tr>
+                            <?php
                             }
-    ?>
+                            ?>
+                           
 
-    </tbody>
+                        </tbody>
 
-    </table>
-
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
-
 </div>
 
 
@@ -811,7 +810,7 @@ include('../../admin/layout/mensaje.php');
 <script>
     $(function() {
         $("#example1").DataTable({
-            "pageLength":10,
+            "pageLength": 10,
             "language": {
                 "emptyTable": "No hay información",
                 "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",

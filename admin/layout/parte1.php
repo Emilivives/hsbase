@@ -206,7 +206,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                         <br>
                         <li class="nav-item">
-                            <a href="<?php echo $URL; ?>/admin/trabajadores" class="nav-link">
+                            <a href="<?php echo $URL; ?>/admin/trabajadores/trabajadorshow.php?id_trabajador=1" class="nav-link">
                                 <i class="nav-icon fas fa-people-arrows"></i>
                                 <p>
                                     Trabajadores

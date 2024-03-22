@@ -6,20 +6,20 @@ FROM `trabajadores`as tr INNER JOIN `categorias` as cat ON tr.categoria_tr = cat
 INNER JOIN `centros` as cen ON tr.centro_tr = cen.id_centro WHERE `id_trabajador` = '$id_trabajador'";
 $query = $pdo->prepare($sql);
 $query->execute();
-$trabajadores = $query->fetchAll(PDO::FETCH_ASSOC);
+$trabajador_datos = $query->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($trabajadores as $trabajador) {
-    $codigo_tr = $trabajador['codigo_tr'];
-    $dni_tr = $trabajador['dni_tr'];
-    $nombre_tr = $trabajador['nombre_tr'];
-    $sexo_tr = $trabajador['sexo_tr'];
-    $fechanac_tr = $trabajador['fechanac_tr'];
-    $inicio_tr = $trabajador['inicio_tr'];
-    $centro_tr = $trabajador['nombre_cen'];
-    $categoria_tr = $trabajador['nombre_cat'];
-    $activo_tr = $trabajador['activo_tr'];
-    $anotaciones_tr = $trabajador['anotaciones_tr'];
-    $formacionpdt_tr = $trabajador['formacionpdt_tr'];
+foreach ($trabajador_datos as $trabajador_dato) {
+    $codigo_tr = $trabajador_dato['codigo_tr'];
+    $dni_tr = $trabajador_dato['dni_tr'];
+    $nombre_tr = $trabajador_dato['nombre_tr'];
+    $sexo_tr = $trabajador_dato['sexo_tr'];
+    $fechanac_tr = $trabajador_dato['fechanac_tr'];
+    $inicio_tr = $trabajador_dato['inicio_tr'];
+    $centro_tr = $trabajador_dato['nombre_cen'];
+    $categoria_tr = $trabajador_dato['nombre_cat'];
+    $activo_tr = $trabajador_dato['activo_tr'];
+    $anotaciones_tr = $trabajador_dato['anotaciones_tr'];
+    $formacionpdt_tr = $trabajador_dato['formacionpdt_tr'];
 
 
 }

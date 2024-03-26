@@ -659,7 +659,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                             <div class="form-group row">
                                 <label for="nombre" class="col-form-label col-sm-4">Zona donde se produjo:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="zonalugar_ace" name="zonalugar_ace" class="form-control" tabindex="1">
+                                    <input type="text" name="zonalugar_ace" class="form-control" tabindex="1">
                                 </div>
                             </div>
                         </div>

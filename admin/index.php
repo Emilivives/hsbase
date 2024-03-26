@@ -32,7 +32,7 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
       $contador_tr_no_formados = $contador_tr_no_formados + 1;
     }
   }
-  echo $contador_tr_no_formados;
+
   ?>
   <?php
   $contador_de_trabajadores;
@@ -313,38 +313,35 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
 
   <!--avisos automaticos-->
 
-<?php 
-if($contador_tr_no_formados > 0){?>
-  <script>
-    $(document).ready(function() {
-      $("#modal-warning").modal("show");
-    });
-  </script><?php 
-}
-  ?>
+  <?php
+  if ($contador_tr_no_formados > 0) { ?>
+    <script>
+      $(document).ready(function() {
+        $("#modal-warning").modal("show");
+      });
+    </script><?php
+            }
+              ?>
 
   <div class="modal fade" id="modal-warning">
     <div class="modal-dialog">
       <div class="modal-content bg-warning">
         <div class="modal-header">
-          <h4 class="modal-title">Warning Modal</h4>
+          <h4 class="modal-title">      <i class="nav-icon fa bi bi-exclamation-triangle-fill"></i>  Aviso       <i class="nav-icon fa bi bi-exclamation-triangle-fill"></i> </h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>trabajadores formados <?php echo $contador_tr_no_formados?>&hellip;</p>
+          <p>Dispones de  <?php echo $contador_tr_no_formados ?> trabajadores no formados&hellip;</p>
         </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-outline-dark">Save changes</button>
-        </div>
+      
       </div>
       <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
-  </div>
 
+  </div>
 
   <!--fin avisos-->
   <br>

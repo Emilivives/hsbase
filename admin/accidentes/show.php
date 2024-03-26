@@ -28,14 +28,17 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row mb-3">
             <div class="col-sm-6">
-                <h5 class="m-0"><b>Nueva Investigacion accidente laboral</b></h5>
+                <h5 class="m-0"><b>Datos Investigacion accidente laboral</b></h5>
             </div><!-- /.col -->
-            <div class="col-sm-6">
+            <div class="col-sm-1">
+            <a href="reporte.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-warning btn-sm" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
+            </div><!-- /.col -->
+            <div class="col-sm-5">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                    <li class="breadcrumb-item active">Nueva investigacion accidente</li>
+                    <li class="breadcrumb-item active">Datos investigacion accidente</li>
                 </ol>
             </div><!-- /.col -->
             <hr>
@@ -204,11 +207,14 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 
                     }
                 </script>
+
+
+
                 <div class="card card-outline card-primary">
                     <div class="card-header">
                         <h3 class="card-title"><i class="bi bi-person-fill" style="text-align: left;"></i> 1. Datos trabajador</h3>
                         <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <button type="button" class="btn btn-tool" data-bs-widget="collapse" aria-expanded="false" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                                 <i class="fas fa-minus"></i>
                             </button>
                         </div>
@@ -218,6 +224,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         </div>
 
                     </div>
+                    <div id="panelsStayOpen-collapseTwo" class="card-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                     <div class="card-body">
                         <div class="row">
 
@@ -299,6 +306,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 
                         </div>
 
+                    </div>
                     </div>
                 </div>
                 <div class="card card-outline card-primary">
@@ -1558,9 +1566,13 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                 <div class="col-md-12">
                     <a href="" class="btn btn-secondary">Cancelar</a>
                     <input type="submit" class="btn btn-primary" value="Registrar accidente">
-                </div>
+                           </div>
             </div>
+            <br><br>
+            <div class="form-group">
+                <a href="reporte.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-warning" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
 
+            </div>
 
         </div>
     </form>

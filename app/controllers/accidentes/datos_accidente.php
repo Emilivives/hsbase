@@ -11,7 +11,8 @@ ace.lugar_ace as lugar_ace, ace.detalleslugar_ace as detalleslugar_ace, ta.tipoa
 ace.fecha_ace as fecha_ace, ace.fechabaja_ace as fechabaja_ace, ace.hora_ace as hora_ace, ace.horatrabajo_ace as horatrabajo_ace, 
 ace.trabajohabitual_ace as trabajohabitual_ace, ace.diadescanso_ace as diadescanso_ace, ace.semanadescanso_ace as semanadescanso_ace, ace.diasbaja_ace as diasbaja_ace,
 ace.isevaluadoriesgo_ace as isevaluadoriesgo_ace, ace.evalconriesgo_ace as evalconriesgo_ace, ace.isrecaida_ace as isrecaida_ace, 
-ace.fechaantesrecaida_ace as fechaantesrecaida_ace, ace.descripcion_ace as descripcion_ace, tlu.tipolugar_tl as tipolugar_tl, 
+ace.fechaantesrecaida_ace as fechaantesrecaida_ace, ace.descripcion_ace as descripcion_ace, tlu.tipolugar_tl as tipolugar_tl,
+tlu.codtipolugar_tl as codtipolugar_tl, 
 ace.zonalugar_ace as zonalugar_ace, ace.observaclugar_ace as observaclugar_ace, pt.procesotrabajo_pt as procesotrabajo_pt, 
 ace.observproceso_ace as observproceso_ace, af.activfisica_af as activfisica_af, ace.observtipoactiv_ace as observtipoactiv_ace, 
 am.agentematerial_am as agentematerial_am, ace.observagmaterial_ace as observagmaterial_ace, ds.desviacion_des as desviacion_des, 
@@ -84,6 +85,7 @@ foreach ($accidentes_datos as $accidentes_dato) {
     $fechaantesrecaida_ace = $accidentes_dato['fechaantesrecaida_ace'];
     $descripcion_ace = $accidentes_dato['descripcion_ace'];
     $tipolugar_ace = $accidentes_dato['tipolugar_tl'];
+    $tipolugar_ace2 = $accidentes_dato['codtipolugar_tl'];
     $zonalugar_ace = $accidentes_dato['zonalugar_ace'];
     $observaclugar_ace = $accidentes_dato['observaclugar_ace'];
     $procesotrabajo_ace = $accidentes_dato['procesotrabajo_pt'];

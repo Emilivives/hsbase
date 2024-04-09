@@ -363,7 +363,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
         include('../../app/controllers/trabajadores/trabajador_reconocimiento.php'); ?>
         <div class="card card-outline card-black">
             <div class="card-header col-md-12" style="background-color:black">
-                <h3 class="card-title text-white"><b>Detalles trabajador: <?php echo $trabajador_dato['nombre_tr'] ?></b> - <?php $trabajador['activo_tr'];
+                <h3 class="card-title text-white"><b>Detalles trabajador: <?php echo $trabajador_dato['nombre_tr'] ?></b> - <?php $trabajador_dato['activo_tr'];
                                                                         if ($trabajador_dato['activo_tr'] == 1) { ?>
                                                 <span class='badge badge-success'>ACTIVO</span>
                                             <?php
@@ -371,6 +371,12 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                 <span class='badge badge-danger'>INACTIVO</span>
                                             <?php
                                                                         }
+                                            ?>
+                                            <?php $trabajador_dato['formacionpdt_tr'];
+                                                                        if ($trabajador_dato['formacionpdt_tr'] == 'No') { ?>
+                                                <span class='badge badge-danger'>NO FORMADO</span>
+                                            <?php
+                                                                        } 
                                             ?></h3>
 
             </div>

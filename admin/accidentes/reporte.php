@@ -86,14 +86,17 @@ foreach ($accidentes_datos as $accidentes_dato) {
     $zonalugar_ace = $accidentes_dato['zonalugar_ace'];
     $observaclugar_ace = $accidentes_dato['observaclugar_ace'];
     $procesotrabajo_ace = $accidentes_dato['procesotrabajo_pt'];
+    $procesotrabajo_ace2 = $accidentes_dato['codigo_pt'];
     $observproceso_ace = $accidentes_dato['observproceso_ace'];
     $tipoactividad_ace = $accidentes_dato['activfisica_af'];
+    $tipoactividad_ace2 = $accidentes_dato['codactivfis_af'];
     $observtipoactiv_ace = $accidentes_dato['observtipoactiv_ace'];
     $agentematerial_ace = $accidentes_dato['agentematerial_am'];
     $observagmaterial_ace = $accidentes_dato['observagmaterial_ace'];
     $desviacion_ace = $accidentes_dato['desviacion_des'];
     $observdesviacion_ace = $accidentes_dato['observdesviacion_ace'];
     $agmaterdesv_ace = $accidentes_dato['agentematerialdesv_amd'];
+    $agentematerial_ace2 = $accidentes_dato['codagentemat_am'];
     $observagendesv_ace = $accidentes_dato['observagendesv_ace'];
     $formacontacto_ace = $accidentes_dato['formacontacto_fc'];
     $observformacont_ace = $accidentes_dato['observformacont_ace'];
@@ -200,9 +203,9 @@ $pdf->SetFont('helvetica', '', 9);
 $html ='
 <style>
     table.first {
-        color: #000000;
+        color: #ffffff;
         font-family: helvetica;
-        font-size: 8pt;
+        font-size:9pt;
         border-left: 2px solid #0069d2;
         border-right: 2px solid #0069d2;
         border-top: 2px solid #0069d2;
@@ -232,7 +235,7 @@ $html ='
     </style>
 
 <br>
-<table border="0">
+<table class="first">
 <tr>
 <td style="height: 18px; width: 80px; background-color: #aed7ff; text-align: center"><b>Informe nº: </b></td>
 <td style= "height: 18px;  width: 80px; background-color: #ffffff; text-align: center">'.$nroaccidente_ace.'</td>
@@ -272,10 +275,10 @@ $html ='
 <td class="fila1">' .$trabajador_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Fecha nacimiento:</b></td>
-<td style="width: 160px; height: 18px; background-color: #ffffff; text-align: left">' .$fechanac_trabajador_ace.'</td>
-<td style="width: 80px; height: 18px; background-color: #aed7ff; text-align: left"><b>  Años:</b></td>
-<td style="width: 200px; height: 18px; background-color: #ffffff; text-align: left">' .'</td>
+<td style="width: 200px; height: 18px; color: #000000;background-color: #aed7ff; text-align: left"><b> Fecha nacimiento:</b></td>
+<td style="width: 160px; height: 18px;border-bottom: 1px solid #0069d2; color: #000000; background-color: #ffffff; text-align: left">' .$fechanac_trabajador_ace.'</td>
+<td style="width: 80px; height: 18px;color: #000000; background-color: #aed7ff; text-align: left"><b>  Años:</b></td>
+<td style="width: 200px; height: 18px; color: #000000;border-bottom: 1px solid #0069d2; background-color: #ffffff; text-align: left">' .'</td>
 </tr>
 <tr>
 <td class="fila"><b> Departamento:</b></td>
@@ -293,259 +296,262 @@ $html ='
 
 <br><br>
 
-<table border="0">
+<table class="first">
 <tr>
 <td style="width: 640px;height: 18px; color:#ffffff; background-color: #0069d2; text-align: left; text-color:#ffffff"><b>  2. DATOS DE LA EMPRESA:</b></td>
 </tr>
 </table>
 
-<table border="0">
+<table class="first">
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Nombre empresa:</b></td>
-<td class="linia; width 440px">'.$razonsocial_ace.'</td>
+<td class="fila" width="200px"><b> Nombre empresa:</b></td>
+<td class="fila1" width="440px">'.$razonsocial_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Centro de trabajo:</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$centro_ace.'</td>
+<td class="fila"><b> Centro de trabajo:</b></td>
+<td class="fila1">'.$centro_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Modalidad preventiva:</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$modalidadprl_ace.'</td>
-</tr>
-</table>
-<br>
-<br>
-<table border="0">
-<tr>
-<td style="width: 640px;height: 18px; color:#ffffff; background-color: #0069d2; text-align: left; text-color:#ffffff"><b>  3. LUGAR Y/O CENTRO DE TRABAJO DONDE SE HA PRODUCIDO EL ACCIDENTE:</b></td>
+<td class="fila"><b> Modalidad preventiva:</b></td>
+<td class="fila1">'.$modalidadprl_ace.'</td>
 </tr>
 </table>
-<table border="0">
-<tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Lugar:</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$lugar_ace.'</td>
-</tr>
-<tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Detalles:</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$detalleslugar_ace.'</td>
-</tr>
-
 <br>
-<table border="0">
+<br>
+<table class="first">
+<tr>
+<td style="width: 640px;height: 18px; color:#ffffff; background-color: #0069d2;border-bottom: 1px solid #0069d2; text-align: left; text-color:#ffffff"><b>  3. LUGAR Y/O CENTRO DE TRABAJO DONDE SE HA PRODUCIDO EL ACCIDENTE:</b></td>
+</tr>
+</table>
+<table class="first">
+<tr>
+<td class="fila" width="200px"><b> Lugar:</b></td>
+<td class="fila1" width="440px">'.$lugar_ace.'</td>
+</tr>
+<tr>
+<td class="fila"><b> Detalles:</b></td>
+<td class="fila1">'.$detalleslugar_ace.'</td>
+</tr>
+</table>
+<br><br>
+<table class="first">
 <tr>
 <td style="width: 640px;height: 18px; color:#ffffff; background-color: #0069d2; text-align: left; text-color:#ffffff"><b>  4. DATOS DEL SUCESO (1)</b></td>
 </tr>
 </table>
-<table border="0">
+<table class="first">
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Tipo de suceso:</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$tipoaccidente_ace.'</td>
+<td class="fila" width="200px"><b> Tipo de suceso:</b></td>
+<td class="fila1" width="440px">'.$tipoaccidente_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Fecha del suceso</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$fecha_ace.'</td>
+<td class="fila" width="200px"><b> Fecha del suceso</b></td>
+<td class="fila1" width="440px">'.$fecha_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Fecha de la baja médica</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$fecha_ace.'</td>
+<td class="fila" width="200px"><b> Fecha de la baja médica</b></td>
+<td class="fila1" width="440px">'.$fecha_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Hora del suceso</b></td>
-<td style="width: 160px; height: 18px; background-color: #ffffff; text-align: left">' .$hora_ace.'</td>
-<td style="width: 130px; height: 18px; background-color: #aed7ff; text-align: left"><b>  Hora trabajada</b></td>
-<td style="width: 150px; height: 18px; background-color: #ffffff; text-align: left">' .$horatrabajo_ace.'</td>
+<td style="width: 200px; height: 18px; color: #000000;background-color: #aed7ff; text-align: left"><b> Hora del suceso</b></td>
+<td style="width: 160px; height: 18px;border-bottom: 1px solid #0069d2; color: #000000; background-color: #ffffff; text-align: left">' .$hora_ace.'</td>
+<td style="width: 80px; height: 18px;color: #000000; background-color: #aed7ff; text-align: left"><b>  Hora trab.</b></td>
+<td style="width: 200px; height: 18px; color: #000000;border-bottom: 1px solid #0069d2; background-color: #ffffff; text-align: left">' .$horatrabajo_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Día del último descanso</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$diadescanso_ace.'</td>
+<td class="fila" width="200px"><b> Día del último descanso</b></td>
+<td class="fila1" width="440px">'.$diadescanso_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> De hace cuantas semanas</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$semanadescanso_ace.'</td>
+<td class="fila" width="200px"><b> De hace cuantas semanas</b></td>
+<td class="fila1" width="440px">'.$semanadescanso_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Dispone de eval. de riesgos del puesto</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$isevaluadoriesgo_ace.'</td>
+<td class="fila" width="200px"><b> Dispone de eval. de riesgos del puesto</b></td>
+<td class="fila1" width="440px">'.$isevaluadoriesgo_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> La evaluacion contempla este riesgo</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$evalconriesgo_ace.'</td>
+<td class="fila" width="200px"><b> La evaluacion contempla este riesgo</b></td>
+<td class="fila1" width="440px">'.$evalconriesgo_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Es un recaida</b></td>
-<td style="width: 160px; height: 18px; background-color: #ffffff; text-align: left">' .$isrecaida_ace.'</td>
-<td style="width: 150px; height: 18px; background-color: #aed7ff; text-align: left"><b>  Fecha accidente inicial</b></td>
-<td style="width: 150; height: 18px; background-color: #ffffff; text-align: left">' .$fechaantesrecaida_ace.'</td>
+<td class="fila" width="200px"><b> Es un recaida</b></td>
+<td style="width: 160px; height: 18px; color: #000000;background-color: #ffffff; text-align: left">' .$isrecaida_ace.'</td>
+<td style="width: 150px; height: 18px; color: #000000;background-color: #aed7ff; text-align: left"><b>  Fecha accidente inicial</b></td>
+<td style="width: 130; height: 18px; color: #000000; border-right: 1px solid #0069d2;background-color: #ffffff; text-align: left">' .$fechaantesrecaida_ace.'</td>
 </tr>
 </table>
 <br>
 <br>
-<table border="0">
+<table class="first">
 <tr>
 <td style="width: 640px;height: 18px; color:#ffffff; background-color: #0069d2; text-align: left; text-color:#ffffff"><b>  4. DATOS DEL SUCESO (2)</b></td>
 </tr>
 </table>
 
-<table border="1">
+<table class="first">
 <tr>
-<td style="width: 640px; height: 18px; background-color: #aed7ff; text-align: left"><b> Descripción del suceso (Breve descripción de los hechos y forma en la que se produjo el suceso</b></td>
+<td style="width: 640px; height: 18px; color:#000000; background-color: #aed7ff; text-align: left"><b> Descripción del suceso (Breve descripción de los hechos y forma en la que se produjo el suceso</b></td>
 </tr>
 <tr>
-<td style="width: 640px; height: 60px; background-color: #ffffff; text-align: left">'.$descripcion_ace.'</td>
+<td style="width: 640px; height: 54px; color:#000000; background-color: #ffffff; text-align: left"> '.$descripcion_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Tipo de lugar</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$tipolugar_ace2.' - '.$tipolugar_ace.'</td>
+<td class="fila" width="200px"><b> Tipo de lugar</b></td>
+<td class="fila1" width="440px">'.$tipolugar_ace2.' - '.$tipolugar_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Zona donde se produce el suceso</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$zonalugar_ace.'</td>
+<td class="fila" width="200px"><b> Zona donde se produce el suceso</b></td>
+<td class="fila1" width="440px">'.$zonalugar_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"> Observ. del lugar</td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$observaclugar_ace.'</td>
+<td class="fila" width="200px"> Observ. del lugar</td>
+<td class="fila1" width="440px">'.$observaclugar_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Procesos de trabajo</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$procesotrabajo_ace.'</td>
+<td class="fila" width="200px"><b> Procesos de trabajo</b></td>
+<td class="fila1" width="440px">'.$procesotrabajo_ace2.' - '.$procesotrabajo_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"> Observ. al proceso de trabajo</td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$observproceso_ace.'</td>
+<td class="fila" width="200px"> Observ. al proceso de trabajo</td>
+<td class="fila1" width="440px">'.$observproceso_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Tipo de actividad</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$tipoactividad_ace.'</td>
+<td class="fila" width="200px"><b> Tipo de actividad</b></td>
+<td class="fila1" width="440px">'.$tipoactividad_ace2.' - '.$tipoactividad_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"> Observ. al tipo de actividad</td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$observtipoactiv_ace.'</td>
+<td class="fila" width="200px"> Observ. al tipo actividad</td>
+<td class="fila1" width="440px">'.$observtipoactiv_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Agente material asoc. a la actividad</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$agentematerial_ace.'</td>
+<td class="fila" width="200px"><b> Agente material asoc. a la actividad</b></td>
+<td class="fila1" width="440px">'.$agentematerial_ace2.' - '.$agentematerial_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"> Obser. al agente asoc. a la actividad</td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$observagmaterial_ace.'</td>
+<td class="fila" width="200px"> Obser. al agente asoc. a la actividad</td>
+<td class="fila1" width="440px">'.$observagmaterial_ace.'</td>
 </tr>
 </table>
-
 <br>
 <br>
-<table border="0">
+<br>
+<br>
+<br>
+<table class="first">
 <tr>
 <td style="width: 640px;height: 18px; color:#ffffff; background-color: #0069d2; text-align: left; text-color:#ffffff"><b>  4. DATOS DEL SUCESO (3)</b></td>
 </tr>
 </table>
-<table border="0">
+<table class="first">
 <tr>
-<tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Tipo de desviación producida</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$desviacion_ace.'</td>
+<td class="fila" width="200px"><b> Tipo de desviación producida</b></td>
+<td class="fila1" width="440px">'.$desviacion_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"> Obser. la observación producida</td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$observdesviacion_ace.'</td>
+<td class="fila" width="200px"> Obser. la observación producida</td>
+<td class="fila1" width="440px">'.$observdesviacion_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Agente material asoc. a la desviacion</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$agmaterdesv_ace.'</td>
+<td class="fila" width="200px"><b> Agente material asoc. a la desviacion</b></td>
+<td class="fila1" width="440px">'.$agmaterdesv_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"> Observ. agente asociado a la desviac.</td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$observagendesv_ace.'</td>
+<td class="fila" width="200px"> Observ. agente asociado a la desviac.</td>
+<td class="fila1" width="440px">'.$observagendesv_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Forma de contacto</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$formacontacto_ace.'</td>
+<td class="fila" width="200px"><b> Forma de contacto</b></td>
+<td class="fila1" width="440px">'.$formacontacto_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"> Observaciones a la forma de contacto</td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$observformacont_ace.'</td>
+<td class="fila" width="200px"> Observaciones a la forma de contacto</td>
+<td class="fila1" width="440px">'.$observformacont_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Agente material causante de la lesión</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$matercasusalesi_ace.'</td>
+<td class="fila" width="200px"><b> Agente material causante de la lesión</b></td>
+<td class="fila1" width="440px">'.$matercasusalesi_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"> Observ. al agente causante de la lesión</td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$observmatlesi_ace.'</td>
+<td class="fila" width="200px"> Observ. al agente causante de la lesión</td>
+<td class="fila1" width="440px">'.$observmatlesi_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Núm. de trabajadores afectados</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$numtrafectados_ace.'</td>
+<td class="fila" width="200px"><b> Núm. de trabajadores afectados</b></td>
+<td class="fila1" width="440px">'.$numtrafectados_ace.'</td>
 </tr>
 <tr>
-<td style="width: 640px; height: 18px; background-color: #aed7ff; text-align: left"><b> Declaración del protagonista (exposición de lo que cuenta el trabajador accidentado</b></td>
+<td style="width: 640px; height: 18px; color:#000000; font-size: 8pt; background-color: #aed7ff; text-align: left"><b> Declaración del protagonista (exposición de lo que cuenta el trabajador accidentado</b></td>
 </tr>
 <tr>
-<td style="width: 640px; height: 50px; background-color: #ffffff; text-align: left">'.$declaraciontrab_ace.'</td>
+<td style="width: 640px; height: 50px; background-color: #ffffff; border-right: 1px solid #0069d2; border-bottom: 1px solid #0069d2; border-left: 1px solid #0069d2; text-align: left">'.$declaraciontrab_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Hubo testigos</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$istestigos_ace.'</td>
+<td class="fila" width="200px"><b> Hubo testigos</b></td>
+<td class="fila1" width="440px">'.$istestigos_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Nombre, puestos de trabajo y telefonos de los testigos</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$detallestestigo_ace.'</td>
+<td class="fila" width="200px"><b> Nombre, puestos de trabajo y telefonos de los testigos</b></td>
+<td class="fila1" width="440px">'.$detallestestigo_ace.'</td>
 </tr>
 <tr>
-<td style="width: 640px; height: 18px; background-color: #aed7ff; text-align: left"><b> Declaración de los testigos</b></td>
+<td style="width: 640px; height: 18px; color:#000000; font-size: 8pt; background-color: #aed7ff; text-align: left"><b> Declaración de los testigos</b></td>
 </tr>
 <tr>
-<td style="width: 640px; height: 50px; background-color: #ffffff; text-align: left">'.$declaraciontestigo_ace.'</td>
+<td style="width: 640px; height: 50px; background-color: #ffffff; border-right: 1px solid #0069d2; border-bottom: 1px solid #0069d2; border-left: 1px solid #0069d2; text-align: left">'.$declaraciontestigo_ace.'</td>
 </tr>
 </table>
+
+
 <br>
 <br>
-<table border="0">
+<table class="first">
 <tr>
 <td style="width: 640px;height: 18px; color:#ffffff; background-color: #0069d2; text-align: left; text-color:#ffffff"><b>  5. DATOS ASISTENCIALES</b></td>
 </tr>
 </table>
-<table border="0">
+<table class="first">
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Descripción de la lesión</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$tipolesion_ace.'</td>
+<td class="fila" width="200px"><b> Descripción de la lesión</b></td>
+<td class="fila1" width="440px">'.$tipolesion_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Grado de la lesión</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$gradolesion_ace.'</td>
+<td class="fila" width="200px"><b> Grado de la lesión</b></td>
+<td class="fila1" width="440px">'.$gradolesion_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Parte del cuerpo lesionada</b></td>
-<td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$partecuerpo_ace.'</td>
+<td class="fila" width="200px"><b> Parte del cuerpo lesionada</b></td>
+<td class="fila1" width="440px">'.$partecuerpo_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Ha sido necesaria su evacuación</b></td>
-<td style="width: 50px; height: 18px; background-color: #ffffff; text-align: left">' .$isevacuacion_ace.'</td>
-<td style="width: 180px; height: 18px; background-color: #aed7ff; text-align: left"><b>  Lugar al que ha sido evacuado</b></td>
-<td style="width: 230px; height: 18px; background-color: #ffffff; text-align: left">'.$lugarevacuacion_ace.'</td>
+<td class="fila" width="200px"><b> Ha sido necesaria su evacuación</b></td>
+<td class="fila1" width="50px">' .$isevacuacion_ace.'</td>
+<td class="fila" width="180px"><b>  Lugar al que ha sido evacuado</b></td>
+<td class="fila1" width="230px">'.$lugarevacuacion_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Ha sido asistido en un centro médico</b></td>
-<td style="width: 50px; height: 18px; background-color: #ffffff; text-align: left">'.$centromedico_ace.'</td>
-<td style="width: 180px; height: 18px; background-color: #aed7ff; text-align: left"><b>  Detalles del centro médico</b></td>
-<td style="width: 230px; height: 18px; background-color: #ffffff; text-align: left">'.$detallescentromed_ace.'</td>
+<td class="fila" width="200px"><b> Ha sido asistido en un centro médico</b></td>
+<td class="fila1" width="50px">'.$centromedico_ace.'</td>
+<td class="fila" width="180px"><b>  Detalles del centro médico</b></td>
+<td style="width: 230px; height: 18px;border-bottom: 1px solid #0069d2; color: #000000; background-color: #ffffff; text-align: left">'.$detallescentromed_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Recon. medico de reincorporación</b></td>
-<td style="width: 50px; height: 18px; background-color: #ffffff; text-align: left">'.$recomedincorp_ace.'</td>
-<td style="width: 180px; height: 18px; background-color: #aed7ff; text-align: left"><b>  Recon. medico previo (fecha)</b></td>
-<td style="width: 230px; height: 18px; background-color: #ffffff; text-align: left">'.$recinedtrab_ace.'</td>
+<td class="fila" width="200px"><b> Recon. medico de reincorporación</b></td>
+<td class="fila1" width="50px">'.$recomedincorp_ace.'</td>
+<td class="fila" width="180px"><b>  Recon. medico previo (fecha)</b></td>
+<td class="fila1" width="230px">'.$recinedtrab_ace.'</td>
 </tr>
 </table>
 <br>
 <br>
 <br>
 <br>
-<table border="0">
+<table class="first">
 <tr>
 <td style="width: 640px;height: 18px; color:#ffffff; background-color: #0069d2; text-align: left; text-color:#ffffff"><b>  6. DATOS DEL ANÁLISIS DE LAS CAUSAS (1)</b></td>
 </tr>
 </table>
-<table border="0">
+<table class="first">
 <tr>
 <td style="width: 230px; height: 18px; background-color: #aed7ff; text-align: left"><b> Tiene informacion PRL (art. 18 LPRL)</b></td>
 <td style="width: 100px; height: 18px; background-color: #ffffff; text-align: left">'.$istrformado_ace.'</td>
@@ -554,27 +560,27 @@ $html ='
 </tr>
 
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Protección colectiva disponible</b></td>
+<td class="fila" width="200px"><b> Protección colectiva disponible</b></td>
 <td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$protcolectivadisp_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Protección colectiva necesaria</b></td>
+<td class="fila" width="200px"><b> Protección colectiva necesaria</b></td>
 <td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$protcolecnecesa_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"> Observ. de prot. colectiva</td>
+<td class="fila" width="200px"> Observ. de prot. colectiva</td>
 <td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$observprotcol_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Protección individual disponible</b></td>
+<td class="fila" width="200px"><b> Protección individual disponible</b></td>
 <td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$episdispon_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Protección individual necesaria</b></td>
+<td class="fila" width="200px"><b> Protección individual necesaria</b></td>
 <td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$episneces_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"> Observ. de prot. individual</td>
+<td class="fila" width="200px"> Observ. de prot. individual</td>
 <td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$observepis_ace.'</td>
 </tr>
 <tr>
@@ -584,23 +590,23 @@ $html ='
 <td style="width: 640px; height: 30px; background-color: #ffffff; text-align: left">'.$causaaccidente_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> ¿Por qué causas anteriores?</b></td>
+<td class="fila" width="200px"><b> ¿Por qué causas anteriores?</b></td>
 <td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$porquecausa_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> ¿Quien tenia control sobre las causas?</b></td>
+<td class="fila" width="200px"><b> ¿Quien tenia control sobre las causas?</b></td>
 <td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$quiencontrolcausa_ace.'</td>
 </tr>
 </table>
 <br><br>
 <br>
 <br>
-<table border="0">
+<table class="first">
 <tr>
 <td style="width: 640px;height: 18px; color:#ffffff; background-color: #0069d2; text-align: left; text-color:#ffffff"><b>  6. DATOS DEL ANÁLISIS DE LAS CAUSAS - CONCLUSIONES Y MEDIDAS PREVENTIVAS (2)</b></td>
 </tr>
 </table>
-<table border="0">
+<table class="first">
 <tr>
 <tr>
 <td style="width: 640px; height: 18px; background-color: #aed7ff; text-align: left"><b> ¿Qué conclusiones se obtienen del análsis del accidente-incidente?</b></td>
@@ -625,26 +631,26 @@ $html ='
 <br>
 
 <br>
-<table border="0">
+<table class="first">
 <tr>
 <td style="width: 640px;height: 18px; color:#ffffff; background-color: #0069d2; text-align: left; text-color:#ffffff"><b>  7. HISTÓRICO ACCIDENTES E INCIDENTES</b></td>
 </tr>
 </table>
-<table border="0">
+<table class="first">
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Accidentes en los últimos 12 meses</b></td>
+<td class="fila" width="200px"><b> Accidentes en los últimos 12 meses</b></td>
 <td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$histaccult12mes_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Puesto que se produjeron</b></td>
+<td class="fila" width="200px"><b> Puesto que se produjeron</b></td>
 <td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$histpuestoacc_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Operaciones que se realizaban</b></td>
+<td class="fila" width="200px"><b> Operaciones que se realizaban</b></td>
 <td style="width: 440px; height: 18px; background-color: #ffffff; text-align: left">'.$histtrabajosreal_ace.'</td>
 </tr>
 <tr>
-<td style="width: 200px; height: 18px; background-color: #aed7ff; text-align: left"><b> Causas</b></td>
+<td class="fila" width="200px"><b> Causas</b></td>
 <td style="width: 50px; height: 18px; background-color: #ffffff; text-align: left">'.$histcausaacc_ace.'</td>
 <td style="width: 180px; height: 18px; background-color: #aed7ff; text-align: left"><b>  Medidas que se adoptaron</b></td>
 <td style="width: 230px; height: 18px; background-color: #ffffff; text-align: left">'.$histmedidaacc_ace.'</td>
@@ -653,12 +659,12 @@ $html ='
 <br>
 <br>
 <br>
-<table border="0">
+<table class="first">
 <tr>
 <td style="width: 640px;height: 18px; color:#ffffff; background-color: #0069d2; text-align: left; text-color:#ffffff"><b>  8. DATOS ASISTENCIALES</b></td>
 </tr>
 </table>
-<table border="0">
+<table class="first">
 <tr>
 <td style="width: 640px; height: 18px; background-color: #aed7ff; text-align: left"><b> Persona que realiza el análisis del suceso:</b></td>
 </tr>

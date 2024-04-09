@@ -4,6 +4,10 @@ include('../admin/layout/parte1.php');
 include('../app/controllers/trabajadores/listado_trabajadores.php');
 include('../app/controllers/formaciones/listado_formaciones.php');
 include('../app/controllers/accidentes/listado_accidentes.php') ?>
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-wordpress-admin/wordpress-admin.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+
 
 <body>
 
@@ -316,32 +320,16 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
   <?php
   if ($contador_tr_no_formados > 0) { ?>
     <script>
-      $(document).ready(function() {
-        $("#modal-warning").modal("show");
+      swal.fire({
+        position: "top-end",
+        icon: "warning",
+        title: "<h4>Dispones de  <?php echo $contador_tr_no_formados ?> trabajadores no formados!</h4>",
+        timer: 3000,
       });
-    </script><?php
-            }
-              ?>
-
-  <div class="modal fade" id="modal-warning">
-    <div class="modal-dialog">
-      <div class="modal-content bg-warning">
-        <div class="modal-header">
-          <h4 class="modal-title">      <i class="nav-icon fa bi bi-exclamation-triangle-fill"></i>  Aviso       <i class="nav-icon fa bi bi-exclamation-triangle-fill"></i> </h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Dispones de  <?php echo $contador_tr_no_formados ?> trabajadores no formados&hellip;</p>
-        </div>
-      
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-
-  </div>
+    </script>
+  <?php
+  }
+  ?>
 
   <!--fin avisos-->
   <br>

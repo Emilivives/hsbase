@@ -198,7 +198,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">Trabajador</label>
-                                            <select name="id_trabajador" id="" class="form-control">
+                                            <select name="trabajador_rm" id="" class="form-control">
                                                 <?php
                                                 foreach ($trabajadores as $trabajador) { ?>
                                                     <option value="<?php echo $trabajador['id_trabajador']; ?>"><?php echo $trabajador['nombre_tr'] ?></option>
@@ -400,12 +400,12 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">Trabajador</label>
-                                                <select name="id_trabajador" id="" class="form-control">
+                                                <select name="trabajador_rm" id="" class="form-control">
                                                     <?php
                                                     foreach ($trabajadores as $trabajador) {
                                                         $trabajador_tabla = $trabajador['nombre_tr'];
                                                         $id_trabajador = $trabajador['id_trabajador']; ?>
-                                                        <option value="<?php echo $id_trabajador; ?>" <?php if ($trabajador_tabla == $id_trabajador) { ?> selected="selected" <?php } ?>>
+                                                        <option value="<?php echo $id_trabajador; ?>" <?php if ($trabajador_tabla == $trabajador_rm) { ?> selected="selected" <?php } ?>>
                                                             <?php echo $trabajador_tabla; ?>
                                                         </option>
                                                     <?php

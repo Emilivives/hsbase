@@ -527,8 +527,6 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                     </div>
                                                                 </div>
                                                             </div>
-<<<<<<< HEAD
-=======
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
@@ -566,7 +564,6 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
 
                                                             </div>
->>>>>>> e31b1a64f8f191b92e4ab9cb25a23d5462103f2b
 
                                                         </div>
                                                     </div>

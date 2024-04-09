@@ -359,10 +359,10 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                 <div class="col-sm-8">
                                     <select class="form-select" name="lugar_ace" aria-label="Default select example">
                                         <option selected>Selecciona lugar</option>
-                                        <option value="1">En el propio centro</option>
-                                        <option value="2">En otro centro de trabajo</option>
-                                        <option value="3">In itinero</option>
-                                        <option value="4">Desplazamiento entre centros</option>
+                                        <option value="En el propio centro">En el propio centro</option>
+                                        <option value="En otro centro de trabajo">En otro centro de trabajo</option>
+                                        <option value="In itinere">In itinere</option>
+                                        <option value="Desplazamiento entre centros">Desplazamiento entre centros</option>
                                     </select>
                                 </div>
                             </div>

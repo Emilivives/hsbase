@@ -13,9 +13,11 @@ ace.trabajohabitual_ace as trabajohabitual_ace, ace.diadescanso_ace as diadescan
 ace.isevaluadoriesgo_ace as isevaluadoriesgo_ace, ace.evalconriesgo_ace as evalconriesgo_ace, ace.isrecaida_ace as isrecaida_ace, 
 ace.fechaantesrecaida_ace as fechaantesrecaida_ace, ace.descripcion_ace as descripcion_ace, tlu.tipolugar_tl as tipolugar_tl,
 tlu.codtipolugar_tl as codtipolugar_tl, 
-ace.zonalugar_ace as zonalugar_ace, ace.observaclugar_ace as observaclugar_ace, pt.procesotrabajo_pt as procesotrabajo_pt, 
-ace.observproceso_ace as observproceso_ace, af.activfisica_af as activfisica_af, ace.observtipoactiv_ace as observtipoactiv_ace, 
-am.agentematerial_am as agentematerial_am, ace.observagmaterial_ace as observagmaterial_ace, ds.desviacion_des as desviacion_des, 
+ace.zonalugar_ace as zonalugar_ace, ace.observaclugar_ace as observaclugar_ace, pt.procesotrabajo_pt as procesotrabajo_pt,
+pt.codigo_pt as codigo_pt, 
+ace.observproceso_ace as observproceso_ace, af.activfisica_af as activfisica_af, af.codactivfis_af as codactivfis_af, 
+ace.observtipoactiv_ace as observtipoactiv_ace, 
+am.agentematerial_am as agentematerial_am, am.codagentemat_am as codagentemat_am, ace.observagmaterial_ace as observagmaterial_ace, ds.desviacion_des as desviacion_des, 
 ace.observdesviacion_ace as observdesviacion_ace, amd.agentematerialdesv_amd as agentematerialdesv_amd, ace.observagendesv_ace as observagendesv_ace, fc.formacontacto_fc as formacontacto_fc, 
 ace.observformacont_ace as observformacont_ace, aml.agentematerialles_aml as agentematerialles_aml, ace.observmatlesi_ace as observmatlesi_ace, ace.numtrafectados_ace as numtrafectados_ace, 
 ace.declaraciontrab_ace as declaraciontrab_ace, ace.istestigos_ace as istestigos_ace, ace.detallestestigo_ace as detallestestigo_ace, 
@@ -89,10 +91,13 @@ foreach ($accidentes_datos as $accidentes_dato) {
     $zonalugar_ace = $accidentes_dato['zonalugar_ace'];
     $observaclugar_ace = $accidentes_dato['observaclugar_ace'];
     $procesotrabajo_ace = $accidentes_dato['procesotrabajo_pt'];
+    $procesotrabajo_ace2 = $accidentes_dato['codigo_pt'];
     $observproceso_ace = $accidentes_dato['observproceso_ace'];
     $tipoactividad_ace = $accidentes_dato['activfisica_af'];
+    $tipoactividad_ace2 = $accidentes_dato['codactivfis_af'];
     $observtipoactiv_ace = $accidentes_dato['observtipoactiv_ace'];
     $agentematerial_ace = $accidentes_dato['agentematerial_am'];
+    $agentematerial_ace2 = $accidentes_dato['codagentemat_am'];
     $observagmaterial_ace = $accidentes_dato['observagmaterial_ace'];
     $desviacion_ace = $accidentes_dato['desviacion_des'];
     $observdesviacion_ace = $accidentes_dato['observdesviacion_ace'];

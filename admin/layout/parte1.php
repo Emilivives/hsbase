@@ -253,7 +253,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <li class="nav-item">
                             <a href="<?php echo $URL; ?>/admin/reconocimientos" class="nav-link">
-                                <i class="nav-icon fa-solid fa-book-medical"></i>
+                                <i class="nav-icon fa-solid fa-heart-pulse"></i>
                                 <p>
                                     Vigilancia salud
 

@@ -30,8 +30,8 @@ include('../../app/controllers/actividad/listado_actividades.php');
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="#">Actividades</a></li>
-                    <li class="breadcrumb-item">Proyectos</li>
+                    <li class="breadcrumb-item">Actividades</a></li>
+                    <li class="breadcrumb-item"><a href="show.php?id_proyecto=<?php echo $id_proyecto1?>">Proyectos</a></li>
                     <li class="breadcrumb-item active">Tarea</li>
                 </ol>
             </div><!-- /.col -->

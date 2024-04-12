@@ -681,7 +681,6 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                         <div class="dropdown">
                                             <a href="show.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-warning btn-sm" title="Accede"> <i class="bi bi-folder"></i> Ver</a></a>
                                             <a href="../../app/controllers/actividad/delete_accion.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar la accion PRL?')" title="Eliminar Accion PRL"><i class="bi bi-trash-fill"></i></a>
-
                                         </div>
 
                                     </td>

@@ -324,7 +324,7 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
         position: "top-end",
         icon: "warning",
         title: "<h4>Dispones de  <?php echo $contador_tr_no_formados ?> trabajadores no formados!</h4>",
-        timer: 3000,
+        timer: 1500,
       });
     </script>
   <?php
@@ -642,16 +642,6 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
     </div>
 
   </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-
-    </div>
-
-  </div>
-  <div class="col-md-6">asdf</div>
-  </div>
-
 </body>
 <?php
 include('../admin/layout/parte2.php'); ?>

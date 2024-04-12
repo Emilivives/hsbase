@@ -564,22 +564,20 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                                         <div class="col-md-1">
                                             <label for="">Programada</label>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="programada_ta" id="flexRadioDefault1" value="1" <?php if ($tarea_proyecto['programada_ta'] == 1); {
-                                                                                                                                                        echo 'checked';
-                                                                                                                                                    } ?>>
+                                                <input class="form-check-input" type="radio" name="programada_ta" id="flexRadioDefault1" value="1" <?php if ($tarea_proyecto['programada_ta'] == "1"){ echo 'Checked'; } ?>>
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     SI
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="programada_ta" id="flexRadioDefault2" value="" <?php if ($tarea_proyecto['programada_ta'] == 0); {
-                                                                                                                                                        echo 'checked';
-                                                                                                                                                    } ?>>
+                                                <input class="form-check-input" type="radio" name="programada_ta" id="flexRadioDefault2" value="0" <?php if ($tarea_proyecto['programada_ta'] == "0"){ echo 'Checked'; } ?>>
                                                 <label class="form-check-label" for="flexRadioDefault2">
                                                     NO
                                                 </label>
                                             </div>
                                         </div>
+
+                                      
                                         <div class="col-md-2">
                                             <label for="">Prioridad</label>
                                             <select class="form-select form-select-sm" name="prioridad_ta" aria-label=".form-select-sm example">
@@ -608,9 +606,17 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="">Vencimiento</label>
-                                                <input type="date" name="fecha_ta" value="<?php echo $tarea_proyecto['categoria_ta']; ?>" class="form-control" required>
+                                                <input type="date" name="fecha_ta" value="<?php echo $tarea_proyecto['fecha_ta']; ?>" class="form-control" required>
                                             </div>
                                         </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="">Realizada</label>
+                                                <input type="date" name="fechareal_ta" value="<?php echo $tarea_proyecto['fechareal_ta']; ?>" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        
                                         <div class="col-md-3">
                                             <label for="">Estado</label>
                                             <select class="form-select form-select-sm" name="estado_ta" aria-label=".form-select-sm example">
@@ -719,7 +725,7 @@ include('../../admin/layout/mensaje.php');
 <script>
     $(function() {
         $("#example1").DataTable({
-            "pageLength": 5,
+            "pageLength": 15,
             "language": {
                 "emptyTable": "No hay información",
                 "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",

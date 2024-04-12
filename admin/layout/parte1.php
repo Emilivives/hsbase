@@ -307,6 +307,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="<?php echo $URL; ?>/admin/maestros/documentos" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Documentos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="<?php echo $URL; ?>/admin/maestros/varios" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>varios</p>

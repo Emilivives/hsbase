@@ -5,6 +5,7 @@ include('../../../app/config.php');
 $id_proyecto = $_POST['id_proyecto'];
 $nombre_ta = $_POST['nombre_ta'];
 $fecha_ta = $_POST['fecha_ta'];
+$fechareal_ta = $_POST['fechareal_ta'];
 $centro_ta = $_POST['centro_ta'];
 $responsable_ta = $_POST['responsable_ta'];
 $prioridad_ta = $_POST['prioridad_ta'];
@@ -14,12 +15,13 @@ $detalles_ta = $_POST['detalles_ta'];
 $categoria_ta = $_POST['categoria_ta'];
 $accionprl_ta = $_POST['accionprl_ta'];
 
-$sentencia = $pdo->prepare("INSERT INTO ag_tareas (id_tarea, id_proyecto, nombre_ta, fecha_ta, centro_ta, responsable_ta, prioridad_ta, estado_ta, programada_ta, detalles_ta, categoria_ta, accionprl_ta) 
-VALUES(NULL, :id_proyecto, :nombre_ta, :fecha_ta, :centro_ta, :responsable_ta, :prioridad_ta, :estado_ta, :programada_ta, :detalles_ta, :categoria_ta, :accionprl_ta)");
+$sentencia = $pdo->prepare("INSERT INTO ag_tareas (id_tarea, id_proyecto, nombre_ta, fecha_ta, fechareal_ta, centro_ta, responsable_ta, prioridad_ta, estado_ta, programada_ta, detalles_ta, categoria_ta, accionprl_ta) 
+VALUES(NULL, :id_proyecto, :nombre_ta, :fecha_ta, :fechareal_ta, :centro_ta, :responsable_ta, :prioridad_ta, :estado_ta, :programada_ta, :detalles_ta, :categoria_ta, :accionprl_ta)");
 
 $sentencia->bindParam('id_proyecto', $id_proyecto);   
 $sentencia->bindParam('nombre_ta', $nombre_ta);    
 $sentencia->bindParam('fecha_ta', $fecha_ta);
+$sentencia->bindParam('fechareal_ta', $fechareal_ta);
 $sentencia->bindParam('centro_ta', $centro_ta);
 $sentencia->bindParam('responsable_ta', $responsable_ta);
 $sentencia->bindParam('prioridad_ta', $prioridad_ta);    

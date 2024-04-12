@@ -364,20 +364,21 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
         <div class="card card-outline card-black">
             <div class="card-header col-md-12" style="background-color:black">
                 <h3 class="card-title text-white"><b>Detalles trabajador: <?php echo $trabajador_dato['nombre_tr'] ?></b> - <?php $trabajador_dato['activo_tr'];
-                                                                        if ($trabajador_dato['activo_tr'] == 1) { ?>
-                                                <span class='badge badge-success'>ACTIVO</span>
-                                            <?php
-                                                                        } else { ?>
-                                                <span class='badge badge-danger'>INACTIVO</span>
-                                            <?php
-                                                                        }
-                                            ?>
-                                            <?php $trabajador_dato['formacionpdt_tr'];
-                                                                        if ($trabajador_dato['formacionpdt_tr'] == 'No') { ?>
-                                                <span class='badge badge-danger'>NO FORMADO</span>
-                                            <?php
-                                                                        } 
-                                            ?></h3>
+                                                                                                                            if ($trabajador_dato['activo_tr'] == 1) { ?>
+                        <span class='badge badge-success'>ACTIVO</span>
+                    <?php
+                                                                                                                            } else { ?>
+                        <span class='badge badge-danger'>INACTIVO</span>
+                    <?php
+                                                                                                                            }
+                    ?>
+                    <?php $trabajador_dato['formacionpdt_tr'];
+                    if ($trabajador_dato['formacionpdt_tr'] == 'No') { ?>
+                        <span class='badge badge-danger'>NO FORMADO</span>
+                    <?php
+                    }
+                    ?>
+                </h3>
 
             </div>
             <div class="card-body">
@@ -464,77 +465,89 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
 
                                             <div class="row">
-                                               
+
                                                 <div class="col-md-2">
-                                           
+
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="activo_tr" id="flexRadioDefault3" value="1" <?php if($trabajador_dato['activo_tr'] == "1"){ echo 'Checked'; }?>>
+                                                        <input class="form-check-input" type="radio" name="activo_tr" id="flexRadioDefault3" value="1" <?php if ($trabajador_dato['activo_tr'] == "1") {
+                                                                                                                                                            echo 'Checked';
+                                                                                                                                                        } ?>>
                                                         <label class="form-check-label" for="flexRadioDefault3">
                                                             <b><?php $trabajador_dato['activo_tr'];
-                                                                        if ($trabajador_dato['activo_tr'] == 1) { ?>
-                                                <span class='badge badge-success'>ACTIVO</span>
-                                           <?php } else { 
-                                               echo "Activo" ;
-                                                               }
-                                            ?></b>
+                                                                if ($trabajador_dato['activo_tr'] == 1) { ?>
+                                                                    <span class='badge badge-success'>ACTIVO</span>
+                                                                <?php } else {
+                                                                    echo "Activo";
+                                                                }
+                                                                ?></b>
 
-                                                              </label>
+                                                        </label>
                                                     </div>
 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="activo_tr" id="flexRadioDefault4" value="0" <?php if($trabajador_dato['activo_tr'] == "0"){ echo 'Checked'; }?>>
+                                                        <input class="form-check-input" type="radio" name="activo_tr" id="flexRadioDefault4" value="0" <?php if ($trabajador_dato['activo_tr'] == "0") {
+                                                                                                                                                            echo 'Checked';
+                                                                                                                                                        } ?>>
                                                         <label class="form-check-label" for="flexRadioDefault4">
-                                                        <b><?php $trabajador_dato['activo_tr'];
-                                                                        if ($trabajador_dato['activo_tr'] == 0) { ?>
-                                                <span class='badge badge-danger'>BAJA</span>
-                                           <?php } else { 
-                                               echo "Baja" ;
-                                                               }
-                                            ?></b>
+                                                            <b><?php $trabajador_dato['activo_tr'];
+                                                                if ($trabajador_dato['activo_tr'] == 0) { ?>
+                                                                    <span class='badge badge-danger'>BAJA</span>
+                                                                <?php } else {
+                                                                    echo "Baja";
+                                                                }
+                                                                ?></b>
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
-                                           
+
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="formacionpdt_tr" id="flexRadioDefault3" value="Si" <?php if($trabajador_dato['formacionpdt_tr'] == "Si"){ echo 'Checked'; }?>>
+                                                        <input class="form-check-input" type="radio" name="formacionpdt_tr" id="flexRadioDefault3" value="Si" <?php if ($trabajador_dato['formacionpdt_tr'] == "Si") {
+                                                                                                                                                                    echo 'Checked';
+                                                                                                                                                                } ?>>
                                                         <label class="form-check-label" for="flexRadioDefault5">
-                                                           <b><?php $trabajador_dato['formacionpdt_tr'];
-                                                                        if ($trabajador_dato['formacionpdt_tr'] == "Si") { ?>
-                                                <span class='badge badge-success'>FORMADO</span>
-                                           <?php } else { 
-                                               echo "Formado" ;
-                                                               }
-                                            ?></b>
+                                                            <b><?php $trabajador_dato['formacionpdt_tr'];
+                                                                if ($trabajador_dato['formacionpdt_tr'] == "Si") { ?>
+                                                                    <span class='badge badge-success'>FORMADO</span>
+                                                                <?php } else {
+                                                                    echo "Formado";
+                                                                }
+                                                                ?></b>
                                                         </label>
                                                     </div>
 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="formacionpdt_tr" id="flexRadioDefault4" value="No" <?php if($trabajador_dato['formacionpdt_tr'] == "No"){ echo 'Checked'; }?>>
+                                                        <input class="form-check-input" type="radio" name="formacionpdt_tr" id="flexRadioDefault4" value="No" <?php if ($trabajador_dato['formacionpdt_tr'] == "No") {
+                                                                                                                                                                    echo 'Checked';
+                                                                                                                                                                } ?>>
                                                         <label class="form-check-label" for="flexRadioDefault6">
                                                             <b><?php $trabajador_dato['formacionpdt_tr'];
-                                                                        if ($trabajador_dato['formacionpdt_tr'] == "No") { ?>
-                                                <span class='badge badge-danger'>NO FORMADO</span>
-                                           <?php } else { 
-                                               echo "No Formado" ;
-                                                               }
-                                            ?></b>
+                                                                if ($trabajador_dato['formacionpdt_tr'] == "No") { ?>
+                                                                    <span class='badge badge-danger'>NO FORMADO</span>
+                                                                <?php } else {
+                                                                    echo "No Formado";
+                                                                }
+                                                                ?></b>
                                                         </label>
                                                     </div>
                                                 </div>
-                                               
+
 
                                                 <div class="col-md-2">
-                                           
+
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="sexo_tr" id="flexRadioDefault1" value="Hombre" <?php if($trabajador_dato['sexo_tr'] == "Hombre"){ echo 'Checked'; }?>>
+                                                        <input class="form-check-input" type="radio" name="sexo_tr" id="flexRadioDefault1" value="Hombre" <?php if ($trabajador_dato['sexo_tr'] == "Hombre") {
+                                                                                                                                                                echo 'Checked';
+                                                                                                                                                            } ?>>
                                                         <label class="form-check-label" for="flexRadioDefault3">
                                                             <b>Hombre</b>
                                                         </label>
                                                     </div>
 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="sexo_tr" id="flexRadioDefault2" value="Mujer" <?php if($trabajador_dato['sexo_tr'] == "Mujer"){ echo 'Checked'; }?>>
+                                                        <input class="form-check-input" type="radio" name="sexo_tr" id="flexRadioDefault2" value="Mujer" <?php if ($trabajador_dato['sexo_tr'] == "Mujer") {
+                                                                                                                                                                echo 'Checked';
+                                                                                                                                                            } ?>>
                                                         <label class="form-check-label" for="flexRadioDefault4">
                                                             <b>Mujer</b>
                                                         </label>
@@ -642,6 +655,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </form>
                                     </div>
                                 </div>
@@ -839,6 +853,10 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
 
                     </div>
+                </div>
+                <div class="row">
+                    <a class="btn btn-primary" href="../maestros/documentos/pdf_dosier.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Dosier</a>
+
                 </div>
             </div>
 

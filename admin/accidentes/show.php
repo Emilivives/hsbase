@@ -34,7 +34,8 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
             </div><!-- /.col -->
             <div class="col-sm-1">
             <a href="reporte.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-warning btn-sm" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
-            </div><!-- /.col -->
+            <a class="btn btn-primary" href="../maestros/documentos/pdf_solicitudmutua.php?id_accidente=<?php echo $id_accidente; ?>">Solicitud asistencia mutua</a>    
+        </div><!-- /.col -->
             <div class="col-sm-5">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Inicio</a></li>

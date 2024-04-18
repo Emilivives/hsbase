@@ -16,7 +16,7 @@ $anotaciones_tr = $_POST['anotaciones_tr'];
 
 
 $sentencia = $pdo->prepare("INSERT INTO trabajadores (codigo_tr, dni_tr, nombre_tr, sexo_tr, fechanac_tr, categoria_tr, inicio_tr, centro_tr, activo_tr, formacionpdt_tr, anotaciones_tr, fyh_creacion, fyh_actualizacion) 
-VALUES(:codigo_tr, :dni_tr, :nombre_tr, :sexo_tr, :fechanac_tr, :categoria_tr, :inicio_tr, :centro_tr, :activo_tr, :formacionpdt_tr, :anotaciones_tr, :fyh_creacion, :fyh_actualizacion)");
+VALUES(:codigo_tr, :dni_tr, :nombre_tr, :sexo_tr, :fechanac_tr, :categoria_tr, :inicio_tr, :centro_tr, :activo_tr, :formacionpdt_tr, :anotaciones_tr, :fyh_creacion, :fyh_actualizacion) ");
 
 $sentencia->bindParam('codigo_tr', $codigo_tr);    
 $sentencia->bindParam('dni_tr', $dni_tr);
@@ -32,16 +32,18 @@ $sentencia->bindParam('anotaciones_tr', $anotaciones_tr);
 $sentencia->bindParam('fyh_creacion', $fechahora);
 $sentencia->bindParam('fyh_actualizacion', $fechahora);
 
+
 if ($sentencia->execute()) {
 session_start();
+$ultimotr = $pdo->lastInsertId();
 $_SESSION['mensaje'] = "Trabajador registrado correctamente";
 $_SESSION['icono'] = 'success';
-header('Location: ' . $URL . '/admin/trabajadores');
+header('Location: ' . $URL . '/admin/trabajadores/trabajadorshow.php?id_trabajador='.$ultimotr.'');
 } else {
 session_start();
 $_SESSION['mensaje'] = "Trabajador NO registrado";
 $_SESSION['icono'] = 'warning';
-header('Location: ' . $URL . '/admin/trabajadores');
+header('Location: ' . $URL . '/admin/trabajadores/trabajadorshow.php?id_trabajador=1');
 }
 
 

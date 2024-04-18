@@ -1,6 +1,6 @@
 <?php
 
-include('../../../app/config.php');
+include('../../../../app/config.php');
 
 $id = $_GET['id'];
 

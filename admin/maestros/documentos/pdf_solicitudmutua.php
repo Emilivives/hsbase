@@ -1,61 +1,36 @@
 <?php
+include('../../../app/config.php');
+
+use setasign\Fpdi\Fpdi;
+
+
+require_once('../../../public/FPDI-2.6.0/src/autoload.php');
+require_once('../../../public/fpdf181/fpdf.php');
 
 $id_accidente = $_GET['id_accidente'];
+include('../../../app/controllers/accidentes/datos_accidente.php');
+include('../../../app/controllers/trabajadores/listado_trabajadores.php');
+
+include('../../../app/controllers/maestros/categorias/listado_categorias.php');
+include('../../../app/controllers/maestros/centros/listado_centros.php');
+include('../../../app/controllers/maestros/accidentes/listado_actividadfisica.php');
+include('../../../app/controllers/maestros/accidentes/listado_agentematerial.php');
+include('../../../app/controllers/maestros/accidentes/listado_agentematerialdesv.php');
+include('../../../app/controllers/maestros/accidentes/listado_agentematerialles.php');
+include('../../../app/controllers/maestros/accidentes/listado_desviacion.php');
+include('../../../app/controllers/maestros/accidentes/listado_formacontacto.php');
+include('../../../app/controllers/maestros/accidentes/listado_gravedad.php');
+include('../../../app/controllers/maestros/accidentes/listado_partecuerpo.php');
+include('../../../app/controllers/maestros/accidentes/listado_tipolesion.php');
+include('../../../app/controllers/maestros/accidentes/listado_procesotrabajo.php');
+include('../../../app/controllers/maestros/accidentes/listado_tipolugar.php');
+include('../../../app/controllers/maestros/accidentes/listado_tipoaccidente.php');
+include('../../../app/controllers/maestros/accidentes/listado_gravedad.php');
 
 
-$sql = "SELECT ace.id_accidente as id_accidente, 
-ace.nroaccidente_ace as nroaccidente_ace, pt.procesotrabajo_pt as procesotrabajo_pt, ace.comunicado_ace as comunicado_ace,
-tr.nombre_tr as nombre_tr, tr.dni_tr as dni_tr, tr.sexo_tr as sexo_tr, tr.fechanac_tr as fechanac_tr, tr.inicio_tr as inicio_tr, cat.nombre_cat as nombre_cat, cat.descripcion_cat as descripcion_cat, cat.departamento_cat as departamento_cat, 
-cen.nombre_cen as nombre_cen, emp.nombre_emp as nombre_emp, emp.razonsocial_emp as razonsocial_emp, emp.modalidadprl_emp as modalidadprl_emp,
-ace.lugar_ace as lugar_ace, ace.detalleslugar_ace as detalleslugar_ace, ta.tipoaccidente_ta as tipoaccidente_ta, 
-ace.fecha_ace as fecha_ace, ace.fechabaja_ace as fechabaja_ace, ace.hora_ace as hora_ace, ace.horatrabajo_ace as horatrabajo_ace, 
-ace.trabajohabitual_ace as trabajohabitual_ace, ace.diadescanso_ace as diadescanso_ace, ace.semanadescanso_ace as semanadescanso_ace, ace.diasbaja_ace as diasbaja_ace,
-ace.isevaluadoriesgo_ace as isevaluadoriesgo_ace, ace.evalconriesgo_ace as evalconriesgo_ace, ace.isrecaida_ace as isrecaida_ace, 
-ace.fechaantesrecaida_ace as fechaantesrecaida_ace, ace.descripcion_ace as descripcion_ace, tlu.tipolugar_tl as tipolugar_tl,
-tlu.codtipolugar_tl as codtipolugar_tl, 
-ace.zonalugar_ace as zonalugar_ace, ace.observaclugar_ace as observaclugar_ace, pt.procesotrabajo_pt as procesotrabajo_pt,
-pt.codigo_pt as codigo_pt, 
-ace.observproceso_ace as observproceso_ace, af.activfisica_af as activfisica_af, af.codactivfis_af as codactivfis_af, 
-ace.observtipoactiv_ace as observtipoactiv_ace, 
-am.agentematerial_am as agentematerial_am, am.codagentemat_am as codagentemat_am, ace.observagmaterial_ace as observagmaterial_ace, ds.desviacion_des as desviacion_des, 
-ace.observdesviacion_ace as observdesviacion_ace, amd.agentematerialdesv_amd as agentematerialdesv_amd, ace.observagendesv_ace as observagendesv_ace, fc.formacontacto_fc as formacontacto_fc, 
-ace.observformacont_ace as observformacont_ace, aml.agentematerialles_aml as agentematerialles_aml, ace.observmatlesi_ace as observmatlesi_ace, ace.numtrafectados_ace as numtrafectados_ace, 
-ace.declaraciontrab_ace as declaraciontrab_ace, ace.istestigos_ace as istestigos_ace, ace.detallestestigo_ace as detallestestigo_ace, 
-ace.declaraciontestigo_ace as declaraciontestigo_ace, tl.tipolesion_tl as tipolesion_tl,gr.gravedad_gr as gravedad_gr, 
-pc.partecuerpo_pc as partecuerpo_pc, ace.isevacuacion_ace as isevacuacion_ace, ace.lugarevacuacion_ace as lugarevacuacion_ace, 
-ace.centromedico_ace as centromedico_ace, ace.detallescentromed_ace as detallescentromed_ace, ace.recomedincorp_ace as recomedincorp_ace, 
-ace.recinedtrab_ace as recinedtrab_ace, ace.istrformado_ace as istrformado_ace, ace.istrinformado_ace as istrinformado_ace, 
-ace.protcolectivadisp_ace as protcolectivadisp_ace, ace.protcolecnecesa_ace as protcolecnecesa_ace, ace.observprotcol_ace as observprotcol_ace, 
-ace.episdispon_ace as episdispon_ace, ace.episneces_ace as episneces_ace, ace.observepis_ace as observepis_ace, 
-ace.causaaccidente_ace as causaaccidente_ace, ace.porquecausa_ace as porquecausa_ace, ace.quiencontrolcausa_ace as quiencontrolcausa_ace, 
-ace.conclusionacci_ace as conclusionacci_ace, ace.medidasprev_ace as medidasprev_ace, ace.valoracionmedida_ace as valoracionmedida_ace, 
-ace.histaccult12mes_ace as histaccult12mes_ace, ace.histpuestoacc_ace as histpuestoacc_ace, ace.histtrabajosreal_ace as histtrabajosreal_ace, 
-ace.histcausaacc_ace as histcausaacc_ace, ace.histmedidaacc_ace as histmedidaacc_ace, ace.investigador_ace as investigador_ace, 
-ace.cargoinvesiga_ace as cargoinvesiga_ace, ace.fechainvestiga_ace as fechainvestiga_ace, ace.fechacumplimen_ace as fechacumplimen_ace, 
-ace.revisadopor_ace as revisadopor_ace, ace.cargorevisado_ace as cargorevisado_ace, ace.fecharevision_ace as fecharevision_ace
-FROM `accidentes`as ace 
-INNER JOIN `trabajadores` as tr ON ace.trabajador_ace = tr.id_trabajador
-INNER JOIN `categorias` as cat ON tr.categoria_tr = cat.id_categoria
-INNER JOIN `centros` as cen ON ace.centro_ace = cen.id_centro
-INNER JOIN `empresa` as emp ON cen.empresa_cen = emp.id_empresa
-INNER JOIN `ace_procesotrabajo` as pt ON ace.procesotrabajo_ace = pt.id_procesotrabajo
-INNER JOIN `ace_actividadfisica` as af ON ace.tipoactividad_ace = af.id_actividadfisica
-INNER JOIN `ace_tipoaccidente` as ta ON ace.tipoaccidente_ace = ta.id_tipoaccidente
-INNER JOIN `ace_tipolesion` as tl ON ace.tipolesion_ace = tl.id_tipolesion
-INNER JOIN `ace_tipolugar` as tlu ON ace.tipolugar_ace = tlu.id_tipolugar
-INNER JOIN `ace_agentematerial` as am ON ace.agentematerial_ace = am.id_agentematerial
-INNER JOIN `ace_agentematerialdesv` as amd ON ace.agmaterdesv_ace = amd.id_agentematerialdesv
-INNER JOIN `ace_agentematerialles` as aml ON ace.matercasusalesi_ace = aml.id_agentematerialles
-INNER JOIN `ace_formacontacto` as fc ON ace.formacontacto_ace = fc.id_formacontacto
-INNER JOIN `ace_partecuerpo` as pc ON ace.partecuerpo_ace = pc.id_partecuerpo
-INNER JOIN `ace_gravedad` as gr ON ace.gradolesion_ace = gr.id_gravedad
-INNER JOIN `ace_desviacion` as ds ON ace.desviacion_ace = ds.id_desviacion
-WHERE `id_accidente` = '$id_accidente'";
 
-$query = $pdo->prepare($sql);
-$query->execute();
-$accidentes_datos = $query->fetchAll(PDO::FETCH_ASSOC);
 
+///// traer datos deL ACCIDENTE
 foreach ($accidentes_datos as $accidentes_dato) {
     $nroaccidente_ace = $accidentes_dato['nroaccidente_ace'];
     $comunicado_ace = $accidentes_dato['comunicado_ace'];
@@ -149,3 +124,117 @@ foreach ($accidentes_datos as $accidentes_dato) {
     $cargorevisado_ace = $accidentes_dato['cargorevisado_ace'];
     $fecharevision_ace = $accidentes_dato['fecharevision_ace'];
 }
+
+$fechaentera = strtotime($fecha_ace);
+$anio = date("Y", $fechaentera);
+$mes = date("m", $fechaentera);
+$dia = date("d", $fechaentera);
+
+$horaentera = strtotime($hora_ace);
+$hora = date("H", $fechaentera);
+$minutos = date("i", $fechaentera);
+
+$fechaahora = strtotime($fechahora);
+$anioahora = date("Y", $fechaentera);
+$mesahora = date("m", $fechaentera);
+$diaahora = date("d", $fechaentera);
+
+
+///// traer datos de accionprl
+
+$pdf = new FPDI();
+
+# Pagina 1  (X-horizontal Y-vertical)
+$pdf->AddPage();
+$pdf->setSourceFile('Files_Pdf/18_04_2024_SOLICITUD_ASISTENCIA_MUTUA.pdf');
+$tplIdx1 = $pdf->importPage(1);
+$pdf->useTemplate($tplIdx1); 
+$pdf->SetFont('Arial', '', '11'); 
+$pdf->SetXY(20, 48);
+$pdf->Write(10, $razonsocial_ace);
+
+
+$pdf->SetFont('Arial', '', '10');
+$pdf->SetXY(20, 83);
+$pdf->Write(10, $trabajador_ace);
+
+
+$pdf->SetFont('Arial', '', '10');
+$pdf->SetXY(135, 83);
+$pdf->Write(10, $dni_trabajador_ace);
+
+$pdf->SetFont('Arial', '', '10');
+$pdf->SetXY(20, 106);
+$pdf->Write(10, $categoria_trabajador_ace);
+
+
+$pdf->SetFont('Arial', '', '6');
+$pdf->SetXY(20, 120);
+$pdf->Write(2, $categoria_descripcion_ace);
+
+
+$pdf->SetFont('Arial', '', '13');
+$pdf->SetXY(20, 153);
+$pdf->Write(10, $dia);
+$pdf->SetFont('Arial', '', '13');
+$pdf->SetXY(35, 153);
+$pdf->Write(10, $mes);
+$pdf->SetFont('Arial', '', '13');
+$pdf->SetXY(50, 153);
+$pdf->Write(10, $anio);
+
+$pdf->SetFont('Arial', '', '13');
+$pdf->SetXY(130, 153);
+$pdf->Write(10, $hora);
+$pdf->SetFont('Arial', '', '13');
+$pdf->SetXY(160, 153);
+$pdf->Write(10, $hora);
+
+$pdf->SetFont('Arial', '', '10');
+$pdf->SetXY(20, 170);
+$pdf->Write(10, $detalleslugar_ace);
+
+$pdf->SetFont('Arial', '', '10');
+$pdf->SetXY(20, 182);
+$pdf->Write(10, $observproceso_ace);
+
+$pdf->SetFont('Arial', '', '10');
+$pdf->SetXY(20, 202);
+$pdf->Write(10, $descripcion_ace);
+
+$pdf->SetFont('Arial', '', '10');
+$pdf->SetXY(20, 222);
+$pdf->Write(10, $causaaccidente_ace);
+
+$pdf->SetFont('Arial', '', '10');
+$pdf->SetXY(20, 241);
+$pdf->Write(10, $tipolesion_ace);
+
+$pdf->SetFont('Arial', '', '10');
+$pdf->SetXY(20, 261);
+$pdf->Write(10, $partecuerpo_ace);
+
+# Pagina 2
+$pdf->AddPage();
+$tplIdx2 = $pdf->importPage(2);
+$pdf->useTemplate($tplIdx2);  
+
+$pdf->SetFont('Arial', '', '9');
+$pdf->SetXY(65, 200);
+$pdf->Write(10, $dia);
+$pdf->SetFont('Arial', '', '9');
+$pdf->SetXY(85, 200);
+$pdf->Write(10, $mes);
+$pdf->SetFont('Arial', '', '9');
+$pdf->SetXY(113, 200);
+$pdf->Write(10, $anio);
+
+// setFont ('B' - NEGRITA 
+//setFont ('I' - ITALICA 
+//setFont ('S' - SUBRAYA 
+
+
+$pdf->Output('Files_Pdf/SOLICITUD_ASISTENCIA_MUTUA_TRASMAPI.pdf', 'D'); //SALIDA DEL PDF
+//    $pdf->Output('original_update.pdf', 'F');
+//    $pdf->Output('original_update.pdf', 'I'); //PARA ABRIL EL PDF EN OTRA VENTANA
+//	  $pdf->Output('original_update.pdf', 'D'); //PARA FORZAR LA DESCARGA

@@ -61,7 +61,7 @@ include('../../../app/controllers/maestros/documentos/listado_documentos.php');
                                         <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
                                         <a href="<?php echo $URL.'/admin/maestros/documentos/Files_Pdf/'. $documentos_dato['urlArchivo'] ?>" target="_blank" class="btn btn-warning btn-sm"><i class="bi bi-eye-fill" title="Ver documento"></i></a>
-                                        <a href="../../app/controllers/maestros/documentos/delete.php?id=<?php echo $id; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar el documento?')" title="Eliminar documento"><i class="bi bi-trash-fill"></i></a>
+                                        <a href="../../../app/controllers/maestros/documentos/delete.php?id=<?php echo $id; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar el documento?')" title="Eliminar documento"><i class="bi bi-trash-fill"></i></a>
 
                                         </div>
                                     </td>

@@ -386,7 +386,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Código</label>
-                            <input type="text" value="<?php echo $trabajador_dato['codigo_tr'] ?>" name="dni_tr" class="form-control" disabled>
+                            <input type="text" value="<?php echo $trabajador_dato['codigo_tr'] ?>" name="codigo_tr" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -404,7 +404,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="">Fecha Nacimiento</label>
+                            <label for="">Fecha Nac.</label>
                             <input type="date" value="<?php echo $trabajador_dato['fechanac_tr'] ?>" name="fechanac_tr" class="form-control" disabled>
                         </div>
                     </div>
@@ -584,7 +584,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                                                 <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label for="">Fecha Nacimiento</label>
+                                                        <label for="">Fecha Nac.</label>
                                                         <input type="date" value="<?php echo $trabajador_dato['fechanac_tr'] ?>" name="fechanac_tr" class="form-control">
                                                     </div>
                                                 </div>
@@ -669,11 +669,12 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                 <hr>
 
 
+
                 <div class="row">
 
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            <table border="0">
+                            <table>
                                 <tr>
                                     <td style="height: 30px; width: 50%; background-color: #ffffff; text-align: left">
                                         <h5 strong style="text-align: left"><i class="fas fa-book mr-1"></i> Formación recibida </h5 strong>
@@ -734,10 +735,10 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                         <h5 strong style="text-align: left"><i class="fas bi bi-heart-pulse-fill mr-1"></i> Reconocimientos médicos</h5 strong>
                                     </td>
                                     <td></td>
-                                    <td style="height: 30px; width: 50%; background-color: #ffffff; text-align: right"> <a href="../formacion/create.php" style="text-align: right;" class="btn btn-outline-primary btn-sm" title="Ver detalles"><i class="bi bi-plus"></i> Crear</a></td>
-
+                                    <td style="height: 30px; width: 50%; background-color: #ffffff; text-align: right"><button type="button" style="text-align: right;" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modal-nuevoreconocimiento">+ Crear</button></td>
                                 </tr>
                             </table>
+
                         </div>
 
                         <table id="" class="table table-sm">
@@ -790,6 +791,9 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                         <hr>
                     </div>
                 </div>
+
+
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
@@ -855,14 +859,139 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                     </div>
                 </div>
                 <div class="row">
-                    <a class="btn btn-primary" href="../maestros/documentos/pdf_dosier.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Dosier</a>
+                    <strong style="text-align: left"><i class="bi bi-printer-fill"></i> Imprimir Documentos</strong>
+                    <div class="form-group">
+                        <a class="btn btn-primary" href="../maestros/documentos/pdf_dosier.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Dosier</a>
 
+                  
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                Entrega EPIs
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_amarrador.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Amarrador</a></li>
+                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_auxiliarpasaje.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Aux. Pasaje</a></li>
+                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_capitan.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Capitán</a></li>
+                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_jefemaquinas.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Jefe maq.</a></li>
+                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_limpieza.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Limpieza</a></li>
+                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_marinero.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Marinero</a></li>
+                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_marineromaquinas.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Marinero maq.</a></li>
+                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_oficialcarga-amarrador.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Of. carga</a></li>
+                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_primeroficial.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Primer of.</a></li>
+                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_taller.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Taller</a></li>
+                     
+                            </ul>
+          
+                    </div>
                 </div>
             </div>
 
         </div>
 
     </div>
+    <!-- inicio modal nuevo reconocimiento-->
+    <div class="modal fade" id="modal-nuevoreconocimiento">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#ffd900 ;color:black">
+                    <h5 class="modal-title" id="modal-nuevoreconocimiento">Nuevo Reconocimiento</h5>
+                    <button type="button" class="close" style="color: black;" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="../../app/controllers/reconocimientos/create.php" method="post" enctype="multipart/form-data">
+
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="">Nombre completo</label>
+                                    <input type="text" value="<?php echo $trabajador_dato['nombre_tr'] ?>" class="form-control" readonly>
+                                    <input type="text" value="<?php echo $trabajador_dato['id_trabajador'] ?>" name="trabajador_rm" class="form-control" hidden>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="">Fecha Reconocimiento</label>
+                                    <input type="date" name="fecha_rm" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="">Valido hasta</label>
+                                    <input type="date" name="caducidad_rm" class="form-control">
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <br>
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" value="1" name="vigente_rm" id="flexRadioDefault1" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        <b>Vigente</b>
+                                    </label>
+
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="0" name="vigente_rm" id="flexRadioDefault2">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        <b>No Vigente</b>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <br>
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" value="1" name="cita_rm" id="citaRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        <b>Citado</b>
+                                    </label>
+
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="0" name="cita_rm" id="flexRadioDefault2" checked>
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        <b>No Citado</b>
+                                    </label>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Anotaciones / restricciones</label>
+                                    <textarea class="form-control" name="anotaciones_rm" rows="6"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--fin modal-->
 
 
 

@@ -145,7 +145,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                     <button type="button" class="btn btn-primary btn-sm btn-font-size" data-toggle="modal" data-target="#modal-nuevaaccion">NUEVA ACCIÓN</button>
                 </div>
 
-                <!--inicio modal nuevo trabajador-->
+                <!--inicio modal nuev accion prl-->
                 <div class="modal fade" id="modal-nuevaaccion">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
@@ -189,9 +189,9 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
                                             <div class="col-sm-6">
                                                 <div class="form-group row">
-                                                    <label for="centro" class="col-form-label col-sm-2">Centro:</label>
+                                                    <label for="centro" class="col-form-label col-sm-3">Centro: *</label>
                                                     <div class="col-sm-7">
-                                                        <select name="centro_acc" id="btn_centro" class="form-control">
+                                                        <select name="centro_acc" id="btn_centro" class="form-control" required>
                                                             <option value="0">--Seleccione centro--</option>
                                                             <?php
                                                             foreach ($centros_datos as $centros_dato) { ?>
@@ -226,6 +226,29 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group row">
+
+                                                    <label for="" class="col-form-label col-sm-3">Responsable *</label>
+                                                    <div class="col-sm-9">
+                                                        <select name="responsable_acc" id="" class="form-control" required>
+                                                            <option value="">--Seleccione Responsable--</option>
+                                                            <?php
+                                                            foreach ($responsables_datos as $responsables_dato) { ?>
+                                                                <option value="<?php echo $responsables_dato['id_responsable']; ?>"><?php echo $responsables_dato['nombre_resp']; ?> | <?php echo $responsables_dato['cargo_resp']; ?> </option>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div id="accordion">
 
                                                 <div class="card card-outline card-primary" id="panelsStayOpen-headingone">
@@ -297,7 +320,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                     <div class="card-header">
                                                         <h3 class="card-title"><i class="fa fa-book" style="text-align: left;"></i> 2. Medidas preventivas / correctoras</h3>
                                                         <div class="card-tools">
-                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                                                 <i class="fas fa-minus"></i>
                                                             </button>
                                                         </div>
@@ -307,7 +330,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                         </div>
 
                                                     </div>
-                                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
+                                                    <div id="collapseTwo" class="collapse" aria-labelledby="collapseTwo">
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-sm-12">
@@ -321,24 +344,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-group">
-                                                                        <label for="" class="col-form-label col-sm-4">Responsable</label>
-                                                                        <div class="col-sm-8">
-                                                                            <select name="responsable_acc" id="" class="form-control">
-                                                                                <option value="">--Seleccione Responsable--</option>
-                                                                                <?php
-                                                                                foreach ($responsables_datos as $responsables_dato) { ?>
-                                                                                    <option value="<?php echo $responsables_dato['id_responsable']; ?>"><?php echo $responsables_dato['nombre_resp']; ?> | <?php echo $responsables_dato['cargo_resp']; ?> </option>
-                                                                                <?php
-                                                                                }
-                                                                                ?>
-                                                                            </select>
 
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
 
 
                                                             </div>
@@ -500,7 +506,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
                                                                         <label for="">Imagen</label>
-                                                                        <input type="file" name="image" class="form-control" id="file">
+                                                                        <!--<input type="file" name="image" class="form-control" id="file">
                                                                         <br>
                                                                         <output id="list" style=""></output>
                                                                         <script>
@@ -524,6 +530,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                             }
                                                                             document.getElementById('file').addEventListener('change', archivo, false);
                                                                         </script>
+                                                                    -->
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -531,7 +538,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <label for="">Imagen 1</label>
-                                                                        <input type="file" name="image" class="form-control" id="file">
+                                                                        <!--    <input type="file" name="image" class="form-control" id="file">
                                                                         <br>
                                                                         <output id="list" style=""></output>
                                                                         <script>
@@ -555,6 +562,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                             }
                                                                             document.getElementById('file').addEventListener('change', archivo, false);
                                                                         </script>
+                                                                    -->
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-6">

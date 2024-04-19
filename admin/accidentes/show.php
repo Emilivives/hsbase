@@ -32,11 +32,11 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
             <div class="col-sm-6">
                 <h5 class="m-0"><b>Datos Investigacion accidente laboral</b></h5>
             </div><!-- /.col -->
-            <div class="col-sm-1">
-            <a href="reporte.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-warning btn-sm" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
-            <a class="btn btn-primary" href="../maestros/documentos/pdf_solicitudmutua.php?id_accidente=<?php echo $id_accidente; ?>">Solicitud asistencia mutua</a>    
-        </div><!-- /.col -->
-            <div class="col-sm-5">
+            <div class="col-sm-3">
+                <a href="reporte.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-warning btn-sm" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir report</a>
+                <a class="btn btn-primary btn-sm" href="../maestros/documentos/pdf_solicitudmutua.php?id_accidente=<?php echo $id_accidente; ?>"><i class="fa-regular fa-file-lines"></i> Imprimir asistencia mutua</a>
+            </div><!-- /.col -->
+            <div class="col-sm-3">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Inicio</a></li>
                     <li class="breadcrumb-item active">Datos investigacion accidente</li>
@@ -226,88 +226,88 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 
                     </div>
                     <div id="panelsStayOpen-collapseTwo" class="card-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                    <div class="card-body">
-                        <div class="row">
+                        <div class="card-body">
+                            <div class="row">
 
-                            <div class="col-sm-3">
-                                <div class="form-group row">
-                                    <label for="nombre_tr" class="col-form-label col-sm-2">Nombre</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" id="nombre_tr" value="<?php echo $trabajador_ace ?>" class="form-control" disabled>
+                                <div class="col-sm-3">
+                                    <div class="form-group row">
+                                        <label for="nombre_tr" class="col-form-label col-sm-2">Nombre</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" id="nombre_tr" value="<?php echo $trabajador_ace ?>" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group row">
+                                        <label for="dni_tr" class="col-form-label col-sm-2">DNI/NIE</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" id="dni_tr" class="form-control" value="<?php echo $dni_trabajador_ace ?>" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group row">
+                                        <label for="sexo_tr" class="col-form-label col-sm-3">Sexo</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" id="sexo_tr" class="form-control" value="<?php echo $sexo_trabajador_ace ?>" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group row">
+                                        <label for="inicio_tr" class="col-form-label col-sm-3">Inicio</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="inicio_tr" class="form-control" value="<?php echo $inicio_trabajador_ace ?>" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group row">
+                                        <label for="fechanac_tr" class="col-form-label col-sm-4">Fecha Nac.</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="fechanac_tr" class="form-control" value="<?php echo $fechanac_trabajador_ace ?>" disabled>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="form-group row">
-                                    <label for="dni_tr" class="col-form-label col-sm-2">DNI/NIE</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" id="dni_tr" class="form-control" value="<?php echo $dni_trabajador_ace ?>" disabled>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group row">
+                                        <label for="categoria_tr" class="col-form-label col-sm-2">Puesto</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="categoria_tr" class="form-control" value="<?php echo $categoria_trabajador_ace ?>" disabled>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="form-group row">
-                                    <label for="sexo_tr" class="col-form-label col-sm-3">Sexo</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" id="sexo_tr" class="form-control" value="<?php echo $sexo_trabajador_ace ?>" disabled>
+                                <div class="col-sm-3">
+                                    <div class="form-group row">
+                                        <label for="departamento_tr" class="col-form-label col-sm-2">Depto.</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="departamento_tr" class="form-control" value="<?php echo $departamento_trabajador_ace ?>" disabled>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="form-group row">
-                                    <label for="inicio_tr" class="col-form-label col-sm-3">Inicio</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" id="inicio_tr" class="form-control" value="<?php echo $inicio_trabajador_ace ?>" disabled>
+
+
+                                <div class="col-sm-3">
+                                    <div class="form-group row">
+                                        <?php
+                                        $cumpleanos = new DateTime($fechanac_trabajador_ace);
+                                        $hoy = new DateTime();
+                                        $annos = $hoy->diff($cumpleanos);
+                                        ?>
+                                        <label for="edad" class="col-form-label col-sm-2">Edad</label>
+                                        <div class="col-sm-2">
+
+                                            <input type="text" id="edad" class="form-control" value="<?php echo $annos->y; ?>" disabled>
+                                        </div>
                                     </div>
                                 </div>
+
+
                             </div>
-                            <div class="col-sm-2">
-                                <div class="form-group row">
-                                    <label for="fechanac_tr" class="col-form-label col-sm-4">Fecha Nac.</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" id="fechanac_tr" class="form-control" value="<?php echo $fechanac_trabajador_ace ?>" disabled>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group row">
-                                    <label for="categoria_tr" class="col-form-label col-sm-2">Puesto</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" id="categoria_tr" class="form-control" value="<?php echo $categoria_trabajador_ace ?>" disabled>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group row">
-                                    <label for="departamento_tr" class="col-form-label col-sm-2">Depto.</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" id="departamento_tr" class="form-control" value="<?php echo $departamento_trabajador_ace ?>" disabled>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-sm-3">
-                                <div class="form-group row">
-                                    <?php
-                                    $cumpleanos = new DateTime($fechanac_trabajador_ace);
-                                    $hoy = new DateTime();
-                                    $annos = $hoy->diff($cumpleanos);
-                                    ?>
-                                    <label for="edad" class="col-form-label col-sm-2">Edad</label>
-                                    <div class="col-sm-2">
-
-                                        <input type="text" id="edad" class="form-control" value="<?php echo $annos->y; ?>" disabled>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                    </div>
                     </div>
                 </div>
                 <div class="card card-outline card-primary">
@@ -1567,11 +1567,12 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                 <div class="col-md-12">
                     <a href="" class="btn btn-secondary">Cancelar</a>
                     <input type="submit" class="btn btn-primary" value="Actualizar Datos">
-                           </div>
+                </div>
             </div>
             <br><br>
             <div class="form-group">
-                <a href="reporte.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-warning" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
+                <a href="reporte.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-warning btn-sm" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
+                <a class="btn btn-primary btn-sm" href="../maestros/documentos/pdf_solicitudmutua.php?id_accidente=<?php echo $id_accidente; ?>"><i class="fa-regular fa-file-lines"></i> Imprimir asistencia mutua</a>
 
             </div>
 

@@ -220,13 +220,13 @@ $tplIdx2 = $pdf->importPage(2);
 $pdf->useTemplate($tplIdx2);  
 
 $pdf->SetFont('Arial', '', '9');
-$pdf->SetXY(65, 200);
+$pdf->SetXY(65, 199);
 $pdf->Write(10, $dia);
 $pdf->SetFont('Arial', '', '9');
-$pdf->SetXY(85, 200);
+$pdf->SetXY(85, 199);
 $pdf->Write(10, $mes);
 $pdf->SetFont('Arial', '', '9');
-$pdf->SetXY(113, 200);
+$pdf->SetXY(113, 199);
 $pdf->Write(10, $anio);
 
 // setFont ('B' - NEGRITA 

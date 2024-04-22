@@ -334,27 +334,24 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                 <td style="text-align: center"><?php echo $newdate1 = date("d-m-Y", strtotime($reconocimiento['fecha_rm'])); ?></td>
                                 <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) ?></td>
                                 <?php $newdate_future = strtotime('+15 day', strtotime($fechahora));
-                                $newdate_future = date('d-m-Y', $newdate_future);
-                                $newdate_future
-
-
+                                                 
                                 ?>
 
-                                <td style="text-align: left;"><?php
+                                <td style="text-align: center;"><?php
                                                                 if ($reconocimiento['vigente_rm'] == 1 and $reconocimiento['caducidad_rm'] < $fechahora) { ?>
                                         <span class='badge badge-danger'>VIGENTE - CADUCADO</span>
 
                                     <?php
-                                                                } elseif ($reconocimiento['vigente_rm'] == 1 and date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) < $newdate_future) { ?>
+                                                                } elseif ($reconocimiento['vigente_rm'] == 1 and date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) > $newdate_future) { ?>
                                         <span class='badge badge-warning'>VIGENTE - A CITAR</span>
 
                                     <?php
 
-                                                                } elseif ($reconocimiento['vigente_rm'] == 1 and date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) > $newdate_future) { ?>
+                                                                } elseif ($reconocimiento['vigente_rm'] == 1 and date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) < $newdate_future) { ?>
                                         <span class='badge badge-success'>VIGENTE <?php date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) ?></span>
                                     <?php
                                                                 } else { ?>
-                                        <span class='badge badge-secondary'>NO VIGENTE</span>
+                                        <span class='badge badge-secondary'>HISTÓRICO</span>
                                     <?php
                                                                 }
                                     ?>

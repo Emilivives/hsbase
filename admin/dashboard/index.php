@@ -8,7 +8,7 @@ include('../../app/controllers/actividad/listado_proyectos.php');
 include('../../app/controllers/trabajadores/listado_trabajadores.php');
 include('../../app/controllers/formaciones/listado_formaciones.php');
 include('../../app/controllers/accidentes/listado_accidentes.php');
-include('../../app/controllers/reconocimientos/listado_reconocimientos.php');
+include('../../app/controllers/reconocimientos/listado_reconocimientos_activos.php');
 include('../../app/controllers/reconocimientos/listado_citasrm.php');
 include('../../app/controllers/actividad/listado_accionprl.php');
 include('../../app/controllers/maestros/responsables/listado_responsables.php');
@@ -184,11 +184,6 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
       </div>
 
-
-
-
-
-
       <div class="col-lg-2 col-6">
         <!-- small box -->
         <div class="small-box bg-light shadow-sm border">
@@ -310,19 +305,19 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                         <td style="text-align: center;"><?php $trabajador['formacionpdt_tr'];
                                                         if ($trabajador['formacionpdt_tr'] == 'Si') { ?>
-                            <span class='badge badge-success'>SI</span>
+                            <span class='badge badge-success'style="font-size: 15px;">SI</span>
                           <?php
                                                         } else { ?>
-                            <span class='badge badge-danger'>NO</span>
+                            <span class='badge badge-danger'style="font-size: 15px;">NO</span>
                           <?php
                                                         }
                           ?>
 
 
                         </td>
-                     
+
                         <td style="text-align: center;">
-                        <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $id_trabajador; ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
+                          <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $id_trabajador; ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
                         </td>
 
                       </tr>
@@ -339,7 +334,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
 
             </div>
-          
+
 
           </div>
         </div>
@@ -390,23 +385,21 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                       <td style="text-align: left"><b><?php echo $reconocimiento['nombre_tr']; ?></b></td>
                       <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) ?></td>
                       <?php $newdate_future = strtotime('+15 day', strtotime($fechahora));
-                      $newdate_future = date('d-m-Y', $newdate_future);
-                      $newdate_future
                       ?>
-                      <td style="text-align: left;"><?php
-                                                    if ($reconocimiento['vigente_rm'] == 1 and $reconocimiento['caducidad_rm'] < $fechahora) { ?>
+                      <td style="text-align: center;"><?php
+                                                      if ($reconocimiento['vigente_rm'] == 1 and $reconocimiento['caducidad_rm'] < $fechahora) { ?>
                           <span class='badge badge-danger'>VIGENTE - CADUCADO</span>
                         <?php
-                                                    } elseif ($reconocimiento['vigente_rm'] == 1 and date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) < $newdate_future) { ?>
+                                                      } elseif ($reconocimiento['vigente_rm'] == 1 and date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) > $newdate_future) { ?>
                           <span class='badge badge-warning'>VIGENTE - A CITAR</span>
                         <?php
-                                                    } elseif ($reconocimiento['vigente_rm'] == 1 and date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) > $newdate_future) { ?>
+                                                      } elseif ($reconocimiento['vigente_rm'] == 1 and date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) < $newdate_future) { ?>
                           <span class='badge badge-success'>VIGENTE <?php date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) ?></span>
                         <?php
-                                                    } else { ?>
-                          <span class='badge badge-secondary'>NO VIGENTE</span>
+                                                      } else { ?>
+                          <span class='badge badge-secondary'>HISTÓRICO</span>
                         <?php
-                                                    }
+                                                      }
                         ?>
                       </td>
                       </td>
@@ -534,9 +527,9 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                   <tr>
                     <th style="text-align: center">#</th>
                     <th style="text-align: left">Tarea</th>
-                    <th style="text-align: left">Proyecto</th>
                     <th style="text-align: left">Centro</th>
                     <th style="text-align: left">Responsable</th>
+                    <th style="text-align: left">Mes año</th>
                     <th style="text-align: left">Fecha Vencim.</th>
                     <th style="text-align: left">Estado</th>
                     <th style="text-align: left">Acc.</th>
@@ -555,11 +548,81 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                       <tr>
                         <td style="text-align: center"><b><?php echo $contador; ?></b></td>
                         <td style="text-align: left"><b><?php echo $tareapendiente['nombre_ta']; ?></b></td>
-                        <td style="text-align: left"><?php echo $tareapendiente['nombre_py']; ?></td>
+
                         <td style="text-align: left"><?php echo $tareapendiente['nombre_cen']; ?></td>
                         <td style="text-align: left"><?php echo $tareapendiente['nombre_resp']; ?></td>
-                        <td style="text-align: left"><?php echo $tareapendiente['fecha_ta']; ?></td>
-                        <td style="text-align: left"><?php echo $tareapendiente['estado_ta']; ?></td>
+                        <td style="text-align: left"><?php
+                                                      // Definimos los nombres de los meses en español
+                                                      $meses = array(
+                                                        1 => "Enero",
+                                                        2 => "Febrero",
+                                                        3 => "Marzo",
+                                                        4 => "Abril",
+                                                        5 => "Mayo",
+                                                        6 => "Junio",
+                                                        7 => "Julio",
+                                                        8 => "Agosto",
+                                                        9 => "Septiembre",
+                                                        10 => "Octubre",
+                                                        11 => "Noviembre",
+                                                        12 => "Diciembre"
+                                                      );
+
+                                                      // Ejemplo de fecha recibida de la variable $tarea_proyecto['fecha_ta']
+                                                      $fecha = $tareapendiente['fecha_ta'];
+
+                                                      // Separamos la fecha en año, mes y día
+                                                      list($anio, $mes, $dia) = explode("-", $fecha);
+
+                                                      // Convertimos el mes a su nombre en español
+                                                      $mesNombre = $meses[intval($mes)];
+
+                                                      // Mostramos la fecha en español
+                                                      echo $mesNombre;
+
+                                                      ?>
+
+                        </td>
+                        <td style="text-align: left"><?php
+                                                      $newdate_future = strtotime('+15 day', strtotime($fechahora));
+
+                                                      if ($tareapendiente['fecha_ta'] < $fechahora) { ?>
+                            <span class='badge badge-danger' style="font-size: 15px;"><?php echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?></span>
+                          <?php
+                                                      } else if ($tareapendiente['fecha_ta'] < $newdate_future) { ?>
+                            <span class='badge badge-success'style="font-size: 15px;"><?php echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?></span>
+                            <?php
+                                                    } else {echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?>
+
+                     
+                          <?php
+                                                      }
+                          ?>
+
+
+
+                        </td>
+
+                        <td style="text-align: left"><?php $tareapendiente['estado_ta'];
+                                                      if ($tareapendiente['estado_ta'] == 'En curso') { ?>
+                            <span class='badge badge-info'>En Curso</span>
+                          <?php
+                                                      } else if ($tareapendiente['estado_ta'] == 'Completado') { ?>
+                            <span class='badge badge-success'>Completado</span>
+                          <?php
+                                                      } else if ($tareapendiente['estado_ta'] == 'Parcialmente hecho') { ?>
+                            <span class='badge badge-warning'>Parcialmente hecho</span>
+                          <?php
+                                                      } else if ($tareapendiente['estado_ta'] == 'Pospuesto') { ?>
+                            <span class='badge badge-secondary'>Pospuesto</span>
+                          <?php
+                                                      } else if ($tareapendiente['estado_ta'] == 'Cancelado') { ?>
+                            <span class='badge badge-danger'>Cancelado</span>
+                          <?php
+                                                      }
+                          ?>
+
+                        </td>
 
                         </td>
 
@@ -767,10 +830,10 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                       <td style="text-align: left"><?php echo $accidentes_dato['gravedad_gr']; ?></td>
                       <td style="text-align: center;"><?php $accidentes_dato['comunicado_ace'];
                                                       if ($accidentes_dato['comunicado_ace'] == "SI") { ?>
-                          <span class='badge badge-success'>SI</span>
+                          <span class='badge badge-success'style="font-size: 15px;">SI</span>
                         <?php
                                                       } else if ($accidentes_dato['comunicado_ace'] == "NO") { ?>
-                          <span class='badge badge-warning'>NO</span>
+                          <span class='badge badge-warning'style="font-size: 15px;">NO</span>
                         <?php                       }
                         ?>
 
@@ -852,14 +915,17 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
   $(function() {
     $("#example1").DataTable({
       "pageLength": 4,
+      "order": [
+        [2, 'desc']
+      ],
       "language": {
         "emptyTable": "No hay información",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ rm",
         "infoEmpty": "Mostrando 0 a 0 de 0 Usuarios",
         "infoFiltered": "(Filtrado de MAX total Usuarios)",
         "infoPostFix": "",
         "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_ Usuarios",
+        "lengthMenu": "Mostrar _MENU_ RM",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
         "search": "Busc:",
@@ -970,6 +1036,9 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
   $(function() {
     $("#example3").DataTable({
       "pageLength": 4,
+      "order": [
+        [3, 'asc']
+      ],
       "language": {
         "emptyTable": "No hay información",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",
@@ -1029,6 +1098,9 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
   $(function() {
     $("#example4").DataTable({
       "pageLength": 4,
+      "order": [
+        [5, 'asc']
+      ],
       "language": {
         "emptyTable": "No hay información",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",

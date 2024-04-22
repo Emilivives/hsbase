@@ -12,4 +12,4 @@ $sentencia->execute();
 session_start();
 $_SESSION['mensaje'] = "Se elimino el trabajador de la manera correcta";
 $_SESSION['icono'] = "success";
-header('Location: ' . $URL . '/trabajadores');
+header('Location: ' . $URL . '/admin/trabajadores/trabajadorshow.php?id_trabajador=1');

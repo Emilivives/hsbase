@@ -863,26 +863,32 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                     <div class="form-group">
                         <a class="btn btn-primary" href="../maestros/documentos/pdf_dosier.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Dosier</a>
 
-                  
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                Entrega EPIs
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_amarrador.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Amarrador</a></li>
-                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_auxiliarpasaje.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Aux. Pasaje</a></li>
-                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_capitan.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Capitán</a></li>
-                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_jefemaquinas.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Jefe maq.</a></li>
-                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_limpieza.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Limpieza</a></li>
-                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_marinero.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Marinero</a></li>
-                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_marineromaquinas.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Marinero maq.</a></li>
-                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_oficialcarga-amarrador.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Of. carga</a></li>
-                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_primeroficial.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Primer of.</a></li>
-                                <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_taller.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Taller</a></li>
-                     
-                            </ul>
-          
+
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                            Entrega EPIs
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_amarrador.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Amarrador</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_auxiliarpasaje.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Aux. Pasaje</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_capitan.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Capitán</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_jefemaquinas.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Jefe maq.</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_limpieza.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Limpieza</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_marinero.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Marinero</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_marineromaquinas.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Marinero maq.</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_oficialcarga-amarrador.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Of. carga</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_primeroficial.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Primer of.</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_taller.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Taller</a></li>
+
+                        </ul>
+
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <a class="btn btn-danger btn-sm btn-font-size" href="../../app/controllers/trabajadores/borrar_trabajador.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>" style="text-align: right" onclick="return confirm('¿Realmente desea eliminar el registro?')" title="Eliminar Trabajador"><i class="bi bi-trash-fill"></i> Eliminar Trabajador</a>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -1047,10 +1053,10 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                         <td><?php echo $trabajador['nombre_cat']; ?></td>
                                         <td style="text-align: center;"><?php $trabajador['activo_tr'];
                                                                         if ($trabajador['activo_tr'] == 1) { ?>
-                                                <span class='badge badge-success'>Activo</span>
+                                                <span class='badge badge-success'style="font-size: 15px;">Activo</span>
                                             <?php
                                                                         } else { ?>
-                                                <span class='badge badge-danger'>Baja</span>
+                                                <span class='badge badge-danger'style="font-size: 15px;">Baja</span>
                                             <?php
                                                                         }
                                             ?>

@@ -36,8 +36,10 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
       <!-- ./col -->
       <div class="col-lg-2 col-6">
         <div class="btn-text-center">
-          <button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador" title="Añadir nuevo trabajador"><i class="bi bi-person-plus-fill"></i>AÑADIR NUEVO TRABAJADOR</button>
-
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador" title="Añadir nuevo trabajador"><i class="bi bi-person-plus-fill"></i>AÑADIR NUEVO TRABAJADOR</button>
+        </div>
+        <div class="btn-text-center">
+          <a href="../accidentes/create.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-list-ul"></i> Nueva Investigacion accidente</a>
         </div>
         <div class="row">
 
@@ -305,10 +307,10 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                         <td style="text-align: center;"><?php $trabajador['formacionpdt_tr'];
                                                         if ($trabajador['formacionpdt_tr'] == 'Si') { ?>
-                            <span class='badge badge-success'style="font-size: 15px;">SI</span>
+                            <span class='badge badge-success' style="font-size: 15px;">SI</span>
                           <?php
                                                         } else { ?>
-                            <span class='badge badge-danger'style="font-size: 15px;">NO</span>
+                            <span class='badge badge-danger' style="font-size: 15px;">NO</span>
                           <?php
                                                         }
                           ?>
@@ -590,11 +592,12 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                             <span class='badge badge-danger' style="font-size: 15px;"><?php echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?></span>
                           <?php
                                                       } else if ($tareapendiente['fecha_ta'] < $newdate_future) { ?>
-                            <span class='badge badge-success'style="font-size: 15px;"><?php echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?></span>
-                            <?php
-                                                    } else {echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?>
+                            <span class='badge badge-success' style="font-size: 15px;"><?php echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?></span>
+                          <?php
+                                                      } else {
+                                                        echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?>
 
-                     
+
                           <?php
                                                       }
                           ?>
@@ -830,10 +833,10 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                       <td style="text-align: left"><?php echo $accidentes_dato['gravedad_gr']; ?></td>
                       <td style="text-align: center;"><?php $accidentes_dato['comunicado_ace'];
                                                       if ($accidentes_dato['comunicado_ace'] == "SI") { ?>
-                          <span class='badge badge-success'style="font-size: 15px;">SI</span>
+                          <span class='badge badge-success' style="font-size: 15px;">SI</span>
                         <?php
                                                       } else if ($accidentes_dato['comunicado_ace'] == "NO") { ?>
-                          <span class='badge badge-warning'style="font-size: 15px;">NO</span>
+                          <span class='badge badge-warning' style="font-size: 15px;">NO</span>
                         <?php                       }
                         ?>
 

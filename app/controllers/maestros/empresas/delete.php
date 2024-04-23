@@ -1,8 +1,8 @@
 <?php
 
-include('../../../app/config.php');
+include('../../../config.php');
 
-$id_empresa = $_POST['id_empresa'];
+$id_empresa = $_GET['id_empresa'];
 
 
     $sentencia = $pdo->prepare("DELETE FROM empresa WHERE id_empresa = '$id_empresa'");

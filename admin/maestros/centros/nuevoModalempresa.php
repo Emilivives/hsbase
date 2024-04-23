@@ -30,7 +30,48 @@
                                 <input type="text" name="direccion_emp" class="form-control" required>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Razon Social (nombre completo) <b>*</b></label>
+                                <input type="text" name="razonsocial_emp" class="form-control" required>
+                            </div>
+                        </div>
 
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Modalidad preventiva <b>*</b></label>
+                                <input type="text" name="modalidadprl_emp" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">Logo empresa</label>
+                                <input type="file" name="image" class="form-control" id="file">
+                                <br>
+                                <output id="list" ></output>
+                                <script>
+                                    function archivo(evt) {
+                                        var files = evt.target.files; // FileList object
+                                        // Obtenemos la imagen del campo "file".
+                                        for (var i = 0, f; f = files[i]; i++) {
+                                            //Solo admitimos imágenes.
+                                            if (!f.type.match('image.*')) {
+                                                continue;
+                                            }
+                                            var reader = new FileReader();
+                                            reader.onload = (function(theFile) {
+                                                return function(e) {
+                                                    // Insertamos la imagen
+                                                    document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                                };
+                                            })(f);
+                                            reader.readAsDataURL(f);
+                                        }
+                                    }
+                                    document.getElementById('file').addEventListener('change', archivo, false);
+                                </script>
+                            </div>
+                        </div>
 
                         <hr>
                         <div class="row">

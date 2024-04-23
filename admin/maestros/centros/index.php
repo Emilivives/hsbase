@@ -71,8 +71,7 @@ include('../../../app/controllers/maestros/empresas/listado_empresas.php');
 
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                            <a href="update.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                            <a href="delete.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                        <a href="../../../app/controllers/maestros/centros/delete.php?id_centro=<?php echo $id_centro; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar empresa?')" title="Eliminar empresa"><i class="bi bi-trash-fill"></i></a>
 
                                         </div>
                                     </td>
@@ -137,8 +136,8 @@ include('../../../app/controllers/maestros/empresas/listado_empresas.php');
 
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                            <a href="update.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> </a>
-                                            <a href="delete.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i> </a>
+                                        <a href="updateempresa.php?id_empresa=<?php echo $id_empresa ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Editar</a>
+                                        <a href="../../../app/controllers/maestros/empresas/delete.php?id_empresa=<?php echo $id_empresa; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar empresa?')" title="Eliminar empresa"><i class="bi bi-trash-fill"></i></a>
 
                                         </div>
                                     </td>
@@ -147,7 +146,7 @@ include('../../../app/controllers/maestros/empresas/listado_empresas.php');
                             <?php
                             }
                             ?>
-
+                            
                         </tbody>
 
                     </table>

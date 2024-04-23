@@ -36,6 +36,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
     <!-- libreria iconos fontawesome -->
     <script src="https://kit.fontawesome.com/f1e1a05e58.js" crossorigin="anonymous"></script>
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="<?php echo $URL; ?>/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="<?php echo $URL; ?>/public/templates/AdminLTE/dist/css/adminlte.min.css">
 
 
     <!-- jQuery -->
@@ -57,6 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- chart js -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/js/echarts.min.js">
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+
 
 
 </head>
@@ -85,10 +90,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
-           
+
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                               <i class="bi bi-bell"></i>
-                    <span class="badge badge-warning navbar-badge" title="Avisos">15</span>
+                        <i class="bi bi-bell"></i>
+                        <span class="badge badge-warning navbar-badge" title="Avisos">15</span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -117,7 +122,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-               
+
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -128,20 +133,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Brand Logo -->
             <a href="<?php echo $URL; ?>/public/templates/AdminLTE/index3.html" class="brand-link">
                 <img src="<?php echo $URL; ?>/public/img/icono-2.png" alt="HS Base Logo" class="brand-image" style="opacity: .9">
-                <span class="brand-text font-weight-light"><?php echo APP_NAME; ?></span>
+                <span class="brand-text font-weight-light"><?php echo APP_NAME; ?> </span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
-                <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-
-                    <div class="info">
-                        <a href="" class="d-block">Emili Vives</a>
-                    </div>
-                </div>
-
-                <!-- SidebarSearch Form -->
+                <!-- SidebarSearch Form 
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
                         <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -151,7 +148,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </button>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -159,6 +156,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
 
+                        </br>
+                        <li class="nav-item">
+                            <a href="<?php echo $URL; ?>/admin/dashboard" class="nav-link">
+                                <i class="nav-icon fas bi-house-fill"></i>
+                                <p>
+                                    Vista general
+                                    <span class="right badge badge-warning">Info</span>
+
+                                </p>
+                            </a>
+                        </li>
                         </br>
                         <li class="nav-item">
                             <a href="<?php echo $URL; ?>/admin" class="nav-link">
@@ -170,16 +178,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?php echo $URL; ?>/admin/dashboard" class="nav-link">
-                                <i class="nav-icon fas bi-clipboard2-data-fill"></i>
-                                <p>
-                                    Panel control
-                                    <span class="right badge badge-warning">Info</span>
 
-                                </p>
-                            </a>
-                        </li>
 
                         </br>
                         <li class="nav-item">
@@ -324,6 +323,56 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <br>
 
+
+                        <!--  PONEMOS MODALES PARA EVITAR MAS MENU
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class=" nav-icon fas bi bi-person-workspace"></i>
+                                <p>
+                                    Perfiles
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo $URL; ?>/admin/perfiles" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Listado de perfiles</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo $URL; ?>/admin/perfiles/create.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Nuevo perfil</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        -->
+                        <br>
+                        <br>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class=" nav-icon fas bi bi-person-workspace"></i>
+                                <p>
+                                    Pruebas
+                                    <i class="right fas fa-angle-left"></i>
+                                    <span class="right badge badge-success">Demo</span>
+
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo $URL; ?>/admin/pruebas" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Prueba accion prl</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+                        </br> </br></br></br></br></br></br></br></br></br></br>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
 
@@ -354,58 +403,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                     </ul>
-                    </li>
-                    <!--  PONEMOS MODALES PARA EVITAR MAS MENU
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class=" nav-icon fas bi bi-person-workspace"></i>
-                                <p>
-                                    Perfiles
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $URL; ?>/admin/perfiles" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listado de perfiles</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo $URL; ?>/admin/perfiles/create.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Nuevo perfil</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        -->
-                    <br>
-                    <br>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class=" nav-icon fas bi bi-person-workspace"></i>
-                            <p>
-                                Pruebas
-                                <i class="right fas fa-angle-left"></i>
-                                <span class="right badge badge-success">Demo</span>
+                    </li></br></br>
 
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?php echo $URL; ?>/admin/pruebas" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Prueba accion prl</p>
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    </li>
-                    </br>
-                    </br>
-                    </br>
                     <li class="nav-item">
                         <a href="<?php echo $URL; ?>/app/controllers/login/cerrar_sesion.php" style="background-color:crimson" class="nav-link">
                             <i class="nav-icon fa fa-door-open"></i>

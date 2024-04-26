@@ -7,11 +7,13 @@ require_once('../../../public/FPDI-2.6.0/src/autoload.php');
 require_once('../../../public/fpdf181/fpdf.php');
 
 $id_trabajador = $_GET['id_trabajador'];
+$id_empresa = $_GET['id_emp'];
 
 include('../../../app/controllers/trabajadores/listado_trabajadores.php');
 include('../../../app/controllers/maestros/centros/listado_centros.php');
 include('../../../app/controllers/trabajadores/datos_trabajador.php');
-
+include('../../../app/controllers/maestros/empresas/listado_empresas.php');
+include('../../../app/controllers/maestros/empresas/datos_empresa.php');
 
 
 
@@ -32,6 +34,21 @@ foreach ($trabajador_datos as $trabajador_dato) {
 
 }
 
+///// traer datos de empresa prl
+foreach ($empresa_datos as $empresa_dato) {
+    $nombre_emp = $empresa_dato['nombre_emp'];
+    $razonsocial_emp = $empresa_dato['razonsocial_emp'];
+    $cif_emp = $empresa_dato['cif_emp'];
+    $direccion_emp = $empresa_dato['direccion_emp'];
+    $modalidadprl_emp = $empresa_dato['modalidadprl_emp'];
+    $logo_emp = $empresa_dato['logo_emp'];
+     
+
+}
+
+
+
+
 ///// traer datos de accionprl
 
 $pdf = new FPDI();
@@ -44,6 +61,12 @@ $pdf->useTemplate($tplIdx1);
 $pdf->SetFont('Arial', '', '9'); 
 $pdf->SetXY(51, 37);
 $pdf->Write(10, $nombre_tr);
+
+
+$pdf->SetFont('Arial', 'B', '10'); 
+$pdf->SetXY(61, 27);
+$pdf->Write(10, $razonsocial_emp);
+$pdf->image('../centros/img/'.$logo_emp, 11, 11, 25, 15, 'jpg');
 
 // setFont ('B' - NEGRITA 
 //setFont ('I' - ITALICA 

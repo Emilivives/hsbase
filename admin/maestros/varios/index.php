@@ -52,7 +52,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header" style="background-color:#808000 ;color:white">
-                                <h5 class="modal-title" id="modal-nuevoresponsable">Tipo de Formación</h5>
+                                <h5 class="modal-title" id="modal-nuevoresponsable">Nuevo responsable</h5>
                                 <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -68,25 +68,26 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                                 <input type="text" name="nombre_resp" class="form-control" required>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Cargo</label>
+                                            <input type="text" name="cargo_resp" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Cargo</label>
-                                                <input type="text" name="cargo_resp" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <label for="">email <b>*</b></label>
+                                                <label for="">email</label>
                                                 <input type="text" name="email_resp" class="form-control" required>
                                             </div>
                                         </div>
-
-
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                         <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
                                     </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -122,8 +123,9 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
 
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                            <a href="update.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                            <a href="delete.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                            <a href="update.php?id_responsable=<?php echo $id_responsable ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                            <a href="../../../app/controllers/maestros/responsables/delete.php?id_responsable=<?php echo $id_responsable ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Realmente desea eliminar responsable?')" title="Eliminar responsable"><i class="bi bi-trash3-fill"></i></a>
+
 
                                         </div>
                                     </td>
@@ -164,7 +166,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header" style="background-color:#808000 ;color:white">
-                                <h5 class="modal-title" id="modal-nuevodirecciones">Direcciones interes</h5>
+                                <h5 class="modal-title" id="modal-nuevodirecciones">Nuevo contacto</h5>
                                 <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -176,24 +178,24 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Nombre departamento <b>*</b></label>
-                                                <input type="text" name="nombre_dpo" class="form-control" required>
+                                                <label for="">Nombre contacto <b>*</b></label>
+                                                <input type="text" name="nombre_ei" class="form-control" required>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label for="">Email</label>
+                                            <input type="text" name="email_ei" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Descripción</label>
-                                                <input type="text" name="descripcion_dpo" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <label for="">Telefono <b>*</b></label>
+                                                <label for="">Telefono</label>
                                                 <input type="text" name="telefono_ei" class="form-control" required>
                                             </div>
                                         </div>
-
-
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -236,8 +238,8 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
 
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                            <a href="update.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                            <a href="delete.php?id_usuario=<?php echo $id_usuario ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                            <a href="update.php?id_responsable=<?php echo $id_responsable ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                            <a href="delete.php?id_responsable=<?php echo $id_responsable ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
 
                                         </div>
                                     </td>
@@ -409,7 +411,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                         </div>
                                     </div>
                                     <div class="row">
-                                    <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Indice incidencia sector <b>*</b></label>
                                                 <input type="text" name="indinciden_est" class="form-control" required>
@@ -459,7 +461,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                 $id_estadistica = $estadisticas_dato['id_estadistica'];
                             ?>
                                 <tr>
-       
+
                                     <td style="text-align: center"><?php echo $estadisticas_dato['anio_est']; ?></td>
                                     <td style="text-align: center"><?php echo $estadisticas_dato['mediatr_est']; ?></td>
                                     <td style="text-align: center"><?php echo $estadisticas_dato['indinciden_est']; ?></td>

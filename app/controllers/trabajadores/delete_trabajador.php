@@ -11,4 +11,4 @@ $sentencia->execute();
 session_start();
 $_SESSION['mensaje'] = "Se elimino el Trabajador correctamente";
 $_SESSION['icono'] = "success";
-header('Location: ' . $URL .'/admin/trabajadores');
+header('Location: ' . $URL . '/admin/trabajadores/trabajadorshow.php?id_trabajador=1');

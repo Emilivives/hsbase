@@ -17,12 +17,12 @@ $descripcion_dpo = $_POST['descripcion_dpo'];
         session_start();
         $_SESSION['mensaje'] = "Categoria registrada correctamente";
         $_SESSION['icono'] = 'success';
-        header('Location: ' . $URL . '/admin/maestros/categorias');
+        header('Location: ' . $URL . '/admin/maestros/varios');
     } else {
         session_start();
         $_SESSION['mensaje'] = "Perfil NO creado";
         $_SESSION['icono'] = 'warning';
-        header('Location: ' . $URL . '/admin/maestros/categorias');
+        header('Location: ' . $URL . '/admin/maestros/varios');
     }
 
        

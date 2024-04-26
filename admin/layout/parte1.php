@@ -131,14 +131,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#001d24;">
             <!-- Brand Logo -->
-            <a href="<?php echo $URL; ?>/public/templates/AdminLTE/index3.html" class="brand-link">
+            <a href="<?php echo $URL; ?>/admin/" class="brand-link">
                 <img src="<?php echo $URL; ?>/public/img/icono-2.png" alt="HS Base Logo" class="brand-image" style="opacity: .9">
                 <span class="brand-text font-weight-light"><?php echo APP_NAME; ?> </span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
-                <!-- SidebarSearch Form 
+            <br>
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
                         <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -148,7 +148,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </button>
                         </div>
                     </div>
-                </div>-->
+                </div>
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">

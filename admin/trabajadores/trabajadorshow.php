@@ -378,7 +378,14 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                     <?php
                     }
                     ?>
+                    <?php $trabajador_dato['informacion_tr'];
+                    if ($trabajador_dato['informacion_tr'] <> 'Si') { ?>
+                        <span class='badge badge-danger'>NO INFORMADO</span>
+                    <?php
+                    }
+                    ?>
                 </h3>
+
 
             </div>
             <div class="card-body">
@@ -526,6 +533,38 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                                                     <span class='badge badge-danger'>NO FORMADO</span>
                                                                 <?php } else {
                                                                     echo "No Formado";
+                                                                }
+                                                                ?></b>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="informacion_tr" id="flexRadioDefault5" value="Si" <?php if ($trabajador_dato['informacion_tr'] == "Si") {
+                                                                                                                                                                    echo 'Checked';
+                                                                                                                                                                } ?>>
+                                                        <label class="form-check-label" for="flexRadioDefault5">
+                                                            <b><?php $trabajador_dato['informacion_tr'];
+                                                                if ($trabajador_dato['informacion_tr'] == "Si") { ?>
+                                                                    <span class='badge badge-success'>INFORMADO</span>
+                                                                <?php } else {
+                                                                    echo "Informado";
+                                                                }
+                                                                ?></b>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="informacion_tr" id="flexRadioDefault6" value="No" <?php if ($trabajador_dato['informacion_tr'] == "No") {
+                                                                                                                                                                    echo 'Checked';
+                                                                                                                                                                } ?>>
+                                                        <label class="form-check-label" for="flexRadioDefault6">
+                                                            <b><?php $trabajador_dato['informacion_tr'];
+                                                                if ($trabajador_dato['informacion_tr'] == "No") { ?>
+                                                                    <span class='badge badge-danger'>NO INFORMADO</span>
+                                                                <?php } else {
+                                                                    echo "No Informado";
                                                                 }
                                                                 ?></b>
                                                         </label>
@@ -884,8 +923,24 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <a class="btn btn-danger btn-sm btn-font-size" href="../../app/controllers/trabajadores/borrar_trabajador.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>" style="text-align: right" onclick="return confirm('¿Realmente desea eliminar el registro?')" title="Eliminar Trabajador"><i class="bi bi-trash-fill"></i> Eliminar Trabajador</a>
+
+                    </div>
+                    <div class="col-md-6 btn-text-right">
+
+                        <style>
+                            .btn-text-right {
+                                text-align: right;
+                            }
+                        </style>
+                        <?php $siguientetr = $id_trabajador + 1;
+                        $anteriortr = $id_trabajador - 1; ?>
+
+                        <a class="btn btn-text-right btn-outline-dark btn-sm" title="Ver anterior" href="../trabajadores/trabajadorshow.php?id_trabajador=<?php echo $anteriortr ?>">Ver Anterior</a>
+                        <a class="btn btn-text-right btn-outline-dark btn-sm" title="Ver siguiente" href="../trabajadores/trabajadorshow.php?id_trabajador=<?php echo $siguientetr ?>">Ver Siguiente</a>
+
+
                     </div>
                 </div>
 
@@ -1017,22 +1072,26 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                             <colgroup>
                                 <col width="5%">
                                 <col width="10%">
-                                <col width="30%">
+                                <col width="25%">
                                 <col width="10%">
                                 <col width="10%">
-                                <col width="15%">
                                 <col width="10%">
+                                <col width="10%">
+                                <col width="3%">
+                                <col width="3%">
                                 <col width="10%">
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <th style="text-align: center">N. Cod.</th>
+                                    <th style="text-align: center">N.</th>
                                     <th style="text-align: center">DNI</th>
                                     <th style="text-align: center">Nombre</th>
                                     <th style="text-align: center">Empresa</th>
                                     <th style="text-align: center">Centro</th>
                                     <th style="text-align: center">Categoria</th>
                                     <th style="text-align: center">Estado</th>
+                                    <th style="text-align: center" title="Formacion PRL">F</th>
+                                    <th style="text-align: center" title="Informacion PRL">I</th>
                                     <th style="text-align: center">Acciones</th>
                                 </tr>
                             </thead>
@@ -1053,15 +1112,33 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                         <td><?php echo $trabajador['nombre_cat']; ?></td>
                                         <td style="text-align: center;"><?php $trabajador['activo_tr'];
                                                                         if ($trabajador['activo_tr'] == 1) { ?>
-                                                <span class='badge badge-success'style="font-size: 15px;">Activo</span>
+                                                <span class='badge badge-success' style="font-size: 15px;">Activo</span>
                                             <?php
                                                                         } else { ?>
-                                                <span class='badge badge-danger'style="font-size: 15px;">Baja</span>
+                                                <span class='badge badge-danger' style="font-size: 15px;">Baja</span>
                                             <?php
                                                                         }
                                             ?>
 
 
+                                        </td>
+                                        <td><?php if ($trabajador['formacionpdt_tr'] == "Si") { ?>
+                                                <span class='badge badge-success' style="font-size: 10px; color:#25aa3f">S</span>
+                                            <?php
+                                            } else { ?>
+                                                <span class='badge badge-danger' style="font-size: 10px; color:crimson">N</span>
+                                            <?php
+                                            }
+                                            ?>
+                                        </td>
+                                        <td><?php if ($trabajador['informacion_tr'] == "Si") { ?>
+                                                <span class='badge badge-success' style="font-size: 10px; color:#25aa3f">S</span>
+                                            <?php
+                                            } else { ?>
+                                                <span class='badge badge-danger' style="font-size: 10px; color:crimson">N</span>
+                                            <?php
+                                            }
+                                            ?>
                                         </td>
                                         <td style="text-align: center;"> <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $id_trabajador; ?>" class="btn btn-primary btn-sm" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
                                         </td>

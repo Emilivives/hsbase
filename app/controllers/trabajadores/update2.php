@@ -13,11 +13,12 @@ $inicio_tr = $_POST['inicio_tr'];
 $centro_tr = $_POST['centro_tr'];
 $activo_tr = $_POST['activo_tr'];
 $formacionpdt_tr = $_POST['formacionpdt_tr'];
+$informacion_tr = $_POST['informacion_tr'];
 $anotaciones_tr = $_POST['anotaciones_tr'];
 
 
 $sentencia = $pdo->prepare("UPDATE trabajadores SET id_trabajador=:id_trabajador, codigo_tr=:codigo_tr, nombre_tr=:nombre_tr, dni_tr=:dni_tr, sexo_tr=:sexo_tr, fechanac_tr=:fechanac_tr, 
-inicio_tr=:inicio_tr, centro_tr=:centro_tr, categoria_tr=:categoria_tr, activo_tr=:activo_tr, formacionpdt_tr=:formacionpdt_tr, anotaciones_tr=:anotaciones_tr, fyh_actualizacion=:fyh_actualizacion 
+inicio_tr=:inicio_tr, centro_tr=:centro_tr, categoria_tr=:categoria_tr, activo_tr=:activo_tr, formacionpdt_tr=:formacionpdt_tr, informacion_tr=:informacion_tr, anotaciones_tr=:anotaciones_tr, fyh_actualizacion=:fyh_actualizacion 
 WHERE id_trabajador = :id_trabajador");
 
 $sentencia->bindParam('id_trabajador', $id_trabajador);
@@ -32,6 +33,7 @@ $sentencia->bindParam('centro_tr', $centro_tr);
 $sentencia->bindParam('activo_tr', $activo_tr);
 $sentencia->bindParam('anotaciones_tr', $anotaciones_tr);
 $sentencia->bindParam('formacionpdt_tr', $formacionpdt_tr);
+$sentencia->bindParam('informacion_tr', $informacion_tr);
 $sentencia->bindParam('fyh_actualizacion', $fechahora);
 
 

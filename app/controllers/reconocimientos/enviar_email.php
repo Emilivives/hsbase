@@ -35,7 +35,7 @@ try {
     //Recipients
     $mail->setFrom('prevencion@trasmapi.com', 'Prevencion Trasmapi');
     $mail->addAddress($destinatario);     //Add a recipient
-    $mail->addAddress('prevenci@trasmapi.com');     //Add a recipient
+    $mail->addAddress('prevencion@trasmapi.com');     //Add a recipient
 
     //Name is optional
 

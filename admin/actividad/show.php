@@ -387,6 +387,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                                     <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
 
                                 </div>
+                            </form>
                         </div>
                     </div>
 

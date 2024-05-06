@@ -287,6 +287,22 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                         </label>
                                     </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <br>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="informacion_tr" id="flexRadioDefault3" value="No" checked>
+                                        <label class="form-check-label" for="flexRadioDefault5">
+                                            <b>NO INFORMADO PRL</b>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="informacion_tr" id="flexRadioDefault4" value="Si">
+                                        <label class="form-check-label" for="flexRadioDefault6">
+                                            <b>INFORMADO PRL</b>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
 
 
@@ -436,22 +452,29 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                         </div>
 
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Empresa</label>
+                            <input type="text" value="<?php echo $trabajador_dato['nombre_emp'] ?>" name="nombre_emp" class="form-control" disabled>
 
-                    <div class="col-md-4">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="">Centro Trabajo</label>
                             <input type="text" value="<?php echo $trabajador_dato['nombre_cen'] ?>" name="centro_tr" class="form-control" disabled>
 
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="">Categoria</label>
                             <input type="text" value="<?php echo $trabajador_dato['nombre_cat'] ?>" name="categoria_tr" class="form-control" disabled>
 
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <div class="form-group" style="text-align: right;">
                             <br>
                             <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" title="Modificar detalles" data-target="#modal-modificartrabajador<?php echo $id_trabajador; ?>"><i class="bi bi-pencil-square"></i> Editar</button>

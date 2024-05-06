@@ -12,6 +12,7 @@ $inicio_tr = $_POST['inicio_tr'];
 $centro_tr = $_POST['centro_tr'];
 $activo_tr = 1;
 $formacionpdt_tr = $_POST['formacionpdt_tr'];
+$informacion_tr = $_POST['informacion_tr'];
 $anotaciones_tr = $_POST['anotaciones_tr'];
 
 

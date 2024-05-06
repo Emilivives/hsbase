@@ -82,12 +82,28 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                     </div>
 
 
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                       <div class="form-group">
                         <label for="">APELLIDOS, NOMBRE</label>
                         <input type="text" name="nombre_tr" class="form-control" required>
                       </div>
 
+                    </div>
+                    <div class="col-md-2">
+                      <br>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sexo_tr" id="flexRadioDefault1" value="Hombre" checked>
+                        <label class="form-check-label" for="flexRadioDefault3">
+                          <b>Hombre</b>
+                        </label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sexo_tr" id="flexRadioDefault2" value="Mujer">
+                        <label class="form-check-label" for="flexRadioDefault4">
+                          <b>Mujer</b>
+                        </label>
+                      </div>
                     </div>
                   </div>
 
@@ -105,26 +121,55 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                       </div>
 
                     </div>
-                    <div class="col-md-2">
-                      <label for="">Sexo</label>
-                      <select class="form-select form-select-sm" name="sexo_tr" aria-label=".form-select-sm example">
-                        <option>Seleccione</option>
-                        <option value="Hombre">Hombre</option>
-                        <option value="Mujer">Mujer</option>
-                      </select>
+                    <!--
+                                <div class="col-md-2">
+                                    <label for="">Sexo</label>
+                                    <select class="form-select form-select-sm" name="sexo_tr" aria-label=".form-select-sm example">
+                                        <option>Seleccione</option>
+                                        <option value="Hombre">Hombre</option>
+                                        <option value="Mujer">Mujer</option>
+                                    </select>
 
-                    </div>
-                    <div class="col-md-2">
-                      <label for="">Formacion PRL</label>
-                      <select class="form-select form-select-sm" name="formacionpdt_tr" aria-label=".form-select-sm example">
-                        <option>Seleccione</option>
-                        <option value="Si">Si</option>
-                        <option value="No">No</option>
-                      </select>
-
+                                </div>-->
+                    <div class="col-md-1">
                     </div>
 
+
+
+                    <div class="col-md-3">
+                      <br>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="formacionpdt_tr" id="flexRadioDefault3" value="No" checked>
+                        <label class="form-check-label" for="flexRadioDefault3">
+                          <b>NO FORMADO PRL</b>
+                        </label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="formacionpdt_tr" id="flexRadioDefault4" value="Si">
+                        <label class="form-check-label" for="flexRadioDefault4">
+                          <b>FORMADO PRL</b>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <br>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="informacion_tr" id="flexRadioDefault3" value="No" checked>
+                        <label class="form-check-label" for="flexRadioDefault5">
+                          <b>NO INFORMADO PRL</b>
+                        </label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="informacion_tr" id="flexRadioDefault4" value="Si">
+                        <label class="form-check-label" for="flexRadioDefault6">
+                          <b>INFORMADO PRL</b>
+                        </label>
+                      </div>
+                    </div>
                   </div>
+
 
                   <div class="row">
                     <div class="col-md-5">
@@ -272,15 +317,17 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
               <table id="example3" class="table tabe-hover table-condensed">
                 <colgroup>
                   <col width="30%">
+                  <col width="20%">
                   <col width="10%">
-                  <col width="25%">
+                  <col width="20%">
                   <col width="10%">
-                  <col width="7%">
+                  <col width="10%">
 
                 </colgroup>
                 <thead class="table-dark">
                   <tr>
                     <th style="text-align: left">Trabajador</th>
+                    <th style="text-align: left">Cia.</th>
                     <th style="text-align: left">Inicio</th>
                     <th style="text-align: left">Categoria</th>
                     <th style="text-align: center">Formado</th>
@@ -297,13 +344,15 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                   ?>
 
                       <tr>
-
+            
 
                         <td><?php echo $trabajador['nombre_tr']; ?></td>
+                        <td><?php echo $trabajador['nombre_emp']; ?></td>
 
                         <td style="text-align: left"><?php echo $newdate1 = date("d-m-Y", strtotime($trabajador['inicio_tr'])); ?></td>
 
                         <td><?php echo $trabajador['nombre_cat']; ?></td>
+                  
 
                         <td style="text-align: center;"><?php $trabajador['formacionpdt_tr'];
                                                         if ($trabajador['formacionpdt_tr'] == 'Si') { ?>
@@ -1040,7 +1089,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
     $("#example3").DataTable({
       "pageLength": 4,
       "order": [
-        [3, 'asc']
+        [4, 'asc']
       ],
       "language": {
         "emptyTable": "No hay información",

@@ -1,7 +1,7 @@
 <?php
 include('../../app/config.php');
 include('../../admin/layout/parte1.php');
-include('../../app/controllers/trabajadores/listado_trabajadores.php');
+include('../../app/controllers/trabajadores/listado_trabajadores_alfabet.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
 include('../../app/controllers/maestros/accidentes/listado_actividadfisica.php');
 include('../../app/controllers/maestros/accidentes/listado_agentematerial.php');

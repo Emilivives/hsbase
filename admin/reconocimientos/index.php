@@ -385,7 +385,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                     <div class="modal-dialog modal-xl">
                                         <div class="modal-content">
                                             <div class="modal-header" style="background-color:gold">
-                                                <h5 class="modal-title" id="modal-modificacita" style="color: black;"><i class="bi bi-person-lines-fill"></i>Recon. Médico - <?php echo $empresa_dato['nombre_tr'] ?> - Detalles</h5>
+                                                <h5 class="modal-title" id="modal-modificacita" style="color: black;"><i class="bi bi-person-lines-fill"></i>Recon. Médico - <?php echo $reconocimientos_dato['nombre_tr'] ?> - Detalles</h5>
                                                 <button type="button" class="close" style="color:black;" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -395,7 +395,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                 <form action="../../app/controllers/reconocimientos/update.php" method="post" enctype="multipart/form-data">
 
                                                     <div class="row">
-                                                        <input type="text" name="id_empresa" value="<?php echo $empresa_dato['id_empresa'] ?>" class="form-control" hidden>
+                                                        <input type="text" name="id_reconocimiento" value="<?php echo $reconocimientos_dato['id_reconocimiento'] ?>" class="form-control" hidden>
 
 
                                                         <div class="col-md-12">
@@ -463,6 +463,8 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                                     </label>
                                                                 </div>
                                                             </div>
+
+                                                            
 
                                                             <div class="col-md-3">
                                                                 <div class="form-check">

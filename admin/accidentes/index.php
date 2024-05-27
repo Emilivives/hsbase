@@ -98,7 +98,7 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
                 $anio = date("Y", $fechahoraentera);
                 $contador_de_accidentessinbaja = 0;
                 foreach ($accidentes_datos as $accidentes_dato) {
-                    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente sin baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+                    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente con baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
                         $contador_de_accidentessinbaja = $contador_de_accidentessinbaja + 1;
                     }
                 }
@@ -174,7 +174,7 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
                             <tr>
                                 <th style="text-align: center">#</th>
                                 <th style="text-align: left">Nro.</th>
-                                <th style="text-align: center">Comunicado</th>      
+                                <th style="text-align: center">Comunicado</th>
                                 <th style="text-align: left">Fecha</th>
                                 <th style="text-align: left">Tipo accidente</th>
                                 <th style="text-align: left">Trabajador</th>
@@ -209,13 +209,16 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
                                     <td style="text-align: left"><b><?php echo $accidentes_dato['fecha_ace']; ?></b></td>
                                     <td style="text-align: left;"><?php $accidentes_dato['tipoaccidente_ta'];
                                                                     if ($accidentes_dato['tipoaccidente_ta'] == "Accidente sin baja") { ?>
-                                            <span class='badge badge-warning'>ACC. SIN BAJA</span>
+                                            <span class='badge badge-primary'>ACC. SIN BAJA</span>
                                         <?php
                                                                     } else if ($accidentes_dato['tipoaccidente_ta'] == "Accidente con baja") { ?>
                                             <span class='badge badge-danger'>ACC. CON BAJA</span>
                                         <?php
-                                                                    } else if ($accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere") { ?>
-                                            <span class='badge badge-secondary'>ACC. IN ITINERE</span>
+                                                                    } else if ($accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere con baja") { ?>
+                                            <span class='badge badge-warning'>IN ITINERE CON BAJA L.</span>
+                                        <?php
+                                                                    } else if ($accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere sin baja") { ?>
+                                            <span class='badge badge-secondary'>IN ITINERE SIN BAJA L.</span>
                                         <?php                       }
                                         ?>
 
@@ -232,7 +235,7 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
                                             <a href="show.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
                                             <a href="../../app/controllers/accidentes/delete.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar el registro?')" title="Eliminar investigación"><i class="bi bi-trash-fill"></i> Eliminar</a>
-                                           
+
 
                                     </td>
 

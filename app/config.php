@@ -34,3 +34,5 @@ $URL = "http://localhost/hsbase";
 
 date_default_timezone_set("Europe/Madrid");
 $fechahora = date(format:'Y-m-d H:i:s');
+$fecha = date(format:'Y-m-d');
+

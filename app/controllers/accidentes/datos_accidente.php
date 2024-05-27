@@ -5,21 +5,22 @@ $id_accidente = $_GET['id_accidente'];
 
 $sql = "SELECT ace.id_accidente as id_accidente, 
 ace.nroaccidente_ace as nroaccidente_ace, pt.procesotrabajo_pt as procesotrabajo_pt, ace.comunicado_ace as comunicado_ace,
-tr.nombre_tr as nombre_tr, tr.dni_tr as dni_tr, tr.sexo_tr as sexo_tr, tr.fechanac_tr as fechanac_tr, tr.inicio_tr as inicio_tr, cat.nombre_cat as nombre_cat, cat.descripcion_cat as descripcion_cat, cat.departamento_cat as departamento_cat, 
+tr.nombre_tr as nombre_tr, tr.dni_tr as dni_tr, tr.sexo_tr as sexo_tr, tr.fechanac_tr as fechanac_tr, tr.inicio_tr as inicio_tr, cat.nombre_cat as nombre_cat, cat.descripcion_cat as descripcion_cat, dep.nombre_dpo as nombre_dpo, 
 cen.nombre_cen as nombre_cen, emp.nombre_emp as nombre_emp, emp.razonsocial_emp as razonsocial_emp, emp.modalidadprl_emp as modalidadprl_emp,
 ace.lugar_ace as lugar_ace, ace.detalleslugar_ace as detalleslugar_ace, ta.tipoaccidente_ta as tipoaccidente_ta, 
 ace.fecha_ace as fecha_ace, ace.fechabaja_ace as fechabaja_ace, ace.hora_ace as hora_ace, ace.horatrabajo_ace as horatrabajo_ace, 
 ace.trabajohabitual_ace as trabajohabitual_ace, ace.diadescanso_ace as diadescanso_ace, ace.semanadescanso_ace as semanadescanso_ace, ace.diasbaja_ace as diasbaja_ace,
 ace.isevaluadoriesgo_ace as isevaluadoriesgo_ace, ace.evalconriesgo_ace as evalconriesgo_ace, ace.isrecaida_ace as isrecaida_ace, 
-ace.fechaantesrecaida_ace as fechaantesrecaida_ace, ace.descripcion_ace as descripcion_ace, tlu.tipolugar_tl as tipolugar_tl,
-tlu.codtipolugar_tl as codtipolugar_tl, 
-ace.zonalugar_ace as zonalugar_ace, ace.observaclugar_ace as observaclugar_ace, pt.procesotrabajo_pt as procesotrabajo_pt,
-pt.codigo_pt as codigo_pt, 
-ace.observproceso_ace as observproceso_ace, af.activfisica_af as activfisica_af, af.codactivfis_af as codactivfis_af, 
-ace.observtipoactiv_ace as observtipoactiv_ace, 
-am.agentematerial_am as agentematerial_am, am.codagentemat_am as codagentemat_am, ace.observagmaterial_ace as observagmaterial_ace, ds.desviacion_des as desviacion_des, 
-ace.observdesviacion_ace as observdesviacion_ace, amd.agentematerialdesv_amd as agentematerialdesv_amd, ace.observagendesv_ace as observagendesv_ace, fc.formacontacto_fc as formacontacto_fc, 
-ace.observformacont_ace as observformacont_ace, aml.agentematerialles_aml as agentematerialles_aml, ace.observmatlesi_ace as observmatlesi_ace, ace.numtrafectados_ace as numtrafectados_ace, 
+ace.fechaantesrecaida_ace as fechaantesrecaida_ace, ace.descripcion_ace as descripcion_ace, 
+tlu.tipolugar_tl as tipolugar_tl, tlu.codtipolugar_tl as codtipolugar_tl, ace.zonalugar_ace as zonalugar_ace, ace.observaclugar_ace as observaclugar_ace, 
+pt.procesotrabajo_pt as procesotrabajo_pt, pt.codigo_pt as codigo_pt, ace.observproceso_ace as observproceso_ace, 
+af.activfisica_af as activfisica_af, af.codactivfis_af as codactivfis_af, ace.observtipoactiv_ace as observtipoactiv_ace, 
+am.agentematerial_am as agentematerial_am, am.codagentemat_am as codagentemat_am, ace.observagmaterial_ace as observagmaterial_ace, 
+ds.desviacion_des as desviacion_des, ds.coddesviacion_des as coddesviacion_des, ace.observdesviacion_ace as observdesviacion_ace, 
+amd.agentematerialdesv_amd as agentematerialdesv_amd, amd.codagentematdesv_amd as codagentematdesv_amd, ace.observagendesv_ace as observagendesv_ace, 
+fc.formacontacto_fc as formacontacto_fc, fc.codformacont_fc as codformacont_fc, ace.observformacont_ace as observformacont_ace, 
+aml.agentematerialles_aml as agentematerialles_aml, aml.codagentematles_aml as codagentematles_aml, ace.observmatlesi_ace as observmatlesi_ace, 
+ace.numtrafectados_ace as numtrafectados_ace, 
 ace.declaraciontrab_ace as declaraciontrab_ace, ace.istestigos_ace as istestigos_ace, ace.detallestestigo_ace as detallestestigo_ace, 
 ace.declaraciontestigo_ace as declaraciontestigo_ace, tl.tipolesion_tl as tipolesion_tl,gr.gravedad_gr as gravedad_gr, 
 pc.partecuerpo_pc as partecuerpo_pc, ace.isevacuacion_ace as isevacuacion_ace, ace.lugarevacuacion_ace as lugarevacuacion_ace, 
@@ -36,6 +37,7 @@ ace.revisadopor_ace as revisadopor_ace, ace.cargorevisado_ace as cargorevisado_a
 FROM `accidentes`as ace 
 INNER JOIN `trabajadores` as tr ON ace.trabajador_ace = tr.id_trabajador
 INNER JOIN `categorias` as cat ON tr.categoria_tr = cat.id_categoria
+INNER JOIN `departamentos` as dep ON cat.departamento_cat = id_departamento
 INNER JOIN `centros` as cen ON ace.centro_ace = cen.id_centro
 INNER JOIN `empresa` as emp ON cen.empresa_cen = emp.id_empresa
 INNER JOIN `ace_procesotrabajo` as pt ON ace.procesotrabajo_ace = pt.id_procesotrabajo
@@ -66,7 +68,7 @@ foreach ($accidentes_datos as $accidentes_dato) {
     $inicio_trabajador_ace = $accidentes_dato['inicio_tr'];
     $categoria_trabajador_ace = $accidentes_dato['nombre_cat'];
     $categoria_descripcion_ace = $accidentes_dato['descripcion_cat'];
-    $departamento_trabajador_ace = $accidentes_dato['departamento_cat'];
+    $departamento_trabajador_ace = $accidentes_dato['nombre_dpo'];
     $centro_ace = $accidentes_dato['nombre_cen'];
     $empresa_ace = $accidentes_dato['nombre_emp'];
     $razonsocial_ace = $accidentes_dato['razonsocial_emp'];
@@ -88,25 +90,29 @@ foreach ($accidentes_datos as $accidentes_dato) {
     $fechaantesrecaida_ace = $accidentes_dato['fechaantesrecaida_ace'];
     $descripcion_ace = $accidentes_dato['descripcion_ace'];
     $tipolugar_ace = $accidentes_dato['tipolugar_tl'];
-    $tipolugar_ace2 = $accidentes_dato['codtipolugar_tl'];
+    $codtipolugar_ace = $accidentes_dato['codtipolugar_tl'];
     $zonalugar_ace = $accidentes_dato['zonalugar_ace'];
     $observaclugar_ace = $accidentes_dato['observaclugar_ace'];
     $procesotrabajo_ace = $accidentes_dato['procesotrabajo_pt'];
-    $procesotrabajo_ace2 = $accidentes_dato['codigo_pt'];
+    $codprocesotrabajo_ace = $accidentes_dato['codigo_pt'];
     $observproceso_ace = $accidentes_dato['observproceso_ace'];
     $tipoactividad_ace = $accidentes_dato['activfisica_af'];
-    $tipoactividad_ace2 = $accidentes_dato['codactivfis_af'];
+    $codtipoactividad_ace = $accidentes_dato['codactivfis_af'];
     $observtipoactiv_ace = $accidentes_dato['observtipoactiv_ace'];
     $agentematerial_ace = $accidentes_dato['agentematerial_am'];
-    $agentematerial_ace2 = $accidentes_dato['codagentemat_am'];
+    $codagentematerial_ace = $accidentes_dato['codagentemat_am'];
     $observagmaterial_ace = $accidentes_dato['observagmaterial_ace'];
     $desviacion_ace = $accidentes_dato['desviacion_des'];
+    $coddesviacion_ace = $accidentes_dato['coddesviacion_des'];
     $observdesviacion_ace = $accidentes_dato['observdesviacion_ace'];
     $agmaterdesv_ace = $accidentes_dato['agentematerialdesv_amd'];
+    $codagmaterdesv_ace = $accidentes_dato['codagentematdesv_amd'];
     $observagendesv_ace = $accidentes_dato['observagendesv_ace'];
     $formacontacto_ace = $accidentes_dato['formacontacto_fc'];
+    $codformacontacto_ace = $accidentes_dato['codformacont_fc'];
     $observformacont_ace = $accidentes_dato['observformacont_ace'];
     $matercasusalesi_ace = $accidentes_dato['agentematerialles_aml'];
+    $codmatercasusalesi_ace = $accidentes_dato['codagentematles_aml'];
     $observmatlesi_ace = $accidentes_dato['observmatlesi_ace'];
     $numtrafectados_ace = $accidentes_dato['numtrafectados_ace'];
     $declaraciontrab_ace = $accidentes_dato['declaraciontrab_ace'];

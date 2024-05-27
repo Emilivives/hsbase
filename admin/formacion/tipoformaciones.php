@@ -85,6 +85,18 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group row">
+                                                    <label for="normativa_tf" class="col-form-label col-sm-2">Normativa aplicada:</label>
+                                                    <div class="col-sm-12">
+                                                        <textarea class="form-control" name="normativa_tf" value="" rows="2" required></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group row">
                                                     <label for="descripcion_acc" class="col-form-label col-sm-2">Contenido formación:</label>
                                                     <div class="col-sm-12">
                                                         <textarea class="form-control" name="detalles_tf" value="" rows="10" required></textarea>

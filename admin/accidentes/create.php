@@ -1116,23 +1116,25 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         </div>
                     </div>
                     <div class="row">
+                    <div class="col-sm-4">
+                            <div class="form-group row">
+                                <label for="protcolecnecesa_ace" class="col-form-label col-sm-3">Proteccion colectiva necesaria:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="protcolecnecesa_ace" class="form-control" value="">
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="col-sm-4">
                             <div class="form-group row">
-                                <label for="protcolectivadisp_ace" class="col-form-label col-sm-3">Proteccion colectiva necesaria:</label>
+                                <label for="protcolectivadisp_ace" class="col-form-label col-sm-3">Proteccion colectiva disponible:</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="protcolectivadisp_ace" class="form-control" value="">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-4">
-                            <div class="form-group row">
-                                <label for="protcolecnecesa_ace" class="col-form-label col-sm-3">Proteccion colectiva disponible:</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="protcolecnecesa_ace" class="form-control" value="">
-                                </div>
-                            </div>
-                        </div>
+               
                         <div class="col-sm-4">
                             <div class="form-group row">
                                 <label for="observprotcol_ace" class="col-form-label col-sm-3">Observaciones:</label>
@@ -1143,9 +1145,18 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         </div>
                     </div>
                     <div class="row">
+                    <div class="col-sm-4">
+                            <div class="form-group row">
+                                <label for="episneces_ace" class="col-form-label col-sm-3">EPIs necesarios:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="episneces_ace" class="form-control" value="">
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="col-sm-4">
                             <div class="form-group row">
-                                <label for="episdispon_ace" class="col-form-label col-sm-3">EPIs necesarios:</label>
+                                <label for="episdispon_ace" class="col-form-label col-sm-3">EPIs Disponibles:</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="episdispon_ace" class="form-control" value="">
                                 </div>
@@ -1153,14 +1164,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         </div>
 
 
-                        <div class="col-sm-4">
-                            <div class="form-group row">
-                                <label for="episneces_ace" class="col-form-label col-sm-3">EPIs disponibles:</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="episneces_ace" class="form-control" value="">
-                                </div>
-                            </div>
-                        </div>
+                       
                         <div class="col-sm-4">
                             <div class="form-group row">
                                 <label for="observepis_ace" class="col-form-label col-sm-3">Observaciones:</label>

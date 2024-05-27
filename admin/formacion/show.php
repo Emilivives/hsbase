@@ -160,11 +160,12 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                         </td>
                                         <td>
                                             <center>
+                                            
                                                 <form action="../../app/controllers/formaciones/borrar_trabajadorformacion.php" method="POST">
                                                     <input type="text" name="id_formasistencia" value="<?php echo $id_formasistencia ?>" hidden>
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Borrar</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Borrar</button>                                                </form>
+                                                <a href="../maestros/documentos/pdf_titulo_formacion.php?id_formacion=<?php echo $id_formacion; ?>&id_trabajador=<?php echo $formasistencia_dato['id_trabajador'] ?>" class="btn btn-warning btn-sm" title="Generar titulo" target="_blank"><i class="fa-regular fa-file-lines"></i> Titulo</a>
 
-                                                </form>
                                             </center>
                                         </td>
                                     </tr>
@@ -227,11 +228,10 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 
             </div>
             <div class="col-md-12">
-            <div class="form-group">
-                <a href="reporte.php?id_formacion=<?php echo $id_formacion; ?>" class="btn btn-warning" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
-
+                <div class="form-group">
+                    <a href="reporte.php?id_formacion=<?php echo $id_formacion; ?>" class="btn btn-warning" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
+                </div>
             </div>
-        </div>
         </div>
 
         <div class="col-md-5">

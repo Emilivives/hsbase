@@ -156,6 +156,7 @@ $pdf->Write(10, $razonsocial_ace);
 
 $pdf->SetFont('Arial', '', '10');
 $pdf->SetXY(20, 83);
+$trabajador_ace = mb_convert_encoding($trabajador_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $trabajador_ace);
 
 
@@ -165,11 +166,13 @@ $pdf->Write(10, $dni_trabajador_ace);
 
 $pdf->SetFont('Arial', '', '10');
 $pdf->SetXY(20, 106);
+$categoria_trabajador_ace = mb_convert_encoding($categoria_trabajador_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $categoria_trabajador_ace);
 
 
 $pdf->SetFont('Arial', '', '6');
 $pdf->SetXY(20, 120);
+$categoria_descripcion_ace = mb_convert_encoding($categoria_descripcion_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(2, $categoria_descripcion_ace);
 
 
@@ -192,26 +195,32 @@ $pdf->Write(10, $hora);
 
 $pdf->SetFont('Arial', '', '10');
 $pdf->SetXY(20, 170);
+$detalleslugar_ace = mb_convert_encoding($detalleslugar_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $detalleslugar_ace);
 
 $pdf->SetFont('Arial', '', '10');
 $pdf->SetXY(20, 182);
+$observproceso_ace = mb_convert_encoding($observproceso_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $observproceso_ace);
 
 $pdf->SetFont('Arial', '', '10');
 $pdf->SetXY(20, 202);
+$descripcion_ace = mb_convert_encoding($descripcion_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $descripcion_ace);
 
 $pdf->SetFont('Arial', '', '10');
 $pdf->SetXY(20, 222);
+$causaaccidente_ace = mb_convert_encoding($causaaccidente_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $causaaccidente_ace);
 
 $pdf->SetFont('Arial', '', '10');
 $pdf->SetXY(20, 241);
+$tipolesion_ace = mb_convert_encoding($tipolesion_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $tipolesion_ace);
 
 $pdf->SetFont('Arial', '', '10');
 $pdf->SetXY(20, 261);
+$partecuerpo_ace = mb_convert_encoding($partecuerpo_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $partecuerpo_ace);
 
 # Pagina 2

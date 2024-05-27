@@ -1,6 +1,6 @@
 <?php
 
-$sql = "SELECT *, tr.nombre_tr as nombre_tr, crm.fecha_crm as fecha_crm, crm.anotaciones_crm as anotaciones_crm
+$sql = "SELECT *, tr.nombre_tr as nombre_tr, crm.fecha_crm as fecha_crm, crm.anotaciones_crm as anotaciones_crm, crm.enviado_crm as enviado_crm
 FROM citas_rm as crm 
 INNER JOIN trabajadores as tr ON crm.trabajador_crm = tr.id_trabajador
 INNER JOIN categorias as cat ON tr.categoria_tr = cat.id_categoria

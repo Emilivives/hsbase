@@ -923,23 +923,29 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                 <div class="row">
                     <strong style="text-align: left"><i class="bi bi-printer-fill"></i> Imprimir Documentos</strong>
                     <div class="form-group">
-                        <a class="btn btn-primary" href="../maestros/documentos/pdf_dosier.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Dosier</a>
-
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dosier
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_dosier.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Dosier Trasmapi</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_infoprl_mediterranea.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Dosier Mediterranea</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_infoprl_discover.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Dosier Discover</a></li>
+                        </ul>
 
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                             Entrega EPIs
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_amarrador.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa']?>">Epis Amarrador</a></li>
-                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_auxiliarpasaje.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa']?>">Epis Aux. Pasaje</a></li>
-                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_capitan.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa']?>">Epis Capitán</a></li>
-                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_jefemaquinas.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa']?>">Epis Jefe maq.</a></li>
-                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_limpieza.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa']?>">Epis Limpieza</a></li>
-                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_marinero.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa']?>">Epis Marinero</a></li>
-                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_marineromaquinas.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa']?>">Epis Marinero maq.</a></li>
-                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_oficialcarga-amarrador.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa']?>">Epis Of. carga</a></li>
-                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_primeroficial.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa']?>">Epis Primer of.</a></li>
-                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_taller.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa']?>">Epis Taller</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_amarrador.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa'] ?>">Epis Amarrador</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_auxiliarpasaje.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa'] ?>">Epis Aux. Pasaje</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_capitan.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa'] ?>">Epis Capitán</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_jefemaquinas.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa'] ?>">Epis Jefe maq.</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_limpieza.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa'] ?>">Epis Limpieza</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_marinero.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa'] ?>">Epis Marinero</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_marineromaquinas.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa'] ?>">Epis Marinero maq.</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_oficialcarga-amarrador.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa'] ?>">Epis Of. carga</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_primeroficial.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa'] ?>">Epis Primer of.</a></li>
+                            <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_taller.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>&id_emp=<?php echo $trabajador_dato['id_empresa'] ?>">Epis Taller</a></li>
 
                         </ul>
 

@@ -10,17 +10,41 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 include('../../app/controllers/actividad/listado_accionprl.php');
 
 ?>
+<head>
+<style>
+    .dropdown-font-size {
+        font-size: 12px;
+    }
+
+    .vencido {
+        background-color: red;
+        color: white;
+    }
+    .badge-wh-1 {
+    display: inline-block;
+    min-width: 1px;
+    padding: 1px 1px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #f58da3;
+    line-height: 6;
+    vertical-align: bottom;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 5px;
+}
+</style>
+</head>
+
 <html>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-<style>
-    .dropdown-font-size {
-        font-size: 12px;
-    }
-</style>
+
+
 
 <div class="content-header">
     <div class="container-fluid">
@@ -433,88 +457,92 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                     <tbody>
                         <?php
                         $contador = 0;
+                        $hoy = date('Y-m-d'); // Obtener la fecha actual
 
                         foreach ($tareas_proyectos as $tarea_proyecto) {
-                            $contador = $contador + 1;
-                            $id_tarea = $tarea_proyecto['id_tarea']
-
-
+                            $contador++;
+                            $id_tarea = $tarea_proyecto['id_tarea'];
+                            $fecha_vencimiento = $tarea_proyecto['fecha_ta'];
+                            $fecha_vencida = strtotime($fecha_vencimiento) < strtotime($hoy) ? 'vencido' : '';
                         ?>
 
-                            <tr>
+                            <tr class="<?php echo $fecha_vencida; ?>">
                                 <td style="text-align: center"><b><?php echo $contador; ?></b></td>
-                                <td style="text-align: left"><?php $tarea_proyecto['estado_ta'];
-                                                                if ($tarea_proyecto['estado_ta'] == 'En curso') { ?>
+                                <td style="text-align: left">
+                                    <?php
+                                    if ($tarea_proyecto['estado_ta'] == 'En curso') { ?>
                                         <span class='badge badge-info'>En Curso</span>
                                     <?php
-                                                                } else if ($tarea_proyecto['estado_ta'] == 'Completado') { ?>
+                                    } else if ($tarea_proyecto['estado_ta'] == 'Completado') { ?>
                                         <span class='badge badge-success'>Completado</span>
                                     <?php
-                                                                } else if ($tarea_proyecto['estado_ta'] == 'Parcialmente hecho') { ?>
+                                    } else if ($tarea_proyecto['estado_ta'] == 'Parcialmente hecho') { ?>
                                         <span class='badge badge-warning'>Parcialmente hecho</span>
                                     <?php
-                                                                } else if ($tarea_proyecto['estado_ta'] == 'Pospuesto') { ?>
+                                    } else if ($tarea_proyecto['estado_ta'] == 'Pospuesto') { ?>
                                         <span class='badge badge-secondary'>Pospuesto</span>
                                     <?php
-                                                                } else if ($tarea_proyecto['estado_ta'] == 'Cancelado') { ?>
+                                    } else if ($tarea_proyecto['estado_ta'] == 'Cancelado') { ?>
                                         <span class='badge badge-danger'>Cancelado</span>
                                     <?php
-                                                                }
+                                    }
                                     ?>
                                 </td>
                                 <td style="text-align: left"><b><?php echo $tarea_proyecto['nombre_ta']; ?></b></td>
                                 <td style="text-align: left"><?php echo $tarea_proyecto['nombre_cen']; ?></td>
-                                <td style="text-align: left"><?php $tarea_proyecto['prioridad_ta'];
-                                                                if ($tarea_proyecto['prioridad_ta'] == 'Alta') { ?>
+                                <td style="text-align: left">
+                                    <?php
+                                    if ($tarea_proyecto['prioridad_ta'] == 'Alta') { ?>
                                         <span class='badge badge-warning'>ALTA</span>
                                     <?php
-                                                                } else if ($tarea_proyecto['prioridad_ta'] == 'Media') { ?>
+                                    } else if ($tarea_proyecto['prioridad_ta'] == 'Media') { ?>
                                         <span class='badge badge-primary'>MEDIA</span>
                                     <?php
-                                                                } else { ?>
+                                    } else { ?>
                                         <span class='badge badge-secondary'>BAJA</span>
                                     <?php
-                                                                }
+                                    }
                                     ?>
-
                                 </td>
                                 <td style="text-align: left"><?php echo $tarea_proyecto['nombre_resp']; ?></td>
                                 <td style="text-align: left"><?php echo $tarea_proyecto['categoria_ta']; ?></td>
-                                <td style="text-align: left"><?php
-                                                                // Definimos los nombres de los meses en español
-                                                                $meses = array(
-                                                                    1 => "Enero",
-                                                                    2 => "Febrero",
-                                                                    3 => "Marzo",
-                                                                    4 => "Abril",
-                                                                    5 => "Mayo",
-                                                                    6 => "Junio",
-                                                                    7 => "Julio",
-                                                                    8 => "Agosto",
-                                                                    9 => "Septiembre",
-                                                                    10 => "Octubre",
-                                                                    11 => "Noviembre",
-                                                                    12 => "Diciembre"
-                                                                );
+                                <td style="text-align: left">
+                                    <?php
+                                    $meses = array(
+                                        1 => "Enero",
+                                        2 => "Febrero",
+                                        3 => "Marzo",
+                                        4 => "Abril",
+                                        5 => "Mayo",
+                                        6 => "Junio",
+                                        7 => "Julio",
+                                        8 => "Agosto",
+                                        9 => "Septiembre",
+                                        10 => "Octubre",
+                                        11 => "Noviembre",
+                                        12 => "Diciembre"
+                                    );
+                                    $fecha = $tarea_proyecto['fecha_ta'];
+                                    list($anio, $mes, $dia) = explode("-", $fecha);
+                                    $mesNombre = $meses[intval($mes)];
+                                    echo $mesNombre;
+                                    ?>
+                                </td>
+                               
+                                <td style="text-align: center;"><?php
+                                                                if ($tarea_proyecto['estado_ta'] != 'Completado' and $tarea_proyecto['fecha_ta'] < $hoy ) { ?>
+                                        <span class='badge-wh-1'><h6><?php echo date("d-m-Y", strtotime($tarea_proyecto['fecha_ta'])); ?></h6></span>
 
-                                                                // Ejemplo de fecha recibida de la variable $tarea_proyecto['fecha_ta']
-                                                                $fecha = $tarea_proyecto['fecha_ta'];
+                                    <?php
+                                  } else { echo date("d-m-Y", strtotime($tarea_proyecto['fecha_ta']));                         }
+                                    ?>
 
-                                                                // Separamos la fecha en año, mes y día
-                                                                list($anio, $mes, $dia) = explode("-", $fecha);
 
-                                                                // Convertimos el mes a su nombre en español
-                                                                $mesNombre = $meses[intval($mes)];
-
-                                                                // Mostramos la fecha en español
-                                                                echo $mesNombre; 
-
-                                                                ?>
-
-                                    </td>
-
-                                <td style="text-align: left"><?php echo $newdate = date("d-m-Y", strtotime($tarea_proyecto['fecha_ta'])) ?></td>
-                                <td style="text-align: left"><?php echo $newdate = date("d-m-Y", strtotime($tarea_proyecto['fechareal_ta'])) ?></td>
+                                </td>
+                                
+                                
+                                
+                                <td style="text-align: left" <?php echo date("d-m-Y", strtotime($tarea_proyecto['fechareal_ta'])); ?></td>
                                 <dl>
 
                                     <td style="text-align: center">

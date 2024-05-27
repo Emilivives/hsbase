@@ -2,6 +2,7 @@
 
 include('../../../app/config.php');
 
+$id_citarm = $_POST['id_citarm'];
 $id_reconocimiento = $_POST['id_reconocimiento'];
 $trabajador_rm = $_POST['trabajador_rm'];
 $fecha_rm = $_POST['fecha_rm'];

@@ -8,6 +8,7 @@ require '../emails/PHPMailer.php';
 require '../emails/SMTP.php';
 include('../../../app/config.php');
 
+$id_citarm = $_POST['id_citarm'];
 $nombre_tr = $_POST['nombre_tr'];
 $dni_tr = $_POST['dni_tr'];
 $categoria_tr = $_POST['categoria_tr'];
@@ -15,6 +16,8 @@ $centro_tr = $_POST['centro_tr'];
 $razonsocial_emp = $_POST['razonsocial_emp'];
 $destinatario = $_POST['destinatario'];
 $anotaciones_crm = $_POST['anotaciones_crm'];
+$enviado_crm = $fechahora;
+
 
 
 
@@ -28,7 +31,7 @@ try {
     $mail->Host       = 'smtp-mail.outlook.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'prevencion@trasmapi.com';                     //SMTP username
-    $mail->Password   = 'S3rcomis@2020/*';                               //SMTP password
+    $mail->Password   = 'Loc34827';                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
     $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -48,7 +51,7 @@ try {
     <body>
     <h4>
     <br>
-   <b> Buenos dias,</b>
+   <b> Buenos dias,</b>$id_citarm ////  $enviado_crm
  <br> <br>
     Agradezco que nos den cita para el trabajador:  
      <br><br>
@@ -73,7 +76,13 @@ Un saludo,
     </html>";
 
     $mail->send();
+    $sentencia = $pdo->prepare("UPDATE citas_rm SET enviado_crm=:enviado_crm WHERE id_citarm=:id_citarm");
+    $sentencia->bindParam(':id_citarm', $id_citarm);    
+    $sentencia->bindParam(':enviado_crm', $enviado_crm);
+    $sentencia->execute();
+
     session_start();
+
     $_SESSION['mensaje'] = "Email para cita de reconocimiento médico enviado";
     $_SESSION['icono'] = "success";
     header('Location: ' . $URL . '/admin/reconocimientos/index.php');

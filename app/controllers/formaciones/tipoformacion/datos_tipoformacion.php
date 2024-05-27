@@ -13,6 +13,6 @@ foreach ($tipoformaciones_datos as $tipoformaciones_dat) {
     $trabajador_fr = $tipoformaciones_dato['nombre_tr'];
     $fecha_fr = $tipoformaciones_dato['fecha_fr'];
     $fechacad_fr = $tipoformaciones_dato['fechacad_fr'];
-     
+       
 
 }

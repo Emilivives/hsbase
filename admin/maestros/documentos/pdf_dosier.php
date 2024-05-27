@@ -38,7 +38,7 @@ $pdf = new FPDI();
 
 # Pagina 1
 $pdf->AddPage();
-$pdf->setSourceFile('Files_Pdf/12_04_2024_DOSIER COMPLETO 2023.pdf');
+$pdf->setSourceFile('Files_Pdf/08_05_2024_DOSIER_COMPLETO_2023.pdf');
 $tplIdx = $pdf->importPage(1);
 $pdf->useTemplate($tplIdx);
 
@@ -86,7 +86,7 @@ $pdf->Write(10, $nombre_tr);
 
 
 $pdf->SetFont('Arial', 'B', '10');
-$pdf->SetXY(150, 60);
+$pdf->SetXY(145, 60);
 $pdf->Write(10, $dni_tr);
 
 
@@ -116,6 +116,31 @@ $pdf->SetFont('Arial', 'B', '10');
 $pdf->SetXY(158, 37);
 $pdf->Write(10, $dni_tr); 
  
+# Pagina 10
+$pdf->AddPage();
+$tplIdx9 = $pdf->importPage(10);
+$pdf->useTemplate($tplIdx9); 
+$pdf->SetFont('Arial', 'B', '10');
+$pdf->SetXY(42, 142);
+$pdf->Write(10, $nombre_tr);
+
+
+$pdf->SetFont('Arial', 'B', '10');
+$pdf->SetXY(112, 142);
+$pdf->Write(10, $dni_tr); 
+
+# Pagina 11
+$pdf->AddPage();
+$tplIdx9 = $pdf->importPage(11);
+$pdf->useTemplate($tplIdx9); 
+$pdf->SetFont('Arial', 'B', '10');
+$pdf->SetXY(42, 112);
+$pdf->Write(10, $nombre_tr);
+
+
+$pdf->SetFont('Arial', 'B', '10');
+$pdf->SetXY(112, 112);
+$pdf->Write(10, $dni_tr); 
 
 $pdf->Output('Files_Pdf/Dosier_PRL.pdf', 'D'); //SALIDA DEL PDF
 //    $pdf->Output('original_update.pdf', 'F');

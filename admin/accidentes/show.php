@@ -33,7 +33,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                 <h5 class="m-0"><b>Datos Investigacion accidente laboral</b></h5>
             </div><!-- /.col -->
             <div class="col-sm-3">
-                <a href="reporte.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-warning btn-sm" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir report</a>
+            <a class="btn btn-danger btn-sm" href="../maestros/documentos/pdf_investigacionacc.php?id_accidente=<?php echo $id_accidente; ?>"><i class="fa-regular fa-file-lines"></i> Imprimir report</a>
                 <a class="btn btn-primary btn-sm" href="../maestros/documentos/pdf_solicitudmutua.php?id_accidente=<?php echo $id_accidente; ?>"><i class="fa-regular fa-file-lines"></i> Imprimir asistencia mutua</a>
             </div><!-- /.col -->
             <div class="col-sm-3">
@@ -1249,18 +1249,18 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group row">
-                                    <label for="protcolectivadisp_ace" class="col-form-label col-sm-3">Proteccion colectiva necesaria:</label>
+                                    <label for="protcolecnecesa_ace" class="col-form-label col-sm-3">Proteccion colectiva necesaria:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="protcolectivadisp_ace" value="<?php echo $protcolectivadisp_ace ?>" class="form-control" value="">
+                                        <input type="text" name="protcolecnecesa_ace" value="<?php echo $protcolecnecesa_ace  ?>" class="form-control" value="">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-4">
                                 <div class="form-group row">
-                                    <label for="protcolecnecesa_ace" class="col-form-label col-sm-3">Proteccion colectiva disponible:</label>
+                                    <label for="protcolectivadisp_ace" class="col-form-label col-sm-3">Proteccion colectiva disponible:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="protcolecnecesa_ace" value="<?php echo $protcolecnecesa_ace ?>" class="form-control" value="">
+                                        <input type="text" name="protcolectivadisp_ace" value="<?php echo $protcolectivadisp_ace; ?>" class="form-control" value="">
                                     </div>
                                 </div>
                             </div>
@@ -1276,9 +1276,9 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group row">
-                                    <label for="episdispon_ace" class="col-form-label col-sm-3">EPIs necesarios:</label>
+                                    <label for="episneces_ace" class="col-form-label col-sm-3">EPIs necesarios:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="episdispon_ace" value="<?php echo $episdispon_ace ?>" class="form-control" value="">
+                                        <input type="text" name="episneces_ace" value="<?php echo $episneces_ace ?>" class="form-control" value="">
                                     </div>
                                 </div>
                             </div>
@@ -1286,9 +1286,9 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 
                             <div class="col-sm-4">
                                 <div class="form-group row">
-                                    <label for="episneces_ace" class="col-form-label col-sm-3">EPIs disponibles:</label>
+                                    <label for="episdispon_ace" class="col-form-label col-sm-3">EPIs disponibles:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="episneces_ace" value="<?php echo $episneces_ace ?>" class="form-control" value="">
+                                        <input type="text" name="episdispon_ace" value="<?php echo $episdispon_ace ?>" class="form-control" value="">
                                     </div>
                                 </div>
                             </div>

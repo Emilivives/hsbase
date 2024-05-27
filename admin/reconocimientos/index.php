@@ -2,7 +2,7 @@
 include('../../app/config.php');
 include('../../admin/layout/parte1.php');
 include('../../app/controllers/reconocimientos/listado_reconocimientos.php');
-include('../../app/controllers/trabajadores/listado_trabajadores_alfabet.php');
+include('../../app/controllers/trabajadores/listado_trabajadores_activos.php');
 include('../../app/controllers/reconocimientos/listado_citasrm.php');
 include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php');
 ?>
@@ -296,9 +296,8 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
             <div class="card-body">
                 <table id="example1" class="table table-striped table-bordered table-hover">
                     <colgroup>
-                        <col width="5%">
                         <col width="20%">
-                        <col width="10%">
+                        <col width="15%">
                         <col width="10%">
                         <col width="10%">
                         <col width="10%">
@@ -308,7 +307,6 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                     </colgroup>
                     <thead>
                         <tr>
-                            <th style="text-align: center">Num.</th>
                             <th style="text-align: left">Nombre trab.</th>
                             <th style="text-align: left">Puesto</th>
                             <th style="text-align: center">Fecha RM.</th>
@@ -328,29 +326,36 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                         ?>
 
                             <tr>
-                                <td style="text-align: center"><?php echo $contador; ?></td>
                                 <td style="text-align: left"><?php echo $reconocimiento['nombre_tr']; ?></td>
-                                <td style="text-align: left"><?php echo $reconocimiento['nombre_cat']; ?></td>
+                                <td style="text-align: left"><?php echo $reconocimiento['nombre_cen']; ?></td>
                                 <td style="text-align: center"><?php echo $newdate1 = date("d-m-Y", strtotime($reconocimiento['fecha_rm'])); ?></td>
                                 <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) ?></td>
-                                <?php $newdate_future = strtotime('+15 day', strtotime($fechahora));
-                                                 
+                                <?php 
+                                $date_now = $fecha;
+                                $newdate_future = date('Y-m-d', strtotime($date_now.'+ 15 days'));
+                                echo $fecha;
+                                echo $newdate_future;
                                 ?>
 
                                 <td style="text-align: center;"><?php
-                                                                if ($reconocimiento['vigente_rm'] == 1 and $reconocimiento['caducidad_rm'] < $fechahora) { ?>
+                                                                if ($reconocimiento['vigente_rm'] == 1 and $reconocimiento['caducidad_rm'] < $fecha) { ?>
                                         <span class='badge badge-danger'>VIGENTE - CADUCADO</span>
 
                                     <?php
-                                                                } elseif ($reconocimiento['vigente_rm'] == 1 and date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) > $newdate_future) { ?>
+                                                                } elseif ($reconocimiento['vigente_rm'] == 1 and $reconocimiento['caducidad_rm'] > $fecha and $reconocimiento['caducidad_rm'] < $newdate_future ) { ?>
                                         <span class='badge badge-warning'>VIGENTE - A CITAR</span>
 
                                     <?php
 
-                                                                } elseif ($reconocimiento['vigente_rm'] == 1 and date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) < $newdate_future) { ?>
-                                        <span class='badge badge-success'>VIGENTE <?php date("d-m-Y", strtotime($reconocimiento['caducidad_rm'])) ?></span>
+                                    } elseif ($reconocimiento['vigente_rm'] == 1 and $reconocimiento['caducidad_rm'] > $fecha and $reconocimiento['caducidad_rm'] == $newdate_future ) { ?>
+                                        <span class='badge badge-warning'>VIGENTE - A CITAR</span>
+
                                     <?php
-                                                                } else { ?>
+
+                                                                } elseif ($reconocimiento['vigente_rm'] == 1 and $reconocimiento['caducidad_rm'] > $newdate_future) { ?>
+                                        <span class='badge badge-success'>VIGENTE</span>
+                                    <?php
+                                                                } elseif ($reconocimiento['vigente_rm'] == 0) { ?>
                                         <span class='badge badge-secondary'>HISTÓRICO</span>
                                     <?php
                                                                 }
@@ -385,7 +390,18 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                     <div class="modal-dialog modal-xl">
                                         <div class="modal-content">
                                             <div class="modal-header" style="background-color:gold">
-                                                <h5 class="modal-title" id="modal-modificacita" style="color: black;"><i class="bi bi-person-lines-fill"></i>Recon. Médico - <?php echo $reconocimientos_dato['nombre_tr'] ?> - Detalles</h5>
+                                                <h5 class="modal-title" id="modal-modificacita" style="color: black;"><i class="bi bi-person-lines-fill"></i>Recon. Médico - <?php echo $reconocimientos_dato['nombre_tr'] ?> - 
+                                                
+                                                <?php $reconocimientos_dato['activo_tr'];
+                                                                if ($reconocimientos_dato['activo_tr'] == 0) { ?>
+                                                                    <span class='badge badge-danger'><h4>BAJA</h4></span>
+                                                                <?php } 
+                                                                ?>
+                                            
+                                            
+                                            
+                                            
+                                            </h5>
                                                 <button type="button" class="close" style="color:black;" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -464,7 +480,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                                 </div>
                                                             </div>
 
-                                                            
+
 
                                                             <div class="col-md-3">
                                                                 <div class="form-check">
@@ -555,72 +571,74 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                         Nuevo Cita
                     </button>
                 </div>
-                        <!-- Modal Nueva cita -->
-        <div class="modal fade" id="modal-nuevacita">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color:#808000 ;color:white">
-                        <h5 class="modal-title" id="modal-nuevacita">Cita para Reconocimiento Medico</h5>
-                        <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="../../app/controllers/reconocimientos/create_citarm.php" method="post" enctype="multipart/form-data">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Trabajador</label>
-                                    <select name="trabajador_crm" id="" class="form-control">
-                                        <?php
-                                        foreach ($trabajadores as $trabajador) { ?>
-                                            <option value="<?php echo $trabajador['id_trabajador']; ?>"><?php echo $trabajador['nombre_tr'] ?> | <?php echo $trabajador['nombre_cat']  ?></option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
+                <!-- Modal Nueva cita -->
+                <div class="modal fade" id="modal-nuevacita">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#808000 ;color:white">
+                                <h5 class="modal-title" id="modal-nuevacita">Cita para Reconocimiento Medico</h5>
+                                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="">Fecha cita</label>
-                                        <input type="date" name="fecha_crm" class="form-control">
+                            <div class="modal-body">
+                                <form action="../../app/controllers/reconocimientos/create_citarm.php" method="post" enctype="multipart/form-data">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Trabajador</label>
+                                            <select name="trabajador_crm" id="" class="form-control">
+                                                <?php
+                                                foreach ($trabajadores as $trabajador) { ?>
+                                                    <option value="<?php echo $trabajador['id_trabajador']; ?>"><?php echo $trabajador['nombre_tr'] ?> | <?php echo $trabajador['nombre_cat']  ?></option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="">Fecha cita</label>
+                                                <input type="date" name="fecha_crm" class="form-control">
+                                            </div>
+                                        </div>
 
-                                <div class="row">
-                                    <div class="form-group">
-                                        <label for="">Anotaciones / restricciones</label>
-                                        <textarea class="form-control" name="anotaciones_crm" rows="3"></textarea>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label for="">Anotaciones / restricciones</label>
+                                                <textarea class="form-control" name="anotaciones_crm" rows="3"></textarea>
+                                            </div>
+                                        </div>
+
+
                                     </div>
-                                </div>
+                                    <div class="modal-footer">
 
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
 
+                                    </div>
+                                </form>
                             </div>
-                            <div class="modal-footer">
-
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
-
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!--fin modal nueva cita-->
+                <!--fin modal nueva cita-->
             </div>
             <div class="card-body">
                 <table id="example2" class="table table-striped table-bordered table-hover">
                     <colgroup>
-                        <col width="50%">
-                        <col width="25%">
+                        <col width="45%">
+                        <col width="20%">
+                        <col width="10%">
                         <col width="25%">
                     </colgroup>
                     <thead>
                         <tr>
                             <th style="text-align: left">Nombre trab.</th>
                             <th style="text-align: center">Fecha cita</th>
+                            <th style="text-align: center" title="Enviado mail a citar"><i class="bi bi-send-check-fill"></i></th>
                             <th style="text-align: center">Acciones</th>
                         </tr>
                     </thead>
@@ -635,6 +653,20 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                             <tr>
                                 <td style="text-align: left"><?php echo $citasrm_lista['nombre_tr']; ?></td>
                                 <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($citasrm_lista['fecha_crm'])) ?></td>
+               
+                                <td style="text-align: left;"><?php  if ($citasrm_lista['enviado_crm'] <> NULL) { ?>
+                                        <span class='badge badge-success' title="Enviado en: <?php echo $citasrm_lista['enviado_crm']?>">OK</span>
+
+                                    <?php
+                                                                } else { ?>
+                                        <span class='badge badge-warning'>NO</span>
+
+                                    <?php
+                                                                }
+                                    ?>
+
+
+                                </td>
                                 <td style="text-align: center">
                                     <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
                                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" title="Email Cita RM" data-target="#modal-emailcita<?php echo $citasrm_lista['id_citarm']; ?>"><i class="fa-regular fa-envelope"></i></i></button>
@@ -653,6 +685,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                                         <form action="../../app/controllers/reconocimientos/enviar_email.php" method="post" enctype="multipart/form-data">
 
                                                             <div class="row">
+                                                            <input type="text" id="id_citarm" name="id_citarm" value="<?php echo $citasrm_lista['id_citarm'] ?>" class="form-control" hidden>
 
                                                                 <div class="col-sm-8">
                                                                     <div class="form-group row">
@@ -902,14 +935,17 @@ include('../../admin/layout/mensaje.php');
     $(function() {
         $("#example1").DataTable({
             "pageLength": 10,
+            "order": [
+        [4, 'desc']
+      ],
             "language": {
                 "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",
-                "infoEmpty": "Mostrando 0 a 0 de 0 Usuarios",
-                "infoFiltered": "(Filtrado de MAX total Usuarios)",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ RM",
+                "infoEmpty": "Mostrando 0 a 0 de 0 RM",
+                "infoFiltered": "(Filtrado de MAX total)",
                 "infoPostFix": "",
                 "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Usuarios",
+                "lengthMenu": "Mostrar _MENU_ RM",
                 "loadingRecords": "Cargando...",
                 "processing": "Procesando...",
                 "search": "Buscador:",

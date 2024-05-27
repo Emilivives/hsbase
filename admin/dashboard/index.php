@@ -347,7 +347,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
             
 
                         <td><?php echo $trabajador['nombre_tr']; ?></td>
-                        <td><?php echo $trabajador['nombre_emp']; ?></td>
+                        <td><?php echo $trabajador['nombre_emp']; ?> - <?php echo $trabajador['nombre_cen']; ?></td>
 
                         <td style="text-align: left"><?php echo $newdate1 = date("d-m-Y", strtotime($trabajador['inicio_tr'])); ?></td>
 

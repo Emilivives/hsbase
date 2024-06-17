@@ -935,9 +935,7 @@ include('../../admin/layout/mensaje.php');
     $(function() {
         $("#example1").DataTable({
             "pageLength": 10,
-            "order": [
-        [4, 'desc']
-      ],
+            "order": [[4, 'desc'], [3, "asc"]],
             "language": {
                 "emptyTable": "No hay información",
                 "info": "Mostrando _START_ a _END_ de _TOTAL_ RM",

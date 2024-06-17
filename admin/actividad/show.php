@@ -10,31 +10,38 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 include('../../app/controllers/actividad/listado_accionprl.php');
 
 ?>
-<head>
-<style>
-    .dropdown-font-size {
-        font-size: 12px;
-    }
 
-    .vencido {
-        background-color: red;
-        color: white;
-    }
-    .badge-wh-1 {
-    display: inline-block;
-    min-width: 1px;
-    padding: 1px 1px;
-    font-size: 13px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #f58da3;
-    line-height: 6;
-    vertical-align: bottom;
-    white-space: nowrap;
-    text-align: center;
-    border-radius: 5px;
-}
-</style>
+<head>
+    <style>
+        .dropdown-font-size {
+            font-size: 12px;
+        }
+
+        .vencido {
+            background-color: red;
+            color: white;
+        }
+
+        .badge-wh-1 {
+            display: inline-block;
+            min-width: 1px;
+            padding: 1px 1px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #f58da3;
+            line-height: 6;
+            vertical-align: bottom;
+            white-space: nowrap;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            border-top: 3px solid #ff0000;
+            /* Puedes ajustar el color y el estilo del borde */
+        }
+    </style>
 </head>
 
 <html>
@@ -424,13 +431,14 @@ include('../../app/controllers/actividad/listado_accionprl.php');
             <div class="card-body">
                 <table id="example1" class="table tabe-hover table-condensed">
                     <colgroup>
+
+                        <col width="25%">
+                        <col width="3%">
+                        <col width="15%">
                         <col width="5%">
+                        <col width="15%">
+                        <col width="10%">
                         <col width="7%">
-                        <col width="23%">
-                        <col width="13%">
-                        <col width="5%">
-                        <col width="12%">
-                        <col width="9%">
                         <col width="7%">
                         <col width="7%">
                         <col width="7%">
@@ -439,16 +447,18 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                     </colgroup>
                     <thead class="table-secondary">
                         <tr>
-                            <th style="text-align: center">#</th>
-                            <th style="text-align: left">Estado</th>
+
+
                             <th style="text-align: left">Tarea</th>
+                            <th style="text-align: left"></th>
                             <th style="text-align: left">Centro</th>
                             <th style="text-align: left">Prioridad</th>
                             <th style="text-align: left">Responsable</th>
                             <th style="text-align: left">Categoria</th>
                             <th style="text-align: left">Mes</th>
-                            <th style="text-align: left">Fecha Venci.</th>
-                            <th style="text-align: left">Fecha realiz.</th>
+                            <th style="text-align: center">Fecha Venci.</th>
+                            <th style="text-align: center">Fecha realiz.</th>
+                            <th style="text-align: center">Estado</th>
 
                             <th style="text-align: center"></th>
                         </tr>
@@ -458,91 +468,34 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                         <?php
                         $contador = 0;
                         $hoy = date('Y-m-d'); // Obtener la fecha actual
+                        $mes_anterior = '';
 
                         foreach ($tareas_proyectos as $tarea_proyecto) {
                             $contador++;
                             $id_tarea = $tarea_proyecto['id_tarea'];
-                            $fecha_vencimiento = $tarea_proyecto['fecha_ta'];
-                            $fecha_vencida = strtotime($fecha_vencimiento) < strtotime($hoy) ? 'vencido' : '';
-                        ?>
+                            setlocale(LC_TIME, 'es_ES');
+                            $fecha = new DateTime($tarea_proyecto['fecha_ta']);
+                            $mes_actual = $fecha->format('F');
 
-                            <tr class="<?php echo $fecha_vencida; ?>">
-                                <td style="text-align: center"><b><?php echo $contador; ?></b></td>
-                                <td style="text-align: left">
-                                    <?php
-                                    if ($tarea_proyecto['estado_ta'] == 'En curso') { ?>
-                                        <span class='badge badge-info'>En Curso</span>
-                                    <?php
-                                    } else if ($tarea_proyecto['estado_ta'] == 'Completado') { ?>
-                                        <span class='badge badge-success'>Completado</span>
-                                    <?php
-                                    } else if ($tarea_proyecto['estado_ta'] == 'Parcialmente hecho') { ?>
-                                        <span class='badge badge-warning'>Parcialmente hecho</span>
-                                    <?php
-                                    } else if ($tarea_proyecto['estado_ta'] == 'Pospuesto') { ?>
-                                        <span class='badge badge-secondary'>Pospuesto</span>
-                                    <?php
-                                    } else if ($tarea_proyecto['estado_ta'] == 'Cancelado') { ?>
-                                        <span class='badge badge-danger'>Cancelado</span>
-                                    <?php
-                                    }
-                                    ?>
-                                </td>
+                            // Comprobar si el mes ha cambiado
+                            $highlight_class = ($mes_actual != $mes_anterior) ? 'highlight' : '';
+                            $mes_anterior = $mes_actual;
+                        ?>
+                            <tr class="<?php echo $highlight_class; ?>">
                                 <td style="text-align: left"><b><?php echo $tarea_proyecto['nombre_ta']; ?></b></td>
-                                <td style="text-align: left"><?php echo $tarea_proyecto['nombre_cen']; ?></td>
                                 <td style="text-align: left">
-                                    <?php
-                                    if ($tarea_proyecto['prioridad_ta'] == 'Alta') { ?>
-                                        <span class='badge badge-warning'>ALTA</span>
-                                    <?php
-                                    } else if ($tarea_proyecto['prioridad_ta'] == 'Media') { ?>
-                                        <span class='badge badge-primary'>MEDIA</span>
-                                    <?php
-                                    } else { ?>
-                                        <span class='badge badge-secondary'>BAJA</span>
-                                    <?php
-                                    }
-                                    ?>
+                                    <a href="showtareas.php?id_tarea=<?php echo $id_tarea; ?>&id_proyecto=<?php echo $tarea_proyecto['id_proyecto']; ?>" style="text-align: right;" class="btn btn-outline-link btn-sm" title="Ver detalles"><i class="fa-solid fa-up-right-from-square"></i></a>
                                 </td>
+                                <td style="text-align: left"><?php echo $tarea_proyecto['nombre_cen']; ?></td>
+                                <td style="text-align: left"><?php echo ($tarea_proyecto['prioridad_ta'] == 'Alta') ? "<span class='badge badge-warning'>ALTA</span>" : (($tarea_proyecto['prioridad_ta'] == 'Media') ? "<span class='badge badge-primary'>MEDIA</span>" : "<span class='badge badge-secondary'>BAJA</span>"); ?></td>
                                 <td style="text-align: left"><?php echo $tarea_proyecto['nombre_resp']; ?></td>
                                 <td style="text-align: left"><?php echo $tarea_proyecto['categoria_ta']; ?></td>
-                                <td style="text-align: left">
-                                    <?php
-                                    $meses = array(
-                                        1 => "Enero",
-                                        2 => "Febrero",
-                                        3 => "Marzo",
-                                        4 => "Abril",
-                                        5 => "Mayo",
-                                        6 => "Junio",
-                                        7 => "Julio",
-                                        8 => "Agosto",
-                                        9 => "Septiembre",
-                                        10 => "Octubre",
-                                        11 => "Noviembre",
-                                        12 => "Diciembre"
-                                    );
-                                    $fecha = $tarea_proyecto['fecha_ta'];
-                                    list($anio, $mes, $dia) = explode("-", $fecha);
-                                    $mesNombre = $meses[intval($mes)];
-                                    echo $mesNombre;
-                                    ?>
-                                </td>
-                               
-                                <td style="text-align: center;"><?php
-                                                                if ($tarea_proyecto['estado_ta'] != 'Completado' and $tarea_proyecto['fecha_ta'] < $hoy ) { ?>
-                                        <span class='badge-wh-1'><h6><?php echo date("d-m-Y", strtotime($tarea_proyecto['fecha_ta'])); ?></h6></span>
+                                <td style="text-align: left"><?php echo $mes_actual; ?></td>
+                                <td style="text-align: center;"><?php echo ($tarea_proyecto['fecha_ta'] < $hoy && $tarea_proyecto['estado_ta'] != 'Completado') ? "<span class='badge-wh-1'><h6>" . date("d-m-Y", strtotime($tarea_proyecto['fecha_ta'])) . "</h6></span>" : date("d-m-Y", strtotime($tarea_proyecto['fecha_ta'])); ?></td>
+                                <td style="text-align: center"><?php echo date("d-m-Y", strtotime($tarea_proyecto['fechareal_ta'])); ?></td>
+                                <td style="text-align: center"><?php echo ($tarea_proyecto['estado_ta'] == 'En curso') ? "<span class='badge badge-info'><h6>En Curso</h6></span>" : (($tarea_proyecto['estado_ta'] == 'Completado') ? "<span class='badge badge-success'><h6>Completado</h6></span>" : (($tarea_proyecto['estado_ta'] == 'Parcialmente hecho') ? "<span class='badge badge-warning'><h6>Parcialmente hecho</h6></span>" : (($tarea_proyecto['estado_ta'] == 'Pospuesto') ? "<span class='badge badge-secondary'><h6>Pospuesto</h6></span>" : "<span class='badge badge-danger'><h6>Cancelado</h6></span>"))); ?></td>
 
-                                    <?php
-                                  } else { echo date("d-m-Y", strtotime($tarea_proyecto['fecha_ta']));                         }
-                                    ?>
-
-
-                                </td>
-                                
-                                
-                                
-                                <td style="text-align: left" <?php echo date("d-m-Y", strtotime($tarea_proyecto['fechareal_ta'])); ?></td>
+                           
                                 <dl>
 
                                     <td style="text-align: center">
@@ -761,28 +714,14 @@ include('../../admin/layout/parte2.php');
 include('../../admin/layout/mensaje.php');
 ?>
 
-<!--<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>-->
-
 <script>
     $(function() {
         $("#example1").DataTable({
             "pageLength": 15,
+            "order": [
+                [9, 'desc'],
+                [7, "asc"]
+            ],
             "language": {
                 "emptyTable": "No hay información",
                 "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",

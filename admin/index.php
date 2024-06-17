@@ -282,7 +282,7 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
     }
   }
   ?>
-    <?php
+  <?php
   $contador_de_accidentesinitinereconbaja = 0;
   foreach ($accidentes_datos as $accidentes_dato) {
     if (($accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere con baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
@@ -317,21 +317,39 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
     }
   }
   ?>
-    <?php
+  <?php
   $contador_de_accidentesinitinereconbaja = 0;
   foreach ($accidentes_datos as $accidentes_dato) {
     if (($accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere con baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
-      $contador_de_accidentesinitineresconbaja = $contador_de_accidentesinitinereconbaja + 1;
+      $contador_de_accidentesinitinereconbaja = $contador_de_accidentesinitinereconbaja + 1;
     }
   }
   ?>
 
- <!-- CALCULOS siniestralidad -->
- <?php
-  $total_accidentesconbaja = $contador_de_accidentesconbaja + $contador_de_accidentesinitinereconbaja;
-  $total_accidentes= $contador_de_accidentesconbaja + $contador_de_accidentessinbaja + $contador_de_accidentesinitineresinbaja + $contador_de_accidentesinitinereconbaja;
+  <!-- CALCULOS siniestralidad -->
+
+  <?php
+  $total_accidentes = $contador_de_accidentessinbaja + $contador_de_accidentesconbaja + $contador_de_accidentesinitineresinbaja + $contador_de_accidentesinitinereconbaja;
+
+
   ?>
-  
+
+  <?php
+  $fechahoraentera = strtotime($fechahora);
+  $anio = date("Y", $fechahoraentera);
+  $contador_de_accidentes = 0;
+  foreach ($accidentes_datos as $accidentes_dato) {
+    if ((date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+      $contador_de_accidentes = $contador_de_accidentes + 1;
+    }
+  }
+  ?>
+
+  <?php
+  $total_accidentesconbaja = $contador_de_accidentesconbaja + $contador_de_accidentesinitinereconbaja;
+  $total_accidentes = $contador_de_accidentesconbaja + $contador_de_accidentessinbaja + $contador_de_accidentesinitineresinbaja + $contador_de_accidentesinitinereconbaja;
+  ?>
+
 
 
   <!--CALCULOS ACCIDENTES POR MES-->
@@ -361,40 +379,39 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
 
 
 
- <!-- CALCULOS accidentes por mes de año vigente -->
+  <!-- CALCULOS accidentes por mes de año vigente -->
 
 
- <?php $fechahoraentera = strtotime($fechahora);
-     $fechahoraentera = strtotime($fechahora);
-   $anio = date("Y", $fechahoraentera);
-   $contador_de_accidentessinbaja = 0;
-   foreach ($accidentes_datos as $accidentes_dato) {
-       if (($accidentes_dato['tipoaccidente_ta'] == "Accidente sin baja" or $accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere sin baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
-           $contador_de_accidentessinbaja = $contador_de_accidentessinbaja + 1;
-       }
-   }
-   echo $contador_de_accidentessinbaja
+  <?php $fechahoraentera = strtotime($fechahora);
+  $fechahoraentera = strtotime($fechahora);
+  $anio = date("Y", $fechahoraentera);
+  $contador_de_accidentessinbaja = 0;
+  foreach ($accidentes_datos as $accidentes_dato) {
+    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente sin baja" or $accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere sin baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+      $contador_de_accidentessinbaja = $contador_de_accidentessinbaja + 1;
+    }
+  }
+  echo $contador_de_accidentessinbaja
   //$siniestralidad = ($contador_accidentes * 100) / $contador_de_formaciones;
- // $porcentage_contador_accidentes = round($siniestralidad, 2); ?>
+  // $porcentage_contador_accidentes = round($siniestralidad, 2); 
+  ?>
 
 
-<?php $fechahoraentera = strtotime($fechahora);
-     $fechahoraentera = strtotime($fechahora);
-   $anio = date("Y", $fechahoraentera);
-   $contador_de_accidentesconbaja = 0;
-   foreach ($accidentes_datos as $accidentes_dato) {
-       if (($accidentes_dato['tipoaccidente_ta'] == "Accidente con baja" or $accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere con baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
-           $contador_de_accidentesconbaja = $contador_de_accidentesconbaja + 1;
-       }
-   }
-   echo $contador_de_accidentesconbaja
+  <?php $fechahoraentera = strtotime($fechahora);
+  $fechahoraentera = strtotime($fechahora);
+  $anio = date("Y", $fechahoraentera);
+  $contador_de_accidentesconbaja = 0;
+  foreach ($accidentes_datos as $accidentes_dato) {
+    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente con baja" or $accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere con baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+      $contador_de_accidentesconbaja = $contador_de_accidentesconbaja + 1;
+    }
+  }
+$contador_de_accidentesconbaja
   //$siniestralidad = ($contador_accidentes * 100) / $contador_de_formaciones;
- // $porcentage_contador_accidentes = round($siniestralidad, 2); ?>
+  // $porcentage_contador_accidentes = round($siniestralidad, 2); 
+  ?>
 
-<?php 
-$total_accidentes = $contador_de_accidentessinbaja + $contador_de_accidentesconbaja;
-echo $total_accidentes
-?>
+
   <?php
   $fechahoraentera = strtotime($fechahora);
   $anio = date("Y", $fechahoraentera);
@@ -512,7 +529,7 @@ echo $total_accidentes
       <!-- small box -->
       <div class="small-box bg-warning shadow-sm border">
         <div class="inner">
-                 <h2><?php echo $total_accidentes; ?><sup style="font-size: 20px"></h2>
+          <h2><?php echo $contador_de_accidentes; ?><sup style="font-size: 20px"></h2>
           <p>Accidentes en <?php echo  $anio ?></p>
         </div>
         <div class="icon">
@@ -527,11 +544,11 @@ echo $total_accidentes
       <!-- small box -->
       <div class="small-box bg-warning shadow-sm border">
         <div class="inner">
-                 <h2><?php echo $total_accidentesconbaja; ?><sup style="font-size: 20px"></h2>
+          <h2><?php echo $total_accidentesconbaja; ?><sup style="font-size: 20px"></h2>
           <p>Con baja en <?php echo  $anio ?></p>
         </div>
         <div class="icon">
-        <i class="fa-solid fa-user-injured"></i>
+          <i class="fa-solid fa-user-injured"></i>
         </div>
 
 
@@ -793,7 +810,7 @@ echo $total_accidentes
 
         </div>
 
-        
+
         <!-- /.card-body-->
       </div>
 
@@ -1100,55 +1117,55 @@ include('../admin/layout/parte2.php'); ?>
 
 
 <script>
-    /*
-     *  CHART
-     * -----------
-     */
+  /*
+   *  CHART
+   * -----------
+   */
 
-    const labels2 = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  const labels2 = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-    const graphi2 = document.getElementById('graficaaccidentes').getContext('2d');
+  const graphi2 = document.getElementById('graficaaccidentes').getContext('2d');
 
-    const data2 = {
-      labels: labels2,
-      datasets: [{
-        label: "Num. accidentes por mes",
-        data: [
-          <?php echo $contador_de_accidentes_en; ?>,
-          <?php echo $contador_de_accidentes_fe; ?>,
-          <?php echo $contador_de_accidentes_mr; ?>,
-          <?php echo $contador_de_accidentes_ab; ?>,
-          <?php echo $contador_de_accidentes_my; ?>,
-          <?php echo $contador_de_accidentes_jn; ?>,
-          <?php echo $contador_de_accidentes_jl; ?>,
-          <?php echo $contador_de_accidentes_ag; ?>,
-          <?php echo $contador_de_accidentes_st; ?>,
-          <?php echo $contador_de_accidentes_oc; ?>,
-          <?php echo $contador_de_accidentes_no; ?>,
-          <?php echo $contador_de_accidentes_di; ?>
-        ],
-        backgroundColor: 'rgba(9, 129, 176, 0.2)',
-        borderColor: 'rgba(9, 129, 176, 1)',
-        borderWidth: 1
-      }]
-    };
+  const data2 = {
+    labels: labels2,
+    datasets: [{
+      label: "Num. accidentes por mes",
+      data: [
+        <?php echo $contador_de_accidentes_en; ?>,
+        <?php echo $contador_de_accidentes_fe; ?>,
+        <?php echo $contador_de_accidentes_mr; ?>,
+        <?php echo $contador_de_accidentes_ab; ?>,
+        <?php echo $contador_de_accidentes_my; ?>,
+        <?php echo $contador_de_accidentes_jn; ?>,
+        <?php echo $contador_de_accidentes_jl; ?>,
+        <?php echo $contador_de_accidentes_ag; ?>,
+        <?php echo $contador_de_accidentes_st; ?>,
+        <?php echo $contador_de_accidentes_oc; ?>,
+        <?php echo $contador_de_accidentes_no; ?>,
+        <?php echo $contador_de_accidentes_di; ?>
+      ],
+      backgroundColor: 'rgba(9, 129, 176, 0.2)',
+      borderColor: 'rgba(9, 129, 176, 1)',
+      borderWidth: 1
+    }]
+  };
 
-    const config2 = {
-      type: 'bar',
-      data: data2,
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+  const config2 = {
+    type: 'bar',
+    data: data2,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
         }
       }
-    };
+    }
+  };
 
-    new Chart(graphi2, config2);
-  </script>
+  new Chart(graphi2, config2);
+</script>
 
-  <script>
+<script>
   /* DONUT CHART*/
 
   const graph = document.querySelector("#doughnutchart");

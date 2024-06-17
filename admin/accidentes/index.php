@@ -121,18 +121,81 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
                 $fechahoraentera = strtotime($fechahora);
                 $anio = date("Y", $fechahoraentera);
                 $contador_de_accidentessinbaja = 0;
+                $contador_jornadas_perdidas = 0;
                 foreach ($accidentes_datos as $accidentes_dato) {
-                    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente sin baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
-                        $contador_de_accidentessinbaja = $contador_de_accidentessinbaja + 1;
+                    if ((date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+                        $contador_jornadas_perdidas += $accidentes_dato['diasbaja_ace'];
                     }
                 }
                 ?>
 
-                <h2><?php echo $contador_de_accidentessinbaja; ?><sup style="font-size: 20px"></h2>
+                <h2><?php echo $contador_jornadas_perdidas; ?><sup style="font-size: 20px"></h2>
                 <p>Jornadas de trabajo perdidas <?php echo  $anio ?></p>
             </div>
             <div class="icon">
                 <i class="fa-solid fa-person-chalkboard"></i>
+            </div>
+
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-1 col-6">
+        <!-- small box -->
+        <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+                <?php
+                include('../../app/controllers/maestros/estadisticas/datos_estadisticas_anio.php');
+
+                $indiciceincidenciaactual = (($contador_de_accidentesconbaja*100000)/$mediatr_est);
+                
+                ?>
+
+                <h2><?php echo round($indiciceincidenciaactual, 2); ?><sup style="font-size: 20px"></h2>
+                <p>Indice incidencia /<?php echo  $anio ?></p>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-hospital-user"></i>
+            </div>
+
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-1 col-6">
+        <!-- small box -->
+        <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+                <?php
+                include('../../app/controllers/maestros/estadisticas/datos_estadisticas_anio.php');
+
+                $indicefrecuenciaaactual = ($contador_de_accidentesconbaja/($mediatr_est*1826))*1000000;
+                
+                ?>
+
+                <h2><?php echo round($indicefrecuenciaaactual, 2); ?><sup style="font-size: 20px"></h2>
+                <p>Indice Frecuencia /<?php echo  $anio ?></p>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-hospital-user"></i>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-1 col-6">
+        <!-- small box -->
+        <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+                <?php
+                include('../../app/controllers/maestros/estadisticas/datos_estadisticas_anio.php');
+
+                $indicegravedadactual = ($contador_jornadas_perdidas/($mediatr_est*1826))*1000;
+                
+                ?>
+
+                <h2><?php echo round($indicegravedadactual, 2); ?><sup style="font-size: 20px"></h2>
+                <p>Indice Gravedad /<?php echo  $anio ?></p>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-hospital-user"></i>
             </div>
 
         </div>

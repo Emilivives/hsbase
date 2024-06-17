@@ -61,6 +61,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- chart js -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/js/echarts.min.js">
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <!-- select2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+
 
 
 

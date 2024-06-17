@@ -5,6 +5,9 @@ include('../../app/controllers/formaciones/listado_formaciones.php');
 include('../../app/controllers/maestros/responsables/listado_responsables.php');
 include('../../app/controllers/pruebas/listado_trabajadores.php');
 include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones.php');
+include('../../app/controllers/maestros/centros/listado_centros.php');
+include('../../app/controllers/maestros/empresas/listado_empresas.php');
+include('../../app/controllers/maestros/categorias/listado_categorias.php');
 ?>
 <html>
 <!-- Font Awesome -->
@@ -35,6 +38,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 <!-- /.content- -->
 <div class="content">
 
+   
     <div class="row">
         <div class="col-md-7">
 
@@ -304,42 +308,41 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                 <div id="respuesta_registro_formacion"></div>
                                 <script>
                                     $('#btn_guardar_formacion').click(function() {
-                                            var nroformacion = '<?php echo $contador_formaciones ?>';
-                                            var tipo_fr = $('#tipo_fr').val();
-                                            var fecha_fr = $('#fecha_fr').val();
-                                            var fechacad_fr = $('#fechacad_fr').val();
-                                            var formador_fr = $('#formador_fr').val();
+                                        var nroformacion = '<?php echo $contador_formaciones ?>';
+                                        var tipo_fr = $('#tipo_fr').val();
+                                        var fecha_fr = $('#fecha_fr').val();
+                                        var fechacad_fr = $('#fechacad_fr').val();
+                                        var formador_fr = $('#formador_fr').val();
 
 
-                                            if (fecha_fr == "") {
-                                                alert("debe indicar la fecha de formacion");
+                                        if (fecha_fr == "") {
+                                            alert("debe indicar la fecha de formacion");
 
-                                            } else if (nroformacion == "") {
-                                                alert("debe indicar el numero de formacion");
+                                        } else if (nroformacion == "") {
+                                            alert("debe indicar el numero de formacion");
 
-                                            } else{
-                                                var url = "../../app/controllers/formaciones/registrar_formacion.php";
-                                                $.get(url, {
-                                                    nroformacion: nroformacion,
-                                                    tipo_fr: tipo_fr,
-                                                    fecha_fr: fecha_fr,
-                                                    fechacad_fr: fechacad_fr,
-                                                    formador_fr: formador_fr
-                                                }, function(datos) {
-                                                    $('#respuesta_registro_formacion').html(datos);
-                                                })
+                                        } else {
+                                            var url = "../../app/controllers/formaciones/registrar_formacion.php";
+                                            $.get(url, {
+                                                nroformacion: nroformacion,
+                                                tipo_fr: tipo_fr,
+                                                fecha_fr: fecha_fr,
+                                                fechacad_fr: fechacad_fr,
+                                                formador_fr: formador_fr
+                                            }, function(datos) {
+                                                $('#respuesta_registro_formacion').html(datos);
+                                            })
                                             /*} else($tipo_fr == 1) {
                                                 <?php
-                                                $sentencia2 = $pdo -> prepare("UPDATE trabajadores as tr SET tr.formacionpdt_tr = $fecha_tr 
+                                                $sentencia2 = $pdo->prepare("UPDATE trabajadores as tr SET tr.formacionpdt_tr = $fecha_tr 
                                                 INNER JOIN form_asistencia as fas ON tr.id_trabajador = fas.idtrabajador_fas
                                                 INNER JOIN formacion as fr ON fas.nroformacion = fr.nroformacion WHERE tr.id_trabajador = fas.idtrabajador_fas");
-                                                $sentencia2 -> bindParam('formacionpdt_tr', $fecha_fr);
+                                                $sentencia2->bindParam('formacionpdt_tr', $fecha_fr);
                                                 ?>
                                             }*/
 
                                         }
-                                    }
-                                    );
+                                    });
                                 </script>
 
                             </div>
@@ -352,6 +355,188 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 
             </div>
         </div>
+        <div class="col-md-1">
+        <div class="btn-text-center">
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador" title="Añadir nuevo trabajador"><i class="bi bi-person-plus-fill"></i>AÑADIR NUEVO TRABAJADOR</button>
+        </div>
+    </div>
+
+    <!-- inicio modal nuevo trabajador-->
+    <div class="modal fade" id="modal-nuevotrabajador">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#ffd900 ;color:black">
+                    <h5 class="modal-title" id="modal-nuevotrabajador">Nuevo Trabajador</h5>
+                    <button type="button" class="close" style="color: black;" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="../../app/controllers/trabajadores/create.php" method="post" enctype="multipart/form-data">
+
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Codigo</label>
+                                    <input type="text" name="codigo_tr" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">DNI/NIE</label>
+                                    <input type="text" name="dni_tr" class="form-control" required>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">APELLIDOS, NOMBRE</label>
+                                    <input type="text" name="nombre_tr" class="form-control" required>
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+                                <br>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sexo_tr" id="flexRadioDefault1" value="Hombre" checked>
+                                    <label class="form-check-label" for="flexRadioDefault3">
+                                        <b>Hombre</b>
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sexo_tr" id="flexRadioDefault2" value="Mujer">
+                                    <label class="form-check-label" for="flexRadioDefault4">
+                                        <b>Mujer</b>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Fecha Nacimiento</label>
+                                    <input type="date" name="fechanac_tr" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Fecha Inicio</label>
+                                    <input type="date" name="inicio_tr" class="form-control" required>
+                                </div>
+
+                            </div>
+                            <!--
+                                <div class="col-md-2">
+                                    <label for="">Sexo</label>
+                                    <select class="form-select form-select-sm" name="sexo_tr" aria-label=".form-select-sm example">
+                                        <option>Seleccione</option>
+                                        <option value="Hombre">Hombre</option>
+                                        <option value="Mujer">Mujer</option>
+                                    </select>
+
+                                </div>-->
+                            <div class="col-md-1">
+                            </div>
+
+
+
+                            <div class="col-md-3">
+                                <br>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="formacionpdt_tr" id="flexRadioDefault3" value="No" checked>
+                                    <label class="form-check-label" for="flexRadioDefault3">
+                                        <b>NO FORMADO PRL</b>
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="formacionpdt_tr" id="flexRadioDefault4" value="Si">
+                                    <label class="form-check-label" for="flexRadioDefault4">
+                                        <b>FORMADO PRL</b>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <br>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="informacion_tr" id="flexRadioDefault3" value="No" checked>
+                                    <label class="form-check-label" for="flexRadioDefault5">
+                                        <b>NO INFORMADO PRL</b>
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="informacion_tr" id="flexRadioDefault4" value="Si">
+                                    <label class="form-check-label" for="flexRadioDefault6">
+                                        <b>INFORMADO PRL</b>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="">Centro Trabajo</label>
+                                    <select name="centro_tr" id="" class="form-control">
+                                        <?php
+                                        foreach ($centros_datos as $centros_dato) { ?>
+                                            <option value="<?php echo $centros_dato['id_centro']; ?>"><?php echo $centros_dato['nombre_cen']; ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="">Categoria</label>
+                                    <select name="categoria_tr" id="" class="form-control">
+                                        <option value="0">--Seleccione categoria--</option>
+                                        <?php
+                                        foreach ($categorias_datos as $categorias_dato) { ?>
+                                            <option value="<?php echo $categorias_dato['id_categoria']; ?>"><?php echo $categorias_dato['nombre_cat']; ?> </option>
+                                            </option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="">ANOTACIONES</label>
+                                    <input type="text" name="anotaciones_tr" class="form-control">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--fin modal-->
     </div>
 
 </div>

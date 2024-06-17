@@ -45,6 +45,29 @@ $pdf->SetFont('Arial', '', '9');
 $pdf->SetXY(51, 37);
 $pdf->Write(10, $nombre_tr);
 
+
+
+$pdf->SetFont('Arial', '', '8'); 
+$pdf->SetXY(10, 65);
+$pdf->Write(10, $razonsocial_tr);
+
+$pdf->Image($img2,10,10,30,0,"JPG");
+
+
+$pdf->SetFont('Arial', 'B', '6'); 
+$pdf->SetXY(50, 277);
+$pdf->SetTextColor(255,255,255);
+$pdf->Write(10, $empresa_tr);
+
+$pdf->SetFont('Arial', 'B', '6'); 
+$pdf->SetXY(70, 277);
+$pdf->SetTextColor(255,255,255);
+$pdf->Write(10, $razonsocial_tr);
+
+$pdf->SetFont('Arial', 'B', '6'); 
+$pdf->SetXY(65, 279);
+$pdf->SetTextColor(255,255,255);
+$pdf->Write(10, $direccionemp_tr);
 // setFont ('B' - NEGRITA 
 //setFont ('I' - ITALICA 
 //setFont ('S' - SUBRAYA 

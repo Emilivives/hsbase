@@ -23,6 +23,10 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+   <!-- select2 -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
 <div class="content-header">
     <div class="container-fluid">
@@ -119,7 +123,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                     <div class="form-group row">
                         <label for="nombre" class="col-form-label col-sm-2">Nombre:</label>
                         <div class="col-sm-8">
-                            <select name="trabajador_ace" id="trabajador_ace" class="form-control" onchange="selectIdtr(event)">
+                            <select name="trabajador_ace" id="trabajador_ace" style="width: 120%" class="trabajador_ace" onchange="selectIdtr(event)">
                                 <option value="0">--Seleccione trabajador--</option>
                                 <?php
                                 foreach ($trabajadores as $trabajador) { ?>
@@ -643,7 +647,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                             <div class="form-group row">
                                 <label for="tipolugar_ace" class="col-form-label col-sm-2">Tipo lugar:</label>
                                 <div class="col-sm-9">
-                                    <select name="tipolugar_ace" id="tipolugar_ace" class="form-control">
+                                    <select name="tipolugar_ace" id="tipolugar_ace" style="width: 100%" class="tipolugar_ace">
                                         <option value="0">--Seleccione tipo--</option>
                                         <?php
                                         foreach ($ace_tipolugar_datos as $ace_tipolugar_dato) { ?>
@@ -659,7 +663,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                             <div class="form-group row">
                                 <label for="nombre" class="col-form-label col-sm-4">Zona donde se produjo:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="zonalugar_ace" class="form-control" tabindex="1">
+                                    <input type="text" name="zonalugar_ace" name="zonalugar_ace" class="form-control" tabindex="1">
                                 </div>
                             </div>
                         </div>
@@ -678,7 +682,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                             <div class="form-group row">
                                 <label for="procesotrabajo_ace" class="col-form-label col-sm-2">Proceso trabajo:</label>
                                 <div class="col-sm-9">
-                                    <select name="procesotrabajo_ace" id="tipolugar_ace" class="form-control">
+                                    <select class="procesotrabajo_ace" style="width: 100%" name="procesotrabajo_ace" id="procesotrabajo_ace">
                                         <option value="0">--Seleccione proceso--</option>
                                         <?php
                                         foreach ($ace_procesotrabajo_datos as $ace_procesotrabajo_dato) { ?>
@@ -707,7 +711,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                             <div class="form-group row">
                                 <label for="tipoactividad_ace" class="col-form-label col-sm-2">Tipo actividad:</label>
                                 <div class="col-sm-9">
-                                    <select name="tipoactividad_ace" id="tipolugar_ace" class="form-control">
+                                    <select name="tipoactividad_ace" id="tipoactividad_ace" class="tipoactividad_ace" style="width: 100%">
                                         <option value="0">--Seleccione la actividad que estaba realizando el trabajador--</option>
                                         <?php
                                         foreach ($ace_actividadfisica_datos as $ace_actividadfisica_dato) { ?>
@@ -736,7 +740,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                             <div class="form-group row">
                                 <label for="agentematerial_ace" class="col-form-label col-sm-2">Agente material a la actividad:</label>
                                 <div class="col-sm-9">
-                                    <select name="agentematerial_ace" id="tipolugar_ace" class="form-control">
+                                    <select name="agentematerial_ace" id="agentematerial_ace" class="agentematerial_ace" style="width: 100%">
                                         <option value="0">--Seleccione el agente material asociado a la actividad--</option>
                                         <?php
                                         foreach ($ace_agentematerial_datos as $ace_agentematerial_dato) { ?>
@@ -765,7 +769,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                             <div class="form-group row">
                                 <label for="desviacion_ace" class="col-form-label col-sm-2">Desviacion producida:</label>
                                 <div class="col-sm-9">
-                                    <select name="desviacion_ace" id="desviacion_ace" class="form-control">
+                                    <select name="desviacion_ace" id="desviacion_ace" class="desviacion_ace" style="width: 100%">
                                         <option value="0">--Seleccione la desviacion que se ha producido--</option>
                                         <?php
                                         foreach ($ace_desviacion_datos as $ace_desviacion_dato) { ?>
@@ -794,7 +798,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                             <div class="form-group row">
                                 <label for="agmaterdesv_ace" class="col-form-label col-sm-2">Agente material desviacion:</label>
                                 <div class="col-sm-9">
-                                    <select name="agmaterdesv_ace" class="form-control">
+                                    <select name="agmaterdesv_ace" class="agmaterdesv_ace" id="agmaterdesv_ace" style="width: 100%">
                                         <option value="0">--Seleccione el agente material asociado a la actividad--</option>
                                         <?php
                                         foreach ($ace_agentematerialdesv_datos as $ace_agentematerialdesv_dato) { ?>
@@ -823,7 +827,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                             <div class="form-group row">
                                 <label for="formacontacto_ace" class="col-form-label col-sm-2">Formad de contacto:</label>
                                 <div class="col-sm-9">
-                                    <select name="formacontacto_ace" class="form-control">
+                                    <select name="formacontacto_ace" class="formacontacto_ace" id="formacontacto_ace" style="width: 100%">
                                         <option value="0">--Seleccione la forma de contacto--</option>
                                         <?php
                                         foreach ($ace_formacontacto_datos as $ace_formacontacto_dato) { ?>
@@ -852,11 +856,11 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                             <div class="form-group row">
                                 <label for="matercasusalesi_ace" class="col-form-label col-sm-2">Agente material causa lesion:</label>
                                 <div class="col-sm-9">
-                                    <select name="matercasusalesi_ace" class="form-control">
+                                    <select name="matercasusalesi_ace" class="matercasusalesi_ace" id="matercasusalesi_ace" style="width: 100%">
                                         <option value="0">--Seleccione el agente material que ha causado la lesion--</option>
                                         <?php
                                         foreach ($ace_agentematerialles_datos as $ace_agentematerialles_dato) { ?>
-                                            <option value="<?php echo $ace_agentematerialles_dato['id_agentematerialles']; ?>"><?php echo $ace_agentematerial_dato['codagentematles_aml']; ?> | <?php echo $ace_agentematerial_dato['agentematerialles_aml']; ?> </option>
+                                            <option value="<?php echo $ace_agentematerialles_dato['id_agentematerialles']; ?>"><?php echo $ace_agentematerialles_dato['codagentematles_aml']; ?> | <?php echo $ace_agentematerialles_dato['agentematerialles_aml']; ?> </option>
                                         <?php
                                         }
                                         ?>
@@ -1116,7 +1120,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         </div>
                     </div>
                     <div class="row">
-                    <div class="col-sm-4">
+                 <div class="col-sm-4">
                             <div class="form-group row">
                                 <label for="protcolecnecesa_ace" class="col-form-label col-sm-3">Proteccion colectiva necesaria:</label>
                                 <div class="col-sm-8">
@@ -1473,7 +1477,68 @@ include('../../admin/layout/mensaje.php');
       "responsive": true,
     });
   });
+
+
+  
+
+
+
 </script>-->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+	 	
+	$(document).ready(function() {
+    $('#trabajador_ace').select2({      
+        theme: 'bootstrap4',});
+    });
+	$(document).ready(function() {
+        $('#procesotrabajo_ace').select2({      
+            theme: 'bootstrap4',});
+
+    });
+		  
+    $(document).ready(function() {
+        $('#tipoactividad_ace').select2({      
+            theme: 'bootstrap4',});
+   });
+	  
+    $(document).ready(function() {
+        $('#tipolugar_ace').select2({      
+            theme: 'bootstrap4',});
+   });
+			 	
+	$(document).ready(function() {
+    $('#agentematerial_ace').select2({      
+        theme: 'bootstrap4',});
+
+    });
+	
+    $(document).ready(function() {
+        $('#desviacion_ace').select2({      
+            theme: 'bootstrap4',});
+
+    });
+    $(document).ready(function() {
+        $('#agmaterdesv_ace').select2({      
+            theme: 'bootstrap4',});
+			
+    });
+					 	
+	$(document).ready(function() {
+    $('#formacontacto_ace').select2({      
+        theme: 'bootstrap4',});
+
+    });
+	
+    $(document).ready(function() {
+        $('#matercasusalesi_ace').select2({      
+            theme: 'bootstrap4',});
+
+    });
+
+</script>
+
 
 <script>
     $(function() {

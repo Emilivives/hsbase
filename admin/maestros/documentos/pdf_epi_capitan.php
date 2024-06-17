@@ -18,6 +18,7 @@ include('../../../app/controllers/maestros/empresas/datos_empresa.php');
 
 
 ///// traer datos de accion prl
+
 foreach ($trabajador_datos as $trabajador_dato) {
     $codigo_tr = $trabajador_dato['codigo_tr'];
     $dni_tr = $trabajador_dato['dni_tr'];
@@ -26,11 +27,16 @@ foreach ($trabajador_datos as $trabajador_dato) {
     $fechanac_tr = $trabajador_dato['fechanac_tr'];
     $inicio_tr = $trabajador_dato['inicio_tr'];
     $centro_tr = $trabajador_dato['nombre_cen'];
+    $empresa_tr = $trabajador_dato['nombre_emp'];
+    $razonsocial_tr = $trabajador_dato['razonsocial_emp'];
+    $direccionemp_tr = $trabajador_dato['direccion_emp'];
     $categoria_tr = $trabajador_dato['nombre_cat'];
     $activo_tr = $trabajador_dato['activo_tr'];
     $anotaciones_tr = $trabajador_dato['anotaciones_tr'];
     $formacionpdt_tr = $trabajador_dato['formacionpdt_tr'];
-
+    $informacion_tr = $trabajador_dato['informacion_tr'];
+    $id_empresa = $trabajador_dato['id_empresa'];
+    $logo_emp = $trabajador_dato['logo_emp'];
 
 }
 
@@ -63,10 +69,27 @@ $pdf->SetXY(51, 37);
 $pdf->Write(10, $nombre_tr);
 
 
-$pdf->SetFont('Arial', 'B', '10'); 
-$pdf->SetXY(61, 27);
-$pdf->Write(10, $razonsocial_emp);
-$pdf->image('../centros/img/'.$logo_emp, 11, 11, 25, 15, 'jpg');
+$pdf->SetFont('Arial', '', '8'); 
+$pdf->SetXY(10, 65);
+$pdf->Write(10, $razonsocial_tr);
+
+$pdf->Image($img2,10,10,30,0,"JPG");
+
+
+$pdf->SetFont('Arial', 'B', '6'); 
+$pdf->SetXY(50, 277);
+$pdf->SetTextColor(255,255,255);
+$pdf->Write(10, $empresa_tr);
+
+$pdf->SetFont('Arial', 'B', '6'); 
+$pdf->SetXY(70, 277);
+$pdf->SetTextColor(255,255,255);
+$pdf->Write(10, $razonsocial_tr);
+
+$pdf->SetFont('Arial', 'B', '6'); 
+$pdf->SetXY(65, 279);
+$pdf->SetTextColor(255,255,255);
+$pdf->Write(10, $direccionemp_tr);
 
 // setFont ('B' - NEGRITA 
 //setFont ('I' - ITALICA 

@@ -25,6 +25,10 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+   <!-- select2 -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
 <div class="content-header">
     <div class="container-fluid">
@@ -131,7 +135,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                     <div class="form-group row">
                         <label for="nombre" class="col-form-label col-sm-2">Nombre:</label>
                         <div class="col-sm-8">
-                            <select name="trabajador_ace" id="trabajador_ace" class="form-control" onchange="selectIdtr(event)">
+                            <select name="trabajador_ace" id="trabajador_ace" class="trabajador_ace" style="width: 120%" onchange="selectIdtr(event)">
                                 <option value="0">--Seleccione trabajador--</option>
                                 <?php
                                 foreach ($trabajadores as $trabajador) {
@@ -1608,6 +1612,60 @@ include('../../admin/layout/mensaje.php');
     });
   });
 </script>-->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+	 	
+	$(document).ready(function() {
+    $('#trabajador_ace').select2({      
+        theme: 'bootstrap4',});
+    });
+	$(document).ready(function() {
+        $('#procesotrabajo_ace').select2({      
+            theme: 'bootstrap4',});
+
+    });
+		  
+    $(document).ready(function() {
+        $('#tipoactividad_ace').select2({      
+            theme: 'bootstrap4',});
+   });
+	  
+    $(document).ready(function() {
+        $('#tipolugar_ace').select2({      
+            theme: 'bootstrap4',});
+   });
+			 	
+	$(document).ready(function() {
+    $('#agentematerial_ace').select2({      
+        theme: 'bootstrap4',});
+
+    });
+	
+    $(document).ready(function() {
+        $('#desviacion_ace').select2({      
+            theme: 'bootstrap4',});
+
+    });
+    $(document).ready(function() {
+        $('#agmaterdesv_ace').select2({      
+            theme: 'bootstrap4',});
+			
+    });
+					 	
+	$(document).ready(function() {
+    $('#formacontacto_ace').select2({      
+        theme: 'bootstrap4',});
+
+    });
+	
+    $(document).ready(function() {
+        $('#matercasusalesi_ace').select2({      
+            theme: 'bootstrap4',});
+
+    });
+
+</script>
 
 <script>
     $(function() {

@@ -14,6 +14,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -124,16 +125,22 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
         <!-- small box -->
         <div class="small-box bg-light shadow-sm border">
             <div class="inner">
+                <!-- contador trabajadores no formados -->
                 <?php
-                $contador_de_trabajadores = 0;
+                $contador_tr_no_formados = 0;
+                $contador_tr_formados = 0;
                 foreach ($trabajadores as $trabajador) {
-                    if ($trabajador['nombre_tc'] == 'Embarcacion') {
-                        $contador_de_trabajadores = $contador_de_trabajadores + 1;
+                    if ($trabajador['activo_tr'] == 1 and $trabajador['formacionpdt_tr'] == 'Si') {
+                        $contador_tr_formados = $contador_tr_formados + 1;
+                    } elseif ($trabajador['activo_tr'] == 1 and $trabajador['formacionpdt_tr'] == 'No') {
+                        $contador_tr_no_formados = $contador_tr_no_formados + 1;
                     }
                 }
-                ?>
 
-                <h2><?php echo $contador_de_trabajadores; ?><sup style="font-size: 20px"></h2>
+                ?>
+                <!-- fin contador trabajadores no formados -->
+
+                <h2><?php echo $contador_tr_no_formados; ?><sup style="font-size: 20px"></h2>
                 <p>Pendientes Formar</p>
             </div>
             <div class="icon">
@@ -313,7 +320,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                         <select name="centro_tr" id="" class="form-control">
                                             <?php
                                             foreach ($centros_datos as $centros_dato) { ?>
-                                                <option value="<?php echo $centros_dato['id_centro']; ?>"><?php echo $centros_dato['nombre_cen']; ?></option>
+                                                <option value="<?php echo $centros_dato['id_centro']; ?>"><?php echo $centros_dato['nombre_cen']; ?> - <?php echo $centros_dato['nombre_emp']; ?></option>
                                             <?php
                                             }
                                             ?>

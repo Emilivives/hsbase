@@ -23,7 +23,7 @@ include('../../../app/controllers/maestros/empresas/datos_empresa.php');
 
                 </div>
                 <div class="card-body">
-                    <form action="../../../app/controllers/maestros/empresas/updtate.php" method="post">
+                    <form action="../../../app/controllers/maestros/empresas/update.php" method="post">
 
                         <div class="row">
                             <div class="col-md-6">

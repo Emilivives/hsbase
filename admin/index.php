@@ -3,10 +3,22 @@ include('../app/config.php');
 include('../admin/layout/parte1.php');
 include('../app/controllers/trabajadores/listado_trabajadores.php');
 include('../app/controllers/formaciones/listado_formaciones.php');
-include('../app/controllers/accidentes/listado_accidentes.php') ?>
+include('../app/controllers/accidentes/listado_accidentes.php');
+include('../app/controllers/actividad/listado_accionprl.php'); ?>
 <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-wordpress-admin/wordpress-admin.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<script src="echarts.js"></script>
 
+<!-- Toastr CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<style>
+        /* Estilo personalizado para el toast */
+        .toast-custom .toast-message {
+            font-size: 20px; /* Ajusta el tamaño de la fuente según tus necesidades */
+        }
+    </style>
 
 
 <body>
@@ -20,6 +32,16 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
   foreach ($trabajadores as $trabajador) {
     if ($trabajador['activo_tr'] == 1) {
       $contador_de_trabajadores = $contador_de_trabajadores + 1;
+    }
+  }
+  ?>
+  <!-- CALCULOS num trabajadores activos mujer -->
+
+  <?php
+  $contador_tr_mujer = 0;
+  foreach ($trabajadores as $trabajador) {
+    if ($trabajador['activo_tr'] == 1 and $trabajador['sexo_tr'] == 'Mujer') {
+      $contador_tr_mujer = $contador_tr_mujer + 1;
     }
   }
   ?>
@@ -80,13 +102,20 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
   <?php $fechahoraentera = strtotime($fechahora);
   $anio = date("Y", $fechahoraentera);
   $contador_formacion_pdt = 0;
+  $contador_formacion_esp = 0;
   foreach ($formaciones_datos as $formaciones_dato) {
     if (date("Y", strtotime($formaciones_dato['fecha_fr'] == $anio)) and $formaciones_dato['tipo_fr'] == 1) {
       $contador_formacion_pdt = $contador_formacion_pdt + 1;
+    } elseif (date("Y", strtotime($formaciones_dato['fecha_fr'] == $anio)) and $formaciones_dato['tipo_fr'] == 3) {
+      $contador_formacion_pdt = $contador_formacion_pdt + 1;
+    } elseif (date("Y", strtotime($formaciones_dato['fecha_fr'] == $anio)) and $formaciones_dato['nombre_tf'] <> 1 or 3) {
+      $contador_formacion_esp = $contador_formacion_esp + 1;
     }
   }
   $porcentage_formpdt = ($contador_formacion_pdt * 100) / $contador_de_formaciones;
-  $porcentage_formpdt = round($porcentage_formpdt, 2); ?>
+  $porcentage_formpdt = round($porcentage_formpdt, 1);
+  $porcentage_formesp = ($contador_formacion_esp * 100) / $contador_de_formaciones;
+  $porcentage_formesp = round($porcentage_formesp, 1); ?>
 
 
   <?php
@@ -153,106 +182,31 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
   <!-- CALCULOS trabajadores por puesto -->
 
   <?php
-  $tr_marineros = 0;
   $tr_administracion = 0;
-  $tr_marineromaquinas = 0;
-  $tr_opermantenimiento = 0;
-  $tr_taquilla = 0;
-  $tr_amarrador = 0;
-  $tr_carga = 0;
-  $tr_jefedpto = 0;
+  $tr_embarcados = 0;
   $tr_comercial = 0;
-  $tr_tecnicobuque = 0;
-  $tr_tecnicoprl = 0;
-  $tr_gerencia = 0;
-  $tr_primeroficial = 0;
-  $tr_jefemaquinas = 0;
-  $tr_primeromaquinas = 0;
-  $tr_mecaniconaval = 0;
-  $tr_azafatapuerto = 0;
-  $tr_taquillacarga = 0;
-  $tr_vigilante = 0;
-  $tr_informatico = 0;
-  $tr_auxiliarpasaje = 0;
-  $tr_sobrecargo = 0;
-  $tr_coordinadorpuerto = 0;
-  $tr_azafatapuerto = 0;
-  $tr_contramaestre = 0;
-  $tr_limpieza = 0;
-
+  $tr_puerto = 0;
+  $tr_taller = 0;
+  $tr_direccion = 0;
 
   foreach ($trabajadores as $trabajador) {
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Administración') {
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_dpo'] == 'Administración') {
       $tr_administracion = $tr_administracion + 1;
     }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Marinero') {
-      $tr_marineros = $tr_marineros + 1;
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_dpo'] == 'Embarcado') {
+      $tr_embarcados = $tr_embarcados + 1;
     }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Marinero máquinas') {
-      $tr_marineromaquinas = $tr_marineromaquinas + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Operario mantenimiento') {
-      $tr_opermantenimiento = $tr_opermantenimiento + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Oficial de carga') {
-      $tr_taquilla = $tr_taquilla + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Jefe departamento') {
-      $tr_amarrador = $tr_amarrador + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Comercial') {
-      $tr_carga = $tr_carga + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Técnico de buques') {
-      $tr_jefedpto = $tr_jefedpto + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Técnico de PRL') {
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_dpo'] == 'Comercial') {
       $tr_comercial = $tr_comercial + 1;
     }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Gerencia') {
-      $tr_administracion = $tr_administracion + 1;
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_dpo'] == 'Puerto') {
+      $tr_puerto = $tr_puerto + 1;
     }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Primer oficial') {
-      $tr_administracion = $tr_administracion + 1;
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_dpo'] == 'Taller - mantenimiento') {
+      $tr_taller = $tr_taller + 1;
     }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Jefe de máquinas') {
-      $tr_administracion = $tr_administracion + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Primero de máquinas') {
-      $tr_administracion = $tr_administracion + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Mecánico naval') {
-      $tr_administracion = $tr_administracion + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Azafata de puerto') {
-      $tr_administracion = $tr_administracion + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Taquilla - Carga') {
-      $tr_administracion = $tr_administracion + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Vigilante') {
-      $tr_administracion = $tr_administracion + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Informático') {
-      $tr_administracion = $tr_administracion + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Auxiliar de pasaje') {
-      $tr_administracion = $tr_administracion + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Sobrecargo') {
-      $tr_administracion = $tr_administracion + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Coordinador de puerto') {
-      $tr_administracion = $tr_administracion + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Azafata de puerto') {
-      $tr_administracion = $tr_administracion + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Contramaestre') {
-      $tr_administracion = $tr_administracion + 1;
-    }
-    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_cat'] == 'Limpieza') {
-      $tr_administracion = $tr_administracion + 1;
+    if ($trabajador['activo_tr'] == 1 and $trabajador['nombre_dpo'] == 'Direccion') {
+      $tr_direccion = $tr_direccion + 1;
     }
   }
   ?>
@@ -381,32 +335,20 @@ include('../app/controllers/accidentes/listado_accidentes.php') ?>
 
   <!-- CALCULOS accidentes por mes de año vigente -->
 
-
-  <?php $fechahoraentera = strtotime($fechahora);
-  $fechahoraentera = strtotime($fechahora);
-  $anio = date("Y", $fechahoraentera);
-  $contador_de_accidentessinbaja = 0;
-  foreach ($accidentes_datos as $accidentes_dato) {
-    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente sin baja" or $accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere sin baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
-      $contador_de_accidentessinbaja = $contador_de_accidentessinbaja + 1;
-    }
-  }
-  echo $contador_de_accidentessinbaja
-  //$siniestralidad = ($contador_accidentes * 100) / $contador_de_formaciones;
-  // $porcentage_contador_accidentes = round($siniestralidad, 2); 
-  ?>
-
-
   <?php $fechahoraentera = strtotime($fechahora);
   $fechahoraentera = strtotime($fechahora);
   $anio = date("Y", $fechahoraentera);
   $contador_de_accidentesconbaja = 0;
+  $contador_accidentes_sin_comunicar = 0;
   foreach ($accidentes_datos as $accidentes_dato) {
     if (($accidentes_dato['tipoaccidente_ta'] == "Accidente con baja" or $accidentes_dato['tipoaccidente_ta'] == "Accidente in itinere con baja") && (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
       $contador_de_accidentesconbaja = $contador_de_accidentesconbaja + 1;
     }
+    if (($accidentes_dato['comunicado_ace'] == "NO")) {
+      $contador_accidentes_sin_comunicar =   $contador_accidentes_sin_comunicar + 1;
+    }
   }
-$contador_de_accidentesconbaja
+  $contador_de_accidentesconbaja
   //$siniestralidad = ($contador_accidentes * 100) / $contador_de_formaciones;
   // $porcentage_contador_accidentes = round($siniestralidad, 2); 
   ?>
@@ -473,8 +415,41 @@ $contador_de_accidentesconbaja
   }
   ?>
 
+  <!-- CALCULOS ACCIONES CORRECTORAS por año vigente -->
+  <?php
+  $contador_de_acciones = 0;
+  $contador_de_acciones_abiertas = 0;
+  $contador_de_acciones_cerradas = 0;
+  $contador_de_acciones_evaluacion = 0;
+  $contador_de_acciones_accidente = 0;
+  $contador_de_acciones_propuesta = 0;
+  $contador_de_acciones_riesgo = 0;
 
+  foreach ($accionprl_datos as $accionprl_dato) {
+    if ((date("Y", strtotime($accionprl_dato['fecha_acc'])) == $anio)) {
+      $contador_de_acciones = $contador_de_acciones + 1;
+    }
+    if ((date("Y", strtotime($accionprl_dato['fecha_acc'])) == $anio and $accionprl_dato['estado_acc'] != 'Cerrada')) {
+      $contador_de_acciones_abiertas = $contador_de_acciones_abiertas + 1;
+    }
 
+    if ((date("Y", strtotime($accionprl_dato['fecha_acc'])) == $anio and $accionprl_dato['estado_acc'] == 'Cerrada')) {
+      $contador_de_acciones_cerradas = $contador_de_acciones_cerradas + 1;
+    }
+    if ((date("Y", strtotime($accionprl_dato['fecha_acc'])) == $anio and $accionprl_dato['origen_acc'] == 'Evaluacion de riesgos')) {
+      $contador_de_acciones_evaluacion = $contador_de_acciones_evaluacion + 1;
+    }
+    if ((date("Y", strtotime($accionprl_dato['fecha_acc'])) == $anio and $accionprl_dato['origen_acc'] == 'Accidente de trabajo')) {
+      $contador_de_acciones_accidente = $contador_de_acciones_accidente + 1;
+    }
+    if ((date("Y", strtotime($accionprl_dato['fecha_acc'])) == $anio and $accionprl_dato['origen_acc'] == 'Propuesta de mejora')) {
+      $contador_de_acciones_propuesta = $contador_de_acciones_propuesta + 1;
+    }
+    if ((date("Y", strtotime($accionprl_dato['fecha_acc'])) == $anio and $accionprl_dato['origen_acc'] == 'Comunicado de riesgos')) {
+      $contador_de_acciones_riesgo = $contador_de_acciones_riesgo + 1;
+    }
+  }
+  ?>
 
 
 
@@ -482,7 +457,7 @@ $contador_de_accidentesconbaja
 
   <!-- FIN  CALCULOS ESTADISTICO -->
 
-  <!--avisos automaticos-->
+  <!--avisos automaticos
 
   <?php
   if ($contador_tr_no_formados > 0) { ?>
@@ -490,15 +465,22 @@ $contador_de_accidentesconbaja
       swal.fire({
         position: "top-end",
         icon: "warning",
-        title: "<h4>Dispones de  <?php echo $contador_tr_no_formados ?> trabajadores no formados!</h4>",
-        timer: 1500,
+        title: "<h6>Dispones de  <?php echo $contador_tr_no_formados ?> trabajadores no formados!   <br> <br> <?php if ($contador_accidentes_sin_comunicar > 0) { ?> Tienes <?php echo $contador_accidentes_sin_comunicar ?> accidentes no comunicados!</h6><?php } ?>  ",
+        timer: 5000,
       });
     </script>
   <?php
   }
-  ?>
+  ?>-->
+
+
+
+
+
 
   <!--fin avisos-->
+  <?php echo $contador_de_acciones ?> // <?php echo $contador_de_acciones_abiertas ?> // <?php echo $contador_de_acciones_cerradas ?>
+
   <br>
   <div class="row">
     <!-- ./col -->
@@ -560,11 +542,11 @@ $contador_de_accidentesconbaja
 
   <div class="row">
     <div class="col-6 col-md-3 text-center">
-      <div class="card card-danger">
+      <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Donut Chart</h3>
-
-
+          <h3 class="card-title">
+            <i class="fa-solid fa-chart-simple"></i> Estadísticas trabajadores
+          </h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -575,13 +557,66 @@ $contador_de_accidentesconbaja
             </button>
           </div>
         </div>
+        <!-- /.card-header -->
         <div class="card-body">
-          <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+          <div class="row">
+
+            <div class="col-6 col-md-4 text-center">
+              <input type="text" class="knob" data-thickness="0.3" data-angleArc="250" data-angleOffset="-125" value="<?php echo $contador_tr_anio ?>" data-width="90" data-height="90" data-fgColor="#00c0ef">
+              <div class="knob-label"><b>Nuevos en <?php echo $anio ?></b></div>
+            </div>
+            <!-- ./col -->
+
+            <div class="col-6 col-md-4 text-center">
+              <input type="text" class="knob" value="<?php echo $porcentage_formados; ?>" data-width="90" data-height="90" data-fgColor="#af577b" data-readonly="true">
+              <div class="knob-label"><b>% Formados</b></div>
+            </div>
+            <!-- ./col -->
+            <div class="col-6 col-md-4 text-center">
+
+
+              <input type="text" class="knob" value="<?php echo $porcentage_embarcados; ?>" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+
+              <div class="knob-label"><b>% Embarcados</b></div>
+            </div>
+            <!-- ./col -->
+
+          </div>
+          <div class="row">
+
+            <div class="col-6 col-md-4 text-center">
+              <input type="text" class="knob" data-thickness="0.3" data-angleArc="250" data-angleOffset="-125" value="<?php echo $contador_tr_mujer ?>" data-width="90" data-height="90" data-fgColor="#00c0ef">
+
+              <div class="knob-label"><b>% Mujeres</b></div>
+            </div>
+
+            <!-- ./col -->
+            <div class="col-6 col-md-4 text-center">
+
+              <input type="text" class="knob" value="<?php echo $porcentage_formpdt; ?>" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+
+              <div class="knob-label"><b>% Puesto Tº</b></div>
+            </div>
+            <!-- ./col -->
+            <div class="col-6 col-md-4 text-center">
+
+
+              <input type="text" class="knob" value="<?php echo $porcentage_embarcados; ?>" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+
+              <div class="knob-label"><b>% Embarcados</b></div>
+            </div>
+            <!-- ./col -->
+
+
+          </div>
+
+          <!-- /.row -->
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
     </div>
+
     <div class="col-6 col-md-3 text-center">
       <div class="card card-danger">
         <div class="card-header">
@@ -622,20 +657,68 @@ $contador_de_accidentesconbaja
           </div>
         </div>
         <div class="card-body">
-          <div id="formaciones" style="width:450px;height:250px;"></div>
+          <div class="row">
+
+            <div class="col-6 col-md-4 text-center">
+              <input type="text" class="knob" data-thickness="0.3" data-angleArc="250" data-angleOffset="-125" value="<?php echo $contador_tr_anio ?>" data-width="90" data-height="90" data-fgColor="#C39BD3 ">
+              <div class="knob-label"><b>Nuevos en <?php echo $anio ?></b></div>
+            </div>
+            <!-- ./col -->
+
+            <div class="col-6 col-md-4 text-center">
+              <input type="text" class="knob" value="<?php echo $porcentage_formados; ?>" data-width="90" data-height="90" data-fgColor="#C39BD3" data-readonly="true">
+              <div class="knob-label"><b>% Formados</b></div>
+            </div>
+            <!-- ./col -->
+            <div class="col-6 col-md-4 text-center">
+
+
+              <input type="text" class="knob" value="<?php echo $porcentage_embarcados; ?>" data-width="90" data-height="90" data-fgColor="#C39BD3" data-readonly="true">
+
+              <div class="knob-label"><b>% Embarcados</b></div>
+            </div>
+            <!-- ./col -->
+
+          </div>
+          <div class="row">
+
+            <div class="col-6 col-md-4 text-center">
+              <input type="text" class="knob" data-thickness="0.3" data-angleArc="250" data-angleOffset="-125" value="<?php echo $contador_de_formaciones ?>" data-width="90" data-height="90" data-fgColor="#C39BD3">
+
+              <div class="knob-label"><b>Form. en <?php echo $anio ?></b></div>
+            </div>
+
+            <!-- ./col -->
+            <div class="col-6 col-md-4 text-center">
+
+              <input type="text" class="knob" value="<?php echo $porcentage_formpdt; ?>" data-width="90" data-height="90" data-fgColor="#C39BD3" data-readonly="true">
+
+              <div class="knob-label"><b>% Puesto Tº</b></div>
+            </div>
+            <!-- ./col -->
+            <div class="col-6 col-md-4 text-center">
+
+
+              <input type="text" class="knob" value="<?php echo $porcentage_formesp; ?>" data-width="90" data-height="90" data-fgColor="#C39BD3" data-readonly="true">
+
+              <div class="knob-label"><b>% especif.</b></div>
+            </div>
+            <!-- ./col -->
+
+
+          </div>
+          <!-- /.row -->
         </div>
+
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
     </div>
 
     <div class="col-6 col-md-3 text-center">
-      <div class="card card-danger">
+      <div class="card card-success">
         <div class="card-header">
-          <h3 class="card-title">Indices</h3>
-
-
-
+          <h3 class="card-title">ACCIONES PREVENTIVAS / CORRECTORAS</h3>
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse">
               <i class="fas fa-minus"></i>
@@ -645,9 +728,14 @@ $contador_de_accidentesconbaja
             </button>
           </div>
         </div>
+
         <div class="card-body">
-          <div id="main3" style="width:600px;height:250px;"></div>
+          <div class="row">
+            <div id="accionprl" style="width:300px;height:250px;"></div>
+            <div id="accionprl2" style="width:300px;height:250px;"></div>
+          </div>
         </div>
+
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
@@ -676,24 +764,51 @@ $contador_de_accidentesconbaja
           <div class="row">
 
             <div class="col-6 col-md-4 text-center">
-              <input type="text" class="knob" data-thickness="0.3" data-angleArc="250" data-angleOffset="-125" value="<?php echo $contador_tr_anio ?>" data-width="90" data-height="90" data-fgColor="#00c0ef">
+              <input type="text" class="knob" data-thickness="0.3" data-angleArc="250" data-angleOffset="-125" value="<?php echo $contador_tr_anio ?>" data-width="90" data-height="90" data-fgColor="#C39BD3 ">
               <div class="knob-label"><b>Nuevos en <?php echo $anio ?></b></div>
             </div>
             <!-- ./col -->
 
             <div class="col-6 col-md-4 text-center">
-              <input type="text" class="knob" value="<?php echo $porcentage_formados; ?>" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+              <input type="text" class="knob" value="<?php echo $porcentage_formados; ?>" data-width="90" data-height="90" data-fgColor="#C39BD3" data-readonly="true">
               <div class="knob-label"><b>% Formados</b></div>
             </div>
             <!-- ./col -->
             <div class="col-6 col-md-4 text-center">
 
 
-              <input type="text" class="knob" value="<?php echo $porcentage_embarcados; ?>" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+              <input type="text" class="knob" value="<?php echo $porcentage_embarcados; ?>" data-width="90" data-height="90" data-fgColor="#C39BD3" data-readonly="true">
 
               <div class="knob-label"><b>% Embarcados</b></div>
             </div>
             <!-- ./col -->
+
+          </div>
+          <div class="row">
+
+            <div class="col-6 col-md-4 text-center">
+              <input type="text" class="knob" data-thickness="0.3" data-angleArc="250" data-angleOffset="-125" value="<?php echo $contador_de_formaciones ?>" data-width="90" data-height="90" data-fgColor="#C39BD3">
+
+              <div class="knob-label"><b>Form. en <?php echo $anio ?></b></div>
+            </div>
+
+            <!-- ./col -->
+            <div class="col-6 col-md-4 text-center">
+
+              <input type="text" class="knob" value="<?php echo $porcentage_formpdt; ?>" data-width="90" data-height="90" data-fgColor="#C39BD3" data-readonly="true">
+
+              <div class="knob-label"><b>% Puesto Tº</b></div>
+            </div>
+            <!-- ./col -->
+            <div class="col-6 col-md-4 text-center">
+
+
+              <input type="text" class="knob" value="<?php echo $porcentage_formesp; ?>" data-width="90" data-height="90" data-fgColor="#C39BD3" data-readonly="true">
+
+              <div class="knob-label"><b>% especif.</b></div>
+            </div>
+            <!-- ./col -->
+
 
           </div>
           <!-- /.row -->
@@ -703,12 +818,13 @@ $contador_de_accidentesconbaja
       <!-- /.card -->
     </div>
     <div class="col-6 col-md-3 text-center">
-      <div class="card">
+      <!-- Donut chart -->
+      <div class="card card-primary card-outline">
         <div class="card-header">
-          <h4 class="card-title">
-            <i class="fa-solid fa-chart-pie"></i>
-            <b> Kpi's Formaciones</b>
-          </h4>
+          <h3 class="card-title">
+            <i class="far fa-chart-bar"></i>
+            <b>Accidentes por mes del <?php echo $anio ?> </b>
+          </h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -718,41 +834,19 @@ $contador_de_accidentesconbaja
               <i class="fas fa-times"></i>
             </button>
           </div>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-          <div class="row">
-
-            <div class="col-6 col-md-3 text-center">
-              <input type="text" class="knob" data-thickness="0.3" data-angleArc="250" data-angleOffset="-125" value="<?php echo $contador_de_formaciones ?>" data-width="90" data-height="90" data-fgColor="#00c0ef">
-
-              <div class="knob-label"><b>Form. en <?php echo $anio ?></b></div>
-            </div>
-
-            <!-- ./col -->
-            <div class="col-6 col-md-4 text-center">
-
-              <input type="text" class="knob" value="<?php echo $porcentage_formpdt; ?>" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
-
-              <div class="knob-label"><b>% Puesto Tº</b></div>
-            </div>
-            <!-- ./col -->
-            <div class="col-6 col-md-4 text-center">
-
-
-              <input type="text" class="knob" value="<?php echo $porcentage_embarcados; ?>" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
-
-              <div class="knob-label"><b>% Embarcados</b></div>
-            </div>
-            <!-- ./col -->
-
-
+        <div class="card-body center">
+          <div style="width: 500px">
+            <canvas id="graficaaccidentes"></canvas>
           </div>
-          <!-- /.row -->
+
         </div>
-        <!-- /.card-body -->
+
+
+        <!-- /.card-body-->
       </div>
-      <!-- /.card -->
+
     </div>
 
     <div class="col-6 col-md-3 text-center">
@@ -790,7 +884,7 @@ $contador_de_accidentesconbaja
         <div class="card-header">
           <h3 class="card-title">
             <i class="far fa-chart-bar"></i>
-            <b>Accidentes por mes del <?php echo $anio ?> </b>
+            <b>Formaciones por mes del <?php echo $anio ?> </b>
           </h3>
 
           <div class="card-tools">
@@ -801,20 +895,17 @@ $contador_de_accidentesconbaja
               <i class="fas fa-times"></i>
             </button>
           </div>
-          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         </div>
         <div class="card-body center">
-          <div style="width: 500px">
-            <canvas id="graficaaccidentes"></canvas>
-          </div>
+
+          <div id="main6" style="width: 300px;height:200px;"></div>
 
         </div>
-
-
         <!-- /.card-body-->
       </div>
 
     </div>
+
 
   </div>
   <div class="row">
@@ -888,7 +979,7 @@ $contador_de_accidentesconbaja
     <div class="col-6 col-md-3 text-center">
       <div class="card card-success">
         <div class="card-header">
-          <h3 class="card-title">Indices</h3>
+          <h3 class="card-title">ACCIONES PREVENTIVAS</h3>
 
 
 
@@ -902,7 +993,7 @@ $contador_de_accidentesconbaja
           </div>
         </div>
         <div class="card-body">
-          <div id="main3" style="width:600px;height:250px;"></div>
+          <div id="" style="width:450px;height:250px;"></div>
         </div>
         <!-- /.card-body -->
       </div>
@@ -911,7 +1002,42 @@ $contador_de_accidentesconbaja
   </div>
 </body>
 <?php
-include('../admin/layout/parte2.php'); ?>
+include('../admin/layout/parte2.php'); ?>$contador_tr_no_formados
+<script>
+  //AVISOS AUTOMATICOS TOAST
+
+  document.addEventListener('DOMContentLoaded', (event) => {
+        toastr.options = {
+            "positionClass": "toast-top-right",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "toastClass": "toast-custom", // Añadir la clase personalizada
+            "onclick": null // Inicialmente nulo, configuraremos el evento nosotros mismos
+
+        };
+
+        <?php if ($contador_tr_no_formados > 0): ?>
+            var toast1 = toastr.info('<?= $contador_tr_no_formados ?> Trabajadores pendientes de formar');
+            toast1.on('click', function() {
+                window.location.href = "<?php echo $URL; ?>/admin/trabajadores/trabajadorshow.php?id_trabajador=1";
+            });
+        <?php endif; ?>
+
+        <?php if ($contador_accidentes_sin_comunicar > 0): ?>
+            var toast2 = toastr.warning('<?= $contador_accidentes_sin_comunicar ?> accidentes sin comunicar');
+            toast2.on('click', function() {
+                window.location.href = "<?php echo $URL; ?>/admin/accidentes/index.php";
+            });
+        <?php endif; ?>
+    });
+
+   
+
+</script>
 
 <script>
   //-------------
@@ -921,19 +1047,16 @@ include('../admin/layout/parte2.php'); ?>
   var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
   var donutData = {
     labels: [
-      'Administración',
-      'Taquilla',
-      'Marinero',
-      'Marinero Máquinas',
-      'Amarrador',
-      'Mantenimiento',
-      'Limpieza',
+      'Administracion',
+      'Embarcados',
       'Comercial',
-      'Capitan',
-      'Jefe de Máquinas',
+      'Puerto',
+      'Taller',
+      'Direccion',
+
     ],
     datasets: [{
-      data: [700, 500, 400, 600, 300, 100, 400, 600, 300, 100],
+      data: [<?php echo $tr_administracion ?>, <?php echo $tr_embarcados ?>, <?php echo $tr_comercial ?>, <?php echo $tr_puerto ?>, <?php echo $tr_taller ?>, <?php echo $tr_direccion ?>],
       backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
     }]
   }
@@ -1041,50 +1164,6 @@ include('../admin/layout/parte2.php'); ?>
   })
 </script>
 
-
-
-<script>
-  /*
-   * DONUT CHART
-   * -----------
-   */
-
-  var donutData = [{
-      label: 'Series2',
-      data: 30,
-      color: '#3c8dbc'
-    },
-    {
-      label: 'Series3',
-      data: 20,
-      color: '#0073b7'
-    },
-    {
-      label: 'Series4',
-      data: 50,
-      color: '#00c0ef'
-    }
-  ]
-  $.plot('#donut-chart', donutData, {
-    series: {
-      pie: {
-        show: true,
-        radius: 1,
-        innerRadius: 0.5,
-        label: {
-          show: true,
-          radius: 2 / 3,
-          formatter: labelFormatter,
-          threshold: 0.1
-        }
-
-      }
-    },
-    legend: {
-      show: false
-    }
-  })
-</script>
 
 
 
@@ -1337,6 +1416,159 @@ include('../admin/layout/parte2.php'); ?>
         data: [820, 932, 901, 934, 1290, 1330, 1320, 934, 934, 934, 934, 934]
       }
     ]
+  };
+
+  option && myChart.setOption('option');
+</script>
+
+<script>
+  //GAUGE CHART//
+  var chartDom = document.getElementById('accionprl');
+  var myChart = echarts.init(chartDom);
+  var option;
+  const gaugeData = [{
+      value: 20,
+      name: 'Total',
+      title: {
+        offsetCenter: ['0%', '-30%']
+      },
+      detail: {
+        valueAnimation: true,
+        offsetCenter: ['0%', '-20%']
+      }
+    },
+    {
+      value: 40,
+      name: 'Good',
+      title: {
+        offsetCenter: ['0%', '0%']
+      },
+      detail: {
+        valueAnimation: true,
+        offsetCenter: ['0%', '10%']
+      }
+    },
+    {
+      value: 100,
+      name: 'Commonly',
+      title: {
+        offsetCenter: ['0%', '30%']
+      },
+      detail: {
+        valueAnimation: true,
+        offsetCenter: ['0%', '40%']
+      }
+    }
+  ];
+  option = {
+    series: [{
+      type: 'gauge',
+      startAngle: 90,
+      endAngle: -270,
+      pointer: {
+        show: false
+      },
+      progress: {
+        show: true,
+        overlap: false,
+        roundCap: false,
+        clip: false,
+        itemStyle: {
+          borderWidth: 0,
+          borderColor: '#464646'
+        }
+      },
+      axisLine: {
+        lineStyle: {
+          width: 40
+        }
+      },
+      splitLine: {
+        show: false,
+        distance: 0,
+        length: 10
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        show: false,
+        distance: 20
+      },
+      data: gaugeData,
+      title: {
+        fontSize: 14
+      },
+      detail: {
+        width: 10,
+        height: 10,
+        fontSize: 14,
+        color: 'inherit',
+        borderColor: 'inherit',
+        borderRadius: 20,
+        borderWidth: 0,
+        formatter: '{value}'
+      }
+    }]
+  };
+
+  option && myChart.setOption(option);
+</script>
+
+<script>
+  var chartDom = document.getElementById('accionprl2');
+  var myChart = echarts.init(chartDom);
+  var option;
+
+  option = {
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      top: '90%',
+      left: 'center'
+    },
+    series: [{
+      name: 'Access From',
+      type: 'pie',
+      radius: ['40%', '70%'],
+      avoidLabelOverlap: false,
+      padAngle: 5,
+      itemStyle: {
+        borderRadius: 1
+      },
+      label: {
+        show: false,
+        position: 'center'
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: 40,
+          fontWeight: 'bold'
+        }
+      },
+      labelLine: {
+        show: false
+      },
+      data: [{
+          value: <?php echo $contador_de_acciones_evaluacion; ?>,
+          name: 'x Eval R.'
+        },
+        {
+          value: <?php echo $contador_de_acciones_propuesta; ?>,
+          name: 'x Propuesta.'
+        },
+        {
+          value: <?php echo $contador_de_acciones_riesgo; ?>,
+          name: 'x Comunicado'
+        },
+        {
+          value: <?php echo $contador_de_acciones_accidente; ?>,
+          name: 'x Accidente'
+        }
+      ]
+    }]
   };
 
   option && myChart.setOption(option);

@@ -10,6 +10,14 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
 
 
 ?>
+<style>
+        .btn-small {
+            font-size: 0.8rem; /* Tamaño de fuente más pequeño */
+            padding: 0.2rem 0.4rem; /* Tamaño de relleno más pequeño */
+            border-radius: 0.2rem; /* Radio de borde pequeño */
+            line-height: 1; /* Ajustar la altura de línea para un tamaño de botón más pequeño */
+        }
+    </style>
 <html>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -39,7 +47,7 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
 </div>
 <!-- /.content- -->
 <div class="content">
-    <form action="../../app/controllers/actividad/update_accion.php" method="post">
+    <form action="../../app/controllers/actividad/update_accion.php" method="post" enctype="multipart/form-data">
 
         <input type="text" name="id_accion" value="<?php echo $id_accion; ?>">
 
@@ -397,18 +405,23 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                         <div class="row">
                             <div class="col-sm-2">
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 <div class="form-group row">
-                                    <div class="col-md-5">
-
+                                    <div class="col-md-8">
                                         <label for="">Imagen 1 </label>
-                                        <input type="file" name="image" class="form-control" id="file">
-                                        <br>
-                                        <output id="list" style=""></output>
+                                        <input type="file" name="imagen1_acc" class="form-control" id="file1">
+                                        <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" role="button" target="_blank">
+            Max. 1Mb
+        </a>
+                                    
+                                        <br><br>
+                                        <output id="list1">
+                                            <img src="<?php echo $URL . "/admin/accionprl/image/" . $imagen1_acc; ?>" width="100%" alt="">
+                                        </output>
                                         <script>
-                                            function archivo(evt) {
+                                            function archivo1(evt) {
                                                 var files = evt.target.files; // FileList object
-                                                // Obtenemos la imagen del campo "file".
+                                                // Obtenemos la imagen del campo "file1".
                                                 for (var i = 0, f; f = files[i]; i++) {
                                                     //Solo admitimos imágenes.
                                                     if (!f.type.match('image.*')) {
@@ -418,50 +431,67 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                                                     reader.onload = (function(theFile) {
                                                         return function(e) {
                                                             // Insertamos la imagen
-                                                            document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                                            document.getElementById("list1").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
                                                         };
                                                     })(f);
                                                     reader.readAsDataURL(f);
                                                 }
                                             }
-                                            document.getElementById('file').addEventListener('change', archivo, false);
+                                            document.getElementById('file1').addEventListener('change', archivo1, false);
                                         </script>
-
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-1">
                             </div>
-
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 <div class="form-group row">
-                                    <tr>
-                                        <td width="5%">Imagen 2</td>
-                                        <!-- /<td><?php echo "<img width='150' height='150' src='$imagen2_acc'" ?> </td> -->
-                                    </tr>
+                                    <div class="col-md-8">
+                                        <label for="">Imagen 2 </label>
+                                        <input type="file" name="imagen2_acc" class="form-control" id="file2"><span class='badge badge-danger'>Max. 1Mb</span>
+                                        <br><br>
+
+                                        <output id="list2">
+                                            <img src="<?php echo $URL . "/admin/accionprl/image/" . $imagen2_acc; ?>" width="100%" alt="">
+                                        </output>
+                                        <script>
+                                            function archivo2(evt) {
+                                                var files = evt.target.files; // FileList object
+                                                // Obtenemos la imagen del campo "file2".
+                                                for (var i = 0, f; f = files[i]; i++) {
+                                                    //Solo admitimos imágenes.
+                                                    if (!f.type.match('image.*')) {
+                                                        continue;
+                                                    }
+                                                    var reader = new FileReader();
+                                                    reader.onload = (function(theFile) {
+                                                        return function(e) {
+                                                            // Insertamos la imagen
+                                                            document.getElementById("list2").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                                        };
+                                                    })(f);
+                                                    reader.readAsDataURL(f);
+                                                }
+                                            }
+                                            document.getElementById('file2').addEventListener('change', archivo2, false);
+                                        </script>
+                                    </div>
                                 </div>
                             </div>
-
-
-
-
-
-
                         </div>
 
-                    </div>
 
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="" class="btn btn-secondary">Cancelar</a>
+                    <input type="submit" class="btn btn-primary" value="Guardar">
                 </div>
             </div>
-
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-md-12">
-                <a href="" class="btn btn-secondary">Cancelar</a>
-                <input type="submit" class="btn btn-primary" value="Guardar">
-            </div>
-        </div>
     </form>
 
 </div>

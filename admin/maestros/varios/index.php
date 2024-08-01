@@ -470,7 +470,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
                                             <a href="update.php?id_estadistica=<?php echo $id_estadistica ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                            <a href="delete.php?id_estadistica=<?php echo $id_estadistica ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                            <a href="../../../app/controllers/maestros/estadisticas/delete.php?id_estadistica=<?php echo $id_estadistica ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
 
                                         </div>
                                     </td>

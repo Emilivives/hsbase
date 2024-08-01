@@ -1,9 +1,10 @@
 <?php
+if (!isset($id_tarea)) {
+    throw new Exception('La variable $id_tarea no está definida.');
+}
 
-$sql = "SELECT acc.id_actividad as id_actividad, acc.fecha_acc as fecha_acc, acc.horain_acc as horain_acc, acc.horafin_acc as horafin_acc, acc.responsable_acc as responsable_acc, 
-acc.detalles_acc as detalles_acc
-FROM ag_actividad as acc WHERE id_tarea = $id_tarea"; 
-
-$query_actividades = $pdo->prepare($sql);
-$query_actividades ->execute();
-$actividades = $query_actividades->fetchAll(PDO::FETCH_ASSOC);
+$sql = "SELECT * FROM ag_actividades WHERE id_tarea = :id_tarea";
+$query = $pdo->prepare($sql);
+$query->execute(['id_tarea' => $id_tarea]);
+$actividades = $query->fetchAll(PDO::FETCH_ASSOC);
+?>

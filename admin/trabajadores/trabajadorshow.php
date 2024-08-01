@@ -6,6 +6,7 @@ $id_trabajador = $_GET['id_trabajador'];
 include('../../admin/layout/parte1.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
 include('../../app/controllers/trabajadores/listado_trabajadores.php');
+include('../../app/controllers/trabajadores/listado_tr_noformado.php');
 include('../../app/controllers/maestros/categorias/listado_categorias.php');
 ?>
 <html>
@@ -142,10 +143,64 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                 <h2><?php echo $contador_tr_no_formados; ?><sup style="font-size: 20px"></h2>
                 <p>Pendientes Formar</p>
+                
             </div>
             <div class="icon">
-                <i class="fas fa-book"></i>
+                <i class="fas fa-book" data-toggle="modal" data-target="#modal-pendientesformar"></i>
             </div>
+
+            <!-- inicio modal nuevo trabajador-->
+        <div class="modal fade" id="modal-pendientesformar">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:#138fec ;color:black">
+                        <h5 class="modal-title" id="modal-pendientesformar">TRABAJADORES PENDIENTES FORMAR</h5>
+                        <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <table id="" class="table table-sm">
+                            <colgroup>
+                                <col width="40%">
+                                <col width="20%">
+                                <col width="30%">
+                                <col width="10%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+
+                                    <th style="text-align: center">Nombre</th>
+                                    <th style="text-align: center">Categoria</th>
+                                    <th style="text-align: center">Centro</th>
+                                    <th style="text-align: center">Empresa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $contador = 0;
+                                foreach ($trabajadores_noformados as $trabajador_noformados) {
+                                    $contador = $contador + 1;
+                                ?>
+
+                                    <tr>
+                                        <td style="text-align: center"><?php echo $trabajador_noformados['nombre_tr']; ?></td>
+                                        <td style="text-align: center"><?php echo $trabajador_noformados['nombre_cat']; ?></td>
+                                        <td style="text-align: center"><?php echo $trabajador_noformados['nombre_cen']; ?></td>
+                                        <td style="text-align: center"><?php echo $trabajador_noformados['nombre_emp']; ?></td>
+                                      
+                                    <?php
+                                }
+                                    ?>
+                            </tbody>
+                        </table>
+                       
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--fin modal-->
 
         </div>
     </div>
@@ -294,6 +349,11 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                         </label>
                                     </div>
                                 </div>
+                                <div class="col-md-3">
+                                <div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+  </div>  </div>
                                 <div class="col-md-3">
                                     <br>
                                     <div class="form-check">
@@ -904,7 +964,15 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                         <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($trabajador_accidente['fecha_ace'])) ?></td>
                                         <td style="text-align: center"><?php echo $trabajador_accidente['tipoaccidente_ta']; ?></td>
                                         <td style="text-align: center"><?php echo $trabajador_accidente['nombre_cen']; ?></td>
-                                        <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($trabajador_accidente['fechabaja_ace'])) ?></td>
+
+                                        <td style="text-align: center">
+                                            <?php if ($trabajador_accidente['fechabaja_ace'] == NULL) { ?>
+                                                <span class='badge badge-success'>VIGENTE</span>
+                                            <?php } else { ?>
+                                                <?php echo date("d-m-Y", strtotime($trabajador_accidente['fechabaja_ace'])); ?>
+                                            <?php } ?>
+                                        </td>
+
                                         <td style="text-align: center">
                                             <a href="../accidentes/show.php?id_accidente=<?php echo $trabajador_accidente['id_accidente'] ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
                                         </td>
@@ -1221,65 +1289,6 @@ include('../../admin/layout/mensaje.php');
   });
 </script>-->
 
-<script>
-    $(function() {
-        $("#example1").DataTable({
-            "pageLength": 10,
-            "language": {
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",
-                "infoEmpty": "Mostrando 0 a 0 de 0 Usuarios",
-                "infoFiltered": "(Filtrado de MAX total Usuarios)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Usuarios",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscador:",
-                "zeroRecords": "Sin resultados encontrados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            },
-            "responsive": true,
-            "lengthChange": true,
-            "autoWidth": false,
-            buttons: [{
-                    extend: "collection",
-                    text: "Reportes",
-                    orientation: "landscape",
-                    buttons: [{
-                            text: "Copiar",
-                            extend: "copy"
-                        },
-                        {
-                            extend: "pdf"
-                        },
-                        {
-                            extend: "csv"
-                        },
-                        {
-                            extend: "excel"
-                        },
-                        {
-                            text: "Imprimir",
-                            extend: "print"
-                        }
-                    ]
-                },
-                {
-                    extend: "colvis",
-                    text: "Visor de columnas",
-                    /*collectionLayout: "fixed three-column" */
-
-                }
-            ],
-        }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
-    });
-</script>
 <script>
     $(function() {
         $("#example2").DataTable({

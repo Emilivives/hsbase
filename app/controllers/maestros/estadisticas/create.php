@@ -9,8 +9,8 @@ $horastranual_est = $_POST['horastranual_est'];
 
 
 
-$sentencia = $pdo->prepare("INSERT INTO estadisticas (anio_est, mediatr_est, indinciden_est, horastranual_est) 
-                         VALUES(:anio_est, :mediatr_est :indinciden_est, :horastranual_est)");
+$sentencia = $pdo->prepare("INSERT INTO estadisticas (id_estadistica, anio_est, mediatr_est, indinciden_est, horastranual_est) 
+                         VALUES(NULL, :anio_est, :mediatr_est, :indinciden_est, :horastranual_est)");
 
 $sentencia->bindParam('anio_est', $anio_est);
 $sentencia->bindParam('mediatr_est', $mediatr_est);

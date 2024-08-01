@@ -52,31 +52,6 @@ include('../../app/controllers/actividad/listado_accionprl.php');
 
 
 
-
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h3 class="m-0">Proyecto Preventivo: <?php echo $nombre_py ?></h3>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="#">Actividades</a></li>
-                    <li class="breadcrumb-item"><a href="<?php echo $URL; ?>/admin/actividad/proyectos.php">Proyecto</a></li>
-                    <li class="breadcrumb-item active">Detalles proyecto</li>
-                </ol>
-            </div><!-- /.col -->
-            <hr class="border-primary">
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
-
-
-</html>
-
-
-<!-- /.content-header -->
 <div class="col-lg-12">
     <div class="row">
         <div class="callout callout-info">
@@ -84,10 +59,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-5">
-                        <dl>
-                            <dt><b class="border-bottom border-primary">Descripción </b></dt>
-                            <dd><?php echo $descripcion_py ?></dd>
-                        </dl>
+                        <h5><b><?php echo $descripcion_py ?></b></h5>
                     </div>
                     <div class="col-md-2">
                         <dl>
@@ -134,130 +106,139 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                         </dl>
                     </div> <!--boton modal modificar proyecto-->
                     <div class="col-md-1">
+
                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" title="Modificar detalles" data-target="#modal-editarproyecto<?php echo $id_proyecto; ?>"><i class="bi bi-pencil-square"></i>Editar</button>
                         <?php include('../../app/controllers/actividad/datos_proyecto.php');
                         include('../../app/controllers/maestros/responsables/listado_responsables.php');
                         ?>
-                    </div>
-                    <!--inicio modal modificar proyecto-->
-                    <div class="modal fade" id="modal-editarproyecto<?php echo $id_proyecto; ?>" tabindex="-1" aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header" style="background-color:gold">
-                                    <h5 class="modal-title" id="modal-editarproyecto" style="color: black;"><i class="fa-solid fa-hands-holding-circle"></i>Proyecto: <?php echo $proyecto['nombre_py'] ?></h5>
-                                    <button type="button" class="close" style="color:black;" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-
-                                    <form action="../../app/controllers/actividad/update_proyecto.php" method="post" enctype="multipart/form-data">
 
 
-                                        <div class="row">
-                                            <div class="form-group row">
-                                                <input type="text" value="<?php echo $proyecto['id_proyecto'] ?>" name="id_proyecto" class="form-control" hidden>
+                        <a class="btn btn-text-right btn-outline-dark btn-sm" title="Ver anterior" href="../actividad/proyectos.php">Volver</a>
+                        <a class="btn btn-danger btn-sm" href="../../admin/actividad/reporte_memoria.php?id_proyecto=<?php echo $id_proyecto; ?>"><i class="fa-regular fa-file-lines"></i> Imprimir report</a>
+
+                        <!--inicio modal modificar proyecto-->
+                        <div class="modal fade" id="modal-editarproyecto<?php echo $id_proyecto; ?>" tabindex="-1" aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color:gold">
+                                        <h5 class="modal-title" id="modal-editarproyecto" style="color: black;"><i class="fa-solid fa-hands-holding-circle"></i>Proyecto: <?php echo $proyecto['nombre_py'] ?></h5>
+                                        <button type="button" class="close" style="color:black;" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form action="../../app/controllers/actividad/update_proyecto.php" method="post" enctype="multipart/form-data">
 
 
-                                                <div class="col-md-5">
-                                                    <label for="">Nombre</label>
-                                                    <input type="text" value="<?php echo $proyecto['nombre_py'] ?>" name="nombre_py" class="form-control">
+                                            <div class="row">
+                                                <div class="form-group row">
+                                                    <input type="text" value="<?php echo $proyecto['id_proyecto'] ?>" name="id_proyecto" class="form-control" hidden>
+
+
+                                                    <div class="col-md-5">
+                                                        <label for="">Nombre</label>
+                                                        <input type="text" value="<?php echo $proyecto['nombre_py'] ?>" name="nombre_py" class="form-control">
+                                                    </div>
+
+
+                                                    <div class="col-sm-5">
+                                                        <label for="" class="col-form-label col-sm-3">Responsable:</label>
+                                                        <div class="col-sm-9">
+                                                            <select name="responsable_py" id="" class="form-control" required>
+                                                                <?php
+                                                                foreach ($responsables_datos as $responsable_dato) {
+                                                                    $responsable_tabla = $responsable_dato['nombre_resp'];
+                                                                    $id_responsable = $responsable_dato['id_responsable']; ?>
+                                                                    <option value="<?php echo $id_responsable; ?>" <?php if ($responsable_tabla == $responsable_py) { ?> selected="selected" <?php } ?> nombre_resp="<?php echo $responsable_dato['nombre_resp']; ?>">
+                                                                        <?php echo  $responsable_tabla; ?>
+                                                                    </option>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <label for="">Descripción:</label>
+                                                        <input type="text" value="<?php echo $proyecto['descripcion_py'] ?>" name="descripcion_py" class="form-control">
+                                                    </div>
 
 
-                                                <div class="col-sm-5">
-                                                    <label for="" class="col-form-label col-sm-3">Responsable:</label>
-                                                    <div class="col-sm-9">
-                                                        <select name="responsable_py" id="" class="form-control" required>
-                                                            <?php
-                                                            foreach ($responsables_datos as $responsable_dato) {
-                                                                $responsable_tabla = $responsable_dato['nombre_resp'];
-                                                                $id_responsable = $responsable_dato['id_responsable']; ?>
-                                                                <option value="<?php echo $id_responsable; ?>" <?php if ($responsable_tabla == $responsable_py) { ?> selected="selected" <?php } ?> nombre_resp="<?php echo $responsable_dato['nombre_resp']; ?>">
-                                                                    <?php echo  $responsable_tabla; ?>
-                                                                </option>
-                                                            <?php
-                                                            }
-                                                            ?>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label for="">Fecha Inicio</label>
+                                                        <input type="date" value="<?php echo $proyecto['fechainicio_py'] ?>" name="fechainicio_py" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label for="">Fecha Fin</label>
+                                                        <input type="date" value="<?php echo $proyecto['fechafin_py'] ?>" name="fechafin_py" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1"> </div>
+                                                <div class="col-sm-2">
+
+                                                    <label for="estado" class="col-form-label col-sm-2">Estado:</label>
+                                                    <div class="col-sm-10">
+                                                        <select class="form-select" name="estado_py" aria-label="Default select example">
+                                                            <option value="<?php echo $estado_py ?>"><?php echo $estado_py ?></option>
+
+                                                            <option value="0">Selecciona estado</option>
+
+                                                            <option value="Activo">Activo</option>
+                                                            <option value="Finalizado">Finalizado</option>
+                                                            <option value="Cancelado">Cancelado</option>
                                                         </select>
-
                                                     </div>
                                                 </div>
 
 
+
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group row">
+
+                                            <hr>
+                                            <div class="row">
                                                 <div class="col-md-12">
-                                                    <label for="">Descripción:</label>
-                                                    <input type="text" value="<?php echo $proyecto['descripcion_py'] ?>" name="descripcion_py" class="form-control">
-                                                </div>
-
-
-
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label for="">Fecha Inicio</label>
-                                                    <input type="date" value="<?php echo $proyecto['fechainicio_py'] ?>" name="fechainicio_py" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label for="">Fecha Fin</label>
-                                                    <input type="date" value="<?php echo $proyecto['fechafin_py'] ?>" name="fechafin_py" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1"> </div>
-                                            <div class="col-sm-2">
-
-                                                <label for="estado" class="col-form-label col-sm-2">Estado:</label>
-                                                <div class="col-sm-10">
-                                                    <select class="form-select" name="estado_py" aria-label="Default select example">
-                                                        <option value="<?php echo $estado_py ?>"><?php echo $estado_py ?></option>
-
-                                                        <option value="0">Selecciona estado</option>
-
-                                                        <option value="Activo">Activo</option>
-                                                        <option value="Finalizado">Finalizado</option>
-                                                        <option value="Cancelado">Cancelado</option>
-                                                    </select>
+                                                    <a href="" class="btn btn-secondary">Cancelar</a>
+                                                    <input type="submit" class="btn btn-primary" value="Guardar">
                                                 </div>
                                             </div>
 
-
-
-                                        </div>
-
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <a href="" class="btn btn-secondary">Cancelar</a>
-                                                <input type="submit" class="btn btn-primary" value="Guardar">
-                                            </div>
-                                        </div>
-
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!--fin modal-->
+
+
                     </div>
-
-                    <!--fin modal-->
-
-
                 </div>
+
             </div>
 
         </div>
 
+
     </div>
 
-
 </div>
+
+
 
 <div class="row">
     <div class="col-md-12">
@@ -429,7 +410,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
 
             </div>
             <div class="card-body">
-                <table id="example1" class="table tabe-hover table-condensed">
+                <table id="example1" class="table compact hover">
                     <colgroup>
 
                         <col width="25%">
@@ -495,7 +476,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                                 <td style="text-align: center"><?php echo date("d-m-Y", strtotime($tarea_proyecto['fechareal_ta'])); ?></td>
                                 <td style="text-align: center"><?php echo ($tarea_proyecto['estado_ta'] == 'En curso') ? "<span class='badge badge-info'><h6>En Curso</h6></span>" : (($tarea_proyecto['estado_ta'] == 'Completado') ? "<span class='badge badge-success'><h6>Completado</h6></span>" : (($tarea_proyecto['estado_ta'] == 'Parcialmente hecho') ? "<span class='badge badge-warning'><h6>Parcialmente hecho</h6></span>" : (($tarea_proyecto['estado_ta'] == 'Pospuesto') ? "<span class='badge badge-secondary'><h6>Pospuesto</h6></span>" : "<span class='badge badge-danger'><h6>Cancelado</h6></span>"))); ?></td>
 
-                           
+
                                 <dl>
 
                                     <td style="text-align: center">
@@ -552,13 +533,26 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                                                         </div>
                                                         <div class="col-md-3">
                                                             <label for="">Centro Trabajo</label>
-                                                            <select name="centro_ta" id="" class="form-control">
+                                                           <!-- <select name="centro_ta" id="" class="form-control">
                                                                 <?php
                                                                 foreach ($centros_datos as $centro_dato) {
                                                                     $centro_tabla = $centro_dato['nombre_cen'];
                                                                     $id_centro = $centro_dato['id_centro']; ?>
                                                                     <option value="<?php echo $tarea_proyecto['id_centro']; ?>" <?php if ($centro_tabla == $centro_ta) { ?> selected="selected" <?php } ?>>
                                                                         <?php echo $centro_tabla; ?>
+                                                                    </option>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </select> -->
+
+                                                            <select name="centro_ta" id="" class="form-control">
+                                                                <?php
+                                                                foreach ($centros_datos as $centro_dato) {
+                                                                    $centro_tabla = $centro_dato['nombre_cen'];
+                                                                    $id_centro = $centro_dato['id_centro']; ?>
+                                                                    <option value="<?php echo $id_centro; ?>" <?php if ($centro_tabla == $centro_ta) { ?> selected="selected" <?php } ?>>
+                                                                        <?php echo  $centro_tabla; ?>
                                                                     </option>
                                                                 <?php
                                                                 }
@@ -744,6 +738,7 @@ include('../../admin/layout/mensaje.php');
             "responsive": true,
             "lengthChange": true,
             "autoWidth": false,
+
             buttons: [{
                     extend: "collection",
                     text: "Reportes",

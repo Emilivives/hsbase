@@ -143,6 +143,20 @@ $mesahora = date("m", $fechaentera);
 $diaahora = date("d", $fechaentera);
 
 
+if ($fechabaja_ace == '0001-01-01' ) {
+    $fechabaja_ace = 'N/A';
+} else {
+    $fechabaja_ace = $fechabaja_ace;
+}
+
+
+if ($fechaantesrecaida_ace == '0001-01-01') {
+    $fechaantesrecaida_ace = 'N/A';
+} else {
+    $fechaantesrecaida_ace = $fechaantesrecaida_ace;
+}
+
+
 ///// traer datos de accionprl
 
 $pdf = new FPDI();
@@ -185,12 +199,12 @@ $pdf->Write(10, $sexo_trabajador_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 79);
-$inicio_trabajador_ace = mb_convert_encoding($inicio_trabajador_ace, 'ISO-8859-1', 'UTF-8');
+$inicio_trabajador_ace = mb_convert_encoding(date("d-m-Y", strtotime($inicio_trabajador_ace)), 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $inicio_trabajador_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 90);
-$fechanac_trabajador_ace = mb_convert_encoding($fechanac_trabajador_ace, 'ISO-8859-1', 'UTF-8');
+$fechanac_trabajador_ace = mb_convert_encoding(date("d-m-Y", strtotime($fechanac_trabajador_ace)), 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $fechanac_trabajador_ace);
 
 $pdf->SetFont('helvetica', '', '8');
@@ -234,12 +248,12 @@ $pdf->Write(10, $tipoaccidente_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 203);
-$fecha_ace = mb_convert_encoding($fecha_ace, 'ISO-8859-1', 'UTF-8');
+$fecha_ace = mb_convert_encoding(date("d-m-Y", strtotime($fecha_ace)), 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $fecha_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 208);
-$fechabaja_ace = mb_convert_encoding($fechabaja_ace, 'ISO-8859-1', 'UTF-8');
+$fechabaja_ace = mb_convert_encoding(date("d-m-Y", strtotime($fechabaja_ace)), 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $fechabaja_ace);
 
 $pdf->SetFont('helvetica', '', '8');
@@ -598,12 +612,12 @@ $pdf->Write(10, $cargoinvesiga_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 250);
-$fechainvestiga_ace = mb_convert_encoding($fechainvestiga_ace, 'ISO-8859-1', 'UTF-8');
+$fechainvestiga_ace = mb_convert_encoding(date("d-m-Y", strtotime($fechainvestiga_ace)), 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $fechainvestiga_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 255);
-$fechacumplimen_ace = mb_convert_encoding($fechacumplimen_ace, 'ISO-8859-1', 'UTF-8');
+$fechacumplimen_ace = mb_convert_encoding(date("d-m-Y", strtotime($fechacumplimen_ace)), 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $fechacumplimen_ace);
 
 $pdf->SetFont('helvetica', '', '8');
@@ -613,7 +627,7 @@ $pdf->Write(10, $revisadopor_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 271);
-$fecharevision_ace = mb_convert_encoding($fecharevision_ace, 'ISO-8859-1', 'UTF-8');
+$fecharevision_ace = mb_convert_encoding(date("d-m-Y", strtotime($fecharevision_ace)), 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $fecharevision_ace);
 
 

@@ -23,8 +23,8 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-   <!-- select2 -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+<!-- select2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
@@ -115,7 +115,17 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         function copiar() {
                             var copiar = document.getElementById("fecha_ace");
                             var pegar = document.getElementById("fecha_ace2");
+                            var diaSemana = document.getElementById("diaSemana");
+
                             pegar.value = copiar.value;
+
+                            // Calcular el día de la semana
+                            var fecha = new Date(copiar.value);
+                            var dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+                            var dia = dias[fecha.getDay()];
+
+                            // Asignar el día de la semana al campo correspondiente
+                            diaSemana.value = dia;
                         }
                     </script>
                 </div>
@@ -468,17 +478,17 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                 </div>
                             </div>
                         </div>
-                    
+
                         <div class="col-sm-2">
                             <div class="form-group row">
                                 <label for="diaSemana" class="col-form-label col-sm-3">Dia</label>
                                 <div class="col-sm-6">
-                                    <input type="text" id="diaSemana" class="form-control" value="diaSemana.value" disabled>
+                                <input type="text" name="diaSemana" id="diaSemana" class="form-control" tabindex="3" readonly>
                                 </div>
                             </div>
                         </div>
 
-                        </div>
+                    </div>
                     <div class="row">
 
                         <div class="col-sm-3">
@@ -538,9 +548,9 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         </div>
 
 
-                   
-                        
-        
+
+
+
 
                     </div>
                     <div class="row">
@@ -572,8 +582,8 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                 </div>
                             </div>
                         </div>
-             
-             
+
+
                         <div class="col-sm-2">
                             <div class="form-group row">
                                 <label for="diasbaja_ace" class="col-form-label col-sm-6 bg-warning"> <b>DIAS DE BAJA:</b></label>
@@ -1120,7 +1130,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         </div>
                     </div>
                     <div class="row">
-                 <div class="col-sm-4">
+                        <div class="col-sm-4">
                             <div class="form-group row">
                                 <label for="protcolecnecesa_ace" class="col-form-label col-sm-3">Proteccion colectiva necesaria:</label>
                                 <div class="col-sm-8">
@@ -1128,7 +1138,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-4">
                             <div class="form-group row">
                                 <label for="protcolectivadisp_ace" class="col-form-label col-sm-3">Proteccion colectiva disponible:</label>
@@ -1138,7 +1148,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                             </div>
                         </div>
 
-               
+
                         <div class="col-sm-4">
                             <div class="form-group row">
                                 <label for="observprotcol_ace" class="col-form-label col-sm-3">Observaciones:</label>
@@ -1149,7 +1159,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         </div>
                     </div>
                     <div class="row">
-                    <div class="col-sm-4">
+                        <div class="col-sm-4">
                             <div class="form-group row">
                                 <label for="episneces_ace" class="col-form-label col-sm-3">EPIs necesarios:</label>
                                 <div class="col-sm-8">
@@ -1157,7 +1167,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-4">
                             <div class="form-group row">
                                 <label for="episdispon_ace" class="col-form-label col-sm-3">EPIs Disponibles:</label>
@@ -1168,7 +1178,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                         </div>
 
 
-                       
+
                         <div class="col-sm-4">
                             <div class="form-group row">
                                 <label for="observepis_ace" class="col-form-label col-sm-3">Observaciones:</label>
@@ -1487,56 +1497,63 @@ include('../../admin/layout/mensaje.php');
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-	 	
-	$(document).ready(function() {
-    $('#trabajador_ace').select2({      
-        theme: 'bootstrap4',});
-    });
-	$(document).ready(function() {
-        $('#procesotrabajo_ace').select2({      
-            theme: 'bootstrap4',});
-
-    });
-		  
     $(document).ready(function() {
-        $('#tipoactividad_ace').select2({      
-            theme: 'bootstrap4',});
-   });
-	  
-    $(document).ready(function() {
-        $('#tipolugar_ace').select2({      
-            theme: 'bootstrap4',});
-   });
-			 	
-	$(document).ready(function() {
-    $('#agentematerial_ace').select2({      
-        theme: 'bootstrap4',});
-
-    });
-	
-    $(document).ready(function() {
-        $('#desviacion_ace').select2({      
-            theme: 'bootstrap4',});
-
+        $('#trabajador_ace').select2({
+            theme: 'bootstrap4',
+        });
     });
     $(document).ready(function() {
-        $('#agmaterdesv_ace').select2({      
-            theme: 'bootstrap4',});
-			
-    });
-					 	
-	$(document).ready(function() {
-    $('#formacontacto_ace').select2({      
-        theme: 'bootstrap4',});
+        $('#procesotrabajo_ace').select2({
+            theme: 'bootstrap4',
+        });
 
     });
-	
+
     $(document).ready(function() {
-        $('#matercasusalesi_ace').select2({      
-            theme: 'bootstrap4',});
+        $('#tipoactividad_ace').select2({
+            theme: 'bootstrap4',
+        });
+    });
+
+    $(document).ready(function() {
+        $('#tipolugar_ace').select2({
+            theme: 'bootstrap4',
+        });
+    });
+
+    $(document).ready(function() {
+        $('#agentematerial_ace').select2({
+            theme: 'bootstrap4',
+        });
 
     });
 
+    $(document).ready(function() {
+        $('#desviacion_ace').select2({
+            theme: 'bootstrap4',
+        });
+
+    });
+    $(document).ready(function() {
+        $('#agmaterdesv_ace').select2({
+            theme: 'bootstrap4',
+        });
+
+    });
+
+    $(document).ready(function() {
+        $('#formacontacto_ace').select2({
+            theme: 'bootstrap4',
+        });
+
+    });
+
+    $(document).ready(function() {
+        $('#matercasusalesi_ace').select2({
+            theme: 'bootstrap4',
+        });
+
+    });
 </script>
 
 

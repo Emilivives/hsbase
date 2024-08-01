@@ -20,7 +20,7 @@ include('../../../app/controllers/maestros/tipocentros/listado_tipocentros.php')
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="">Nombre Centro <b>*</b></label>
+                                <label for="">Nombre CENTRO <b>*</b></label>
                                 <input type="text" name="nombre_cen" class="form-control" required>
                             </div>
                         </div>

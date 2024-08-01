@@ -8,7 +8,7 @@ require '../emails/PHPMailer.php';
 require '../emails/SMTP.php';
 include('../../../app/config.php');
 
-$id_citarm = $_POST['id_citarm'];
+$id_reconocimiento = $_POST['id_reconocimiento'];
 $nombre_tr = $_POST['nombre_tr'];
 $dni_tr = $_POST['dni_tr'];
 $categoria_tr = $_POST['categoria_tr'];
@@ -16,7 +16,8 @@ $centro_tr = $_POST['centro_tr'];
 $razonsocial_emp = $_POST['razonsocial_emp'];
 $destinatario = $_POST['destinatario'];
 $anotaciones_crm = $_POST['anotaciones_crm'];
-$enviado_crm = $fechahora;
+$solicitudcita_rm = $fechahora;
+
 
 
 
@@ -46,12 +47,12 @@ try {
     //Content
     $mail->isHTML(true);
     $mail->CharSet = 'UTF-8';                             //Set email format to HTML
-    $mail->Subject = 'SOLICITUD CITA RECONOCIMIENTO MÉDICO';
+    $mail->Subject = "SOLICITUD CITA RECONOCIMIENTO MÉDICO - $razonsocial_emp";
     $mail->Body    = "<html>
     <body>
     <h4>
     <br>
-   <b> Buenos dias,</b>$id_citarm ////  $enviado_crm
+   <b> Buenos dias,</b> $id_reconocimiento ////  $solicitudcita_rm
  <br> <br>
     Agradezco que nos den cita para el trabajador:  
      <br><br>
@@ -76,9 +77,9 @@ Un saludo,
     </html>";
 
     $mail->send();
-    $sentencia = $pdo->prepare("UPDATE citas_rm SET enviado_crm=:enviado_crm WHERE id_citarm=:id_citarm");
-    $sentencia->bindParam(':id_citarm', $id_citarm);    
-    $sentencia->bindParam(':enviado_crm', $enviado_crm);
+    $sentencia = $pdo->prepare("UPDATE reconocimientos SET cita_rm= '1', solicitudcita_rm=:solicitudcita_rm WHERE id_reconocimiento=:id_reconocimiento");
+    $sentencia->bindParam(':id_reconocimiento', $id_reconocimiento, PDO::PARAM_INT);    
+    $sentencia->bindParam(':solicitudcita_rm', $solicitudcita_rm,  PDO::PARAM_STR);
     $sentencia->execute();
 
     session_start();

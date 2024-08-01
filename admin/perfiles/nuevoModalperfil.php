@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="">Nombre Perfil <b>*</b></label>
+                                <label for="">Nombre PERFIL <b>*</b></label>
                                 <input type="text" name="nombre_pf" class="form-control" required>
                             </div>
                             <br>

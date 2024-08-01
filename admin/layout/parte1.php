@@ -50,6 +50,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
     <!-- Iconos bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <!-- javascrip bootstrap -->
@@ -81,7 +83,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
 
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?php echo $URL; ?>/admin" class="nav-link"><?php echo APP_NAME ?></a>
+                    <a href="<?php echo $URL; ?>/admin" class="nav-link">Inicio</a>
                 </li>
             </ul>
 
@@ -95,7 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item dropdown">
 
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="bi bi-bell"></i>
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
                         <span class="badge badge-warning navbar-badge" title="Avisos">15</span>
                     </a>
 
@@ -106,9 +108,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <i class="fas fa-envelope mr-2"></i> 4 new messages
                             <span class="float-right text-muted text-sm">3 mins</span>
                         </a>
+
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
+                            <i class="fas fa-users mr-2"></i> <?php echo $contador_tr_no_formados ?> friend requests
                             <span class="float-right text-muted text-sm">12 hours</span>
                         </a>
                         <div class="dropdown-divider"></div>
@@ -141,7 +144,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Sidebar -->
             <div class="sidebar">
-            <br>
+                <br>
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
                         <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -159,8 +162,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
 
-                        </br>
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a href="<?php echo $URL; ?>/admin/dashboard" class="nav-link">
                                 <i class="nav-icon fas bi-house-fill"></i>
                                 <p>
@@ -169,45 +171,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                 </p>
                             </a>
-                        </li>
-                        </br>
+                        </li>-->
+                      
                         <li class="nav-item">
                             <a href="<?php echo $URL; ?>/admin" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
-                   
-
+                                    <span class="right badge badge-warning">Info</span>
                                 </p>
                             </a>
                         </li>
 
 
                         </br>
+
+             
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?php echo $URL; ?>/admin/actividad/proyectos.php" class="nav-link">
                                 <i class="nav-icon fas bi bi-calendar3"></i>
                                 <p>
                                     Actividad
-                                    <i class="right fas fas fa-angle-left"></i>
 
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo $URL; ?>/admin/actividad/proyectos.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Proyectos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo $URL; ?>/admin/actividad/tareas.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tareas</p>
-                                    </a>
-                                </li>
 
-                            </ul>
                         </li>
                         <br>
                         <li class="nav-item">
@@ -281,12 +269,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo $URL; ?>/admin/documentos" class="nav-link">
-                                <i class="nav-icon fa bi bi-exclamation-triangle-fill"></i>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa-solid fa-check-to-slot"></i>
                                 <p>
-                                    Documentos
+                                    Evaluaciones
+                                    <i class="right fas fa-angle-left"></i>
+
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo $URL; ?>/admin/evaluacion/control.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Control</p>
+                                    </a>
+                                </li>
+
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -320,6 +319,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="<?php echo $URL; ?>/admin/maestros/documentos" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Documentos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo $URL; ?>/admin/maestros/evaluacion" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Evaluacion</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -376,11 +381,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="nav-item">
                                     <a href="<?php echo $URL; ?>/admin/pruebas" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Prueba accion prl</p>
+                                        <p>CONTROL EVALUACIONES</p>
                                     </a>
                                 </li>
 
                             </ul>
+
 
                         </li>
                         </br> </br></br></br></br></br></br></br></br></br></br>

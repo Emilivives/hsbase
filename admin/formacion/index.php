@@ -126,6 +126,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                     <tr>
                         <th style="text-align: center">Num.</th>
                         <th style="text-align: center">Formacion nº</th>
+                        <th style="text-align: center">Empresa</th>
                         <th style="text-align: center">Tipo Form.</th>
                         <th style="text-align: center">Nombre trab.</th>
                         <th style="text-align: center">Fecha Form.</th>
@@ -143,7 +144,8 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 
                         <tr>
                             <td style="text-align: center"><?php echo $contador; ?></td>
-                            <td style="text-align: center"><?php echo $formaciones_dato['nroformacion'];; ?></td>
+                            <td style="text-align: center"><?php echo $formaciones_dato['nroformacion']; ?></td>
+                            <td style="text-align: center"><?php echo $formaciones_dato['nombre_emp']; ?></td>
                             <td>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-tipoformacion<?php echo $id_formacion; ?>">

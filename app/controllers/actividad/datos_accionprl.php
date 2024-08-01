@@ -33,4 +33,6 @@ foreach ($accionprl_datos as $accionprl_dato) {
     $accrealizada_acc = $accionprl_dato['accrealizada_acc'];
     $seguimiento_acc = $accionprl_dato['seguimiento_acc'];
     $recursos_acc = $accionprl_dato['recursos_acc'];
+    $imagen1_acc = $accionprl_dato['imagen1_acc'];
+    $imagen2_acc = $accionprl_dato['imagen2_acc'];
 }

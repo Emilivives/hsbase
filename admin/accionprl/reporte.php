@@ -59,8 +59,16 @@ foreach ($accionprl_datos as $accionprl_dato) {
     $accrealizada_acc = $accionprl_dato['accrealizada_acc'];
     $seguimiento_acc = $accionprl_dato['seguimiento_acc'];
     $recursos_acc = $accionprl_dato['recursos_acc'];
+    $imagen1_acc = $accionprl_dato['imagen1_acc'];
+    $imagen2_acc = $accionprl_dato['imagen2_acc'];
 }
 ///// traer datos de accionprl
+
+// Ruta de la primera imagen
+$image1 = '../../admin/accionprl/image/' . $imagen1_acc;
+// Ruta de la segunda imagen
+$image2 = '../../admin/accionprl/image/' . $imagen2_acc;
+
 
 
 
@@ -105,7 +113,8 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
     require_once(dirname(__FILE__).'/lang/eng.php');
     $pdf->setLanguageArray($l);
 }
-
+// set JPEG quality
+$pdf->setJPEGQuality(75);
 // ---------------------------------------------------------
 
 // set font
@@ -221,13 +230,21 @@ $html ='
 <table border="0">
 
 <tr style="text-align:center">
-<td style="width: 300px;height: 20px; background-color: #ffffff; text-align: left"><b>Imagenes:</b></td>
-<td style="width: 300px;height: 20px;"></td>
-</tr>
-<tr>
-<td style="width: 300px;height: 150px; text-align: center"></td>
-<td style="width: 300px;height: 150px; text-align: center"></td>
-</tr>
+        <td colspan="3" style="height: 20px; background-color: #ffffff; text-align: left"><b>Imagenes:</b></td>
+    </tr>
+       <tr>
+        <td colspan="2" style="height: 20px;"></td>
+    </tr>
+    <tr>
+       <td style="width: 50px;"></td>
+        <td style="width: 200px; text-align: center;">
+            <img src="'.$image1.'" style="max-height: 150px; width: auto;">
+        </td>
+        <td style="width: 100px;"></td>
+        <td style="width: 200px; text-align: center;">
+            <img src="'.$image2.'" style="max-height: 150px; width: auto;">
+        </td>
+    </tr>
 </table>
 
 

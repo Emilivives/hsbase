@@ -157,7 +157,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                             </div>
                             <div class="modal-body">
 
-                                <form action="../../app/controllers/actividad/create_accion.php" method="post">
+                                <form action="../../app/controllers/actividad/create_accion.php" method="post" enctype="multipart/form-data">
 
 
                                     <div class="well">
@@ -501,75 +501,73 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
                                                             </div>
 
-                                                            <div class="row">
 
-                                                                <div class="col-md-5">
-                                                                    <div class="form-group">
-                                                                        <label for="">Imagen</label>
-                                                                        <!--<input type="file" name="image" class="form-control" id="file">
-                                                                        <br>
-                                                                        <output id="list" style=""></output>
-                                                                        <script>
-                                                                            function archivo(evt) {
-                                                                                var files = evt.target.files; // FileList object
-                                                                                // Obtenemos la imagen del campo "file".
-                                                                                for (var i = 0, f; f = files[i]; i++) {
-                                                                                    //Solo admitimos imágenes.
-                                                                                    if (!f.type.match('image.*')) {
-                                                                                        continue;
-                                                                                    }
-                                                                                    var reader = new FileReader();
-                                                                                    reader.onload = (function(theFile) {
-                                                                                        return function(e) {
-                                                                                            // Insertamos la imagen
-                                                                                            document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
-                                                                                        };
-                                                                                    })(f);
-                                                                                    reader.readAsDataURL(f);
-                                                                                }
-                                                                            }
-                                                                            document.getElementById('file').addEventListener('change', archivo, false);
-                                                                        </script>
-                                                                    -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                             <div class="row">
                                                                 <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <label for="">Imagen 1</label>
-                                                                        <!--    <input type="file" name="image" class="form-control" id="file">
-                                                                        <br>
-                                                                        <output id="list" style=""></output>
-                                                                        <script>
-                                                                            function archivo(evt) {
-                                                                                var files = evt.target.files; // FileList object
-                                                                                // Obtenemos la imagen del campo "file".
-                                                                                for (var i = 0, f; f = files[i]; i++) {
-                                                                                    //Solo admitimos imágenes.
-                                                                                    if (!f.type.match('image.*')) {
-                                                                                        continue;
+                                                                    <div class="form-group row">
+                                                                        <div class="col-md-8">
+                                                                            <label for="">Imagen 1 </label>
+                                                                            <input type="file" name="imagen1_acc" class="form-control" id="file1">
+                                                                            <br>
+                                                                            <output id="list1">
+                                                                            </output>
+                                                                            <script>
+                                                                                function archivo1(evt) {
+                                                                                    var files = evt.target.files; // FileList object
+                                                                                    // Obtenemos la imagen del campo "file1".
+                                                                                    for (var i = 0, f; f = files[i]; i++) {
+                                                                                        //Solo admitimos imágenes.
+                                                                                        if (!f.type.match('image.*')) {
+                                                                                            continue;
+                                                                                        }
+                                                                                        var reader = new FileReader();
+                                                                                        reader.onload = (function(theFile) {
+                                                                                            return function(e) {
+                                                                                                // Insertamos la imagen
+                                                                                                document.getElementById("list1").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                                                                            };
+                                                                                        })(f);
+                                                                                        reader.readAsDataURL(f);
                                                                                     }
-                                                                                    var reader = new FileReader();
-                                                                                    reader.onload = (function(theFile) {
-                                                                                        return function(e) {
-                                                                                            // Insertamos la imagen
-                                                                                            document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="200px" title="', escape(theFile.name), '"/>'].join('');
-                                                                                        };
-                                                                                    })(f);
-                                                                                    reader.readAsDataURL(f);
                                                                                 }
-                                                                            }
-                                                                            document.getElementById('file').addEventListener('change', archivo, false);
-                                                                        </script>
-                                                                    -->
+                                                                                document.getElementById('file1').addEventListener('change', archivo1, false);
+                                                                            </script>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+                                                          
                                                                 <div class="col-sm-6">
-
-                                                                    <input type="file" name="imagen1_acc">
+                                                                    <div class="form-group row">
+                                                                        <div class="col-md-8">
+                                                                            <label for="">Imagen 2 </label>
+                                                                            <input type="file" name="imagen2_acc" class="form-control" id="file2">
+                                                                            <br>
+                                                                            <output id="list2">
+                                                                            </output>
+                                                                            <script>
+                                                                                function archivo2(evt) {
+                                                                                    var files = evt.target.files; // FileList object
+                                                                                    // Obtenemos la imagen del campo "file2".
+                                                                                    for (var i = 0, f; f = files[i]; i++) {
+                                                                                        //Solo admitimos imágenes.
+                                                                                        if (!f.type.match('image.*')) {
+                                                                                            continue;
+                                                                                        }
+                                                                                        var reader = new FileReader();
+                                                                                        reader.onload = (function(theFile) {
+                                                                                            return function(e) {
+                                                                                                // Insertamos la imagen
+                                                                                                document.getElementById("list2").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                                                                            };
+                                                                                        })(f);
+                                                                                        reader.readAsDataURL(f);
+                                                                                    }
+                                                                                }
+                                                                                document.getElementById('file2').addEventListener('change', archivo2, false);
+                                                                            </script>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-
 
                                                             </div>
 

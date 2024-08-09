@@ -48,6 +48,10 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
+<!-- select2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -215,7 +219,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
 
 
                 <!-- inicio modal nuevo reconocimiento-->
-                <div class="modal fade" id="modal-nuevoreconocimiento">
+                <div class="modal fade" id="modal-nuevoreconocimiento" role="dialog" aria-labelledby="modal-nuevoreconocimiento" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header" style="background-color:#ffd900 ;color:black">
@@ -229,25 +233,26 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                                 <form action="../../app/controllers/reconocimientos/create.php" method="post" enctype="multipart/form-data">
 
 
+
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Trabajador</label>
-                                                <select name="trabajador_rm" id="" class="form-control">
+                                        <div class="col-md-8">
+                                            <label for="tarea">Trabajador</label>
+                                            <div class="input-group">
+                                                <select name="trabajador_rm" id="trabajador_rm" class="trabajador_rm">
+                                                    <option value="">Seleccione un trabajador</option>
                                                     <?php
-                                                    foreach ($trabajadores as $trabajador) { ?>
-                                                        <option value="<?php echo $trabajador['id_trabajador']; ?>"><?php echo $trabajador['nombre_tr'] ?></option>
+                                                     foreach ($trabajadores as $trabajador) { ?>
+                                                        <option value="<?php echo $trabajador['id_trabajador']; ?>"><?php echo $trabajador['nombre_tr'] ?> // <?php echo $trabajador['nombre_emp'] ?></option>
                                                     <?php
                                                     }
                                                     ?>
                                                 </select>
-                                            </div>
+                                                    </div>
                                         </div>
-
                                     </div>
 
 
-
+<br>
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -367,7 +372,7 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
                         ?>
 
                             <tr>
-                                <td style="text-align: left"><?php echo $reconocimiento['nombre_tr']; ?>   <?php if ($reconocimiento['activo_tr'] == 0) { ?>
+                                <td style="text-align: left"><a href="../trabajadores/trabajadorshow.php?id_trabajador=<?php echo $reconocimiento['trabajador_rm'];?>"><?php echo $reconocimiento['nombre_tr']; ?>   <?php if ($reconocimiento['activo_tr'] == 0) { ?>
                                                 <span class='badge badge-danger' style="font-size: 15px;">Baja</span>
                                            
                                             <?php
@@ -758,24 +763,17 @@ include('../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php'
 include('../../admin/layout/parte2.php');
 include('../../admin/layout/mensaje.php');
 ?>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<!--<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+<script>
+ $(document).ready(function() {
+        $('#trabajador_rm').select2({
+            dropdownParent: $('#modal-nuevoreconocimiento .modal-body'),
+            theme: 'bootstrap4',
+        });
     });
-  });
-</script>-->
+
+</script>
 
 <script>
     $(function() {

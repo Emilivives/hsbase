@@ -7,7 +7,8 @@ INNER JOIN ag_proyecto as py ON ta.id_proyecto = py.id_proyecto
 INNER JOIN centros as cen ON ta.centro_ta = cen.id_centro 
 INNER JOIN responsables as resp ON ta.responsable_ta = resp.id_responsable 
 INNER JOIN ag_acciones as acc ON ta.accionprl_ta = acc.id_accion
-ORDER BY ta.fecha_ta DESC"; 
+WHERE ta.estado_ta IN ('En curso', 'Parcialmente hecho')
+ORDER BY ta.nombre_ta DESC"; 
 
 $query_tareaspendientes = $pdo->prepare($sql);
 $query_tareaspendientes ->execute();

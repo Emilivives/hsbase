@@ -12,36 +12,91 @@ include('../../app/controllers/actividad/listado_accionprl.php');
 ?>
 
 <head>
-    <style>
-        .dropdown-font-size {
-            font-size: 12px;
-        }
-
-        .vencido {
-            background-color: red;
-            color: white;
-        }
-
-        .badge-wh-1 {
-            display: inline-block;
-            min-width: 1px;
-            padding: 1px 1px;
-            font-size: 13px;
-            font-weight: bold;
-            color: #fff;
-            background-color: #f58da3;
-            line-height: 6;
-            vertical-align: bottom;
-            white-space: nowrap;
-            text-align: center;
-            border-radius: 5px;
-        }
-
-        .highlight {
-            border-top: 3px solid #ff0000;
-            /* Puedes ajustar el color y el estilo del borde */
-        }
-    </style>
+<style>
+    .dropdown-font-size {
+        font-size: 12px;
+    }
+	
+    .vencido {
+        background-color: red;
+        color: white;
+    }
+    .badge-wh-1 {
+    display: inline-block;
+    min-width: 1px;
+    padding: 1px 1px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #f58da3;
+    line-height: 6;
+    vertical-align: bottom;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 5px;
+}
+.badge-wh-2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+		   width: 150px; /* Ancho fijo */
+    min-width: 1px;
+    padding: 1px 1px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #FF8E2A;
+    line-height: 0;  /* Ajuste de line-height para que no influya en la altura del span */
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 5px;
+}
+	.badge-wh-3 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+		   width: 150px; /* Ancho fijo */
+    padding: 0 2px;  /* Reducción de padding horizontal para estrechar el span */
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #5CBFCC;
+    line-height: 1;  /* Ajuste de line-height para que no influya en la altura del span */
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 5px;
+}
+	 .badge-wh-4 {
+    display: inline-block;
+    min-width: 1px;
+    padding: 1px 1px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+		 		   width: 150px; /* Ancho fijo */
+    background-color: #63BC59;
+    line-height: 6;
+    vertical-align: bottom;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 5px;
+}
+	 .badge-wh-5 {
+    display: inline-block;
+    min-width: 1px;
+    padding: 1px 1px;
+    font-size: 13px;
+    font-weight: bold;
+		 		   width: 150px; /* Ancho fijo */
+    color: #fff;
+    background-color: #E1B4FC;
+    line-height: 6;
+    vertical-align: bottom;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 5px;
+}
+</style>
 </head>
 
 <html>

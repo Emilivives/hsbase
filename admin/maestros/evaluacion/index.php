@@ -4,12 +4,18 @@ include('../../../admin/layout/parte1.php');
 include('../../../app/controllers/maestros/evaluacion/listado_tipoevaluacion.php');
 include('../../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php');
 include('../../../app/controllers/maestros/empresas/listado_empresas.php');
+include('../../../app/controllers/maestros/evaluacion/listado_riesgos.php');
+include('../../../app/controllers/maestros/evaluacion/listado_medidas.php');
 include('../../../app/controllers/maestros/departamentos/listado_departamentos.php');
 include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php');
 
 
 ?>
-<br>
+<html>
+
+<!-- select2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 <div class="content-header">
     <div class="container-fluid">
@@ -166,7 +172,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
         <div class="col-md-6">
             <div class="card card-outline card-primary">
                 <div class="card-header col-md-12">
-                    <h3 class="card-title"><b>Direcciones interés</b></h3>
+                    <h3 class="card-title"><b>Riesgos</b></h3>
                     <style>
                         .btn-text-right {
                             text-align: right;
@@ -174,42 +180,37 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                     </style>
                     <!-- Button trigger modal -->
                     <div class="btn-text-right">
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevodirecciones">Añadir Responsable</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevoriesgo">Añadir Riesgo</button>
                     </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="modal-nuevodirecciones">
+                <div class="modal fade" id="modal-nuevoriesgo">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header" style="background-color:#808000 ;color:white">
-                                <h5 class="modal-title" id="modal-nuevodirecciones">Nuevo contacto</h5>
+                                <h5 class="modal-title" id="modal-nuevodirecciones">Nuevo Riesgo</h5>
                                 <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
 
-                                <form action="../../../app/controllers/maestros/emailsinteres/create.php" method="post" enctype="multipart/form-data">
+                                <form action="../../../app/controllers/maestros/evaluacion/create_riesgo.php" method="post" enctype="multipart/form-data">
 
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Nombre contacto <b>*</b></label>
-                                                <input type="text" name="nombre_ei" class="form-control" required>
+                                                <label for="">Codigo Riesgo <b>*</b></label>
+                                                <input type="text" name="codigoriesgo" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label for="">Email</label>
-                                            <input type="text" name="email_ei" class="form-control" required>
-                                        </div>
-                                    </div>
+
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="">Telefono</label>
-                                                <input type="text" name="telefono_ei" class="form-control" required>
+                                                <label for="">Frase Riesgo</label>
+                                                <input type="text" name="fraseriesgo" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
@@ -229,11 +230,18 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
 
                 <div class="card-body">
                     <table id="example2" class="table table-striped table-bordered table-hover">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="70%">
+                            <col width="10%">
+
+                        </colgroup>
                         <thead>
                             <tr>
-                                <th style="text-align: center">Num.</th>
-                                <th style="text-align: center">Nombre departamento</th>
-                                <th style="text-align: center">Descripción</th>
+                                <th style="text-align: center">#</th>
+                                <th style="text-align: center">Codigo</th>
+                                <th style="text-align: center">Frase Riesgo</th>
                                 <th style="text-align: center">Acciones</th>
                             </tr>
                         </thead>
@@ -241,16 +249,15 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
 
 
                             <?php
-                            $contadoremailsinteres_dato = 0;
-                            foreach ($emailsinteres_datos as $emailsinteres_dato) {
-                                $contadoremailsinteres_dato = $contadoremailsinteres_dato + 1;
-                                $id_emailinteres = $emailsinteres_dato['id_emailinteres'];
+                            $contador_riesgos = 0;
+                            foreach ($riesgos_datos as $riesgos_dato) {
+                                $contador_riesgos = $contador_riesgos + 1;
+                                $id_riesgo = $riesgos_dato['id_riesgo'];
                             ?>
                                 <tr>
-                                    <td><?php echo $contadoremailsinteres_dato; ?></td>
-                                    <td><?php echo $emailsinteres_dato['nombre_ei']; ?></td>
-                                    <td><?php echo $emailsinteres_dato['email_ei']; ?></td>
-                                    <td><?php echo $emailsinteres_dato['telefono_ei']; ?></td>
+                                    <td style="text-align: center"><?php echo $contador_riesgos; ?></td>
+                                    <td style="text-align: center"><?php echo $riesgos_dato['codigoriesgo']; ?></td>
+                                    <td style="text-align: left"><?php echo $riesgos_dato['fraseriesgo']; ?></td>
 
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
@@ -281,7 +288,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
         <div class="col-md-6">
             <div class="card card-outline card-primary">
                 <div class="card-header col-md-12">
-                    <h3 class="card-title"><b>Departamentos</b></h3>
+                    <h3 class="card-title"><b>Medidas</b></h3>
                     <style>
                         .btn-text-right {
                             text-align: right;
@@ -289,41 +296,61 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                     </style>
                     <!-- Button trigger modal -->
                     <div class="btn-text-right">
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevodepartamento">Añadir Departamento</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevamedida">Añadir Medida</button>
                     </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="modal-nuevodepartamento">
+                <div class="modal fade" id="modal-nuevamedida">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header" style="background-color:#808000 ;color:white">
-                                <h5 class="modal-title" id="modal-nuevodepartamento">Departamento empresa</h5>
+                                <h5 class="modal-title" id="modal-nuevodirecciones">Nuevo Medida</h5>
                                 <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
 
-                                <form action="../../../app/controllers/maestros/departamentos/create.php" method="post" enctype="multipart/form-data">
+                                <form action="../../../app/controllers/maestros/evaluacion/create_medida.php" method="post" enctype="multipart/form-data">
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Nombre Departamento <b>*</b></label>
-                                                <input type="text" name="nombre_dpo" class="form-control" required>
-                                            </div>
-                                        </div>
-                                    </div>
+
+
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="">Descripcion</label>
-                                                <input type="text" name="descripcion_dpo" class="form-control" required>
+                                                <label for="codigomedida" class="col-form-label col-sm-3">Código*</label>
+                                                <div class="col-sm-8">
+                                                <select name="codigomedida" id="id_riesgo" class="id_riesgo">
+                                                        <option value="">Seleccione un riesgo</option>
+                                                        <?php
+                                                        foreach ($riesgos_datos as $riesgos_dato) { ?>
+                                                            <option value="<?php echo $riesgos_dato['codigoriesgo']; ?>">
+                                                                <?php echo $riesgos_dato['codigoriesgo']; ?> - <?php echo  $riesgos_dato['fraseriesgo'];  ?>
+
+
+                                                            </option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
 
+                                    </div>
+
+                                  
+                                    <br>
 
 
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Frase Medida</label>
+                                                <textarea class="form-control" name="frasemedida" rows="4" required></textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -343,23 +370,23 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                     <table id="example3" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th style="text-align: center">Num.</th>
-                                <th style="text-align: center">Departamento</th>
+                                <th style="text-align: center">#</th>
+                                <th style="text-align: center">Codigo</th>
                                 <th style="text-align: center">Descripcion</th>
                                 <th style="text-align: center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $contadordepartamentos_dato = 0;
-                            foreach ($departamentos_datos as $departamentos_dato) {
-                                $contadordepartamentos_dato = $contadordepartamentos_dato + 1;
-                                $id_departamento = $departamentos_dato['id_departamento'];
+                            $contadormedidas = 0;
+                            foreach ($medidas_datos as $medidas_dato) {
+                                $contadormedidas = $contadormedidas + 1;
+                                $id_departamento = $medidas_dato['id_medida'];
                             ?>
                                 <tr>
-                                    <td><?php echo $contadordepartamentos_dato; ?></td>
-                                    <td><?php echo $departamentos_dato['nombre_dpo']; ?></td>
-                                    <td><?php echo $departamentos_dato['descripcion_dpo']; ?></td>
+                                    <td><?php echo $contadormedidas; ?></td>
+                                    <td><?php echo $medidas_dato['codigomedida']; ?></td>
+                                    <td><?php echo $medidas_dato['frasemedida']; ?></td>
 
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
@@ -473,7 +500,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                             <?php
                             $contadorestadisticas_dato = 0;
                             foreach ($estadisticas_datos as $estadisticas_dato) {
-                                $contadordepartamentos_dato = $contadordepartamentos_dato + 1;
+                                $contadormedidas = $contadormedidas + 1;
                                 $id_estadistica = $estadisticas_dato['id_estadistica'];
                             ?>
                                 <tr>
@@ -519,25 +546,16 @@ include('../../../admin/layout/parte2.php');
 include('../../../admin/layout/mensaje.php');
 ?>
 
-
-<!--<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#id_riesgo').select2({
+            dropdownParent: $('#modal-nuevamedida .modal-body'),
+            theme: 'bootstrap4',
+            width: 600,
+        });
     });
-  });
-</script>-->
-
+</script>
 <script>
     $(function() {
         $("#example1").DataTable({
@@ -717,3 +735,5 @@ include('../../../admin/layout/mensaje.php');
         }).buttons().container().appendTo("#example3_wrapper .col-md-6:eq(0)");
     });
 </script>
+
+</html>

@@ -25,9 +25,33 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-   <!-- select2 -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+<!-- select2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<style>
+    /* Estilos para el botón flotante */
+    .boton-flotante {
+        position: fixed;
+        bottom: 20px;
+        /* Distancia desde la parte inferior */
+        right: 20px;
+        /* Distancia desde la derecha */
+        background-color: #fdc502;
+        color: BLACK;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        /* Asegura que esté por encima de otros elementos */
+    }
+
+    .boton-flotante:hover {
+        background-color: #0056b3;
+    }
+</style>
 
 
 <div class="content-header">
@@ -37,7 +61,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                 <h5 class="m-0"><b>Datos Investigacion accidente laboral</b></h5>
             </div><!-- /.col -->
             <div class="col-sm-3">
-            <a class="btn btn-danger btn-sm" href="../maestros/documentos/pdf_investigacionacc.php?id_accidente=<?php echo $id_accidente; ?>"><i class="fa-regular fa-file-lines"></i> Imprimir report</a>
+                <a class="btn btn-danger btn-sm" href="../maestros/documentos/pdf_investigacionacc.php?id_accidente=<?php echo $id_accidente; ?>"><i class="fa-regular fa-file-lines"></i> Imprimir report</a>
                 <a class="btn btn-primary btn-sm" href="../maestros/documentos/pdf_solicitudmutua.php?id_accidente=<?php echo $id_accidente; ?>"><i class="fa-regular fa-file-lines"></i> Imprimir asistencia mutua</a>
             </div><!-- /.col -->
             <div class="col-sm-3">
@@ -56,7 +80,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
 
 <!-- /.content- -->
 <div class="content">
-    <form action="../../app/controllers/accidentes/update.php" method="post">
+    <form id="formulario" action="../../app/controllers/accidentes/update.php" method="post">
 
         <input type="text" name="id_accidente" value="<?php echo $id_accidente; ?>" hidden>
 
@@ -1575,10 +1599,12 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
             </div>
             <br><br>
             <div class="form-group">
-                <a href="reporte.php?id_accidente=<?php echo $id_accidente; ?>" class="btn btn-warning btn-sm" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
-                <a class="btn btn-primary btn-sm" href="../maestros/documentos/pdf_solicitudmutua.php?id_accidente=<?php echo $id_accidente; ?>"><i class="fa-regular fa-file-lines"></i> Imprimir asistencia mutua</a>
 
+                <a class="btn btn-danger btn-sm" href="../maestros/documentos/pdf_investigacionacc.php?id_accidente=<?php echo $id_accidente; ?>"><i class="fa-regular fa-file-lines"></i> Imprimir report</a>
+                <a class="btn btn-primary btn-sm" href="../maestros/documentos/pdf_solicitudmutua.php?id_accidente=<?php echo $id_accidente; ?>"><i class="fa-regular fa-file-lines"></i> Imprimir asistencia mutua</a>
             </div>
+            <!-- Botón flotante para actualizar -->
+            <button class="boton-flotante" onclick="document.getElementById('formulario').submit();">Actualizar Datos</button>
 
         </div>
     </form>
@@ -1615,56 +1641,63 @@ include('../../admin/layout/mensaje.php');
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-	 	
-	$(document).ready(function() {
-    $('#trabajador_ace').select2({      
-        theme: 'bootstrap4',});
-    });
-	$(document).ready(function() {
-        $('#procesotrabajo_ace').select2({      
-            theme: 'bootstrap4',});
-
-    });
-		  
     $(document).ready(function() {
-        $('#tipoactividad_ace').select2({      
-            theme: 'bootstrap4',});
-   });
-	  
-    $(document).ready(function() {
-        $('#tipolugar_ace').select2({      
-            theme: 'bootstrap4',});
-   });
-			 	
-	$(document).ready(function() {
-    $('#agentematerial_ace').select2({      
-        theme: 'bootstrap4',});
-
-    });
-	
-    $(document).ready(function() {
-        $('#desviacion_ace').select2({      
-            theme: 'bootstrap4',});
-
+        $('#trabajador_ace').select2({
+            theme: 'bootstrap4',
+        });
     });
     $(document).ready(function() {
-        $('#agmaterdesv_ace').select2({      
-            theme: 'bootstrap4',});
-			
-    });
-					 	
-	$(document).ready(function() {
-    $('#formacontacto_ace').select2({      
-        theme: 'bootstrap4',});
+        $('#procesotrabajo_ace').select2({
+            theme: 'bootstrap4',
+        });
 
     });
-	
+
     $(document).ready(function() {
-        $('#matercasusalesi_ace').select2({      
-            theme: 'bootstrap4',});
+        $('#tipoactividad_ace').select2({
+            theme: 'bootstrap4',
+        });
+    });
+
+    $(document).ready(function() {
+        $('#tipolugar_ace').select2({
+            theme: 'bootstrap4',
+        });
+    });
+
+    $(document).ready(function() {
+        $('#agentematerial_ace').select2({
+            theme: 'bootstrap4',
+        });
 
     });
 
+    $(document).ready(function() {
+        $('#desviacion_ace').select2({
+            theme: 'bootstrap4',
+        });
+
+    });
+    $(document).ready(function() {
+        $('#agmaterdesv_ace').select2({
+            theme: 'bootstrap4',
+        });
+
+    });
+
+    $(document).ready(function() {
+        $('#formacontacto_ace').select2({
+            theme: 'bootstrap4',
+        });
+
+    });
+
+    $(document).ready(function() {
+        $('#matercasusalesi_ace').select2({
+            theme: 'bootstrap4',
+        });
+
+    });
 </script>
 
 <script>

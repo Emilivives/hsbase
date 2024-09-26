@@ -279,8 +279,9 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                 <div class="card-body">
                     <table id="example1" class="table tabe-hover table-condensed">
                         <colgroup>
-                            <col width="5%">
+                            <col width="3%">
                             <col width="10%">
+                            <col width="2%">
                             <col width="15%">
                             <col width="25%">
                             <col width="15%">
@@ -295,6 +296,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                             <tr>
                                 <th style="text-align: center">#</th>
                                 <th style="text-align: left">Fecha</th>
+                                <th style="text-align: center"></th>
                                 <th style="text-align: left">Codigo</th>
                                 <th style="text-align: center">Nombre</th>
                                 <th style="text-align: center">Tipo</th>
@@ -315,21 +317,27 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                 <tr>
                                     <td style="text-align: center"><b><?php echo $contador; ?></b></td>
                                     <td style="text-align: left"><?php echo $evaluacion_dato['fecha_er']; ?></td>
+                                    <td style="text-align: left"> <a href="show_er.php?id_evaluacion=<?php echo $id_evaluacion; ?>" style="text-align: right;" class="btn btn-outline-link btn-sm" title="Ver"><i class="fa-solid fa-up-right-from-square"></i></a></td>
+
                                     <td style="text-align: left"><b><?php echo $evaluacion_dato['codigo_er']; ?></b></td>
                                     <td style="text-align: left"><b><?php echo $evaluacion_dato['nombre_er']; ?></b></td>
                                     <td style="text-align: left"><?php echo $evaluacion_dato['tipoevaluacion_er']; ?></td>
                                                <td style="text-align: left"><?php echo $evaluacion_dato['nombre_cen']; ?></td>
                                     <td style="text-align: left"><?php echo $evaluacion_dato['nombre_resp']; ?></td>
-                                    
-                                 
-                                    <td style="text-align: center">
+                                    <td style="text-align: left">
                                         <div class="dropdown">
-                                            <a href="show_er.php?id_evaluacion=<?php echo $id_evaluacion; ?>" class="btn btn-warning btn-sm" title="Accede"> <i class="bi bi-folder"></i> Ver</a></a>
-                                            <a href="../../app/controllers/actividad/delete_accion.php?id_evaluacion=<?php echo $id_evaluacion; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar la evalucion PRL?')" title="Eliminar Evaluacion PRL"><i class="bi bi-trash-fill"></i></a>
+                                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Acciones
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="show_er.php?id_evaluacion=<?php echo $id_evaluacion; ?>" class="btn btn-warning btn-sm" title="Accede"> <i class="bi bi-folder"></i> Ver</a></a>
+                                                <a class="dropdown-item" href="../../app/controllers/evaluacion/delete_evaluacion.php?id_evaluacion=<?php echo $id_evaluacion; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar la evalucion PRL?')" title="Eliminar Evaluacion PRL"><i class="bi bi-trash-fill"></i> Eliminar</a>
+                                                <a class="dropdown-item" href="../../app/controllers/evaluacion/duplicar_evaluacion.php?id_evaluacion=<?php echo $id_evaluacion; ?>"><i class="bi bi-copy"></i> Duplicar</a>
+                                            </div>
                                         </div>
-
                                     </td>
-
+                                 
+                                    
                                 </tr>
                             <?php
                             }

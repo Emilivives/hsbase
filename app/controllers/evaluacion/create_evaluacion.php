@@ -28,12 +28,12 @@ session_start();
 $ultimotr = $pdo->lastInsertId();
 $_SESSION['mensaje'] = "Evaluacion registrada correctamente";
 $_SESSION['icono'] = 'success';
-header('Location: ' . $URL . "/admin/pruebas/index.php");
+header('Location: ' . $URL . "/admin/evaluacion/index.php");
 } else {
 session_start();
 $_SESSION['mensaje'] = "Evaluacion NO registrado";
 $_SESSION['icono'] = 'warning';
-header('Location: ' . $URL . '/admin/pruebas/index.php');
+header('Location: ' . $URL . '/admin/evaluacion/index.php');
 }
 
 

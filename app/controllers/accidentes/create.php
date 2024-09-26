@@ -22,22 +22,34 @@ $evalconriesgo_ace = $_POST['evalconriesgo_ace'];
 $isrecaida_ace = $_POST['isrecaida_ace'];
 $fechaantesrecaida_ace = $_POST['fechaantesrecaida_ace'];
 $descripcion_ace = $_POST['descripcion_ace'];
-$tipolugar_ace = $_POST['tipolugar_ace'];
+
+$tipolugar_ace = !empty($_POST['tipolugar_ace']) ? $_POST['tipolugar_ace'] : NULL;
+
 $zonalugar_ace = $_POST['zonalugar_ace'];
 $observaclugar_ace = $_POST['observaclugar_ace'];
-$procesotrabajo_ace = $_POST['procesotrabajo_ace'];
+
+$procesotrabajo_ace = !empty($_POST['procesotrabajo_ace']) ? $_POST['procesotrabajo_ace'] : NULL;
+
 $observproceso_ace = $_POST['observproceso_ace'];
-$tipoactividad_ace = $_POST['tipoactividad_ace'];
+
+$tipoactividad_ace = !empty($_POST['tipoactividad_ace']) ? $_POST['tipoactividad_ace'] : NULL;
+
 $observtipoactiv_ace = $_POST['observtipoactiv_ace'];
-$agentematerial_ace = $_POST['agentematerial_ace'];
+
+$agentematerial_ace = !empty($_POST['agentematerial_ace']) ? $_POST['agentematerial_ace'] : NULL;
+
 $observagmaterial_ace = $_POST['observagmaterial_ace'];
-$desviacion_ace = $_POST['desviacion_ace'];
+
+$desviacion_ace = !empty($_POST['desviacion_ace']) ? $_POST['desviacion_ace'] : NULL;
 $observdesviacion_ace = $_POST['observdesviacion_ace'];
-$agmaterdesv_ace = $_POST['agmaterdesv_ace'];
+
+$agmaterdesv_ace = !empty($_POST['agmaterdesv_ace']) ? $_POST['agmaterdesv_ace'] : NULL;
 $observagendesv_ace = $_POST['observagendesv_ace'];
-$formacontacto_ace = $_POST['formacontacto_ace'];
+
+$formacontacto_ace = !empty($_POST['formacontacto_ace']) ? $_POST['formacontacto_ace'] : NULL;
 $observformacont_ace = $_POST['observformacont_ace'];
-$matercasusalesi_ace = $_POST['matercasusalesi_ace'];
+
+$matercasusalesi_ace = !empty($_POST['matercasusalesi_ace']) ? $_POST['matercasusalesi_ace'] : NULL;
 $observmatlesi_ace = $_POST['observmatlesi_ace'];
 $numtrafectados_ace = $_POST['numtrafectados_ace'];
 $declaraciontrab_ace = $_POST['declaraciontrab_ace'];
@@ -79,6 +91,50 @@ $fechacumplimen_ace = $_POST['fechacumplimen_ace'];
 $revisadopor_ace = $_POST['revisadopor_ace'];
 $cargorevisado_ace = $_POST['cargorevisado_ace'];
 $fecharevision_ace = $_POST['fecharevision_ace'];
+
+
+// Comprova si està buit
+if (empty($fechabaja_ace)) {
+    $fechabaja_ace = null;
+}
+if (empty($fechaantesrecaida_ace)) {
+    $fechaantesrecaida_ace = null;
+}
+if (empty($recomedincorp_ace)) {
+    $recomedincorp_ace = null;
+}
+if (empty($recinedtrab_ace)) {
+    $recinedtrab_ace = null;
+}
+if (empty($recomedincorp_ace)) {
+    $recomedincorp_ace = null;
+}
+if (empty($fechacumplimen_ace)) {
+    $fechacumplimen_ace = null;
+}
+if (empty($fechainvestiga_ace)) {
+    $fechainvestiga_ace = null;
+}
+if (empty($fecharevision_ace)) {
+    $fecharevision_ace = null;
+}
+if (empty($tipolugar_ace)) {
+    $tipolugar = null;
+}
+
+
+if (empty($hora_ace)) {
+    $hora_ace = null;
+}
+if (empty($diasbaja_ace)) {
+    $diasbaja_ace = 0;
+}
+
+if($numtrafectados_ace = "-"){
+$numtrafectados_ace = null;
+}
+
+
 
 $sentencia = $pdo->prepare("INSERT INTO accidentes (nroaccidente_ace, comunicado_ace, trabajador_ace, centro_ace, lugar_ace, detalleslugar_ace, tipoaccidente_ace, fecha_ace, fechabaja_ace, hora_ace, horatrabajo_ace, trabajohabitual_ace, diadescanso_ace, semanadescanso_ace, diasbaja_ace, isevaluadoriesgo_ace, evalconriesgo_ace, isrecaida_ace, fechaantesrecaida_ace, descripcion_ace, tipolugar_ace, zonalugar_ace, observaclugar_ace, procesotrabajo_ace, observproceso_ace, tipoactividad_ace, observtipoactiv_ace, agentematerial_ace, observagmaterial_ace, desviacion_ace, observdesviacion_ace, agmaterdesv_ace, observagendesv_ace, formacontacto_ace, observformacont_ace, matercasusalesi_ace, observmatlesi_ace, numtrafectados_ace, declaraciontrab_ace, istestigos_ace, detallestestigo_ace, declaraciontestigo_ace, tipolesion_ace, gradolesion_ace, partecuerpo_ace, isevacuacion_ace, lugarevacuacion_ace, centromedico_ace, detallescentromed_ace, recomedincorp_ace, recinedtrab_ace, istrformado_ace, istrinformado_ace, protcolectivadisp_ace, protcolecnecesa_ace, observprotcol_ace, episdispon_ace, episneces_ace, observepis_ace, causaaccidente_ace, porquecausa_ace, quiencontrolcausa_ace, conclusionacci_ace, medidasprev_ace, valoracionmedida_ace, histaccult12mes_ace, histpuestoacc_ace, histtrabajosreal_ace, histcausaacc_ace, histmedidaacc_ace, investigador_ace, cargoinvesiga_ace, fechainvestiga_ace, fechacumplimen_ace, revisadopor_ace, cargorevisado_ace, fecharevision_ace)
 VALUES (:nroaccidente_ace, :comunicado_ace, :trabajador_ace, :centro_ace, :lugar_ace, :detalleslugar_ace, :tipoaccidente_ace,:fecha_ace, :fechabaja_ace, :hora_ace, :horatrabajo_ace, :trabajohabitual_ace, :diadescanso_ace, :semanadescanso_ace, :diasbaja_ace, :isevaluadoriesgo_ace, :evalconriesgo_ace, :isrecaida_ace, :fechaantesrecaida_ace, :descripcion_ace, :tipolugar_ace, :zonalugar_ace, :observaclugar_ace, :procesotrabajo_ace, :observproceso_ace, :tipoactividad_ace, :observtipoactiv_ace, :agentematerial_ace, :observagmaterial_ace, :desviacion_ace, :observdesviacion_ace, :agmaterdesv_ace, :observagendesv_ace, :formacontacto_ace, :observformacont_ace, :matercasusalesi_ace, :observmatlesi_ace, :numtrafectados_ace, :declaraciontrab_ace, :istestigos_ace, :detallestestigo_ace, :declaraciontestigo_ace, :tipolesion_ace, :gradolesion_ace, :partecuerpo_ace, :isevacuacion_ace, :lugarevacuacion_ace, :centromedico_ace, :detallescentromed_ace, :recomedincorp_ace, :recinedtrab_ace, :istrformado_ace, :istrinformado_ace, :protcolectivadisp_ace, :protcolecnecesa_ace, :observprotcol_ace, :episdispon_ace, :episneces_ace, :observepis_ace, :causaaccidente_ace, :porquecausa_ace, :quiencontrolcausa_ace, :conclusionacci_ace, :medidasprev_ace, :valoracionmedida_ace, :histaccult12mes_ace, :histpuestoacc_ace, :histtrabajosreal_ace, :histcausaacc_ace, :histmedidaacc_ace, :investigador_ace, :cargoinvesiga_ace, :fechainvestiga_ace, :fechacumplimen_ace, :revisadopor_ace, :cargorevisado_ace, :fecharevision_ace)");

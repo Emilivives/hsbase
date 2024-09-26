@@ -19,6 +19,9 @@ define('USUARIO', 'root');
 define('PASSWORD', '');
 define('BD', 'hs_base');
 
+define('BASE_URL', '/hsbase'); // Ajusta según tu configuración
+define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'] . BASE_URL);
+
 $servidor = "mysql:dbname=".BD.";host=".SERVIDOR;
 
 try{

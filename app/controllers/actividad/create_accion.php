@@ -21,19 +21,19 @@ $seguimiento_acc = $_POST['seguimiento_acc'];
 $avance_acc = $_POST['avance_acc'];
 $estado_acc = $_POST['estado_acc'];
 
-$imagen1_acc = $_POST['imagen1_acc'];
-$imagen2_acc = $_POST['imagen2_acc'];
+$imgriesgo_fer = $_POST['imgriesgo_fer'];
+$imgplan_fer = $_POST['imgplan_fer'];
 
 $nombreDelArchivo = date("Y-m-d-h-i-s");
-$filename = $nombreDelArchivo."__".$_FILES['imagen1_acc']['name'];
-$location = "../../../admin/accionprl/image/".$filename;
+$filename = $nombreDelArchivo."__".$_FILES['imgriesgo_fer']['name'];
+$location = "../../../admin/pruebas/image/".$filename;
 
-move_uploaded_file($_FILES['imagen1_acc']['tmp_name'],$location);
+move_uploaded_file($_FILES['imgriesgo_fer']['tmp_name'],$location);
 
-$filename2 = $nombreDelArchivo."__".$_FILES['imagen2_acc']['name'];
-$location2 = "../../../admin/accionprl/image/".$filename2;
+$filename2 = $nombreDelArchivo."__".$_FILES['imgplan_fer']['name'];
+$location2 = "../../../admin/pruebas/image/".$filename2;
 
-move_uploaded_file($_FILES['imagen2_acc']['tmp_name'],$location2);
+move_uploaded_file($_FILES['imgplan_fer']['tmp_name'],$location2);
 
 // Comprova si està buit
 if (empty($fecha_acc)) {

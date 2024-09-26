@@ -18,9 +18,16 @@ foreach ($puestoarea_datos as $puestoarea_dato) {
     $evaluacion_pc = $puestoarea_dato['evaluacion_pc'];
     $puestoarea_pc = $puestoarea_dato['puestoarea_pc'];
     $descripcion_pc = $puestoarea_dato['descripcion_pc'];
+    $factoresriesgo_pc = $puestoarea_dato['factoresriesgo_pc'];
+    $sensible_pc = $puestoarea_dato['sensible_pc'];
+    $siniestralidad_pc = $puestoarea_dato['siniestralidad_pc'];
+    $epis_pc = $puestoarea_dato['epis_pc'];
+    $equipos_pc = $puestoarea_dato['equipos_pc'];
+    $prodquim_pc = $puestoarea_dato['prodquim_pc'];
+    $descripcion_pc = $puestoarea_dato['descripcion_pc'];
+    $metodos_pc = $puestoarea_dato['metodos_pc'];
+    $factorpsico_pc = $puestoarea_dato['factorpsico_pc'];
     $nombre_cen = $puestoarea_dato['nombre_cen'];
     $nombre_cen = $puestoarea_dato['nombre_cen'];
     $nombre_resp = $puestoarea_dato['nombre_resp'];
-     
-
 }

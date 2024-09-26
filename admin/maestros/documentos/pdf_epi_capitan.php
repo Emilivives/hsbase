@@ -49,11 +49,7 @@ foreach ($empresa_datos as $empresa_dato) {
     $modalidadprl_emp = $empresa_dato['modalidadprl_emp'];
     $logo_emp = $empresa_dato['logo_emp'];
      
-
 }
-
-
-
 
 ///// traer datos de accionprl
 

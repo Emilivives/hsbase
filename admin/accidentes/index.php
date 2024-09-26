@@ -123,8 +123,15 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
                 $contador_de_accidentessinbaja = 0;
                 $contador_jornadas_perdidas = 0;
                 foreach ($accidentes_datos as $accidentes_dato) {
-                    if ((date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
-                        $contador_jornadas_perdidas += $accidentes_dato['diasbaja_ace'];
+                    // Verificar si es un accidente con baja y si pertenece al año actual
+                    if (($accidentes_dato['tipoaccidente_ta'] == "Accidente con baja") && 
+                        (date("Y", strtotime($accidentes_dato['fecha_ace'])) == $anio)) {
+                        
+                        // Verificar si 'diasbaja_ace' está definido y no está vacío
+                        if (!empty($accidentes_dato['diasbaja_ace']) && is_numeric($accidentes_dato['diasbaja_ace'])) {
+                            // Sumar los días de baja
+                            $contador_jornadas_perdidas += (int)$accidentes_dato['diasbaja_ace'];
+                        }
                     }
                 }
                 ?>
@@ -215,6 +222,7 @@ include('../../app/controllers/accidentes/listado_accidentes.php');
                 </style>
 
                 <div class="btn-text-right">
+                <a href="../accidentes/create_asistencia.php" class="btn btn-warning"><i class="bi bi-list-ul"></i> Nueva Asistencia Mutua</a>
                     <a href="../accidentes/create.php" class="btn btn-primary"><i class="bi bi-list-ul"></i> Nueva Investigacion accidente</a>
                 </div>
 

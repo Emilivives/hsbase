@@ -74,6 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <!-- javascrip bootstrap -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/js/bootstrap.bundle.min.js">
+    <script src="<?php echo $URL; ?>/public/js/bootstrap.bundle.min.js"></script>
     <!-- css bootstrap -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/css/bootstrap.min.css">
     <!-- chart js -->
@@ -120,7 +121,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             margin-top: auto;
         }
     </style>
-
+           
 </head>
 
 
@@ -144,8 +145,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
 
-                <!-- Messages Dropdown Menu -->
+                <!-- Messages Dropdown Menu 
+                <li class="nav-item dropdown">
 
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <span class="badge badge-info navbar-badge" title="Avisos">FAST</span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">MENU ACCESO RAPIDO</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#nuevoModalusuario">
+                            <i class="fas fa-envelope mr-2"></i> NUEVO USUARIO
+                            <span class="float-right text-muted text-sm">3 mins</span>
+                        </a>
+              
+
+
+                        <div class="dropdown-divider"></div>
+                        <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#nuevoModalAsistencia">
+                        <i class="fas fa-envelope mr-2"></i> NUEVA ASISTENCIA MUTUA
+                            <span class="float-right text-muted text-sm">12 hours</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-file mr-2"></i> 3 new reports
+                            <span class="float-right text-muted text-sm">2 days</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    </div>
+                </li>-->
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
 
@@ -331,7 +362,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                        <li class="nav-item <?php echo isTreeviewOpen(['/admin/evaluacion/control.php']); ?>">
+                        <li class="nav-item <?php echo isTreeviewOpen(['/admin/evaluacion/index.php', '/admin/evaluacion/control.php']); ?>">
 
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa-solid fa-check-to-slot"></i>
@@ -342,6 +373,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                         
+                                <li class="nav-item">
+                                    <a href="<?php echo $URL; ?>/admin/evaluacion/index.php" class="nav-link <?php echo isActive('/admin/evaluacion/index.php'); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Inicio ER</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="<?php echo $URL; ?>/admin/evaluacion/control.php" class="nav-link <?php echo isActive('/admin/evaluacion/control.php'); ?>">
                                         <i class="far fa-circle nav-icon"></i>
@@ -385,6 +423,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="<?php echo $URL; ?>/admin/maestros/documentos/index.php" class="nav-link <?php echo isActive('/admin/maestros/documentos/index.php'); ?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Documentos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo $URL; ?>/admin/maestros/epis_equipos_pq/index.php" class="nav-link <?php echo isActive('/admin/maestros/epis_equipos_pq/index.php'); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Epis/Equipos/PQ</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -485,3 +529,4 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Main content -->
             <div class="content">
+

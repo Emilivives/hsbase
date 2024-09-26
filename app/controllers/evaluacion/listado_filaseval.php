@@ -5,7 +5,9 @@ $puestocentro_fer = $_GET['id_puestocentro']; // Obtener el valor de la URL o fo
 
 // Consulta SQL corregida
 $sql_filaseval = "SELECT fer.id_filaeval, fer.puestocentro_fer, fer.frasefila_fer, fer.riesgo_fer, fer.probabilidad_fer, 
-           fer.gravedad_fer, fer.nivelriesgo_fer, m.id_medida, m.codigomedida, m.frasemedida, rg.codigoriesgo, rg.fraseriesgo
+           fer.gravedad_fer, fer.nivelriesgo_fer, m.id_medida, m.codigomedida, m.frasemedida, rg.codigoriesgo, rg.fraseriesgo,
+           fer.planresponsable_fer, fer.plancoste_fer, fer.planaccion_fer, fer.planprioridad_fer, fer.planmetodo_fer, 
+           fer.planformacion_fer, fer.planinformacion_fer
     FROM er_filas as fer
     INNER JOIN er_riesgos as rg ON fer.riesgo_fer = rg.id_riesgo
     INNER JOIN er_filamedidas as fm ON fer.id_filaeval = fm.filaeval_fm
@@ -42,6 +44,15 @@ foreach ($resultados as $fila) {
             'nivelriesgo_fer' => $fila['nivelriesgo_fer'],
             'codigoriesgo' => $fila['codigoriesgo'],
             'fraseriesgo' => $fila['fraseriesgo'],
+            'planresponsable_fer' => $fila['planresponsable_fer'],
+            'plancoste_fer' => $fila['plancoste_fer'],
+            'planaccion_fer' => $fila['planaccion_fer'],
+            'planprioridad_fer' => $fila['planprioridad_fer'],
+            'planmetodo_fer' => $fila['planmetodo_fer'],
+            'planformacion_fer' => $fila['planformacion_fer'],
+            'planinformacion_fer' => $fila['planinformacion_fer'],
+
+
             'medidas' => [] // Inicializamos el array de medidas
         ];
     }

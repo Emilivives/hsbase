@@ -658,7 +658,7 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
                                 <label for="tipolugar_ace" class="col-form-label col-sm-2">Tipo lugar:</label>
                                 <div class="col-sm-9">
                                     <select name="tipolugar_ace" id="tipolugar_ace" style="width: 100%" class="tipolugar_ace">
-                                        <option value="0">--Seleccione tipo--</option>
+                                        <option value="">--Seleccione tipo--</option>
                                         <?php
                                         foreach ($ace_tipolugar_datos as $ace_tipolugar_dato) { ?>
                                             <option value="<?php echo $ace_tipolugar_dato['id_tipolugar']; ?>"><?php echo $ace_tipolugar_dato['codtipolugar_tl']; ?> | <?php echo $ace_tipolugar_dato['tipolugar_tl']; ?> </option>

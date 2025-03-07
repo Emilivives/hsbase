@@ -1,4 +1,4 @@
-<?php include(BASE_PATH.'/app/controllers/perfiles/listado_perfiles.php') ?>
+<?php include('../../app/controllers/perfiles/listado_perfiles.php') ?>
 
 <div class="modal fade" id="nuevoModalusuario" tabindex="-1" aria-labelledby="nuevoModalusuario" aria-hidden="true">
     <div class="modal-dialog modal-xl">

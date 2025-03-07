@@ -41,7 +41,7 @@ header("Location: " . $URL . "/admin/actividad/showtareas.php?id_tarea=$id_tarea
 session_start();
 $_SESSION['mensaje'] = "Formacion NO creada";
 $_SESSION['icono'] = 'warning';
-header("Location: " . $URL . "/admin/actividad/showtareas.php?id_tarea=$id_tarea");
+header("Location: " . $URL . "/admin/actividad/showtareas.php?id_tarea=$id_tarea&id_proyecto=$id_proyecto");
 }
 
 

@@ -36,7 +36,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
 
 <div class="container-fluid">
 
-<div class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header col-md-12">
@@ -72,7 +72,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                             <div class="form-group">
                                                 <label for="codigomedida" class="col-form-label col-sm-3">Código*</label>
                                                 <div class="col-sm-8">
-                                                <select name="codigomedida" id="id_riesgo" class="id_riesgo">
+                                                    <select name="codigomedida" id="id_riesgo" class="id_riesgo">
                                                         <option value="">Seleccione un riesgo</option>
                                                         <?php
                                                         foreach ($riesgos_datos as $riesgos_dato) { ?>
@@ -91,7 +91,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
 
                                     </div>
 
-                                  
+
                                     <br>
 
 
@@ -130,25 +130,33 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                         </thead>
                         <tbody>
                             <?php
-                            $contadormedidas = 0;
+                            $contadomedidas = 0;
                             foreach ($medidas_datos as $medidas_dato) {
-                                $contadormedidas = $contadormedidas + 1;
+                                $contadomedidas = $contadomedidas + 1;
                                 $id_departamento = $medidas_dato['id_medida'];
                             ?>
                                 <tr>
-                                    <td><?php echo $contadormedidas; ?></td>
+                                    <td><?php echo $contadomedidas; ?></td>
                                     <td><?php echo $medidas_dato['codigomedida']; ?></td>
                                     <td><?php echo $medidas_dato['frasemedida']; ?></td>
 
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                            <a href="update.php?id_departamento=<?php echo $id_departamento ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                            <a href="delete.php?id_departamento=<?php echo $id_departameto ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" title="EDITAR MEDIDA" data-target="#modal-modificarmedida<?php echo $id_medida; ?>"><i class="bi bi-pencil-square"></i></button>
+
+                                            <a href="../../../app/controllers/maestros/evaluacion/delete_medida.php?id_medida=<?php echo $medidas_dato['id_medida'] ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+
+
+                                            
+
 
                                         </div>
                                     </td>
 
                                 </tr>
+
+
+
                             <?php
                             }
                             ?>
@@ -163,7 +171,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
 
 
         </div>
-      
+
     </div>
 
     <div class="row">
@@ -413,7 +421,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
         </div>
 
     </div>
-   
+
 
 </div>
 

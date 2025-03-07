@@ -160,10 +160,11 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                         </td>
                                         <td>
                                             <center>
-                                            
+
                                                 <form action="../../app/controllers/formaciones/borrar_trabajadorformacion.php" method="POST">
                                                     <input type="text" name="id_formasistencia" value="<?php echo $id_formasistencia ?>" hidden>
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Borrar</button>                                                </form>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Borrar</button>
+                                                </form>
                                                 <a href="../maestros/documentos/pdf_titulo_formacion.php?id_formacion=<?php echo $id_formacion; ?>&id_trabajador=<?php echo $formasistencia_dato['id_trabajador'] ?>" class="btn btn-warning btn-sm" title="Generar titulo" target="_blank"><i class="fa-regular fa-file-lines"></i> Titulo</a>
 
                                             </center>
@@ -177,46 +178,88 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                         </table>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <button class="btn btn-primary btn-block" id="btn_guardar_formacion">Guardar Formación</button>
+                                <button class="btn btn-primary btn-block" id="btn_guardar_formacion" onclick="return confirm('Realmente desea actualizar la formación?')">Guardar Formación</button>
                                 <div id="respuesta_registro_formacion"></div>
                                 <script>
-                                    $('#btn_guardar_formacion').click(function() {
-                                        var nroformacion = '<?php echo $contador_formaciones ?>';
-                                        var tipo_fr = $('#tipo_fr').val();
-                                        var fecha_fr = $('#fecha_fr').val();
-                                        var fechacad_fr = $('#fechacad_fr').val();
-                                        var formador_fr = $('#formador_fr').val();
+                                    $('#btn_guardar_formacion').click(function(e) {
+                                        e.preventDefault();
 
+                                        var nroformacion = '<?php echo $nroformacion ?>';
+                                        var tipo_fr = $('select[name="tipo_fr"]').val();
+                                        var fecha_fr = $('input[name="fecha_fr"]').val();
+                                        var fechacad_fr = $('input[name="fechacad_fr"]').val();
+                                        var formador_fr = $('select[name="formador_fr"]').val();
 
-                                        if (fecha_fr == "") {
-                                            alert("debe indicar la fecha de formacion");
+                                        // Validation
+                                        if (!fecha_fr) {
+                                            alert("Debe indicar la fecha de formación");
+                                            return false;
+                                        }
+                                        if (!nroformacion) {
+                                            alert("Debe indicar el número de formación");
+                                            return false;
+                                        }
 
-                                        } else if (nroformacion == "") {
-                                            alert("debe indicar el numero de formacion");
+                                        // Show loading state
+                                        $('#respuesta_registro_formacion').html('<div class="alert alert-info">Procesando...</div>');
 
-                                        } else {
-                                            var url = "../../app/controllers/formaciones/registrar_formacion.php";
-                                            $.get(url, {
+                                        // Send AJAX request
+                                        $.ajax({
+                                            url: "../../app/controllers/formaciones/actualizar_formacion.php",
+                                            type: "POST",
+                                            data: {
                                                 nroformacion: nroformacion,
                                                 tipo_fr: tipo_fr,
                                                 fecha_fr: fecha_fr,
                                                 fechacad_fr: fechacad_fr,
                                                 formador_fr: formador_fr
-                                            }, function(datos) {
-                                                $('#respuesta_registro_formacion').html(datos);
-                                            })
-                                            /*} else($tipo_fr == 1) {
-                                                <?php
-                                                $sentencia2 = $pdo->prepare("UPDATE trabajadores as tr SET tr.formacionpdt_tr = $fecha_tr 
-                                                INNER JOIN form_asistencia as fas ON tr.id_trabajador = fas.idtrabajador_fas
-                                                INNER JOIN formacion as fr ON fas.nroformacion = fr.nroformacion WHERE tr.id_trabajador = fas.idtrabajador_fas");
-                                                $sentencia2->bindParam('formacionpdt_tr', $fecha_fr);
-                                                ?>
-                                            }*/
+                                            },
+                                            success: function(response) {
+                                                // Primero intentamos parsear la respuesta como JSON
+                                                try {
+                                                    // Si es una cadena, intentamos convertirla a objeto
+                                                    if (typeof response === 'string') {
+                                                        response = JSON.parse(response);
+                                                    }
 
-                                        }
+                                                    // Mostramos el mensaje de éxito
+                                                    $('#respuesta_registro_formacion').html(
+                                                        '<div class="alert alert-success">' + response.message + '</div>'
+                                                    );
+
+                                                    // Actualizamos los valores en el formulario
+                                                    if (response.data) {
+                                                        $('select[name="tipo_fr"]').val(response.data.tipo_fr);
+                                                        $('input[name="fecha_fr"]').val(response.data.fecha_fr);
+                                                        $('input[name="fechacad_fr"]').val(response.data.fechacad_fr);
+                                                        $('select[name="formador_fr"]').val(response.data.formador_fr);
+                                                    }
+
+                                                    // Recargamos la página después de 1.5 segundos
+                                                    setTimeout(function() {
+                                                        location.reload();
+                                                    }, 1500);
+
+                                                } catch (e) {
+                                                    // Si hay un error al parsear el JSON, asumimos que la actualización fue exitosa
+                                                    $('#respuesta_registro_formacion').html(
+                                                        '<div class="alert alert-success">Formación actualizada correctamente</div>'
+                                                    );
+                                                    // Recargamos la página después de 1.5 segundos
+                                                    setTimeout(function() {
+                                                        location.reload();
+                                                    }, 1500);
+                                                }
+                                            },
+                                            error: function(xhr, status, error) {
+                                                $('#respuesta_registro_formacion').html(
+                                                    '<div class="alert alert-danger">Error: ' + error + '</div>'
+                                                );
+                                            }
+                                        });
                                     });
                                 </script>
+
 
                             </div>
                         </div>

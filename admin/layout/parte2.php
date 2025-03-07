@@ -19,10 +19,13 @@
     <!-- REQUIRED SCRIPTS -->
 
 
+
+
     <!-- Bootstrap 4 -->
     <script src="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo $URL; ?>/public/templates/AdminLTE/dist/js/adminlte.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
 
     <!-- DataTables  & Plugins -->
 <script src="<?php echo $URL; ?>/public/templates/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>

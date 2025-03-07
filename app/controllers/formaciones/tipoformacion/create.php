@@ -32,3 +32,4 @@ header('Location: ' . $URL . '/admin/formacion/tipoformaciones.php');
 
 
 ?>
+

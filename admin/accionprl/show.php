@@ -1,5 +1,19 @@
 <?php
+session_start();
 include('../../app/config.php');
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['sesion_email'])) {
+    header('Location: ' . $URL . '/login.php');
+    exit();
+}
+
+// Verificar si el usuario tiene permiso para acceder a esta página
+if ($_SESSION['perfil_usr'] !== 'ADMINISTRADOR' && $_SESSION['perfil_usr'] !== 'USUARIO_PRL') {
+    // Si el usuario no es administrador, redirigirlo a su dashboard de usuario
+    header('Location: ' . $URL . '/admin/acceso_nopermitido.php');
+    exit();
+}
 include('../../admin/layout/parte1.php');
 $id_accion = $_GET['id_accion'];
 include('../../app/controllers/actividad/datos_accionprl.php');
@@ -10,7 +24,11 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
 
 
 ?>
-<style>
+<html>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<style>
         .btn-small {
             font-size: 0.8rem; /* Tamaño de fuente más pequeño */
             padding: 0.2rem 0.4rem; /* Tamaño de relleno más pequeño */
@@ -18,10 +36,6 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
             line-height: 1; /* Ajustar la altura de línea para un tamaño de botón más pequeño */
         }
     </style>
-<html>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 <div class="content-header">
     <div class="container-fluid">
@@ -49,7 +63,7 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
 <div class="content">
     <form action="../../app/controllers/actividad/update_accion.php" method="post" enctype="multipart/form-data">
 
-        <input type="text" name="id_accion" value="<?php echo $id_accion; ?>">
+        <input type="text" name="id_accion" value="<?php echo $id_accion; ?>" hidden>
 
         <div class="well">
             <div class="row">
@@ -377,7 +391,7 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                         </div>
                     </div>
 
-                    <div class="card-body">
+                        <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group row">
@@ -405,16 +419,12 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                         <div class="row">
                             <div class="col-sm-2">
                             </div>
-                            <div class="col-sm-4">
+                          <!--  <div class="col-sm-4">
                                 <div class="form-group row">
                                     <div class="col-md-8">
                                         <label for="">Imagen 1 </label>
                                         <input type="file" name="imagen1_acc" class="form-control" id="file1">
-                                        <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" role="button" target="_blank">
-            Max. 1Mb
-        </a>
-                                    
-                                        <br><br>
+                                        <br>
                                         <output id="list1">
                                             <img src="<?php echo $URL . "/admin/accionprl/image/" . $imagen1_acc; ?>" width="100%" alt="">
                                         </output>
@@ -441,16 +451,83 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                                         </script>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
+							<div class="col-sm-4">
+        <div class="form-group row">
+            <div class="col-md-8">
+                <label for="">Imagen 1 </label>
+                <input type="file" name="imagen1_acc" class="form-control" id="file1">
+				<a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" role="button" target="_blank">
+            Max. 1Mb
+        </a>
+                <br>
+                <output id="list1">
+                    <img src="<?php echo $URL . "/admin/accionprl/image/" . $imagen1_acc; ?>" width="100%" alt="">
+                </output>
+                <input type="hidden" name="imagen1_actual" value="<?php echo $imagen1_acc; ?>">
+                <script>
+                    function archivo1(evt) {
+                        var files = evt.target.files; // FileList object
+                        for (var i = 0, f; f = files[i]; i++) {
+                            if (!f.type.match('image.*')) {
+                                continue;
+                            }
+                            var reader = new FileReader();
+                            reader.onload = (function(theFile) {
+                                return function(e) {
+                                    document.getElementById("list1").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                };
+                            })(f);
+                            reader.readAsDataURL(f);
+                        }
+                    }
+                    document.getElementById('file1').addEventListener('change', archivo1, false);
+                </script>
+            </div>
+        </div>
+    </div>
                             <div class="col-sm-1">
                             </div>
-                            <div class="col-sm-4">
+							
+							 <div class="col-sm-4">
+        <div class="form-group row">
+            <div class="col-md-8">
+                <label for="">Imagen 2</label>
+                <input type="file" name="imagen2_acc" class="form-control" id="file2">
+				<a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" role="button" target="_blank">
+            Max. 1Mb
+        </a>
+                <br>
+                <output id="list2">
+                    <img src="<?php echo $URL . "/admin/accionprl/image/" . $imagen2_acc; ?>" width="100%" alt="">
+                </output>
+                <input type="hidden" name="imagen2_actual" value="<?php echo $imagen2_acc; ?>">
+                <script>
+                    function archivo2(evt) {
+                        var files = evt.target.files; // FileList object
+                        for (var i = 0, f; f = files[i]; i++) {
+                            if (!f.type.match('image.*')) {
+                                continue;
+                            }
+                            var reader = new FileReader();
+                            reader.onload = (function(theFile) {
+                                return function(e) {
+                                    document.getElementById("list2").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                };
+                            })(f);
+                            reader.readAsDataURL(f);
+                        }
+                    }
+                    document.getElementById('file2').addEventListener('change', archivo2, false);
+                </script>
+          
+							
+                      <!--   <div class="col-sm-4">
                                 <div class="form-group row">
                                     <div class="col-md-8">
                                         <label for="">Imagen 2 </label>
-                                        <input type="file" name="imagen2_acc" class="form-control" id="file2"><span class='badge badge-danger'>Max. 1Mb</span>
-                                        <br><br>
-
+                                        <input type="file" name="imagen2_acc" class="form-control" id="file2">
+                                        <br>
                                         <output id="list2">
                                             <img src="<?php echo $URL . "/admin/accionprl/image/" . $imagen2_acc; ?>" width="100%" alt="">
                                         </output>
@@ -477,21 +554,24 @@ include('../../app/controllers/maestros/centros/listado_centros.php');
                                         </script>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
 
                     </div>
-                </div>
 
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="" class="btn btn-secondary">Cancelar</a>
-                    <input type="submit" class="btn btn-primary" value="Guardar">
                 </div>
             </div>
+
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="" class="btn btn-secondary">Cancelar</a>
+                <input type="submit" class="btn btn-primary" value="Guardar">
+				  <a href="reporte.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-warning" title="Generar reporte" target="_blank"><i class="fa-regular fa-file-lines"></i> Imprimir</a>
+            </div>
+        </div>
     </form>
 
 </div>
@@ -509,23 +589,6 @@ include('../../admin/layout/parte2.php');
 include('../../admin/layout/mensaje.php');
 ?>
 
-<!--<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>-->
 
 <script>
     $(function() {

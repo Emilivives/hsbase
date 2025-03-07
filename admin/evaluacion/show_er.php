@@ -1,5 +1,19 @@
 <?php
+session_start();
 include('../../app/config.php');
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['sesion_email'])) {
+    header('Location: ' . $URL . '/login.php');
+    exit();
+}
+
+// Verificar si el usuario tiene permiso para acceder a esta página
+if ($_SESSION['perfil_usr'] !== 'ADMINISTRADOR' && $_SESSION['perfil_usr'] !== 'USUARIO_PRL') {
+    // Si el usuario no es administrador, redirigirlo a su dashboard de usuario
+    header('Location: ' . $URL . '/admin/acceso_nopermitido.php');
+    exit();
+}
 include('../../admin/layout/parte1.php');
 $id_evaluacion = $_GET['id_evaluacion'];
 include('../../app/controllers/evaluacion/datos_evaluacion.php');
@@ -821,7 +835,8 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
                             <col width="1%">
                             <col width="10%">
-                            <col width="85%">
+							   <col width="1%">
+                            <col width="84%">
                             <col width="4%">
 
 
@@ -832,6 +847,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
                                 <th style="text-align: left">#</th>
                                 <th style="text-align: left">Puesto / Area</th>
+								 <th style="text-align: center"></th>
                                 <th style="text-align: left">Descripcion</th>
                                 <th style="text-align: center"></th>
                             </tr>
@@ -852,6 +868,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                     <td style="text-align: left"><b><?php echo $contador ?></b></td>
 
                                     <td style="text-align: left"><?php echo $puestoareas_dato['puestoarea_pc']; ?></td>
+									  <td style="text-align: left"> <a href="show_puestoarea.php?id_puestocentro=<?php echo $id_puestocentro; ?>&id_evaluacion=<?php echo $id_evaluacion; ?>" style="text-align: right;" class="btn btn-outline-link btn-sm" title="Ver"><i class="fa-solid fa-up-right-from-square"></i></a></td>
                                     <td style="text-align: left"><?php echo $puestoareas_dato['descripcion_pc']; ?></td>
                                     <td style="text-align: left">
                                         <div class="dropdown">

@@ -62,6 +62,8 @@ include('../../app/controllers/perfiles/listado_perfiles.php');
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
                                             <a href="update.php?id_perfil=<?php echo $id_perfil; ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> Editar</a>
+                                            <a href="../../app/controllers/perfiles/delete.php?id_perfil=<?php echo $id_perfil; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar el registro?')" title="Eliminar investigación"><i class="bi bi-trash-fill"></i> </a>
+
                                         </div>
                                     </td>
 
@@ -114,10 +116,10 @@ include('../../admin/layout/mensaje.php');
 <script>
     $(function() {
         $("#example1").DataTable({
-            "pageLength": 5,
+            "pageLength": 15,
             "language": {
                 "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ perfiles",
                 "infoEmpty": "Mostrando 0 a 0 de 0 Perfiles",
                 "infoFiltered": "(Filtrado de MAX total Perfiles)",
                 "infoPostFix": "",

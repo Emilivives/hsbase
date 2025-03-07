@@ -54,14 +54,13 @@ foreach ($formasistencia_datos as $formasistencia_dato) {
     $contador_formasistencia = $contador_formasistencia + 1;
 }
 
-
 ///// traer datos de accionprl
 
 $pdf = new FPDI();
 
 # Pagina 1  (X-horizontal Y-vertical)
 $pdf->addPage('L');
-$pdf->setSourceFile('Files_Pdf/14_05_2024_titulo_formacion.pdf');
+$pdf->setSourceFile('Files_Pdf/14_05_2024_titulo formacion.pdf');
 $tplIdx1 = $pdf->importPage(1);
 $pdf->useTemplate($tplIdx1); 
 
@@ -76,22 +75,22 @@ $dni = mb_convert_encoding($formasistencia_dato['dni_tr'], 'ISO-8859-1', 'UTF-8'
 $pdf->Write(10, $dni);
 
 
-$pdf->SetFont('Arial', 'B', '15');
-$pdf->SetXY(165, 89);
+$pdf->SetFont('Arial', 'B', '18');
+$pdf->SetXY(50, 102);
 $trabajador_ace = mb_convert_encoding($tipo_fr, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(5, $tipo_fr);
 
 $pdf->SetFont('Arial', '', '15');
-$pdf->SetXY(65, 104);
+$pdf->SetXY(65, 128);
 $pdf->Write(10, $fecha_fr);
 
 
 $pdf->SetFont('Arial', '', '15');
-$pdf->SetXY(181, 104);
+$pdf->SetXY(165, 128);
 $pdf->Write(10, $duracion_fr);
 
 $pdf->SetFont('Arial', '', '15');
-$pdf->SetXY(100, 117);
+$pdf->SetXY(100, 115);
 $pdf->Write(10, $normativa_fr);
 
 
@@ -106,8 +105,9 @@ $detalles_fr = mb_convert_encoding($detalles_fr, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(3, $detalles_fr);
 
 $pdf->SetFont('Arial', '', '13');
-$pdf->SetXY(45, 221);
+$pdf->SetXY(45, 248);
 $pdf->Write(10, $fecha_fr);
+
 
 
 
@@ -116,7 +116,7 @@ $pdf->Write(10, $fecha_fr);
 //setFont ('S' - SUBRAYA 
 
 
-$pdf->Output('Files_Pdf/SOLICITUD_ASISTENCIA_MUTUA_TRASMAPI.pdf', 'D'); //SALIDA DEL PDF
+$pdf->Output(''.$formasistencia_dato['nombre_tr'].'_'.$fecha_fr.'.pdf', 'D'); //SALIDA DEL PDF
 //    $pdf->Output('original_update.pdf', 'F');
 //    $pdf->Output('original_update.pdf', 'I'); //PARA ABRIL EL PDF EN OTRA VENTANA
 //	  $pdf->Output('original_update.pdf', 'D'); //PARA FORZAR LA DESCARGA

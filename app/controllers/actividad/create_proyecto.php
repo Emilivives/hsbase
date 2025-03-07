@@ -3,6 +3,7 @@
 include('../../../app/config.php');
 
 $nombre_py = $_POST['nombre_py'];
+$empresa_py = $_POST['empresa_py'];
 $responsable_py = $_POST['responsable_py'];
 $descripcion_py = $_POST['descripcion_py'];
 $estado_py = $_POST['estado_py'];
@@ -11,10 +12,11 @@ $fechafin_py = $_POST['fechafin_py'];
 
 
 
-$sentencia = $pdo->prepare("INSERT INTO ag_proyecto (nombre_py, responsable_py, descripcion_py, estado_py, fechainicio_py, fechafin_py) 
-VALUES(:nombre_py, :responsable_py, :descripcion_py, :estado_py, :fechainicio_py, :fechafin_py)");
+$sentencia = $pdo->prepare("INSERT INTO ag_proyecto (nombre_py, empresa_py, responsable_py, descripcion_py, estado_py, fechainicio_py, fechafin_py) 
+VALUES(:nombre_py, :empresa_py, :responsable_py, :descripcion_py, :estado_py, :fechainicio_py, :fechafin_py)");
 
 $sentencia->bindParam('nombre_py', $nombre_py);    
+$sentencia->bindParam('empresa_py', $empresa_py);
 $sentencia->bindParam('responsable_py', $responsable_py);
 $sentencia->bindParam('descripcion_py', $descripcion_py);
 $sentencia->bindParam('estado_py', $estado_py);

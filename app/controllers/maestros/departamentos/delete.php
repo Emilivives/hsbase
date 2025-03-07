@@ -1,6 +1,7 @@
 <?php
 
-include('../../../../app/config.php');
+
+include('../../../config.php');
 
 $id_departamento = $_POST['id_departamento'];
 

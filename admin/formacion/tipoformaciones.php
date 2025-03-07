@@ -81,7 +81,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                                 </div>
                                             </div>
                                         </div>
-                                        <hr>
+										<hr>
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group row">
@@ -92,7 +92,6 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                                 </div>
                                             </div>
                                         </div>
-
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-12">

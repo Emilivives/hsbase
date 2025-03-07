@@ -1,5 +1,19 @@
 <?php
+session_start();
 include('../../app/config.php');
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['sesion_email'])) {
+    header('Location: ' . $URL . '/login.php');
+    exit();
+}
+
+// Verificar si el usuario tiene permiso para acceder a esta página
+if ($_SESSION['perfil_usr'] !== 'ADMINISTRADOR' && $_SESSION['perfil_usr'] !== 'USUARIO_PRL') {
+    // Si el usuario no es administrador, redirigirlo a su dashboard de usuario
+    header('Location: ' . $URL . '/admin/acceso_nopermitido.php');
+    exit();
+}
 include('../../admin/layout/parte1.php');
 include('../../app/controllers/pruebas/listado_trabajadores.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');

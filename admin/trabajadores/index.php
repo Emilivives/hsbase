@@ -1,5 +1,7 @@
 <?php
+include('../../app/controllers/functions.php');
 include('../../app/config.php');
+verificarAcceso(['ADMINISTRADOR', 'USUARIO_PRL', 'USUARIO']); // Verificamos que sea administrador
 include('../../admin/layout/parte1.php');
 include('../../app/controllers/trabajadores/listado_trabajadores.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');

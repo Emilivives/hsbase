@@ -1442,8 +1442,9 @@ include('../../app/controllers/maestros/accidentes/listado_gravedad.php');
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <a href="" class="btn btn-secondary">Cancelar</a>
+          
                 <input type="submit" class="btn btn-primary" value="Registrar accidente">
+				           <a href="<?php echo $URL; ?>/admin/accidentes/index.php" class="btn btn-secondary">Salir</a>
             </div>
         </div>
 

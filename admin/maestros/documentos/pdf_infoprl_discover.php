@@ -31,7 +31,7 @@ foreach ($trabajador_datos as $trabajador_dato) {
 
 
 }
-
+$nombre_tr = mb_convert_encoding($nombre_tr, 'ISO-8859-1', 'UTF-8');
 ///// traer datos de accionprl
 
 $pdf = new FPDI();
@@ -43,7 +43,8 @@ $tplIdx = $pdf->importPage(1);
 $pdf->useTemplate($tplIdx);
 $pdf->SetFont('Arial', 'B', '10');
 $pdf->SetXY(48, 92);
-$pdf->Write(10, $nombre_tr);
+$trabajador = mb_convert_encoding($nombre_tr, 'ISO-8859-1', 'UTF-8');
+$pdf->Write(10, $trabajador);
 
 
 $pdf->SetFont('Arial', 'B', '10');
@@ -52,7 +53,7 @@ $pdf->Write(10, $dni_tr);
 
 
 
-$pdf->Output('Files_Pdf/Dosier_PRL.pdf', 'D'); //SALIDA DEL PDF
+$pdf->Output(''.$nombre_tr.'_INFOPRL.pdf', 'D'); //SALIDA DEL PDF
 //    $pdf->Output('original_update.pdf', 'F');
 //    $pdf->Output('original_update.pdf', 'I'); //PARA ABRIL EL PDF EN OTRA VENTANA
 //	  $pdf->Output('original_update.pdf', 'D'); //PARA FORZAR LA DESCARGA

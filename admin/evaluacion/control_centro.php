@@ -83,7 +83,7 @@ include('../../app/controllers/evaluacion/listado_control_centro.php');
 
 
     <!-- ./col -->
-
+ 
 </div>
 <!-- /.content-header -->
 
@@ -97,6 +97,89 @@ include('../../app/controllers/evaluacion/listado_control_centro.php');
                     text-align: right;
                 }
             </style>
+            <!-- Button trigger modal -->
+            <div class="btn-text-right">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevocontrol">Añadir control</button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="modal-nuevocontrol">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#0080ff ;color:white">
+                            <h5 class="modal-title" id="modal-nuevocontrol">EVALUACION REALIZADA</h5>
+                            <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="../../app/controllers/evaluacion/create_control.php" method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label for="">Centro Trabajo</label>
+                                            <select name="centro_cev" class="form-control">
+                                                <?php foreach ($centros_datos as $centros_dato) : ?>
+                                                    <option value="<?php echo htmlspecialchars($centros_dato['id_centro']); ?>">
+                                                        <?php echo htmlspecialchars($centros_dato['nombre_cen']); ?> - <?php echo htmlspecialchars($centros_dato['nombre_emp']); ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label for="">Tipo evaluación</label>
+                                            <select name="tipoevaluacion_cev" class="form-control">
+                                                <?php foreach ($tipoevaluacion_datos as $tipoevaluacion_dato) : ?>
+                                                    <option value="<?php echo htmlspecialchars($tipoevaluacion_dato['id_tipoevaluacion']); ?>">
+                                                        <?php echo htmlspecialchars($tipoevaluacion_dato['tipoevaluacion_tev']); ?> - <?php echo htmlspecialchars($tipoevaluacion_dato['especialidad_tev']); ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <input type="hidden" name="noaplica_cev" value="NULL">
+                                    <div class="col-md-4">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="noaplica_cev" id="flexSwitchCheckDefault" value="NA">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">No Aplica</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <label for="fecha_cev" class="col-form-label col-sm-4">Fecha doc.:</label>
+                                            <input type="date" id="fecha_cev" name="fecha_cev" class="form-control" tabindex="1">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="fechacad_cev" class="col-form-label col-sm-4">Fecha cad.:</label>
+                                            <input type="date" id="fechacad_cev" name="fechacad_cev" class="form-control" tabindex="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group row">
+                                            <label for="anotaciones_cev" class="col-form-label col-sm-2">Anotaciones</label>
+                                            <div class="col-sm-12">
+                                                <textarea class="form-control" name="anotaciones_cev" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <div class="card-body">
@@ -127,113 +210,42 @@ include('../../app/controllers/evaluacion/listado_control_centro.php');
                             <?php
                             $contador = 0;
                             foreach ($control_evaluaciones_centro as $control_evaluaciones) {
-                                $contador++;
+                                $contador = $contador + 1;
                             ?>
+
                                 <tr>
                                     <td style="text-align: center"><?php echo $contador ?></td>
-                                    <td style="text-align: center" hidden><?php echo $control_evaluaciones['id_controleval']; ?></td>
                                     <td style="text-align: center"><?php echo $control_evaluaciones['tipoevaluacion_tev']; ?></td>
                                     <td><?php echo $control_evaluaciones['fecha_cev']; ?></td>
                                     <td><?php echo $control_evaluaciones['fechacad_cev']; ?></td>
                                     <td><?php echo $control_evaluaciones['noaplica_cev']; ?></td>
                                     <td><?php echo $control_evaluaciones['anotaciones_cev']; ?></td>
-                                    <td style="text-align: center">
-                                        <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-nuevocontrol<?php echo $control_evaluaciones['id_controleval']; ?>" title="EDITAR RM"><i class="bi bi-pencil-square"></i></button>
-                                            <a href="../../app/controllers/reconocimientos/delete.php?id_reconocimiento=<?php echo $control_evaluaciones['id_controleval']; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar el registro?')" title="Eliminar investigación"><i class="bi bi-trash-fill"></i> </a>
-                                        </div>
+                                  
                                     </td>
+                                    <td style="text-align: center;"> <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $id_trabajador; ?>" class="btn btn-primary btn-sm" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
+                                    </td>
+
                                 </tr>
                             <?php
                             }
                             ?>
+
+
                         </tbody>
+
                     </table>
                 </div>
             </div>
         </div>
 
-        <?php
-foreach ($control_evaluaciones_centro as $control_evaluaciones) {
-    $id_controleval = $control_evaluaciones['id_controleval'];
-    include('../../app/controllers/evaluacion/datos_control.php');
-?>
-    <!-- Modal MODIFICAR DATOS -->
-    <div class="modal fade" id="modal-nuevocontrol<?php echo $id_controleval; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color:gold">
-                    <h5 class="modal-title" id="modal-modificacontrol" style="color: black;"><i class="bi bi-person-lines-fill"></i> CONTROL EVALUACION <?php echo $id_controleval; ?></h5>
-                    <button type="button" class="close" style="color:black;" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="../../app/controllers/evaluacion/update_control.php" method="post" enctype="multipart/form-data">
-                        <div class="row">
-                        <input type="hidden" name="id_controleval" value="<?php echo $id_controleval ?>" class="form-control">
 
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label for="">Centro Trabajo</label>
-                                    <input type="text" id="centro_cev<?php echo $id_controleval; ?>" value="<?php echo htmlspecialchars($centro_cev); ?>" class="form-control" readonly>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label for="">Tipo evaluación</label>
-                                    <input type="text" id="tipoevaluacion_cev<?php echo $id_controleval; ?>" value="<?php echo htmlspecialchars($tipoevaluacion_cev); ?>" class="form-control" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-2"></div>
-                            <input type="hidden" name="noaplica_cev" value="NULL">
-                            <div class="col-md-4">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="noaplica_cev" id="flexSwitchCheckDefault<?php echo $id_controleval; ?>" value="NA" <?php echo ($noaplica_cev == 'NA') ? 'checked' : ''; ?>>
-                                    <label class="form-check-label" for="flexSwitchCheckDefault<?php echo $id_controleval; ?>">No Aplica</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group row">
-                                <div class="col-sm-4">
-                                    <label for="fecha_cev<?php echo $id_controleval; ?>" class="col-form-label col-sm-4">Fecha doc.:</label>
-                                    <input type="date" id="fecha_cev<?php echo $id_controleval; ?>" name="fecha_cev" class="form-control" value="<?php echo htmlspecialchars($fecha_cev); ?>" tabindex="1">
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="fechacad_cev<?php echo $id_controleval; ?>" class="col-form-label col-sm-4">Fecha cad.:</label>
-                                    <input type="date" id="fechacad_cev<?php echo $id_controleval; ?>" name="fechacad_cev" class="form-control" value="<?php echo htmlspecialchars($fechacad_cev); ?>" tabindex="1">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group row">
-                                    <label for="anotaciones_cev" class="col-form-label col-sm-2">Anotaciones</label>
-                                    <div class="col-sm-12">
-                                        <textarea class="form-control" name="anotaciones_cev" rows="3"><?php echo htmlspecialchars($anotaciones_cev); ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+
+
     </div>
-    <?php
-}
-?>
-    </div>
+
+
 </div>
-
 
 
 
@@ -246,30 +258,25 @@ include('../../admin/layout/mensaje.php');
 
 <!-- JavaScript para manejar el checkbox -->
 <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkbox<?php echo $id_controleval; ?> = document.getElementById('flexSwitchCheckDefault<?php echo $id_controleval; ?>');
-            const fechaDoc<?php echo $id_controleval; ?> = document.getElementById('fecha_cev<?php echo $id_controleval; ?>');
-            const fechaCad<?php echo $id_controleval; ?> = document.getElementById('fechacad_cev<?php echo $id_controleval; ?>');
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkbox = document.getElementById('flexSwitchCheckDefault');
+        const fechaDoc = document.getElementById('fecha_cev');
+        const fechaCad = document.getElementById('fechacad_cev');
 
-            checkbox<?php echo $id_controleval; ?>.addEventListener('change', function() {
-                if (checkbox<?php echo $id_controleval; ?>.checked) {
-                    fechaDoc<?php echo $id_controleval; ?>.value = '';
-                    fechaCad<?php echo $id_controleval; ?>.value = '';
-                    fechaDoc<?php echo $id_controleval; ?>.disabled = true;
-                    fechaCad<?php echo $id_controleval; ?>.disabled = true;
-                } else {
-                    fechaDoc<?php echo $id_controleval; ?>.disabled = false;
-                    fechaCad<?php echo $id_controleval; ?>.disabled = false;
-                }
-            });
-
-            // Initial check
-            if (checkbox<?php echo $id_controleval; ?>.checked) {
-                fechaDoc<?php echo $id_controleval; ?>.disabled = true;
-                fechaCad<?php echo $id_controleval; ?>.disabled = true;
+        checkbox.addEventListener('change', function() {
+            if (checkbox.checked) {
+                fechaDoc.value = '';
+                fechaCad.value = '';
+                fechaDoc.disabled = true;
+                fechaCad.disabled = true;
+            } else {
+                fechaDoc.disabled = false;
+                fechaCad.disabled = false;
             }
         });
-    </script>
+    });
+</script>
+
 
 <script>
     $(function() {

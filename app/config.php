@@ -12,31 +12,28 @@
 //define('BD', 'hs_base');
 // fin para servidor web
 
-
 define('APP_NAME', 'HS Base');
 define('SERVIDOR', 'localhost');
-define('USUARIO', 'root');
-define('PASSWORD', '');
+define('USUARIO', 'root');      // Mantén un usuario fijo
+define('PASSWORD', '');         // Mantén la contraseña fija
 define('BD', 'hs_base');
 
 define('BASE_URL', '/hsbase'); // Ajusta según tu configuración
 define('BASE_PATH', $_SERVER['DOCUMENT_ROOT'] . BASE_URL);
 
+
 $servidor = "mysql:dbname=".BD.";host=".SERVIDOR;
 
-try{
+try {
     $pdo = new PDO($servidor, USUARIO, PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-   // echo "conexion correcta con BD";
-}catch (PDOException $e) {
-
-    echo "error conexion a bd";
+    // echo "Conexión correcta con la BD";
+} catch (PDOException $e) {
+    echo "Error de conexión a la base de datos: " . $e->getMessage();
+    exit;  // Detenemos la ejecución si no se conecta a la base de datos
 }
 
 $URL = "http://localhost/hsbase";
 
-
 date_default_timezone_set("Europe/Madrid");
-$fechahora = date(format:'Y-m-d H:i:s');
-$fecha = date(format:'Y-m-d');
-
-
+$fechahora = date('Y-m-d H:i:s');
+$fecha = date('Y-m-d');

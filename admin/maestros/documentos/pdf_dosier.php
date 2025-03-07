@@ -69,7 +69,7 @@ $tplIdx6 = $pdf->importPage(6);
 $pdf->useTemplate($tplIdx6);  
 $pdf->SetFont('Arial', 'B', '10');
 $pdf->SetXY(57, 46);
-$pdf->Write(10, $nombre_tr);
+$pdf->Write(10, mb_convert_encoding($nombre_tr, 'ISO-8859-1', 'UTF-8'));
 
 
 $pdf->SetFont('Arial', 'B', '10');
@@ -82,12 +82,16 @@ $tplIdx7 = $pdf->importPage(7);
 $pdf->useTemplate($tplIdx7);  
 $pdf->SetFont('Arial', 'B', '10');
 $pdf->SetXY(68, 60);
-$pdf->Write(10, $nombre_tr);
+$pdf->Write(10, mb_convert_encoding($nombre_tr, 'ISO-8859-1', 'UTF-8'));
 
 
 $pdf->SetFont('Arial', 'B', '10');
-$pdf->SetXY(145, 60);
+$pdf->SetXY(147, 60);
 $pdf->Write(10, $dni_tr);
+
+$pdf->SetFont('Arial', 'B', '10');
+$pdf->SetXY(68, 67);
+$pdf->Write(10, mb_convert_encoding($categoria_tr, 'ISO-8859-1', 'UTF-8'));
 
 
 # Pagina 8
@@ -96,7 +100,7 @@ $tplIdx8 = $pdf->importPage(8);
 $pdf->useTemplate($tplIdx8);  
 $pdf->SetFont('Arial', 'B', '10');
 $pdf->SetXY(55, 37);
-$pdf->Write(10, $nombre_tr);
+$pdf->Write(10, mb_convert_encoding($nombre_tr, 'ISO-8859-1', 'UTF-8'));
 
 
 $pdf->SetFont('Arial', 'B', '10');
@@ -109,7 +113,7 @@ $tplIdx9 = $pdf->importPage(9);
 $pdf->useTemplate($tplIdx9); 
 $pdf->SetFont('Arial', 'B', '10');
 $pdf->SetXY(55, 37);
-$pdf->Write(10, $nombre_tr);
+$pdf->Write(10, mb_convert_encoding($nombre_tr, 'ISO-8859-1', 'UTF-8'));
 
 
 $pdf->SetFont('Arial', 'B', '10');
@@ -122,7 +126,7 @@ $tplIdx9 = $pdf->importPage(10);
 $pdf->useTemplate($tplIdx9); 
 $pdf->SetFont('Arial', 'B', '10');
 $pdf->SetXY(42, 142);
-$pdf->Write(10, $nombre_tr);
+$pdf->Write(10, mb_convert_encoding($nombre_tr, 'ISO-8859-1', 'UTF-8'));
 
 
 $pdf->SetFont('Arial', 'B', '10');
@@ -135,14 +139,14 @@ $tplIdx9 = $pdf->importPage(11);
 $pdf->useTemplate($tplIdx9); 
 $pdf->SetFont('Arial', 'B', '10');
 $pdf->SetXY(42, 112);
-$pdf->Write(10, $nombre_tr);
+$pdf->Write(10, mb_convert_encoding($nombre_tr, 'ISO-8859-1', 'UTF-8'));
 
 
 $pdf->SetFont('Arial', 'B', '10');
 $pdf->SetXY(112, 112);
 $pdf->Write(10, $dni_tr); 
 
-$pdf->Output('Files_Pdf/Dosier_PRL.pdf', 'D'); //SALIDA DEL PDF
+$pdf->Output('Files_Pdf/Dosier_PRL_' . $nombre_tr . '.pdf', 'D'); //SALIDA DEL PDF
 //    $pdf->Output('original_update.pdf', 'F');
 //    $pdf->Output('original_update.pdf', 'I'); //PARA ABRIL EL PDF EN OTRA VENTANA
 //	  $pdf->Output('original_update.pdf', 'D'); //PARA FORZAR LA DESCARGA

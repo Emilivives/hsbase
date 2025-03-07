@@ -82,6 +82,47 @@ $cargorevisado_ace = $_POST['cargorevisado_ace'];
 $fecharevision_ace = $_POST['fecharevision_ace'];
 
 
+
+// Comprova si està buit
+if (empty($fechabaja_ace)) {
+    $fechabaja_ace = null;
+}
+if (empty($fechaantesrecaida_ace)) {
+    $fechaantesrecaida_ace = null;
+}
+if (empty($recomedincorp_ace)) {
+    $recomedincorp_ace = null;
+}
+if (empty($recinedtrab_ace)) {
+    $recinedtrab_ace = null;
+}
+if (empty($recomedincorp_ace)) {
+    $recomedincorp_ace = null;
+}
+if (empty($fechacumplimen_ace)) {
+    $fechacumplimen_ace = null;
+}
+if (empty($fechainvestiga_ace)) {
+    $fechainvestiga_ace = null;
+}
+if (empty($fecharevision_ace)) {
+    $fecharevision_ace = null;
+}
+
+
+
+if (empty($hora_ace)) {
+    $hora_ace = null;
+}
+if (empty($diasbaja_ace)) {
+    $diasbaja_ace = 0;
+}
+if($numtrafectados_ace = "-"){
+$numtrafectados_ace = null;
+}
+
+
+
 $sentencia = $pdo->prepare("UPDATE accidentes SET 
 id_accidente=:id_accidente,
 nroaccidente_ace=:nroaccidente_ace,

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 20-03-2024 a las 13:40:31
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
+-- Servidor: localhost:3306
+-- Temps de generació: 30-12-2024 a les 11:40:20
+-- Versió del servidor: 10.5.26-MariaDB
+-- Versió de PHP: 8.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `hs_base`
+-- Base de dades: `hs_base`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `accidentes`
+-- Estructura de la taula `accidentes`
 --
 
 CREATE TABLE `accidentes` (
@@ -37,17 +37,17 @@ CREATE TABLE `accidentes` (
   `detalleslugar_ace` varchar(255) NOT NULL,
   `tipoaccidente_ace` int(11) NOT NULL,
   `fecha_ace` date NOT NULL,
-  `fechabaja_ace` date NOT NULL,
-  `hora_ace` time NOT NULL,
-  `horatrabajo_ace` int(11) NOT NULL,
+  `fechabaja_ace` date DEFAULT NULL,
+  `hora_ace` time DEFAULT NULL,
+  `horatrabajo_ace` varchar(2) NOT NULL,
   `trabajohabitual_ace` varchar(255) NOT NULL,
   `diadescanso_ace` varchar(255) NOT NULL,
-  `semanadescanso_ace` int(11) NOT NULL,
-  `diasbaja_ace` int(11) NOT NULL,
+  `semanadescanso_ace` varchar(2) NOT NULL,
+  `diasbaja_ace` int(11) DEFAULT NULL,
   `isevaluadoriesgo_ace` varchar(255) NOT NULL,
   `evalconriesgo_ace` varchar(255) NOT NULL,
   `isrecaida_ace` varchar(255) NOT NULL,
-  `fechaantesrecaida_ace` date NOT NULL,
+  `fechaantesrecaida_ace` date DEFAULT NULL,
   `descripcion_ace` text NOT NULL,
   `tipolugar_ace` int(11) NOT NULL,
   `zonalugar_ace` varchar(255) NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE `accidentes` (
   `observformacont_ace` varchar(255) NOT NULL,
   `matercasusalesi_ace` int(11) NOT NULL,
   `observmatlesi_ace` varchar(255) NOT NULL,
-  `numtrafectados_ace` int(11) NOT NULL,
+  `numtrafectados_ace` int(11) DEFAULT NULL,
   `declaraciontrab_ace` text NOT NULL,
   `istestigos_ace` varchar(255) NOT NULL,
   `detallestestigo_ace` text NOT NULL,
@@ -78,8 +78,8 @@ CREATE TABLE `accidentes` (
   `lugarevacuacion_ace` varchar(255) NOT NULL,
   `centromedico_ace` varchar(255) NOT NULL,
   `detallescentromed_ace` varchar(255) NOT NULL,
-  `recomedincorp_ace` int(11) NOT NULL,
-  `recinedtrab_ace` int(11) NOT NULL,
+  `recomedincorp_ace` date DEFAULT NULL,
+  `recinedtrab_ace` date DEFAULT NULL,
   `istrformado_ace` varchar(255) NOT NULL,
   `istrinformado_ace` varchar(255) NOT NULL,
   `protcolectivadisp_ace` varchar(255) NOT NULL,
@@ -101,17 +101,52 @@ CREATE TABLE `accidentes` (
   `histmedidaacc_ace` varchar(255) NOT NULL,
   `investigador_ace` varchar(255) NOT NULL,
   `cargoinvesiga_ace` varchar(255) NOT NULL,
-  `fechainvestiga_ace` date NOT NULL,
-  `fechacumplimen_ace` date NOT NULL,
+  `fechainvestiga_ace` date DEFAULT NULL,
+  `fechacumplimen_ace` date DEFAULT NULL,
   `revisadopor_ace` varchar(255) NOT NULL,
   `cargorevisado_ace` varchar(255) NOT NULL,
-  `fecharevision_ace` date NOT NULL
+  `fecharevision_ace` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `accidentes`
+--
+
+INSERT INTO `accidentes` (`id_accidente`, `nroaccidente_ace`, `comunicado_ace`, `trabajador_ace`, `centro_ace`, `lugar_ace`, `detalleslugar_ace`, `tipoaccidente_ace`, `fecha_ace`, `fechabaja_ace`, `hora_ace`, `horatrabajo_ace`, `trabajohabitual_ace`, `diadescanso_ace`, `semanadescanso_ace`, `diasbaja_ace`, `isevaluadoriesgo_ace`, `evalconriesgo_ace`, `isrecaida_ace`, `fechaantesrecaida_ace`, `descripcion_ace`, `tipolugar_ace`, `zonalugar_ace`, `observaclugar_ace`, `procesotrabajo_ace`, `observproceso_ace`, `tipoactividad_ace`, `observtipoactiv_ace`, `agentematerial_ace`, `observagmaterial_ace`, `desviacion_ace`, `observdesviacion_ace`, `agmaterdesv_ace`, `observagendesv_ace`, `formacontacto_ace`, `observformacont_ace`, `matercasusalesi_ace`, `observmatlesi_ace`, `numtrafectados_ace`, `declaraciontrab_ace`, `istestigos_ace`, `detallestestigo_ace`, `declaraciontestigo_ace`, `tipolesion_ace`, `gradolesion_ace`, `partecuerpo_ace`, `isevacuacion_ace`, `lugarevacuacion_ace`, `centromedico_ace`, `detallescentromed_ace`, `recomedincorp_ace`, `recinedtrab_ace`, `istrformado_ace`, `istrinformado_ace`, `protcolectivadisp_ace`, `protcolecnecesa_ace`, `observprotcol_ace`, `episdispon_ace`, `episneces_ace`, `observepis_ace`, `causaaccidente_ace`, `porquecausa_ace`, `quiencontrolcausa_ace`, `conclusionacci_ace`, `medidasprev_ace`, `valoracionmedida_ace`, `histaccult12mes_ace`, `histpuestoacc_ace`, `histtrabajosreal_ace`, `histcausaacc_ace`, `histmedidaacc_ace`, `investigador_ace`, `cargoinvesiga_ace`, `fechainvestiga_ace`, `fechacumplimen_ace`, `revisadopor_ace`, `cargorevisado_ace`, `fecharevision_ace`) VALUES
+(25, '005/2024', 'SI', 280, 5, 'In itinere', 'Volviendo de la jornada laboral, con patinete', 4, '2024-05-01', '1900-01-01', '19:00:00', '8', 'SI', 'Lunes', '1', 0, 'SI', 'SI', 'NO', '1900-01-01', 'Volviendo a casa despues de jornada laboral, con patinete electrico, al cruzar la calle en el pequeño resalte de la acera el patinete resbala y se golpea contra la cabeza y brazo', 32, 'Frente para taxis puerto Ibiza', '', 33, 'Patinete electrico', 12, 'Patinete eléctrico', 2, '', 23, '', 12, 'resalte de acera', 24, '', 12, '', 1, 'Volviendo para casa al cruzar hay un pequeño resalte en el suelo y el patinete resbala generando la caida', 'NO', '-', '-', 2, 1, 4, 'NO', '', 'SI', 'Policlinica el rosario', '1900-01-01', '1900-01-01', 'SI', 'SI', 'N/P', 'N/P', '', 'Casco proteccion', 'no lo llevaba', '', 'Falta de atencion a aquellos elementos que son obstaculos a pasar con mas cuidado o a evitar', 'Falta atencion frente resaltes o suelos mojados', 'Trabajador', 'En los trayectos de ida o vuelta hay que tener constancia de las posibles alteraciones del pavimento asi como posibilidad de suelos mojados, todo ello frente a un deficit de atencion lleva al accidente del trabajador', 'Informacion protocolo acc. in itinere', 'Se entrega ficha informativa al trabajador, devuelve firmada', 'NO', '-', '-', '-', '-', 'Emili Vives Garcia', 'Trabajador Designado', '2024-05-03', '2024-05-03', 'Emili Vives Garcia', 'Resp PRL', '2024-05-03'),
+(26, '006/2024', 'SI', 475, 17, 'En el propio centro', 'Migjorn Jet', 2, '2024-05-07', '1900-01-01', '10:30:00', '2', 'SI', 'Lunes', '0', 0, 'SI', 'SI', 'NO', '1900-01-01', 'En trabajos de amarre de embarcion hace un mal movimiento con la mano para el agarre y le lleva a una dislocacion del dedo pequeño', 57, 'Puerto de Ibiza', 'a bordo de embarcación Migjorn Jet', 26, 'Preparacion de amarra', 17, 'Agarrar amarra de barco', 3, '', 1, '', 3, '', 25, 'Golpe contra amarra', 6, '', 1, 'Agarrando amarra se disloca el dedo pequeño mano derecha', 'NO', '-', '-', 12, 1, 26, 'NO', '-', 'SI', 'Mutua Balear', '1900-01-01', '1900-01-01', 'SI', 'SI', 'N/P', 'N/P', '', 'Guantes', 'Guantes', '', 'Posible mal agarre de la amarra', 'Despiste', 'Trabajador', '-', '-', '-', 'NO', '-', '-', '-', '-', 'Emili Vives Garcia', 'Trabajador Designado', '2024-05-07', '2024-05-07', 'Emili Vives Garcia', 'Responsable PRL', '2024-05-07'),
+(27, '008/2024', 'SI', 203, 19, 'In itinere', 'Volviendo de la jornada laboral, con patinete', 3, '2024-05-12', '2024-05-12', '18:30:00', '9', 'SI', 'Lunes', '6', 17, 'SI', 'SI', 'NO', '1900-01-01', 'Volviendo a su casa en bici, un patinete electrico se le hecho encima golpeandose en la cara ', 33, 'CALLE roro levante', 'Muelle de ibiza', 33, 'Bicicleta', 13, 'Bicicleta', 2, '', 23, 'Caida con bici', 1, '', 24, '', 2, '', NULL, 'volviendo de la jornda circulando por carril bici, patinete paso muy rapido al lado generando perdida de control y posterior deslizamiento de rueda delantera de la bici,', 'NO', 'Luis Bartolome Dominguez', 'Iba por delante del trabajador con otra bici y se dio cuenta que no le seguia, se giró y vió que estaba en el suelo y que ya habia otra gente alrededor del accidentado. Si se percató que al cruzarse con el del patinete, este iba muy rápido.', 7, 1, 8, 'SI', 'Policlinica el rosario', 'SI', 'Policlinica el rosario', '1900-01-01', '1900-01-01', 'SI', 'SI', 'N/P', 'N/P', '', 'No disponia', 'Casco circulacion (recomendable)', '', 'Accidente in itiener provocado por tercero (patinete) al pasar muy cerca de trabajador con bici que le desestabiliza y le hace caer de frente', 'Conduccion temeraria de un tercero', 'Personas ajenas / trabajador', 'Ante situaciones de conduccion por vias urbanas o interurbanas hay que tener en cuenta las posibles interacciones de otros conductores o viandantes por lo que se tiene que extremar la precaucion durante la circulación.', 'Recordatorio de metodo operativo de \"accidentes in itinere\"', '100%', 'NO', '-', '-', '-', '-', 'Emili Vives Garcia', 'Trabajador Designado', '2024-05-13', '2024-05-13', 'Emili Vives Garcia', 'Responsable PRL', '2024-05-13'),
+(28, '007/2024', 'SI', 186, 19, 'In itinere', 'Calle Isidor Macabich', 3, '2024-05-12', '2024-05-12', '10:05:00', '3', 'SI', 'Miércoles', '4', 19, 'SI', 'SI', 'NO', '1900-01-01', 'En el desplazamiento de ir al centro de trabajo (buque Chenega) al bajar una acera para cruzar apoya mal el pie y se lo retuerce.', 33, 'Calle Isidor Macabich', '', 32, '', 31, '', 12, '', 30, '', 12, '', 23, '', 3, '', NULL, 'Bajando acera de calle apoyo mal el pie y me retuerzo', 'NO', 'Javier Garcia', 'Veo al compañero apoyar mal el pie y torcerselo.', 10, 1, 33, 'NO', '', 'SI', 'Centro medico Vila', '1900-01-01', '1900-01-01', 'SI', 'SI', 'N/P', 'N/P', '', 'N/P', 'N/P', '', 'Falta de atención a los posibles elementos adversos durante trayecto de camino al centro de trabajo', 'Despiste', 'Trabajador', 'En los desplazamientos urbanos tanto en medios de transporte propios o aunque sea a pie se debe tener en cuenta aquellos elementos que puedan generar accidentes (baches, resaltes, zonas humedas, aceras, etc.) para poder atender la forma más idonea de sortearlos', 'Informacion sobre accidentes in itienere', 'Comunicado al trabajador', 'NO', '-', '-', '-', '', 'Emili Vives Garcia', 'Trabajador Designado', '2024-05-13', '2024-05-13', 'Emili Vives Garcia', 'Responsable PRL', '2024-05-13'),
+(29, '001/2024', 'SI', 141, 18, 'En el propio centro', 'Buque Fairweather', 4, '2024-01-05', '1900-01-01', '17:00:00', '8', 'SI', 'Miércoles', '2', 0, 'SI', 'SI', 'NO', '1900-01-01', 'En el proceso de volver a casa con vehiculo, el trabajador baja del vehiculo y nota un dolor en la rodilla izquierda', 33, '', '', 33, 'Vuelta a casa con vehiculo', 14, '', 1241, 'Coche', 32, '', 2, '', 40, '', 2, '', 1, 'En el proceso de volver a casa con vehiculo, el trabajador baja del vehiculo y nota un dolor en la rodilla izquierda', 'SI', 'Luis Bartolome Dominguez', 'Observa quejarse de dolor al bajar del coche y apoyar mal el pie', 12, 1, 32, 'NO', '', 'SI', 'Clinica Juaneda Muro', '1900-01-01', '1900-01-01', 'SI', 'SI', 'N/P', 'N/P', '', 'N/P', 'N/P', '', 'Falta de control o estabilidad al bajar del vehiculo', 'Falta de atencion al realizar movimientos intempestivos o bruscos', 'Trabajador', 'El trabajador al bajar del coche apoya incorrectamente el peso lo que le lleva a notar un dolor', '--', '', 'NO', '-', '-', '-', '-', 'Emili Vives Garcia', 'Trabajador Designado', '2024-01-08', '2024-01-08', 'Emili Vives Garcia', 'Responsable PRL', '2024-01-09'),
+(30, '002/2024', 'SI', 224, 18, 'En el propio centro', 'Buque atracado en muelle', 1, '2024-03-01', '2024-03-01', '16:00:00', '6', 'SI', 'Viernes', '7', 52, 'SI', 'SI', 'NO', '1900-01-01', 'Posicionando defensa de muelle para evitar golpeo por las oscilaciones de la embarcación al entrar el mal tiempo en muelle, la propia defensa sale escupida por la presión ejercida de la embarcación contra el muelle y al intentar contenerla, un dedo de la mano se retuerce.', 33, 'Muelle Ciutadella', 'Muelle Comercial', 26, 'Colocación de defensas del barco a pie de muelle', 19, 'Colocar defensa de la embarcación entre la embarcacion y el muelle', 1376, 'Defensa portatil buque', 14, 'La defensa al estar presionada entre el buque y el muelle, se desliza por el efecto de la presion y estar mojada del agua de mar', 1462, 'Viento / agua de mar', 21, 'Golpe contra la defensa que sale proyectada', 234, 'Defensa portatil buque', NULL, 'Recibe instrucciones (capitan / Primer oficial) de posicionar defensa portatil del buque entre el muelle y el buque para evitar golpeos del buque debido a las inclemencias meteorologicas que hacian oscilar y golpear el buque contra el muelle.', 'NO', '-', '-', 7, 1, 25, 'NO', '', 'SI', 'Hospital Juaneda Ciutadella', '1900-01-01', '1900-01-01', 'SI', 'SI', 'N/P', 'N/P', '', 'Guantes, calzado de seguridad', 'Guantes', '', 'Mala planificacion de las tareas siendo viable otras formas de hacerlo mas seguras evitando riesgos', 'No ser conscientes del riesgo que puede generarse por la propia accion', 'Trabajador', 'Ante un inesperado cambio meteoroligo brusco, reaccionan de forma instintiva a poner la defensa por la via mas rapida que es el trabajador poniendo la defensa del buque desde el muelle. Siendo poco probable que la defensa salga escupida al aprisionarse pero hay variables como el fuerte viento y el hecho de que la defensa se moje por el agua de mar. ', 'Se envia email a buques y departamento técnico para que este tipo de trabajos se realicen desde el propio buque y no a pie de muelle.', '100%', 'NO', '-', '-', '-', '-', 'Emili Vives Garcia', 'Trabajador Designado', '2024-03-04', '2024-03-04', 'Emili Vives Garcia', 'Responsable PRL', '2024-03-04'),
+(31, '003/2024', 'SI', 191, 28, 'En el propio centro', 'Puerto ciutadella', 2, '2024-03-27', '1900-01-01', '10:15:00', '3', 'SI', 'Lunes', '1', 0, 'SI', 'SI', 'NO', '1900-01-01', 'En la maniobra de desamarre del buque Fairweather, ante las oscilaciones de la embarcación y el temporal, y que la operativa debe realizarse con rapidez para evitar daños al buque. La trabajadora al desencapillar la amarra con otra amarra en noray de refuerzo por la tensión ejercida se atrapa dedo pequeño entre las dos.', 33, 'Muelle poniente', 'Muelle comercial para el atraque de buques de pasaje', 5, 'Desamarre de embarcación', 17, 'Coger amarra con las dos manos para sacarla del noray donde esta fija', 1206, 'Amarra del buque (largo de proa)', 35, 'Atrapamiento entre amarra, segunda amarra (refuerzo) y noray al desamarrar', 1206, 'amarra buque', 21, 'Atrapamiento entre amarra y noray al desamarrar', 476, 'Amarra', 1, 'En el proceso de desamarre del buque, debido al temporal y las oscilaciones del buque hay dos amarra de largo en el noray, lo que al desamarrar la primera con la tension de la amarra de respeto se engancha entre las dos amarras y el noray.', 'SI', 'JEHINER ALEXANDER SIERRA JARAMILLO', 'Comenta que en la maniobra de desatraque un policia portuario ayuda a soltar el spring de popa y la trabajadora se encargaba del largo de proa, por lo que no observa el momento en el que se accidenta debido a la distancia y la operativa de recogida rápida de los cabos.', 17, 1, 25, 'NO', '', 'SI', 'Asepeyo Ciutadella (centro asociado mutua balear)', '1900-01-01', '1900-01-01', 'SI', 'SI', 'N/P', 'N/P', '', 'Guantes', 'Guantes protección mecánica', '', 'La trabajadora dada la situacion del temporal y peculiaridad de la situacion de dos amarras en el mismo sitio procede incorrectamente.', 'Coge la amarra de forma en que los dedos le quedan en el interior', 'Trabajadora', 'Los trabajos de amarre y desamarre se deben realizar con extrema precaucion y segun establecido en formaciones y informacion facilitada. Por las inclemencias meteorológicas la trabajadora no presta atencion suficiente al coger de manera correcta la primera amarra (simpre por fuera) y todo ello le lleva a atrapar el dedo', 'Informacion específica de amarre y sus riesgos (segun Metodo de trabajo seguro de la empresa: Amarre y desamarre de embarcaciones) ', '100%', 'NO', '-', '', '-', '-', 'Emili Vives Garcia', '', '2024-03-27', '2024-03-27', 'Emili Vives Garcia', 'Responsable PRL', '2024-03-27'),
+(32, '004/2024', 'SI', 28, 22, 'En el propio centro', 'A bordo de la embarcacion atracado en muelle', 2, '2024-03-28', '1900-01-01', '12:30:00', '4', 'SI', 'Viernes', '2', 0, 'SI', 'SI', 'NO', '1900-01-01', 'Una vez desatracado el buque, el trabajador procede a entrar a la cubierta de pasaje con lo que resbala por efecto del agua/sal de las inclemencias meteorológicas y se golpea al caer contra el lateral del tronco.', 57, 'Acceso entrada cubierta pasaje', 'Buque de pasaje, en la zona de popa contigua a la entrada de la cubierta de pasaje', 33, 'Caminando hacia la cubierta de pasaje', 31, 'Andando', 2, '', 10, 'Agua procedente del oleaje', 14, '', 17, 'Golpe contra el suelo', 8, 'suelo', 1, 'al andar por la cubierta entrando a la parte de pasajeros, resbala y se golpea contra la zona lateral del cuerpo', 'SI', 'Josep Arabi', 'Vio al trabajador en el suelo doliendose de un golpe en el lateral', 2, 1, 17, 'NO', '', 'SI', 'Centro medico Ibiza', '1900-01-01', '1900-01-01', 'SI', 'SI', 'N/P', 'N/P', '', 'Calzado de seguridad (suela antideslizante)', 'Calzado de seguridad (suela antideslizante)', '', 'Falta de control en zonas resbaladizas por inclemencias meteorologicas', 'El trabajador no penso en que podia resbalar o que se hubiese originado una acumulacion de agua/sal en el suelo.', 'El trabajador', 'El trabajador embarcado debe ser consciente de que a bordo de un buque en dias de inclemencias meteorologicas puede existir zonas exteriores con agua o sal que lleven a resbalar. Por lo que en ese dia la falta de control (pudiendo desplazarse agarrado a pasamanos u otros) le llevaron a resbalar.', 'Informar al trabajador de los riesgos y medidas preventivas sobre caidas y resbalones a bordo de buques, incidiendo en dias de mal tiempo.', '100%', 'NO', '-', '-', '-', '-', 'Emili Vives Garcia', 'Trabajador Designado', '2024-04-08', '2024-04-08', 'Emili Vives Garcia', 'Responsable PRL', '2024-04-08'),
+(33, '009/2024', 'SI', 477, 18, 'En el propio centro', 'Buque Fairweather', 2, '2024-06-11', '0001-01-01', '17:00:00', '6', 'SI', 'Lunes', '1', 0, 'SI', 'SI', 'NO', '0001-01-01', 'Amolando pieza nota que se le introduce alguna particula en el ojo', 57, 'Bodega', '', 3, 'trabajos con amoladora', 9, 'trabajos con amoladora', 1, '', 12, 'salta particula', 1, '', 14, 'Particula que entra en el ojo por el ambiente al generar trabajos de amolado', 9, '', 1, 'Puliendo una superficie con la radial, le entra una particula en el ojo sin ser proyectada directamente, en suspension en el aire (supone)', 'NO', '-', '-', 3, 1, 5, 'NO', '', 'SI', 'Juaneda Muro', '1900-01-01', '1900-01-01', 'SI', 'SI', '-', 'N/P', '-', 'GAFAS UNIVERSALES', 'PROTECCION OCULAR COMPLETA', 'NO SON LAS GAFAS ADECUADAS PARA EL TRABAJO', 'Mala eleccion de epis, ya que debeia haber elegido una gafas con proteccion total (cerradas)', 'Mala eleccion de los epis', 'trabajador', 'Ante trabajos que implique generacion de polvo o particulas que puedan quedarse en suspension en el aire, debe optarse por el uso de gafas de proteccion total (cerradas) en lugar de gafas de proteccion universales.', 'Recordatorio de uso de epis adecuados', 'Se entrega a trabajador ficha.', '-', '-', '-', '-', '-', 'Emili Vives Garcia', 'Trabajador Designado', '2024-06-12', '2024-06-12', 'Emili Vives Garcia', 'Responsable PRL', '2024-07-01'),
+(42, '010/2024', 'SI', 9, 13, 'En el propio centro', 'Bajando a cubierta inferior', 2, '2024-07-12', NULL, '10:00:00', '3', 'SI', 'Lunes', '1', NULL, 'SI', 'SI', 'NO', NULL, 'Bajando escalera a cubierta inferior resbala y nota un fuerte dolor en muslo', 57, 'A bodo buque', '', 3, 'Bajando escaleras', 31, 'Bajando a cubierta inferior', 31, 'escaleras de acceso a cubierta inferior', 28, 'Resbalon', 1, 'Falta de atencion / falta de control', 40, '', 31, '', NULL, 'Al bajar resbala y al estirar demasiado la pierna nota un dolor intenso', 'NO', '', '', 3, 1, 32, 'NO', '', 'NO', '', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '-', 'N/P', 'N/P', '', 'Falta atencion al bajar, ya que un posible mal apoyo al pisar le lleva a resvalar y caer', 'Falta de atencion', 'El trabajador', 'Ante situaciones cuotidianas que la probabilidad de materializarse el riesgo es alta, el trabajador debe estar centrado en la propia accion, como puede ser en este caso bajar por las escaleras que al ser exteriores pueden estar humedas', 'Informacion al trabajador sobre los riesgos de caidas al mismo nivel.', '100%', '-', '', '', '', '', 'Emili Vives Garcia', 'Trabajador Designado', '2024-07-15', '2024-07-15', 'Emili Vives Garcia', 'Responsable PRL', '2024-07-15'),
+(43, '011/2024', 'SI', 191, 28, 'In itinere', 'C/ Gayarre, 10 - Ciutadella (Menorca)', 4, '2024-07-19', NULL, '17:00:00', '8', '-', 'Seleccione', '-', NULL, '-', '-', '-', NULL, 'Accidente in itinere', 33, '', '', 33, 'Patinete electrico', 12, 'Patinete eléctrico', 1246, 'Patinete', 23, '', 1246, '', 17, 'Caida contra el suelo', 10, '', NULL, 'Circulacion con patinete, desplazandose de casa al trabajo cae la trabajadora al perder el control del patinete.', 'NO', '', '', 17, 1, 40, 'NO', '', 'SI', 'Asepeyo Ciutadella (centro asociado mutua balear)', NULL, NULL, 'SI', 'SI', '', 'N/P', '', 'N/P', 'N/P', '', 'Falta de control del patinete', 'Falta de atencion / control sobre el elemento de transporte', 'La trabajadores', 'Ante los desplazamientos con vehiculos yendo o vieniendo al trabajo hay que respetar las normas de circulacion asi como tener una atencion plena en la conduccion asi como con los elementos que puedan interferir que puedan generar accidentes.', '', '', '-', '', '', '', '', 'Emili Vives Garcia', 'Trabajador Designado', '2024-07-22', '2024-07-22', 'Emili Vives Garcia', 'Responsable PRL', '2024-07-22'),
+(44, '012/2024', 'SI', 302, 29, 'Desplazamiento entre centros', 'Llegando a estacion maritima', 1, '2024-07-23', '2024-07-23', '09:00:00', '1', 'SI', 'Miércoles', '0', 10, 'SI', 'SI', 'NO', NULL, 'En el desplazamiento entre zonas de trabajo (de la zona de embarque de vehiculos  a el area de preembarque de vehiculos) la trabajadora justo en la salida intenta hacer un giro para evitar golpearse con un coche aparcado a lo que la bici no responde y cae contra el suelo.', 33, '', '', 33, 'En motocicleta', 12, '', 1248, '', 23, '', 10, '', 17, '', 12, '', NULL, 'Saliendo para la campa de preembarque intento evitar un coche que iba a embarcar para balearia, la bici no responde al giro y cae.', 'NO', '-', '-', 3, 1, 20, 'NO', '', 'SI', 'Mutua balear + Clinica del Rosario', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '', 'N/P', 'N/P', '', 'Falta de control, averia de bicicleta', 'La trabajadora no controla la bici correctamente', 'La trabajadora', 'Ante situaciones de desplazamientos aquellos medios usados (aunque sean bicicletas) tienen que estar en correcto estado, dado lo explicado por la trabajadora accidentada y los hechos, se entiende que no controla bien la bicicleta añadiendole que no funcionaba bien del todo. Todo ello le lleva a accidentarse', 'Recordar a la trabajadora lo importante de los desplazamientos y los riesgos de la conduccion de bicicletas, patinetes, etc.', '', '-', '', '', '', '', 'Emili Vives Garcia', 'Trabajador Designado', '2024-07-24', '2024-07-24', 'Emili Vives Garcia', 'Responsable PRL', '2024-07-24'),
+(45, '013/2024', 'SI', 396, 19, 'En el propio centro', 'Buque Chenega', 2, '2024-07-24', NULL, '16:00:00', '-', 'SI', 'Seleccione', '-', NULL, 'SI', 'SI', 'NO', NULL, 'Preparando las herramientas para la entrega de residuos', 57, 'Buque Chenega', 'Bodega', 27, 'Cogiendo llave del armario de herramientas', 8, 'Llave inglesa', 144, 'Llave inglesa', 24, 'Abriendo el armario de forma intempestiva', 1328, 'Llave correctamente almacenada, pero al abrir intempestivamente se cae', 22, '', 144, '', NULL, 'Al abrir el armario, abro demasiado rapido lo que hace que la llave se suelte y caiga de punta en el pie izquierdo', 'NO', '', '', 5, 1, 34, 'NO', '', 'SI', 'Clinica Juaneda Muro', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '-', 'Calzado de seguridad ', 'Calzado de seguridad', 'Lo dispone pero golpea en la parte del empeine', 'Falta control al sujetar la llave', 'Falta atencion a la hora de abrir la puerta del armario de herramientas', 'Trabajador', '', '', '', '-', '', '', '', '', '', '', NULL, NULL, '', '', NULL),
+(46, '014/2024', 'SI', 399, 7, 'In itinere', 'Cami de la Cala / Carretera la Mola', 4, '2024-07-29', NULL, '16:30:00', '8', 'SI', 'Seleccione', '-', NULL, 'SI', 'SI', 'NO', NULL, 'Volviendo a su casa con moto, la moto resbala la rueda delantera por polvo u otro elemento no identificado y cae al suelo', 33, '', '', 33, 'Patinete', 12, 'Patinete', 1246, 'Patinete', 23, '', 1246, '', 25, 'Caida contra el suelo', 10, '', NULL, 'En la vuelta del trabajo a casa una vez llegando a casa la moto resbala al girar y caigo golpeandome contra el suelo', 'NO', '', '', 3, 1, 40, 'NO', '', 'SI', 'Centro medico de formentera', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '', 'N/P', 'N/P', 'Llevaba casco de motocicleta', 'Falta de atencion al circular con vehiculo a motor en zonas o caminos con posibilidad de encontrarse con gravilla, polvo o elementos que puedan hacer perder el contro.', 'Falta de atencion', 'El trabajador', 'Accidente in itinere por falta de control ante pavimento irregular', '-', '', '-', '', '', '', '', 'Emili Vives Garcia', 'Trabajador Designado', '2024-08-01', '2024-08-01', 'Emili Vives Garcia', 'Responsable PRL', '2024-08-01'),
+(47, '015/2024', 'SI', 173, 5, 'En el propio centro', 'bodega', 2, '2024-08-14', NULL, '08:00:00', '2', 'SI', 'Domingo', '0', NULL, 'SI', 'SI', 'NO', NULL, 'Haciendo reparacion / mantenimiento de barco el trabajador se golpea la cabeza contra un rociador de agua que le hace una brecha.', 57, 'Buque Castavi Jet', 'Bodega del buque', 27, '', 7, '', 1, '', 37, 'Levantar la cabeza en lugar cercano al techo de la bodega', 2, '', 25, '', 68, 'sprinkler de bodega', NULL, 'Realizando trabajos de mantenimiento en bodega de buque levanlo la cabez sin darme cuenta que hay un sprinkler y me golpeo contra el.', 'NO', '', '', 4, 1, 3, 'NO', '', 'NO', '', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '', 'No disponia', 'Casco', '', 'El trabajador debia haber adoptado como medida preventiva llevar el casco de proteccion frente golpes, cosa que no lo hizo', 'Falta de uso de epis', 'El trabajador', 'Ante situaciones donde el trabajo se realiza a una altura del techo o superficies donde existe la posibilidad de golperse la cabeza ( bodegas, varadas, zonas de limitadas dimensiones del buque), es imporante recordar que hay obligación de llevar casco frente golpes.', 'Se transmite informacion sobre el uso y la obligacion de usar los epis al trabajador', 'Entregado', '-', '', '', '', '', 'Emili Vives Garcia', 'Trabajador Designado', '2024-08-14', '2024-08-14', 'Emili Vives Garcia', 'Responsable PRL', '2024-08-26'),
+(48, '018/2024', 'SI', 490, 5, 'En el propio centro', 'Buque Castavi Jet', 2, '2024-08-27', NULL, '11:00:00', '4', 'SI', 'Seleccione', '-', NULL, '-', '-', '-', NULL, 'Trabajadora empieza a notar reaccion alergica espontanea en ojo, se genera inflamacion en la zona facial del ojo.', 1, '', '', 1, 'Asistencia pasaje', 1, '', 1, '', 1, '', 1, '', 1, 'Alergia por contacto accidental en la cara', 0, '', NULL, 'Noto sensacion de inchazon en el ojo sin estar claro porque', 'NO', '', '', 3, 1, 5, 'NO', '', 'NO', '', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '', 'N/P', 'N/P', '', 'Sin mucha informacion sobre la que se dispone ya que la trabajadora no sabe por que tiene la reaccion alergica, probablemente sea por que haya tocada algun elemento o producto que genere alergia y con la mano se haya frotado el ojo', '', 'La trabajadora', 'N/P', 'N/P', '', '-', '', '', '', '', 'Emili VIves Garcia', 'Trabajador Designado', '2024-08-29', '2024-08-29', 'Emili Vives Garcia', 'Responsable PRL', '2024-08-30'),
+(49, '017/2024', 'SI', 257, 19, 'En el propio centro', 'Buque Chenega', 1, '2024-08-25', '2024-08-26', '23:59:00', '4', 'SI', 'Seleccione', '-', 6, 'SI', 'SI', 'NO', NULL, 'Limpiando teckles de sala maquinas estrivor en el proceso de subir y bajar nota fuerte dolor derivado de una hernia discal que dispone previa la relacion labaral 3:45', 57, 'Buque Chenega', '', 3, 'Limpieza y mantenimiento de teckles (suelo) de sala de máquinas de estribor', 28, 'Subiendo teckles a bodega', 2, '', 25, 'Planificacion trabajos incorrectos o bien sujeccion incorrecta', 1335, '', 40, 'Sobreesfuerzo', 1335, '', NULL, 'Llevando cargas a bodega (teckles de sala maquinas) empieza a notar dolo en zona donde el trabajador ya dispone de una hernia discal previa a la relacion laboral con la empresa', 'NO', '', '', 17, 1, 15, 'NO', '', 'SI', 'Alcudia CS', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '', 'N/P', 'N/P', '', 'La patologia medica (hernia discal) previa al inicio de la relacion laboral que dispone el trabajador junto a que el trabajador realiza una tarea comun pero con posibles sobresfuerzos por no planificar correctamente, lleva a resentirse del dolor en la zona afectada. Todo ello sin haber expuesto nada a sus superiores', 'Mala planificacion', 'El trabjador', 'En situaciones donde el trabajador tenga patologias o impedimentos que le imposibiliten realizar trabajos, deberá comentarlo a la empresa para que tome las medidas adecuadas para evitar recaidas o accidentes derivados de estas.', 'Recordar al trabajador la importancia de planificar tareas y de informar que la manipulacion de cargas en situaciones repetitivas debe considerar o bien ayuda de elementos auxiliares, ayuda de otro compañero o bien de ejecutar una planifiacion de la actividad para que no resulte exhausta.', '100$', 'NO', '', '', '', '', 'Emili VIves Garcia', 'Trabajador Designado', '2024-08-28', '2024-08-28', 'Emili Vives Garcia', 'Responsable PRL', '2024-08-28'),
+(50, '016/2024', 'SI', 296, 19, 'En el propio centro', 'Buque Chenega', 2, '2024-08-19', NULL, '11:30:00', '4', 'SI', 'Seleccione', '-', NULL, 'SI', 'SI', 'SI', NULL, 'La trabajadora de hace unos dias ha desarrollado una dermatitis alergica en las manos posiblemente derivada del uso de un producto quimicos al no usar guantes de proteccion (jabon lavavajillas)', 57, 'Buque Chenega', 'office de cocina', 28, 'Limpieza a mano de vajillas y enseres', 10, 'Limpieza a mano en fregadero', 903, '', 10, 'contacto con manos de producto quimico (jabon lavavajillas)', 1339, '', 8, 'Manos', 1339, '', NULL, 'De hace un tiempo ha empezado a tener picores y pequeños sarpullido en mano ya que ha visto que se le aparece en cuando vuelve a trabajar (embarcada 2 meses trabajo / 1 mes descanso), por lo que piensa que puede ser el unico producto quimico que ha utilizado sin guantes ya que es estandar de producto hogar (jabon lavavajillas)', 'SI', 'Luis Bartolome Dominguez', 'Verifica la presencia de reacciona alergica en las manos y corrobora su uso en pequeños trabajos cuando esta en el office del buque.', 3, 1, 25, 'NO', '', 'SI', 'Clinica Juaneda Ciutadella', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '', 'No disponia', 'Guantes latex', '', '', '', '', '', '', '', '-', '', '', '', '', '', '', NULL, NULL, '', '', NULL),
+(51, '019/2024', 'SI', 320, 19, 'En el propio centro', 'Buque Chenega', 1, '2024-08-20', '2024-08-28', '11:30:00', '3', 'SI', 'Seleccione', '-', 5, 'SI', 'SI', 'NO', NULL, 'Trabajador al realizar lanzamiento de sirga que implica giro de cadera o movimientos similares nota dolor en el interior de la cadera', 57, 'Buque Chenega', '', 3, '', 20, 'Trabajos con movimientos de cadera', 1206, 'Sirga', 36, '', 1206, '', 40, '', 2, '', NULL, 'De hace unos dias el trabajador nota dolor en la zona de la cadera cada vez que hay que hacer movimientos de giro de tronco ', 'SI', 'Sergio Urios', 'Recibe informacion del trabajador del dolor desde el dia 20/08/2024', 12, 1, 31, 'NO', '', 'NO', '', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '', 'N/P', 'N/P', '', 'Movimientos repetitivos de forma descordinada', 'Falta de atencion al realizar movimientos intempestivos o bruscos', 'Trabajador', 'Ante situaciones de movimientos repetitivos, el control del trabajador de como se realiza dicha actividad es muy importante, por lo que ante una tarea que implique giro de tronco o agacharse, la concentracion del trabajador es fundamental para evitar este tipo de accidentes.', 'Ficha informativa de riesgos derivados de esfuerzos musculoesqueléticos.', 'entregada', '-', '', '', '', '', 'Emili VIves Garcia', '', '2024-08-28', '2024-08-28', 'Emili Vives Garcia', 'Responsable PRL', '2024-08-30'),
+(52, '020/2024', 'SI', 187, 19, 'En el propio centro', 'Buque Chenega', 2, '2024-08-29', NULL, '09:00:00', '2', '-', 'Seleccione', '-', NULL, 'SI', 'SI', 'NO', NULL, 'Al abrir tapon de linea del seawage este disponia de presion y sale disparado y golpea la mano', 57, 'Buque Chenega', 'Zona de descarga presion de conducto seawage', 27, 'Abriendo circuito de descarga de seawage', 18, 'Abriendo tapa de circuito de descarga', 61, 'circuito de descarga', 11, 'Sobrepresion en circuito', 1351, 'Sobrepresion en circuito', 21, 'Tapon sale disparado por sobrepresion', 1336, 'Tapon de tuberia de descarga de presion del circuito de seawage', NULL, 'Al abrir tapon de linea del seawage este disponia de presion y sale disparado y golpea la mano', '-', '', '', 3, 1, 25, 'NO', '', 'SI', 'Hospital Juaneda Ciutadella', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '-', 'Guantes', 'Guantes', '', 'El accidente se genera por una mala gestion de la tarea derivada por la incompleta tarea del trabajador que realizo la descarga de preseion del circuito de seawage en la que fue incompleta, dejandor presion en el interior, cosa que al dia siguiente el trabajador accidentado abrir la tapa salio proyectada por la sobrepresion del circuito', 'Actividad no ejecutada correctamente por un tercero', 'Trabajador / responsable Jefe Maquinas', 'Cuando hay trabajos en los que la actividad en caso de no ejecutarse correctamente puede devenir en accidentes a terceras personas, debe disponer de un sistema de verificación previa (check list con firma y hora de responsable)', '', '', 'NO', '', '', '', '', 'Emili VIves Garcia', 'Trabajador Designado', '2024-08-30', '2024-08-29', 'Emili Vives Garcia', '', '2024-08-30'),
+(54, '021/2024', 'SI', 338, 5, 'En el propio centro', 'Castavi Jet', 1, '2024-09-05', '2024-09-05', '11:07:00', '6', 'SI', 'Lunes', '0', 4, '-', '-', '-', NULL, 'En proceso de trabajo de amarre nora un fuerte pinchazo en la espalda seguido de dolor intenso.', 57, '', '', 3, 'Amarrando embarcacion', 4, '', 1, '', 25, 'Aplicacion de fuerzas incorrecta // postura incorrecta', 1, 'Sobreesfuerzo ', 40, 'Sobreesfuerzo espalda ', 2, '', NULL, 'En proceso de amarre al tirar la sirga noto un fuerte dolor en la espalda', 'NO', '', '', 3, 1, 14, 'NO', '', 'SI', 'CAP 8 agost ', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '', '', 'N/P', '', 'Adopcion de postura o gesto de forma incorrecta', 'Falta de atencion en controlar el objeto o material a movilizar', 'El trabajador', 'Ante situaciones que implique movimientos coordinados para tirar, estirar o soltar objetos (cabos, sirgas, etc) se tiene que tener conciencia de accion directa y su posibles desvios que pueden generar lesiones musculares', 'Entrega de ficha informativa de sobresfuerzos', '100%', 'NO', '', '', '', '', 'Emili VIves Garcia', 'Trabajador Designado', '2024-09-10', '2024-09-10', 'Emili Vives Garcia', '', '2024-09-10'),
+(78, '022/2024', 'SI', 318, 5, 'En el propio centro', 'Buque Castavi Jet - acceso a sala de máquinas', 1, '2024-10-02', '2024-10-02', '09:00:00', '3', 'SI', 'Lunes', '0', 7, 'SI', 'SI', 'NO', NULL, 'Saliendo de la sala de máquinas de babor el trabajador sin darse cuenta roza con la rodilla uno de los peldaños metálicos al realizar un movimiento descordinado', 57, 'Buque Castavi Jet', 'Escalera de acceso a sala maquinas babor', 33, 'Saliendo de sala de máquinas', 31, 'Subiendo escaleras', 25, 'Escalera fija del buque', 36, '', 25, 'Escalera fija de acceso/salida a sala de máquinas', 29, 'peldaño metalico', 25, 'zona metalica', NULL, 'No me di cuenta del corte has pasado un rato ya que si note que habia rozado con la rodilla contra un peldaño de la escalera pero sin darme cuenta', 'NO', '', '', 5, 1, 32, 'NO', '', 'NO', '', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '', 'N/P', 'N/P', '', 'Falta control al bajar por escaleras verticales.', 'Descordinacion del trabajador para el acceso a sala de máquinas asi como ausencia de pantalones largos para evitar este tipo de situaciones', 'El trabajador', 'Los accesos y salidas a salas de maquinas, void, y lugares con dimensiones reducidas debe realizarse sin prisas y siendo consciente de que es muy facil golpearse, rascarse o cortarse por elementos metalicos (ya que es un buque). El trabajador por las prisas que comenta que tuvo que salir realizo la accion con descontrol y por ende tambien no llevaba pantalones largos, cosa que hubiese evitado este corte', 'Recordar al trabajador las medidas basicas para accesos y salidas a lugares de dimensiones estrechas asi como la utilidad de el uso de pantalones largos.', '100% (entregada ficha)', 'NO', '', '', '', '', 'Emili VIves Garcia', 'Trabajador Designado', '2024-10-04', '2024-10-04', 'Emili Vives Garcia', 'Responsable PRL', '2024-10-04'),
+(83, '023/2024', 'SI', 31, 7, 'En el propio centro', 'Buque Espalmador Jet', 1, '2024-10-14', '2024-10-13', '05:49:00', '1', 'SI', 'Jueves', '1', 10, 'SI', 'SI', 'NO', NULL, 'Golpe fortuito contra la propia embarcacion al subir.', 57, 'Embarcacion Espalmador Jet', 'Zona de acceso / Rampa subida pasaje', 33, 'Accediendo a la zona de popa de la embarcacion', 32, 'Accediendo a la embarcacion desde muelle', 1, '', 27, 'Despiste al subir', 2, '', 23, '', 10, '', NULL, 'En el proceso de acceder a la embarcacion desde el muelle, se cae y se golpea contra la propia embarcacion', 'NO', '', '', 3, 1, 32, 'NO', '', 'SI', 'Hospital de formentera', NULL, NULL, 'SI', 'SI', '', 'N/P', '', 'Calzado de seguridad (suela antideslizante)', 'Calzado de seguridad', '', 'Falta de atencion frente elementos irregulares (rampas, suelos, movimiento de buques)', 'Falta de atencion - Despiste', 'El trabajador', 'Ante situaciones comunes como es el acceso a la embarcacion o salida de esta, hay que tener en cuenta los diferentes elementos que intervienen y pueden estar presentes (suelos mojados, balanceo de la embarcacion), todo esto sumado a la falta de atención en la tarea llevó al trabajador caerse y golpearse accidentalmente la rodilla.', 'Recordatorio al trabajador del metodo de trabajo seguro de acceso a embarcaciones', '', 'NO', '', '', '', '', 'Emili VIves Garcia', 'Trabajador Designado', '2024-10-15', '2024-10-15', 'Emili Vives Garcia', 'Responsable PRL', '2024-10-17'),
+(84, '024/2024', 'SI', 92, 15, 'En el propio centro', 'Embarcacion Seabus', 1, '2024-10-16', '2024-10-16', '20:00:00', '-', 'SI', 'Martes', '-', 16, 'SI', 'SI', '-', NULL, 'Al bajar de la embarcacion, tropieza con con cantil y se cae al suelo, nota un fuerte dolor en la parte posterior de la pierna', 57, 'Embarcacion SEABUS I', '', 33, 'Bajando de la embarcacion al muelle', 31, 'Bajando embarcacion', 10, '', 36, '', 2, '', 40, '', 1, '', NULL, 'Al bajar de la embarcacion tropieza y realiza un sobresfuerzo que a la noche nota un fuerte dolor en la pierna', 'NO', '', '', 3, 1, 32, 'NO', '', 'NO', '', NULL, NULL, 'SI', 'SI', '', 'N/P', '', 'Calzado de seguridad (suela antideslizante)', 'Calzado de seguridad (suela antideslizante)', '', 'Movimiento descoordinado', 'Falta de atencion al realizar movimientos intempestivos o bruscos', '', 'Ante situaciones comunes como es subir y bajar se generan muchos accidentes por no prestar atencion a la forma de realizar el gesto', 'Informacion de ficha en esfuerzo musculoesquelético.', '100%', 'NO', '', '', '', '', 'Emili VIves Garcia', 'Trabajador Designado', '2024-10-18', '2024-10-18', 'Emili Vives Garcia', 'Responsable PRL', '2024-10-21'),
+(86, '001/2023', 'SI', 288, 19, 'En el propio centro', 'En el propio centro', 2, '2023-03-17', NULL, '16:00:00', '6', 'SI', 'Jueves', '2', NULL, 'SI', 'SI', 'NO', NULL, 'Durante trabajos en sala de maquinas el trabajador retira una de las chapas del suelo y en un despiste se cae en la sala de sentinas al precipitarse por el hueco.', 55, 'Sala de maquinas', '', 25, '', 32, '', 10, '', 29, '', 17, '', 17, '', 17, '', NULL, 'En labores de mantenimiento en sala de maquinas, una vez retirado la xapa del suelo \"tecklet\" para revision zonas el trabajador pasa por la zona cayendo por el hueco generado.', 'NO', '', '', 3, 1, 40, 'NO', '', 'SI', 'Centro medico alcudia', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '', 'CALZADO DE SEGURIDAD', 'CALZADO DE SEGURIDAD', '', 'No prestar atencion a la apertura de huecos, no cerrar huecos una vez finalizada la tarea de revisión', 'Despiste del trabajador', '', 'Ante trabajos en las salas de maquinas, pañoles y salas similares donde las superficies de a nivel de suelo son removibles, en los procesos de retirada de las piezas y comprobacion de fondos, sentinas, etc. se debe serciorar de que una vez finalizado los trabajos se debe devolver a la posición inicial o bien señalizar con cintas o balizas.', 'Charla de operativas seguras y labores diarias con seguridad.', '', 'NO', '', '', '', '', 'Emili Vives Garcia', 'Trabajador Designado', '2023-03-23', '2023-03-24', 'Emili Vives Garcia', 'Resp PRL', '2023-03-24'),
+(87, '002/2023', 'SI', 158, 20, 'En el propio centro', 'Zona rampas', 2, '2023-05-19', NULL, '17:00:00', '8', 'SI', 'Jueves', '2', NULL, 'SI', 'SI', 'NO', NULL, 'En el proceso de repliegue de rampa, el trabajador acerca la mano sin querer a la zona de la maquinilla de recogida de cable, al llevar guantes se le engacha y le realiza un corte ene ldedo pulgar', 57, 'Zona de rampas (popa)', '', 27, '', 39, '', 28, 'Rampa de embarque al buque', 36, '', 28, '', 36, '', 1206, '', NULL, 'En el proceso limpieza del cable de subida de rampa el trabajador al limpiar el cable durante su recogida acerca la mano demasiado a la zona de enrolle de la maquinilla y al llevar guante se le engancha haciendose corte en dedo pulgar', 'NO', '', '', 4, 1, 26, 'NO', '', 'SI', 'Asepeyo Vigo', NULL, NULL, 'SI', 'SI', '-', 'Protector cable de maquinilla', '', '', 'No llevar epis', '', 'Llevar guante que le lleva al atrapamiento', 'Atrapamiento derivado del engancharse el cuante con el cable', 'el trabajador / la empresa (disponer de proteccion de cable)', '', 'Informacion al trabajador y a la embarcación que aquellas operativas de mantenimiento y limpieza de recogedores de cable se realizaran con la rampa bajada, y por consiguiente sancando el cable, o bien realizando la operativa con dos trabajadores que puedan generar la actividad parando en cada trozo de cable que el compañero pueda trabajar sin la accion de recoger.', '', 'NO', '', '', '', '', 'Emili Vives Garcia', 'Trabajador Designado', '2023-05-22', '2023-05-22', 'Emili Vives Garcia', '', '2023-05-22'),
+(88, '003/2023', 'SI', 315, 29, 'En el propio centro', 'Puerto ibiza (estacion maritima ibiza-formentera)', 1, '2023-06-13', '2023-06-13', '18:00:00', '3', 'SI', 'Jueves', '0', 18, 'SI', 'SI', 'NO', NULL, 'En el proceso de amarre del buque Formentera Express, el trabajador estaba encapillando la primera amarra al norai cuando al incorporarse recibe el golpe de una segunda amarra que se le había tirado desde el barco', 33, 'Zona de atraque de los buques', '', 5, 'Amarre de embarcación en puerto', 18, 'Amarre de buque', 1206, 'Amarra de buque', 21, 'Marinera del buque lanza la amarra sin previamente haber comprobado la atención del marinero de tierra', 1206, 'Amarra de buque', 21, 'Amarra lanzada', 1206, 'Amarra de buque', NULL, 'Encapillando la amarra recibe un golpe fortuito por la amarra lanzada de la marinera del Eivissa Jet (Nuria', 'SI', '', 'Lanzo la amarra sin avisar y al girar el cuerpo vio que el trabajador de muelle no estaba mirando', 12, 1, 11, 'NO', '', 'SI', 'Policlinica del rosario', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '', 'N/P', 'N/P', '', 'Descoordinación con marinera', 'La trabajador lanza la amarra si antes a ver comprobado de que el amarrador estaba listo para recibirla', 'Ambos trabajadores', 'Ante la falta de atencion de la marinera a la hora de pasar/lanzar la amarra, al lanzarla golpea contra el cuello del trabajador', 'Informar en la importancia del contacto visual para facilitar los cabos o amarras de los barcos al equipo de amarradores.', '', 'NO', '', '', '', '', 'Emili Vives Garcia', 'Trabajador Designado', '2023-06-14', '2023-06-14', 'Emili Vives Garcia', 'Resp PRL', '2023-06-15'),
+(89, '004/2023', 'SI', 42, 30, 'En el propio centro', 'Zona contigua al edificio', 2, '2023-06-30', NULL, '17:30:00', '3', 'SI', 'Martes', '0', NULL, 'SI', 'SI', '-', NULL, 'En los trabajos de limpieza, la trabajadora observa que sale humo de una de las papeleras de la est. maritima (contigua estacion taxis), viendo que sigue saliendo humo decide retirar la bolsa. Al coger la bolsa nota un finchazo en el dedo.', 32, 'Exterior estacion maritima frente la parada de taxis', '', 28, '', 17, '', 1233, '', 6, '', 180, '', 8, '', 180, '', NULL, 'Observa que sale humo de una paperera, le hecha un cubo de agua pero sigue saliendo humos, decide retirar la bolsa de la papelera y al coger la bolsa se pincha el dedo corazon de la mano derecha', 'NO', '', '', 3, 1, 26, 'NO', '', 'SI', 'Hospital de Formentera', NULL, NULL, 'SI', 'SI', '', 'N/P', '', 'GUANTES LATEX', 'GUANTES LATEX', '', 'Coger la bolsa de basura de forma incontrolada o bien meter la mano dentro de la bolsa sin previamente mirar', '', '', 'La trabajadora impulsada por la urgencia al ver humo de la papelera mete la mano de forma incontrolada (sin revisar contenido de dentro) lo que lleva a pincharse', 'Se entrega Ficha Informativa de trabajos de retirada de residuos en papeleras.', 'Entregada y firmada - 19/06/2023', 'NO', '', '', '', '', 'Emili Vives Garcia', 'Trabajador Designado', '2023-07-03', '2023-07-03', 'Emili Vives Garcia', 'Resp PRL', '2023-07-06'),
+(90, '025/2024', 'SI', 257, 19, 'En el propio centro', 'Chenega - embarcacion', 1, '2024-12-07', '2024-12-07', '00:15:00', '4', 'SI', 'Seleccione', '7', 13, 'SI', 'SI', 'NO', NULL, 'Aflojando tuerca de doble fondo del boil de estribor nota pinchazo en la espalda', 57, 'Embarcacion Chenega', 'Boil Estribor', 27, 'Preparacion zona', 8, ' aflojar tuercas para apertura boil', 144, 'Llave fija', 38, '', 2, '', 40, '', 2, '', NULL, 'Durante el proceso de aflojar tuercas para la apertura del boil, nota un pinchazo en la espalda.', 'NO', '', '', 3, 1, 14, 'NO', '', 'SI', 'Centro medico alcudia', NULL, NULL, 'SI', 'SI', 'N/P', 'N/P', '', 'N/P', 'N/P', '', 'Aplicar fuerzas de manera incorrecta, ', 'mala planificacion de los trabajos', 'el trabajador', 'Ante situaciones donde requiere un trabajo de esfuerzo fisico prolongado, el trabajador debe planificar la actividad con los descansos adecuados al esfuerzo', 'A la incorporacion del trabajador se le entrega ficha de riesgo por sobresfuerzos', '', '-', '', '', '', '', 'Emili Vives Garcia', 'Trabajador Designado', '2024-12-09', '2024-12-10', 'Emili Vives Garcia', 'Resp PRL', '2024-12-10');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ace_actividadfisica`
+-- Estructura de la taula `ace_actividadfisica`
 --
 
 CREATE TABLE `ace_actividadfisica` (
@@ -121,40 +156,41 @@ CREATE TABLE `ace_actividadfisica` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ace_actividadfisica`
+-- Bolcament de dades per a la taula `ace_actividadfisica`
 --
 
 INSERT INTO `ace_actividadfisica` (`id_actividadfisica`, `codactivfis_af`, `activfisica_af`) VALUES
-(1, '00', 'Ninguna informaci?n '),
-(2, '10', 'Operaciones con m?quinas ? sin especificar'),
-(3, '11', 'Arrancar la m?quina, parar la m?quina'),
-(4, '12', 'Alimentar la m?quina, vaciar la m?quina'),
-(5, '13', 'Vigilar la m?quina, hacer funcionar - conducir la m?quina'),
-(6, '19', 'Otra Actividad f?sica espec?fica del grupo 1 no mencionada anteriormente'),
-(7, '20', 'Trabajos con herramientas manuales ? sin especificar'),
+(0, '0', 'Ninguna información'),
+(1, '00', 'Ninguna información '),
+(2, '10', 'Operaciones con máquinas sin especificar'),
+(3, '11', 'Arrancar la máquina, parar la máquina'),
+(4, '12', 'Alimentar la máquina, vaciar la máquina'),
+(5, '13', 'Vigilar la máquina, hacer funcionar - conducir la máquina'),
+(6, '19', 'Otra Actividad física específica del grupo 1 no mencionada anteriormente'),
+(7, '20', 'Trabajos con herramientas manuales, sin especificar'),
 (8, '21', 'Trabajar con herramientas manuales sin motor'),
 (9, '22', 'Trabajar con herramientas manuales con motor'),
-(10, '29', 'Otra Actividad f?sica espec?fica del grupo 2 no mencionada anteriormente'),
+(10, '29', 'Otra Actividad física específica del grupo 2 no mencionada anteriormente'),
 (11, '30', 'Conducir / estar a bordo de un medio de transporte o equipo de carga ? sin especificar'),
 (12, '31', 'Conducir un medio de transporte o un equipo de carga - m?vil y con motor'),
 (13, '32', 'Conducir un medio de transporte o un equipo de carga - m?vil y sin motor'),
 (14, '33', 'Ser pasajero a bordo de un medio de transporte'),
-(15, '39', 'Otra Actividad f?sica espec?fica del grupo 3 no mencionada anteriormente'),
-(16, '40', 'Manipulaci?n de objetos ? sin especificar'),
+(15, '39', 'Otra Actividad física específica del grupo 3 no mencionada anteriormente'),
+(16, '40', 'Manipulación de objetos, sin especificar'),
 (17, '41', 'Coger con la mano, agarrar, sujetar, poner ? en un plano horizontal'),
 (18, '42', 'Atar, ligar, arrancar, deshacer, prensar, destornillar, atornillar, girar'),
 (19, '43', 'Fijar, colgar, izar, instalar - en un plano vertical'),
 (20, '44', 'Lanzar, proyectar lejos'),
 (21, '45', 'Abrir, cerrar (una caja, un embalaje, un paquete)'),
-(22, '46', 'Verter, introducir l?quidos, llenar, regar, pulverizar, vaciar, achicar'),
-(23, '47', 'Abrir (un caj?n), empujar (puerta de un hangar, de despacho, de armario)'),
-(24, '49', 'Otra Actividad f?sica espec?fica del grupo 4 no mencionada anteriormente'),
-(25, '50', 'Transporte manual ? sin especificar'),
+(22, '46', 'Verter, introducir líquidos, llenar, regar, pulverizar, vaciar, achicar'),
+(23, '47', 'Abrir (un cajón), empujar (puerta de un hangar, de despacho, de armario)'),
+(24, '49', 'Otra Actividad física específica del grupo 4 no mencionada anteriormente'),
+(25, '50', 'Transporte manual, sin especificar'),
 (26, '51', 'Transportar verticalmente - alzar, levantar, bajar, etc. un objeto'),
 (27, '52', 'Transportar horizontalmente - tirar de, empujar, hacer rodar, etc. un objeto'),
 (28, '53', 'Transportar una carga (portar) - por parte de una persona'),
-(29, '59', 'Otra Actividad f?sica espec?fica del grupo 5 no mencionada anteriormente'),
-(30, '60', 'Movimiento ? sin especificar'),
+(29, '59', 'Otra Actividad física específica del grupo 5 no mencionada anteriormente'),
+(30, '60', 'Movimiento, sin especificar'),
 (31, '61', 'Andar, correr, subir, bajar, etc.'),
 (32, '62', 'Entrar, salir'),
 (33, '63', 'Saltar, abalanzarse, etc.'),
@@ -162,14 +198,14 @@ INSERT INTO `ace_actividadfisica` (`id_actividadfisica`, `codactivfis_af`, `acti
 (35, '65', 'Levantarse, sentarse, etc.'),
 (36, '66', 'Nadar, sumergirse'),
 (37, '67', 'Hacer movimientos en un mismo sitio'),
-(38, '69', 'Otra Actividad f?sica espec?fica del grupo 6 no mencionada anteriormente'),
+(38, '69', 'Otra Actividad física específica del grupo 6 no mencionada anteriormente'),
 (39, '70', 'Estar presente'),
-(40, '99', 'Otra Actividad f?sica espec?fica no codificada en esta clasificaci?n');
+(40, '99', 'Otra Actividad física específica no codificada en esta clasificaci?n');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ace_agentematerial`
+-- Estructura de la taula `ace_agentematerial`
 --
 
 CREATE TABLE `ace_agentematerial` (
@@ -179,10 +215,11 @@ CREATE TABLE `ace_agentematerial` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ace_agentematerial`
+-- Bolcament de dades per a la taula `ace_agentematerial`
 --
 
 INSERT INTO `ace_agentematerial` (`id_agentematerial`, `codagentemat_am`, `agentematerial_am`) VALUES
+(0, '0', 'Ninguna información'),
 (1, '00.00.00.00', 'Ning?n agente material o ninguna informaci?n'),
 (2, '00.01.00.00', 'Ning?n agente material'),
 (3, '00.02.00.00', 'Ninguna informaci?n'),
@@ -1657,20 +1694,21 @@ INSERT INTO `ace_agentematerial` (`id_agentematerial`, `codagentemat_am`, `agent
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ace_agentematerialdesv`
+-- Estructura de la taula `ace_agentematerialdesv`
 --
 
 CREATE TABLE `ace_agentematerialdesv` (
   `id_agentematerialdesv` int(11) NOT NULL,
   `codagentematdesv_amd` varchar(15) NOT NULL,
   `agentematerialdesv_amd` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Volcado de datos para la tabla `ace_agentematerialdesv`
+-- Bolcament de dades per a la taula `ace_agentematerialdesv`
 --
 
 INSERT INTO `ace_agentematerialdesv` (`id_agentematerialdesv`, `codagentematdesv_amd`, `agentematerialdesv_amd`) VALUES
+(0, '0', 'Ninguna información'),
 (1, '00.00.00.00', 'Ning?n agente material o ninguna informaci?n'),
 (2, '00.01.00.00', 'Ning?n agente material'),
 (3, '00.02.00.00', 'Ninguna informaci?n'),
@@ -3145,7 +3183,7 @@ INSERT INTO `ace_agentematerialdesv` (`id_agentematerialdesv`, `codagentematdesv
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ace_agentematerialles`
+-- Estructura de la taula `ace_agentematerialles`
 --
 
 CREATE TABLE `ace_agentematerialles` (
@@ -3155,10 +3193,11 @@ CREATE TABLE `ace_agentematerialles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ace_agentematerialles`
+-- Bolcament de dades per a la taula `ace_agentematerialles`
 --
 
 INSERT INTO `ace_agentematerialles` (`id_agentematerialles`, `codagentematles_aml`, `agentematerialles_aml`) VALUES
+(0, '0', 'Ninguna información'),
 (1, '00.00.00.00', 'Ning?n agente material o ninguna informaci?n'),
 (2, '00.01.00.00', 'Ning?n agente material'),
 (3, '00.02.00.00', 'Ninguna informaci?n'),
@@ -4633,7 +4672,7 @@ INSERT INTO `ace_agentematerialles` (`id_agentematerialles`, `codagentematles_am
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ace_desviacion`
+-- Estructura de la taula `ace_desviacion`
 --
 
 CREATE TABLE `ace_desviacion` (
@@ -4643,10 +4682,11 @@ CREATE TABLE `ace_desviacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ace_desviacion`
+-- Bolcament de dades per a la taula `ace_desviacion`
 --
 
 INSERT INTO `ace_desviacion` (`id_desviacion`, `coddesviacion_des`, `desviacion_des`) VALUES
+(0, '0', 'Ninguna información'),
 (1, '00', 'Ninguna informaci?n'),
 (2, '10', 'Desviaci?n por problema el?ctrico, explosi?n, fuego ? sin especificar'),
 (3, '11', 'Problema el?ctrico que da lugar a descarga el?ctrica ? sin contacto f?sico'),
@@ -4703,7 +4743,7 @@ INSERT INTO `ace_desviacion` (`id_desviacion`, `coddesviacion_des`, `desviacion_
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ace_formacontacto`
+-- Estructura de la taula `ace_formacontacto`
 --
 
 CREATE TABLE `ace_formacontacto` (
@@ -4713,7 +4753,7 @@ CREATE TABLE `ace_formacontacto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ace_formacontacto`
+-- Bolcament de dades per a la taula `ace_formacontacto`
 --
 
 INSERT INTO `ace_formacontacto` (`id_formacontacto`, `codformacont_fc`, `formacontacto_fc`) VALUES
@@ -4766,12 +4806,14 @@ INSERT INTO `ace_formacontacto` (`id_formacontacto`, `codformacont_fc`, `formaco
 (47, '83', 'Golpes, patadas, cabezazos, estrangulamiento, etc.'),
 (48, '89', 'Otro Contacto conocido del grupo 8 no mencionado anteriormente'),
 (49, '90', 'Infartos, derrames cerebrales y otras patolog?as no traum?ticas'),
-(50, '99', 'Otros Contacto no codificado en la presente clasificaci?n');
+(50, '99', 'Otros Contacto no codificado en la presente clasificaci?n'),
+(51, '0', 'Ninguna información'),
+(53, '00', '--Seleccione la forma de contacto--');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ace_gravedad`
+-- Estructura de la taula `ace_gravedad`
 --
 
 CREATE TABLE `ace_gravedad` (
@@ -4781,19 +4823,20 @@ CREATE TABLE `ace_gravedad` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ace_gravedad`
+-- Bolcament de dades per a la taula `ace_gravedad`
 --
 
 INSERT INTO `ace_gravedad` (`id_gravedad`, `codgravedad_gr`, `gravedad_gr`) VALUES
 (1, 1, 'Leve'),
 (2, 2, 'Grave'),
 (3, 3, 'Muy Grave'),
-(4, 4, 'Mortal');
+(4, 4, 'Mortal'),
+(5, 0, 'Ninguna información');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ace_partecuerpo`
+-- Estructura de la taula `ace_partecuerpo`
 --
 
 CREATE TABLE `ace_partecuerpo` (
@@ -4803,10 +4846,11 @@ CREATE TABLE `ace_partecuerpo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ace_partecuerpo`
+-- Bolcament de dades per a la taula `ace_partecuerpo`
 --
 
 INSERT INTO `ace_partecuerpo` (`id_partecuerpo`, `codpartecuerpo_pc`, `partecuerpo_pc`) VALUES
+(0, '0', 'Ninguna información'),
 (1, '00', 'Parte del cuerpo afectada sin especificar'),
 (2, '10', 'Cabeza - sin especificar'),
 (3, '11', 'Cabeza cerebro, nervios craneanos y vasos cerebrales'),
@@ -4852,7 +4896,7 @@ INSERT INTO `ace_partecuerpo` (`id_partecuerpo`, `codpartecuerpo_pc`, `partecuer
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ace_procesotrabajo`
+-- Estructura de la taula `ace_procesotrabajo`
 --
 
 CREATE TABLE `ace_procesotrabajo` (
@@ -4862,10 +4906,11 @@ CREATE TABLE `ace_procesotrabajo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ace_procesotrabajo`
+-- Bolcament de dades per a la taula `ace_procesotrabajo`
 --
 
 INSERT INTO `ace_procesotrabajo` (`id_procesotrabajo`, `codigo_pt`, `procesotrabajo_pt`) VALUES
+(0, '0', 'Ninguna información'),
 (1, '0', 'Ninguna información sin especificar'),
 (2, '10', 'Tareas de producción, transformación, almacenamiento sin especificar'),
 (3, '11', 'Producción, transformación, tratamiento de todo tipo'),
@@ -4906,7 +4951,7 @@ INSERT INTO `ace_procesotrabajo` (`id_procesotrabajo`, `codigo_pt`, `procesotrab
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ace_tipoaccidente`
+-- Estructura de la taula `ace_tipoaccidente`
 --
 
 CREATE TABLE `ace_tipoaccidente` (
@@ -4916,18 +4961,20 @@ CREATE TABLE `ace_tipoaccidente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ace_tipoaccidente`
+-- Bolcament de dades per a la taula `ace_tipoaccidente`
 --
 
 INSERT INTO `ace_tipoaccidente` (`id_tipoaccidente`, `codtipoaccidente_ta`, `tipoaccidente_ta`) VALUES
 (1, 1, 'Accidente con baja'),
 (2, 2, 'Accidente sin baja'),
-(3, 3, 'Accidente in itinere');
+(3, 3, 'Accidente in itinere con baja'),
+(4, 4, 'Accidente in itinere sin baja'),
+(5, 0, 'Ninguna información');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ace_tipolesion`
+-- Estructura de la taula `ace_tipolesion`
 --
 
 CREATE TABLE `ace_tipolesion` (
@@ -4937,13 +4984,14 @@ CREATE TABLE `ace_tipolesion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ace_tipolesion`
+-- Bolcament de dades per a la taula `ace_tipolesion`
 --
 
 INSERT INTO `ace_tipolesion` (`id_tipolesion`, `codtipolesion_tl`, `tipolesion_tl`) VALUES
-(1, '000', 'Lesi?n desconocida'),
+(0, '0', 'Ninguna información'),
+(1, '000', 'Lesión desconocida'),
 (2, '010', 'Heridas y lesiones superficiales'),
-(3, '011', 'Lesiones superficiales y cuerpos extra?os en los ojos'),
+(3, '011', 'Lesiones superficiales y cuerpos extraños en los ojos'),
 (4, '012', 'Heridas abiertas'),
 (5, '019', 'Otros tipos de heridas y lesiones superficiales'),
 (6, '020', 'Fracturas de huesos'),
@@ -4954,15 +5002,15 @@ INSERT INTO `ace_tipolesion` (`id_tipolesion`, `codtipolesion_tl`, `tipolesion_t
 (11, '031', 'Dislocaciones y subluxaciones'),
 (12, '032', 'Esguinces y torceduras'),
 (13, '039', 'Otros tipos de dislocaciones, esguinces y distensiones'),
-(14, '040', 'Amputaciones traum?ticas, p?rdidas de partes del cuerpo'),
-(15, '050', 'Conmoci?n y lesiones internas'),
-(16, '051', 'Conmoci?n y lesiones intracraneales'),
+(14, '040', 'Amputaciones traumáticas, pérdidas de partes del cuerpo'),
+(15, '050', 'Conmoción y lesiones internas'),
+(16, '051', 'Conmoción y lesiones intracraneales'),
 (17, '052', 'Lesiones internas'),
-(18, '059', 'Otros tipos de conmoci?n y lesiones internas'),
-(19, '060', 'Quemaduras, escaldaduras y congelaci?n'),
-(20, '061', 'Quemaduras y escaldaduras (t?rmicas)'),
-(21, '062', 'Quemaduras qu?micas (corrosi?n)'),
-(22, '063', 'Congelaci?n'),
+(18, '059', 'Otros tipos de conmoción y lesiones internas'),
+(19, '060', 'Quemaduras, escaldaduras y congelación'),
+(20, '061', 'Quemaduras y escaldaduras (térmicas)'),
+(21, '062', 'Quemaduras químicas (corrosión)'),
+(22, '063', 'Congelación'),
 (23, '069', 'Otros tipos de quemaduras, escaldaduras y congelaci?n'),
 (24, '070', 'Envenenamientos e infecciones'),
 (25, '071', 'Envenenamientos agudos'),
@@ -4973,27 +5021,27 @@ INSERT INTO `ace_tipolesion` (`id_tipolesion`, `codtipolesion_tl`, `tipolesion_t
 (30, '081', 'Asfixia'),
 (31, '082', 'Ahogamiento y sumersiones no mortales'),
 (32, '089', 'Otros tipos de ahogamiento y asfixia'),
-(33, '090', 'Efectos del ruido, la vibraci?n y la presi?n'),
-(34, '091', 'P?rdida auditiva aguda'),
-(35, '092', 'Efectos de la presi?n (barotrauma)'),
-(36, '099', 'Otros efectos agudos del ruido, la vibraci?n y la presi?n'),
+(33, '090', 'Efectos del ruido, la vibración y la presión'),
+(34, '091', 'Pérdida auditiva aguda'),
+(35, '092', 'Efectos de la presión (barotrauma)'),
+(36, '099', 'Otros efectos agudos del ruido, la vibración y la presión'),
 (37, '100', 'Efectos de las temperaturas extremas, la luz y la radiaci?n'),
-(38, '101', 'Calor e insolaci?n'),
-(39, '102', 'Efectos de la radiaci?n no t?rmica (rayos X, sustancias radioactivas, etc)'),
+(38, '101', 'Calor e insolación'),
+(39, '102', 'Efectos de la radiación no térmica (rayos X, sustancias radioactivas, etc)'),
 (40, '103', 'Efectos de las bajas temperaturas'),
 (41, '109', 'Otros efectos de las temperaturas extremas, la luz y la radiaci?n'),
-(42, '110', 'Da?os psicol?gicos, choques traum?ticos'),
-(43, '111', 'Da?os psicol?gicos debidos a agresiones o amenazas'),
-(44, '112', 'Choques traum?ticos (el?ctricos, provocados por un rayo, etc)'),
+(42, '110', 'Daños psicológicos, choques traumáticos'),
+(43, '111', 'Daños psicológicos debidos a agresiones o amenazas'),
+(44, '112', 'Choques traumáticos (eléctricos, provocados por un rayo, etc)'),
 (45, '119', 'Otros tipos de choques (desastres naturales, choque anafil?ctico, etc)'),
-(46, '120', 'Lesiones m?ltiples'),
-(47, '130', 'Infartos, derrames cerebrales y otras patolog?as no traum?ticas'),
+(46, '120', 'Lesiones múltiples'),
+(47, '130', 'Infartos, derrames cerebrales y otras patologías no traumáticas'),
 (48, '999', 'Otras lesiones especificadas no incluidas en otros apartados');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ace_tipolugar`
+-- Estructura de la taula `ace_tipolugar`
 --
 
 CREATE TABLE `ace_tipolugar` (
@@ -5003,11 +5051,12 @@ CREATE TABLE `ace_tipolugar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ace_tipolugar`
+-- Bolcament de dades per a la taula `ace_tipolugar`
 --
 
 INSERT INTO `ace_tipolugar` (`id_tipolugar`, `codtipolugar_tl`, `tipolugar_tl`) VALUES
-(1, 0, 'Ninguna informaci?n'),
+(0, 0, 'Ninguna información'),
+(1, 0, 'Ninguna información'),
 (2, 10, 'Zonas industriales ? sin especificar'),
 (3, 11, 'Lugar de producci?n, taller, f?brica'),
 (4, 12, '?rea de mantenimiento, taller de reparaci?n'),
@@ -5074,42 +5123,74 @@ INSERT INTO `ace_tipolugar` (`id_tipolugar`, `codtipolugar_tl`, `tipolugar_tl`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ag_acciones`
+-- Estructura de la taula `ag_acciones`
 --
 
 CREATE TABLE `ag_acciones` (
   `id_accion` int(11) NOT NULL,
   `codigo_acc` varchar(255) NOT NULL,
-  `fecha_acc` date NOT NULL,
+  `fecha_acc` date DEFAULT NULL,
   `centro_acc` int(11) NOT NULL,
   `prioridad_acc` varchar(50) NOT NULL,
   `origen_acc` varchar(255) NOT NULL,
   `detalleorigen_acc` varchar(255) NOT NULL,
   `descripcion_acc` varchar(255) NOT NULL,
   `responsable_acc` int(11) NOT NULL,
-  `fechaprevista_acc` date NOT NULL,
-  `fecharea_acc` date NOT NULL,
-  `fechaveri_acc` date NOT NULL,
+  `fechaprevista_acc` date DEFAULT NULL,
+  `fecharea_acc` date DEFAULT NULL,
+  `fechaveri_acc` date DEFAULT NULL,
   `avance_acc` varchar(25) NOT NULL,
   `estado_acc` varchar(255) NOT NULL,
   `accpropuesta_acc` text NOT NULL,
   `accrealizada_acc` text NOT NULL,
   `seguimiento_acc` text NOT NULL,
-  `recursos_acc` int(11) NOT NULL,
-  `imagen1_acc` longblob NOT NULL
+  `recursos_acc` int(11) DEFAULT NULL,
+  `imagen1_acc` text DEFAULT NULL,
+  `imagen2_acc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ag_acciones`
+-- Bolcament de dades per a la taula `ag_acciones`
 --
 
-INSERT INTO `ag_acciones` (`id_accion`, `codigo_acc`, `fecha_acc`, `centro_acc`, `prioridad_acc`, `origen_acc`, `detalleorigen_acc`, `descripcion_acc`, `responsable_acc`, `fechaprevista_acc`, `fecharea_acc`, `fechaveri_acc`, `avance_acc`, `estado_acc`, `accpropuesta_acc`, `accrealizada_acc`, `seguimiento_acc`, `recursos_acc`, `imagen1_acc`) VALUES
-(1, 'N/A', '0001-01-01', 23, 'Baja', '0', 'N/A', 'N/A', 1, '0001-01-01', '0000-00-00', '0000-00-00', '0%', 'Comunicada', 'N/A', 'N/A', 'n/a', 1, 0x323032342d30332d31322d30322d35362d31385f5f);
+INSERT INTO `ag_acciones` (`id_accion`, `codigo_acc`, `fecha_acc`, `centro_acc`, `prioridad_acc`, `origen_acc`, `detalleorigen_acc`, `descripcion_acc`, `responsable_acc`, `fechaprevista_acc`, `fecharea_acc`, `fechaveri_acc`, `avance_acc`, `estado_acc`, `accpropuesta_acc`, `accrealizada_acc`, `seguimiento_acc`, `recursos_acc`, `imagen1_acc`, `imagen2_acc`) VALUES
+(1, 'N/A', '0001-01-01', 24, 'Baja', '0', 'N/A', 'N/A', 1, '0001-01-01', '0001-01-01', '0001-01-01', '100%', 'Cerrada', 'N/A', 'N/A', 'n/a', 1, '2024-04-09-01-46-18__', ''),
+(27, '001/2024', '2024-01-02', 18, 'Baja', 'Evaluacion de riesgos', 'Informe Evaluacion humos diesel 2023', 'Realizar nueva evaluacion de humos ', 1, '2024-01-02', '2024-06-08', '2024-08-08', '100%', 'Cerrada', 'Realizar una nueva evaluacion de humos para alcanzar mediciones segun UNE', '-', '14.2.2024 - Programada en SPA\r\n08.06.2024 - Realizada medicion en buque Fairweather\r\n27.08.2024 - Recepcion de informe', 0, '', ''),
+(28, '002/2024', '2024-01-02', 19, 'Baja', 'Evaluacion de riesgos', 'Evaluación humos - SPA', 'A raiz de las mediciones de humos diesel y las diferentes mediciones higienicas, realizar una formacion especifica sobre los riesgos higienicos en este caso de los humos diesel y otros riesgos del entorno higienico.', 1, '2024-01-02', '0001-01-01', '0001-01-01', '100%', 'Cerrada', 'Informar y formar a trabajadores del riesgo a la exposición a humos diesel', '-', '14.02.2024 - Programado con SPA\r\n13.06.2024 - Se envia email a tecnico de SPA para que coordine la formacion\r\n18.07.2024 - SPA propone formacion para setiembre (se acepta)\r\n12.11.2024 - SPA organiza formación para 14.11.2024\r\n14.11.2024 - Realizada formacion a para tripulaciones\r\n', 0, '', ''),
+(29, '003/2024', '2024-03-04', 24, 'Media', 'Accidente de trabajo', 'accidente 002/2024', 'Se detecta un nuevo riesgo a raíz de un accidente en el que se procede de una forma incorrecta.', 1, '2024-03-30', '2024-03-04', '2024-03-04', '100%', 'Cerrada', 'Informar a todos los buques de la forma segura de proceder para poner defensas desde el buque.', 'email', '04.03.2024 - Se envia email a Jaume Juan para que haga comunicación.\r\n04.03.2024 - Comentado con Jaume Juan que el comunicado lo haga el departamento de PRL\r\n04.03.2024 - Se realiza comunicado a todos los buques de forma de proceder en colocacion de defensas.', 0, NULL, ''),
+(30, '004/2024', '2024-03-14', 34, 'Media', 'Evaluacion de riesgos', 'erl_segu_oficina_ikebana', 'Las cristaleras externas de acceso a terrazas no disponen de señalizacion identificativa', 1, '2024-03-14', '2024-06-17', '2024-06-17', '100%', 'Cerrada', 'Dotar de elementos identificativos (vinilo logo) en los cristales como los de interior', '-', '14.05.2024 Deteccion riesgo\r\n13.06.2024 Comunicada a David Prior (Marketing) para que lo gestione con empresa vinilos\r\n17.06.2024 David prior envia fotos de cristaleras viniladas.', 150, NULL, ''),
+(31, '005/2024', '2024-03-14', 34, 'Media', 'Evaluacion de riesgos', 'erl_segu_oficina_ikebana', 'Dotar de señal identificativa de riesgo electrico en cuadro principal (sala 1)', 1, '2024-05-14', '2024-03-25', '2024-03-25', '100%', 'Cerrada', 'Dotar señal de riesgo electrico', '-', '14.03.2024 Identificado\r\n20.03.2024 Enviada señal a Maura para que se coloque.\r\n25.03.2024 Colocada en lugar', 2, NULL, ''),
+(32, '006/2024', '2024-03-14', 34, 'Alta', 'Evaluacion de riesgos', 'erl_segu_oficina_ikebana', 'El dia de la visita para evaluacion de riesgos inicial del centro no se dispone de botiquin para primero auxilios asi como su señal identificativa', 1, '2024-03-30', '2024-03-25', '2024-03-25', '100%', 'Cerrada', 'Dotar de botiquin en el centro en lugar publico con seña identificativa.', '-', '14.03.2024 Identificado riesgo\r\n16.03.2024 Solicitado a mutua botiquin para centro\r\n25.03.2024 Colocado y dispuesto botiquin + señal identificativa', 0, NULL, ''),
+(33, '007/2024', '2024-04-09', 29, 'Media', 'Otros', 'Visita por instalaciones', 'Recordatorio a los trabajadores de puerto mediante señales de obligacion de uso de epi', 1, '2024-04-09', '2024-04-09', '2024-04-09', '100%', 'Cerrada', 'Dotar de recordatorios de uso de epis', '-', '09.04.2024 Se envia email informativo a responsable \r\n09.04.2024 Colocadas señales', 1, NULL, ''),
+(35, '008/2024', '2024-04-09', 30, 'Media', 'Otros', 'Visita instalaciones', 'Recordatorio de uso obligatorio de los epis.', 1, '2024-04-09', '2024-06-14', '2024-06-17', '100%', 'Cerrada', 'Dotar de señales de obligacion uso epis', '-', '09.04.2024 Se envia email informativo a responsable (Delfina)\r\n10.04.2024 Delfi contesta que se dotaran en nuevo lugar una vez establecidos.\r\n13.06.2024 Se envia email a Delfi para ver si se han colocado las señales\r\n14.06.2024 Delfi confirma colocacion y remite foto', 0, NULL, ''),
+(36, '009/2024', '2024-04-10', 28, 'Media', 'Propuesta de mejora', 'R6-15-A (10.04.2024)', 'Centro de trabajo solicita nuevo epis para proteccion solar ante incremento de temperaturas', 4, '2024-04-10', '0001-01-01', '0001-01-01', '100%', 'Cerrada', 'Dotar de nuevos equipos para la proteccion solar asi como crema solar para la piel', '', '10.04.2024 - enviado email a compras para gestion\r\n10.04.2024 - email de compras verificando todo\r\n17.04.2024 - Compra realizada de cremas\r\n21.05.2024 - Compra nuevos gorros/gorras\r\n30.05.2024 - Verficacion de disposicion de epis', 0, NULL, ''),
+(37, '010/2024', '2024-05-12', 16, 'Alta', 'Comunicado de riesgos', 'llamada telefonica capitan', 'Embarcacion solicita un nuevo botiquin al estraviarse el anterior y empezar nueva temporada', 1, '2024-05-12', '2024-06-16', '2024-06-16', '100%', 'Cerrada', 'Dotar de nuevo botiquin', '', '13.06.2024 Se visita embarcacion para confirmar si es perdida o bien quieren recambios nuevos.\r\n14.06.2024 Solicitado en web y informado a departamento de compras que a su llegada lo envien al buque.\r\n15.06.2024 Recibido en oficinas, se envia al buque\r\n16.06.2024 Ya disponible en el buque', 0, NULL, ''),
+(38, '013/2024', '2024-06-10', 18, 'Media', 'Propuesta de mejora', 'Propuesta mejora', 'En reunion con embarcación durante visita se habla de la posibilidad de que entrabajos de reparacion y mantenimiento de los jet, no haya suficientes chalecos salvavidas.', 1, '2024-06-10', '2024-06-20', '2024-06-20', '100%', 'Cerrada', 'Dotar de una nueva unidad a parte de las que ya se disponen a bordo', '', '06.06.2024 Mantenida reunion con responsable Sabino galdos para nueva adquisición de chalecos\r\n12.06.2024 Responsable me comunica que ya esta solitado al proveedor.\r\n13.06.2024 Comunicado a los barcos que en breve recibirán las unidades\r\n', 119, NULL, ''),
+(39, '012/2024', '2024-06-10', 19, 'Media', 'Propuesta de mejora', '', 'A solicitud de la embarcacion Fairweather, se cree conveniente dotar de nuevo chaleco salvavidas para tripulacion en el momento que se realizan trabajos en los jet a nivel de agua', 1, '2024-06-10', '2024-06-20', '2024-06-20', '100%', 'Cerrada', 'Disponer de un chaleco salvavidas extra', '', '05.06.2024 Buque traslada necesidad\r\n07.06.2024 Se comunica al responsable Sabino Galdos la necesidad\r\n10.06.2024 Se gestiona la compra con proveedor por parte de responsable.\r\n20.06.2024 Se entregan chalecos a bordo', 119, NULL, ''),
+(40, '011/2024', '2024-06-05', 28, 'Media', 'Propuesta de mejora', 'Propuesta mejora', 'A raiz de propuesta de mejora R6-15-A se solicita reposapies para la mejora ergonomica en puesto de trabajo de taquilla.', 1, '2024-06-05', '2024-06-15', '2024-06-27', '100%', 'Cerrada', 'Disposición de reposapiés en taquilla de ciutadella', '', '05.06.2024 Centro comunica la necesidad de reposapies\r\n06.06.2024 Responsable (sabino Galdos) hace gestiones para su disposición\r\n15.06.2024 Se reciben en taquilla nuevos reposapies.', 33, NULL, ''),
+(41, '014/2024', '2024-06-20', 24, 'Alta', 'Otros', '-', 'Campaña sobre la informacion de las altas temperaturas y prevencion del golpe de calor.', 1, '2024-06-20', '0001-01-01', '0001-01-01', '100%', 'Cerrada', 'Informar de los riesgos y medidas mediante ficha informativa a aquellos trabajadores expuestos al calor constante por altas temperaturas.', '', '20.06.2024 - Se remite comunicado a los diferentes responsables de departamento para que trasladen la ficha informativa.\r\n24.06.2024 - Recibida informacion de ciutadella', 0, '2024-07-22-07-25-44__comunicado ola calor 17.07.2024.jpg', '2024-07-22-07-26-18__comunicado_altas temp 17.07.2024.JPG'),
+(42, '015/2024', '2024-06-24', 43, 'Alta', 'Evaluacion de riesgos', 'erl_segu_oficina_rrhh', 'En evaluacion de riesgos se observa que aun no se han instalado elementos contraincendios (extintores)', 1, '2024-06-24', '2024-07-17', '2024-07-17', '100%', 'Cerrada', 'Dotar de equipos contraincendios', '-', '21.06.2024 Detectado riesgo\r\n26.06.2024 Solicitado a compra para dotacion\r\n16.07.2024 Se solicita de nuevo a compras, el proveedor tan pronto pueda se pasará\r\n17.07.2027 Se instalan extintores', 100, '2024-07-19-01-26-55__extintores rrhh.jpg', '2024-07-19-11-56-44__'),
+(43, '016/2024', '2024-06-24', 43, 'Media', 'Evaluacion de riesgos', 'erl_segu_oficina_rrhh', 'En evaluacion no se identifica el riesgo electrico en cuadro y subcuadros.', 1, '2024-06-29', '2024-06-24', '2024-06-24', '100%', 'Cerrada', 'Dotar de señales identificativas de riesgo electrico los cuadro y subcuadros electricos', '', 'Se recogien señales identificativas en oficina principal\r\n24.06.2024 Colocacion de señales', 0, NULL, ''),
+(44, '017/2024', '2024-06-24', 43, 'Media', 'Evaluacion de riesgos', 'erl_segu_oficina_rrhh', 'En evaluacion de riesgos se identifica que no se dispone de señal de salida / evacuacion', 1, '2024-06-24', '2024-08-19', '2024-08-19', '100%', 'Cerrada', 'Dotar de señales adecuadas para la evacuacion', '', 'Se solicita a compras dos señales de salida (estilo pegatina)\r\n19.08.2024 Recibida señal y colocacion', 0, '2024-08-19-11-17-00__señal salida oficina rrhh 19.08.2024.jpg', ''),
+(45, '018/2024', '2024-06-26', 19, 'Media', 'Comunicado de riesgos', 'R6-15-A (26.06.2024)', 'Se recibe comunicado de riesgo en el que se solicita guantes desechables de material diferente al disponible (nitrilo)', 1, '2024-06-26', '2024-07-01', '2024-07-22', '100%', 'Cerrada', 'Dotar de nuevos guantes desechables de material diferente al disponible actualmente', 'Seguimiento de la accion necesaria ya que probablemente no se alergia al propio guante desechable', '26.06.2024 Abierta incidencia\r\n26.06.2024 Trasladada al responsable de flota en puerto (sabino Galdos) para nueva compra\r\n22.07.2024 Verificada disposicion (buque manda foto por whatsapp)', 5, '2024-07-22-11-40-30__guantes latex- chenega.jpg', ''),
+(46, '019/2024', '2024-06-24', 24, 'Media', 'Otros', '', 'Campaña informativa estrés térmico / altas temperaturas verano', 1, '2024-06-24', '2027-07-15', '0001-01-01', '100%', 'Cerrada', 'Ampliar informacion respecto al estrés termico y riesgos que se derivan de el', '', '20.06.2024 Envio comunicado por email a los centros que tienen exposición\r\n17.07.2024 Envio comunicado por email a todos los centros de primera ola de calor', 0, '2024-07-22-07-24-27__comunicado_altas temp 17.07.2024.JPG', '2024-07-22-07-24-27__comunicado ola calor 17.07.2024.JPG'),
+(47, '020/2024', '2024-07-01', 18, 'Media', 'Accidente de trabajo', 'Investigaccion acc alejandro senen', 'A raiz de accidente laboral se trasmite al trabajador ficha de correcta eleccion de epis.', 1, '2024-07-01', '0001-01-01', '0001-01-01', '100%', 'Cerrada', 'Informar al trabajador sobre la correcta eleccion de equipos de proteccion individual', '', '01.07.2024 - Se envia a buque ficha informativa\r\n09.07.2024 - Recibidas firmas Fairweather\r\n17.07.2024 - Recibidas firmas Chenega', 0, '', ''),
+(52, '021/2024', '2024-07-04', 23, 'Media', 'Comunicado de riesgos', '', 'Trabajadora detalla mediante solicitud necesidad de proteccion auditiva (tapones) para momentos de ruido en sala', 1, '2024-07-04', '2024-07-05', '2024-07-05', '100%', 'Cerrada', 'Dotar de proteccion auditiva', '', '04.07..2024 Recepcion mensaje solicitando\r\n05.07.2024 Coordinacion con taller para que envien unas unidades a la ofiicna\r\n05.07.2024 Entregada proteccion auditiva', 5, NULL, ''),
+(53, '022/2024', '2024-07-15', 26, 'Alta', 'Propuesta de mejora', 'R16-ventilador_alcudia', 'Mediante comunicado de propuesta de riesgo / mejora, nos solicitan disponer de ventilador para mejorar confort termico dentro de la taquilla', 8, '2024-07-15', '2024-07-22', '2024-07-22', '100%', 'Cerrada', 'Dotar de elemento de ventilacion para mejorar la circulacion de aire en taquilla', '', '15.07.2024 Se recibe propuesta\r\n16.07.2024 Se envia email a Sabino para que compre ventilador.', 78, '2024-08-06-07-48-49__ventilador taq alcudia.jpg', ''),
+(61, '024/2024', '2024-08-23', 19, 'Alta', 'Propuesta de mejora', 'Propuesta mejora', 'Recepción de comunicado de riesgos/mejora por parte de trabajadora donde indica que es posible que a raiz de uso de jabon lavavajillas le hayan aparecido erupciones cutaneas alergicas en las manos.', 8, '2024-08-23', '2024-08-23', '2024-08-23', '100%', 'Cerrada', 'Cambiar el jabon lavavajillas por uno hipoalergenico (se pasara una lista de jabones aptos), o bien consultar con el proveedor habitual para que disponga de estos.', 'Se dispone de dos imagenes, 1 el antiguo jabon usado y el nuevo 2', '23.08.2024 Se comunica al barco la accion para que inicie el proceso de compra de un nuevo jabon.\r\n23.08.2024 El responsable de zona realiza la compra del jabon ademas de polvos talco para los guantes\r\n23.08.2024 Se entrega a bordo', 10, '2024-08-23-08-11-20__jabon lavavajillas CHENEGA 23.08.2024.jpg', '2024-08-23-02-05-34__fotolavavajillashipoalergenico.jpg'),
+(62, '025/2024', '2024-08-23', 27, 'Media', 'Comunicado de riesgos', '', 'La iluminacion natural que disponia la sala ya no esta al colocar por parte del \"consell de formentera\" vinilo que tapa toda la entrada de luz, tambien en la sala hay un punto de luz insuficiente (fluorescentes)', 1, '2024-08-23', '2024-08-26', '2024-08-27', '100%', 'Cerrada', 'Se propone quitar franja de la parte superior del vinilo asi como aumentar la potencia de la luminaria presente', '', '23.08.2024 Se comunica con responsable de PRL la situacion que se observó el pasado miercoles 21.08.2024\r\n23.08.2024 Se envia email a Consell de formentera oficina de turisma para solicitar retirada una franja en el vinilo.\r\n26.08.2024 autorización por parte del consell, se envia orden para proceder a responsable de Taquilla de formentera.\r\n26.08.2024 Se procede a retirar la parte superior del vinilo y instalar una nueva luminaria', 65, '2024-08-27-09-20-15__viniloformenterarecortado.jpg', '2024-08-27-09-20-15__luminariaformenteranuevaoficina.jpg'),
+(63, '023/2024', '2024-08-01', 24, 'Baja', 'Otros', 'Analisis siniestralidad en acta comite tierra', 'Creacion y disposicion a conocimiento de ficha informativa de buenas practicas en el uso de patinete', 1, '2024-08-01', NULL, NULL, '25%', 'Abierta', '', '', '', 0, '2024-08-29-11-14-06__', '2024-08-29-11-14-06__'),
+(64, '026/2024', '2024-10-02', 5, 'Media', 'Evaluacion de riesgos', 'IRL_SEGU_REV.PLAN_CASTAVI_2024', 'Hay dos arneses en el buque que han caducado (>5años fabricacion)', 1, '2024-10-02', NULL, NULL, '100%', 'Cerrada', 'Dotar de nuevos arneses', '', '022/10/2024 - Se realiza gestion para compra con dpto compras. (email)\r\n24.10.2024 - Realizada compra.\r\n26.10.2024 - Sustitucion de los equipos caducado por los nuevos (se entregan 3 nuevos)', 125, '2024-10-28-01-23-51__IMG-20241024-WA0003.jpg', '2024-10-28-01-23-51__IMG-20241024-WA0006.jpg'),
+(65, '027/2024', '2024-10-04', 5, 'Media', 'Accidente de trabajo', '', 'Entrega de ficha informativa a trabajador accidentado a raiz del accidente, ficha informativa sobre riesgos de cortes y golpes por elementos fijos', 1, '2024-10-04', NULL, NULL, '100%', 'Cerrada', 'Entrega de ficha informativa', '', 'Entrega de ficha al buque 08.10.2024\r\n28.10.2024 Se contacta con el buque para conocer situacion de la informacion entregada\r\n30.10.2024 Recepcion de la ficha firmada por el trabajador', 0, '2024-10-31-08-29-58__R70 CHOQUES OBJ. - MARIANO ALVAREZ 28.10.2024.pdf', '2024-10-04-11-45-28__'),
+(66, '028/2024', '2024-10-07', 19, 'Alta', 'Propuesta de mejora', '-', 'Mediante solicitud de compras interna del buque solicitan guantes electricos >10.000 v', 1, '2024-10-14', NULL, NULL, '25%', 'Abierta', 'Dotar del epi adiente', '', '07/10/2024 - Se recibe email de solicitud a compras pidiendo guantes para trabajos electricos', 0, '2024-10-08-07-30-51__', '2024-10-08-07-30-51__'),
+(67, '029/2024', '2024-10-17', 23, 'Media', 'Evaluacion de riesgos', 'autoevaluacion puesto teletrabajo', 'Durante comprobacion de la autoevaluación de puesto de teletrabajo de Sofia Barbieri (marketing) comenta que no dispone de elementos para una correcta conducta ergonómica (pantalla, teclado, raton) .', 1, '2024-10-17', '2024-10-30', '2024-10-30', '100%', 'Cerrada', 'Dotar de pantalla teclado y raton', '', '21.10.2024 - Se comunica necesidad e inicio de la accion correctora a responsable de departamento y dpto informatica\r\n24.10.2024 - Gestionado con depto informatica la compra de perifericos y pantalla\r\n28.10.2024 - Recibidos y disponibles perifericos y pantalla', 0, '2024-10-28-02-53-05__sofia barbieri-pantalla.jpeg', '2024-10-21-07-49-43__'),
+(68, '030/2024', '2024-10-23', 29, 'Alta', 'Otros', 'llamada Marino Taller.', 'El accionamiento de la rampa de embarque en el muelle de ibiza tiene, fuga de aceite que se derrama sobre el muelle posiblitando la caida ', 2, '2024-10-23', '2024-10-28', '2024-10-28', '100%', 'Cerrada', 'Reparacion fuga por parte de Balearia (responsable del mantenimiento de la rampa)', '', '23.10.2024 Comunicado de problema\r\n23.10.2024 Se estabiliza la zona hechando sepiolita (absorvente) y unos cartones\r\n23.10.2024 Se envia email a responsable de Balearia para su subsanacion.\r\n28.10.2024 Se visita puerto y confirman reparaciones por parte de Balearia a falta de limpieza de la zona.\r\n28.10.2024 Limpiada la zona por parte de operarios de APB', 0, '2024-10-24-08-59-20__aceite rampa-2- 23.10.2024.jpg', '2024-10-31-08-33-49__zona rampa ibiza - 28.10.2024.jpg'),
+(69, '031/2024', '2024-08-23', 15, 'Baja', 'Evaluacion de riesgos', 'IRL_SEGU_REV.PLAN_SEABUS_I_2024', 'En inspeccion periodica de seguridad se observa luminaria de la sala de depositos descolgada', 2, '2024-08-23', '2024-08-22', '2024-11-05', '100%', 'Cerrada', 'Colocar correctamente luminaria', '', '13.08.2024 Revision y deteccion de incidencia\r\n14.08.2024 Comunicacion con patron  (jose Ferrer) para subsanacion\r\n22.08.2024 Reparada\r\n06.11.2024 Se verifica in situ\r\n', 0, '2024-11-05-10-12-17__IMG_20240813_100413.jpg', '2024-11-06-08-00-13__luminaria seabus.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ag_actividad`
+-- Estructura de la taula `ag_actividad`
 --
 
 CREATE TABLE `ag_actividad` (
@@ -5123,15 +5204,230 @@ CREATE TABLE `ag_actividad` (
   `detalles_acc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Bolcament de dades per a la taula `ag_actividad`
+--
+
+INSERT INTO `ag_actividad` (`id_actividad`, `id_tarea`, `fecha_acc`, `horain_acc`, `horafin_acc`, `horas_acc`, `responsable_acc`, `detalles_acc`) VALUES
+(15, 50, '2024-04-30', '07:30:00', '08:30:00', '01:00:00', 'Emili Vives', 'investiacion ok'),
+(17, 51, '2024-04-24', '14:05:00', '15:05:00', '01:00:00', 'Emili Vives', 'documentacion y citas para formacion Deborah iozzolino y Florencia Grasso'),
+(18, 54, '2024-05-10', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Reunion con responsables de Tanit Varadero y Tanit Marina port ibiza, para explicar evaluacion psicosocial segun planficacion act preventiva '),
+(19, 56, '2024-05-13', '08:31:00', '09:31:00', '01:00:00', 'Emili Vives', 'Gestion atencion en mutua'),
+(20, 56, '2024-05-13', '10:00:00', '11:00:00', '01:00:00', '', 'Investigacion'),
+(21, 56, '2024-05-14', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Gestion traslado expediente para atencion en Asturias'),
+(22, 54, '2024-05-16', '10:37:00', '11:37:00', '01:00:00', 'Emili Vives', 'Comunicaciones y email para reunion de evaluacion psicosocial con marina port maon y marina cuarentena'),
+(23, 54, '2024-05-22', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Reunion por videoconferencia para trasmitir resultados y exposicion de medidas preventivas.'),
+(25, 54, '2024-05-22', '14:01:00', '14:38:00', '00:37:00', '', 'Comunicaciones y email para rgenerar actas de la reunion evaluacion psicosocial con marina port maon y marina cuarentena, asi como preparacion de las propias actas'),
+(26, 62, '2024-05-22', '11:02:00', '13:00:00', '01:58:00', 'Emili Vives', 'Visita instalaciones de varadero para verificar medidas preventivas y documentacion formativa de goyosastre (pintura migjorn jet)'),
+(27, 59, '2024-05-22', '13:00:00', '14:00:00', '01:00:00', 'Emili Vives', 'Formacion trabajadora Amanda baque'),
+(28, 69, '2024-01-15', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'ASISTENTE: JESUS CALPE DOBON'),
+(29, 69, '2024-01-11', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'ASISTENTE: LAMOURI, ADAM. '),
+(30, 69, '2024-01-02', '13:00:00', '15:00:00', '02:00:00', 'Emili Vives', 'ASISTENTE: ALVAREZ ROBREDO, LUIS A. '),
+(31, 69, '2024-01-31', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'ASISTENTE: SOSA INSFRAN,LIZ PAOLA'),
+(32, 59, '2024-05-23', '11:36:00', '13:36:00', '02:00:00', 'Emili Vives', 'Formacion prl Antonoi miguel hidalgo'),
+(33, 62, '2024-05-23', '10:33:00', '11:42:00', '01:09:00', 'Emili Vives', 'Formacion especifica prl trabajadores de Goyo sastre'),
+(34, 59, '2024-05-28', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Formacion prl Samuel Leiva'),
+(35, 75, '2024-05-29', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Gestion formacion nuevos trabajadores: Tripulacion Ibiza Jet'),
+(36, 59, '2024-05-29', '13:00:00', '15:00:00', '02:00:00', 'Emili Vives', 'Formacion prl Jose Antonio Molina'),
+(37, 59, '2024-05-30', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Formacion prl Alexander Peña'),
+(38, 59, '2024-05-30', '12:00:00', '13:30:00', '01:30:00', 'Emili Vives', 'Formacion Prl Marcos Alvarez'),
+(39, 59, '2024-05-31', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Formacion prl Gabriel Gomez'),
+(40, 59, '2024-05-31', '12:00:00', '13:00:00', '01:00:00', 'Emili Vives', 'Formacion prl: Maria Robles, Daniel ferrer, Noelia Gutierrez, Beatriz Rodriguez, Maria Perez'),
+(41, 76, '2024-04-17', '09:00:00', '11:00:00', '02:00:00', 'Emili Vives', 'Formacion Oficina puerto'),
+(42, 76, '2024-05-31', '11:00:00', '13:00:00', '02:00:00', 'Emili Vives', 'Formacion oficina RRHH'),
+(43, 61, '2024-06-06', '12:00:00', '14:00:00', '02:00:00', 'Emili Vives', 'Formacion Enric Ortiz'),
+(44, 61, '2024-06-12', '13:30:00', '14:30:00', '01:00:00', 'Emili Vives', 'Formacion Victora Moya'),
+(45, 94, '2024-06-04', '10:00:00', '14:00:00', '04:00:00', 'Emili Vives', 'Asesoramiento y seguimiento durante auditoria de SITE5 en marina port mao'),
+(46, 96, '2024-06-17', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Llamadas y gestion con GESEME para aclarar procedimiento de trabajo de la plataforma con usuarios. Se envia email'),
+(47, 97, '2024-06-04', '08:00:00', '09:00:00', '01:00:00', 'Emili Vives', 'Colocación de dosimetros a marinero de puente y marinero de maquinas'),
+(48, 97, '2024-06-04', '21:00:00', '22:00:00', '01:00:00', 'Emili Vives', 'Retirada dosimetros de los marineros'),
+(49, 97, '2024-06-05', '08:00:00', '09:00:00', '01:00:00', 'Emili Vives', 'Colocacion dosimetros (dia 2)'),
+(50, 97, '2024-06-05', '21:00:00', '22:00:00', '01:00:00', 'Emili Vives', 'Retirada dosimetros'),
+(51, 97, '2024-06-06', '08:00:00', '09:00:00', '01:00:00', 'Emili Vives', 'Colocacion dosimetros (dia 3)'),
+(52, 97, '2024-06-06', '21:00:00', '22:00:00', '01:00:00', 'Emili Vives', 'Retirada de dosimetros'),
+(53, 98, '2024-05-30', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Acompañamiento a tecnico del SPA para colocar dosimetros a marineros (marinero de puente y marinero de maquinas) - dia 1'),
+(54, 98, '2024-05-31', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Acompañamiento a tecnico del SPA para colocar dosimetros a marineros (marinero de puente y marinero de maquinas) - dia 2'),
+(55, 98, '2024-06-18', '09:00:00', '10:00:00', '01:00:00', '', 'Acompañamiento a tecnico del SPA para colocar dosimetros a marineros (marinero de puente y marinero de maquinas) - dia 3'),
+(56, 61, '2024-06-17', '13:00:00', '15:00:00', '02:00:00', 'Emili Vives', 'Formacion Alberto Chopo'),
+(57, 61, '2024-06-05', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'ARBONA GELABERT, ANDREU, CORDOBA MORQUILLA, JORGE ALBERTO, FRANCO ROMERO, LUIS, NAVARRO BARRERA, JESICA, ORTIZ GARCIA,, GABRIEL, PASCUAL SEGURA, ADRIA, PEREZ GARCIA, ALEJANDRO SENEN, SALES CASALI, JOAN	, SOTO ARCILA, CRISTIAN ANDRES	, URIBE PANIAGUA, ANTONIO'),
+(58, 61, '2024-06-18', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Formacion Sergio Urios'),
+(59, 99, '2024-06-18', '15:00:00', '16:00:00', '01:00:00', 'Emili Vives', 'Llamada atendida a Dani capitan marina mahon sobre rellenar planificacion evaluacion de equipos de trabajo'),
+(60, 92, '2024-05-04', '15:00:00', '18:00:00', '03:00:00', 'Emili Vives', 'ASISTENTES: FEMENIAS SUAREZ, CRISTINA, CANAVES ROS, EVA MARIA, OLIVA MONTAÑEZ, ALBA, ESCOBAR VAZQUEZ, KARIN GISSELLA, OVIEDO LOPEZ, LYDIA,CAMARASA SINTES, DANIEL, RODRIGUEZ CONTRERAS, ALEXANDER, FEBRER LLORENS, FRANCINA'),
+(62, 76, '2024-05-05', '15:00:00', '17:00:00', '02:00:00', 'Emili Vives', 'Oficina Ciutadella'),
+(63, 91, '2024-06-03', '11:00:00', '14:00:00', '03:00:00', 'Emili Vives', 'ALCALDE CAMPOS, ISMAEL, BORRAS SALOM, BARTOLOME, CASTRO MARIN, DANIEL, DOMINGUEZ GONZALEZ-MIRAND, LUIS BART., GOMEZ GIL, MARIA LUISA, JIMENEZ ESCOBAR, PEDRO, LOPEZ CAMUS, RAFAEL, NAVARRO BARRERA, JESICA, ORTIZ MORILLAS, MANUEL JESUS, ROSA RIOS, VICTOR MANUEL, SIERRA JARAMILLO, JEHINER ALEXANDER'),
+(64, 90, '2024-05-06', '10:00:00', '14:00:00', '04:00:00', 'Emili Vives', 'ASISTENTES: NAVARRO BARRERA, JESICA, ORTIZ GARCIA, GABRIEL, PASCUAL SEGURA, ADRIA, PEREZ GARCIA, ALEJANDRO SENEN, RUBERT JIMENEZ, DIEGO JAVIER, , SOTO ARCILA, CRISTIAN ANDRES	, SOTO URIA, DANIEL'),
+(65, 61, '2024-06-25', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Asistente: Maria Roig'),
+(66, 100, '2024-06-21', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Evaluacion centro de trabajo y analisis puestos de trabajo'),
+(68, 100, '2024-06-26', '08:00:00', '12:00:00', '04:00:00', 'Emili Vives', 'Analisis y generacion de documento de evaluacion de riesgos laborals + planificacion de actividad preventiva'),
+(69, 102, '2024-06-26', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'CAE con empresa ACASTIMAR trabajos en CHENEGA'),
+(70, 87, '2024-03-13', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Visita toma de datos'),
+(71, 61, '2024-06-27', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Formacion prl: Jaume Juan, Joel rodriguez'),
+(72, 61, '2024-06-28', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Formacion prl: Luis angel alvarez, Cristian conejero, michel costa, juan antonio juan, jose vicente mari, marc muñoz, jose miguel peral, evelyn perez, alejandro rodriguez, jaime torres\r\n'),
+(73, 104, '2024-06-13', '10:00:00', '11:00:00', '01:00:00', 'e', 'Informe de investigacion de accidente'),
+(74, 104, '2024-07-01', '11:07:00', '12:00:00', '00:53:00', 'Emili Vives', 'Verificacion de codigos delt@ con infomutua'),
+(75, 105, '2024-07-01', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Recepcion y explicacion de caso con responsables de buque y coordinador de flota\r\n'),
+(76, 105, '2024-07-01', '11:00:00', '12:00:00', '01:00:00', 'Emili Vives', 'Entrevista testigos del caso\r\n'),
+(77, 105, '2024-07-01', '12:00:00', '13:00:00', '01:00:00', 'Emili Vives', '01.07.2024 - Reunion y redaccion de acta informativa, y traslado a departamento legal para finalizar expediente.'),
+(78, 107, '2024-07-02', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Nueva empresa: Rotuls Manacor SL'),
+(80, 106, '2024-07-03', '13:00:00', '14:00:00', '01:00:00', 'Emili Vives', 'Formacion PRL: Paula Serra'),
+(81, 100, '2024-07-04', '08:00:00', '12:00:00', '04:00:00', 'Emili Vives', 'Elaboracion de documento'),
+(82, 108, '2024-07-03', '09:00:00', '12:00:00', '03:00:00', 'Emili Vives', 'Redaccion de documento del procedimiento de canal de denuncias de la empresa y maquetacion y coordinacion con Kety del canal de denuncias'),
+(83, 106, '2024-07-09', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'FORMACION TRIPULACION ESPALMADOR JET'),
+(84, 106, '2024-07-09', '12:00:00', '14:00:00', '02:00:00', 'Emili Vives', 'FORMACION TRIPULACION ILLETAS JET'),
+(85, 106, '2024-07-11', '11:00:00', '13:00:00', '02:00:00', 'Emili Vives', 'formacion prl: Miguel Carretero'),
+(86, 106, '2024-07-11', '12:00:00', '14:00:00', '02:00:00', 'Emili Vives', 'Formacio prl: alejandro ortiz barbera'),
+(87, 133, '2024-03-19', '09:00:00', '11:00:00', '02:00:00', 'Emili Vives', 'Visita castavi trabajos, Gasifred y Limpiezas dalt vila'),
+(88, 185, '2024-07-16', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'El servicio de prevencion posterga la charla para la segunda quincena de setiembre'),
+(89, 106, '2024-07-17', '09:00:00', '11:00:00', '02:00:00', 'Emili Vives', 'formacion prl Taller'),
+(90, 101, '2024-07-17', '11:00:00', '12:00:00', '01:00:00', 'Emili Vives', 'Toma datos para elaboracion'),
+(91, 101, '2024-07-22', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Redaccion informe'),
+(92, 107, '2024-07-25', '08:00:00', '12:00:00', '04:00:00', 'Emili Vives', 'Gestion de documentacion para coordinacion de trabajos de colocacion de defensas en puerto ciutadella.'),
+(93, 199, '2024-05-30', '08:00:00', '11:00:00', '03:00:00', 'Emili Vives', 'Acompañamiento a SPA para medicion de ruido'),
+(94, 199, '2024-05-31', '08:00:00', '11:00:00', '03:00:00', 'Emili Vives', 'Acompañamiento a SPA para medicion de ruido'),
+(95, 199, '2024-06-18', '08:00:00', '11:00:00', '03:00:00', 'Emili Vives', 'Acompañamiento a SPA para medicion de ruido'),
+(96, 199, '2024-07-23', '12:00:00', '13:00:00', '01:00:00', 'Emili Vives', 'Recepcion y analisis de informe generado'),
+(97, 79, '2024-06-05', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Visita para la toma de datos y revision de zonas del buque'),
+(98, 79, '2024-07-29', '10:00:00', '13:00:00', '03:00:00', 'Emili Vives', 'Redaccion informe'),
+(99, 78, '2024-06-06', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Revision condiciones instalaciones buque'),
+(100, 78, '2024-07-30', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Generacion informe'),
+(101, 130, '2024-03-13', '11:00:00', '12:00:00', '01:00:00', 'Emili Vives', 'Realizacion simulacro oficinas puerto'),
+(102, 130, '2024-05-15', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Realizacion infome'),
+(103, 200, '2024-06-06', '16:00:00', '18:00:00', '02:00:00', 'Emili Vives', 'Realizacion Simulacro'),
+(104, 200, '2024-07-30', '12:00:00', '13:00:00', '01:00:00', 'Emili Vives', 'Realizacion informe'),
+(105, 119, '2024-07-31', '09:00:00', '11:00:00', '02:00:00', 'Emili Vives', 'Visita buque para revision periodica'),
+(106, 106, '2024-07-31', '09:00:00', '11:00:00', '02:00:00', 'Emili Vives', 'Formacion tripulacion mediterrane'),
+(107, 106, '2024-07-31', '12:00:00', '13:00:00', '01:00:00', 'Emili Vives', 'Formacion prl Alejandro Fernandez (amarrador)'),
+(108, 83, '2024-06-05', '12:00:00', '13:00:00', '01:00:00', 'E', 'Revision de arneses'),
+(109, 83, '2024-08-02', '10:00:00', '13:00:00', '03:00:00', 'Emili Vives', 'Redaccion de informe de revision de arneses'),
+(110, 203, '2024-08-05', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Investigacion y comunicacion accidente jesus calpe dobon'),
+(111, 193, '2024-07-30', '11:00:00', '12:00:00', '01:00:00', 'Emili Vives', 'Revision trimestrl extintores oficinia consigna buques'),
+(112, 106, '2024-07-03', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Formacion prl, Miquel picornell, Naira Leon'),
+(113, 99, '2024-08-09', '09:00:00', '11:00:00', '02:00:00', 'Emili Vives', 'Recepcion y comunicacion de evaluacion con restricciones para trabajadora embarazada, email a capitan para comunicar y adaptar restricciones.'),
+(114, 58, '2024-08-12', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Gestion formacion Juana Caterian'),
+(115, 144, '2024-08-12', '12:00:00', '14:00:00', '02:00:00', 'Emili Vives', 'Formacion prl inicial: Borja Acosta'),
+(116, 123, '2024-08-13', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Visita para revision periodica condiciones embarcacion'),
+(117, 117, '2024-08-13', '12:00:00', '13:00:00', '01:00:00', 'Emili Vives', 'Visita para revision periodica condiciones embarcacion'),
+(118, 144, '2024-08-13', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Formación específica Manuel Piñon y Jose Ferrer'),
+(119, 135, '2024-08-12', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Gestion CAE con OKTICS SL'),
+(120, 58, '2024-08-14', '11:00:00', '12:00:00', '01:00:00', 'Emili Vives', 'Gestion reconocimiento medico y formacion de David Morante'),
+(121, 135, '2024-08-16', '11:00:00', '13:00:00', '02:00:00', 'Emili Vives', 'Gestion documental de Aniano Costa para Trasmapi.'),
+(122, 135, '2024-08-19', '08:00:00', '09:00:00', '01:00:00', 'Emili Vives', 'Gestion CAE Aniano Costa'),
+(123, 116, '2024-08-21', '12:00:00', '13:00:00', '01:00:00', 'Emili Vives', ''),
+(124, 118, '2024-08-21', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', ''),
+(125, 144, '2024-08-21', '11:00:00', '12:00:00', '01:00:00', 'Emili Vives', 'Formacion prl puesto de trabajo en Illetas Jet'),
+(126, 144, '2024-08-21', '13:00:00', '14:00:00', '01:00:00', 'Emili Vives', 'Formacion PRL en embarcacion Espalmador Jet'),
+(127, 168, '2024-08-21', '10:30:00', '11:30:00', '01:00:00', 'Emili Vives', 'Realizacion Simulacro y charla'),
+(128, 135, '2024-08-26', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Coordinacion con Nunsys para trabajo en Fairweather'),
+(129, 204, '2024-08-14', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Investigacion accidente'),
+(130, 111, '2024-08-27', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Digitalizacion de reunion realizada'),
+(131, 111, '2024-07-29', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Reunion comite de tierra'),
+(132, 126, '2024-03-15', '11:00:00', '12:00:00', '01:00:00', 'Emili Vives', 'Revision condiciones extintores'),
+(133, 174, '2024-06-27', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Revision trimestral extintores'),
+(134, 206, '2024-08-28', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Investigacion accidente, llamadas, analisis y transcripcion'),
+(135, 207, '2024-08-29', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Investigacion accidente, llamadas, analisis y transcripcion'),
+(136, 208, '2024-08-20', '09:54:00', '10:54:00', '01:00:00', 'Emili Vives', 'Investigacion accidente, llamadas, analisis y transcripcion'),
+(137, 135, '2024-08-30', '11:00:00', '12:00:00', '01:00:00', 'Emili Vives', 'Coordinacion con empresa LACREM S.AU. (HELADOS LA MENORQUINA)'),
+(138, 144, '2024-08-30', '11:00:00', '13:00:00', '02:00:00', 'Emili Vives', 'Trabajador: Ruben Lastres'),
+(139, 209, '2024-08-30', '12:50:00', '13:50:00', '01:00:00', 'Emili Vives', 'Solicitud botiquines a mutua'),
+(140, 57, '2024-08-30', '13:48:00', '14:41:00', '00:53:00', 'Emili Vives', 'Cancelacion cita de David Morante'),
+(141, 210, '2024-08-30', '13:00:00', '14:00:00', '01:00:00', 'Emili Vives', 'Investigacion accidente, llamadas, analisis y transcripcion - MARIA MORALES - SIN BAJA'),
+(142, 211, '2024-08-30', '12:56:00', '13:56:00', '01:00:00', 'Emili Vives', 'Investigacion, cumplimentacion, comunicacion accidente sin baja VICTOR ROSA RIOS-'),
+(143, 145, '2024-09-11', '13:00:00', '15:00:00', '02:00:00', 'Emili Vives', 'Mario palmes y Alvaro Martinez'),
+(144, 212, '2024-09-11', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Reunion con Ingrid, Javier y Dani para aclarar conceptos de CAE sobre la nueva gestion con GESEME'),
+(145, 212, '2024-09-13', '11:08:00', '12:08:00', '01:00:00', 'Emili Vives', 'Gestion con GESEME para SEMAR'),
+(146, 145, '2024-09-16', '13:00:00', '15:00:00', '02:00:00', 'Emili Vives', 'Enol alonso'),
+(147, 145, '2024-09-17', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Alexis bordagaray'),
+(148, 212, '2024-09-18', '07:00:00', '10:00:00', '03:00:00', 'Emili Vives', 'Redaccion Manual de seguridad y salud de marina ibiza'),
+(149, 136, '2024-09-19', '07:03:00', '08:13:00', '01:10:00', 'Emili Vives', 'Coordinacion con Cor gelat slu (proveedor chenega)'),
+(150, 195, '2024-06-27', '10:00:00', '11:00:00', '01:00:00', 'Juan Jose Castro', 'Toma de datos y envio de ficha'),
+(152, 169, '2024-06-12', '08:34:00', '09:35:00', '01:01:00', 'Emili Vives', 'Simulacro oficina Ikebana'),
+(153, 182, '0204-06-28', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Revision extintores'),
+(154, 217, '2024-09-17', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Acompañamiento a tecnico de SPA para medicion'),
+(155, 218, '2024-09-17', '12:00:00', '13:00:00', '01:00:00', 'Emili Vives', 'Acompañamiento a tecnico de SPA en medicion de temperatura en taller'),
+(156, 125, '2024-08-21', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Visita para revision condiciones centro'),
+(157, 89, '2024-03-13', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'realizacion Simulacro en oficina ikebana'),
+(158, 89, '2024-04-23', '08:00:00', '09:00:00', '01:00:00', 'Emili Vives', 'Realizacion informe simulacro'),
+(159, 125, '2024-09-20', '07:00:00', '08:00:00', '01:00:00', 'Emili Vives', 'Elaboracion informe'),
+(160, 164, '2024-07-31', '09:30:00', '11:00:00', '01:30:00', 'Emili Vives', 'Visita para toma de datos y revision de instalaciones (rd 486)'),
+(161, 164, '2024-09-20', '09:12:00', '10:10:00', '00:58:00', 'Emili Vives', 'Realizacion informe'),
+(162, 183, '2024-09-18', '09:04:00', '10:00:00', '00:56:00', 'Maura Basan', 'Toma de datos y envio'),
+(163, 145, '2024-09-20', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Formacion PRL, Diego Peralta'),
+(164, 145, '2024-09-20', '13:00:00', '15:00:00', '02:00:00', 'Emili Vives', 'Francisco Mazuelos'),
+(165, 227, '2024-09-26', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Revision y correccion de informe de investigacion de accidente'),
+(166, 145, '2024-09-30', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Rafael Rodriguez'),
+(167, 115, '2024-10-01', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Revision periodica buque'),
+(168, 146, '2024-10-01', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Formacion prl: Rebecca Bauwelink, Shaini V.'),
+(169, 122, '2024-10-02', '12:00:00', '13:30:00', '01:30:00', 'Emili Vives', 'Revision y toma de datos de condiciones generales suncat'),
+(170, 228, '2024-10-02', '09:45:00', '10:30:00', '00:45:00', 'Emili Vives', 'Gestion asistencia con mutua'),
+(171, 228, '2024-10-04', '10:00:00', '11:00:00', '01:00:00', '', 'Investigacion de los detalles del accidente'),
+(172, 121, '2024-10-08', '11:00:00', '12:00:00', '01:00:00', 'Emili Vives', 'Cancelacion actividad del princesa del mar por inactividad del centro de trabajo'),
+(173, 109, '2024-10-08', '13:00:00', '14:00:00', '01:00:00', 'Emili Vives', 'Investigacion accidente Jaime Torres Tur'),
+(175, 230, '2024-10-01', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Envio y explicacion por email  a trabajadora de autoevaluacion'),
+(176, 230, '2024-10-14', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Recepcion y analisis de autoevaluacion'),
+(177, 231, '2024-10-15', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Solicitud de asistencia a la mutau'),
+(178, 231, '2024-10-16', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Investigacion del accidente de trabajo'),
+(179, 146, '2024-10-16', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Asistente: Sofia Roman Barbieri'),
+(180, 146, '2024-10-16', '12:00:00', '14:00:00', '02:00:00', 'Emili Vives', 'Asistentes: Patricia Alvarez, Alexandra Lopez'),
+(182, 233, '2024-10-21', '10:00:00', '13:00:00', '03:00:00', 'Emili Vives', 'Visita instalaciones para reunion con Miquel de SITE5 para actualizar documentacion de SGI y revision de procedimientos.'),
+(183, 233, '2024-10-22', '08:00:00', '09:00:00', '01:00:00', 'Emili Vives', 'Comunicado a ANADE para mejoras de canal de coordinacion para marinas'),
+(184, 234, '2024-10-28', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Investigacion accidente - Victor Yannik Martinez Mari'),
+(185, 146, '2024-10-28', '12:00:00', '13:00:00', '01:00:00', 'Emili Vives', 'Asistente: Luis Merino'),
+(186, 235, '2024-10-18', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Investigacion hechos, llamada telefonica accidentado'),
+(187, 235, '2024-10-21', '11:00:00', '13:00:00', '02:00:00', 'Emili Vives', 'Elaboracion y revision documento'),
+(188, 167, '2024-08-21', '09:40:00', '10:40:00', '01:00:00', 'Emili Vives', 'Visita para explicacion y puesta en practica de simulacro en caso de emergencia'),
+(189, 167, '2024-09-16', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Elaboracion informe simulacro'),
+(190, 168, '2024-09-16', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Elaboracion informe simulacro'),
+(191, 181, '2024-09-23', '10:00:00', '11:00:00', '01:00:00', 'Raquel Soria', 'Revision y envio de informe'),
+(192, 129, '2024-03-15', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Nueva instalacion'),
+(193, 230, '2024-10-16', '08:00:00', '09:00:00', '01:00:00', 'Emili Vives', 'Puesta en marcha de medidas preventivas (dotacion de elementos perifericos para teletrabajar: pantalla, teclado, raton)'),
+(194, 196, '2024-11-04', '10:00:00', '11:00:00', '01:00:00', 'Ramiro Riveiro', 'Revision y cumplimentacion informe'),
+(195, 187, '2024-07-23', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Formacion y realizacion del simulacro en oficina'),
+(196, 187, '2024-08-28', '12:00:00', '13:00:00', '01:00:00', 'Emili Vives', 'Elaboracion de informe'),
+(197, 169, '2024-03-13', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Formacion y realizacion de simulacro de emergencias.'),
+(198, 123, '2024-10-14', '09:00:00', '11:00:00', '02:00:00', 'Emili Vives', 'Elaboracion informe'),
+(199, 117, '2024-11-05', '09:07:00', '10:07:00', '01:00:00', 'Emili Vives', 'Elaboracion simulacro'),
+(200, 236, '2024-02-10', '08:00:00', '12:00:00', '04:00:00', 'Emili Vives', 'Redaccion y actualizacion nuevo protocolo'),
+(201, 237, '2024-11-13', '12:00:00', '14:00:00', '02:00:00', 'Emili Vives', 'recepción documento PROTOCOLO ACOSO PSICOLOGICO'),
+(202, 146, '2024-10-02', '11:00:00', '12:00:00', '01:00:00', 'Emili Vives', 'Formacion prl: Miguel Gil, Noel Bouzon, Gabriel Muñiz, Alexandre Serra'),
+(203, 147, '2024-11-18', '08:00:00', '09:00:00', '01:00:00', 'Emili Vives', 'Asistente: Fatima Ahamidan'),
+(204, 147, '2024-11-18', '09:00:00', '11:00:00', '02:00:00', 'Emili Vives', 'Asistente: Ruben esteban Martinez'),
+(205, 185, '2024-11-14', '08:00:00', '09:00:00', '01:00:00', 'SPA', 'REalizada'),
+(206, 112, '2024-11-14', '10:00:00', '12:00:00', '02:00:00', 'SPA', 'Realizada la formacion a bordo'),
+(207, 115, '2024-11-18', '10:00:00', '13:00:00', '03:00:00', 'Emili Vives', 'Elaboracion de informe'),
+(208, 163, '2024-10-30', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Realizacion de reunion del comite de tierra para determinar estado de la seguridad y salud en los ultimos 3 meses'),
+(209, 163, '2024-11-20', '08:00:00', '09:00:00', '01:00:00', 'Emili Vives', 'Digitalizacion y traslado del acta'),
+(210, 238, '2024-11-29', '09:00:00', '10:00:00', '01:00:00', 'Emili Vives', 'Revision investigacion accidente de trabajo'),
+(211, 148, '2024-12-02', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Asistente: Jorge Jesus Sanchez'),
+(212, 138, '2024-11-15', '09:00:00', '11:00:00', '02:00:00', 'Emili Vives', 'Coordinacion de Motores y Transmisiones Marinos S.A'),
+(213, 138, '2024-11-09', '09:00:00', '11:00:00', '02:00:00', 'Emili Vives', 'Coordinacion de Servisub SL'),
+(214, 94, '2024-12-03', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Gestion y asesoramiento para autonomos en CAE (limpieza mahon) - se pasa presupuesto de previs a capitania'),
+(215, 148, '2024-12-04', '13:00:00', '15:00:00', '02:00:00', 'Emili Vives', 'asistente: SIANA LOUISE SMITH'),
+(216, 119, '2024-10-09', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Realizacion informe'),
+(217, 116, '2024-10-22', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Realizacion informe'),
+(218, 122, '2024-12-10', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Elaboracion de informe'),
+(219, 118, '2024-12-13', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Redaccion informe'),
+(220, 148, '2024-12-13', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Asistente: Jordi Rodes'),
+(221, 131, '2024-01-08', '09:00:00', '11:00:00', '02:00:00', 'Emili Vives', 'Redaccion documento'),
+(222, 148, '2024-12-13', '11:30:00', '13:30:00', '02:00:00', 'Emili Vives', 'Alumno escuela: Pau Rosello'),
+(223, 148, '2024-12-13', '10:00:00', '12:00:00', '02:00:00', 'Emili Vives', 'Asistente: juan Gimenez tores'),
+(224, 148, '2024-12-17', '11:00:00', '13:00:00', '02:00:00', 'Emili Vives', 'Alumno escuela: Xavier Tur Tur'),
+(225, 124, '2024-08-21', '11:00:00', '12:00:00', '01:00:00', 'Emili Vives', 'Visita centro para revision condiciones centro'),
+(226, 124, '2024-11-10', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Redaccion informe'),
+(227, 120, '2024-10-31', '11:30:00', '13:30:00', '02:00:00', 'Emili Vives', 'Visita embarcacion para revision condiciones centro'),
+(228, 120, '2024-12-30', '08:00:00', '10:00:00', '02:00:00', 'Emili Vives', 'Elaboracion informe'),
+(229, 114, '2024-10-31', '09:00:00', '10:30:00', '01:30:00', 'Emili Vives', 'Visita embarcacion para revision condiciones del centro '),
+(230, 114, '2024-12-30', '10:00:00', '11:00:00', '01:00:00', 'Emili Vives', 'Elaboracion de informe de revision');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ag_proyecto`
+-- Estructura de la taula `ag_proyecto`
 --
 
 CREATE TABLE `ag_proyecto` (
   `id_proyecto` int(11) NOT NULL,
   `nombre_py` varchar(255) NOT NULL,
+  `empresa_py` int(11) NOT NULL,
   `responsable_py` int(11) NOT NULL,
   `descripcion_py` text NOT NULL,
   `estado_py` varchar(25) NOT NULL,
@@ -5140,16 +5436,20 @@ CREATE TABLE `ag_proyecto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ag_proyecto`
+-- Bolcament de dades per a la taula `ag_proyecto`
 --
 
-INSERT INTO `ag_proyecto` (`id_proyecto`, `nombre_py`, `responsable_py`, `descripcion_py`, `estado_py`, `fechainicio_py`, `fechafin_py`) VALUES
-(3, 'Actividad PRL 2024 - SERCOMISA', 1, 'Actividad preventiva de la empresa SERVICIOS Y CONCESIONES MARITIMAS IBICENCAS S.A.', 'Activo', '2024-01-01', '2024-12-31');
+INSERT INTO `ag_proyecto` (`id_proyecto`, `nombre_py`, `empresa_py`, `responsable_py`, `descripcion_py`, `estado_py`, `fechainicio_py`, `fechafin_py`) VALUES
+(3, 'Actividad PRL 2024 - SERCOMISA', 1, 1, 'Actividad preventiva de la empresa SERVICIOS Y CONCESIONES MARITIMAS IBICENCAS S.A.', 'Activo', '2024-01-01', '2024-12-31'),
+(4, 'Actividad PRL 2024 - DISCOVER ', 3, 1, 'Actividad preventiva desarrollada en la empresa DISCOVER PITIUSAS S.L. durante el año 2024', 'Activo', '2024-04-30', '2024-12-31'),
+(5, 'Actividad PRL 2024 - TANIT IBIZA', 4, 1, 'Actividad de soporte en gestion de PRL', 'Activo', '2024-01-01', '2024-12-31'),
+(8, 'Actividad PRL 2024 - MEDITERRANEA LA NAVIERA', 2, 1, 'Coordinacion de actividad preventiva', 'Activo', '2024-01-01', '2024-12-31'),
+(9, 'Actividad PRL 2024 - SEMAR MARINA IBIZA', 6, 1, 'Acitividad desarrollada para la empresa SEMAR', 'Activo', '2024-01-01', '2024-12-31');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ag_tareas`
+-- Estructura de la taula `ag_tareas`
 --
 
 CREATE TABLE `ag_tareas` (
@@ -5162,23 +5462,193 @@ CREATE TABLE `ag_tareas` (
   `responsable_ta` int(11) NOT NULL,
   `prioridad_ta` varchar(255) NOT NULL,
   `estado_ta` varchar(255) NOT NULL,
-  `programada_ta` tinyint(1) NOT NULL,
+  `programada_ta` int(1) NOT NULL,
   `detalles_ta` text NOT NULL,
   `categoria_ta` varchar(255) NOT NULL,
   `accionprl_ta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `ag_tareas`
+-- Bolcament de dades per a la taula `ag_tareas`
 --
 
 INSERT INTO `ag_tareas` (`id_tarea`, `id_proyecto`, `nombre_ta`, `fecha_ta`, `fechareal_ta`, `centro_ta`, `responsable_ta`, `prioridad_ta`, `estado_ta`, `programada_ta`, `detalles_ta`, `categoria_ta`, `accionprl_ta`) VALUES
-(18, 3, 'Formacion PRL', '2024-03-12', '2024-03-12', 18, 1, 'Media', 'Completado', 0, 'Formacion trabajador Joan Sales', 'Formación', 1);
+(50, 4, 'INVESTIGACION ACCIDENTE TRABAJO A.T.C', '2024-05-02', '2024-04-30', 35, 1, 'Alta', 'Completado', 0, '', 'Documentos', 1),
+(51, 4, 'DOCUMENTACION PRL', '2024-12-31', '2024-04-30', 35, 1, 'Media', 'En curso', 0, '', 'Documentos', 1),
+(54, 5, 'GESTION PRL - EVALUACION PSICOSOCIAL', '2024-05-30', '2024-05-10', 37, 1, 'Media', 'Completado', 0, '', 'Psicosociologia', 1),
+(55, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-05-30', '2024-05-13', 19, 1, 'Alta', 'Completado', 0, 'Trabajador: Jorge agustin perez ares', 'Seguridad', 1),
+(56, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-05-30', '2024-05-13', 19, 1, 'Alta', 'Completado', 0, 'Trabajador: Fran Canto Vallina', 'Seguridad', 1),
+(57, 4, 'GESTION RM', '2024-05-30', '2024-05-30', 35, 1, 'Seleccione', 'En curso', 0, '', 'Documentos', 1),
+(58, 4, 'GESTION FORMACION CON SPA', '2024-05-30', '2024-05-30', 35, 1, 'Media', 'Parcialmente hecho', 0, 'Gestion formacion inicial y periodica de trabajadores', 'Formación', 1),
+(59, 3, 'FORMACION PRL - MAYO', '2024-05-30', '2024-05-30', 4, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(60, 3, 'FORMACION PRL - ABRIL', '2024-04-30', '2024-04-30', 4, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(61, 3, 'FORMACION PRL - JUNIO', '2024-06-30', '2024-06-30', 4, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(62, 3, 'COORDINACION ACTIVIDADES EMPRESARIALES - MAYO', '2024-05-30', '2024-05-30', 4, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(63, 3, 'INFORME SINIESTRALIDAD 2023', '2024-01-30', '2024-01-02', 4, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(64, 3, 'MEMORIA ANUAL 2023', '2024-01-30', '2024-01-03', 4, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(65, 3, 'FORMACION PRL ESPACIOS CONFINADOS', '2024-01-30', '2024-01-04', 5, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(66, 3, 'PROGRAMACIÓN ANUAL 2024', '2024-01-30', '2024-01-05', 4, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(67, 3, 'ACTUALIZACIÓN PLAN PREVENCION EMPRESA', '2024-01-30', '2024-01-08', 4, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(68, 3, 'ASISTENCIA COMITÉ DE SEGURIDAD', '2024-01-30', '2024-01-15', 4, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(69, 3, 'FORMACION PRL - ENERO', '2024-01-30', '2024-01-30', 4, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(70, 3, 'AUDITORIA INTERNA 2023', '2024-01-30', '2024-01-18', 4, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(71, 3, 'COORDINACION ACTIVIDADES EMPRESARIALES - ENERO', '2024-01-30', '2024-01-30', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(72, 3, 'SEGUIMIENTO LISTADOS VIGILANCIA SALUD - ENERO', '2024-01-30', '2024-01-30', 4, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(73, 3, 'MEMORIA ANUAL HIGIENE IND 2023', '2024-01-30', '2024-02-09', 4, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(74, 3, 'PROGRAMACION ANUAL HIGIENE', '2024-01-30', '2024-02-20', 4, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(75, 8, 'GESTION FORMACION CON SPA', '2024-12-31', '2024-12-31', 31, 1, 'Media', 'En curso', 0, '', 'Formación', 1),
+(76, 3, 'FORMACION ESPECIFICA RIESGOS PSICOSOCIALES', '2024-12-30', '2024-12-30', 24, 1, 'Media', 'Parcialmente hecho', 1, 'Formacion especifica a diferentes grupos de la empresa sobre los riesgos psicosociales, protocolos de actuacion, analisis de situaciones, etc.', 'Formación', 1),
+(77, 3, 'ASISTENCIA COMITÉ DE SEGURIDAD', '2024-04-30', '2024-06-06', 23, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(78, 3, 'REVISION PERIODICA CENTRO', '2024-05-30', '2024-06-06', 19, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(79, 3, 'REVISION PERIODICA CENTRO', '2024-05-30', '2024-06-05', 18, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(83, 3, 'REVISIÓN PERIÓDICA MEDIOS AUXILIARES (ARNESES)', '2024-05-30', '2024-06-05', 18, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(84, 3, 'REVISIÓN PERIÓDICA MEDIOS AUXILIARES (ARNESES)', '2024-05-30', '2024-06-04', 19, 1, 'Media', 'Parcialmente hecho', 1, '', 'Seguridad', 1),
+(85, 3, 'EVALUACION EQUIPOS DE TRABAJO', '2024-06-30', '2024-06-06', 18, 1, 'Media', 'Parcialmente hecho', 1, '', 'Seguridad', 1),
+(86, 3, 'EVALUACION EQUIPOS DE TRABAJO', '2024-06-30', '2024-06-05', 19, 1, 'Media', 'Parcialmente hecho', 1, '', 'Seguridad', 1),
+(87, 3, 'ELABORACIÓN PLAN BASICO EMERGENCIA', '2024-03-30', '2024-03-13', 34, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(88, 3, 'ELABORACION MET. Tº Sº EMBARQUE Y DESEMBARQUE VEHICULOS', '2024-03-30', '2024-03-13', 24, 1, 'Media', 'Parcialmente hecho', 1, '', 'Seguridad', 1),
+(89, 3, 'SIMULACRO DE EMERGENCIAS', '2024-03-30', '2024-03-13', 34, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(90, 3, 'FORMACIÓN ESP. TRABAJOS EN ALTURA', '2024-06-30', '2024-05-06', 18, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(91, 3, 'FORMACIÓN ESP. TRABAJOS EN ALTURA', '2024-06-30', '2024-06-03', 19, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(92, 3, 'FORMACION ESP. EMERGENCIAS Y INCENCIOS', '2024-06-30', '2024-05-04', 28, 1, 'Media', 'Completado', 0, '', 'Formación', 1),
+(94, 5, 'ASESORIAMIENTO PRL - ISO 45001', '2024-06-30', '2024-06-04', 42, 1, 'Media', 'Completado', 0, 'Asesoramiento para auditoria interna de Site5', 'Documentos', 38),
+(95, 3, 'INSPECCIÓN DE TRABAJO (MLC MIGJORN JET)', '2024-06-30', '2024-06-14', 17, 1, 'Alta', 'Completado', 0, '', 'Documentos', 1),
+(96, 5, 'GESTION PRL - CAE PLATAFORMA GESEME', '2024-12-30', '2024-12-30', 37, 1, 'Media', 'En curso', 0, '', 'Documentos', 1),
+(97, 3, 'EVALUACION HIGIENICA RUIDO', '2024-06-30', '2024-06-06', 18, 7, 'Media', 'Completado', 1, 'Acompañamiento SPA para medicion higienica de ruido', 'Higiene', 1),
+(98, 3, 'EVALUACION HIGIENICA RUIDO', '2024-06-30', '2024-06-18', 5, 7, 'Media', 'Completado', 1, '', 'Higiene', 1),
+(99, 5, 'ASESORAMIENTO PRL', '2024-12-30', '2024-12-30', 37, 1, 'Baja', 'En curso', 0, 'Llamadas, email sobre gestion documental de prl', 'Documentos', 1),
+(100, 3, 'EVALUACION CENTRO DE TRABAJO', '2024-06-30', '2024-06-21', 43, 1, 'Media', 'Completado', 0, 'Evaluacion de nuevo centro de trabajo', 'Seguridad', 1),
+(101, 3, 'ELABORACION PLAN BÁSICO DE EMERGENCIA', '2024-06-30', '0001-01-01', 43, 1, 'Media', 'Completado', 0, '', 'Seguridad', 1),
+(102, 3, 'COORDINACION ACTIVIDADES EMPRESARIALES - JUNIO', '2024-06-30', '2024-06-30', 24, 1, 'Media', 'Completado', 1, 'CAE con empresas contratadas.', 'Documentos', 1),
+(103, 9, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-06-30', '2024-06-28', 44, 1, 'Alta', 'Completado', 0, 'Investigacion Accidente in itienere con baja de Alberto Rametta', 'Documentos', 1),
+(104, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-06-30', '2024-06-13', 18, 1, 'Alta', 'Completado', 0, 'Investigacion accidente sin baja: Alejandro Senen Perez', 'Documentos', 47),
+(105, 3, 'ACTIVACION PROTOCOLO PSICOSOCIAL', '2024-07-30', '2024-07-01', 19, 1, 'Alta', 'Completado', 0, 'Protocolo psicosocial violencia activado - DCM/ASJ', 'Psicosociologia', 1),
+(106, 3, 'FORMACION PRL - JULIO', '2024-07-30', '2024-07-30', 24, 1, 'Media', 'Completado', 1, 'Acciones formativas a trabajadores de la emrpesa', 'Formación', 1),
+(107, 3, 'COORDINACION ACTIVIDADES EMPRESARIALES - JULIO', '2024-07-30', '2024-07-30', 24, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(108, 9, 'CANAL DE DENUNCIAS 2/2023', '2024-07-30', '2024-07-03', 44, 1, 'Alta', 'Completado', 0, 'Redaccion y coordinacion con departamentos para implantacion de canal de denuncias', 'Documentos', 1),
+(109, 8, 'INVESTIGACION ACCIDENTE', '2024-07-11', '2027-07-10', 38, 1, 'Alta', 'Completado', 0, '', 'Documentos', 1),
+(111, 3, 'ASISTENCIA COMITÉ DE SEGURIDAD', '2024-07-30', '2024-07-29', 4, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(112, 3, 'FORMACION HIGIENICA (RESULTADOS EVAL. 2023)', '2024-07-30', '2024-11-14', 19, 7, 'Media', 'Completado', 1, '', 'Higiene', 28),
+(114, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-07-30', '2024-10-31', 22, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(115, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-07-30', '2024-10-01', 5, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(116, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-07-30', '2024-08-21', 7, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(117, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-07-30', '2024-08-13', 33, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(118, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-07-30', '2024-08-21', 8, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(119, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-07-30', '2024-07-31', 13, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(120, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-07-30', '2024-10-31', 17, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(121, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-07-30', '0001-01-01', 9, 1, 'Media', 'Cancelado', 1, '', 'Seguridad', 1),
+(122, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-07-30', '2024-10-02', 11, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(123, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-07-30', '2024-08-13', 15, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(124, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-03-30', '2024-08-21', 25, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(125, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-03-30', '2024-08-21', 27, 1, 'Media', 'Completado', 1, 'Revision de condiciones de centro de trabajo', 'Seguridad', 1),
+(126, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-03-30', '2024-03-15', 23, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(128, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-03-30', '2024-03-27', 32, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(129, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-03-30', '2024-03-27', 34, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(130, 3, 'SIMULACRO DE EMERGENCIAS', '2024-03-30', '2024-03-13', 23, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(131, 3, 'PROGRAMA FORMATIVO ANUAL', '2024-01-30', '2024-01-08', 24, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(132, 3, 'COORDINACION ACTIVIDADES EMPRESARIALES - FEBRERO', '2024-02-28', '2024-02-28', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(133, 3, 'COORDINACION ACTIVIDADES EMPRESARIALES - MARZO', '2024-03-30', '2024-03-30', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(134, 3, 'COORDINACION ACTIVIDADES EMPRESARIALES - ABRIL', '2024-04-30', '2024-04-30', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(135, 3, 'COORDINACION ACTIVIDADES EMPRESARIALES - AGOSTO', '2024-08-30', '2024-08-30', 24, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(136, 3, 'COORDINACION ACTIVIDADES EMPRESARIALES - SETIEMBRE', '2024-09-30', '2024-09-30', 24, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(137, 3, 'COORDINACION ACTIVIDADES EMPRESARIALES - OCTUBRE', '2024-10-30', '2024-10-30', 24, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(138, 3, 'COORDINACION ACTIVIDADES EMPRESARIALES - NOVIEMBRE', '2024-11-30', '2024-11-30', 24, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(139, 3, 'COORDINACION ACTIVIDADES EMPRESARIALES - DICIEMBRE', '2024-12-30', '2024-12-30', 24, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(140, 3, 'AUDITORIA EXTERNA ISO 45001', '2024-02-28', '2024-02-16', 24, 1, 'Alta', 'Completado', 1, '', 'Documentos', 52),
+(141, 3, 'FORMACION PRL - FEBRERO', '2024-02-28', '2024-02-28', 4, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(142, 3, 'EVALUACION CENTRO DE TRABAJO', '2024-03-30', '2024-03-14', 34, 1, 'Alta', 'Completado', 0, '', 'Seguridad', 1),
+(143, 3, 'FORMACION PRL - MARZO', '2024-03-30', '2024-03-30', 4, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(144, 3, 'FORMACION PRL - AGOSTO', '2024-08-30', '2024-08-30', 24, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(145, 3, 'FORMACION PRL - SETIEMBRE', '2024-09-30', '2024-09-30', 24, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(146, 3, 'FORMACION PRL - OCTUBRE', '2024-10-30', '2024-10-30', 24, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(147, 3, 'FORMACION PRL - NOVIEMBRE', '2024-11-30', '2024-11-30', 24, 1, 'Media', 'Completado', 1, '', 'Formación', 1),
+(148, 3, 'FORMACION PRL - DICIEMBRE', '2024-12-30', '2024-12-30', 24, 1, 'Media', 'En curso', 1, '', 'Formación', 1),
+(149, 3, 'FORMACIÓN ESPECÍFICA EMERGENCIAS/INCENDIOS', '2024-03-30', '2024-03-14', 34, 1, 'Media', 'Completado', 0, '', 'Formación', 1),
+(150, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-03-30', '2024-03-27', 26, 1, 'Alta', 'Completado', 0, 'Accidente laboral de Fransina Febrer', 'Documentos', 53),
+(151, 3, 'SEGUIMIENTO LISTADOS VIGILANCIA SALUD - FEBRERO', '2024-02-28', '2024-02-28', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(152, 3, 'SEGUIMIENTO LISTADOS VIGILANCIA SALUD - MARZO', '2024-03-30', '2024-03-30', 4, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(153, 3, 'SEGUIMIENTO LISTADOS VIGILANCIA SALUD - ABRIL', '2024-04-30', '2024-04-30', 4, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(154, 3, 'SEGUIMIENTO LISTADOS VIGILANCIA SALUD - MAYO', '2024-05-30', '2024-05-30', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(155, 3, 'SEGUIMIENTO LISTADOS VIGILANCIA SALUD - JUNIO', '2024-06-30', '2024-06-30', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(156, 3, 'SEGUIMIENTO LISTADOS VIGILANCIA SALUD - JULIO', '2024-07-30', '2024-07-30', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(157, 3, 'SEGUIMIENTO LISTADOS VIGILANCIA SALUD - AGOSTO', '2024-08-30', '2024-08-30', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(158, 3, 'SEGUIMIENTO LISTADOS VIGILANCIA SALUD - SETIEMBRE', '2024-09-30', '2024-09-30', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(159, 3, 'SEGUIMIENTO LISTADOS VIGILANCIA SALUD - OCTUBRE', '2024-10-30', '2024-10-30', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(160, 3, 'SEGUIMIENTO LISTADOS VIGILANCIA SALUD - NOVIEMBRE', '2024-11-30', '2024-11-30', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(161, 3, 'SEGUIMIENTO LISTADOS VIGILANCIA SALUD - DICIEMBRE', '2024-12-30', '2024-12-30', 24, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(163, 3, 'ASISTENCIA COMITÉ DE SEGURIDAD', '2024-10-30', '2024-10-30', 4, 1, 'Media', 'Completado', 1, '', 'Documentos', 1),
+(164, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-07-30', '2024-07-31', 23, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(165, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-03-30', '0001-01-01', 10, 1, 'Media', 'En curso', 1, '', 'Seguridad', 1),
+(166, 3, 'REVISIÓN PERIÓDICA CENTRO', '2024-03-30', '2024-09-19', 32, 1, 'Media', 'Parcialmente hecho', 1, '', 'Seguridad', 1),
+(167, 3, 'SIMULACRO DE EMERGENCIAS', '2024-04-30', '2024-08-21', 25, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(168, 3, 'SIMULACRO DE EMERGENCIAS', '2024-04-30', '2024-08-21', 27, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(169, 3, 'SIMULACRO DE EMERGENCIAS', '2024-04-30', '2024-06-12', 34, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(170, 3, 'FORMACION ESPECIFICA PRODUCTOS QUIMICOS', '2024-11-30', '0001-01-01', 24, 1, 'Media', 'En curso', 1, '', 'Formación', 1),
+(171, 3, 'REVISIÓN PERIÓDICA MEDIOS AUXILIARES (ESCALERAS)', '2024-05-30', '2024-07-17', 10, 1, 'Media', 'Parcialmente hecho', 1, '', 'Seguridad', 1),
+(172, 3, 'REVISIÓN PERIÓDICA MEDIOS AUXILIARES (ARNESES)', '2024-05-30', '2024-07-17', 10, 1, 'Media', 'Parcialmente hecho', 1, '', 'Seguridad', 1),
+(173, 3, 'REVISIÓN PERIÓDICA MEDIOS AUXILIARES (ESLINGAS)', '2024-05-30', '2024-07-17', 10, 1, 'Media', 'Parcialmente hecho', 1, '', 'Seguridad', 1),
+(174, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-06-30', '2024-06-27', 23, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(176, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-03-30', '0001-01-01', 25, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(177, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-06-30', '0001-01-01', 28, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(178, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-03-30', '0001-01-01', 28, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(179, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-09-30', '0001-01-01', 28, 1, 'Baja', 'En curso', 1, '', 'Seguridad', 1),
+(180, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-06-30', '0001-01-01', 25, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(181, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-09-30', '2024-09-23', 25, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(182, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-06-30', '2024-06-28', 34, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(183, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-09-30', '0001-01-01', 34, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(185, 3, 'FORMACION HIGIENICA (RESULTADOS EVAL. 2023)', '2024-07-30', '2024-11-14', 18, 7, 'Media', 'Completado', 1, '', 'Higiene', 28),
+(186, 3, 'ELABORACIÓN PLAN BASICO EMERGENCIA', '2024-07-30', '2024-07-23', 43, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(187, 3, 'SIMULACRO DE EMERGENCIAS', '2024-07-30', '2024-07-23', 43, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(188, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-07-30', '2024-07-22', 28, 1, 'Media', 'Completado', 0, '', 'Documentos', 1),
+(189, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-07-30', '2024-07-23', 29, 1, 'Alta', 'Completado', 0, 'Accidente de Giovana Cortina', 'Documentos', 1),
+(190, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-07-30', '2024-07-25', 19, 1, 'Media', 'Completado', 0, 'Accidente de Jonathan Leiva', 'Documentos', 1),
+(191, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-07-30', '2024-07-12', 13, 1, 'Media', 'Completado', 0, 'Accidente sin baja: Alex Ortiz', 'Documentos', 1),
+(193, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-09-30', '2024-09-30', 23, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(195, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-06-30', '2024-06-27', 32, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(196, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-09-30', '0001-01-01', 32, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(199, 3, 'EVALUACION HIGIENICA RUIDO', '2024-07-30', '2024-07-22', 7, 7, 'Media', 'Completado', 1, 'Evaluacion higienica ruido expuesto: marinero de maquinas y marinero de puente en embarcaciones Jet (espalmador jet, illetas jet, migjorn jet, Formentera jet)', 'Higiene', 1),
+(200, 3, 'SIMULACRO DE EMERGENCIAS', '2024-06-30', '2024-06-06', 28, 1, 'Media', 'Completado', 1, '', 'Seguridad', 1),
+(202, 9, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-08-30', '2024-08-01', 44, 1, 'Media', 'Completado', 0, 'Investigación accidente trabajo VARELA GUMPERT MARTÍN', 'Documentos', 1),
+(203, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-08-30', '2024-08-05', 7, 1, 'Alta', 'Completado', 0, 'Investigacion accidente: Jesus Calpe Dobon', 'Documentos', 53),
+(204, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-08-30', '2024-08-14', 5, 1, 'Media', 'Completado', 0, 'ACCIDENTE SIN BAJA SERGIO GONZALEZ PRATS', 'Seguridad', 1),
+(206, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-08-30', '2024-08-30', 19, 1, 'Media', 'Completado', 0, 'Investigaccion accidente Martin Ageitos', 'Seguridad', 1),
+(207, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-08-30', '2024-08-29', 19, 1, 'Media', 'Completado', 0, 'Investigaccion accidente Antonio Uribe', 'Seguridad', 1),
+(208, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-08-30', '2024-08-20', 19, 1, 'Baja', 'Completado', 0, 'Investigacion accidente trabajadora: Jesica Navarro', 'Seguridad', 53),
+(209, 4, 'GESTION PRL - DISCOVER 2024', '2024-12-31', '2024-12-31', 35, 1, 'Media', 'En curso', 0, '', 'Documentos', 1),
+(210, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-08-30', '2024-08-30', 5, 1, 'Media', 'Completado', 0, 'TRABAJADORA: MARIA MORALES - SIN BAJA', 'Seguridad', 1),
+(211, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-08-30', '2024-08-30', 19, 1, 'Media', 'Completado', 0, 'accidente sin baja: VICTOR ROSA RIOS', 'Seguridad', 1),
+(212, 9, 'COORDINACION ACTIVIDADES EMPRESARIALES', '2024-12-31', '2024-09-16', 44, 1, 'Media', 'En curso', 0, 'Gestion de CAE', 'Documentos', 1),
+(213, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-01-30', '2024-01-05', 18, 1, 'Media', 'Completado', 0, 'Accidente Gabriel ortiz', 'Seguridad', 1),
+(214, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-03-30', '2024-03-01', 18, 1, 'Media', 'Completado', 0, 'Accidente Ismael Alcalde', 'Seguridad', 1),
+(215, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-03-30', '2024-03-28', 22, 1, 'Alta', 'Completado', 0, 'Accidente de Miguel Alberto Lorenzo ', 'Seguridad', 1),
+(216, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-05-30', '2024-05-02', 5, 1, 'Media', 'Completado', 0, 'Accidente de Alejandro manuel Rodriguez', 'Seguridad', 1),
+(217, 3, 'EVALUACION HIGIÉNICA RUIDO', '2024-09-30', '2024-09-17', 10, 7, 'Media', 'Completado', 1, 'Medicion de ruido en equipos de trabajo de taller', 'Higiene', 1),
+(218, 3, 'EVALUACION HIGIÉNICA TEMPERATURA', '2024-09-30', '2024-09-17', 10, 7, 'Media', 'Completado', 1, '', 'Higiene', 1),
+(219, 3, 'REVISION ANUAL EXTINTORES', '2024-12-30', '0001-01-01', 32, 1, 'Media', 'En curso', 1, '', 'Seguridad', 1),
+(220, 3, 'REVISION ANUAL EXTINTORES', '2024-12-30', '0001-01-01', 23, 1, 'Media', 'En curso', 1, '', 'Seguridad', 1),
+(221, 3, 'REVISION ANUAL EXTINTORES', '2024-12-30', '0001-01-01', 28, 1, 'Media', 'En curso', 1, '', 'Seguridad', 1),
+(222, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-06-30', '2024-06-30', 27, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(223, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-03-30', '2024-03-30', 27, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(224, 3, 'REVISION TRIMESTRAL EXTINTORES', '2024-09-30', '2024-09-20', 27, 1, 'Baja', 'Completado', 1, '', 'Seguridad', 1),
+(225, 3, 'REVISION ANUAL EXTINTORES', '2024-12-30', '0001-01-01', 27, 1, 'Media', 'En curso', 1, '', 'Seguridad', 1),
+(226, 3, 'REVISION ANUAL EXTINTORES', '2024-12-30', '0001-01-01', 25, 1, 'Media', 'En curso', 1, '', 'Seguridad', 1),
+(227, 9, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-09-30', '2024-09-26', 44, 1, 'Media', 'Completado', 0, 'Investigacion accidente Daniele barbagallo', 'Seguridad', 1),
+(228, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-10-30', '2024-10-04', 5, 1, 'Media', 'Completado', 0, 'accidente trabajador: Mariano Alvarez', 'Seguridad', 65),
+(229, 8, 'INV', '2024-10-30', '2024-10-08', 21, 1, 'Baja', 'Completado', 0, 'Investigacion accidente Jaime Torres Tur ', 'Seguridad', 1),
+(230, 3, 'EVALUACION PRL - TELETRABAJO', '2024-10-30', '2024-10-14', 23, 1, 'Media', 'Completado', 0, 'Teletrabajo de Sofia Barbieri', 'Seguridad', 1),
+(231, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-10-30', '2024-10-15', 7, 1, 'Media', 'Completado', 0, 'Trabajador Accidentado: Albert Queralt', 'Seguridad', 1),
+(232, 3, 'ANALISIS PUESTO TELETRABAJO', '2024-10-30', '2024-10-21', 23, 1, 'Media', 'Completado', 0, 'Analisis puesto teletrabajo: Sofia Roman Barbieri', 'Seguridad', 67),
+(233, 9, 'ASISTENCIA PRL', '2024-12-30', '2024-12-30', 44, 1, 'Media', 'En curso', 1, '', 'Seguridad', 1),
+(234, 5, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-12-30', '2024-12-30', 48, 1, 'Media', 'En curso', 0, '', 'Documentos', 1),
+(235, 3, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-10-30', '2024-10-15', 15, 1, 'Media', 'Completado', 0, 'Trabajador Accidentado: David Tejado', 'Seguridad', 1),
+(236, 3, 'ACTUALIZACIÓN PROTOCOLO ACOSO SEXUAL', '2024-02-28', '2024-02-15', 24, 1, 'Media', 'Completado', 0, 'Actualizacion del protocolo por inclusion en el protocolo referencia a la ley 4/2023 , acoso o violencia contra las personas LGTBI', 'Documentos', 1),
+(237, 4, 'GESTION DOCUMENTOS SPA', '2024-12-31', '2024-10-10', 35, 1, 'Media', 'En curso', 1, 'Gestion de documentos e informes generados por el servicio de prevencion ajenos', 'Documentos', 1),
+(238, 9, 'INVESTIGACION ACCIDENTE TRABAJO', '2024-11-30', '2024-11-29', 44, 1, 'Media', 'Completado', 0, 'Accidente trabajo: Mari Carmen Saez Santamaria', 'Seguridad', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categorias`
+-- Estructura de la taula `categorias`
 --
 
 CREATE TABLE `categorias` (
@@ -5189,45 +5659,47 @@ CREATE TABLE `categorias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `categorias`
+-- Bolcament de dades per a la taula `categorias`
 --
 
 INSERT INTO `categorias` (`id_categoria`, `nombre_cat`, `departamento_cat`, `descripcion_cat`) VALUES
 (1, 'Administracion', 1, 'Puestos de trabajo incluidos: Responsable SGI, Responsable RRHH, Administrativo RRHH, Administrativo Técnico, Administrativo comercial, Responsable Opto. Marketing, Administrativo marketing, Diseñador/a gráfico, Responsable Opto. Calidad, Administrativo contable, Responsable Opto. Compras, Administrativo compras, Administrativo Informático, administrativo Call Centre y administrativo.\r\nLa definición de trabajos y funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestión Integrada de la empresa.\r\nEl puesto de trabajo concierne a trabajadores de distintos departamentos con riesgos similares aunque realizan trabajos administrativos de diferentes índoles.\r\nLas funciones genéricas establecidas dentro del puesto de trabajo de administración incluyen: Gestionar (recibir, redactar, transcribir, clasificar, registrar, distribuir, etc.) documentos, informes o escritos, correspondencia, actas administrativas, etc., utilizando para ello ordenador personal, fax, teléfono, etc. Uso de pantallas de visualización de datos. Planificar, dirigir y coordinar diariamente las actividades relativas a la empresa asegurando la utilización racional de los recursos y el cumplimiento de las normas. Negociar, vender y contratar equipos, aparatos e instrumentos técnicos, productos, repuestos, etc., así como servicios\r\ndiversos a empresas y a clientes particulares. Atender llamadas telefónicas y/o correos electrónicos, solicitando información, citas,\r\nentrevistas ... Establecer la comunicación entre el solicitante y la persona a quien va dirigida la llamada . . Asimismo, puede realizar labores\r\nde información, orientación. En ocasiones pueden realizar desplazamientos al exterior mediante vehículos, transporte público o andando.'),
 (2, 'Marinero', 2, 'La definicion de trabajos y  funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestion Integrada de la empresa. Actividad:  A las órdenes del primer oficial, tiene asignadas las funciones siguientes asumiendo sus responsabilidades: • Mantenimiento de los equipos de cubierta y casco. • Maniobras de atraque • Embarque y desembarque del pasaje • Estiba del equipaje incluido la ayuda al pasajero con su equipaje en las rampas de acceso. • Atención al pasaje, transmitir cualquier incidencia al primer oficial, • Limpieza general • Otras funciones generales de marinería que le sean encomendadas.  Condiciones de trabajo: Participa de las condiciones generales de la embarcación. En ella, existen distintas zonas: Zonas de cubierta, con distintos niveles a los que se accede por escaleras de servicio. Zonas de proa y popa en donde existen diferentes elementos para hacer firme como molinetes, bozas, cabos, cornamusas, bitas, etc. Zonas de pasaje. Están ubicadas en cubierta principal y superior. Hay una zona abierta y otras cerradas. Todas ellas disponen de hileras de asientos para el pasaje. De manera general, la marinería se encuentra expuesta a las condiciones climáticas exteriores, y por tanto, variables. Disponen de ropa de trabajo adecuada a las inclemencias del tiempo y a las condiciones de las distintas épocas del año. En las operaciones de atraque y desamarre, participan también de las condiciones del muelle, existiendo interacción con pasarelas, defensas del muelle, norays, etc.'),
-(21, 'Informático', 1, 'Detalles puesto informatico'),
-(22, 'Capitán', 2, 'Detalles puesto capitan'),
+(21, 'Informático', 1, 'Las principales funciones y responsabilidades de los presentes puestos de trabajo son:\r\n- Planificar, organizar, dirigir, controlar y evaluar las actividades del departamento de Informática.\r\n- Planificar y coordinar los cambios en los sistemas.\r\n- Soporte al usuario, instalación de software y hardware.\r\n- Gestión de proyectos y control de calidad de los mismos.\r\n- Construir o gestionar nuevas soluciones.\r\n- Infraestructura de red.\r\n- Monitorización y administración de los servidores y los sistemas operativos de la organización.\r\n- Control de copias de seguridad, control de accesos a los terminales.\r\n- Gestión de usuarios.\r\n- Soporte al usuario, instalación de software y hardware.\r\n- Infraestracutra de red.\r\n- Aplicación de los procedimientos, instrucciones y métodos que procedan, a nivel de calidad, medio ambiente y PRL.\r\n- Aplicación de buenas prácticas medioambientales.\r\n- Aplicación de medidas preventivas según su ficha de PRL de puesto.\r\n- Aplicación de funciones en materia de PRL, según la sección 3 capítulo 2 del Manual del Plan de PRL'),
+(22, 'Capitán', 1, 'La definicion de trabajos y  funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestion Integrada de la empresa.\r\n\r\nEl capitán de la embarcación tiene las funciones y responsabilidades siguientes:\r\n- Dirigir todas las operaciones que se realicen en la embarcación de acuerdo a las instrucciones recibidas por la Compañía.\r\n- Establecer la ruta de navegación más segura.\r\n- Navegación del buque, dirigiendo las maniobras de atraque, amarre y desamarre.\r\n- Ocuparse directamente de la seguridad del pasaje, del buque y del equipaje.\r\n- Controlar el embarque y desembarque del pasaje.\r\n- Supervisar todos los controles realizados, antes, durante y después de la navegación.\r\n- Asumir el mando en caso de emergencia dando las instrucciones que considere necesario.\r\n- Implementar la política de seguridad y protección del medio ambiente de la Compañía, así como la motivación de la tripulación en la observancia de tal política.\r\n- Implementar la seguridad operativa y de la verificación del cumplimento del Sistema de Gestión en el buque, informando de las desviaciones de su cumplimiento a la dirección en tierra.\r\n- Debe motivar, instruir y corregir al personal y será un ejemplo de comportamiento para su tripulación. Las órdenes e instrucciones del capitán serán impartidas de una manera clara y precisa, y en la medida de lo posible se realizará por escrito.\r\n\r\nEl capitán asumirá la responsabilidad de la totalidad de las funciones de abordo, contando para ello con el Jefe de Máquinas y el Primer Oficial. Sus objetivos principales serán.\r\n- La operación del buque dentro de los parámetros seguros y eficientes.\r\n- La seguridad, formación, prevención de riesgos laborales y bienestar del personal a bordo.\r\n- El mantenimiento del buque y su equipo dentro de los estándares de la Compañía.\r\n'),
 (23, 'Primer oficial', 2, 'Detalles puesto primer oficial'),
 (25, 'Primer Of. máquinas', 1, 'detalles categoria'),
 (26, 'Taquilla', 4, 'Atencion y venta al cliente'),
-(27, 'Amarrador', 4, 'Amarre de embarcaciones'),
-(29, 'Gerente', 1, 'Descripcion puesto Gerente'),
+(27, 'Amarrador', 1, 'El  Amarrador  realiza las siguientes funciones:\r\n1.-Traslado y posicionamiento de pasarela al punto de amarre de la embarcación. 2.-Operación de amarre de cabos a norays. 3.-Operación de sujeción de pasarela a la embarcación. 4.-Operación de descenso de la pasarela desde la embarcación. 5.-Operación de desamarre de cabos. 6.-Asistencia y colaboracion en operativas de embarque de vehiculos con operarios de carga.\r\n\r\nApoyo en lo necesario en puerto (valijas de documentacion, tramites en bancos, documentación). \r\n\r\nLas condiciones de trabajo son predominantemente en Puerto, de pie, caminando, hablando con el personal de la empresa y los viajeros. Las condiciones climáticas son exteriores.\r\n'),
+(29, 'Gerente', 1, 'Las funciones principales del gerente son:\r\n•Director de flota, Director RRHH.\r\n•Coordinar, se trata de aunar las actuaciones y esfuerzos del personal y de los departamentos para obtener una acción conjunta sinérgica.\r\n•Coordinar las actividades comerciales, adquisición de materias primas necesarias para los servicios de la empresa, venta de servicios, marketing, calidad y prevención de riesgos laborales.\r\n•Control sobre departamentos en que incide la atención al cliente, responsable de supervisión de todas las instalaciones y áreas de servicio/trabajo.\r\n•Organizar, describir y agrupar el trabajo definiéndolo claramente a los jefes de departamento, delegando en ellos la autoridad y la responsabilidad suficientes para conseguir que todo el personal trabaje en equipo para conseguir la mayor eficacia.\r\n•Planificar, prever el futuro seleccionando las alternativas, los objetivos, programas, presupuestos y directrices, trazar los planes de acción para conseguir los objetivos.\r\n•Motivar y estimular al personal. Para ello debe tener un mínimo de psicología para tratar tanto a los clientes como al personal, y deberá saber transmitirla a los empleados, para que la apliquen a su vez a los clientes y viajeros.\r\nLas condiciones de trabajo son las derivadas de despachos y salas de reuniones en zonas administrativas del centro con posibilidad de regulación de las condiciones lumínicas y termo higrométricas. Otras zonas del centro de trabajo. Equipos utilizados frecuentemente: Pantalla de visualización de datos y diversos medios ofimáticos. En desplazamientos y visitas a instalaciones de la empresa está sujeto a las condiciones ambientales exteriores.'),
 (30, 'Operario/a mantenimiento', 5, 'Descripcion puesto Operario mantenimiento'),
-(31, 'Mecánico', 5, 'Descripción puesto Mecanico'),
-(32, 'Jefe de máquinas', 2, 'Descripción puesto Jefe de máquinas'),
+(31, 'Mecánico', 1, 'La actividad del puesto se centra principalmente en la supervisión (Rble. Matenimiento) y ejecución (Todos los puestos) de las siguientes acciones que se llevan a cabo en las embarcaciones, en taller y en en varaderos: • Reparaciones y revisiones de motores de embarcaciones. • Reparación de distintos componentes de las embarcaciones: asientos, cornamusas, bitas, timones, bombas, pasamanos. • Traslado, montaje o retirada de mobiliario, etc. • Movilidad de piezas con máquinas elevadoras. • Trabajos con máquinas (radiales, taladros, bombas de presión, equipos de soldadura,etc…) • Traslado o movimiento de las pasarelas de embarque, ya sea para su reparación o ayuda en su colocación. • Tratamiento de sentinas y aguas oleosas. • Se vetan determinadas tareas por los conocimientos que entrañan o por los riesgos que comportan.  (Determinadas actividades en B.T., soldaduras complejas,determinados trabajos en altura, etc.).\r\nEn Varadero se realizan las siguientes acciones:\r\n• Maniobras con las embarcaciones en el agua. • Embarque y desembarque de embarcaciones. • Izado y botadura de embarcaciones mediante travel-lift. • Trasvase de la embarcación al carro transportador y traslado al área de reparación. • Apuntalamiento/desapuntalamiento de la embarcación. • Conexiones eléctricas y abastecimiento. • Cubrimiento total o parcial del buque. • Limpieza con agua a presión de zonas de paso, cubiertas, estructuras, obra viva, casco, salas de máquinas y pañoles. • Reparaciones del casco. • Rascado de adherencias • Lijado y rascado de superficies. • Aplicación de imprimaciones, masillas, niveladores, pinturas y barnices.\r\n• Saneado de zonas: desmonte de elementos, sustitución de juntas, reponer elementos deteriorados y montar • Desmontar ejes, hélices, aros de sacrificio, desmonte y limpieza de fondos, timones. • Pintura de todas las zonas del barco. • Utilización de máquinas elevadoras, tanto de cargas como personas. • Utilización de andamios.• Arreglo de ventanas, compuertas, puertas, escotillas, etc. • Arreglo de mobiliario interior de la embarcación incluido asientos, bandejas, portaequipajes. • Trabajos en altura • Desmontaje, limpieza y cambio de válvulas de fondo'),
+(32, 'Jefe de máquinas', 2, 'A las órdenes del Capitán, sus funciones son las siguientes:\r\n• Es el responsable del buen funcionamiento de la maquinaria del buque y de su conservación.\r\n• Estará en todo momento controlando el estado de los motores, bombas y equipos/servicios desde la consola de control situada en el puente de mando.\r\n• Acudirá a la sala de máquinas solo si es imprescindiblemente necesario abandonar el control.\r\n• Controlará los consumos y cantidades de los tanques para gestionar las operaciones oportunas.\r\n• En caso de emergencia, asegurará que todos los equipos necesarios para el funcionamiento del buque estén activados.\r\n• Controlará los mantenimientos, su planificación, sustituciones, etc.'),
 (33, 'Vigilante', 1, 'Descripción puesto Vigilante'),
-(34, 'Marinero de máquinas', 2, 'Descripción puesto  marinero de maquinas'),
+(34, 'Marinero de máquinas', 2, 'A las órdenes del Jefe de Máquinas debe realizar las siguientes operaciones y asumir las responsabilidades que se derivan de las mismas:\r\n• Comprobación del nivel de agua en sentinas.\r\n• Comprobación de temperatura del motor.\r\n• Comprobación de niveles de aceite en motor.\r\n• Relleno de aceite de cárter y engrase de transmisiones.\r\n• Apriete de tuercas, roscas, bridas, abrazaderas, etc.\r\n• Limpieza de la sala de maquinas y elementos auxiliares.\r\nA las órdenes del primer oficial:\r\n• Embarque y desembarque de pasaje.\r\n• Estiba del equipaje.\r\n• Otras funciones generales de marinería que le sean encomendadas\r\n\r\n'),
 (35, 'Comercial', 3, 'Descripción puesto comercial'),
-(36, 'Auxiliar de pasaje', 2, 'Descripción puesto auxiliar de pasaje'),
+(36, 'Auxiliar de pasaje', 1, 'La definicion de trabajos y  funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestion Integrada de la empresa.\r\nActividad: \r\nLos/as Auxiliares de Pasaje estarán capacitadas para cumplir con las funciones siguientes y asumir las responsabilidades que de ellas se derivan: Cobro de tickets a bordo, Control de Trasmapicard, Control de caja, Gestión, ordenación y archivo de los tickets, Atención e información al cliente, Servicio de snack bar, Limpieza general.\r\nCondiciones de trabajo:\r\nParticipa de las condiciones generales de la embarcación, aunque a diferencia de los otros puestos, las condiciones de trabajo se limitan a las zonas de pasaje y zonas de embarque.\r\nDe manera general pueden estar expuestas a las condiciones climatológicas exteriores y por tanto, condiciones variables.\r\nDisponen de ropa de trabajo adecuada a las inclemencias del tiempo y a las condiciones de las distintas épocas del año.'),
 (37, 'Contramaestre', 1, 'Descripción puesto contramaestre'),
 (38, 'Oficial de puente', 2, 'Descripción puesto oficial de puente'),
 (39, 'Oficial de máquinas', 2, 'Oficial de maquinas'),
 (40, 'Sobrecargo', 2, 'Descripción puesto sobrecargo'),
 (41, 'Limpiador/a', 1, 'Descripción puesto limpiador/a'),
 (42, 'Responsable dpto ', 1, 'Descripción puesto responsable dpto.'),
-(43, 'Coordinador puerto', 4, 'Descripción puesto coordinador puerto'),
+(43, 'Coordinador puerto', 1, 'Las funciones principales del coordinador/a de puerto son:\r\nGestión y control del personal de tierra en Puerto (Ibiza y Formentera) Personal de taquillas, informadoras, azafatas de tierra, amarradores.\r\n- Organización de horarios, turnos, vacaciones.\r\n- Resolución de incidencias.\r\n- Control del trabajo, puntualidad, uniformidad.\r\n- Supervisión del correcto funcionamiento.\r\n- Tareas en oficina con PVD y administrativas\r\n'),
 (44, 'Mecánico naval', 5, 'Descripción puesto mecánico naval'),
 (45, 'Mecánico naval 2ª', 5, 'Descripción puesto mecanico naval 2ª'),
 (46, 'Oficial de carga', 4, 'Descripción puesto oficial de carga'),
-(47, 'Azafata puerto', 4, 'Descripción puesto azafata puerto'),
+(47, 'Azafata puerto', 4, 'Las funciones principales de la Azafata de Tierra son:\r\nControl de tickets de acceso a las embarcaciones en el embarque a pie de rampa. Gestión de los tickets mediante un sistema de lectura con PDA. Información y atención a los clientes. Venta de tíckets a pie de embarcación. Colaboración con la tripulación para optimizar embarques voluminosos.  Cierre de embarque con toda la información y documentación para su posterior envío telemático.\r\nLas condiciones de trabajo son predominantemente en Puerto, de pie, caminando, hablando con el personal de la empresa y los viajeros. Las condiciones climáticas son exteriores.'),
 (48, 'Oficial operaciones puerto', 4, 'Descripción puesto oficial operaciones puerto'),
 (49, 'Taquilla - Amarrador - carga', 4, 'Descripción puesto  Taquilla - Amarrador - carga'),
-(50, 'Patrón', 2, 'Descripcion puesto Patrón');
+(50, 'Patrón', 2, 'La definicion de trabajos y funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestion Integrada de la empresa. El patrón de la embarcación tiene las funciones y responsabilidades siguientes: - Dirigir todas las operaciones que se realicen en la embarcación de acuerdo a las instrucciones recibidas por la Compañía. - Establecer la ruta de navegación más segura. - Navegación de la embarcación, dirigiendo las maniobras de atraque, amarre y desamarre. - Ocuparse directamente de la seguridad del pasaje, del buque y del equipaje. - Controlar el embarque y desembarque del pasaje. - Supervisar todos los controles realizados, antes, durante y después de la navegación. - Asumir el mando en caso de emergencia dando las instrucciones que considere necesario. - Implementar la política de seguridad y protección del medio ambiente de la Compañía, así como la motivación de la tripulación en la observancia de tal política. - Implementar la seguridad operativa y de la verificación del cumplimento del Sistema de Gestión en el buque, informando de las desviaciones de su cumplimiento a la dirección en tierra. - Debe motivar, instruir y corregir al personal y será un ejemplo de comportamiento para su tripulación. Las órdenes e instrucciones del capitán serán impartidas de una manera clara y precisa, y en la medida de lo posible se realizará por escrito. El patrón asumirá la responsabilidad de la totalidad de las funciones de abordo, contando para ello dependiendo del tipo de embarcación con el Jefe de Máquinas y el Primer Oficial. Sus objetivos principales serán. - La operación de la embarcación dentro de los parámetros seguros y eficientes. - La seguridad, formación, prevención de riesgos laborales y bienestar del personal a bordo. - El mantenimiento de la embarcación y su equipo dentro de los estándares de la Compañía.'),
+(51, 'Azafata puerto - Informadora', 1, 'Las funciones principales del Informador/a son:\r\nRealizar vistas a establecimientos turísticos próximos a Ibiza: Platja D’en Bossa, Figueretes, Port de Eivissa, Talamanca, Puerto de Santa Eulalia, etc. para información de los trayectos, horarios y barcos que trabajan habitualmente en la zona.\r\nEl trabajador/a puede formalizar la venta de tickets directamente con el cliente.\r\nEl trabajador/a se Traslada en unos de los barcos “Seabus” de la Compañía como viajero/a.\r\nDurante su jornada de trabajo permanece sentado/a en exterior durante el transporte en barco como pasajero/a y andando hacia los establecimientos que visita. En ellos puede estar de pie o sentado/a en las condiciones de interior de los mismos. En las visitas se espera a que sean atendidos y se realiza entrevistas con el personal de los establecimientos.\r\nTransporta una pequeña mochila para llevar material de publicidad, tickets, bolígrafos y otro material de escritura. No debe adoptar levantamientos de cargas ni posturas forzadas, tampoco está expuesto/a a ningún contaminante físico, químico ni biológico, salvo la exposición al sol. Las condiciones de trabajo son predominantemente en Puerto, de pie, caminando, hablando con el personal de la empresa y los viajeros. Las condiciones climáticas son exteriores.\r\n'),
+(52, 'Taquilla - Op. Carga', 4, 'Trabajos de atencion al cliente para la venta + Coordinacion a pie de muelle en la operativa de embarque y desembarque de vehiculos / pasajeros');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `centros`
+-- Estructura de la taula `centros`
 --
 
 CREATE TABLE `centros` (
@@ -5239,59 +5711,81 @@ CREATE TABLE `centros` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `centros`
+-- Bolcament de dades per a la taula `centros`
 --
 
 INSERT INTO `centros` (`id_centro`, `nombre_cen`, `empresa_cen`, `tipo_cen`, `direccion_cen`) VALUES
-(4, 'Oficina Trasmapi', 1, 1, 'Moll pescadors S/N - Eivissa'),
-(5, 'Castavi Jet', 1, 2, 'C/ Aragon, 71 - Eivissa'),
-(6, 'Aires de Formentera', 2, 2, 'Ctra Sant Francesc s/n - La savina'),
-(7, 'Espalmador Jet', 1, 2, 'C/ Aragón, 71 - Eivissa'),
-(8, 'Illetas Jet', 1, 2, 'C/ Aragón, 71 - Eivissa'),
-(9, 'PRINCESA DEL MAR', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(4, 'OFICINA TRASMAPI', 1, 1, 'Moll pescadors S/N - Eivissa'),
+(5, 'CASTAVI JET', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(6, 'AIRES DE FORMENTERA', 2, 2, 'Ctra Sant Francesc s/n - La savina'),
+(7, 'ESPALMADOR JET', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(8, 'ILLETAS JET', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(9, 'PRINCESA DEL MAR', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
 (10, 'NAUTICA VARADERO', 1, 1, 'Pol. Montecristo s/n'),
-(11, 'SUN CAT', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
-(12, 'CASTAVI JET', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
-(13, 'MEDITERRANE', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
-(14, 'ESPALMADOR JET', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
-(15, 'SEABUS I', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
-(16, 'ILLETAS JET', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
-(17, 'MIGJORN JET', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
-(18, 'FAIRWEATHER', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
-(19, 'CHENEGA', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
-(20, 'INCAT 045', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
-(21, 'EIVISSA JET', 2, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
-(22, 'FORMENTERA JET', 1, 2, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(11, 'SUN CAT', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(12, 'CASTAVI JET', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(13, 'MEDITERRANE', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(14, 'ESPALMADOR JET', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(15, 'SEABUS I', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(16, 'ILLETAS JET', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(17, 'MIGJORN JET', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(18, 'FAIRWEATHER', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(19, 'CHENEGA', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(20, 'INCAT 045', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(21, 'EIVISSA JET', 2, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(22, 'FORMENTERA JET', 1, 2, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
 (23, 'OFICINAS  CONSIGNA DE BUQUES', 1, 1, 'Muelle pesquero s/n - Eivissa'),
-(24, 'TODOS LOS CENTROS', 1, 1, 'C/ Arag?n, 71 - 07800 - Eivissa (I. Balears)'),
+(24, 'TODOS LOS CENTROS', 1, 1, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
 (25, 'OFICINAS- Taquilla Ibiza', 1, 1, 'Estacion maritima Ibiza - 07800 - Eivissa (I. Balears)'),
 (26, 'OFICINAS- Taquilla Alcudia', 1, 1, 'Estacion maritima Alcudia - 07800 - Alcudia (I. Balears)'),
 (27, 'OFICINAS- Taquilla Formentera', 1, 1, 'Estacion maritima Formentera - 07800 - La Savina (I. Balears)'),
 (28, 'OFICINAS- Taquilla Ciutadella', 1, 1, 'Estacion maritima Ciutadella - 07800 - Ciutadella (I. Balears)'),
 (29, 'OFICINAS- Puerto Ibiza', 1, 1, 'Estacion maritima Ibiza - 07800 - Ibiza (I. Balears)'),
 (30, 'OFICINAS- Puerto Formentera', 1, 1, 'Estacion maritima Formentera - 07800 - La Savoma (I. Balears)'),
-(31, 'IBIZA JET', 1, 1, 'Embarcacion'),
+(31, 'IBIZA JET', 2, 1, 'Embarcacion'),
 (32, 'OFICINAS- Benidorm', 1, 1, 'Oficina Benidorm (Alicante)'),
-(33, 'SEABUS II', 1, 1, 'Embarcaci?n'),
-(34, 'OFICINAS- Ikebana', 2, 1, 'C/ S\'hort de sa fruita, 5, 1? - 07800 - Eivissa (I. Balears)');
+(33, 'SEABUS II', 1, 1, 'C/ Aragón, 71 - 07800 - Eivissa (I. Balears)'),
+(34, 'OFICINAS- Ikebana', 2, 1, 'C/ S\'hort de sa fruita, 5, 1? - 07800 - Eivissa (I. Balears)'),
+(35, 'OFICINA CARLOS V', 3, 1, 'C/ Carlos V, 10 - 07800 - Eivissa (I. Balears)'),
+(36, 'Taquilla Formentera - FL', 2, 1, 'Estacion maritima de Formentera -  La Savina'),
+(37, 'VARADERO - Tanit', 4, 1, 'Muelles pesquero s/n - Eivissa'),
+(38, 'FORMENTERA EXPRESS', 2, 2, 'Ctra Sant Francesc s/n - La savina'),
+(39, 'ILLA PITIUSA', 2, 2, 'Ctra Sant Francesc s/n - La savina'),
+(40, 'OFICINAS - Formentera Lines', 2, 1, 'Carlos V, Ibiza'),
+(41, 'Taquilla Ibiza - FL', 2, 1, 'Estacion maritima de Eivissa -  Eivissa'),
+(42, 'MARINA MAHON', 4, 1, 'Puerto Mahon'),
+(43, 'OFICINAS -  RRHH', 1, 1, 'C/ Aragón, 67 , 2o 28'),
+(44, 'MARINA IBIZA', 6, 1, 'Passeig Joan Carles I, 20 - 07800 - Eivissa (I. Balears)'),
+(45, 'TAQUILLA BOTAFOC - DIS', 3, 1, 'Estacion Maritima de botafoc, s/n - 07800 - Eivissa (I. Balears)'),
+(47, 'AIGÜES DE FORMENTERA', 2, 2, 'Ctra Sant Francesc s/n - La savina'),
+(48, 'MARINA PORT IBIZA', 4, 1, 'Edif Andenes s/n - Ibiza');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `citas_rm`
+-- Estructura de la taula `citas_rm`
 --
 
 CREATE TABLE `citas_rm` (
   `id_citarm` int(11) NOT NULL,
   `trabajador_crm` int(11) NOT NULL,
-  `fecha_crm` date NOT NULL,
-  `anotaciones_crm` varchar(255) NOT NULL
+  `fecha_crm` date DEFAULT NULL,
+  `anotaciones_crm` varchar(255) NOT NULL,
+  `enviado_crm` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `citas_rm`
+--
+
+INSERT INTO `citas_rm` (`id_citarm`, `trabajador_crm`, `fecha_crm`, `anotaciones_crm`, `enviado_crm`) VALUES
+(55, 536, '2024-06-16', '', '2024-05-29 07:44:03'),
+(64, 355, '0001-01-01', '', '2024-06-18 09:57:42');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `departamentos`
+-- Estructura de la taula `departamentos`
 --
 
 CREATE TABLE `departamentos` (
@@ -5301,7 +5795,7 @@ CREATE TABLE `departamentos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `departamentos`
+-- Bolcament de dades per a la taula `departamentos`
 --
 
 INSERT INTO `departamentos` (`id_departamento`, `nombre_dpo`, `descripcion_dpo`) VALUES
@@ -5309,12 +5803,50 @@ INSERT INTO `departamentos` (`id_departamento`, `nombre_dpo`, `descripcion_dpo`)
 (2, 'Embarcado', 'Personal realizando trabajos a bordo de un buque'),
 (3, 'Comercial', 'Trabajador del sistema comercial de la empresa'),
 (4, 'Puerto', 'Personal destinado a la atencion al pasaje, preparacion de entorno para el atraque de buques o embarque de vehiculos.'),
-(5, 'Taller - mantenimiento', 'Personal destinado a la reparación y mantenimiento de embarcaciones, maquinaria y otros.');
+(5, 'Taller - mantenimiento', 'Personal destinado a la reparación y mantenimiento de embarcaciones, maquinaria y otros.'),
+(6, 'Direccion', 'Direccion de empresa');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `emailsinteres`
+-- Estructura de la taula `documentos`
+--
+
+CREATE TABLE `documentos` (
+  `id` int(11) NOT NULL,
+  `urlArchivo` varchar(255) NOT NULL,
+  `name_file` varchar(255) NOT NULL,
+  `fecha_actual` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `documentos`
+--
+
+INSERT INTO `documentos` (`id`, `urlArchivo`, `name_file`, `fecha_actual`) VALUES
+(19, '18_04_2024_SOLICITUD_ASISTENCIA_MUTUA.pdf', 'Solicitud_mutua', '18_04_2024_12:15:PM'),
+(20, '07_05_2024_investaccidente-A.pdf', 'InvestigaciÃ³n accidente', '07_05_2024_10:17:AM'),
+(21, '08_05_2024_DOSIER_COMPLETO_2023.pdf', 'DOSIER_INICIAL', '08_05_2024_1:24:PM'),
+(22, '08_05_2024_ENTREGA_INFO_PRL_MEDITERRANEA.pdf', 'Info_prl_mediterranea', '08_05_2024_2:07:PM'),
+(23, '08_05_2024_plantilla_info_prl_DISCOVIER.pdf', 'Info_prl_discover', '08_05_2024_2:07:PM'),
+(25, '08_05_2024_investaccidente-A1.pdf', 'Investigacion_acc', '09_05_2024_12:47:PM'),
+(26, '09_05_2024_investaccidente.pdf', 'Investigacion_accidente', '09_05_2024_2:14:PM'),
+(30, '14_05_2024_titulo formacion.pdf', 'Titulo_formacion', '14_05_2024_9:19:AM'),
+(32, '28_05_2024_epis-amarrador.pdf', 'EPIS_AMARRADOR', '28_05_2024_12:49:PM'),
+(33, '28_05_2024_epis-auxiliarpasaje.pdf', 'EPIS_AUXILIARPASAJE', '28_05_2024_12:50:PM'),
+(34, '28_05_2024_epis-capitan.pdf', 'EPIS_CAPITAN', '28_05_2024_12:50:PM'),
+(35, '28_05_2024_epis-jefemaquinas.pdf', 'EPIS_JEFEMAQUINAS', '28_05_2024_12:50:PM'),
+(36, '28_05_2024_epis-limpieza.pdf', 'EPIS_LIMPIEZA', '28_05_2024_12:50:PM'),
+(37, '28_05_2024_epis-marineromaquinas.pdf', 'EPIS_MARINEROMAQUINAS', '28_05_2024_12:51:PM'),
+(38, '28_05_2024_epis-mecanicotaller.pdf', 'EPIS_MECANICOTALLER', '28_05_2024_12:51:PM'),
+(39, '28_05_2024_epis-marinero.pdf', 'EPIS_MARINERO', '28_05_2024_12:51:PM'),
+(40, '28_05_2024_epis-oficialcarga.pdf', 'EPIS_OFICIALCARGA', '28_05_2024_12:52:PM'),
+(41, '28_05_2024_epis-primeroficial.pdf', 'EPIS_PRIMEROFICIAL', '28_05_2024_12:52:PM');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `emailsinteres`
 --
 
 CREATE TABLE `emailsinteres` (
@@ -5325,17 +5857,24 @@ CREATE TABLE `emailsinteres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `emailsinteres`
+-- Bolcament de dades per a la taula `emailsinteres`
 --
 
 INSERT INTO `emailsinteres` (`id_emailinteres`, `nombre_ei`, `email_ei`, `telefono_ei`) VALUES
 (1, 'Emili particular', 'emilivives@gmail.com', '654372089'),
-(2, 'Emili Prevencion Trasmapi', 'prevencion@trasmapi.com', '673868753');
+(2, 'Emili Prevencion Trasmapi', 'prevencion@trasmapi.com', '673868753'),
+(3, 'Citas RM Ibiza-Previs', 'citasibiza@previs.es', '971193860'),
+(4, 'Cita RM - Alcudia Previs', 'citasinca@previs.es', '971507507'),
+(5, 'Cita RM - Menorca Previs', 'citasmenorca@previs.es', '971350338'),
+(6, 'Cita RM - Palma Previs', 'citaspoligonosoncastello@previs.es', '971715207'),
+(8, 'Cita RM - Encomienda Previs (fuera Baleares)', 'encomienda@previs.es', '971715207'),
+(9, 'Asistencia Accidente - Mutua Balear Ibiza', 'admisionibiza@mutuabalear.es', '971300203'),
+(10, 'Asistencia Accidente - Mutua Balear Inca (Alcudia)', 'admisioninca@mutuabalear.es', '971501365');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empresa`
+-- Estructura de la taula `empresa`
 --
 
 CREATE TABLE `empresa` (
@@ -5344,21 +5883,572 @@ CREATE TABLE `empresa` (
   `razonsocial_emp` varchar(255) NOT NULL,
   `cif_emp` varchar(10) NOT NULL,
   `direccion_emp` varchar(255) NOT NULL,
-  `modalidadprl_emp` varchar(255) NOT NULL
+  `modalidadprl_emp` varchar(255) NOT NULL,
+  `logo_emp` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `empresa`
+-- Bolcament de dades per a la taula `empresa`
 --
 
-INSERT INTO `empresa` (`id_empresa`, `nombre_emp`, `razonsocial_emp`, `cif_emp`, `direccion_emp`, `modalidadprl_emp`) VALUES
-(1, 'TRASMAPI', 'SERVICIOS Y CONCESIONES MARITIMAS IBICENCAS S.A.', 'A07066749', 'C/ Aragón, 71. 07800. Eivissa (Illes Balears)', 'Mixta (Trabajador designado + SPA)'),
-(2, 'FORMENTERA LINES', 'MEDITERRANEA LA NAVIERA DE FORMENTERA S.L.', 'B16620635', 'Ctra. Sant Francesc - La savina', 'SPA (Previs)');
+INSERT INTO `empresa` (`id_empresa`, `nombre_emp`, `razonsocial_emp`, `cif_emp`, `direccion_emp`, `modalidadprl_emp`, `logo_emp`) VALUES
+(1, 'TRASMAPI', 'SERVICIOS Y CONCESIONES MARITIMAS IBICENCAS S.A.', 'A07066749', 'C/ Aragon, 71. 07800. Eivissa (Illes Balears)', 'Mixta (Trabajador designado + SPA)', '2024-04-23-12-14-23__LOGO TRASMAPI.jpg'),
+(2, 'FORMENTERA LINES', 'MEDITERRANEA LA NAVIERA DE FORMENTERA S.L.', 'B16620635', 'Ctra. Sant Francesc - La savina', 'SPA (Previs)', '2024-04-23-12-14-00__LOGO FORMENTERA LINES.jpg'),
+(3, 'DISCOVER', 'DISCOVER PITIUSAS S.L.', 'B16533044', 'C/ Aragon, 71. 07800. Eivissa (Illes Balears)', 'SPA (Previs)', '2024-04-23-12-41-42__logo discover.jpg'),
+(4, 'TANIT IBIZA', 'TANIT IBIZA PORT S.A.', 'A57313868', 'C/ Aragon, 71, 07800, Eivissa (Illes Balears)', 'SPA (Previs)', '2024-05-10-01-42-20__'),
+(5, 'UTE DISCOVER SERCOMISA', 'UTE DISCOVER SERCOMISA', 'U72906217', 'C/ Aragon, 71, 07800, Eivissa (Illes Balears)', 'SPA (Previs)', '2024-05-28-03-32-57__'),
+(6, 'SEMAR', 'SERVEIS MARITIMS PORT EIVISSA S.L.', 'B57362105', 'C/ Aragón, 71, 07800 Eivissa (Illes Balears)', 'SPA (Previs)', '2024-06-28-12-24-24__');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estadisticas`
+-- Estructura de la taula `epis`
+--
+
+CREATE TABLE `epis` (
+  `id_epi` int(11) NOT NULL,
+  `nombre_epi` varchar(255) NOT NULL,
+  `normativa_epi` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `epis`
+--
+
+INSERT INTO `epis` (`id_epi`, `nombre_epi`, `normativa_epi`) VALUES
+(1, 'CALZADO SEGURIDAD', 'UNE-EN ISO 20345:2012'),
+(2, 'BOTA ALTA IMPERMEABLE', 'UNE-EN 405:2002+A1:2010'),
+(3, 'CASCO DE PROTECCION', 'EN 397:2012+A1:2012'),
+(4, 'GUANTE PROTECCION MECANICA', 'UNE-EN388:2016'),
+(5, 'GUANTES TÉRMICOS', 'UNE-EN 407:2005'),
+(6, 'GUANTES LATEX', 'UNE-EN ISO 374-5:2016'),
+(7, 'GUANTES PROTECC QUIMICOS', 'UNE-EN 4020:2004+A1 :2010'),
+(8, 'GAFAS ANTIPROYECCIONES', 'UNE-EN 166:2002'),
+(9, 'GAFAS MONTURA INTEGRAL', 'UNE-EN 166:2002'),
+(10, 'PANTALLA PROTECCION FACIAL', 'UNE-EN 166:2002'),
+(11, 'MASCARA VAPORES ORG Y GASES', 'UNE-EN 405:2002+A1:2010'),
+(12, 'PROTECCION AUDITIVA', 'UNE-EN 352-1:2003');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `er_controlevaluaciones`
+--
+
+CREATE TABLE `er_controlevaluaciones` (
+  `id_controleval` int(11) NOT NULL,
+  `centro_cev` int(11) NOT NULL,
+  `tipoevaluacion_cev` int(11) NOT NULL,
+  `fecha_cev` date DEFAULT NULL,
+  `fechacad_cev` date DEFAULT NULL,
+  `noaplica_cev` varchar(5) NOT NULL,
+  `anotaciones_cev` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `er_controlevaluaciones`
+--
+
+INSERT INTO `er_controlevaluaciones` (`id_controleval`, `centro_cev`, `tipoevaluacion_cev`, `fecha_cev`, `fechacad_cev`, `noaplica_cev`, `anotaciones_cev`) VALUES
+(1, 5, 2, '2021-02-16', '2023-02-16', 'NULL', 'Realizada por SPM Insotel (Carlos Gonzalez)'),
+(2, 5, 2, '2022-05-16', '2025-05-16', 'NULL', 'Elaborada por Trabajador Designado'),
+(3, 5, 1, '2022-06-29', '2023-06-29', 'NULL', 'revision periódica buque'),
+(4, 5, 1, '2023-09-19', '2024-09-19', 'NULL', ''),
+(5, 21, 2, '2018-11-12', '2021-11-12', 'NULL', 'Realizada por SPM insotel'),
+(6, 21, 1, '2019-11-19', '2020-11-19', 'NULL', 'realizada por SPM insotel'),
+(7, 21, 2, '2022-04-06', '2025-04-06', 'NULL', 'Realizada por Trabajador Designado'),
+(8, 21, 1, '2023-06-16', '2024-06-16', 'NULL', 'Realizada por Trabajador Designado'),
+(9, 21, 2, '2024-01-17', '2027-01-17', 'NULL', 'Realizada por SPA (misma evaluación para todas embarcaciones)'),
+(10, 6, 2, '2024-01-17', '2027-01-17', 'NULL', 'Realizada por SPA Previs (misma evaluación para todas embarcaciones de mediterránea)'),
+(11, 38, 2, '2027-01-17', '2027-01-17', 'NULL', 'Realizada por SPA Previs (misma evaluación para todas embarcaciones de mediterránea)'),
+(12, 31, 2, '2024-01-17', '2027-01-17', 'NULL', 'Realizada por SPA Previs (misma evaluación para todas embarcaciones de mediterránea)'),
+(13, 39, 2, '2024-01-17', '2027-01-17', 'NULL', 'Realizada por SPA Previs (misma evaluación para todas embarcaciones de mediterránea)'),
+(14, 47, 2, '2024-01-17', '2027-01-17', 'NULL', 'Realizada por SPA Previs (misma evaluación para todas embarcaciones de mediterránea)'),
+(15, 7, 2, '2017-09-04', '2020-09-04', 'NULL', 'Realizada por SPM Insotel'),
+(16, 7, 2, '2022-04-28', '2025-04-28', 'NULL', 'Realizada por Trabajador Designado'),
+(17, 7, 1, '2022-06-29', '2023-06-29', 'NULL', 'Realizada por Trabajador Designado'),
+(18, 7, 1, '2023-09-19', '2024-09-19', 'NULL', 'Realizada por Trabajador Designado'),
+(19, 22, 1, '2017-11-14', '2019-11-14', 'NULL', 'Realizada por SPM Insotel'),
+(20, 22, 1, '2018-08-03', '2019-08-03', 'NULL', 'Realizada por SPM Insotel'),
+(21, 22, 1, '2019-11-19', '2020-11-19', 'NULL', 'Realizada por SPM Insotel'),
+(22, 22, 2, '2022-05-03', '2025-05-03', 'NULL', 'Realizada por Trabajador Designado'),
+(23, 22, 1, '2022-03-17', '2023-03-17', 'NULL', ''),
+(24, 22, 1, '2023-09-13', '2024-09-13', 'NULL', ''),
+(25, 31, 2, '2018-11-12', '2021-11-12', 'NULL', 'Realizada por SPM Insotel'),
+(26, 31, 1, '2018-10-10', '2019-10-10', 'NULL', 'Realizada por SPM Insotel'),
+(27, 38, 1, '2021-03-19', '2024-03-19', 'NULL', 'Realizada por SPA'),
+(28, 41, 1, '2021-07-05', '2024-07-05', 'NULL', 'Realizada por SPA'),
+(29, 41, 2, '2021-07-05', '2024-07-05', 'NULL', 'Realizada por SPA'),
+(30, 6, 1, '2021-03-19', '2024-03-19', 'NULL', 'Realizada por SPA'),
+(31, 40, 1, '2021-03-19', '2024-03-19', 'NULL', 'Realizada por SPA'),
+(32, 40, 2, '2021-03-19', '2024-03-19', 'NULL', 'Realizada por SPA'),
+(33, 47, 1, '2019-07-30', '2022-07-30', 'NULL', 'Realizada por SPA'),
+(34, 36, 11, '2022-05-20', '2025-05-20', 'NULL', 'Realizada por SPA'),
+(35, 36, 1, '2023-05-24', '2026-05-24', 'NULL', 'Realizada por SPA'),
+(36, 40, 1, '2024-02-27', '2027-02-27', 'NULL', 'Realizada por SPA'),
+(37, 41, 1, '2024-02-27', '2027-02-27', 'NULL', 'Realizada por SPA'),
+(38, 41, 3, NULL, NULL, 'NA', ''),
+(39, 36, 3, NULL, NULL, 'NA', ''),
+(40, 31, 2, '2024-01-17', '2027-01-17', 'NULL', ''),
+(41, 8, 1, '2017-11-14', '2018-11-17', 'NULL', 'Realizada por SPM Insotel'),
+(42, 8, 1, '2019-11-19', '2020-11-19', 'NULL', 'Realizada por SPM Insotel'),
+(43, 8, 2, '2022-04-26', '2025-04-26', 'NULL', 'Realizada por Trabajador Designado'),
+(44, 8, 1, '2022-06-21', '2023-06-21', 'NULL', 'Realizada por Trabajador Designado'),
+(45, 8, 1, '2023-09-06', '2024-09-06', 'NULL', 'Realizada por Trabajador Designado'),
+(46, 13, 2, '2015-04-01', '2018-04-01', 'NULL', 'Realizada por SPM Insotel'),
+(47, 13, 2, '2019-09-17', '2022-09-17', 'NULL', 'Realizada por SPM Insotel'),
+(48, 13, 2, '2023-06-30', '2024-06-30', 'NULL', 'Realizada por Trabajador Designado'),
+(49, 13, 1, '2023-06-30', '2024-06-30', 'NULL', 'Realizada por Trabajador Designado'),
+(50, 17, 1, '2018-10-10', '2019-10-10', 'NULL', 'Realizada por SPM Insotel'),
+(51, 17, 2, '2020-10-15', '2023-10-15', 'NULL', 'Realizada por SPM Insotel'),
+(52, 17, 2, '2022-05-15', '2025-05-15', 'NULL', 'Realizada por Trabajador Designado'),
+(53, 17, 1, '2022-08-18', '2023-08-18', 'NULL', 'Realizada por Trabajador Designado'),
+(54, 17, 1, '2023-05-31', '2024-05-31', 'NULL', 'Realizada por Trabajador Designado'),
+(55, 9, 2, '2019-06-11', '2022-06-11', 'NULL', 'Realizada por SPM Insotel'),
+(56, 9, 2, '2023-07-21', '2026-07-21', 'NULL', 'Realizada por Trabajador Designado'),
+(57, 9, 1, '2023-07-21', '2024-07-21', 'NULL', 'Realizada por Trabajador Designado'),
+(58, 15, 1, '2018-10-10', '2019-10-10', 'NULL', 'Realizada por SPM Insotel'),
+(59, 15, 2, '2023-06-01', '2026-06-01', 'NULL', 'Realizada por Trabajador Designado'),
+(60, 15, 1, '2023-06-01', '2024-06-01', 'NULL', 'Realizada por Trabajador Designado'),
+(61, 33, 2, '2016-08-22', '2019-08-22', 'NULL', 'Realizada por SPM Insotel'),
+(62, 33, 1, '2018-10-10', '2019-10-10', 'NULL', 'Realizada por SPM Insotel'),
+(63, 33, 2, '2023-06-01', '2026-06-01', 'NULL', 'Realizada por Trabajador Designado'),
+(64, 33, 1, '2023-06-01', '2024-06-01', 'NULL', 'Realizada por Trabajador Designado'),
+(65, 11, 1, '2018-10-10', '2019-10-10', 'NULL', 'Realizada por SPM Insotel'),
+(66, 11, 2, '2019-09-17', '2022-09-17', 'NULL', 'Realizada por SPM Insotel'),
+(67, 11, 2, '2023-06-30', '2026-06-30', 'NULL', 'Realizada por Trabajador Designado'),
+(68, 11, 1, '2023-06-30', '2024-06-30', 'NULL', 'Realizada por Trabajador Designado'),
+(69, 18, 1, '2022-05-15', '2023-05-15', 'NULL', 'Realizada por Trabajador Designado'),
+(70, 18, 2, '2022-01-22', '2025-01-22', 'NULL', 'Realizada por Trabajador Designado'),
+(71, 18, 1, '2023-05-23', '2024-05-23', 'NULL', ''),
+(72, 19, 2, '2022-01-24', '2025-01-24', 'NULL', 'Realizada por Trabajador Designado'),
+(73, 19, 1, '2022-06-09', '2023-06-09', 'NULL', 'Realizada por Trabajador Designado'),
+(74, 19, 1, '2023-05-24', '2024-05-24', 'NULL', 'Realizada por Trabajador Designado'),
+(75, 26, 2, '2022-05-02', '2025-05-02', 'NULL', 'Realizada por Trabajador Designado'),
+(76, 26, 1, '2022-05-02', '2023-05-02', 'NULL', 'Realizada por Trabajador Designado'),
+(77, 26, 1, '2023-05-22', '2024-05-22', 'NULL', 'Realizada por Trabajador Designado'),
+(78, 28, 2, '2022-05-02', '2025-05-02', 'NULL', 'Realizada por Trabajador Designado'),
+(79, 28, 1, '2022-05-03', '2023-05-03', 'NULL', 'Realizada por Trabajador Designado'),
+(80, 28, 1, '2023-05-24', '2024-05-24', 'NULL', 'Realizada por Trabajador Designado'),
+(81, 30, 2, '2020-09-25', '2023-05-22', 'NULL', 'Realizada por SPM Insotel'),
+(82, 27, 2, '2020-09-25', '2023-09-25', 'NULL', 'Realizada por SPM Insotel'),
+(83, 30, 1, NULL, NULL, 'NA', ''),
+(84, 30, 2, '2022-03-15', '2025-03-15', 'NULL', 'Realizada por Trabajador Designado'),
+(85, 27, 2, '2022-03-15', '2025-03-15', 'NULL', 'Realizada por Trabajador Designado'),
+(86, 27, 1, '2022-03-30', '2023-03-30', 'NULL', 'Realizada por Trabajador Designado'),
+(87, 28, 1, '2023-05-10', '2024-05-10', 'NULL', 'Realizada por Trabajador Designado'),
+(88, 25, 2, '2020-09-25', '2022-09-25', 'NULL', 'Realizada por SPM Insotel'),
+(89, 29, 2, '2020-09-25', '2023-09-25', 'NULL', 'Realizada por SPM Insotel'),
+(90, 25, 2, '2022-03-15', '2025-03-15', 'NULL', 'Realizada por Trabajador Designado'),
+(91, 29, 2, '2022-03-15', '2025-03-15', 'NULL', 'Realizada por Trabajador Designado'),
+(92, 25, 1, '2022-03-30', '2023-03-30', 'NULL', 'Realizada por Trabajador Designado'),
+(93, 25, 1, '2023-05-10', '2024-05-10', 'NULL', 'Realizada por Trabajador Designado'),
+(94, 23, 2, '2020-09-25', '2023-09-25', 'NULL', 'Realizada por SPM Insotel'),
+(95, 23, 2, '2022-03-23', '2025-03-23', 'NULL', 'Realizada por Trabajador Designado'),
+(96, 23, 1, '2022-12-01', '2023-12-01', 'NULL', 'Realizada por Trabajador Designado'),
+(97, 18, 1, '2024-06-05', '2025-06-05', 'NULL', ''),
+(98, 19, 1, '2024-06-06', '2025-06-06', 'NULL', ''),
+(99, 5, 7, '2021-09-10', '2023-09-10', 'NULL', ''),
+(100, 15, 4, '2021-09-08', '2024-09-08', 'NULL', ''),
+(101, 5, 7, '2022-08-01', '2025-08-01', 'NULL', ''),
+(102, 5, 7, '2022-11-04', '2025-11-04', 'NULL', 'Incluye informe estadístico (shapiro)'),
+(103, 5, 4, '2022-08-01', '2025-08-01', 'NULL', ''),
+(104, 10, 8, '2022-02-01', '2028-02-01', 'NULL', 'PQ: Aceite / Lubricantes: Traction Max, Traction Sae, Maxifluid 46'),
+(105, 10, 8, '2022-02-01', '2028-02-01', 'NULL', 'PQ: (Soldadura) Low Hydrogen electrode, Rutile electrode, Stainless Steel electrode'),
+(106, 10, 5, '2024-09-17', '2028-09-17', 'NULL', ''),
+(107, 10, 4, '2024-09-17', '2027-09-17', 'NULL', 'SPA Previs');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `er_elementos_revisionmaq`
+--
+
+CREATE TABLE `er_elementos_revisionmaq` (
+  `id_elemento` int(11) NOT NULL,
+  `grupo` varchar(50) NOT NULL DEFAULT 'Grupo 1',
+  `descripcion` varchar(255) NOT NULL,
+  `tipo` enum('RESPUESTA','OBSERVACION') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `er_elementos_revisionmaq`
+--
+
+INSERT INTO `er_elementos_revisionmaq` (`id_elemento`, `grupo`, `descripcion`, `tipo`) VALUES
+(1, 'ÓRGANOS ACC.', '1.1 ¿Está controlado el accionamiento involuntario?', 'RESPUESTA'),
+(2, 'ÓRGANOS ACC.', '1.2 ¿Están situados fuera de las zonas peligrosas?', 'RESPUESTA'),
+(3, 'ÓRGANOS ACC.', '1.3 ¿Desde el puesto de mando se ve la ausencia de personas en zonas peligrosas?', 'RESPUESTA'),
+(4, 'ÓRGANOS ACC.', '1.4 En caso de respuesta negativa ¿Dispone de Señal acústica o visual previa a la puesta en marcha?', 'RESPUESTA'),
+(5, 'ÓRGANOS ACC.', '1.5 ¿La puesta en marcha solo se puede producir por accionamiento voluntario?', 'RESPUESTA'),
+(6, 'ÓRGANOS ACC.', '1.6 ¿Existe un órgano de accionamiento que permite la parada total?', 'RESPUESTA'),
+(7, 'ÓRGANOS ACC.', '1.7 ¿La orden de parada tiene prioridad sobre la de puesta en marcha?', 'RESPUESTA'),
+(8, 'ÓRGANOS ACC.', '1.8 ¿Dispone de parada de emergencia?', 'RESPUESTA'),
+(9, 'ÓRGANOS ACC.', 'MEDIDAS CORRECTORAS / OBSERVACIONES', 'OBSERVACION'),
+(10, 'DISP. PROTECC.', '2.1 Si existe riesgo de caida de objetos ¿Dispone de dispositivos de protección contra caída de objetos?', 'RESPUESTA'),
+(11, 'DISP. PROTECC.', '2.2 Si existe riesgo de proyecciones. ¿Dispone de dispositivos de protección contra proyecciones?', 'RESPUESTA'),
+(12, 'DISP. PROTECC.', '2.3 Si existe el reisgo de emanacion de gases, polvo, etc. ¿Dispone de dispositivos de captación o extracción localizada?', 'RESPUESTA'),
+(13, 'DISP. PROTECC.', '2.4 Si existe el reisgo de emanacion de gases, polvo, etc. El Equipo de trabajo/máquina, ¿Se encuentra correctamente fijado y estabilizado?', 'RESPUESTA'),
+(14, 'DISP. PROTECC.', '2.5 Si existe el reisgo de emanacion de gases, polvo, etc.¿Las condiciones de acceso y permanencia en el puesto de mando son seguras?', 'RESPUESTA'),
+(15, 'DISP. PROTECC.', '2.6  Si existe riesgo de estalliod o rotura de elementos¿Dispone de dispositivos de protección contra estallido o rotura de los elementos?', 'RESPUESTA'),
+(16, 'DISP. PROTECC.', '2.7  Si existe riesgo de estalliod o rotura de elementos ¿Existen resguardos o dispositivos para evitar atrapamiento con elementos móviles?', 'RESPUESTA'),
+(17, 'DISP. PROTECC.', '2.8 Si existe riesgo de estalliod o rotura de elementos ¿Los resguardos y dispositivos de protección son sólidos y resistentes?', 'RESPUESTA'),
+(18, 'DISP. PROTECC.', '2.9 Si existe riesgo de estalliod o rotura de elementos ¿Ubicación de resguardos y dispositivos sin añadir riesgos suplementarios?', 'RESPUESTA'),
+(19, 'DISP. PROTECC.', '2.10 Si existe riesgo de estalliod o rotura de elementos ¿Se imposibilita la fácil anulación de los resguardos y dispositivos?', 'RESPUESTA'),
+(20, 'DISP. PROTECC.', '2.11 Si existe riesgo de estalliod o rotura de elementos ¿Los resguardos están situados a suficiente distancia de la zona peligrosa?', 'RESPUESTA'),
+(21, 'DISP. PROTECC.', 'MEDIDAS CORRECTORAS / OBSERVACIONES', 'OBSERVACION');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `er_equiposcentro`
+--
+
+CREATE TABLE `er_equiposcentro` (
+  `id_equiposcentro` int(11) NOT NULL,
+  `id_centro` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `descripcion` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `er_evaluacion`
+--
+
+CREATE TABLE `er_evaluacion` (
+  `id_evaluacion` int(11) NOT NULL,
+  `codigo_er` varchar(255) NOT NULL,
+  `nombre_er` varchar(255) NOT NULL,
+  `tipoevaluacion_er` varchar(255) NOT NULL,
+  `fecha_er` date NOT NULL,
+  `centro_er` int(11) NOT NULL,
+  `responsable_er` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `er_evaluacion`
+--
+
+INSERT INTO `er_evaluacion` (`id_evaluacion`, `codigo_er`, `nombre_er`, `tipoevaluacion_er`, `fecha_er`, `centro_er`, `responsable_er`) VALUES
+(7, 'CASTAVI_02', 'ERL_SEGU_EMB_CASTAVI_2024', 'Puestos', '2024-10-01', 5, 1),
+(9, 'VARADEROS_01', 'ERL_SEGU_VARADERO', 'Puestos', '2025-01-08', 24, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `er_filamedidas`
+--
+
+CREATE TABLE `er_filamedidas` (
+  `id_filamedida` int(11) NOT NULL,
+  `filaeval_fm` int(11) NOT NULL,
+  `medida_fm` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `er_filamedidas`
+--
+
+INSERT INTO `er_filamedidas` (`id_filamedida`, `filaeval_fm`, `medida_fm`) VALUES
+(195, 145, 31),
+(196, 146, 32),
+(197, 147, 33),
+(198, 148, 34),
+(199, 149, 35),
+(200, 150, 36),
+(201, 151, 38),
+(202, 152, 24),
+(203, 152, 40),
+(204, 153, 41),
+(205, 155, 42),
+(206, 156, 43),
+(207, 157, 46),
+(208, 157, 45),
+(209, 158, 47),
+(210, 159, 48),
+(211, 160, 49),
+(212, 161, 50),
+(213, 162, 51),
+(214, 164, 52),
+(215, 165, 54),
+(216, 166, 53),
+(217, 167, 55),
+(218, 168, 56),
+(219, 169, 28);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `er_filas`
+--
+
+CREATE TABLE `er_filas` (
+  `id_filaeval` int(11) NOT NULL,
+  `puestocentro_fer` int(11) NOT NULL,
+  `frasefila_fer` text NOT NULL,
+  `riesgo_fer` int(11) NOT NULL,
+  `probabilidad_fer` varchar(50) NOT NULL,
+  `gravedad_fer` varchar(50) NOT NULL,
+  `nivelriesgo_fer` varchar(50) NOT NULL,
+  `planresponsable_fer` varchar(50) DEFAULT NULL,
+  `plancoste_fer` int(11) DEFAULT NULL,
+  `planaccion_fer` varchar(255) DEFAULT NULL,
+  `planprioridad_fer` varchar(50) DEFAULT NULL,
+  `planmetodo_fer` varchar(255) DEFAULT NULL,
+  `planformacion_fer` varchar(4) DEFAULT NULL,
+  `planinformacion_fer` varchar(4) DEFAULT NULL,
+  `imgriesgo_fer` text DEFAULT NULL,
+  `imgplan_fer` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `er_filas`
+--
+
+INSERT INTO `er_filas` (`id_filaeval`, `puestocentro_fer`, `frasefila_fer`, `riesgo_fer`, `probabilidad_fer`, `gravedad_fer`, `nivelriesgo_fer`, `planresponsable_fer`, `plancoste_fer`, `planaccion_fer`, `planprioridad_fer`, `planmetodo_fer`, `planformacion_fer`, `planinformacion_fer`, `imgriesgo_fer`, `imgplan_fer`) VALUES
+(145, 41, 'Disposición del apto médico por parte de los trabajadores embarcados a bordo de un buque (marinos)', 59, 'Media', 'Dañino', 'Riesgo Moderado', 'Trabajador', 0, 'Previo a los trabajos', 'Periodica', 'N/A', 'Si', 'Si', '2024-10-07-11-33-23__', '2024-10-07-11-33-23__'),
+(146, 41, 'Embarazo / Lactancia Natural', 59, 'Baja', 'Extremadamente Dañino', 'Riesgo Moderado', 'Trabajador', 0, 'Previo a los trabajos', 'Periodica', 'Tr. sensibles: embarazadas, menores o trab. Con rest. médic', 'Si', 'Si', '2024-10-07-11-38-28__', '2024-10-07-11-38-28__embarazo.jpeg'),
+(147, 41, 'Tareas que requieran un uso de equipos de protección individual (EPI) para garantizar la protección de las personas\r\ntrabajadoras, y no se usen o bien se utilizan de forma incorrecta, derivando en accidentes de trabajo.', 59, 'Media', 'Dañino', 'Riesgo Moderado', 'Trabajador', 0, 'Previo a los trabajos', 'Periodica', 'EPIS', 'Si', 'Si', '2024-10-07-11-42-28__', '2024-10-07-11-42-28__uso epis obligacion.png'),
+(148, 41, 'Accidentes derivados de actos inseguros (acción u omisión de la persona trabajadora que origina un riesgo contra su propia seguridad y/o la de sus compañeros)', 59, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'N/A', '', '', '', '2024-10-07-12-05-35__actos inseguros 2.png'),
+(149, 41, 'Uso y mantenimiento de equpos de trabajo. Daños para la seguridad y salud de las personas trabajadoras derivados de no seguir las instrucciones y limitaciones del fabricante asi como por retirar protecciones.', 59, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'Mantenimiento preventivo', 'Si', 'Si', '2024-10-07-12-00-10__', '2024-10-07-12-00-10__mantenimiento equipos.jpg'),
+(150, 41, 'Violencia sexual: Garantía integral sobre la libertad sexual y su regulación para la prevención y concienciación en el\r\námbito laboral en puestos ocupados por trabajadoras.', 59, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Previo a los trabajos', 'Periodica', 'N/A', '', '', '', '2024-10-07-12-05-01__acoso sexual.jpeg'),
+(151, 41, 'Agresiones y conductas improcedentes de caracter sexual, asi como otras indoles.', 59, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', '', 'Si', 'Si', '2024-10-07-12-10-00__', '2024-10-07-12-10-00__violencia sexual.jpg'),
+(152, 42, 'Caídas de personas a diferente nivel por trabajos en cubiertas, trabajos con fuerte oleaje o mal tiempo.', 1, 'Baja', 'Extremadamente Dañino', 'Riesgo Moderado', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'Trabajos verticales', 'Si', 'Si', '2024-10-07-12-39-54__', '2024-10-07-12-39-54__caida distinto nivel - arnes.jpeg'),
+(153, 42, 'Caídas al mar desde la embarcación', 1, 'Baja', 'Extremadamente Dañino', 'Riesgo Moderado', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'SGS(Manual de gestión de buque)', '', '', NULL, NULL),
+(154, 42, 'Caídas de personas a diferente nivel desde rampas, en pañoles o estancias por escotillas abiertas sin proteger ni señalizar o al bajar por sus escaleras.', 1, 'Baja', 'Extremadamente Dañino', 'Riesgo Moderado', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'Acceso embarcaciones', 'Si', 'Si', '2024-10-07-12-57-56__', '2024-10-07-12-57-56__caida distinto nivel - escotilla abierta.jpg'),
+(155, 42, 'Caídas de personas a diferente nivel desde rampas, en pañoles o estancias por escotillas abiertas sin proteger ni señalizar o al bajar por sus escaleras.', 1, 'Baja', 'Extremadamente Dañino', 'Riesgo Moderado', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'Acceso embarcaciones', 'Si', 'Si', '', '2024-10-07-01-04-23__escotilla abierta.jpg'),
+(156, 42, 'Caídas al agua por tropiezo con elementos de amarre (cabos, norais, escaleras, rampas, etc)', 1, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'Limpieza de embarcaciones', 'Si', 'Si', '2024-10-07-01-01-28__', '2024-10-07-01-04-00__chaleco salvavidasjpeg.jpeg'),
+(157, 42, 'Acceso a embarcaciones mediante rampas u medios auxiliares. Acceso a embarcaciones abarloadas. Acceso a puntos elevados (+ 2 mtrs.)', 1, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'Acceso embarcaciones', 'Si', 'Si', '2024-10-09-01-07-50__', '2024-10-09-01-10-18__rampas embarcacion (1).jpg'),
+(158, 42, 'Caida por uso de escalera manuales o escaleras de servicio', 1, 'Baja', 'Extremadamente Dañino', 'Riesgo Moderado', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'Uso de escaleras manuales', 'Si', 'Si', '2024-10-09-01-37-59__', '2024-10-09-01-37-59__escalera 1.jpeg'),
+(159, 42, 'Resbalones, tropiezos, caídas a bordo de la embarcación, debido al mal tiempo', 2, 'Media', 'Dañino', 'Riesgo Moderado', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'N/A', 'Si', 'Si', '2024-10-09-01-42-54__', '2024-10-09-01-42-54__caida mismo nivel buque.jpeg'),
+(160, 42, 'Tropiezos y caidas derivadas de elementos en el suelo (bitas, cornamusas, tuberias), o bien escotillas mal cerradas, superficies desiguales, etc.', 2, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'N/A', 'Si', 'Si', '2024-10-09-01-46-03__', '2024-10-09-01-46-03__tropiezo cabos.jpg'),
+(161, 42, 'Caídas por superficies resbaladizas, aceites, grasas o bién después de tareas de limpieza o por paso por zonas húmedas.', 2, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'N/A', 'Si', 'Si', '2024-10-09-01-48-56__', '2024-10-09-01-48-56__caida mismo nivel buque.jpeg'),
+(162, 42, 'Caídas al mismo nivel por tropiezo con elementos móviles en cubierta como cabos, cables, y otros, mal adujados, caídos, etc', 2, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'N/A', 'Si', 'Si', '2024-10-23-08-35-01__', '2024-10-23-08-35-01__tropiezo cabos.jpg'),
+(163, 42, 'Caída de objetos por estar mal apilados o mal sujetas, cargas de objetos izados', 3, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'N/A', 'Si', 'Si', '2024-10-23-08-39-49__', '2024-10-23-08-39-49__Caída de objetos derrumbamiento.png'),
+(164, 42, 'Caída de objetos por estar mal apilados o mal sujetas, cargas de objetos izados', 3, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'N/A', 'Si', 'Si', '2024-10-23-08-41-02__', '2024-10-23-08-41-02__Caída de objetos derrumbamiento.png'),
+(165, 42, 'Caída de objetos de objetos izados', 3, 'Baja', 'Extremadamente Dañino', 'Riesgo Moderado', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'N/A', 'Si', 'Si', '2024-10-23-08-45-35__', '2024-10-23-08-45-35__caida elementos izados.jpg'),
+(166, 42, 'Golpes por objetos que estén manipulados a niveles superiores o en altura', 4, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'N/A', 'Si', 'Si', '2024-10-23-08-49-19__', '2024-10-23-08-49-19__caida objetos en altura.jpeg'),
+(167, 42, 'Caída de objetos diversos que no se están manipulando, y que se desprenden de su ubicación por razones varias', 5, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'N/A', 'Si', 'Si', '2024-10-23-08-54-43__', '2024-10-23-08-54-43__'),
+(168, 42, 'Pisadas sobre objetos en suelo derivado de los trabajos de mantenimiento de embarcaciones.', 6, 'Baja', 'Dañino', 'Riesgo Tolerable', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'N/A', 'Si', 'Si', '2024-10-23-08-57-32__', '2024-10-23-08-57-32__pisada objetos 2.jpeg'),
+(169, 43, 'Trabajos con andamios o estructuras de acceso (andamios para acceso a buques barados)', 1, 'Baja', 'Extremadamente Dañino', 'Riesgo Moderado', 'Trabajador', 0, 'Durante los trabajos', 'Periodica', 'Acceso embarcaciones', 'Si', 'Si', '2024-12-17-10-50-53__', '2024-12-17-10-50-53__caida distinto nivel andamio.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `er_medidas`
+--
+
+CREATE TABLE `er_medidas` (
+  `id_medida` int(11) NOT NULL,
+  `codigomedida` int(11) NOT NULL,
+  `frasemedida` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `er_medidas`
+--
+
+INSERT INTO `er_medidas` (`id_medida`, `codigomedida`, `frasemedida`) VALUES
+(3, 20, 'Escaleras deben tener como minimo calzos, resistentes de estructura.'),
+(4, 20, 'Usar arnes anticaidas'),
+(6, 10, '• Antes de subir o bajar de la embarcación comprobar que las escotillas esten cerradas, y que registros, pasarelas/rampas se encuentran en buen estado y no hay presencia de grasa en los escalones ni en las suelas del calzado.\n• En caso de abrir escotilla para el acceso o mantenimiento de la embarcación se deberá señalizar o bien acotar la zona para advertir que la escotilla está abierta.\n• Mantener tapados los huecos de la embarcación (escotillas y registros) para evitar tropiezos o caídas.\n• Evitar dejar cabos, cables, mangueras o herramientas en el suelo de las zonas de trabajo y de circulación.\n• No correr en la embarcación. Utilizar los asideros.\n• Mantener en correcto estado de orden y limpieza las zona de trabajo. Evitar dejar cables, mangueras o herramientas en el suelo de las zonas de trabajo y de circulación.\n• Mantener los pasillos y demás zonas de paso despejadas de objetos.\n• Mantener los suelos secos, y recoger los derrames de líquidos tan pronto como se produzcan.\n• No acceder a lugares con riesgo de caída de altura superior a 2 m (altillos, plataformas) sin protección contra caídas (barandillas, cinturón de seguridad apropiado etc...).\nEvitar llevar a cabo tareas con riesgo de caída en altura que se vean agravadas por las condiciones climatológicas; mala mar, lluvia, fuertes vientos...\nSe evitará utilizar el elevador de la embarcación para usos diferentes para los que a sido diseñado, sobre todo para la elevación de trabajadores salvo con los medios auxiliares adecuados y diseñados par tal fin.'),
+(7, 10, '• Utilizar únicamente escaleras de mano que se encuentren en buen estado. Tener en cuenta las siguientes recomendaciones:\n- Elección de la escalera adecuada al trabajo a efectuar.\n- Verificación del buen estado de conservación y resistencia de todos los componentes.\n- No estarán pintadas, para poder ver mejor si sufren roturas parciales.\n- Sólo podrá estar subido en la escalera una persona.\n- Mientras se encuentra una persona subida en la misma, otro aguantará la escalera por la base; este operario puede ser sustituido si se amarra la escalera firmemente o si no hay posibilidad de deslizamiento de la base de la escalera.\n- A la hora de bajar no se saltará, se bajará hasta el último escalón.\n- El ascenso se hará de frente con las manos libres de objetos y agarrándose a los peldaños.\n- Utilizar elementos adecuados (escaleras o pasarelas dotadas de barandilla, etc) y en buenas condiciones para acceder a las embarcaciones.\n• Antes de subir a una escalera deberá comprobarse que las suelas del calzado no tienen grasa, barro o cualquier otro elemento que pueda hacer resbalar el pie.\n\n• Aquellos trabajos en cubierta que no sean protegidos por elementos de proteccion colectiva (barandillas) serán realizados con los EPIs adecuados para evitar caidas por la borda o a distinto nivel (arnes anticaidas + complementos de amarre).'),
+(10, 20, 'Usar arnes anticaidas y accesorios relacionados'),
+(12, 20, '• Utilizar únicamente escaleras de mano que se encuentren en buen estado. Tener en cuenta las siguientes recomendaciones:\r\n- A la hora de bajar no se saltará, se bajará hasta el último escalón.\r\n- El ascenso se hará de frente con las manos libres de objetos y agarrándose a los peldaños.\r\n- Utilizar elementos adecuados (escaleras o pasarelas dotadas de barandilla, etc) y en buenas condiciones para acceder a las embarcaciones.\r\n• Antes de subir a una escalera deberá comprobarse que las suelas del calzado no tienen grasa, barro o cualquier otro elemento que pueda hacer resbalar el pie.\r\n\r\n• Aquellos trabajos en cubierta que no sean protegidos por elementos de proteccion colectiva (barandillas) serán realizados con los EPIs adecuados para evitar caidas por la borda o a distinto nivel (arnes anticaidas + complementos de amarre).'),
+(18, 40, 'Proba frase actualizadr'),
+(19, 10, 'El trabajador extremará las precauciones durante la travesía debido a los movimientos de cabeceo y balanceo de la embarcación, evitando ponerse de pie en zonas peligrosas o donde no se pueda sujetar correctamente, ya que un aumento o disminución brusca de la velocidad puede provocar su caída. Evitará utilizar baldes para recoger agua del mar durante la navegación. Con mala mar, la embarcación estará particularmente expuesta al riesgo de encapillar un golpe de mar cuando, después de haber permanecido atravesada a las olas, se aproan al viento. En caso de mal tiempo, los trabajadores no deberán permanecer en cubierta durante la travesía sin el correspondiente chaleco salvavidas.\r\nPrestar atención para evitar caídas por la borda. Evitar situarse sobre las barandillas, regalas y/o lugares donde sea fácil caer al agua y especialmente con mal tiempo y sin las debidas protecciones.\r\n- Moverse por el barco con el cuerpo inclinado hacia el centro del mismo.\r\n- Prevenir los movimientos del barco vigilando la mar.\r\n- Sujetarse siempre a las partes sólidas del barco.\r\n- Utilizar calzado de seguridad con suela antideslizante.\r\n- No correr sobre la cubierta.\r\n- Toda operativa de trabajo en altura, en exteriores de la embarcacion sin protección perimetral es obligatorio ponerse el chaleco salvavidas y arnés\r\nantes de subir a cubierta. (En todo caso, usar siempre ambos elementos en caso de mal tiempo. Verificar los cabos de sujeción y los puntos de anclaje de los arneses)\r\n- La operativa de trabajos en altura viene precedida de la autorización correspondiente, sin esta no se puede empezar a realizar los trabajos.'),
+(20, 211, 'Actuación a bordo frente emergencias:\r\nSegún expertos y reglamentos internacionales, lo primero que debe preguntarse un tripulante tan pronto embarque en una embarcación es:\r\n• ¿Cuál es la señal de alarma general de emergencia?\r\n• ¿Qué debo hacer en caso de emergencia?\r\n• ¿A dónde debo acudir y que responsabilidades tengo?\r\nEl capitán/patrón de la embarcación contestará a todas ellas según se pueden encontrar por el tripulante en el Cuadro Orgánico de Obligaciones. Es un documento escrito en formato poster o cartel que nos encontramos a bordo de la embarcación y el cual va a estar ubicado en diferentes lugares bien visibles.\r\nEn este Cuadro Orgánico se recogen las instrucciones a efectuar por la tripulación y los pasajeros en caso de emergencias a bordo. En definitiva, se\r\ntrata de las medidas a tomar cuando suene la señal de alarma, quedando definidas las responsabilidades asignadas a cada tripulante en una situación de emergencia.\r\nSegún SOLAS, las obligaciones de cada persona tripulante en situaciones de emergencia deben estar implícitas en el cuadro orgánico de  obligaciones en caso de determinadas situaciones de emergencia.'),
+(21, 10, '• Antes de subir o bajar de la embarcación comprobar que las escotillas esten cerradas, y que registros, pasarelas/rampas se encuentran en buen estado y no hay presencia de grasa en los escalones ni en las suelas del calzado.\r\n• En caso de abrir escotilla para el acceso o mantenimiento de la embarcación se deberá señalizar o bien acotar la zona para advertir que la escotilla está abierta.\r\n• Mantener tapados los huecos de la embarcación (escotillas y registros) para evitar tropiezos o caídas.\r\n• Evitar dejar cabos, cables, mangueras o herramientas en el suelo de las zonas de trabajo y de circulación.\r\n• No correr en la embarcación. Utilizar los asideros.\r\n• Mantener en correcto estado de orden y limpieza las zona de trabajo. Evitar dejar cables, mangueras o herramientas en el suelo de las zonas de trabajo y de circulación.\r\n• Mantener los pasillos y demás zonas de paso despejadas de objetos.\r\n• Mantener los suelos secos, y recoger los derrames de líquidos tan pronto como se produzcan.\r\n• No acceder a lugares con riesgo de caída de altura superior a 2 m (altillos, plataformas) sin protección contra caídas (barandillas, cinturón de seguridad apropiado etc...).\r\nEvitar llevar a cabo tareas con riesgo de caída en altura que se vean agravadas por las condiciones climatológicas; mala mar, lluvia, fuertes vientos...\r\nSe evitará utilizar el elevador de la embarcación para usos diferentes para los que a sido diseñado, sobre todo para la elevación de trabajadores salvo con los medios auxiliares adecuados y diseñados par tal fin.'),
+(22, 10, '• Utilizar únicamente escaleras de mano que se encuentren en buen estado. Tener en cuenta las siguientes recomendaciones:\r\n- Elección de la escalera adecuada al trabajo a efectuar.\r\n- Verificación del buen estado de conservación y resistencia de todos los componentes.\r\n- No estarán pintadas, para poder ver mejor si sufren roturas parciales.\r\n- Sólo podrá estar subido en la escalera una persona.\r\n- Mientras se encuentra una persona subida en la misma, otro aguantará la escalera por la base; este operario puede ser sustituido si se amarra la escalera firmemente o si no hay posibilidad de deslizamiento de la base de la escalera.\r\n- A la hora de bajar no se saltará, se bajará hasta el último escalón.\r\n- El ascenso se hará de frente con las manos libres de objetos y agarrándose a los peldaños.\r\n- Utilizar elementos adecuados (escaleras o pasarelas dotadas de barandilla, etc) y en buenas condiciones para acceder a las embarcaciones.\r\n• Antes de subir a una escalera deberá comprobarse que las suelas del calzado no tienen grasa, barro o cualquier otro elemento que pueda hacer resbalar el pie.\r\n\r\n• Aquellos trabajos en cubierta que no sean protegidos por elementos de proteccion colectiva (barandillas) serán realizados con los EPIs adecuados para evitar caidas por la borda o a distinto nivel (arnes anticaidas + complementos de amarre).'),
+(23, 10, '• En caso de dejar abierta cualquier escotilla o acceso a distinto nivel, se deberá señalizar correctamente (cinta balizamiento, conos, vallas, etc.) para evitar que otros tripulantes por despiste no se percaten de su apertura.'),
+(24, 10, 'Las medidas preventivas que adoptaremos serán:\r\n• Los trabajadores que trabajen en cubierta deben estar acostumbrados al balanceo y cambio repentino de la embarcación.\r\n• Realizar de forma eficiente la información entre el puente y la tripulación cuando se cambie de rumbo o velocidad.\r\n• Sujetarse con un cinturón o arnés de seguridad cuando se tenga que trabajar en un lugar expuesto o durante una tormenta.\r\n• Aquellos trabajos en cubierta donde no exista proteccion perimietral se realizaran con arnes anticaidas conectado a puntos de anclaje seguros.\r\n• En caso de mal tiempo, aquellos trabajos en cubierta o zonas de riesgos no deberan realizarse solos.\r\n• Si cae un hombre al agua, es preciso iniciar inmediatamente las maniobras de salvamento correspondiente: señal de alarma, lanzamiento de aros salvavidas, maniobras de hombre al agua del barco, bote salvavidas y rescate del náufrago\r\n• Durante los trabajos en cubierta, la vigilancia será constante y, en su caso, se avisará a la tripulación del\r\npeligro inminente de marejada.\r\n• Los medios de salvamento y supervivencia estarán situados en el lugar que corresponda, en buen estado de funcionamiento y lisos para su uso inmediato.'),
+(25, 10, '• Durante los trabajos en cubierta, la vigilancia será constante y, en su caso, se avisará a la tripulación del\r\npeligro inminente de marejada.\r\n• Los medios de salvamento y supervivencia estarán situados en el lugar que corresponda, en buen estado de funcionamiento y lisos para su uso inmediato.'),
+(26, 10, '• Aquellos trabajos que se realicen en puntos elevados (+ 2mtrs) o cubiertade embarcaciones, que no sean protegidos por elementos de proteccion colectiva (barandillas) serán realizados con los EPIs adecuados para evitar caidas por la borda o a distinto nivel (arnes anticaidas + complementos de amarre).\r\n• Los accesos y descensos en las embarcaciones se realizara con medios seguros (pasarelas, rampas, etc.) siempre disponiendo de las barandillas adecuadas para proteger frente posibles desequilibrios o tropiezos accidentales.\r\n• En caso de dejar abierta cualquier escotilla o acceso a distinto nivel, se deberá señalizar correctamente (cinta balizamiento, conos, vallas, etc.) para evitar que otros tripulantes por despiste no se percaten de su apertura.\r\n\r\n• Utilizar únicamente escaleras de mano que se encuentren en buen estado. Tener en cuenta las siguientes recomendaciones:\r\n- Elección de la escalera adecuada al trabajo a efectuar.\r\n- Verificación del buen estado de conservación y resistencia de todos los componentes.\r\n- No estarán pintadas, para poder ver mejor si sufren roturas parciales.\r\n- Sólo podrá estar subido en la escalera una persona.\r\n- Mientras se encuentra una persona subida en la misma, otro aguantará la escalera por la base; este operario puede ser sustituido si se amarra la escalera firmemente o si no hay posibilidad de deslizamiento de la base de la escalera.\r\n- A la hora de bajar no se saltará, se bajará hasta el último escalón.\r\n- El ascenso se hará de frente con las manos libres de objetos y agarrándose a los peldaños.\r\n- Utilizar elementos adecuados (escaleras o pasarelas dotadas de barandilla, etc) y en buenas condiciones para acceder a las embarcaciones.\r\n• Antes de subir a una escalera deberá comprobarse que las suelas del calzado no tienen grasa, barro o cualquier otro elemento que pueda hacer resbalar el pie.\r\n\r\n• Aquellos trabajos en cubierta que no sean protegidos por elementos de proteccion colectiva (barandillas) serán realizados con los EPIs adecuados para evitar caidas por la borda o a distinto nivel (arnes anticaidas + complementos de amarre).'),
+(27, 10, '- El ascenso se hará de frente con las manos libres de objetos y agarrándose a los peldaños.'),
+(28, 10, '• El acceso / salida de la embarcacion se realizará mediante elementos configurados expresamente para esto (rampas, escaleras, pasarelas, etc.)\r\n• Antes de subir o bajar de la embarcación comprobar que las pasarelas/rampas se encuentran en buen estado y no hay presencia de grasa en los escalones ni en las suelas del calzado.\r\n• Evitar dejar cabos, cables, mangueras o herramientas en el suelo de las zonas de trabajo y de circulación.\r\n• No correr en la embarcación. Utilizar los asideros.\r\n• Mantener los pasillos y demás zonas de paso despejadas de objetos.\r\n• Mantener los suelos secos, y recoger los derrames de líquidos tan pronto como se produzcan.\r\n• No acceder a lugares con riesgo de caída de altura superior a 2 m (altillos, plataformas) sin protección contra caídas (barandillas, cinturón de seguridad apropiado etc...).\r\nEvitar llevar a cabo tareas con riesgo de caída en altura que se vean agravadas por las condiciones climatológicas; mala mar, lluvia, fuertes vientos...\r\nSe evitará utilizar el elevador de la embarcación para usos diferentes para los que a sido diseñado, sobre todo para la elevación de trabajadores salvo con los medios auxiliares adecuados y diseñados par tal fin.\r\n• Aquellos trabajos en cubierta que no sean protegidos por elementos de proteccion colectiva (barandillas) serán realizados con los EPIs adecuados para evitar caidas por la borda o a distinto nivel (arnes anticaidas + complementos de amarre).\r\n• Durante los trabajos en cubierta, la vigilancia será constante y, en su caso, se avisará a la tripulación del peligro inminente de marejada.\r\n• Para el ascenso o descenso por las escaleras fijas de acceso o salida a salas / compartimentos de la embarcación:\r\n- Se debera realizar con suelas del calzado libre de grasas o aceites (limpieza y revision previa)\r\n- Se utilizaran guantes para una correcta y firme sujección.\r\n- Se evitaran prisas\r\n- Se accederá con las dos manos totalmente libres (no se puede con una de las dos manos ocupada por sujeccion de herramientas o enseres)\r\n- A la hora de bajar no se saltará, se bajará hasta el último escalón.\r\n- El ascenso se hará de frente con las manos libres de objetos y agarrándose a los peldaños.\r\n'),
+(29, 10, 'Todo trabajo que se realice a una altura superior a dos metros de altura debera disponer de la proteccion adecuada para evitar la caída: Barandillas o elementos fijos, arnes anticaidas y complementos, enganchados a puntos de anclaje fijos o lineas de vida homologas.\r\n\r\n• Utilizar únicamente escaleras de mano que se encuentren en buen estado. Tener en cuenta las siguientes recomendaciones:\r\n- Elección de la escalera adecuada al trabajo a efectuar.\r\n- Verificación del buen estado de conservación y resistencia de todos los componentes.\r\n- No estarán pintadas, para poder ver mejor si sufren roturas parciales.\r\n- Sólo podrá estar subido en la escalera una persona.\r\n- Mientras se encuentra una persona subida en la misma, otro aguantará la escalera por la base; este\r\noperario puede ser sustituido si se amarra la escalera firmemente o si no hay posibilidad de deslizamiento\r\nde la base de la escalera.\r\n- A la hora de bajar no se saltará, se bajará hasta el último escalón.\r\n- El ascenso se hará de frente con las manos libres de objetos y agarrándose a los peldaños.\r\n- Utilizar elementos adecuados (escaleras o pasarelas dotadas de barandilla, etc) y en buenas condiciones\r\npara acceder a las embarcaciones.\r\nEvitar llevar a cabo tareas con riesgo de caída en altura que se vean agravadas por las condiciones\r\nclimatológicas; mala mar, lluvia, fuertes vientos...\r\nSe evitará utilizar el elevador de la embarcación para usos diferentes para los que a sido diseñado, sobre\r\ntodo para la elevación de trabajadores salvo con los medios auxiliares adecuados y diseñados par tal fin.\r\n• Los accesos y descensos en las embarcaciones se realizara con medios seguros (pasarelas, rampas, etc.) siempre disponiendo de las barandillas adecuadas para proteger frente posibles desequilibrios o tropiezos accidentales.\r\n\r\n• Todo personal que vaya usar dicho equipo dispondrá de la formación adecuada y autorización al uso de PEMPs, si no dispone de la formación consultar con el responsable de departamento\r\nUso de plataforma elevadora:\r\n1. Delimitar la zona de trabajo de la Plataforma Elevadora y asegurar que nadie pueda permanecer dentro del radio de acción de la máquina.\r\n2. Conocer y respetar la carga máxima admisible de la plataforma.\r\n3. Utilizar correctamente los Equipos de Protección Individual (EPI) durante el trabajo: Elemento de Retención (Arnés) anclado a los puntos indicados por el fabricante, Calzado de Seguridad y Casco de Protección.\r\n4. No sujetar la plataforma a estructuraras fijas mediante cuerdas, alambres o similares.\r\n5. Comprobar el buen estado de todos los dispositivos de seguridad y protección, y de los estabilizadores en caso de disponer de ellos.\r\n6. Verificar el correcto funcionamiento del mecanismo de bajada de emergencia.\r\n7. Acceder y descender de la máquina cuando se encuentre situada en la posición más baja posible y verificar que la puerta o la barra intermedia este colocada correctamente.\r\n8. No circular nunca en dirección transversal a la pendiente ni en pendientes superiores a las recomendadas por el fabricante.\r\n9. Mantener el cuerpo entero dentro de la plataforma durante el movimiento de la misma.\r\n10. Mantener las distancias límites de aproximación a las líneas eléctricas aéreas.'),
+(30, 10, '- Moverse por el barco con el cuerpo inclinado hacia el centro del mismo.\r\n- Prevenir los movimientos del barco vigilando la mar.\r\n- Sujetarse siempre a las partes sólidas del barco.\r\n- Utilizar calzado de seguridad con suela antideslizante.\r\n- No correr sobre la cubierta.\r\n\r\n- Toda operativa de trabajo en altura, en exteriores de la embarcacion sin protección perimetral es obligatorio ponerse el chaleco salvavidas y arnés antes de subir a cubierta. (En todo caso, usar siempre ambos elementos en caso de mal tiempo. Verificar los cabos de sujeción y los puntos de anclaje de los arneses)\r\n- La operativa de trabajos en altura viene precedida de la autorización correspondiente, sin esta no se puede empezar a realizar los trabajos.\r\n'),
+(31, 999, 'Los tripulantes de embarcaciones deberán hacer constancia de su aptitud médica mediante el reconocimiento médico expedido regulado por el Real Decreto 1696/2007, de 14 de diciembre, por el que se regulan los reconocimientos médicos de embarque marítimo. La declaración de aptitud resultante del reconocimiento médico de embarque marítimo se extenderá en el certificado médico de aptitud para embarque de conformidad con el Convenio MLC 2006 de la OIT y a la regla I/9 del Convenio STCW.\r\nEn los supuestos que el trabajador se reincorpore al trabajo por una baja de larga duracion (+ 6 meses) o bien tengan alguna dolencia que le imposibilite realizar al 100% las labores a desempeñar (incapacidad, restricciones médicas, etc) debera comentarlo con la empresa para proceder a realizar un reconocimiento médico específico. '),
+(32, 999, 'Si está embarazada, puede ser más sensible que sus otros compañeros hombres o mujeres no gestantes a algunos de los riesgos de su puesto de\r\ntrabajo, pudiendo verse afectada la adecuada evolución de su embarazo. Por ello y con el fin de proteger su salud y la del feto, se recomienda que con carácter urgente lo ponga en conocimiento de la persona responsable de prevención de su empresa para que se proceda a concertar un examen de salud médico laboral con tal motivo, a fin de valorar las concretas adaptaciones requeridas.\r\nEn caso de embarazo, se recomienda tenga en cuenta las siguientes pautas higiénico-saludables de carácter general:\r\n- Mantenga la forma física general, para minimizar las molestias músculo-esqueléticas durante el embarazo. Siga en todo momento las recomendaciones de su médico.\r\n- Mantenga una alimentación sana y equilibrada, tome alimento de forma regular y mantenga un buen estado de hidratación, prestando especial\r\natención a esta durante el trabajo en entornos calurosos y en particular, durante la temporada estival.\r\n- Dentro de los controles médicos particulares con motivo del seguimiento de su embarazo que le practiquen, en caso de que se detecte cualquier síntoma que a criterio de su médico pueda verse agravado por su trabajo, póngalo en conocimiento de su empresa, con la finalidad de volver a concertar un nuevo examen de salud laboral para revalidar su certificado de aptitud y permitir de esta forma que se adopten todas aquellas medidas adicionales que puedan ser requeridas.'),
+(33, 999, 'El trabajador deberá tener en cuenta sobre el uso y disposición de los EPIs (equipos de protección individual):\r\n- Utilizar estos equipos en todas las zonas en que se sea obligatorio o aconsejable su uso.\r\n- Cualquier trabajo que implique el uso de EPI no se empezará sin previamente haberse equipado y ajustado correctamente.\r\n- Mantener en buenas condiciones los equipos de protección individual entregados.\r\n- En caso de deterioro indicarlo a la persona responsable para que se proceda a su sustitución o reparación.\r\n- Utilizar los quipos de protección individual única y exclusivamente para los fines que han sido diseñados.\r\n- Los equipos de protección individual son de uso exclusivo de su usuario.\r\n- Leer en su totalidad las instrucciones de uso y seguirlas escrupulosamente.\r\n- Participar y atender las instrucciones formativas impartidas por expertos de la empresa, empresa suministradora o técnicos del servicio de prevención.'),
+(34, 999, 'Se deberán evitar todo tipo de actuaciones y/o actos inseguros durante las tareas, entendiendo como acto inseguro, cualquier acción u omisión de la\r\npersona trabajadora que origina un riesgo contra su propia seguridad y/o la de sus compañeros. Los actos inseguros son uno de los factores humanos más importantes que dan origen a los accidentes laborales. Para prevenirlos, se deberá contar con una adecuada formación e información, y disponer de suficiente adiestramiento para evitar malos hábitos, exceso de confianza y las prisas.\r\nEntre los ejemplos más comunes de actos inseguros destacan: la adopción de posiciones inseguras o incorrectas, utilización de herramientas o equipos en mal estado, uso de herramientas de forma incorrecta, no hacer uso o usar incorrectamente los EPI, hacer uso de equipos y máquinas para lo que no se está capacitado, no respetar las normas de seguridad establecidas por la empresa, no respetar señalizaciones y/o balizamientos, así como, la realización de tareas de mantenimiento en equipos y/o máquinas encendidas, desorden de la zona de trabajo, etc.\r\nTambien aquello actos derivados del trabajo a bordo de una embarcación: no uso de chaleco salvavidas cuando sea necesario, acceso a lugares\r\nelevados sin sistemas de retencion y protección frente caidas en altura, comprobaciones rutinarias en salas de maquinas sin los epis adientes, etc.'),
+(35, 999, 'Conforme a lo regulado en el R.D. 1215/1997, por el que se establecen las disposiciones mínimas de seguridad y salud para la utilización de los equipos de trabajo, todo equipo de trabajo dispone del manual de instrucciones para que el trabajador pueda consultar aquellas especificaciones, las características del equipo, la función de los mandos, los riesgos que el equipo puede ocasionar en su utilización, los equipos de protección individual que debe utilizar, inspecciones periódicas reglamentarias y cualquier otra instrucción pertinente, en particular, en materia de seguridad.\r\n- Las condiciones de seguridad antes mencionadas se deben conservar durante todo el tiempo de utilización o vida útil del equipo, mediante un\r\nadecuado mantenimiento que se realizará teniendo en cuenta las instrucciones del fabricante o, en su defecto, las características de estos equipos,\r\nsus condiciones de utilización y cualquier otra circunstancia normal o excepcional que pueda influir en su deterioro o desajuste.\r\n- Las operaciones de mantenimiento, reparación o transformación de los equipos de trabajo cuya realización suponga un riesgo específico para los\r\ntrabajadores sólo podrán ser encomendadas al personal especialmente capacitado para ello. Estos trabajadores deberán recibir una formación\r\nespecífica adecuada.\r\n- Los resultados de las comprobaciones periódicas deberán documentarse (Plan de Mantenimiento). Dichos resultados deberán conservarse durante\r\ntoda la vida útil de los equipos.'),
+(36, 999, 'La trabajadora dispone de aquellos elementos necesarios para reconocer y actuar frente los casos que puedan derivar en violencia sexual o actos\r\nconstitutivos de acoso sexual. La empresa dispone del \"Protocolos de acoso sexual o acoso por razón de sexo\", en el que explica el procedimiento\r\nfrente dichos casos.\r\nLa propia empresa promueve en la organización una política de prevención de riesgos psicosociales, especialmente centrada en la intolerancia frente a la violencia y al acoso de carácter psicológico, sexual o por razón de sexo, entre otras situaciones.\r\nOBSERVACIONES:\r\nConforme a lo establecido en el apartado I del Preámbulo de la Ley Orgánica 10/2022, de 6 de septiembre, de garantía integral de la libertad sexual, se consideran violencias sexuales los actos de naturaleza sexual en cualquier ámbito público o privado, lo que incluye la agresión sexual, el acoso sexual y la explotación de la prostitución ajena, así como todos los demás delitos previstos en el Título VIII del Libro II de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, orientados específicamente a proteger a personas menores de edad.'),
+(37, 999, 'Considerando los datos de violencia sexual que afectan a las mujeres según lo recogido en el apartado IV del Preámbulo de la Ley Orgánica 10/2022,\r\nde 6 de septiembre, de garantía integral de la libertad sexual y lo regulado en su artículo 12.2 sobre la prevención y concienciación en el ámbito laboral, en aquellos puestos de trabajo ocupados por trabajadoras, la violencia sexual debe considerarse entre los riesgos concurrentes, con el fin de prevenirlo se pone a disposición de las personas trabajadoras el Protocolo Psicosocial que permite la denuncia en la empresa de cualquier violencia y acoso de carácter psicológico, sexual o por razón de sexo, entre otras situaciones. En caso de necesidad, haga uso del mismo.\r\nConforme a lo establecido en el apartado I del Preámbulo de la Ley Orgánica 10/2022, de 6 de septiembre, de garantía integral de la libertad sexual, se consideran violencias sexuales los actos de naturaleza sexual en cualquier ámbito público o privado, lo que incluye la agresión sexual, el acoso sexual y la explotación de la prostitución ajena, así como todos los demás delitos previstos en el Título VIII del Libro II de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, orientados específicamente a proteger a personas menores de edad.\r\nLa empresa dispone del Protocolo de violencia, violencia sexual, acoso psicológico y acoso sexual o por razon de sexo para que el trabajador pueda disponer de informacion complementaria para evitar situaciones o exporner situaciones que sean denunciables dentro del ambito del trabajo.'),
+(38, 999, 'Considerando los datos de violencia sexual que afectan a las mujeres según lo recogido en el apartado IV del Preámbulo de la Ley Orgánica 10/2022, de 6 de septiembre, de garantía integral de la libertad sexual y lo regulado en su artículo 12.2 sobre la prevención y concienciación en el ámbito laboral, en aquellos puestos de trabajo ocupados por trabajadoras, la violencia sexual debe considerarse entre los riesgos concurrentes, con el fin de prevenirlo se pone a disposición de las personas trabajadoras el Protocolo Psicosocial que permite la denuncia en la empresa de cualquier violencia y acoso de carácter psicológico, sexual o por razón de sexo, entre otras situaciones. En caso de necesidad, haga uso del mismo.\r\nConforme a lo establecido en el apartado I del Preámbulo de la Ley Orgánica 10/2022, de 6 de septiembre, de garantía integral de la libertad sexual, se consideran violencias sexuales los actos de naturaleza sexual en cualquier ámbito público o privado, lo que incluye la agresión sexual, el acoso sexual y la explotación de la prostitución ajena, así como todos los demás delitos previstos en el Título VIII del Libro II de la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, orientados específicamente a proteger a personas menores de edad.\r\nLa empresa dispone del Protocolo de violencia, violencia sexual, acoso psicológico y acoso sexual o por razon de sexo para que el trabajador pueda disponer de informacion complementaria para evitar situaciones o exporner situaciones que sean denunciables dentro del ambito del trabajo.'),
+(39, 10, 'Las medidas preventivas que adoptaremos serán:\r\n• Los trabajadores que trabajen en cubierta deben estar acostumbrados al balanceo y cambio repentino de la embarcación.\r\n• Realizar de forma eficiente la información entre el puente y la tripulación cuando se cambie de rumbo o velocidad.\r\n• Sujetarse con un cinturón o arnés de seguridad cuando se tenga que trabajar en un lugar expuesto o durante una tormenta.\r\n• Aquellos trabajos en cubierta donde no exista proteccion perimietral se realizaran con arnes anticaidas conectado a puntos de anclaje seguros.\r\n• En caso de mal tiempo, aquellos trabajos en cubierta o zonas de riesgos no deberan realizarse solos.\r\n• Si cae un hombre al agua, es preciso iniciar inmediatamente las maniobras de salvamento correspondiente: señal de alarma, lanzamiento de aros salvavidas, maniobras de hombre al agua del barco, bote salvavidas y rescate del náufrago\r\n• Durante los trabajos en cubierta, la vigilancia será constante y, en su caso, se avisará a la tripulación del peligro inminente de marejada.\r\n• Los medios de salvamento y supervivencia estarán situados en el lugar que corresponda, en buen estado de funcionamiento y lisos para su uso inmediato.'),
+(40, 10, 'El uso de arnés anticaídas será obligatorio en los supuestos que el trabajador este a mas de 2 metros de altura al suelo/mar y que no disponga de aquellos elementos de protección colectiva como puede ser una barandilla.'),
+(41, 10, '- Moverse por el barco con el cuerpo inclinado hacia el centro del mismo.\r\n- Prevenir los movimientos del barco vigilando la mar.\r\n- Sujetarse siempre a las partes sólidas del barco.\r\n- Utilizar calzado de seguridad con suela antideslizante.\r\n- No correr sobre la cubierta. \r\n- Toda operativa de trabajo en altura, en exteriores de la embarcación sin protección perimetral es obligatorio ponerse el chaleco salvavidas y arnés antes de subir a cubierta. (En todo caso, usar siempre ambos elementos en caso de mal tiempo. Verificar los cabos de sujeción y los puntos de  anclaje de los arneses)\r\n- La operativa de trabajos en altura viene precedida de la autorización correspondiente, sin esta no se puede empezar a realizar los trabajos.'),
+(42, 10, '• Antes de subir o bajar de la embarcación comprobar que las escotillas esten cerradas, y que registros, pasarelas/rampas se encuentran en buen estado y no hay presencia de grasa en los escalones ni en las suelas del calzado.\r\n• En caso de abrir escotilla para el acceso o mantenimiento de la embarcación se deberá señalizar o bien acotar la zona para advertir que la escotilla está abierta.\r\n• Mantener tapados los huecos de la embarcación (escotillas y registros) para evitar tropiezos o caídas. \r\n• Evitar dejar cabos, cables, mangueras o herramientas en el suelo de las zonas de trabajo y de circulación.\r\n• No correr en la embarcación. Utilizar los asideros.\r\n• Mantener en correcto estado de orden y limpieza las zona de trabajo. Evitar dejar cables, mangueras o herramientas en el suelo de las zonas de trabajo y de circulación.\r\n• Mantener los pasillos y demás zonas de paso despejadas de objetos.\r\n• Mantener los suelos secos, y recoger los derrames de líquidos tan pronto como se produzcan.\r\n• No acceder a lugares con riesgo de caída de altura superior a 2 m (altillos, plataformas) sin protección contra caídas (barandillas, cinturón de seguridad apropiado etc...).\r\nEvitar llevar a cabo tareas con riesgo de caída en altura que se vean agravadas por las condiciones climatológicas; mala mar, lluvia, fuertes vientos...\r\nSe evitará utilizar el elevador de la embarcación para usos diferentes para los que a sido diseñado, sobre todo para la elevación de trabajadores salvo con los medios auxiliares adecuados y diseñados par tal fin.'),
+(43, 10, '• Los pasillos, escaleras, vías de circulación y salidas deberán permanecer libres de obstáculos, con óptimas condiciones lumínicas, y a su vez exentos\r\nde fluidos (agua, grasa…) en el suelo, para que su utilización esté libre de riesgos en todo momento.\r\n• Se evitará la presencia de obstáculos en el suelo.\r\n• En caso de realizar trabajos en las inmediaciones del cantil, se utilizará chaleco salvavidas.\r\n• Se deberá extremar la precaución en caso de acercarse a las zonas de cantil carentes de protección, ya que existe riesgo de caída al mar.\r\n• Se deberá circular con precaución en las zonas próximas al mar/muelles, mantener una distancia de seguridad al cantil (al menos 3 metros).\r\n• Aquellos trabajos en las inmediaciones del cantil, o situaciones de trabajo con probabilidad de caida al mar será obligatorio el uso de chaleco\r\nsalvavidas.\r\n• En caso de realizar trabajos al borde del cantil del muelle se usará el chaleco salvavidas.'),
+(44, 10, '• El acceso / salida de la embarcacion se realizará mediante elementos configurados expresamente para esto (rampas, escaleras, pasarelas, etc.)\r\n• Antes de subir o bajar de la embarcación comprobar que las pasarelas/rampas se encuentran en buen estado y no hay presencia de grasa en los\r\nescalones ni en las suelas del calzado.\r\n• Evitar dejar cabos, cables, mangueras o herramientas en el suelo de las zonas de trabajo y de circulación.\r\n• No correr en la embarcación. Utilizar los asideros.\r\n• Mantener los pasillos y demás zonas de paso despejadas de objetos.\r\n• Mantener los suelos secos, y recoger los derrames de líquidos tan pronto como se produzcan.\r\n• No acceder a lugares con riesgo de caída de altura superior a 2 m (altillos, plataformas) sin protección contra caídas (barandillas, cinturón de\r\nseguridad apropiado etc...).\r\nEvitar llevar a cabo tareas con riesgo de caída en altura que se vean agravadas por las condiciones climatológicas; mala mar, lluvia, fuertes vientos...\r\nSe evitará utilizar el elevador de la embarcación para usos diferentes para los que a sido diseñado, sobre todo para la elevación de trabajadores salvo\r\ncon los medios auxiliares adecuados y diseñados par tal fin.\r\n• Aquellos trabajos en cubierta que no sean protegidos por elementos de proteccion colectiva (barandillas) serán realizados con los EPIs adecuados\r\npara evitar caidas por la borda o a distinto nivel (arnes anticaidas + complementos de amarre).\r\n• Durante los trabajos en cubierta, la vigilancia será constante y, en su caso, se avisará a la tripulación del peligro inminente de marejada.\r\n• Para el ascenso o descenso por las escaleras fijas de acceso o salida a salas / compartimentos de la embarcación:\r\n- Se debera realizar con suelas del calzado libre de grasas o aceites (limpieza y revision previa)\r\n- Se utilizaran guantes para una correcta y firme sujección.\r\n- Se evitaran prisas\r\n- Se accederá con las dos manos totalmente libres (no se puede con una de las dos manos ocupada por sujeción de herramientas o enseres)\r\n- A la hora de bajar no se saltará, se bajará hasta el último escalón.\r\n- El ascenso se hará de frente con las manos libres de objetos y agarrándose a los peldaños.'),
+(45, 10, 'A menudo se producen accidentes cuando no se utilizan los medios adecuados para entrar y salir de a bordo. Los tripulantes no deben saltar en ningún caso de la embarcación a tierra o viceversa. Cuando el barco no esté del todo atracado al muelle y se utilicen escalas de muelle, deberá fijarse una plataforma al antepecho. Cuando las embarcaciones están abarloadas, deben instalarse las planchas de transbordo necesarias para pasar sin riesgo de una a otra.\r\nTambién debe existir un aro salvavidas con cabo cerca de la plancha de transbordo, que pueda ser utilizado inmediatamente. Puede ser conveniente en determinadas circunstancias colocar una red debajo da la plancha de transbordo.'),
+(46, 10, '• El acceso / salida de la embarcacion se realizará mediante elementos configurados expresamente para esto (rampas, escaleras, pasarelas, etc.)\r\n• Antes de subir o bajar de la embarcación comprobar que las pasarelas/rampas se encuentran en buen estado y no hay presencia de grasa en los escalones ni en las suelas del calzado.\r\n• Evitar dejar cabos, cables, mangueras o herramientas en el suelo de las zonas de trabajo y de circulación.\r\n• No correr en la embarcación. Utilizar los asideros.\r\n• Mantener los pasillos y demás zonas de paso despejadas de objetos.\r\n• Mantener los suelos secos, y recoger los derrames de líquidos tan pronto como se produzcan.\r\n• No acceder a lugares con riesgo de caída de altura superior a 2 m (altillos, plataformas) sin protección contra caídas (barandillas, cinturón de seguridad apropiado etc...).\r\nEvitar llevar a cabo tareas con riesgo de caída en altura que se vean agravadas por las condiciones climatológicas; mala mar, lluvia, fuertes vientos...\r\nSe evitará utilizar el elevador de la embarcación para usos diferentes para los que a sido diseñado, sobre todo para la elevación de trabajadores salvo con los medios auxiliares adecuados y diseñados par tal fin.\r\n• Aquellos trabajos en cubierta que no sean protegidos por elementos de proteccion colectiva (barandillas) serán realizados con los EPIs adecuados para evitar caidas por la borda o a distinto nivel (arnes anticaidas + complementos de amarre).\r\n• Durante los trabajos en cubierta, la vigilancia será constante y, en su caso, se avisará a la tripulación del peligro inminente de marejada.\r\n• Para el ascenso o descenso por las escaleras fijas de acceso o salida a salas / compartimentos de la embarcación:\r\n- Se debera realizar con suelas del calzado libre de grasas o aceites (limpieza y revision previa)\r\n- Se utilizaran guantes para una correcta y firme sujección.\r\n- Se evitaran prisas\r\n- Se accederá con las dos manos totalmente libres (no se puede con una de las dos manos ocupada por sujeción de herramientas o enseres)\r\n- A la hora de bajar no se saltará, se bajará hasta el último escalón.\r\n- El ascenso se hará de frente con las manos libres de objetos y agarrándose a los peldaños.'),
+(47, 10, 'Para acceder a lugares elevados, utilice elementos adecuados y que se encuentren en buenas condiciones (escaleras de mano, etc.). No subirse a cajas, sillas, ni utilizar las baldas de las estanterías como peldaños.\r\nNo realizar actos inseguros que comprometan nuestra seguridad.\r\nEn el uso de escaleras de mano se deben evitar las siguientes acciones: ascenso o descenso con las manos ocupadas, de lado o de espaldas a los peldaños, la utilización de una escalera de altura insuficiente, el realizar alcances horizontales excesivos por no mover la escalera.\r\nAntes de utilizar una escalera, comprobar que sus condiciones de seguridad son adecuadas.\r\nRevisar periódicamente el estado de las escaleras de mano, en particular, entre otras cosas comprobar que:\r\ndisponen de elementos antideslizantes y están en óptimas condiciones, los peldaños están bien ensamblados y cuentan con sistema anti apertura, son estables y se colocan sobre superficies estables y niveladas.\r\nTras su uso, se debe limpiar las sustancias que pudieran haber caído en las escaleras de mano (agua, grasas, etc.) y guardarlas de forma adecuada. Cuando haya que utilizar escaleras de mano, sólo podrá utilizarse aquellas que cumplan con la normativa de seguridad actual (norma UNE-131).\r\n• Utilizar únicamente escaleras de mano que se encuentren en buen estado. Tener en cuenta las siguientes recomendaciones:\r\n- Elección de la escalera adecuada al trabajo a efectuar.\r\n- Verificación del buen estado de conservación y resistencia de todos los componentes.\r\n- No estarán pintadas, para poder ver mejor si sufren roturas parciales.\r\n- Sólo podrá estar subido en la escalera una persona.\r\n- Mientras se encuentra una persona subida en la misma, otro aguantará la escalera por la base; este operario puede ser sustituido si se amarra la escalera firmemente o si no hay posibilidad de deslizamiento de la base de la escalera.\r\n- A la hora de bajar no se saltará, se bajará hasta el último escalón.\r\n- El ascenso se hará de frente con las manos libres de objetos y agarrándose a los peldaños.\r\n- Utilizar elementos adecuados (escaleras o pasarelas dotadas de barandilla, etc) y en buenas condiciones para acceder a las embarcaciones.\r\n• Antes de subir a una escalera deberá comprobarse que las suelas del calzado no tienen grasa, barro o cualquier otro elemento que pueda hacer resbalar el pie.\r\n• Aquellos trabajos en cubierta que no sean protegidos por elementos de proteccion colectiva (barandillas) serán realizados con los EPIs adecuados para evitar caidas por la borda o a distinto nivel (arnes anticaidas + complementos de amarre).'),
+(48, 20, '• Al desplazarse a bordo del buque, la gente de mar debería tener presente el hecho de que en el mar el buque puede experimentar un bandazo inesperado o ser sacudido por un fuerte oleaje.\r\n• Los desplazamientos durante travesias con fuerte oleaje se realizará buscando y agarrandose a puntos fijos, se evitará correr o bien transportar elementos que dificulten el equilibrio al andar.\r\n• El acceso a pisos superiores o inferiores se realizara agarrado a los pasamanos.\r\n• Los trabajos en cubiertas en caso de oleaje deberan realizarse siempre agarrados a las barandillas.\r\n• En caso de fuerte oleaje, no se accedera a ningún lugar que de paso una caida sin la posibilidad de poder agarrarse a un elemento fijo.'),
+(49, 20, '• El espacio y lugar de trabajo debe mantenerse limpio y ordenado.\r\n• Los pasillos, escaleras, vías de circulación y salidas deberán permanecer libres de obstáculos, con óptimas condiciones lumínicas, y a su vez exentos de fluidos (agua, grasa…) en el suelo, para que su utilización esté libre de riesgos en todo momento.\r\n• Los desperdicios, manchas de grasa y residuos de sustancias peligrosas que puedan originar accidentes (provocar caídas) o contaminar el ambiente de trabajo. Se han de eliminar inmediatamente depositándolos en los recipientes de material desechable.\r\n• Utilizar calzado de seguridad con suela antideslizante y sujeción en el talón.\r\n• En caso de derrames y/o suelo mojado, si es necesario, señalizar la zona con el cartel de riesgo de caídas por suelo resbaladizo. Recoger los derrames tan pronto como se produzcan.\r\n• Mantener despejadas las zonas de paso. Evitar la presencia de cableado, mangueras, atravesando zonas de paso. Disponerlas de manera que en lo posible no crucen zonas de paso. Recogerlas una vez se haya terminado el trabajo, aunque más tarde sea necesario volver a utilizar ese equipo.\r\n• Evitar las prisas, no correr en las diferentes zonas de la embarcacion o instalaciones.\r\n• Prestar atención al subir y bajar de la embarcación.\r\n• Antes de subir o bajar de la embarcación comprobar que las pasarelas se encuentran en buen estado y no hay presencia de grasa en los escalones  i en las suelas del calzado.\r\n• Evitar dejar cabos, cables, mangueras o herramientas en el suelo de las zonas de trabajo y de circulación.\r\n• Extremar las precauciones al trabajar en condiciones atmosféricas adversas (viento, hielo, lluvia, etc.)\r\n• Utilizar los pasos y vías existentes.\r\n• En el transporte manual de materiales no se debe obstaculizar con la carga la visibilidad del recorrido.'),
+(50, 20, '• Las tareas deberían llevarse a cabo teniendo en cuenta los riesgos posibles que entrañan para terceras personas; por ejemplo, al lavar con  manguera la cubierta, el agua puede entrar en otros sitios y causar resbalones y caídas.\r\n• Se señalizará aquellas zonas que esten en proceso de limpieza, pulido, que exista la posibilidad de resbalarse.\r\n• Se extremara precaucion en cubiertas por el efecto del agua que pueda dipositarse por efecto de la humedad, por una reciente travesia o bien por limpieza.\r\n• Limpiar aquellas zonas en las que haya derrames de aceites, grasas o liquidos.\r\n• Extremar precaucion en salas de motores o pañoles que pueda haber fugas de liquidos.\r\n• Utilizar calzado con suela antideslizante y sujeción en el talón.\r\n• En caso de derrames y/o suelo mojado, si es necesario, señalizar la zona con el cartel de riesgo de caídas por suelo resbaladizo. Recoger los derrames tan pronto como se produzcan.\r\n• Evitar las prisas, no correr en las diferentes zonas de la embarcacion o instalaciones.\r\n• Prestar atención al subir y bajar de la embarcación.\r\n• Antes de subir o bajar de la embarcación comprobar que las pasarelas se encuentran en buen estado y no hay presencia de grasa en los escalones  ni en las suelas del calzado.\r\n• Extremar las precauciones al trabajar en condiciones atmosféricas adversas (viento, hielo, lluvia, etc.)\r\n• Utilizar los pasos y vías existentes.'),
+(51, 20, '• Todo pasillo, escalera y espacio de cubierta destinado al paso de un sitio a otro deberían conservarse en buen estado y mantenerse exentos de materiales o sustancias que puedan causar deslizamientos o caídas.\r\n• Las operativas de amarre se finalizaran adujando la amarra en un lugar seguro que no entorpezca el paso.\r\n• Aquellos actividades, procesos o reparaciones en cubiertas o zonas de paso; una vez finalizadas se deberá recoger aquel material que pueda  generar tropiezos.\r\n• Utilizar calzado de seguridad con suela antideslizante.'),
+(52, 30, '• Verificar el correcto estado de resistencia y sujeción de las estanterías y que los materiales están bien almacenados. Si existe una estantería sin sujeción y se puede desplomar, avise a la dirección para que se tomen medidas.\r\n• Apilar/colocar los materiales de forma que no puedan caer y evitando sobrecargar las estanterías o con apilamientos altos e inestables.\r\n• Almacenar los materiales grandes y pesados en los estantes medios o inferiores.\r\n• Procurar que la cantidad sea la mínima posible y utilizar de forma eficiente el espacio disponible.\r\n• Almacenar los objetos en estanterías para obtener un mejor aprovechamiento del volumen y una mayor seguridad en los trabajos.\r\n• Evitar colocar los objetos en los extremos de los estantes, especialmente próximos a zonas de paso.\r\n• No dejar herramientas o materiales en la cubierta de los barcos o en el travellift, de forma que puedan caer sobre el personal que trabaje en el  suelo.\r\n• Verificar que los mangos y elementos de agarre de las herramientas de trabajo, utensilios o máquinas, están en buenas condiciones y en perfecto estado de conservación. Mantener libres de grasas y aceites las herramientas manuales y portátiles.\r\n• Utilizar guantes de protección para facilitar el agarre y especialmente al manipular piezas que presenten bordes o aristas cortantes.\r\n• Asegurarse que los recipientes sobre los que se deposita una carga no carecen de fondo o que este no se encuentre debilitado.\r\n• No pasar ni permanecer debajo de cargas suspendidas.\r\n• Utilizar calzado de seguridad con puntera reforzada para evitar lesiones en los pies.\r\n• Cuando se eleven cargas por medio de grúas u otros sistemas de elevación, los trabajadores no deberán permanecer debajo de éstas o debajo del recorrido que éstas deban efectuar, manteniendo una distancia de seguridad suficiente dependiendo de los trabajos realizados.\r\n• En trabajo con cargas izadas se deberá utilizar casco de seguridad');
+INSERT INTO `er_medidas` (`id_medida`, `codigomedida`, `frasemedida`) VALUES
+(53, 40, 'Asegurar el buen agarre de los materiales que se manipulan, así como la estabilidad de los mismos.\r\nSi se tienen que manipular materiales y maquinaria pesada se hará uso de calzado de seguridad.\r\n• Mantener distancia de seguridad (> 2 mtrs) de la zona de atraque o estancia de la embarcación\r\n• Asegurar el agarre de materiales o cajas durante su manipulación. Utilizar calzado de seguridad.\r\n• No dejar herramientas o materiales en la cubierta de los barcos de forma que puedan caer sobre el personal que trabaje en el suelo.\r\n• Verificar que los mangos y elementos de agarre de las herramientas de trabajo estén en perfecto estado de conservación. Mantener libres de grasas y aceites las herramientas manuales y portátiles.\r\n• Utilizar guantes de protección para facilitar el agarre y especialmente al manipular piezas que presenten bordes o aristas cortantes.'),
+(54, 30, 'Cargas suspendidas (si hubiera)\r\nMantener una distancia de seguridad con respecto a las cargas suspendidas.\r\nNo dar la espalda nunca a una carga suspendida.\r\nNo situarse entre obstáculos o zonas que dificulten la movilidad que impidan la salida del operario en caso de accidente por caída de la carga.\r\nUtilizar las eslingas adecuadas y normalizadas para levantar cada carga; comprobar que la carga a manipular es adecuada al peso que puede soportar.\r\nAsegurar y estibar correctamente las cargas antes de su manipulación.\r\nEn la carga a elevar, los enganches o puntos de fijación de la eslinga no permitirán el deslizamiento de ésta, debiéndose emplear, de ser necesario, distanciadores, etc. Al mismo tiempo, los citados puntos deberán encontrarse convenientemente dispuestos en relación al centro de gravedad.\r\nEn caso de empalmarse eslingas, deberá tenerse en cuenta que la carga a elevar viene limitada por la menos resistente.\r\nCada uno de los elementos auxiliares que se utilicen en las maniobras (eslingas, ganchos, grilletes, etc.) tendrán capacidad de carga suficiente para soportar, sin deformarse, las oscilaciones a las que estarán sometidos.\r\nSe desecharán aquellos cables cuyos hilos rotos, contados a lo largo de un tramo de cable de longitud inferior a 8 veces su diámetro, superen el 10 % del total de los mismos.\r\nUso obligatorio de guantes y casco de seguridad.'),
+(55, 50, 'Los espacios de trabajo estarán libres del riesgo de caídas de objetos por desprendimiento , y en el caso de no ser posible deberá protegerse adecuadamente a una altura mínima de 1,80 m. mediante mallas, barandillas, chapas o similares, cuando por ellos deban circular o permanecer personas.\r\nLas escaleras, plataformas, etc., serán de material adecuado, bien construidas y adosadas y ancladas sólidamente de manera que se impida el desprendimiento de toda o parte de ella.\r\nTodos los elementos que constituyen las estructuras, mecanismos y accesorios de aparatos, máquinas, instalaciones, etc., serán de material sólido, bien construido y de resistencia adecuada al uso al que se destina, y sólidamente afirmados en su base.\r\nEl almacenamiento de materiales se realizará en lugares específicos, delimitados y señalizados.\r\nCuando el almacenamiento de materiales sea en altura éste ofrecerá estabilidad , según la forma y resistencia de los materiales.\r\nLas cargas estarán bien sujetas entre sí y con un sistema adecuado de sujeción y contención (flejes, cuerdas, contenedores, etc.).\r\nLos materiales se apilarán en lugares adecuados , los cuales estarán en buen estado y con resistencia acorde a la carga máxima (palet, estanterías, etc.).\r\nLos almacenamientos verticales (botellas, barras, etc.) estarán firmemente protegidos y apoyados en el suelo, y dispondrán de medios de estabilidad y sujeción (separadores, cadenas, etc.).\r\nLos accesorios de los equipos de elevación (ganchos, cables, ...) para la sujeción y elevación de materiales tendrán una resistencia acorde a la carga y estarán en buen estado.\r\nLas cargas transportadas estarán bien sujetas con medios adecuados, y los enganches , conexiones , etc ., se realizarán adecuadamente (ganchos con pestillos de seguridad...). \r\nSe establecerá un programa de revisiones periódicas y mantenimiento de los equipos, maquinaria, cables, ganchos, etc '),
+(56, 60, 'Mantener limpia y en buen estado la zona de trabajo.\r\nNo dejar herramientas ni materiales en las zonas de paso.\r\nEn caso de acceder a zonas donde se realizan trabajos de mantenimiento y conservacion de la embarcacion hacer uso de calzado de seguridad con\r\nsuela de protección objetos punzantes. Tambien se aplicará en la misma medida en trabajos en diques secos o varaderos.'),
+(57, 30, 'El montaje y desmontaje de andamios, se realizará bajo la supervisión y responsabilidad del Supervisor de andamios, quien autorizará por escrito la utilización de los mismos. Para ello, se utilizarán etiquetas que indiquen la fecha y la persona competente que autoriza el uso del andamio.\r\nLas plataformas de trabajo, las pasarelas y las escaleras de los andamios deberán construirse, protegerse y utilizarse de forma que se evite que las personas caigan o estén expuestas a caídas de objetos. Se prohíbe expresamente el uso de tablones para formar plataformas o pasarelas.\r\nLos andamios móviles deberán asegurarse contra los movimientos involuntarios.\r\nLos andamios, tanto en la zona de trabajo como en la zona de paso, se protegerán mediante barandillas resistentes con altura mínima de 90 cm., rodapié o reborde de protección de al menos 15 cm. y protección intermedia que impida el paso por deslizamiento de los trabajadores.\r\nDurante el montaje y desmontaje del andamio, nadie debe permanecer debajo del mismo.\r\nTodas las conexiones deben tener pasadores de seguridad.\r\nSe montarán las barras trasversales para que el andamio tenga estabilidad.\r\nNo se comenzará el montaje de un nivel superior sin que el inferior sea totalmente estable.\r\nEl acceso a plataformas superiores, se hará por medio de escaleras interiores y fijadas al andamio; nunca se subirá o bajará del andamio por el exterior o por las crucetas.\r\nLas plataformas no pueden estar resbaladizas, tendrán un mínimo de 60 cm. de ancho v se inmovilizarán con pasadores para evitar vuelcos o deslizamientos.\r\nLos módulos de la base se apoyarán sobre durmientes formados por tableros, no directamente sobre el suelo, o bien sobre placas de apoyo con husillos de nivelación para garantizar la estabilidad.\r\nCuando se trabaje en las proximidades de instalaciones en tensión, guardar las distancias de seguridad.\r\nEn caso de fuertes vientos, no se permanecerá sobre el andamio.\r\nLos andamios de más de dos cuerpos, deberán arriostrarse al paramento o a puntos fijos estables.\r\nNo mover el andamio si hay personal sobre el mismo.\r\nAcotar la zona inferior del andamio.\r\nNo deben pintarse los andamios, para facilitar la detección de defectos estructurales.\r\nSe deberán utilizar los Equipos de Protección Individual apropiados a los riesgos existentes, (casco, guantes, calzado de seguridad, arnés anticaídas durante montajes, desmontajes y utilización de andamios, etc.).\r\nLos andamios serán inspeccionados:\r\nAntes de su puesta en servicio. Periódicamente. Tras modificaciones, periodos de no utilización, exposición a intemperie u otras circunstancias que hayan podido afectar su resistencia o estabilidad. ');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `er_puestocentro`
+--
+
+CREATE TABLE `er_puestocentro` (
+  `id_puestocentro` int(11) NOT NULL,
+  `evaluacion_pc` int(11) NOT NULL,
+  `puestoarea_pc` varchar(255) NOT NULL,
+  `descripcion_pc` text NOT NULL,
+  `factoresriesgo_pc` text NOT NULL,
+  `sensible_pc` text NOT NULL,
+  `siniestralidad_pc` text NOT NULL,
+  `epis_pc` text NOT NULL,
+  `equipos_pc` text NOT NULL,
+  `prodquim_pc` text NOT NULL,
+  `metodos_pc` text NOT NULL,
+  `factorpsico_pc` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `er_puestocentro`
+--
+
+INSERT INTO `er_puestocentro` (`id_puestocentro`, `evaluacion_pc`, `puestoarea_pc`, `descripcion_pc`, `factoresriesgo_pc`, `sensible_pc`, `siniestralidad_pc`, `epis_pc`, `equipos_pc`, `prodquim_pc`, `metodos_pc`, `factorpsico_pc`) VALUES
+(41, 7, 'General - Embarcaciones', 'Riesgos comunes a todos los puestos de trabajo por el hecho de ser tripulante de una embarcación.', 'Riesgos comunes de espacios en el interior de los buques, instalaciones\r\nRiesgos derivados de actuaciones por emergencia/s\r\nRiesgos particulares que se crean en el mar (mal tiempo, averías, etc.), para las cuáles, deben tomarse decisiones rápidas y algunas\r\nveces comprometidas.\r\nRiesgos de indole psicosocial por las relaciones entre compañeros de la compañia, asi tambien como aquellos por estar en frecuente contacto con clientes.', '--', '--', '', '', '', '', 'Autonomia personal: Imposibilidad ausentarse del puesto,Autonomia personal: Imposibilidad de control sobre el ritmo,Organización del Trabajo: Trabajo a turnos'),
+(42, 7, 'Marinero/a', 'La definicion de trabajos y funciones especificas de cada uno de los puestos se definen en el documento R1-03-A (Tabla definición puestos) del Sistema de Gestion Integrada de la empresa.\r\nActividad:\r\nA las órdenes del capitán, patrón o primer oficial, tiene asignadas las funciones siguientes asumiendo sus responsabilidades:\r\n• Mantenimiento de los equipos de cubierta y casco.\r\n• Maniobras de atraque\r\n• Embarque y desembarque del pasaje\r\n• Estiba del equipaje incluido la ayuda al pasajero con su equipaje en las rampas de acceso.\r\n• Atención al pasaje, transmitir cualquier incidencia al primer oficial o capitan/patrón\r\n• Limpieza general\r\n• Otras funciones generales de marinería que le sean encomendadas.\r\nCondiciones de trabajo:\r\nParticipa de las condiciones generales de la embarcación. En ella, existen distintas zonas:\r\nZonas de cubierta, con distintos niveles a los que se accede por escaleras de servicio.\r\nZonas de proa y popa en donde existen diferentes elementos para hacer firme como molinetes, bozas, cabos, cornamusas, bitas, etc.\r\nZonas de pasaje. Están ubicadas en cubierta principal y superior. Hay una zona abierta y otras cerradas. Todas ellas disponen de hileras de asientos para el pasaje.\r\nDe manera general, la marinería se encuentra expuesta a las condiciones climáticas exteriores, y por tanto, variables.\r\nDisponen de ropa de trabajo adecuada a las inclemencias del tiempo y a las condiciones de las distintas épocas del año.\r\nEn las operaciones de atraque y desamarre, participan también de las condiciones del muelle, existiendo interacción con pasarelas, defensas del muelle, norays, etc.', 'La presencia de elementos en las zonas de paso, las zonas inestables del buque (planos inclinados, etc.), el tener que frecuentar las escalas de servicio, los elementos inmóviles y móviles como molinetes, las bozas y los propios cabos, las operaciones para hacer firme, las operaciones durante el embarque y desembarque del pasaje, las condiciones termohigrométricas exteriores, constituyen factores de riesgo. Añadimos a éstos, las situaciones particulares que se crean en el mar (mal tiempo, averías, etc.)', 'Estudiado el puesto de trabajo, las funciones que en él se desarrollan y los riesgos que no se han podido evitar, la empresa considera\r\nque para este puesto de trabajo:\r\n- No se puede realizar contrataciones de trabajadores a menores de 18 años.\r\n- Respecto de mujeres embarazadas o en periodo de lactancia el desarrollo de las actividades del puesto es incompatible con el estado mencionado.\r\n- Respecto a sensibilidades especiales debe remitirse al trabajador/a al facultativo especialista del SPA de medicina de la salud para emisión del dictamen de aptitud y si procede de las oportunas restricciones aplicables.', 'Se conocen entre los principales accidentes algunos casos de dolencias musculoesqueléticas por sobresfuerzos, caídas al mismo, golpes contra objetos inmóviles, atrapamiento entre objetos y contactos con herramientas. La mayoría de una consideración leve.', 'CALZADO SEGURIDAD,GUANTE PROT. MEC.,GAFAS ANTIPROYECCIONES,PROTECCION AUDITIVA,ARNES ANTICAIDAS,CHALECO SALVAVIDAS,CHALECO ALTA VISIBILIDAD', 'Herramientas manuales, Equipos portátiles (taladro, pulidoras, maquinas agua presión)', 'Productos químicos asociados a la limpieza de uso diario\r\nProductos domésticos', 'Mantenimiento preventivo,Comprobación de energías,Consignación de equipos de Tº,Rampas de las embarcaciones,Trabajos en espacios cerrados,Ordenam. amarre y atraque,Acceso embarcaciones,Limpieza de embarcaciones,Conexiones electr. y agua en embarcaciones,Tratamientos de superficies O.V.,Traslado embarcación a área reparado,Apuntalamiento embarcaciones,Tratamiento superficies emb. fondeadas,Manipulación de bidones,Uso herramientas manuales,Uso de herramientas portátiles,Uso de escaleras manuales,Andamios de borriquetas,Andamios tubulares,Uso Plataformas elevadoras móviles personas,Trabajos verticales,Trabajos en cubiertas,Operativa en bodega,Trabajos en fosos,Andamios de borriquetas,Trabajos eléctricos,Guía uso de guantes,(manual de gestión de buque),Prevención de accidentes in itinere,Vigilancia de la salud,Golpe de Calor- RAD UV,Tr. sensibles: embarazadas, menores o trab. Con rest. médi,EPIS,Sistema de etiquetado Productos químicos,Manipulación manual de cargas,Uso escaleras de mano,Diseño seguro de trabajos,Uso de herramientas manuales', 'Carga Mental: Tiempo limitado para las tareas,Contenido del trabajo: Trabajo monotono y/o repetitivo,Autonomia personal: Imposibilidad ausentarse del puesto'),
+(43, 9, 'TRIPULANTE-VARADERO', 'Trabajos desarrollados para la conservación y mantenimiento de embarcaciones en varaderos o procesos de parada de las propias embarcaciones.', '', '', 'ND', 'CALZADO SEGURIDAD,BOTA ALTA IMPERMEABLE,CASCO DE PROTECCION,CASCO CON PANTALLA,MANOPLAS SOLDADURA,GUANTE PROT. MEC.,GUANTES LATEX,GUANTES PROT. QUIM.,GAFAS ANTIPROYECCIONES,PANTALLA PROTECCION FACIAL,PANTALLA SOLDADURA,MASCARA VAPOR ORG./GAS.,MASCARILLA PARTICULAS,PROTECCION AUDITIVA,ARNES ANTICAIDAS,CHALECO SALVAVIDAS,CHALECO ALTA VISIBILIDAD,ROPA DE AGUA', 'Maquinaria Portatil (taladros, radiales, pulidoras, maquina presion de agua), equipos de soldadura portatil, plataforma elevadora móvil, traspaletas / carretilla elevadora.', 'Pinturas, disolventes, grasas, aceites minerales, desatascantes, antioxidantes.', 'Mantenimiento preventivo,Comprobación de energías,Consignación de equipos de Tº,Rampas de las embarcaciones,Trabajos en espacios cerrados,Ordenam. amarre y atraque,Acceso embarcaciones,Limpieza de embarcaciones,Conexiones electr. y agua en embarcaciones,Tratamientos de superficies O.V.,Traslado embarcación a área reparado,Apuntalamiento embarcaciones,Tratamiento superficies emb. fondeadas,Manipulación de bidones,Uso herramientas manuales,Uso de herramientas portátiles,Uso de escaleras manuales,Andamios de borriquetas,Andamios tubulares,Uso Plataformas elevadoras móviles personas,Trabajos verticales,Trabajos en cubiertas,Operativa en bodega,Trabajos en fosos,Andamios de borriquetas,Trabajos eléctricos,Guía uso de guantes,(manual de gestión de buque),>Prevención de accidentes in itinere,Vigilancia de la salud,Golpe de Calor- RAD UV,Tr. sensibles: embarazadas, menores o trab. Con rest. médi,EPIS,Sistema de etiquetado Productos químicos,Manipulación manual de cargas,Uso escaleras de mano,Diseño seguro de trabajos,Uso de herramientas manuales', 'Contenido del trabajo: Trabajo monotono y/o repetitivo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `er_puestocentro_epi`
+--
+
+CREATE TABLE `er_puestocentro_epi` (
+  `id_pc_epi` int(11) NOT NULL,
+  `id_puestocentro` int(11) NOT NULL,
+  `id_epi` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `er_revisionmaq_respuestas`
+--
+
+CREATE TABLE `er_revisionmaq_respuestas` (
+  `id_respuesta` int(11) NOT NULL,
+  `id_revision_maquina` int(11) NOT NULL,
+  `id_elemento` int(11) NOT NULL,
+  `respuesta` varchar(3) DEFAULT NULL,
+  `observacion` text DEFAULT NULL,
+  `planificacion` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `er_revision_maquina`
+--
+
+CREATE TABLE `er_revision_maquina` (
+  `id_revision_maquina` int(11) NOT NULL,
+  `id_revision` int(11) NOT NULL,
+  `id_maquina` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `er_riesgos`
+--
+
+CREATE TABLE `er_riesgos` (
+  `id_riesgo` int(11) NOT NULL,
+  `codigoriesgo` int(6) NOT NULL,
+  `fraseriesgo` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `er_riesgos`
+--
+
+INSERT INTO `er_riesgos` (`id_riesgo`, `codigoriesgo`, `fraseriesgo`) VALUES
+(1, 10, 'Caida a distinto nivel'),
+(2, 20, 'Caida al mismo nivel'),
+(3, 30, 'Caída de objetos por desplome o derrumbamiento'),
+(4, 40, 'Caída de objetos en manipulación'),
+(5, 50, 'Caída de objetos desprendidos'),
+(6, 60, 'Pisadas sobre objetos'),
+(7, 70, 'Choques contra objetos inmóviles'),
+(8, 80, 'Choques contra objetos móviles'),
+(9, 90, 'Golpes/cortes por objetos o herramientas'),
+(10, 100, 'Proyección de fragmentos o partículas'),
+(11, 110, 'Atrapamientos por o entre objetos'),
+(12, 120, 'Atropellos o golpes con vehículos'),
+(13, 130, 'Sobreesfuerzos'),
+(14, 140, 'Exposición a temperaturas ambientales extremas'),
+(15, 150, 'Contactos térmicos'),
+(16, 161, 'Contactos eléctricos directos'),
+(17, 162, 'Contactos eléctricos indirectos'),
+(18, 170, 'Exposición a sustancias nocivas o tóxicas'),
+(19, 180, 'Contactos con sustancias cáusticas y/o corrosivas'),
+(20, 190, 'Exposición a radiaciones'),
+(21, 200, 'Explosiones'),
+(22, 211, 'Incendios'),
+(23, 212, 'Incendios. Propagación'),
+(24, 213, 'Incendios. Medios de lucha'),
+(25, 214, 'Incendios. Evacuación'),
+(26, 220, 'Accidentes causados por seres vivos'),
+(27, 230, 'Atropellos o golpes con vehículos'),
+(28, 240, 'Ahogamiento'),
+(29, 250, 'Posturas forzadas'),
+(30, 300, 'ENFERMEDAD PROFESIONAL'),
+(31, 310, 'Exposición a contaminantes químicos'),
+(32, 320, 'Exposición a contaminantes biológicos'),
+(33, 330, 'Ruido'),
+(34, 340, 'Vibraciones'),
+(35, 350, 'Estrés térmico'),
+(36, 360, 'Radiaciones ionizantes'),
+(37, 370, 'Radiaciones no ionizantes'),
+(38, 380, 'Iluminación'),
+(39, 390, 'Fatiga visual'),
+(40, 400, 'FATIGA FISICA'),
+(41, 410, 'Fatiga Física. Posición'),
+(42, 420, 'Fatiga Física. Desplazamiento'),
+(43, 430, 'Fatiga Física. Esfuerzo'),
+(44, 440, 'Fatiga Física. Manejo de cargas'),
+(45, 450, 'Fatiga Mental. Recepción de la información'),
+(46, 460, 'Fatiga Mental. Tratamiento de la información'),
+(47, 470, 'Fatiga Mental. Respuesta'),
+(48, 480, 'Fatiga Crónica'),
+(49, 500, 'INSATISFACCIÓN - Riesgo psicosocial'),
+(50, 510, 'Contenido'),
+(51, 520, 'Monotonía'),
+(52, 530, 'Roles'),
+(53, 540, 'Autonomía'),
+(54, 550, 'Comunicaciones'),
+(55, 560, 'Relaciones'),
+(56, 570, 'Tiempo de trabajo'),
+(57, 484, 'Demanda Psicológica'),
+(58, 482, 'Demanda Psicológica. Carga de trabajo'),
+(59, 999, 'VARIOS');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `estadisticas`
 --
 
 CREATE TABLE `estadisticas` (
@@ -5370,17 +6460,18 @@ CREATE TABLE `estadisticas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `estadisticas`
+-- Bolcament de dades per a la taula `estadisticas`
 --
 
 INSERT INTO `estadisticas` (`id_estadistica`, `anio_est`, `mediatr_est`, `indinciden_est`, `horastranual_est`) VALUES
 (1, 2023, 251, 3867, 1826),
-(2, 2022, 216, 3867, 1826);
+(2, 2022, 216, 3867, 1826),
+(3, 2024, 251, 3867, 1826);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `formacion`
+-- Estructura de la taula `formacion`
 --
 
 CREATE TABLE `formacion` (
@@ -5393,19 +6484,166 @@ CREATE TABLE `formacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `formacion`
+-- Bolcament de dades per a la taula `formacion`
 --
 
 INSERT INTO `formacion` (`id_formacion`, `nroformacion`, `tipo_fr`, `fecha_fr`, `fechacad_fr`, `formador_fr`) VALUES
 (26, 1, 3, '2024-03-12', '2024-03-12', 1),
 (27, 2, 1, '2024-03-20', '2027-03-20', 1),
 (28, 3, 3, '2024-03-20', '2025-03-21', 1),
-(29, 4, 3, '2024-03-13', '2024-03-14', 1);
+(29, 4, 3, '2024-03-13', '2027-03-14', 1),
+(30, 7, 3, '2024-03-08', '2026-03-20', 1),
+(31, 8, 1, '2022-06-16', '2025-06-16', 1),
+(32, 9, 1, '2023-04-17', '2026-04-17', 7),
+(33, 10, 1, '2023-04-17', '2027-04-17', 7),
+(34, 13, 1, '2023-03-24', '2026-03-24', 7),
+(35, 14, 1, '2023-08-04', '2026-08-04', 7),
+(36, 15, 1, '2023-07-05', '2026-07-05', 7),
+(37, 18, 1, '2023-04-13', '2026-04-13', 7),
+(38, 19, 3, '2024-03-26', '2027-03-26', 1),
+(39, 20, 1, '2024-04-29', '2027-04-29', 7),
+(40, 22, 3, '2024-04-30', '2027-04-30', 1),
+(41, 24, 3, '2024-04-30', '2027-04-30', 1),
+(42, 25, 3, '2024-05-07', '2027-05-07', 1),
+(43, 28, 3, '2024-05-09', '2027-05-09', 1),
+(44, 29, 3, '2024-05-09', '2027-05-09', 1),
+(45, 30, 3, '2024-05-09', '2027-05-09', 1),
+(46, 32, 4, '2024-04-16', '2029-04-16', 1),
+(47, 43, 3, '2024-05-16', '2027-05-16', 1),
+(48, 44, 1, '2024-05-20', '2027-05-20', 7),
+(49, 46, 3, '2024-05-21', '2027-05-21', 1),
+(50, 47, 1, '2024-05-21', '2027-05-21', 7),
+(51, 48, 1, '2024-05-22', '2027-05-22', 1),
+(52, 49, 3, '2024-05-23', '2027-05-23', 1),
+(53, 50, 3, '2024-05-28', '2027-05-28', 1),
+(54, 51, 1, '2024-04-29', '2027-04-29', 7),
+(55, 55, 1, '2023-10-03', '2026-10-03', 7),
+(56, 56, 1, '2022-04-05', '2025-04-05', 7),
+(57, 57, 1, '2024-02-27', '2027-04-27', 7),
+(58, 58, 1, '2023-07-04', '2026-07-04', 7),
+(59, 63, 1, '2022-06-27', '2025-06-27', 7),
+(60, 65, 1, '2023-08-10', '2026-08-10', 7),
+(61, 67, 1, '2022-01-28', '2025-01-28', 7),
+(62, 68, 1, '2023-02-07', '2026-02-07', 7),
+(63, 69, 1, '2023-11-27', '2026-11-27', 7),
+(64, 70, 1, '2024-05-28', '2027-05-28', 7),
+(65, 71, 1, '2021-07-05', '2024-07-05', 7),
+(66, 74, 1, '2019-12-23', '2022-12-31', 7),
+(67, 75, 1, '2024-05-22', '2027-05-22', 7),
+(68, 76, 3, '2024-05-29', '2027-05-29', 1),
+(69, 77, 3, '2024-05-30', '2027-04-30', 1),
+(70, 78, 3, '2024-05-30', '2027-05-30', 1),
+(71, 79, 5, '2024-04-17', '2030-04-17', 1),
+(72, 91, 3, '2024-05-31', '2027-05-31', 1),
+(73, 92, 1, '2024-05-31', '2027-05-31', 1),
+(74, 97, 5, '2024-05-31', '2030-05-31', 1),
+(75, 102, 3, '2024-05-31', '2027-05-31', 1),
+(76, 103, 1, '2024-06-04', '2027-06-04', 7),
+(77, 104, 1, '2024-05-31', '2027-05-31', 7),
+(78, 105, 1, '2024-06-06', '2027-06-06', 7),
+(79, 107, 1, '2024-05-31', '2027-05-31', 7),
+(80, 109, 1, '2024-05-31', '2027-05-31', 7),
+(81, 113, 1, '2024-06-03', '2027-06-03', 1),
+(82, 116, 3, '2024-06-05', '2027-06-05', 1),
+(83, 126, 3, '2024-06-05', '2027-06-05', 1),
+(84, 127, 6, '2024-06-03', '2029-06-03', 1),
+(85, 138, 3, '2024-06-04', '2027-06-04', 1),
+(86, 139, 7, '2024-05-04', '2029-05-04', 1),
+(87, 144, 5, '2024-06-05', '2029-06-05', 1),
+(88, 148, 5, '2024-06-05', '2029-06-05', 1),
+(89, 161, 6, '2024-06-05', '2029-06-05', 1),
+(90, 168, 6, '2024-06-05', '2029-06-05', 1),
+(91, 179, 3, '2024-06-05', '2027-06-05', 1),
+(92, 189, 7, '2024-06-06', '2029-06-06', 1),
+(93, 192, 1, '2019-09-23', '2022-09-23', 7),
+(94, 197, 3, '2024-06-06', '2027-06-06', 1),
+(95, 198, 1, '2024-06-12', '2027-06-12', 1),
+(96, 199, 1, '2024-06-14', '2027-06-14', 7),
+(97, 200, 1, '2023-11-27', '2026-11-27', 7),
+(98, 201, 1, '2024-04-29', '2027-04-29', 7),
+(99, 205, 3, '2024-06-17', '2027-06-17', 1),
+(100, 206, 1, '2023-11-27', '2026-11-27', 7),
+(101, 207, 3, '2024-06-18', '2027-06-18', 1),
+(102, 208, 1, '2021-08-06', '2024-08-06', 1),
+(104, 209, 1, '2022-05-06', '2025-05-06', 7),
+(105, 210, 1, '2023-11-27', '2026-11-27', 7),
+(106, 217, 1, '2019-09-23', '2022-09-23', 7),
+(107, 218, 3, '2024-06-21', '2027-06-21', 1),
+(108, 219, 1, '2024-06-25', '2027-06-25', 7),
+(109, 220, 1, '2023-07-05', '2027-07-05', 7),
+(110, 224, 1, '2024-06-27', '2027-06-27', 7),
+(111, 229, 3, '2024-06-28', '2027-06-28', 1),
+(112, 240, 3, '2024-06-27', '2027-06-27', 1),
+(113, 242, 3, '2024-06-26', '2027-06-26', 1),
+(115, 243, 3, '2024-07-03', '2027-07-03', 1),
+(116, 245, 1, '2024-07-03', '2027-07-03', 1),
+(117, 246, 1, '2024-06-25', '2027-06-25', 1),
+(118, 247, 3, '2024-05-15', '2027-05-15', 1),
+(119, 248, 7, '2024-05-15', '2027-05-15', 1),
+(120, 249, 1, '2024-06-22', '2027-06-22', 7),
+(121, 255, 3, '2024-07-09', '2027-07-09', 1),
+(122, 260, 1, '2024-07-09', '2027-07-09', 1),
+(123, 267, 3, '2024-07-11', '2027-07-11', 1),
+(124, 268, 3, '2024-07-12', '2027-07-12', 1),
+(125, 269, 1, '2024-07-05', '2027-07-05', 7),
+(126, 271, 3, '2024-07-15', '2027-07-15', 1),
+(127, 272, 1, '2024-06-27', '2027-06-27', 7),
+(128, 273, 1, '2024-07-15', '2027-07-15', 7),
+(129, 274, 3, '2024-07-11', '2027-07-11', 7),
+(130, 275, 1, '2024-07-17', '2027-07-17', 7),
+(131, 276, 3, '2024-07-17', '2027-07-17', 1),
+(132, 283, 1, '2024-07-18', '2027-07-18', 7),
+(133, 284, 3, '2024-07-18', '2027-07-18', 1),
+(134, 285, 1, '2024-07-18', '2027-07-18', 7),
+(135, 287, 7, '2024-07-23', '2027-07-23', 1),
+(136, 291, 1, '2024-07-12', '2027-07-12', 1),
+(137, 292, 1, '2024-07-26', '2027-07-26', 1),
+(138, 293, 3, '2024-07-31', '2027-07-31', 1),
+(139, 298, 1, '2024-08-03', '2027-08-03', 1),
+(140, 302, 3, '2024-08-12', '2027-08-12', 1),
+(141, 303, 3, '2024-08-13', '2027-08-13', 1),
+(142, 305, 1, '2024-08-13', '2027-08-13', 7),
+(143, 306, 1, '2024-08-14', '2027-08-14', 7),
+(144, 307, 1, '2024-08-14', '2027-08-14', 7),
+(145, 308, 8, '2024-08-21', '2028-08-21', 1),
+(146, 311, 3, '2024-08-21', '2027-08-21', 1),
+(147, 314, 3, '2024-08-21', '2027-05-21', 1),
+(148, 320, 2, '2024-08-21', '2029-08-21', 1),
+(149, 333, 3, '2024-08-21', '2027-08-21', 1),
+(150, 340, 1, '2024-08-21', '2027-08-21', 7),
+(151, 341, 1, '2024-07-24', '2027-07-24', 7),
+(152, 342, 3, '2024-08-30', '2027-08-30', 1),
+(153, 343, 3, '2024-09-11', '2027-09-11', 1),
+(154, 345, 1, '2024-09-16', '2027-09-16', 1),
+(155, 346, 3, '2024-09-17', '2027-09-17', 1),
+(156, 347, 3, '2024-09-20', '2027-09-20', 1),
+(158, 348, 3, '2024-09-20', '2027-09-20', 1),
+(159, 349, 3, '2024-09-30', '2027-09-30', 1),
+(160, 350, 3, '2024-10-01', '2027-10-01', 1),
+(161, 352, 1, '2024-09-12', '2027-09-12', 7),
+(162, 353, 1, '2024-09-25', '2027-09-25', 7),
+(163, 355, 1, '2024-10-16', '2024-10-16', 1),
+(164, 356, 1, '2024-10-16', '2027-10-16', 1),
+(165, 357, 1, '2024-10-16', '2027-10-16', 1),
+(166, 359, 1, '2024-10-28', '2027-10-28', 1),
+(167, 360, 9, '2023-03-28', '2033-03-28', 7),
+(168, 361, 9, '2022-01-27', '2032-01-27', 7),
+(169, 362, 9, '2020-05-11', '2030-05-11', 9),
+(171, 363, 3, '2024-10-02', '2027-10-02', 1),
+(172, 367, 2, '2024-10-02', '2029-10-02', 1),
+(173, 371, 1, '2024-11-18', '2027-11-18', 1),
+(174, 372, 10, '2024-11-14', '2029-11-14', 7),
+(175, 391, 3, '2024-11-18', '2027-11-18', 1),
+(176, 392, 3, '2024-12-02', '2027-12-02', 1),
+(177, 393, 3, '2024-12-04', '2027-12-04', 1),
+(178, 394, 3, '2024-12-13', '2027-12-13', 1),
+(179, 395, 3, '2024-12-17', '2027-12-17', 1),
+(180, 396, 3, '2024-12-13', '2027-12-13', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `form_asistencia`
+-- Estructura de la taula `form_asistencia`
 --
 
 CREATE TABLE `form_asistencia` (
@@ -5415,7 +6653,7 @@ CREATE TABLE `form_asistencia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `form_asistencia`
+-- Bolcament de dades per a la taula `form_asistencia`
 --
 
 INSERT INTO `form_asistencia` (`id_formasistencia`, `nroformacion`, `idtrabajador_fas`) VALUES
@@ -5424,12 +6662,516 @@ INSERT INTO `form_asistencia` (`id_formasistencia`, `nroformacion`, `idtrabajado
 (27, 3, 101),
 (29, 4, 1),
 (30, 4, 101),
-(31, 4, 102);
+(31, 4, 102),
+(32, 7, 318),
+(33, 8, 454),
+(34, 9, 455),
+(35, 10, 456),
+(36, 10, 459),
+(37, 10, 377),
+(38, 13, 457),
+(39, 14, 458),
+(40, 15, 461),
+(41, 15, 464),
+(42, 15, 460),
+(43, 18, 463),
+(44, 19, 471),
+(45, 20, 465),
+(46, 20, 462),
+(47, 22, 477),
+(48, 22, 479),
+(49, 24, 475),
+(50, 25, 249),
+(51, 25, 485),
+(52, 25, 486),
+(53, 28, 476),
+(54, 29, 481),
+(55, 30, 489),
+(56, 30, 489),
+(57, 32, 186),
+(58, 32, 35),
+(59, 32, 130),
+(60, 32, 239),
+(61, 32, 395),
+(62, 32, 375),
+(63, 32, 391),
+(64, 32, 225),
+(65, 32, 143),
+(66, 32, 183),
+(67, 32, 253),
+(68, 43, 490),
+(69, 44, 466),
+(70, 44, 467),
+(71, 46, 493),
+(72, 47, 466),
+(73, 48, 484),
+(74, 49, 380),
+(75, 50, 492),
+(76, 51, 498),
+(77, 51, 506),
+(78, 51, 509),
+(79, 51, 398),
+(80, 55, 505),
+(81, 56, 171),
+(82, 57, 533),
+(83, 58, 513),
+(84, 58, 503),
+(85, 58, 508),
+(86, 58, 512),
+(87, 58, 514),
+(88, 63, 524),
+(89, 63, 525),
+(90, 65, 534),
+(91, 65, 535),
+(92, 67, 522),
+(93, 68, 537),
+(94, 69, 538),
+(95, 70, 483),
+(96, 71, 540),
+(97, 71, 539),
+(98, 71, 541),
+(99, 74, 543),
+(100, 75, 544),
+(101, 76, 494),
+(102, 77, 487),
+(103, 78, 496),
+(104, 79, 152),
+(105, 79, 336),
+(106, 79, 55),
+(107, 79, 77),
+(108, 79, 90),
+(109, 79, 135),
+(110, 79, 244),
+(111, 79, 347),
+(112, 79, 340),
+(113, 79, 20),
+(114, 79, 57),
+(115, 79, 102),
+(116, 91, 488),
+(117, 92, 333),
+(118, 92, 357),
+(119, 92, 287),
+(120, 92, 363),
+(121, 92, 206),
+(122, 97, 206),
+(123, 97, 287),
+(124, 97, 363),
+(125, 97, 333),
+(126, 97, 357),
+(127, 102, 546),
+(128, 103, 549),
+(129, 104, 536),
+(130, 105, 531),
+(131, 105, 518),
+(132, 107, 515),
+(133, 107, 519),
+(134, 109, 545),
+(135, 109, 521),
+(136, 109, 517),
+(137, 109, 516),
+(138, 113, 192),
+(139, 113, 86),
+(140, 113, 322),
+(141, 116, 375),
+(142, 116, 225),
+(143, 116, 477),
+(144, 116, 141),
+(145, 116, 553),
+(146, 116, 249),
+(147, 116, 296),
+(148, 116, 320),
+(152, 116, 408),
+(153, 116, 185),
+(154, 126, 554),
+(155, 127, 108),
+(156, 127, 157),
+(157, 127, 224),
+(158, 127, 198),
+(159, 127, 161),
+(160, 127, 486),
+(161, 127, 245),
+(162, 127, 296),
+(163, 127, 169),
+(164, 127, 495),
+(165, 127, 187),
+(166, 138, 495),
+(167, 139, 182),
+(168, 139, 493),
+(169, 139, 474),
+(170, 139, 387),
+(171, 139, 191),
+(172, 144, 191),
+(173, 144, 474),
+(174, 144, 493),
+(175, 144, 387),
+(176, 148, 220),
+(177, 148, 225),
+(178, 148, 477),
+(179, 148, 141),
+(180, 148, 155),
+(181, 148, 554),
+(182, 148, 375),
+(183, 148, 553),
+(184, 148, 296),
+(185, 148, 185),
+(186, 148, 320),
+(187, 148, 408),
+(188, 148, 249),
+(189, 161, 155),
+(190, 161, 225),
+(191, 161, 477),
+(192, 161, 141),
+(193, 161, 554),
+(194, 161, 375),
+(195, 161, 296),
+(196, 168, 220),
+(197, 168, 225),
+(198, 168, 477),
+(199, 168, 141),
+(200, 168, 249),
+(201, 168, 553),
+(202, 168, 185),
+(203, 168, 320),
+(204, 168, 408),
+(205, 168, 397),
+(206, 168, 469),
+(207, 179, 220),
+(208, 179, 225),
+(209, 179, 554),
+(210, 179, 477),
+(211, 179, 141),
+(212, 179, 553),
+(213, 179, 249),
+(214, 179, 320),
+(215, 179, 408),
+(216, 179, 185),
+(217, 189, 192),
+(218, 189, 86),
+(219, 189, 322),
+(220, 192, 497),
+(221, 192, 512),
+(222, 192, 514),
+(223, 192, 505),
+(224, 192, 498),
+(225, 197, 556),
+(226, 198, 555),
+(227, 199, 552),
+(228, 200, 507),
+(229, 201, 498),
+(230, 201, 506),
+(231, 201, 509),
+(232, 201, 526),
+(233, 205, 548),
+(234, 206, 510),
+(235, 207, 550),
+(236, 208, 139),
+(237, 209, 504),
+(238, 210, 505),
+(239, 210, 504),
+(240, 210, 507),
+(241, 210, 510),
+(242, 210, 519),
+(243, 210, 511),
+(244, 210, 538),
+(245, 217, 511),
+(246, 218, 139),
+(247, 219, 560),
+(248, 220, 566),
+(249, 220, 464),
+(250, 220, 565),
+(251, 220, 461),
+(252, 224, 529),
+(253, 224, 527),
+(254, 224, 530),
+(255, 224, 528),
+(256, 224, 568),
+(257, 229, 17),
+(258, 229, 132),
+(259, 229, 100),
+(260, 229, 63),
+(261, 229, 96),
+(262, 229, 268),
+(263, 229, 468),
+(264, 229, 78),
+(265, 229, 494),
+(266, 229, 328),
+(267, 229, 280),
+(268, 240, 102),
+(269, 240, 57),
+(270, 242, 558),
+(271, 243, 551),
+(272, 243, 570),
+(273, 245, 562),
+(274, 246, 501),
+(275, 247, 6),
+(276, 248, 6),
+(277, 249, 503),
+(278, 249, 499),
+(279, 249, 510),
+(280, 249, 502),
+(281, 249, 559),
+(282, 249, 500),
+(283, 255, 120),
+(284, 255, 214),
+(285, 255, 189),
+(286, 255, 101),
+(287, 255, 14),
+(288, 260, 47),
+(289, 260, 84),
+(290, 260, 399),
+(291, 260, 66),
+(292, 260, 272),
+(293, 260, 279),
+(294, 260, 576),
+(295, 267, 547),
+(296, 268, 9),
+(297, 269, 572),
+(298, 269, 571),
+(299, 271, 569),
+(300, 272, 575),
+(301, 273, 567),
+(302, 274, 564),
+(303, 275, 543),
+(304, 276, 103),
+(305, 276, 4),
+(306, 276, 173),
+(307, 276, 32),
+(308, 276, 219),
+(309, 276, 2),
+(310, 276, 74),
+(311, 283, 539),
+(312, 284, 561),
+(313, 285, 557),
+(314, 285, 578),
+(315, 287, 287),
+(316, 287, 363),
+(317, 287, 206),
+(318, 287, 357),
+(319, 291, 339),
+(320, 292, 585),
+(321, 293, 93),
+(322, 293, 583),
+(323, 293, 112),
+(324, 293, 29),
+(325, 293, 21),
+(326, 298, 579),
+(327, 298, 580),
+(328, 298, 584),
+(329, 298, 581),
+(330, 302, 588),
+(331, 303, 590),
+(332, 303, 75),
+(333, 305, 582),
+(334, 306, 540),
+(335, 307, 589),
+(336, 308, 150),
+(337, 308, 392),
+(338, 308, 232),
+(339, 311, 150),
+(340, 311, 232),
+(341, 311, 392),
+(342, 314, 85),
+(343, 314, 402),
+(344, 314, 101),
+(345, 314, 99),
+(346, 314, 14),
+(347, 314, 593),
+(348, 320, 85),
+(349, 320, 101),
+(350, 320, 593),
+(351, 320, 14),
+(352, 320, 402),
+(353, 320, 99),
+(354, 320, 269),
+(355, 320, 202),
+(356, 320, 279),
+(357, 320, 84),
+(358, 320, 66),
+(359, 320, 7),
+(360, 320, 399),
+(361, 333, 269),
+(362, 333, 84),
+(363, 333, 66),
+(364, 333, 7),
+(365, 333, 202),
+(366, 333, 279),
+(367, 333, 399),
+(368, 340, 591),
+(369, 341, 574),
+(370, 342, 594),
+(371, 343, 596),
+(372, 343, 595),
+(373, 345, 598),
+(374, 346, 597),
+(375, 347, 600),
+(376, 348, 601),
+(377, 349, 605),
+(378, 350, 604),
+(379, 350, 606),
+(380, 352, 599),
+(381, 353, 602),
+(382, 353, 603),
+(383, 355, 607),
+(384, 356, 607),
+(385, 357, 34),
+(386, 357, 242),
+(387, 359, 608),
+(388, 360, 24),
+(389, 361, 166),
+(390, 362, 11),
+(391, 363, 184),
+(392, 363, 23),
+(393, 363, 19),
+(394, 363, 14),
+(395, 367, 14),
+(396, 367, 23),
+(397, 367, 184),
+(398, 367, 19),
+(399, 371, 609),
+(400, 372, 257),
+(401, 372, 224),
+(402, 372, 263),
+(403, 372, 185),
+(404, 372, 169),
+(405, 372, 198),
+(406, 372, 396),
+(407, 372, 147),
+(408, 372, 267),
+(409, 372, 141),
+(410, 372, 600),
+(411, 372, 477),
+(412, 372, 570),
+(413, 372, 187),
+(414, 372, 158),
+(415, 372, 397),
+(416, 372, 51),
+(417, 372, 320),
+(418, 372, 550),
+(419, 391, 267),
+(420, 392, 610),
+(421, 393, 611),
+(422, 394, 149),
+(423, 395, 613),
+(424, 396, 563);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `logformacion_trabajadores`
+-- Estructura de la taula `info_documentos`
+--
+
+CREATE TABLE `info_documentos` (
+  `id_infodoc` int(11) NOT NULL,
+  `nombre_ifd` varchar(255) NOT NULL,
+  `tipoinfo_ifd` varchar(100) NOT NULL,
+  `fecha_ifd` date NOT NULL,
+  `vigente_ifd` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `info_entregainfo`
+--
+
+CREATE TABLE `info_entregainfo` (
+  `id_entregainfo` int(11) NOT NULL,
+  `id_trabajador` int(11) NOT NULL,
+  `id_infodoc` int(11) NOT NULL,
+  `fechaentrega` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `inv_maquinaria`
+--
+
+CREATE TABLE `inv_maquinaria` (
+  `id_maquina` int(11) NOT NULL,
+  `tipo_maq` int(11) NOT NULL,
+  `marca_maq` varchar(255) NOT NULL,
+  `modelo_maq` varchar(255) NOT NULL,
+  `numserie_maq` varchar(255) NOT NULL,
+  `proveedor_maq` varchar(100) NOT NULL,
+  `centro_maq` int(11) NOT NULL,
+  `manual_maq` varchar(3) NOT NULL,
+  `marcace_maq` varchar(3) NOT NULL,
+  `aniofab_maq` year(4) NOT NULL,
+  `estado_maq` varchar(20) NOT NULL,
+  `epis_maq` text NOT NULL,
+  `observaciones_maq` varchar(255) NOT NULL,
+  `img1_maq` text NOT NULL,
+  `img2_maq` text NOT NULL,
+  `imgmto1_maq` text NOT NULL,
+  `imgmto2_maq` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `inv_maquinaria`
+--
+
+INSERT INTO `inv_maquinaria` (`id_maquina`, `tipo_maq`, `marca_maq`, `modelo_maq`, `numserie_maq`, `proveedor_maq`, `centro_maq`, `manual_maq`, `marcace_maq`, `aniofab_maq`, `estado_maq`, `epis_maq`, `observaciones_maq`, `img1_maq`, `img2_maq`, `imgmto1_maq`, `imgmto2_maq`) VALUES
+(14, 11, 'OPTIMUM', 'ASLAK S275G', '500081', '-', 10, 'Si', 'Si', '2005', 'Disponible', '', '-', '2024-10-31-15-09-29__IMG_20230308_092712.jpg', '2024-10-31-15-09-29__IMG_20230308_092734.jpg', '', ''),
+(15, 12, 'ASLAK', 'B30GS', 'J102490', '-', 10, 'Si', 'Si', '2005', 'Disponible', '', '-', '2024-10-31-15-21-33__IMG_20230308_093035.jpg', '2024-10-31-15-21-33__IMG_20230308_093038.jpg', '', ''),
+(16, 13, '-', '30tn', '-', '-', 10, 'No', 'No', '2002', 'Disponible', '', '-', '2024-10-31-15-22-35__IMG_20230308_093114.jpg', '', '', ''),
+(17, 14, 'STILL', 'EGV14', '710248102630', '-', 10, 'Si', 'Si', '2005', 'Disponible', '', '-', '2024-10-31-15-23-54__IMG_20230308_093146.jpg', '2024-10-31-15-23-54__IMG_20230308_093213.jpg', '', ''),
+(18, 15, 'UNICRAFT', 'PHW 2000W', '902196', '-', 10, 'Si', 'Si', '2021', 'Disponible', '', '-', '2024-10-31-15-35-52_1.jpg', '2024-10-31-15-36-19_2.jpg', '', ''),
+(19, 15, 'GAYNER', '2500', '17051576M-1/093', '-', 10, 'Si', 'Si', '2017', 'Disponible', '', '', '2024-10-31-15-39-18__IMG_20230308_103712.jpg', '2024-10-31-15-39-18__IMG_20230308_103706.jpg', '', ''),
+(20, 17, 'GALAGAR', 'GALA PULSE SYNERGIC 4000', '1000000107V3', '-', 10, 'Si', 'Si', '2020', 'Disponible', '', '-', '2024-10-31-15-41-36__IMG_20230308_093330.jpg', '2024-10-31-15-41-36__IMG_20230308_093512.jpg', '', ''),
+(21, 17, 'CEMONT', 'S 1400', '14212', '-', 10, 'Si', 'Si', '2000', 'Disponible', '', '-', '2024-10-31-15-42-59__IMG_20230308_094135.jpg', '2024-10-31-15-42-59__IMG_20230308_094116.jpg', '', ''),
+(22, 17, 'BERNER', 'INVERTER 145-G', '34042/000152', '-', 10, 'Si', 'Si', '2000', 'Disponible', '', '-', '2024-10-31-15-45-15__IMG_20230308_094220.jpg', '2024-10-31-15-45-15__IMG_20230308_094245.jpg', '', ''),
+(23, 18, 'OPTIMUM', 'OPTI SM 250', '3101253', '-', 10, 'Si', 'Si', '2005', 'Disponible', '', '-', '2024-10-31-15-48-10__IMG_20230308_094051.jpg', '2024-10-31-15-48-10__IMG_20230308_094101.jpg', '', ''),
+(24, 20, 'DEWALT', 'DCD796', '-', '-', 10, 'Si', 'Si', '2000', 'Disponible', '', '-', '2024-10-31-15-50-05__IMG_20230308_093711.jpg', '2024-10-31-15-50-05__IMG_20230308_093717.jpg', '', ''),
+(25, 21, 'DRAGËR', 'X-AM 2500', '8323912 // ARLJ 4762', 'nd', 23, 'Si', 'Si', '2020', 'Disponible', '', 'PARA USO MULTIPLE ', '', '', '', ''),
+(26, 21, '3M-GMI', 'PS24I', '383167', 'nd', 19, 'Si', 'Si', '2020', 'Disponible', '', '', '', '', '', ''),
+(27, 21, '3M-GMI', 'PS24I', '392514', 'nd', 18, 'Si', 'Si', '2020', 'Disponible', '', '', '', '', '', ''),
+(28, 21, 'DRAGËR', 'X-AM 2500', 'ARLF 4539', 'nd', 47, 'Si', 'Si', '2020', 'Disponible', '', 'EMPRESA: MEDITERRANEA', '', '', '', ''),
+(29, 22, 'IGENA', 'LFIS', '44155', 'RIGGINMAR', 10, 'Si', 'Si', '2022', 'Disponible', '', 'INSTALADO POR RIGGINMAR A TRAVÉS DE SEIBA', '', '', '', ''),
+(30, 23, 'ABAC', 'B6000-LN', '266686', 'ND', 10, 'Si', 'Si', '2005', 'Disponible', '', '', '', '', '', ''),
+(31, 24, 'KARCHER', 'HD 5/17 C', '018580', 'nd', 18, 'Si', 'Si', '2024', 'Disponible', 'PROTECCION AUDITIVA', '', '2024-12-30-10-15-11__IMG_20240605_131313.jpg', '2024-12-30-10-15-11__IMG_20240605_131336.jpg', '', ''),
+(32, 20, 'DEWALT', 'DCD776', 'ND', 'nd', 18, 'Si', 'Si', '2022', 'Disponible', 'GUANTE PROT. MEC.', '', '2024-12-30-10-19-08__IMG_20240605_131415.jpg', '2024-12-30-10-19-08__IMG_20240605_131437.jpg', '', ''),
+(33, 25, 'KARCHER', 'PUZZI 8/1C', '094362', 'nd', 18, 'Si', 'Si', '2019', 'Disponible', 'PROTECCION AUDITIVA', '', '2024-12-30-10-21-51__IMG_20240605_131517.jpg', '2024-12-30-10-21-51__IMG_20240605_131526.jpg', '', ''),
+(34, 25, 'KARCHER', 'WD 5', '075379', 'nd', 18, 'Si', 'Si', '2020', 'Disponible', 'PROTECCION AUDITIVA', '', '2024-12-30-10-23-26__IMG_20240605_131536.jpg', '2024-12-30-10-23-26__IMG_20240605_131541.jpg', '', ''),
+(35, 18, 'BELFLEX', 'V-150-H', '202205041', 'nd', 18, 'No', 'No', '2022', 'Disponible', 'GUANTE PROT. MEC.,GAFAS ANTIPROYECCIONES,PROTECCION AUDITIVA', '', '2024-12-30-10-25-03__IMG_20240605_132023.jpg', '', '', ''),
+(36, 26, 'HIKOKI', 'G13SB4', 'C800954', 'nd', 18, 'Si', 'Si', '2020', 'Disponible', 'GAFAS ANTIPROYECCIONES,PROTECCION AUDITIVA', '', '2024-12-30-10-28-45__IMG_20240605_183825.jpg', '2024-12-30-10-28-45__IMG_20240605_183832.jpg', '', ''),
+(37, 26, 'BLACK+DECKER', 'BEG010', '20214158', 'nd', 18, 'Si', 'Si', '2021', 'Disponible', 'GAFAS ANTIPROYECCIONES,PROTECCION AUDITIVA', '', '2024-12-30-10-30-31__IMG_20240605_183935.jpg', '2024-12-30-10-30-31__IMG_20240605_183938.jpg', '', ''),
+(38, 20, 'DEWALT', 'DCD709', 'N614903', 'nd', 19, 'Si', 'Si', '2020', 'Disponible', 'PROTECCION AUDITIVA', '', '2024-12-30-10-37-43__IMG_20240606_120842.jpg', '2024-12-30-10-37-43__IMG_20240606_120845.jpg', '', ''),
+(39, 27, 'DEWALT', 'DCF921', 'N916095', 'nd', 19, 'Si', 'Si', '2020', 'Disponible', 'GUANTE PROT. MEC.,PROTECCION AUDITIVA', '', '2024-12-30-10-41-06__IMG_20240606_120847.jpg', '2024-12-30-10-41-06__IMG_20240606_120851.jpg', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `inv_revision_oficial`
+--
+
+CREATE TABLE `inv_revision_oficial` (
+  `id_revisionoficial` int(11) NOT NULL,
+  `id_equipo` int(11) NOT NULL,
+  `tipo_revof` varchar(255) NOT NULL,
+  `proveedor_revof` varchar(255) NOT NULL,
+  `fecha_revof` date NOT NULL,
+  `caducidad_revof` date NOT NULL,
+  `vigente_revof` tinyint(1) NOT NULL,
+  `observaciones_revof` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Bolcament de dades per a la taula `inv_revision_oficial`
+--
+
+INSERT INTO `inv_revision_oficial` (`id_revisionoficial`, `id_equipo`, `tipo_revof`, `proveedor_revof`, `fecha_revof`, `caducidad_revof`, `vigente_revof`, `observaciones_revof`) VALUES
+(1, 25, 'CALIBRACION', 'ANATRAC', '2024-07-22', '2025-07-22', 1, ''),
+(2, 28, 'CALIBRACION', 'ANATRAC', '2024-07-22', '2025-07-22', 1, 'PROPIEDAD EMPRESA MEDITERRANEA LA NAVIERA DE FORMENTERA'),
+(3, 26, 'CALIBRACION', 'ANATRAC', '2023-08-10', '2024-08-10', 1, ''),
+(4, 27, 'CALIBRACION', 'ANATRAC', '2024-03-14', '2025-03-14', 1, ''),
+(5, 29, 'INSTALACION INICIAL', 'RIGGINMAR', '2022-11-24', '2023-11-24', 1, 'INSTALADA POR RIGGIN MAR A TRAVES DE SEIBA'),
+(6, 30, 'INSTALACION', 'ABAC', '2010-01-01', '2020-01-01', 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `logformacion_trabajadores`
 --
 
 CREATE TABLE `logformacion_trabajadores` (
@@ -5442,30 +7184,249 @@ CREATE TABLE `logformacion_trabajadores` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `reconocimientos`
+-- Estructura de la taula `mto_maquinaria`
 --
 
-CREATE TABLE `reconocimientos` (
-  `id_reconocimiento` int(11) NOT NULL,
-  `id_trabajador` int(11) NOT NULL,
-  `fecha_rm` date NOT NULL,
-  `caducidad_rm` date NOT NULL,
-  `vigente_rm` int(11) NOT NULL,
-  `cita_rm` int(11) NOT NULL,
-  `anotaciones_rm` text NOT NULL
+CREATE TABLE `mto_maquinaria` (
+  `id_mtomaquina` int(11) NOT NULL,
+  `id_maquina` int(11) NOT NULL,
+  `fecha_mto` date NOT NULL,
+  `operario_mto` varchar(50) NOT NULL,
+  `detalles_mto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `reconocimientos`
---
-
-INSERT INTO `reconocimientos` (`id_reconocimiento`, `id_trabajador`, `fecha_rm`, `caducidad_rm`, `vigente_rm`, `cita_rm`, `anotaciones_rm`) VALUES
-(57, 318, '2024-03-11', '2024-03-15', 1, 1, '');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `responsables`
+-- Estructura de la taula `reconocimientos`
+--
+
+CREATE TABLE `reconocimientos` (
+  `id_reconocimiento` int(11) NOT NULL,
+  `trabajador_rm` int(11) NOT NULL,
+  `fecha_rm` date NOT NULL,
+  `caducidad_rm` date NOT NULL,
+  `vigente_rm` int(11) NOT NULL,
+  `cita_rm` int(11) NOT NULL,
+  `fechacita_rm` date DEFAULT NULL,
+  `solicitudcita_rm` date DEFAULT NULL,
+  `anotaciones_rm` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `reconocimientos`
+--
+
+INSERT INTO `reconocimientos` (`id_reconocimiento`, `trabajador_rm`, `fecha_rm`, `caducidad_rm`, `vigente_rm`, `cita_rm`, `fechacita_rm`, `solicitudcita_rm`, `anotaciones_rm`) VALUES
+(484, 473, '2024-05-03', '2025-05-03', 1, 0, NULL, NULL, ''),
+(485, 37, '2023-05-12', '2024-05-12', 0, 1, NULL, NULL, ''),
+(486, 45, '2022-05-12', '2024-05-12', 0, 1, NULL, NULL, ''),
+(489, 232, '2023-05-19', '2024-05-19', 0, 1, NULL, NULL, ''),
+(491, 179, '2022-05-25', '2024-05-26', 0, 1, NULL, NULL, ''),
+(492, 386, '2022-05-24', '2024-05-24', 0, 1, NULL, NULL, ''),
+(493, 316, '2023-06-01', '2024-06-01', 0, 1, NULL, NULL, ''),
+(494, 335, '2023-06-02', '2024-06-02', 0, 1, NULL, NULL, ''),
+(495, 345, '2024-06-09', '2024-09-06', 0, 0, '0001-01-01', NULL, ''),
+(496, 210, '2023-06-16', '2024-06-16', 0, 1, '2024-07-10', '2024-06-19', ''),
+(497, 109, '2024-05-06', '2025-05-06', 1, 0, NULL, NULL, ''),
+(498, 355, '2023-06-19', '2024-06-19', 0, 1, '0001-01-01', '2024-06-19', ''),
+(499, 324, '2022-06-25', '2024-06-25', 0, 1, NULL, NULL, ''),
+(500, 294, '2022-06-29', '2024-06-28', 0, 1, NULL, NULL, ''),
+(501, 71, '2022-07-01', '2024-07-01', 0, 1, '2024-07-08', '2024-06-19', ''),
+(502, 50, '2022-07-06', '2024-07-06', 0, 1, '0001-01-01', NULL, ''),
+(503, 354, '2023-07-11', '2024-07-11', 0, 1, '0001-01-01', NULL, ''),
+(504, 465, '2024-05-09', '2026-05-09', 1, 0, NULL, NULL, ''),
+(505, 462, '2024-05-09', '2026-05-09', 1, 0, NULL, NULL, ''),
+(506, 8, '2024-02-16', '2026-02-16', 1, 0, NULL, NULL, ''),
+(507, 25, '2023-03-27', '2025-03-27', 1, 0, NULL, NULL, ''),
+(508, 305, '2023-04-21', '2024-04-21', 0, 1, NULL, NULL, ''),
+(509, 40, '2023-01-13', '2025-01-13', 1, 0, NULL, NULL, ''),
+(510, 41, '2023-07-04', '2025-07-04', 1, 0, NULL, NULL, ''),
+(511, 298, '2023-04-20', '2024-04-20', 0, 1, NULL, NULL, ''),
+(512, 42, '2024-04-11', '2025-04-11', 1, 0, NULL, NULL, ''),
+(513, 377, '2023-03-24', '2025-03-24', 1, 0, NULL, NULL, ''),
+(514, 55, '2023-08-14', '2025-08-14', 1, 0, NULL, NULL, ''),
+(515, 383, '2023-09-27', '2025-09-27', 1, 0, NULL, NULL, ''),
+(516, 77, '2022-07-29', '2024-07-29', 0, 1, '2024-08-26', '2024-07-30', ''),
+(517, 79, '2023-03-24', '2025-03-24', 1, 0, NULL, NULL, ''),
+(518, 241, '2023-08-17', '2025-08-17', 1, 0, NULL, NULL, ''),
+(519, 137, '2021-07-28', '2023-07-28', 0, 1, NULL, NULL, ''),
+(520, 86, '2022-12-29', '2024-12-29', 1, 1, '2025-01-02', '2024-12-17', ''),
+(521, 283, '2023-07-18', '2024-07-18', 0, 1, '2024-07-22', '2024-07-04', ''),
+(522, 90, '2023-07-21', '2025-07-21', 1, 0, NULL, NULL, ''),
+(523, 151, '2023-12-20', '2025-12-20', 1, 0, NULL, NULL, ''),
+(524, 107, '2023-07-26', '2025-07-26', 1, 0, NULL, NULL, ''),
+(525, 20, '2023-04-18', '2025-04-18', 1, 0, NULL, NULL, ''),
+(526, 229, '2022-04-17', '2024-07-12', 0, 1, '0001-01-01', NULL, ''),
+(527, 302, '2023-04-19', '2024-04-19', 0, 1, NULL, NULL, ''),
+(528, 26, '2024-04-23', '2025-04-23', 1, 0, NULL, NULL, ''),
+(530, 121, '2023-03-28', '2024-03-28', 0, 1, NULL, NULL, ''),
+(531, 135, '2022-08-23', '2024-05-23', 0, 1, '2024-07-05', '2024-07-01', ''),
+(532, 162, '2023-04-18', '2025-04-18', 1, 0, NULL, NULL, ''),
+(533, 114, '2022-08-26', '2024-08-26', 1, 0, '0001-01-01', NULL, 'Baja por contingencia comun, + 6 meses'),
+(534, 307, '2023-04-25', '2024-04-25', 0, 1, '2024-07-16', '2024-07-02', ''),
+(535, 174, '2023-08-17', '2025-08-17', 1, 0, NULL, NULL, ''),
+(536, 175, '2023-06-07', '2025-06-07', 1, 1, NULL, NULL, ''),
+(537, 182, '2024-03-19', '2025-03-19', 1, 0, NULL, NULL, ''),
+(538, 188, '2022-07-11', '2024-07-11', 0, 1, '0001-01-01', NULL, ''),
+(539, 191, '2023-12-15', '2024-12-15', 0, 1, '2024-12-16', '2024-12-04', ''),
+(540, 46, '2023-11-10', '2024-11-10', 0, 1, '2024-11-22', '2024-11-12', ''),
+(541, 287, '2023-02-21', '2025-02-21', 1, 0, NULL, NULL, ''),
+(542, 150, '2023-11-28', '2025-11-28', 1, 0, NULL, NULL, ''),
+(543, 319, '2023-06-08', '2025-06-08', 1, 0, NULL, NULL, ''),
+(544, 226, '2022-07-13', '2024-07-13', 0, 1, '0001-01-01', NULL, ''),
+(545, 193, '2022-12-19', '2024-12-19', 1, 1, '2024-12-19', '2024-12-17', ''),
+(546, 194, '2022-08-04', '2024-08-04', 0, 0, '0001-01-01', NULL, ''),
+(547, 204, '2023-12-13', '2025-12-13', 1, 0, NULL, NULL, ''),
+(548, 205, '2024-02-11', '2025-02-11', 1, 0, NULL, NULL, ''),
+(549, 206, '2024-04-08', '2026-04-08', 1, 0, NULL, NULL, ''),
+(550, 368, '2023-09-01', '2024-09-01', 0, 1, '0001-01-01', NULL, ''),
+(551, 298, '2024-05-14', '2025-05-14', 1, 0, NULL, NULL, ''),
+(552, 302, '2024-05-13', '2025-05-13', 1, 0, NULL, NULL, ''),
+(553, 304, '2024-05-17', '2025-05-17', 1, 0, NULL, NULL, ''),
+(554, 305, '2024-05-21', '2025-05-21', 1, 0, NULL, NULL, ''),
+(555, 481, '2024-05-21', '2026-05-21', 1, 0, NULL, NULL, ''),
+(556, 466, '2024-05-24', '2026-05-24', 1, 0, NULL, NULL, ''),
+(557, 179, '2024-05-21', '2026-05-21', 1, 0, NULL, NULL, 'A citar en mao'),
+(558, 484, '2024-05-24', '2026-05-24', 1, 0, NULL, NULL, ''),
+(560, 317, '2023-07-12', '2024-07-12', 0, 1, '0001-01-01', NULL, ''),
+(561, 278, '2022-07-15', '2024-07-15', 0, 1, '0001-01-01', NULL, ''),
+(562, 374, '2023-07-17', '2024-07-17', 0, 1, '0001-01-01', NULL, ''),
+(563, 89, '2022-07-29', '2024-07-29', 0, 1, '2024-08-16', '2024-07-30', ''),
+(564, 178, '2022-08-02', '2024-08-02', 0, 1, '2024-08-21', '2024-07-26', ''),
+(566, 74, '2023-08-14', '2024-08-14', 0, 1, '2024-09-11', '2024-08-19', ''),
+(567, 128, '2023-08-16', '2024-08-16', 0, 0, '0001-01-01', NULL, ''),
+(568, 301, '2023-08-18', '2024-08-18', 0, 1, '2024-09-04', '2024-08-19', ''),
+(569, 378, '2023-09-13', '2024-09-13', 0, 1, '2024-09-27', '2024-09-13', ''),
+(570, 357, '2022-10-07', '2024-10-07', 0, 0, '0001-01-01', NULL, ''),
+(572, 275, '2022-11-22', '2024-11-22', 0, 0, '0001-01-01', NULL, ''),
+(573, 30, '2023-11-28', '2024-11-28', 0, 1, '2024-12-13', '2024-11-29', ''),
+(574, 268, '2023-12-05', '2024-12-05', 0, 0, '0001-01-01', NULL, 'No hay restricciones en el apto, los proximos a aportar seran los de la casa del mar	\r\n'),
+(575, 387, '2023-12-05', '2024-12-05', 1, 0, '0001-01-01', NULL, '**BAJA FIJO DISCONTINUO** REINCORPORACION MARZO 2025'),
+(576, 347, '2023-12-12', '2025-12-12', 1, 0, '0001-01-01', NULL, ''),
+(577, 406, '2022-12-21', '2024-12-21', 1, 1, '2025-01-07', '2024-12-17', ''),
+(580, 333, '2023-02-07', '2025-02-07', 0, 1, NULL, NULL, ''),
+(581, 400, '2023-02-07', '2025-02-07', 1, 0, NULL, NULL, ''),
+(582, 356, '2024-02-16', '2025-02-16', 1, 0, NULL, NULL, ''),
+(583, 287, '2023-02-21', '2025-02-21', 1, 0, NULL, NULL, ''),
+(584, 24, '2024-03-15', '2025-03-15', 1, 0, NULL, NULL, ''),
+(585, 182, '2023-03-19', '2025-03-19', 1, 0, NULL, NULL, ''),
+(586, 336, '2023-03-23', '2025-03-23', 1, 0, NULL, NULL, ''),
+(587, 382, '2023-03-24', '2025-03-24', 1, 0, NULL, NULL, ''),
+(588, 377, '2023-03-24', '2025-03-24', 1, 0, NULL, NULL, ''),
+(589, 286, '2024-03-25', '2025-03-25', 1, 0, NULL, NULL, ''),
+(590, 25, '2023-03-25', '2025-03-25', 1, 0, NULL, NULL, ''),
+(591, 363, '2023-03-27', '2025-03-27', 1, 0, NULL, NULL, ''),
+(592, 244, '2023-04-03', '2025-04-03', 1, 0, NULL, NULL, ''),
+(593, 62, '2023-04-03', '2025-04-03', 1, 0, NULL, NULL, ''),
+(594, 98, '2023-04-03', '2025-04-03', 1, 0, NULL, NULL, ''),
+(595, 42, '2024-04-11', '2025-04-11', 1, 0, NULL, NULL, ''),
+(596, 124, '2024-04-11', '2025-04-11', 1, 0, NULL, NULL, ''),
+(597, 162, '2023-04-17', '2025-04-17', 1, 0, NULL, NULL, ''),
+(598, 20, '2023-04-18', '2025-04-18', 1, 0, NULL, NULL, ''),
+(599, 26, '2024-04-23', '2025-04-23', 1, 0, NULL, NULL, ''),
+(600, 474, '2024-04-24', '2025-04-04', 1, 0, NULL, NULL, ''),
+(601, 473, '2024-05-03', '2025-05-03', 1, 0, NULL, NULL, ''),
+(602, 325, '2023-05-22', '2025-05-22', 1, 0, NULL, NULL, ''),
+(603, 175, '2023-06-07', '2025-06-07', 1, 0, NULL, NULL, ''),
+(604, 319, '2023-06-08', '2025-06-08', 1, 0, NULL, NULL, ''),
+(605, 365, '2023-06-22', '2025-06-22', 1, 0, NULL, NULL, ''),
+(606, 261, '2023-06-22', '2025-06-22', 1, 0, NULL, NULL, ''),
+(608, 322, '2023-07-13', '2025-07-13', 1, 0, NULL, NULL, ''),
+(609, 215, '2023-07-14', '2025-07-14', 1, 0, NULL, NULL, ''),
+(610, 373, '2023-07-17', '2025-07-17', 1, 0, NULL, NULL, ''),
+(611, 364, '2023-07-17', '2025-07-17', 1, 0, NULL, NULL, ''),
+(612, 90, '2023-07-21', '2025-07-21', 1, 0, NULL, NULL, ''),
+(613, 192, '2023-07-24', '2025-07-24', 1, 0, NULL, NULL, ''),
+(614, 404, '2023-07-26', '2025-07-26', 1, 0, NULL, NULL, ''),
+(615, 107, '2023-07-26', '2025-07-26', 1, 0, NULL, NULL, ''),
+(616, 55, '2023-08-14', '2025-08-14', 1, 0, NULL, NULL, ''),
+(617, 241, '2023-08-17', '2025-08-17', 1, 0, NULL, NULL, ''),
+(618, 174, '2023-08-17', '2025-08-07', 1, 0, NULL, NULL, ''),
+(619, 104, '2023-08-17', '2025-08-17', 1, 0, NULL, NULL, ''),
+(620, 125, '2023-08-18', '2025-08-18', 1, 0, NULL, NULL, ''),
+(621, 255, '2023-08-22', '2025-08-22', 1, 0, NULL, NULL, ''),
+(622, 383, '2023-09-27', '2025-09-07', 1, 0, NULL, NULL, ''),
+(623, 60, '2023-11-10', '2025-11-10', 1, 0, NULL, NULL, ''),
+(624, 405, '2023-11-14', '2025-11-14', 1, 0, NULL, NULL, ''),
+(625, 150, '2023-11-28', '2025-11-28', 1, 0, NULL, NULL, ''),
+(626, 255, '2023-12-11', '2025-12-11', 1, 0, NULL, NULL, ''),
+(627, 218, '2023-12-13', '2025-12-13', 1, 0, NULL, NULL, ''),
+(628, 204, '2023-12-13', '2025-12-13', 1, 0, NULL, NULL, ''),
+(629, 138, '2023-12-15', '2025-12-15', 1, 0, NULL, NULL, ''),
+(630, 151, '2023-12-20', '2025-12-20', 1, 0, NULL, NULL, ''),
+(631, 152, '2023-01-23', '2025-01-23', 1, 0, NULL, NULL, ''),
+(632, 385, '2024-02-06', '2026-02-06', 1, 0, NULL, NULL, ''),
+(633, 8, '2024-02-16', '2026-02-16', 1, 0, NULL, NULL, ''),
+(634, 342, '2024-03-13', '2026-03-13', 1, 0, NULL, NULL, ''),
+(635, 392, '2024-03-20', '2026-03-20', 1, 1, NULL, NULL, ''),
+(636, 37, '2024-05-29', '2025-05-29', 1, 0, NULL, NULL, ''),
+(637, 483, '2024-05-28', '2027-05-28', 1, 0, NULL, NULL, ''),
+(638, 488, '2024-05-31', '2025-05-31', 1, 0, NULL, NULL, '***FORMENTERA**'),
+(639, 476, '2024-06-04', '2025-06-04', 1, 0, NULL, NULL, ''),
+(640, 467, '2024-05-30', '2026-05-30', 1, 0, NULL, NULL, ''),
+(641, 157, '2024-05-31', '2025-05-31', 1, 0, NULL, NULL, '** RM REALIZADO DESPUES DE BAJA CONT. COM DE LARGA DURACION** EMBARCADO!!'),
+(642, 491, '2024-06-05', '2026-06-05', 1, 0, NULL, NULL, ''),
+(643, 489, '2024-06-04', '2025-06-04', 1, 0, NULL, NULL, ''),
+(644, 472, '2024-06-06', '2026-06-06', 1, 0, NULL, NULL, ''),
+(645, 45, '2024-06-07', '2026-06-07', 1, 0, NULL, NULL, ''),
+(646, 232, '2024-06-10', '2026-06-10', 1, 0, NULL, NULL, 'FORMENTERA'),
+(647, 333, '2024-05-31', '2025-05-31', 1, 0, NULL, NULL, 'No mantener la sedestación prolongada favoreciendo alternancia con bipedestación. No realizar trabajos en solitario sin posibilidad de comunicación.\r\n'),
+(648, 386, '2024-06-06', '2026-06-06', 1, 0, NULL, NULL, ''),
+(649, 555, '2024-07-19', '2026-07-19', 1, 1, '2024-07-08', '2024-06-19', ''),
+(650, 501, '2024-06-26', '2026-06-26', 1, 1, '2024-06-26', '2024-06-19', ''),
+(651, 493, '2024-07-08', '2025-07-08', 1, 1, '0001-01-01', '2024-06-19', ''),
+(652, 536, '2024-06-18', '2026-06-18', 1, 1, '2024-06-18', NULL, ''),
+(653, 139, '2024-07-09', '2025-07-09', 1, 1, '2024-07-09', '2024-06-21', ''),
+(654, 560, '2024-07-15', '2026-07-15', 1, 1, '2024-07-15', '2024-06-21', ''),
+(655, 567, '2024-08-16', '2026-08-16', 1, 1, '2024-08-16', '2024-06-27', ''),
+(656, 487, '2024-07-23', '2025-07-23', 1, 1, '2024-07-17', '2024-07-02', ''),
+(657, 571, '2024-07-16', '2026-07-16', 1, 1, '2024-07-16', '2024-07-03', ''),
+(658, 562, '2024-09-06', '2026-09-06', 1, 1, '2024-09-06', '2024-07-03', ''),
+(660, 552, '2024-06-21', '2026-06-21', 1, 0, NULL, NULL, ''),
+(661, 543, '2022-04-20', '2024-04-20', 0, 1, '2024-07-19', '2024-07-05', ''),
+(662, 539, '2022-04-19', '2024-04-19', 0, 1, '2024-07-22', '2024-07-05', ''),
+(663, 454, '2023-05-11', '2025-05-11', 1, 1, '0001-01-01', '2024-07-05', ''),
+(664, 135, '2024-07-05', '2026-07-05', 1, 0, NULL, NULL, ''),
+(665, 71, '2024-07-09', '2026-07-09', 1, 0, NULL, NULL, ''),
+(666, 210, '2024-07-08', '2025-07-08', 1, 0, NULL, NULL, ''),
+(667, 456, '2024-08-19', '2026-08-19', 1, 1, '2024-08-19', '2024-07-11', ''),
+(668, 464, '2023-08-17', '2025-08-17', 1, 1, '0001-01-01', '2024-07-11', ''),
+(669, 535, '2024-09-12', '2026-09-12', 1, 1, '2024-08-14', '2024-08-20', ''),
+(671, 569, '2024-08-12', '2026-08-12', 1, 1, '2024-08-12', '2024-07-15', ''),
+(672, 307, '2024-07-16', '2025-07-16', 1, 0, NULL, NULL, '**FORMENTERA**'),
+(673, 582, '2024-08-16', '2026-08-16', 1, 1, '2024-08-13', '2024-07-22', ''),
+(674, 543, '2024-07-22', '2026-07-22', 1, 0, NULL, NULL, ''),
+(675, 572, '2024-08-26', '2026-08-26', 1, 1, '2024-08-21', '2024-08-14', ''),
+(676, 283, '2024-07-22', '2025-07-22', 1, 0, NULL, NULL, '**formentera**'),
+(677, 539, '2024-07-22', '2026-07-22', 1, 0, NULL, NULL, ''),
+(678, 537, '2023-02-09', '2025-02-09', 0, 1, '2024-08-16', '2024-08-06', ''),
+(679, 540, '2023-11-24', '2025-11-24', 1, 0, NULL, NULL, ''),
+(681, 549, '2024-09-02', '2026-09-02', 1, 1, '0001-01-01', '2024-08-16', ''),
+(682, 591, '2024-09-30', '2026-09-30', 1, 1, '2024-09-29', '2024-09-23', ''),
+(683, 537, '2024-08-16', '2026-08-16', 1, 0, NULL, NULL, ''),
+(684, 178, '2024-08-21', '2026-08-21', 1, 0, NULL, NULL, ''),
+(685, 89, '2024-08-16', '2026-08-16', 1, 0, NULL, NULL, ''),
+(686, 77, '2024-08-26', '2026-08-26', 1, 0, NULL, NULL, ''),
+(687, 74, '2024-09-11', '2025-09-11', 1, 0, NULL, NULL, ''),
+(688, 301, '2024-09-04', '2025-09-04', 1, 0, NULL, NULL, ''),
+(689, 357, '2024-09-26', '2025-09-26', 1, 0, NULL, NULL, '**RENUNCIA**'),
+(690, 378, '2024-09-27', '2025-09-27', 1, 0, NULL, NULL, ''),
+(691, 606, '2024-10-09', '2025-10-09', 1, 1, '2024-10-09', '2024-10-02', ''),
+(692, 604, '2024-11-21', '2026-11-21', 1, 1, '2024-10-28', '2024-10-02', ''),
+(693, 607, '2024-11-12', '2026-11-12', 1, 1, '2024-11-12', '2024-10-21', ''),
+(694, 608, '2024-11-07', '2026-11-07', 1, 1, '2024-11-07', '2024-10-29', '***REALIZADA EN MADRID***'),
+(695, 609, '2024-11-22', '2026-11-22', 1, 1, '2024-11-22', '2024-11-12', ''),
+(697, 61, '0001-01-01', '0001-01-01', 1, 1, '2024-12-11', '2024-11-18', ''),
+(698, 46, '2024-11-22', '2025-11-22', 1, 0, NULL, NULL, ''),
+(699, 611, '2024-12-17', '2026-12-17', 1, 1, '2024-12-16', '2024-12-04', ''),
+(700, 191, '2024-12-16', '2025-12-16', 1, 0, NULL, NULL, ''),
+(701, 30, '2024-12-13', '2025-12-13', 1, 0, NULL, NULL, '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `responsables`
 --
 
 CREATE TABLE `responsables` (
@@ -5476,7 +7437,7 @@ CREATE TABLE `responsables` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `responsables`
+-- Bolcament de dades per a la taula `responsables`
 --
 
 INSERT INTO `responsables` (`id_responsable`, `nombre_resp`, `cargo_resp`, `email_resp`) VALUES
@@ -5485,12 +7446,15 @@ INSERT INTO `responsables` (`id_responsable`, `nombre_resp`, `cargo_resp`, `emai
 (3, 'Damia Torres Cerda', 'Capitán embarcacion', 'fairweather@trasmapi.com'),
 (4, 'Maria Jose Planells', 'Responsable Calidad', 'm.planells@trasmapi.com'),
 (5, 'Maria Robles', 'Resp. RRHH', 'm.robles@trasmapi.com'),
-(6, 'Maria Perez', 'RRHH', 'm.perez@trasmapi.com');
+(6, 'Maria Perez', 'RRHH', 'm.perez@trasmapi.com'),
+(7, 'SPA - Previs', 'Servicio prevencion ajeno', 'noemail'),
+(8, 'Sabino Galdós', 'Responsable tierra - Menorca Lines', 's.galdos@menorcalines.com'),
+(9, 'SPM - Insotel', 'Servicio prevencion mancomunado', '-');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_perfiles`
+-- Estructura de la taula `tb_perfiles`
 --
 
 CREATE TABLE `tb_perfiles` (
@@ -5501,24 +7465,21 @@ CREATE TABLE `tb_perfiles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `tb_perfiles`
+-- Bolcament de dades per a la taula `tb_perfiles`
 --
 
 INSERT INTO `tb_perfiles` (`id_perfil`, `nombre_pf`, `fyh_creacion`, `fyh_actualizacion`) VALUES
 (1, 'ADMINISTRADOR', '2023-11-03 14:30:26', '2023-11-03 14:30:26'),
 (2, 'USUARIO', '2023-11-08 15:42:01', '2023-11-08 15:42:01'),
-(3, 'ALUMNO', '2023-11-08 16:10:39', '0000-00-00 00:00:00'),
+(3, 'USUARIO_PRL', '2023-11-08 16:10:39', '2024-10-10 08:11:16'),
 (4, 'EMPLEADO', '2023-11-08 16:10:39', '2023-11-08 17:36:40'),
 (5, 'RESPONSABLE', '2023-11-08 17:00:52', '2023-11-16 14:57:03'),
-(6, 'ALUMNO 0', '2023-11-08 17:00:52', '2023-11-10 08:13:35'),
-(7, 'ALUMNO 5', '2023-11-14 12:49:36', '0000-00-00 00:00:00'),
-(8, 'ALUMNO 5', '2023-11-14 12:49:36', '0000-00-00 00:00:00'),
-(9, 'ALUMNO 3', '2023-11-14 12:50:17', '0000-00-00 00:00:00');
+(10, 'USUARIO_RRHH', '2024-12-19 13:04:00', '2024-12-19 13:04:00');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tb_usuarios`
+-- Estructura de la taula `tb_usuarios`
 --
 
 CREATE TABLE `tb_usuarios` (
@@ -5529,23 +7490,24 @@ CREATE TABLE `tb_usuarios` (
   `id_perfil` int(11) NOT NULL,
   `token_usr` varchar(11) DEFAULT NULL,
   `fyh_creacion` datetime NOT NULL,
-  `fyh_actualizacion` datetime DEFAULT NULL
+  `fyh_actualizacion` datetime DEFAULT NULL,
+  `reset_token` varchar(255) DEFAULT NULL,
+  `reset_expires` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `tb_usuarios`
+-- Bolcament de dades per a la taula `tb_usuarios`
 --
 
-INSERT INTO `tb_usuarios` (`id_usuario`, `nombre_usr`, `email_usr`, `password_usr`, `id_perfil`, `token_usr`, `fyh_creacion`, `fyh_actualizacion`) VALUES
-(4, 'prueba2', 'asdas@asds.es', '$2y$10$I0IP94V17/VaZMbsL/cQ.eJRuwx9A5O3KYguIcacM2fJ4G1uYyfDO', 2, NULL, '2023-11-10 08:24:12', '2023-11-10 11:45:44'),
-(8, 'Proba5', '123456abc@gmail.com', '$2y$10$dRRBy5oVHGdzSAfxmuKkX.CAVEdNoEYcsnrT7KfPxcqPcpc3b9LfG', 4, NULL, '2023-11-10 11:38:31', '2023-11-10 11:45:32'),
-(9, 'mgomez', 'prueba@gmai.com', '$2y$10$q2CXpRA5ucNc6CGnrncHdeLuP8xsHgax/o70Rlp.S9pQsZZpuINiW', 3, NULL, '2023-11-14 13:04:59', NULL),
-(12, 'Emili Vives', 'prevencion@trasmapi.com', '$2y$10$cIoBp9T9JEC8EdJVGc6h6upDWH0.RPTpqMIteE0b/o6QC5xIzpCsO', 1, NULL, '2024-01-29 13:32:06', NULL);
+INSERT INTO `tb_usuarios` (`id_usuario`, `nombre_usr`, `email_usr`, `password_usr`, `id_perfil`, `token_usr`, `fyh_creacion`, `fyh_actualizacion`, `reset_token`, `reset_expires`) VALUES
+(12, 'Emili Vives', 'prevencion@trasmapi.com', '$2y$10$2KUxZIgJkZMuLUmPOdoNf.ylDvcuc/Z9MUWltYBb8zzg77mgWw41y', 1, NULL, '2024-01-29 13:32:06', '2024-05-21 10:45:31', NULL, NULL),
+(13, 'Usuario', 'usuario@usuario.com', '$2y$10$OiMzNc4RD02F/KN5PrpC4uGnxdKjawesFlKwXPa/zypK/byANbOjm', 2, NULL, '2024-09-27 13:50:59', NULL, NULL, NULL),
+(14, 'Daniel Ferrer', 'daniel.ferrer@trasmapi.com', '$2y$10$J/pKdptt99NTrc5.zpcQ6eURkgVHSGVmneZTTYH4N7MZsW2wZFST.', 10, NULL, '2024-12-20 08:57:18', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipocentros`
+-- Estructura de la taula `tipocentros`
 --
 
 CREATE TABLE `tipocentros` (
@@ -5554,7 +7516,7 @@ CREATE TABLE `tipocentros` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `tipocentros`
+-- Bolcament de dades per a la taula `tipocentros`
 --
 
 INSERT INTO `tipocentros` (`id_tipocentro`, `nombre_tc`) VALUES
@@ -5564,30 +7526,102 @@ INSERT INTO `tipocentros` (`id_tipocentro`, `nombre_tc`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipoformacion`
+-- Estructura de la taula `tipoevaluacion`
 --
 
-CREATE TABLE `tipoformacion` (
-  `id_tipoformacion` int(11) NOT NULL,
-  `nombre_tf` varchar(50) NOT NULL,
-  `duracion_tf` int(4) NOT NULL,
-  `validez_tf` int(2) NOT NULL,
-  `detalles_tf` text NOT NULL
+CREATE TABLE `tipoevaluacion` (
+  `id_tipoevaluacion` int(11) NOT NULL,
+  `tipoevaluacion_tev` varchar(255) NOT NULL,
+  `especialidad_tev` varchar(50) NOT NULL,
+  `descripcion_tev` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `tipoformacion`
+-- Bolcament de dades per a la taula `tipoevaluacion`
 --
 
-INSERT INTO `tipoformacion` (`id_tipoformacion`, `nombre_tf`, `duracion_tf`, `validez_tf`, `detalles_tf`) VALUES
-(1, 'Puesto de trabajo 1h', 1, 3, 'Formacion de los riesgos segun el puesto de trabajo que realiza el trabajador:(LPRL 31/1995) \r\nExposición y medidas frente a los riesgos que esta expuesto el trabajador según el puesto de trabajoque realice (Conceptos generales LPRL: Normativa, derechos y obligaciones, Siniestralidad departamento / Centro /Grupo\r\nCaidas al mismo nivel\r\nCaidas a distinto nivel\r\nCaida de objetos en manipulación\r\nCorte por herramientas / útiles\r\nGolpes por objetos o herramientas\r\nProyección de fragmentos o partículas\r\nAtrapamiento por elementos de máquinas / vehículos\r\nSobresfuerzos\r\nContáctos térmicos\r\nContactos eléctricos\r\nExposición a sustancias tóxicas o nocivas, causticas o corrosivas\r\nExposicición a altas temperaturas (actuación ante el golpe de calor)\r\nIncendios – Emergneicas (uso extintores, evacuación, señalización)\r\nRuido – Vibraciones\r\nOperativas de trabajo seguro (rampas, accesos, atraque)\r\nRiesgos Psicosociales \r\nActuacion en caso de accidente\r\nRiesgos y medidas frente COVID-19 \r\nEquipos de protección individual (EPI’s)\r\nActuacion en caso de accidente\r\nVigilancia de la salud'),
-(2, 'Equipos de trabajo', 2, 5, 'Detalles formacion equipos trabajo 2h'),
-(3, 'Puesto de trabajo (Art.19 LPRL) 2 hrs', 2, 3, 'Formacion de los riesgos segun el puesto de trabajo que realiza el trabajador:(LPRL 31/1995) \r\nExposición y medidas frente a los riesgos que esta expuesto el trabajador según el puesto de trabajo que realice\r\nConceptos generales LPRL: Normativa, derechos y obligaciones, \r\nSiniestralidad departamento / Centro /Grupo \r\nCaidas al mismo nivel\r\n Caidas a distinto nivel \r\nCaida de objetos en manipulación \r\nCorte por herramientas / útiles \r\nGolpes por objetos o herramientas\r\nProyección de fragmentos o partículas \r\nAtrapamiento por elementos de máquinas / vehículos \r\nSobresfuerzos \r\nContáctos térmicos \r\nContactos eléctricos \r\nExposición a sustancias tóxicas o nocivas, causticas o corrosivas \r\nExposicición a altas temperaturas (actuación ante el golpe de calor) \r\nIncendios – Emergneicas (uso extintores, evacuación, señalización)\r\nRuido – Vibraciones\r\nOperativas de trabajo seguro (rampas, accesos, atraque, etc) \r\nRiesgos Psicosociales \r\nActuacion en caso de accidente Riesgos y medidas frente COVID-19 \r\nEquipos de protección individual (EPI’s) \r\nActuacion en caso de accidente \r\nVigilancia de la salud\r\n--\r\nAspectos medioambientales (tratamiento residuos, contaminacion y determinacion de contaminantes peligrosos,etc)');
+INSERT INTO `tipoevaluacion` (`id_tipoevaluacion`, `tipoevaluacion_tev`, `especialidad_tev`, `descripcion_tev`) VALUES
+(1, 'Centro trabajo', 'Seguridad', 'Documento para evaluar condiciones de centro de trabajo'),
+(2, 'Puestos de trabajo', 'Seguridad', 'Puestos desarrollados en un centro de trabajo'),
+(3, 'Equipos de trabajo', 'Seguridad', 'Equipos de trabajo rd1215/1997'),
+(4, 'Ruido', 'Higiene', 'Ruido'),
+(5, 'Termohigrometrica', 'Higiene', 'Temperatura y humedad centro de trabajo'),
+(6, 'Vapores organicos', 'Seguridad', 'vapores o emanaciones'),
+(7, 'Humos', 'Higiene', 'humos diesel'),
+(8, 'Productos químicos', 'Higiene', 'Productos quimicos que se dispongan'),
+(9, 'Ergonomica', 'Selecciona Especialidad', 'Ergonomica'),
+(10, 'Psicosocial', 'Psicosociologia', 'Psicosocial'),
+(11, 'Iluminación', 'Higiene', 'Condiciones iluminacion centro de trabajo');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `trabajadores`
+-- Estructura de la taula `tipoformacion`
+--
+
+CREATE TABLE `tipoformacion` (
+  `id_tipoformacion` int(11) NOT NULL,
+  `nombre_tf` varchar(255) NOT NULL,
+  `duracion_tf` int(4) NOT NULL,
+  `validez_tf` int(2) NOT NULL,
+  `detalles_tf` text NOT NULL,
+  `normativa_tf` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `tipoformacion`
+--
+
+INSERT INTO `tipoformacion` (`id_tipoformacion`, `nombre_tf`, `duracion_tf`, `validez_tf`, `detalles_tf`, `normativa_tf`) VALUES
+(1, 'Riesgos del Puesto de trabajo (Art.19 LPRL) 1 hr', 1, 3, 'Formacion de los riesgos segun el puesto de trabajo que realiza el trabajador:(LPRL 31/1995) \r\nExposición y medidas frente a los riesgos que esta expuesto el trabajador según el puesto de trabajoque realice (Conceptos generales LPRL: Normativa, derechos y obligaciones, Siniestralidad departamento / Centro /Grupo\r\nCaidas al mismo nivel\r\nCaidas a distinto nivel\r\nCaida de objetos en manipulación\r\nCorte por herramientas / útiles\r\nGolpes por objetos o herramientas\r\nProyección de fragmentos o partículas\r\nAtrapamiento por elementos de máquinas / vehículos\r\nSobresfuerzos\r\nContáctos térmicos\r\nContactos eléctricos\r\nExposición a sustancias tóxicas o nocivas, causticas o corrosivas\r\nExposicición a altas temperaturas (actuación ante el golpe de calor)\r\nIncendios – Emergneicas (uso extintores, evacuación, señalización)\r\nRuido – Vibraciones\r\nOperativas de trabajo seguro (rampas, accesos, atraque)\r\nRiesgos Psicosociales \r\nActuacion en caso de accidente\r\nRiesgos y medidas frente COVID-19 \r\nEquipos de protección individual (EPI’s)\r\nActuacion en caso de accidente\r\nVigilancia de la salud', 'Art. 19 LPRL 31/1995'),
+(2, 'Equipos de trabajo', 2, 5, 'Detalles formacion equipos trabajo 2h', 'RD 1215/1997, LPRL 39/1995'),
+(3, 'Riesgos del Puesto de trabajo (Art.19 LPRL) 2 hrs', 2, 3, 'Formacion de los riesgos segun el puesto de trabajo que realiza el trabajador:(LPRL 31/1995) \r\nExposición y medidas frente a los riesgos que esta expuesto el trabajador según el puesto de trabajo que realice\r\nConceptos generales LPRL: Normativa, derechos y obligaciones, \r\nSiniestralidad departamento / Centro /Grupo \r\nCaidas al mismo nivel\r\n Caidas a distinto nivel \r\nCaida de objetos en manipulación \r\nCorte por herramientas / útiles \r\nGolpes por objetos o herramientas\r\nProyección de fragmentos o partículas \r\nAtrapamiento por elementos de máquinas / vehículos \r\nSobresfuerzos \r\nContáctos térmicos \r\nContactos eléctricos \r\nExposición a sustancias tóxicas o nocivas, causticas o corrosivas \r\nExposicición a altas temperaturas (actuación ante el golpe de calor) \r\nIncendios – Emergneicas (uso extintores, evacuación, señalización)\r\nRuido – Vibraciones\r\nOperativas de trabajo seguro (rampas, accesos, atraque, etc) \r\nRiesgos Psicosociales \r\nActuacion en caso de accidente Riesgos y medidas frente COVID-19 \r\nEquipos de protección individual (EPI’s) \r\nActuacion en caso de accidente \r\nVigilancia de la salud\r\n--\r\nAspectos medioambientales (tratamiento residuos, contaminacion y determinacion de contaminantes peligrosos,etc)', 'Art. 19 LPRL 31/1995'),
+(4, 'Seguridad y Uso de Plataformas Moviles de Personal (PEMP)', 6, 5, 'CONTENIDO TEÓRICO (3  horas)\r\na)	Legislación y normativa referente al uso de estos equipos de trabajo\r\nb)	Clasificación y topos de PEMP\r\nc)	Características y descripciones de las PEMP\r\nd)	Aplicaciones\r\ne)	Seguridad ante s de poner en marcha el equipo (Inspecciones antes de comenzar los trabajos. Emplazamiento	Nivelación, estabilidad )\r\nf)	Puesto de mando (1. Acceso a los puestos de mando, 2.Tipos de mando)\r\ng)	Entorno de trabajo (1.Zona de realización de los trabajos, 2.Señalización de la maniobra, 3.	Zonas cercanas a líneas eléctricas)\r\nh)	Nivelación (1.Con estabilizadores, 2.Sin estabilizadores)\r\ni)	Principales peligros y factores de riesgos (1.Posicionamiento de estabilizadores fallo del terreno, 2.Fallo del terreno, 3.	Sobrepasar capacidad máxima)\r\nd)	Efecto del viento\r\ne)	Caída de las personas debida a fallos del equipo, hidráulicos, mecánicos, etc\r\nf)	Caídas de las personas por mal uso\r\ng)	Golpes contra objetos\r\nh)	Atrapamiento de extremidades\r\ni)	Contactos eléctricos indebidos\r\nj)	Movimiento de traslación de las PEMP\r\nj)	Medidas de protección y prevención (1.Sistemas de seguridad del equipo, 2.Indicadores, 3.Limitadores, 4.Parada de emergencia, 5. Familiarización)\r\nk)	Normas de seguridad debida a otros riesgos (1.Quemaduras, 2.Ruido, 3.Inhalación de gases)\r\nl)	Puesta en marcha (1. Usos previstos, 2.Sistemas de seguridad y rescate)\r\nm)	Normas específicas de seguridad en el uso\r\nn)	Normas de seguridad al finalizar los trabajos (1.Aseguramiento de la PEMP contra usos indebidos, 2.	Transporte)\r\no)	Equipos de protección individual\r\np)	Mantenimiento \r\nq)	Revisiones\r\n\r\nCONTENIDO PRÁCTICO (3 horas):\r\na) Introducción a la maquina                                                                    b) Reconocimiento del entorno y señalización de la zona de trabajo\r\nc) Reconocimiento visual perimetral de la maquina                         d)Componentes principales: identificación y función\r\ne)Comprobaciones e inspección previa al uso, de acuerdo al manual de instrucciones del fabricante\r\nf)Puesta en marcha y parada de la maquina                                      g)Maniobrabilidad\r\n', 'RD1215/1997, LPRL 39/1995, NTP 634,  1039,1040 y 1048 1049'),
+(5, 'Riesgos Psicosociales en el trabajo y medidas preventivas', 2, 6, 'a) Legislación y normativa referente a riesgos psicosociales	\r\nb) Factores y riesgo psicosociales\r\nc) Principales riesgos psicosociales	\r\nd) Efectos de los riesgos psicosociales\r\ne) Como reconocer situaciones de riesgo psicosocial	\r\nf) Origen y definición del estrés\r\ng) Técnicas de control del estrés	\r\nh) Síndrome de Burnout: evaluación y afrontamiento\r\ni) Acoso psicológico: identificación y protocolos establecidos para cómo saber actuar.	\r\nj) autocontrol emocional\r\nk) Ejercicios y entrenamiento en el autocontrol emocional	\r\nl) La Motivación Laboral\r\nm) Cómo incrementar los niveles de motivación	\r\nMesa abierta: Exposición de resultados de ultima evaluacion psicosocial, medidas adoptadas, propuestas, etc.\r\n', 'LPRL 31/1995 '),
+(6, 'Trabajos en altura', 4, 5, '1. NORMATIVA APLICABLE	\r\n2. DEFINICIÓN DE ALTURA\r\n3. TIPOS DE PROTECCIÓN FRENTE CAIDAS EN ALTURA	\r\n4. PROTECCIONES COLECTIVAS\r\n5. PROTECCIONES INIDIVIDUALES (EPIs)	\r\n6. EL ARNÉS\r\n7. CABOS DE ANCLAJE, ABSORVEDORES ENERGIA, CONECTORES.	\r\n8. SISTEMAS ANTICAIDAS, CUERDAS\r\n9. ANCLAJES	\r\n10. FACTOR DE CAIDA, EL EFECTO PENDULO\r\n11. LINEAS DE VIDA	\r\n12. MEDIOS AUXILIARES: PLATAFORMAS ELEVADORAS\r\n13. MEDIOS AUXILIARES: ESCALERAS DE MANO	\r\n14. MEDIOS AUXILIARES: ESCALERAS DE SERVICIO\r\n15. TRABAJOS ESPECIFICOS EN ALTURA EN BARCOS (METODO OPERATIVO)	\r\n16. EJERCICIO PRÁCTICO: \r\n•	Colocación de epi’s\r\n•	Utilización de sistemas anti caídas y sistemas de sujeción.\r\n•	Comprensión de técnicas.\r\n•	Montaje de instalaciones de seguridad.\r\n•	Técnicas de posicionamiento.\r\n•	Actuación ante accidentes en altura	\r\nMATERIAL ENTREGADO ALUMNO:\r\n•	Manual del alumno\r\n•	Normativa de referencia: \r\no	RD2177/2004 \r\no	NTP 774, NTP 809, NTP 1104\r\n•	Métodos operativos internos de empresa: (trabajos con PEMP, Trabajos con escalera, trabajos con andamios.)\r\n', 'RD 2177/2004, NTP 774, NTP 809, NTP 1104, LPRL (31/1995)'),
+(7, 'Emergencias, incendios, medios de extincion y actuacion en caso de emergencia', 3, 5, '1. Normativa aplicable\r\n2. Conceptos generales\r\n3. Métodos de extinción\r\n4. Clases de incendios\r\n5. Cómo prevenir los incendios\r\n6. Agentes extintores\r\n7. Eficacia de los extintores\r\n8. Equipos de extinción\r\n9. Cuándo utilizar un extintor\r\n10. Cómo utilizar un extintor\r\n11. Cuidado y mantenimiento de equipos contra incendios\r\n12. Cómo utilizar las BIES (Bocas de Incendio Equipadas)\r\n13. El Plan de emergencia\r\na. Objetivos\r\nb. Clasificación de emergencias\r\nc. Equipos de emergencia. Funciones específicas\r\n14. Cómo evacuar un edificio\r\n15. La señalización\r\n16. Diagrama de actuación en caso de incendio\r\nEjercicio práctico: uso de extintores y actuacion en caso de emergencia', 'RD 393/2007. Ley 31/1995'),
+(8, 'Actuacion ante emergencias - simulacro', 1, 1, 'a) Legislación y normativa referente\r\nb) Conceptos generales de gestión emergencias\r\nc) Agentes extintores 	\r\nComo prevenir incendios\r\nEl plan de emergencia	\r\nEquipos de emergencias. Funciones específicas\r\nActuación en caso de personal herido	\r\nPractica: Planteamiento de la hipótesis de emergencia	Conclusiones\r\n\r\nRECOMENDACIONES MEDIOAMBIENTALES\r\nPolítica empresa en materia medioambiental (P12)	\r\nMedioambiente: Daños derivados de la emergencias (medioambientales, materiales, etc.)\r\nTipo residuos, clasificación y tratamiento, actuaciones básicas.\r\n', 'Ley 31/1995: Ley de Prevención de Riesgos Laborales, Real Decreto 393/2007: Norma Básica de Autoprotección, \r\n'),
+(9, 'Nivel Basico de PRL', 60, 10, 'A. Conceptos básicos sobre seguridad y salud.\r\nEl trabajo y la salud. Los riesgos profesionales. Factores de riesgo.\r\nDaños derivados del trabajo. Los accidentes de trabajo y las enfermedades profesionales. Otras patologías derivadas del trabajo.\r\nMarco normativo básico en materia de prevención de riesgos laborales. Deberes y obligaciones básicos en esta materia.\r\nB. Riesgos generales y su prevención.\r\nRiesgos ligados a las condiciones de seguridad.\r\nRiesgos ligados al medio ambiente del trabajo.\r\nLa carga del trabajo, la fatiga y la insatisfacción laboral.\r\nSistemas elementales de control de riesgos. Medios de protección colectiva y equipos de protección individual.\r\nPlanes de emergencia y evacuación.\r\nEl control de la salud de los trabajadores.\r\nC. Riesgos específicos y su prevención en el sector de la construcción.\r\nDiferentes fases de obra y sus protecciones correspondientes (redes, barandillas, andamios, plataformas de trabaja, escaleras, etc.).\r\nImplantación de obra. Locales higiénico sanitarios, instalaciones provisionales, etc.\r\nD. Elementos básicos de gestión de la prevención de riesgos.\r\nOrganismos públicos relacionados con la seguridad y salud en el trabajo.\r\nOrganización preventiva del trabajo: «rutinas» básicas.\r\nDocumentación: recogida, elaboración y archivo.\r\nRepresentación de los trabajadores. Derechos y obligaciones (delegados de prevención, comité de seguridad y salud, trabajadores designados, etc.).\r\nE. Primeros auxilios.\r\nProcedimientos generales.\r\nPlan de actuación.', 'art. 35 RSP, Ley 31/1995'),
+(10, 'Formacion higiene PRL', 1, 5, 'Formación especifica de riesgos higiénicos derivados de la exposición a agentes químicos y físicos:\r\nFormación preventiva (Art. 19 LPRL) específica del puesto o funciones de la persona trabajadora con motivo de los riesgos derivados de las condiciones higiénicas de trabajo (conforme al art. 4.7 de la LPRL). así como de las medidas de prevención y protección colectivas e individuales asociadas para la prevención de los siguientes riesgos:\r\n•	Exposición a temperaturas ambientales extremas\r\n•	Exposición a agentes químicos: Humos Diésel\r\n•	Exposición a ruido / vibraciones\r\n•	Explicación de los resultados obtenidos en las mediciones realizadas (humos diésel y ruido). Medidas preventivas derivadas de las planificaciones de la actividad preventiva de los informes\r\n•	Equipos de protección individual y su uso\r\n•	Riesgo biológico: Salud pública', 'Art 19 LPRL, y art 4.7 LPRL');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `tipomaquinas`
+--
+
+CREATE TABLE `tipomaquinas` (
+  `id_tipomaquina` int(11) NOT NULL,
+  `nombre_tm` varchar(255) NOT NULL,
+  `clase_tm` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Bolcament de dades per a la taula `tipomaquinas`
+--
+
+INSERT INTO `tipomaquinas` (`id_tipomaquina`, `nombre_tm`, `clase_tm`) VALUES
+(11, 'SIERRA DE CINTA', 'FIJA'),
+(12, 'TALADRO DE COLUMNA', 'FIJA'),
+(13, 'PRENSA', 'FIJA'),
+(14, 'CARRETILLA ELEVADORA', 'CARGAS'),
+(15, 'TRASPALETA', 'CARGAS'),
+(17, 'SOLDADURA MIG/MAG', 'PORTÁTIL'),
+(18, 'ESMERILADORA', 'FIJA'),
+(19, 'TALADRO', 'PORTÁTIL'),
+(20, 'TALADRO DE BATERIA', 'PORTÁTIL'),
+(21, 'MEDIDOR GASES', 'MEDICION'),
+(22, 'LINEA DE VIDA', 'PROTECCIÓN'),
+(23, 'COMPRESOR', 'EQUIPOS A PRESION'),
+(24, 'HIDROLIMPIADORA', 'LIMPIEZA'),
+(25, 'ASPIRADOR', 'LIMPIEZA'),
+(26, 'AMOLADORA', 'PORTÁTIL'),
+(27, 'LLAVE IMPACTO', 'PORTÁTIL');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `trabajadores`
 --
 
 CREATE TABLE `trabajadores` (
@@ -5602,432 +7636,583 @@ CREATE TABLE `trabajadores` (
   `centro_tr` int(11) NOT NULL,
   `activo_tr` int(1) NOT NULL DEFAULT 1,
   `formacionpdt_tr` varchar(10) DEFAULT NULL,
+  `informacion_tr` varchar(10) NOT NULL DEFAULT 'No',
   `anotaciones_tr` text DEFAULT NULL,
   `fyh_creacion` datetime NOT NULL,
   `fyh_actualizacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `trabajadores`
+-- Bolcament de dades per a la taula `trabajadores`
 --
 
-INSERT INTO `trabajadores` (`id_trabajador`, `codigo_tr`, `dni_tr`, `nombre_tr`, `sexo_tr`, `fechanac_tr`, `categoria_tr`, `inicio_tr`, `centro_tr`, `activo_tr`, `formacionpdt_tr`, `anotaciones_tr`, `fyh_creacion`, `fyh_actualizacion`) VALUES
-(1, 2, '41443686D', 'CARDONA VIUDA, RAFAEL', 'Hombre', '1964-04-16', 50, '1983-03-24', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(2, 6, '41451668X', 'FERRER TORRES, JOSE ANTONIO', 'Hombre', '1974-03-17', 31, '1995-05-15', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(3, 813, '77016973R', 'ABDELKADER BLANCO, DUNIA', 'Mujer', '1997-10-07', 36, '2022-05-23', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(4, 23, '41451240L', 'JUAN TORRES, JOSE ANTONIO', 'Hombre', '1969-05-29', 2, '2005-05-03', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(5, 26, '41445521G', 'GUASCH FERRER, VICENTE', 'Hombre', '1965-03-03', 32, '2014-10-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(6, 28, '41448434L', 'BONET RIERA, JOSE ANTONIO', 'Hombre', '1969-06-18', 32, '2008-01-01', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(7, 30, '41451861L', 'SERRA SERRA, JUAN', 'Hombre', '1970-06-29', 2, '1999-07-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(8, 1015, '47405158L', 'ALBA CALDER?N, CRISTINA', 'Mujer', '1993-07-06', 26, '2024-02-05', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(9, 44, '41461463F', 'ORTIZ BARBERA, ALEJANDRO', 'Hombre', '1980-07-05', 50, '1999-06-04', 13, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(10, 48, '41454605A', 'MARI SERRA, JUAN ANTONIO', 'Hombre', '1977-12-07', 22, '1999-06-27', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(11, 52, '41455077S', 'TUR RIBAS, VICENTE', 'Hombre', '1974-11-14', 32, '2000-08-24', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(12, 113, '46956466B', 'FERRER BONED, EDGAR', 'Hombre', '1985-02-23', 32, '2004-05-03', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(13, 119, '41450426X', 'COSTA ROIG, ANTONIO', 'Hombre', '1968-08-07', 2, '2005-04-04', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(14, 121, '41453566E', 'GARCIA SERRA, ALEXANDRE', 'Hombre', '1972-02-03', 2, '2004-10-25', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(15, 129, '47251238S', 'COLOMAR LIX, GREGORI', 'Hombre', '1986-10-15', 22, '2014-08-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(16, 135, '41454248Z', 'TORRES TORRES, SERGIO', 'Hombre', '1973-09-27', 32, '2005-04-11', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(17, 140, '41458075T', 'MARI FERRER, JOSE VICENTE', 'Hombre', '1978-02-14', 22, '2005-05-16', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(18, 144, '46951202Z', 'GRACIA MARTINEZ, JOSE ANTONIO', 'Hombre', '1980-10-27', 34, '2005-05-19', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(19, 155, '10838430W', 'MU?IZ RODRIGUEZ, GABRIEL', 'Hombre', '1964-01-09', 34, '2006-12-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(20, 156, '41461863Q', 'CLAPES PRATS, JUAN', 'Hombre', '1975-08-20', 42, '2006-02-02', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(21, 170, '46955505Q', 'COSTA ESCANDELL, FRANCISCO JAVIER', 'Hombre', '1985-07-30', 50, '2013-07-01', 13, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(22, 174, '41450474N', 'MARIN MILES, DAVID', 'Hombre', '1974-12-23', 50, '2007-10-01', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(23, 175, '41459089W', 'GIL MARI, JOS? MIGUEL', 'Hombre', '1976-12-16', 50, '2007-04-23', 11, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(24, 192, '21682866F', 'VENTEO MASIA, ROC', 'Hombre', '1981-05-21', 27, '2007-10-10', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(25, 908, '47252607G', 'ALBA CALDERON, IRENE', 'Mujer', '1987-07-06', 1, '2023-03-13', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(26, 200, '47251838V', 'COSTA SERRA, JORGE', 'Hombre', '1986-10-23', 31, '2008-03-03', 10, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(27, 201, '41459188D', 'MARI GUASCH, JUAN ANTONIO', 'Hombre', '1975-11-20', 2, '2008-04-01', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(28, 203, '43180310H', 'LORENZO FERNANDEZ, MIGUEL ALBERTO', 'Hombre', '1973-10-15', 2, '2008-04-07', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(29, 204, '41455968D', 'RIERA SU?ER, JOSE', 'Hombre', '1973-10-23', 2, '2012-08-12', 13, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(30, 209, '41461892E', 'YERN RAMON, JAVIER', 'Hombre', '1981-05-21', 31, '2008-05-05', 10, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(31, 214, '47165760M', 'QUERALT GOMEZ, ALBERT', 'Hombre', '1991-11-15', 2, '2010-12-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(32, 216, '47252260W', 'MENDEZ INFANTE, LORENZO', 'Hombre', '1987-10-20', 32, '2015-07-06', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(33, 225, '47253362T', 'TUR JUAN, MARCOS', 'Hombre', '1990-11-01', 31, '2016-06-01', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(34, 365, '09434532R', 'ALVAREZ LORENCES, PATRICIA', 'Mujer', '1976-12-14', 22, '2015-08-15', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(35, 227, '46959506S', 'SALAZAR PAGUIRIGAN, ALLAN JAMES', 'Hombre', '1972-08-21', 2, '2010-03-02', 13, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(36, 229, '41448429Z', 'VERDERA FERRER, SANTIAGO', 'Hombre', '1969-02-02', 22, '2011-12-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(37, 234, '46955207V', 'FERNANDEZ RODRIGUEZ, ALEJANDRO', 'Hombre', '1986-09-04', 27, '2018-02-15', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(38, 240, 'Y1179592M', 'XAVIER DA VEIGA, PABLO DANIEL', 'Hombre', '1983-02-11', 27, '2022-05-27', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(39, 793, '75900122F', 'ALVAREZ MADERAL, ESTHER', 'Mujer', '1994-05-29', 2, '2022-05-03', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(40, 160, '11417528Y', 'ALVAREZ MENES, DELFINA', 'Mujer', '0000-00-00', 26, '0000-00-00', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(41, 226, '76947568X', 'ALVAREZ PEREZ, ALEJANDRA', 'Mujer', '1978-08-04', 1, '2010-07-05', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(42, 690, '02519411Z', 'ARRIBAS FERNANDEZ, MARIA JOSEFA', 'Mujer', '1959-10-12', 41, '2019-08-21', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(43, 276, '46134871E', 'MENDEZ GONZALEZ, NORTO', 'Hombre', '1971-10-28', 2, '2015-08-15', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(44, 962, 'Y7248169D', 'ARRIETA, BERENICE DINA MARIA', 'Mujer', '1986-11-05', 26, '2023-05-31', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(45, 278, '47251534N', 'BONED VARGAS, JOAN', 'Hombre', '1989-09-25', 42, '2022-04-19', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(46, 279, '41461615K', 'FERNANDEZ RODRIGUEZ, ROBERTO', 'Hombre', '1978-06-28', 27, '2012-11-30', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(47, 288, '48397906H', 'NICOLAS ARCE, SERGIO', 'Hombre', '1982-09-14', 2, '2018-04-01', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(48, 295, '46959279H', 'MARI GUASCH, VICENT', 'Hombre', '1992-12-08', 2, '2018-03-20', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(49, 302, '47256498P', 'URETA JUAN, JAVIER', 'Hombre', '1987-08-31', 34, '2015-10-26', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(50, 830, 'Y3410568G', 'BANDEIRA DO NASCIMENTO DE AMORIN, ELISABETH', 'Mujer', '1967-04-24', 41, '2022-06-03', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(51, 315, '41738301V', 'TORRES CERDA, DAMIAN', 'Hombre', '1974-11-26', 22, '2015-08-15', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(52, 317, '47260464H', 'JIMENEZ TUR, DANIEL', 'Hombre', '1993-06-29', 27, '2016-02-26', 30, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(53, 818, '75919048G', 'BARRANCO VERDEJO, LETICIA', 'Mujer', '1994-02-23', 36, '2022-05-30', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(54, 322, '46951850H', 'MARI MOYA, ARNALDO', 'Hombre', '1988-10-30', 2, '2014-11-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(55, 362, '41448394W', 'BELTRAN RIBAS, MARIA', 'Mujer', '1968-12-20', 1, '2015-11-01', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(56, 340, '47250209K', 'JUAN BONED, ANTONIO', 'Hombre', '1986-06-08', 32, '2015-03-02', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(57, 342, '47255357V', 'JUAN PALERM, JAUME', 'Hombre', '1995-05-28', 32, '2020-06-20', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(58, 346, '46958139M', 'GARCIA TORRES, DANIEL', 'Hombre', '1989-09-09', 22, '2015-05-01', 12, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(59, 349, '41510306K', 'AMARO JIMENEZ, CARLOS', 'Hombre', '1991-10-20', 23, '2016-03-30', 14, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(60, 352, '41458257K', 'ORTIZ CASTRO, JAVIER', 'Hombre', '1986-12-28', 21, '2014-10-22', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(61, 353, '48323417A', 'CASTRO ZARCO, JUAN JOSE', 'Hombre', '1981-10-14', 42, '2014-11-03', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(62, 354, '41449044P', 'MARI FERRER, ALEJANDRO', 'Hombre', '1969-02-03', 42, '2014-11-10', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(63, 356, '47405628Y', 'ALVAREZ ROBREDO, LUIS ANGEL', 'Hombre', '1996-10-24', 2, '2017-06-13', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(64, 357, '43162330R', 'MANZANARES BA?OS, DAVID', 'Hombre', '1982-09-08', 34, '2015-02-07', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(65, 820, '75884019G', 'BENITEZ SUBIAS, VANESA', 'Mujer', '1981-05-04', 40, '2022-06-01', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(66, 323, '74850412V', 'BERMEJO EXPOSITO, SARA', 'Mujer', '1980-11-03', 2, '2016-04-25', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(67, 373, '41460327K', 'DOMINGUEZ BAENA, DAVID', 'Hombre', '1980-05-09', 50, '2016-04-04', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(68, 379, '41456576L', 'BLASCO BARRERO, ISABEL MARIA', 'Mujer', '1982-07-18', 2, '2016-03-14', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(69, 376, '41454714C', 'MARIN CORTES, OSCAR', 'Hombre', '1977-01-06', 32, '2018-04-23', 13, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(70, 378, 'X8973539C', 'FERRARIS, DIEGO', 'Hombre', '1975-04-01', 48, '2017-04-03', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(71, 805, '47257531Y', 'BOGNANI, PAOLA', 'Mujer', '1993-10-21', 26, '2022-05-15', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(72, 380, '47256098E', 'BONED ROIG, CARLES', 'Hombre', '1991-10-30', 34, '2017-07-30', 22, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(73, 382, '41524562V', 'SEGUI JUAN, JOSEP', 'Hombre', '1990-07-11', 22, '2017-05-01', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(74, 387, '32875243D', 'SUAREZ GARCIA, MARINO', 'Hombre', '1972-07-03', 31, '2016-04-07', 10, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(75, 397, '41445077C', 'FERRER RIBAS, JOSE', 'Hombre', '1963-11-13', 50, '2016-04-13', 15, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(76, 403, '42861727P', 'SANTANA SAAVEDRA, JOSE MANUEL', 'Hombre', '1971-01-01', 2, '2017-04-18', 11, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(77, 859, '43709565C', 'BONASTRA DE CASTRO, MARIA CARMEN', 'Mujer', '1970-07-01', 1, '2022-07-13', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(78, 410, '46993698Y', 'CONEJERO BERNAL, CRISTIAN', 'Hombre', '1990-04-29', 2, '2017-03-27', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(79, 907, '47259965W', 'BONET TRUJILLO, MARTA', 'Mujer', '1992-02-15', 26, '2023-03-13', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(80, 785, '43210704Y', 'BUGALLO ODELLA, SILVINA YANET', 'Mujer', '1982-12-26', 1, '2022-04-25', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(81, 423, '47251833N', 'MARI RIERA, JUAN', 'Hombre', '1991-11-29', 34, '2019-04-23', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(82, 807, '30557702V', 'BURGOA ARANTZAMENDI, MIREN LORE', 'Mujer', '1963-03-01', 26, '2022-05-16', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(83, 968, 'Y9980683P', 'CALVARI, MARIA FLORENCIA', 'Mujer', '1992-10-22', 26, '2023-06-05', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(84, 438, '53244067X', 'CARBONELL MONZO, BORJA', 'Hombre', '1989-03-01', 2, '2017-05-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(85, 443, '78919718W', 'BASTERRECHEA CABALLERO, IRAITZ', 'Hombre', '1986-01-23', 23, '2019-04-10', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(86, 897, '43167690W', 'CANAVES ROS, EVA MARIA', 'Mujer', '1984-03-30', 26, '2022-12-12', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(87, 551, '41451673S', 'COSTA TUR, JOSE', 'Hombre', '1971-11-27', 32, '2019-01-31', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(88, 554, '47260066B', 'SERRA RIERA, JOSEP SALVADOR', 'Hombre', '1988-07-24', 27, '2017-04-22', 30, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(89, 559, '47253295W', 'ROMERO GARCIA, CESAR', 'Hombre', '1993-01-02', 1, '2017-04-29', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(90, 38, '41461842H', 'CARAYOL NAVARRO, MARIA ROSARIO', 'Mujer', '1978-07-27', 1, '2003-05-05', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(91, 569, '47258460S', 'KEHRLI ESCANDELL, OSCAR ENRIQUE', 'Hombre', '1993-02-12', 34, '2017-05-29', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(92, 572, '47407097A', 'TEJADO DELGADO, DAVID', 'Hombre', '1995-10-24', 2, '2020-05-13', 15, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(93, 573, '46959646V', 'PERELLO GUASCH, JOSE ANTONIO', 'Hombre', '1981-04-01', 2, '2018-04-23', 13, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(94, 575, '47251776R', 'LINERO ALVAREZ, DAVID', 'Hombre', '1990-02-05', 2, '2018-03-19', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(95, 576, '47259122X', 'RAMON COSTA, JAUME', 'Hombre', '1996-05-21', 32, '2018-04-16', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(96, 585, '47256454X', 'JUAN FERRER, JUAN ANTONIO', 'Hombre', '1992-02-05', 32, '2017-08-08', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(97, 937, '47406526F', 'CARBONELL MOYA, AINA', 'Mujer', '2000-10-07', 26, '2023-04-24', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(98, 588, '52726339N', 'JIMENEZ CAMPOS, JOAQUIN', 'Hombre', '1971-12-27', 27, '2017-12-04', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(99, 593, '76904134T', 'ALVAREZ MARTINEZ, MIGUEL ANGEL', 'Hombre', '1979-08-13', 2, '2018-03-19', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(100, 598, '76635815E', 'PERAL SANCHEZ, JOSE MIGUEL', 'Hombre', '1990-01-01', 2, '2018-05-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(101, 601, '47258959P', 'ARABI GUINART, JOSEP', 'Hombre', '1994-12-11', 34, '2018-05-17', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(102, 607, '47406814L', 'RODRIGUEZ TORRES, JOEL', 'Hombre', '1996-05-10', 2, '2019-04-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(103, 608, '47259429H', 'CARDONA TORRES, JOAN LUIS', 'Hombre', '1998-05-25', 2, '2018-05-31', 9, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(104, 12, '41450383J', 'CARDONA TUR, CARMEN', 'Mujer', '1969-04-24', 1, '1995-04-20', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(105, 619, '47433721Q', 'TORRES GUASCH, ANDREU', 'Hombre', '1999-02-17', 34, '2021-06-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(106, 621, '47257449Q', 'MARI FERNANDEZ, ALEX', 'Hombre', '1997-08-15', 2, '2020-05-20', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(107, 938, '48606017W', 'CEBRIAN OLCINA, MARIA', 'Mujer', '1993-06-07', 26, '2023-04-25', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(108, 635, '20194068E', 'LOPEZ CAMUS, RAFAEL', 'Hombre', '1973-08-14', 32, '2021-06-09', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(109, 808, '75902018V', 'CERRO MARTINEZ, ISABEL MARIA', 'Mujer', '1986-12-03', 49, '2022-05-17', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(110, 1000, 'X6877939L', 'CHENTOUF, HANAN', 'Mujer', '1975-11-15', 41, '2023-10-09', 27, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(111, 639, '58056578R', 'SESAH ARTHUR, ROBERT KWESI', 'Hombre', '1965-08-09', 34, '2019-04-01', 12, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(112, 643, '41455802G', 'RIBAS RIBAS, JOSE VICENTE', 'Hombre', '1976-02-02', 50, '2021-07-12', 9, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(113, 849, 'Y7506494K', 'CHRIFI ALAOUI, MERYEM', 'Mujer', '1991-03-19', 40, '2022-06-29', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(114, 833, '41751244B', 'COLL DIAZ, MARTA', 'Mujer', '1997-02-08', 49, '2022-06-07', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(115, 561, '48199132X', 'COSTA ROIG, MARIA NIEVES', 'Mujer', '1999-02-11', 2, '2019-05-13', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(116, 672, '39892709Z', 'GRANDA GONZALEZ, JULIO CESAR', 'Hombre', '1979-03-29', 2, '2022-05-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(117, 674, 'Y0890212B', 'SPIESER JALBAUD, LOUIS ROBERT PIERRE', 'Hombre', '1994-04-28', 34, '2020-02-10', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(118, 675, '47405810G', 'FERRER FERRER, ADRIAN', 'Hombre', '1997-04-08', 2, '2022-07-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(119, 684, '47430090L', 'GIMENEZ TORRES, JUAN', 'Hombre', '2000-09-21', 2, '2022-07-01', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(120, 685, '47430809W', 'ESCANDELL ESCANDELL, LUIS', 'Hombre', '1997-12-07', 2, '2022-06-13', 15, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(121, 8, '22719306K', 'DE LA FUENTE TORRES, FRANCISCA', 'Mujer', '1962-04-18', 27, '2023-03-31', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(122, 691, '36011742K', 'MARTINEZ COBA, JULIO', 'Hombre', '1956-01-06', 42, '2021-07-17', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(123, 696, '47406340M', 'TRELIS CARDONA, KILIAN', 'Hombre', '1989-01-31', 1, '2020-01-29', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(124, 698, 'X8221056M', 'MARZAK, AHMED', 'Hombre', '1975-06-23', 33, '2020-03-01', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(125, 699, '47251531D', 'PRIOR BONED, DAVID', 'Hombre', '1991-04-04', 1, '2020-03-03', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(126, 703, '54103381K', 'LECHUGA ESCUDERO, KEVIN', 'Hombre', '1992-10-02', 27, '2020-03-13', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(127, 705, '47255834B', 'COSTA ALBA, JAVIER', 'Hombre', '1995-07-17', 26, '2021-05-12', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(128, 706, '47258183Z', 'TUR HOMAR, GERARD', 'Hombre', '1996-11-18', 27, '2021-05-17', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(129, 277, '46956710W', 'DE LA TORRE BLANQUEZ, NURIA', 'Mujer', '1981-01-05', 42, '2012-11-20', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(130, 708, '47432117E', 'GONZALEZ GONZALEZ, RAFAEL', 'Hombre', '1994-09-06', 2, '2021-12-09', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(131, 709, '51428229E', 'PEREZ MORENO, SAMUEL', 'Hombre', '1979-06-20', 27, '2022-04-01', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(132, 710, '47408010L', 'MU?OZ GUASCH, MARC', 'Hombre', '1997-08-25', 2, '2022-02-01', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(133, 711, '47406466Q', 'RAMON RIERA, IVAN', 'Hombre', '1997-07-11', 34, '2022-02-01', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(134, 712, '72180413L', 'SANCHEZ - VALVERDE LOPE, JAVIER', 'Hombre', '1991-04-29', 2, '2022-05-02', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(135, 274, '46954609V', 'DELGADO ROIG, NOELIA', 'Mujer', '1981-07-29', 26, '2014-03-03', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(136, 716, '79326166V', 'AGEITOS BLANCO, MARCIAL', 'Hombre', '1978-10-31', 34, '2022-01-03', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(137, 717, '47250165T', 'CABRERA VEGA, MARIA', 'Hombre', '1985-11-05', 26, '2022-06-20', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(138, 723, '47627004F', 'VIVES GARCIA, EMILI', 'Hombre', '1979-10-03', 42, '2021-08-01', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(139, 728, '41745970G', 'MORCILLO MORAN, AAR?N', 'Hombre', '1998-05-21', 27, '2022-07-04', 30, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(140, 731, '36088927H', 'COSTAS ALONSO, GERMAN', 'Hombre', '1967-04-17', 30, '2022-01-03', 10, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(141, 732, '53183489Z', 'ORTIZ GARCIA, GABRIEL', 'Hombre', '1983-03-03', 44, '2022-01-03', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(142, 734, '47252943H', 'SORIANO TORRES, ALVARO', 'Hombre', '1993-06-09', 2, '2021-09-01', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(143, 735, '47826297M', 'VAZQUEZ GALLART, JORDI', 'Hombre', '1998-10-25', 39, '2022-02-04', 22, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(144, 736, '75814283G', 'ORTA ARIZA, JORGE', 'Hombre', '1978-06-22', 34, '2021-09-06', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(145, 739, '47259147N', 'MARTINEZ GARCIA, RODRIGO', 'Hombre', '1994-06-03', 31, '2021-09-06', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(146, 742, 'Y7375907M', 'RIVERA VEGA, OSCAR ANDRES', 'Hombre', '1976-04-02', 27, '2021-09-17', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(147, 744, '31257938H', 'LEON ALFEREZ, MANUEL', 'Hombre', '1968-04-15', 32, '2021-10-01', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(148, 746, '36040236H', 'COLLAZO VIDAL, CLAUDIO', 'Hombre', '1961-01-07', 30, '2022-01-03', 10, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(149, 747, '48320161J', 'RODES GARCIA, JORDI', 'Hombre', '1977-01-26', 34, '2022-06-03', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(150, 748, '41452880A', 'FERRER FERRER, FRANCISCO', 'Hombre', '1970-07-11', 26, '2022-01-13', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(151, 749, '47259563Z', 'CARDONA BONET, GUILLEM', 'Hombre', '1996-10-23', 21, '2021-11-02', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(152, 750, '47253016E', 'SANCHO PE?A, VICENTE', 'Hombre', '1992-09-20', 1, '2021-11-17', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(153, 752, '53552292N', 'LLANEZA NIETO, DAVID', 'Hombre', '1983-03-02', 34, '2021-11-30', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(154, 754, '43387524W', 'RODRIGUEZ DOMINGUEZ, YERAY', 'Hombre', '1996-05-05', 23, '2021-12-02', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(155, 755, '53647496L', 'SOTO URIA, DANIEL', 'Hombre', '1993-09-08', 38, '2021-12-26', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(156, 757, '45595342G', 'GOMEZ AVILES, MARIO', 'Hombre', '1975-06-25', 22, '2022-01-01', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(157, 759, '31694831A', 'ORTIZ MORILLAS, MANUEL JESUS', 'Hombre', '1976-04-06', 22, '2022-01-17', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(158, 761, '75874658G', 'SALVATIERRA HOYOS, DAVID', 'Hombre', '1975-03-20', 37, '2022-01-28', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(159, 762, '22986182M', 'TABOADA DURRUTY, SEM JUAN ETIENN', 'Hombre', '1969-09-06', 23, '2022-01-31', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(160, 763, '32042371J', 'TOLEDO SERRATO, JORGE CARLOS', 'Hombre', '1971-02-21', 23, '2022-02-04', 20, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(161, 765, '75888668F', 'CASTRO MARIN, DANIEL', 'Hombre', '1982-03-05', 37, '2022-02-11', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(162, 909, 'Y0022563Z', 'DI NUNZIO, SANDRA', 'Mujer', '1981-10-12', 26, '2023-03-20', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(163, 767, '51810146R', 'RODRIGUEZ NU?EZ, VLADIMIR OMAR', 'Hombre', '1961-05-13', 32, '2022-02-21', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(164, 769, '75750319A', 'SABORIDO URIA, FRANCISCO JAVIER', 'Hombre', '1978-02-23', 32, '2022-03-25', 20, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(165, 770, '47406754M', 'ALBERT TUR, VICTOR', 'Hombre', '1999-05-13', 2, '2022-03-25', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(166, 771, '30570187J', 'GALDOS BARRANCO, CARLOS SABINO', 'Hombre', '1965-06-03', 22, '2022-04-05', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(167, 772, '47252226Z', 'HERRERA BERLANGA, SAMUEL', 'Hombre', '1989-10-13', 27, '2022-04-09', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(168, 963, 'Y5341537P', 'EL BAKKALI, SOUKAINA', 'Mujer', '1990-10-08', 41, '2023-06-01', 27, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(169, 777, '43158414H', 'DOMINGUEZ GONZALEZ-MIRAND, LUIS BART.', 'Hombre', '1987-08-24', 23, '2022-04-13', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(170, 779, '43199194L', 'MICO CARBALLO, ALEJANDRO', 'Hombre', '1990-04-05', 27, '2022-04-22', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(171, 304, '41455361T', 'ESCANDELL ROIG, EVA MARIA', 'Mujer', '1976-02-12', 2, '2015-03-30', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(172, 781, '34095769V', 'GABARAIN SAIZ, MIKEL', 'Hombre', '1969-03-06', 27, '2022-04-25', 30, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(173, 783, '47406595F', 'GONZALEZ PRATS, SERGIO', 'Hombre', '1998-07-09', 34, '2022-04-25', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(174, 644, 'Y3107583K', 'ESCOBAR ORTIZ, NELLY ELIZABETH', 'Mujer', '1989-05-10', 41, '2019-04-23', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(175, 950, '41753819X', 'ESCOBAR VAZQUEZ, DORA GRISELDA', 'Mujer', '1985-05-19', 49, '2023-05-11', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(176, 787, '41740667Z', 'ORFILA PONS, PEDRO', 'Hombre', '1990-03-18', 26, '2022-04-25', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(177, 788, '43176283Q', 'ALEMANY SASTRE, TOMAS', 'Hombre', '1991-12-22', 2, '2022-05-16', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(178, 789, '43051137J', 'SANCHEZ SANCHEZ, FRANCISCO', 'Hombre', '1969-06-20', 35, '2022-05-09', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(179, 790, '05394205S', 'BARTHELEMY PAZ, FERNANDO', 'Hombre', '1962-10-11', 35, '2022-05-02', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(180, 791, '72438626B', 'LERTXUNDI MURGIONDO, MIKEL AINGERU', 'Hombre', '1966-12-23', 2, '2022-05-02', 15, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(181, 792, '05929119H', 'GARCIA LUENGO, JAIME', 'Hombre', '1986-08-06', 34, '2022-05-03', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(182, 1019, 'Y8579851Z', 'ESCOBAR VAZQUEZ, KARIN GISSELLA', 'Mujer', '1998-06-12', 49, '2024-03-11', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(183, 794, '53645317W', 'VALDEMORO BRAVO, ANGEL JOSE', 'Hombre', '1986-09-09', 2, '2022-05-03', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(184, 795, '47253251G', 'BOUZON SANCHEZ, NOEL', 'Hombre', '1986-11-06', 2, '2022-05-02', 11, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(185, 796, '31853714W', 'CORDOBA MORQUILLA, JORGE ALBERTO', 'Hombre', '1971-02-12', 37, '2022-05-03', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(186, 797, '32794348M', 'PEREZ ARES, JORGE AGUSTIN', 'Hombre', '1968-12-01', 40, '2022-05-03', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(187, 798, '31862676V', 'ROSA RIOS, VICTOR MANUEL', 'Hombre', '1975-11-19', 34, '2022-05-04', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(188, 804, 'Y3494139Q', 'F VARGAS, JOANIMARLY', 'Mujer', '1989-05-29', 26, '2022-05-12', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(189, 800, '41455438P', 'TORRES TUR, VICENTE', 'Hombre', '1973-09-02', 2, '2022-05-12', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(190, 801, '41746429A', 'VILLALONGA ENENTO, ENRIC', 'Hombre', '1992-08-06', 49, '2022-05-11', 28, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(191, 1009, '41752411M', 'FEBRER LLORENS, FRANCINA', 'Mujer', '2003-01-31', 49, '2023-12-05', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(192, 979, '43476721M', 'FEMENIAS SUAREZ, CRISTINA', 'Mujer', '2000-11-08', 26, '2023-07-03', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(193, 895, '47406769C\n', 'GARCIA GOMEZ, ANA MARIA', 'Mujer', '2001-02-18', 26, '2022-12-05', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(194, 803, '30698172A', 'GARCIA LOPEZ, NAZARET', 'Mujer', '1997-10-21', 26, '2022-05-11', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(195, 802, '46952173L', 'GARCIA MARTINEZ, JESSICA', 'Mujer', '1978-10-29', 1, '2022-05-16', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(196, 424, '49413954H', 'GARCIA RAMON, TATIANA', 'Mujer', '1992-10-12', 36, '2018-03-28', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(197, 809, '47406641F', 'MORENO RODRIGUEZ, ANTONIO', 'Hombre', '1999-08-20', 46, '2022-05-17', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(198, 811, '31849554M', 'GOMEZ GIL, MARIA LUISA', 'Mujer', '1967-12-05', 36, '2022-05-23', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(199, 812, 'X6867018T', 'EBIYON, BRIKINN', 'Hombre', '1974-07-14', 36, '2022-05-23', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(200, 951, '26243345T', 'G?MEZ NEBRERA, VANESA', 'Mujer', '1985-06-30', 26, '2023-05-15', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(201, 815, '47407071T', 'GUASCH MARI, VICENT', 'Hombre', '1994-12-12', 34, '2022-05-30', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(202, 816, '41447901S', 'TORRES RIBAS, JESUS', 'Hombre', '1966-11-07', 50, '2022-05-26', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(203, 817, '71157001S', 'CANTO VALLINA, FRANCISCO JOSE', 'Hombre', '1987-07-15', 22, '2022-05-28', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(204, 1007, 'Z1469612D', 'GUERRA, TAMARA', 'Mujer', '1968-12-26', 41, '2023-11-28', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(205, 1017, '37342121B', 'GUITART FEMENIAS, MARIA HELENA', 'Mujer', '1982-09-10', 42, '2024-03-01', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(206, 766, '41461994D', 'GUTIERREZ VILAR, NOELIA', 'Mujer', '1982-05-18', 1, '2022-04-11', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(207, 821, '55143984N', 'CINSTITU UNGUREANU, MIHAI', 'Hombre', '1967-11-28', 2, '2022-06-27', 20, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(208, 822, '41455465N', 'RIERA JUAN, ANTONIO', 'Hombre', '1973-12-08', 1, '2022-05-30', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(209, 823, '49569144G', 'GONZALEZ RUIZ, EDUARDO ASNALDO', 'Hombre', '1964-09-15', 2, '2022-06-06', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(210, 824, '41738666Z', 'HURTADO ROMERO, JOSE', 'Hombre', '1972-10-29', 49, '2022-05-31', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(211, 825, '50415682G', 'MARTINEZ GIRONES, JOAQUIN GERMAN', 'Hombre', '1958-06-10', 50, '2022-05-31', 15, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(212, 827, '40533957E', 'GARCIA BARCELO, ROGER', 'Hombre', '1980-11-16', 34, '2022-06-10', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(213, 828, '48763537H', 'MORENO NAVARRO, ALEJANDRO', 'Hombre', '1995-02-01', 34, '2022-06-02', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(214, 829, 'Y4746951H', 'CRICCO, MAURO JOSE', 'Hombre', '1978-10-30', 2, '2022-06-02', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(215, 9, 'X9374424S\n', 'HURTADO GUTIERREZ, JOSELIN', 'Mujer', '1998-04-20', 26, '2023-03-02', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(216, 831, '47431270A', 'MA?EZ PLANELLS, ADRIA', 'Hombre', '2001-08-10', 2, '2022-06-16', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(217, 832, '47408354H', 'COSTA TUMBACO, VICENTE ADRIAN', 'Hombre', '2002-12-02', 2, '2022-06-16', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(218, 1004, '47745858C', 'ISART ESTEVA, HELENA', 'Mujer', '1994-04-24', 26, '2023-11-15', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(219, 835, '47406114D', 'ESCANDELL BONET, VICENTE', 'Hombre', '1997-08-21', 34, '2022-06-20', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(220, 836, '41604189H', 'ORTIZ GARCIA, FRANK', 'Hombre', '1994-07-20', 2, '2022-06-15', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(221, 838, '41529072L', 'MIRANDA EXPOSITO, IVAN', 'Hombre', '1995-05-29', 2, '2022-06-13', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(222, 839, '75897162Z', 'TRIGUEROS GARCIA, DAVID', 'Hombre', '1994-12-15', 34, '2022-06-13', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(223, 840, '43480537A', 'FERNANDEZ SELS, PHILLIPP ALEXANDER', 'Hombre', '1988-05-17', 23, '2022-06-14', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(224, 841, '75916337F', 'ALCALDE CAMPOS, ISMAEL', 'Hombre', '1992-02-09', 2, '2022-06-17', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(225, 842, 'Y1475040H', 'SOTO ARCILA, CRISTIAN ANDRES', 'Hombre', '1994-09-25', 2, '2022-06-17', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(226, 843, '45184490R', 'GALDOS BURGOA, AITOR', 'Hombre', '2003-08-25', 26, '2022-06-17', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(227, 957, 'Y6149069X', 'LEIVA, MARIA EUGENIA', 'Mujer', '1982-10-11', 26, '2023-05-22', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(228, 986, '42264813J', 'LE?N TRAVIESO, MELANI VICTORIA', 'Mujer', '1998-10-24', 36, '2023-09-07', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(229, 846, '78221701N', 'COLL CARRETERO, MACIA', 'Hombre', '1997-10-03', 26, '2022-06-20', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(230, 847, '75960085D', 'JIMENEZ ANDRADES, JESUS', 'Hombre', '1986-10-15', 22, '2022-06-21', 20, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(231, 848, '42285827M', 'GARCIA GIMIENEZ, POL', 'Hombre', '1999-05-19', 2, '2022-06-30', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(232, 434, '34851226Q', 'LOPEZ DIAZ, ENCARNACION', 'Mujer', '1964-08-04', 41, '2017-03-30', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(233, 850, '43460370F', 'MORENO CORRAL, MARC', 'Hombre', '2002-05-01', 34, '2022-06-29', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(234, 851, '14592581R', 'RODRIGUEZ GONZALEZ, LUIS MIGUEL', 'Hombre', '1964-06-25', 2, '2022-07-01', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(235, 852, '47381207B', 'BARROS VALI?A, JESUS MANUEL', 'Hombre', '0000-00-00', 32, '2022-07-05', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(236, 853, '47408692B', 'ZITO MARIN, ALEXANDRO', 'Hombre', '1994-08-27', 2, '2022-07-07', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(237, 854, '48172744A', 'BIELSA GARCIA, CARLOS', 'Hombre', '1999-08-31', 34, '2022-07-08', 22, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(238, 855, '41524046F', 'JUAN FUSTER, JOSEP', 'Hombre', '1991-01-31', 23, '2022-07-10', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(239, 856, '18993007K', 'GARCIA RODRIGUEZ, JAVIER', 'Hombre', '1972-07-25', 36, '2022-07-14', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(240, 857, '53557520L', 'VAZQUEZ GUTIERREZ, PABLO', 'Hombre', '1987-03-21', 36, '2022-07-14', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(241, 858, '41755126Y', 'BURDILES VERA, DENIS ANDRES', 'Hombre', '2001-05-18', 49, '2022-07-12', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(242, 646, '72079142V', 'LOPEZ GONZALEZ, ALEXANDRA', 'Mujer', '1986-05-05', 36, '2019-04-24', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(243, 860, '43208729D', 'REYNES GALLEGO, FRANCISCO ALEJANDRO', 'Hombre', '2001-07-18', 36, '2022-07-18', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(244, 242, '45590835M', 'MA?AS RODRIGUEZ, MARIA DEL CARMEN', 'Mujer', '1976-10-16', 1, '2011-04-04', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(245, 862, '41752434M', 'SIERRA JARAMILLO, JEHINER ALEXANDER', 'Hombre', '1983-07-12', 2, '2022-07-25', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(246, 863, '75916933M', 'VALVERDE MARIN, LUIS MANUEL', 'Hombre', '1992-06-29', 2, '2022-07-25', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(247, 864, '78710782K', 'GORRIN ARMAS, RAMON ENRIQUE', 'Hombre', '1979-09-03', 37, '2022-07-27', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(248, 865, '10222676G', 'AATTAR BELKHYR, YASSINE', 'Hombre', '1994-01-08', 39, '2022-07-28', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(249, 866, '48109447W', 'ROMERO FRANCO, LUIS', 'Hombre', '2001-04-30', 2, '2022-07-28', 12, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(250, 873, 'X4792566X', 'MARIN MARTINEZ, TATIANA   ', 'Mujer', '1997-01-18', 49, '2022-08-22', 28, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(251, 876, '78585873W', 'GARCIA PERESTELO, GUILLERMO  ', 'Hombre', '1990-11-17', 34, '2022-09-10', 14, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(252, 877, '34748377T', 'MORA VALERO, ORIOL', 'Hombre', '1978-12-13', 49, '2022-09-20', 28, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(253, 878, '75880541E', 'TOLEDO DIAZ, DANIEL', 'Hombre', '1976-10-23', 34, '2022-10-03', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(254, 871, '41751177J', 'PONS SANCHEZ, MARC', 'Hombre', '1999-06-26', 49, '2022-08-18', 28, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(255, 319, '46957487C', 'MARIN ROMERO, EVA MARIA', 'Mujer', '1981-09-24', 1, '2014-03-03', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(256, 879, '45865637A', 'RAMOS BARROSO, MARCOS', 'Hombre', '1996-10-28', 23, '2022-10-07', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(257, 880, '78805146Q', 'AGEITOS BLANCO, MARTIN', 'Hombre', '1991-09-20', 34, '2022-10-12', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(258, 875, '71901257Z', 'ROCES MORAN, JAVIER', 'Hombre', '1995-09-05', 34, '2022-08-27', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(259, 874, '41502433Z', 'VALVERDE HERNANDO, RAUL', 'Hombre', '1976-04-17', 34, '2022-08-31', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(260, 881, '75900843S', 'RUIZ ESTRADA, MANUEL', 'Hombre', '1984-09-09', 34, '2022-10-14', 12, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(261, 647, '55469005C', 'MARQUES RIBEIRO, FERNANDA', 'Mujer', '1982-09-05', 26, '2019-04-25', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(262, 883, '54148126P\n', 'ROSS SANTANA, ALEXEI', 'Hombre', '1969-09-22', 34, '2022-10-27', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(263, 884, '43156293J', 'BALEANI-SPRINGOLO SERRA, IGNACIO', 'Hombre', '1988-05-09', 23, '2022-10-28', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(264, 885, '48762559Y', 'MOLINA GRANIZO, PABLO', 'Hombre', '1997-04-17', 34, '2022-10-30', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(265, 886, '32862720K', 'RUIZ CEBADA, JOSE MARIA', 'Hombre', '1969-11-03', 34, '2022-11-07', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(266, 887, '13979231S', 'GOMEZ GOMEZ, JOSE RAMON', 'Hombre', '1975-08-21', 32, '2022-11-03', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(267, 745, '30657987E', 'MARTINEZ PERALTA, RUBEN ESTEBAN', 'Hombre', '0000-00-00', 32, '2021-10-04', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(268, 56, '41447907K', 'TORRES MU?OZ, JAIME', 'Hombre', '1969-02-03', 34, '2022-11-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(269, 753, '47260233V', 'VERDERA JUAN, FRANCISCO JAVIER', 'Hombre', '0000-00-00', 23, '2022-05-02', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(270, 707, '76260828G', 'MARTINEZ BARRERO, FELISA', 'Mujer', '1993-08-20', 26, '2021-12-29', 27, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(271, 888, '36528166A\n', 'RUBERT JIMENEZ, DIEGO JAVIER\n', 'Hombre', '1975-10-09', 22, '2022-11-21', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(272, 891, '47260039F', 'MAYANS TORRES, PAU\n', 'Hombre', '1996-11-02', 23, '2022-12-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(273, 942, '47258302H', 'SANCHEZ ARIAS, ERIC JOSE', 'Hombre', '1995-05-11', 2, '2022-11-23', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(274, 893, '73397330Y', 'FERN?NDEZ ROCA, JOAN', 'Hombre', '1996-11-30', 34, '2022-12-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(275, 882, '43038474T', 'MARTINEZ ROTGER, MARIA ANGELES', 'Mujer', '1996-11-03', 26, '2022-10-18', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(276, 845, 'Y6047308R', 'MEZA ILARRAZA, LISSETTE ANAIS', 'Mujer', '1985-08-28', 49, '2022-06-20', 28, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(277, 896, '78640257Z', 'RODRIGUEZ GONZALEZ, DANIEL', 'Hombre', '1995-02-24', 39, '2022-12-03', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(278, 844, '18222644C', 'MIRALLES ARMERO, MARIA DEL MAR', 'Mujer', '1972-10-16', 26, '2022-06-20', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(279, 892, '71657450F\n', 'LOPEZ MONTERO, GONZALO RAFAEL\n', 'Hombre', '1987-08-29', 44, '2022-12-02', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(280, 890, '78519795A', 'RODRIGUEZ SANTANA, ALEJANDRO MANUEL', 'Hombre', '1984-10-10', 34, '2022-12-17', 20, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(281, 898, '78769677J', 'MARTIN NU?EZ, MIGUEL ANGEL', 'Hombre', '0000-00-00', 34, '2022-12-17', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(282, 900, '71639279Y', 'ESCALADA MARIN, DAVID', 'Hombre', '0000-00-00', 25, '2023-01-04', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(283, 899, 'Y9449622V', 'CANDELO CUERO, FAVER ODIMAR', 'Hombre', '1984-05-08', 27, '2022-01-03', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(284, 901, '47409255E', 'SALOMON PADILLA, JOAN', 'Hombre', '1985-08-21', 27, '2022-01-17', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(285, 902, '47432042Q\n', 'FERRER FERRER, SERGI EDUARD', 'Hombre', '0000-00-00', 27, '2023-01-18', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(286, 903, '47433117X', 'RODRIGUEZ RODRIGUEZ, JOSE MARIA\n', 'Hombre', '1993-05-17', 27, '2023-02-01', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(287, 7, '48198156T', 'FERRER ESCANDELL, DANIEL', 'Hombre', '2000-09-03', 1, '2023-02-05', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(288, 905, '76361137X', 'PEREZ ABELLEIRA, JOSE RAMON\n', 'Hombre', '1965-12-16', 34, '2023-02-22', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(289, 906, '51118002L\n', 'ANGLADA REVENGA, JAIME\n', 'Hombre', '1991-05-09', 34, '2023-03-01', 12, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(290, 904, '79063365Z\n', 'MESA BASTIDA, CLAUDIO ARTURO', 'Hombre', '1993-09-11', 34, '2023-02-28', 12, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(291, 778, '22962290X', 'DONATE MARTINEZ, JOSE DOMINGO', 'Hombre', '1999-01-01', 2, '2022-01-15', 20, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(292, 556, '0002t', 'MIRANDA VILLACRESES, JOCELYNE PAMELA', 'Mujer', '0000-00-00', 26, '0000-00-00', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(293, 715, '47259258P', 'MORENO PLATA, NATALIA', 'Mujer', '1993-07-08', 26, '2022-04-29', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(294, 775, '46953726P', 'MORENO RODRIGUEZ, PROVIDENCIA', 'Mujer', '1977-03-05', 26, '2022-04-11', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(295, 870, '47664389V\n', 'LOZANO MORATA, JOSE', 'Hombre', '1989-11-08', 46, '2023-03-31', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(296, 965, '78720363B', 'NAVARRO BARRERA, JESICA', 'Mujer', '1983-08-27', 36, '2023-06-03', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(297, 634, '41461877F', 'NIETO ARRIBAS, EVA MARIA', 'Mujer', '1975-11-13', 26, '2019-02-20', 27, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(298, 910, '47405523Q', 'ARRIAZA RINCON, PATRICIO', 'Hombre', '1998-08-18', 46, '2023-03-29', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(299, 911, '48198061C', 'FERNANDEZ SERRANO, ADRIAN', 'Hombre', '2001-02-12', 27, '2023-03-31', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(300, 915, '29198514Z', 'CARRIO GARCIA, JAIME', 'Hombre', '1977-07-23', 27, '2023-03-31', 30, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(301, 912, 'X2746193Q', 'PASTANO, LUCA', 'Hombre', '1972-04-08', 46, '2023-03-31', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(302, 917, '24373813T', 'CORTINA SALVAGO, GIOVANA', 'Hombre', '1977-09-25', 46, '2023-04-05', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(303, 919, '47260798F ', 'GARCIOLO MARTOS, JUAN ANDRES', 'Hombre', '1995-08-14', 26, '2023-03-27', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(304, 920, 'X9240193N', 'GONZALEZ ANDRADE, JESUS ABEL', 'Hombre', '1994-12-26', 27, '2023-03-29', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(305, 921, '47431252P', 'ALVADO BATLLORI, CARLOS', 'Hombre', '2004-03-17', 27, '2023-03-31', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(306, 922, '52899577Z', 'CASAS S?NCHEZ, DAVID', 'Hombre', '1992-02-07', 27, '2023-03-31', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(307, 923, 'Y2276896W', 'EL ABDELLAOUI, ALI', 'Hombre', '1994-02-01', 27, '2023-03-31', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(308, 916, '52454673E', 'PI?EIRO SANCHEZ, JOSE LUIS', 'Hombre', '1967-10-15', 34, '2023-03-31', 18, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(309, 918, '78625879B\n', 'GONZ?LEZ YANES, JONATHAN', 'Hombre', '1986-08-31', 34, '2023-04-14', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(310, 924, '47406183D', 'TORRES PRATS, JOAN MARC', 'Hombre', '1997-05-06', 23, '2023-04-11', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(311, 925, '47259650D', 'COLOMAR MARTIN, DAVID', 'Hombre', '1997-07-03', 2, '2023-04-11', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(312, 926, '47431439B', 'CABEZUELO DELGADO, JAVIER', 'Hombre', '2004-01-05', 27, '2023-04-10', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(313, 868, '18217528X', 'OBRADOR FUSTER, MARGARITA', 'Mujer', '1967-04-24', 26, '2022-08-09', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00');
-INSERT INTO `trabajadores` (`id_trabajador`, `codigo_tr`, `dni_tr`, `nombre_tr`, `sexo_tr`, `fechanac_tr`, `categoria_tr`, `inicio_tr`, `centro_tr`, `activo_tr`, `formacionpdt_tr`, `anotaciones_tr`, `fyh_creacion`, `fyh_actualizacion`) VALUES
-(314, 928, '11783785B', 'IGLESIAS CRUZ, JOSE MANUEL', 'Hombre', '1972-11-30', 34, '2023-04-14', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(315, 929, '39951732L', 'GARCIA CORTES, MIGUEL', 'Hombre', '2004-03-22', 46, '2023-04-17', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(316, 930, '47260660F', 'VERDERA SANCHEZ, ALEJANDRO', 'Hombre', '2003-03-14', 46, '2023-04-15', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(317, 931, 'Y9751913L', 'DELLE ROSE, GIULIO', 'Hombre', '1991-07-10', 46, '2023-04-15', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(318, 932, '71892660L', '?LVAREZ SANCHEZ, MARIANO', 'Hombre', '1986-09-04', 34, '2023-04-26', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(319, 933, '41746000B', 'FULLANA AMOR?S, FRANCESC', 'Hombre', '1994-07-20', 49, '2023-04-24', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(320, 934, '43199959W', 'URIBE PANIAGUA, ANTONIO', 'Hombre', '1989-11-23', 2, '2023-04-20', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(321, 935, '75906268N', 'SALVADOR HERNANDEZ, JOAQUIN', 'Hombre', '1990-05-01', 2, '2023-04-28', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(322, 972, '78219399X', 'OLIVA MONTA?EZ, ALBA', 'Mujer', '1996-07-27', 26, '2023-06-12', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(323, 251, '75266050E', 'PALMA GARCIA, CARMEN MARIA', 'Mujer', '1983-06-01', 2, '2016-08-15', 9, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(324, 786, '77322820V', 'PAREJA BRAVO, MERCEDES', 'Mujer', '1978-04-17', 26, '2022-04-25', 26, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(325, 936, '32695701M', 'RIVEIROS GUZMAN, RAMIRO', 'Hombre', '1980-11-21', 21, '2023-04-17', 32, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(326, 940, '47251062T', 'SOMOZA VICO, GONZALO\n', 'Hombre', '1967-10-30', 50, '2023-05-03', 15, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(327, 939, '10847465K', 'TRIGUERO MENDEZ, JESUS AVELINO', 'Hombre', '1965-12-08', 50, '2023-05-02', 9, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(328, 953, '54147855J????????????????', 'P?REZ HERN?NDEZ, EVELYN DESIREE', 'Mujer', '1996-10-01', 36, '2023-05-23', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(329, 999996, 'X6922346J', 'BONERBA, LUCA', 'Hombre', '1979-11-09', 2, '2023-05-10', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(330, 999995, '46957433N', 'RAMON PEREZ, JOSE OMAR', 'Hombre', '1989-11-19', 2, '2023-05-10', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(331, 999947, 'Y8015386S', 'ZAHI, ADAM', 'Hombre', '2003-10-02', 2, '2023-05-10', 16, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(332, 943, '47431281Z', 'TORRES RAMON, JORDI', 'Hombre', '2002-02-10', 2, '2023-05-08', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(333, 587, '50903232T', 'PEREZ RUBIO, MARIA', 'Mujer', '1988-04-29', 43, '2017-10-17', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(334, 945, 'X3241976B', 'ROMANUTTI, WALTER RAUL', 'Hombre', '1973-06-11', 46, '2023-05-09', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(335, 946, '45896444J', 'CANO DOMINGUES, RAUL', 'Hombre', '1997-04-21', 46, '2023-05-15', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(336, 374, '46958026F', 'PLANELLS ROSELLO, MARIA JOSE', 'Mujer', '1983-07-17', 42, '2015-11-11', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(337, 1018, 'Y0611359X', 'POPA, DIANA CRISTINA', 'Mujer', '1993-07-29', 26, '2024-03-04', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(338, 948, 'X8501909M', 'BOTCA, SERGIU-ANDREI', 'Hombre', '1985-10-02', 2, '2023-05-08', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(339, 947, '47257718D', 'BONED CARBAJAL, SIMON', 'Hombre', '2001-12-19', 2, '2023-05-08', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(340, 417, '43545801Q', 'PORRAS AGUILERA, BEATRIZ', 'Mujer', '1979-07-07', 22, '2016-06-15', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(341, 819, '17490024L', 'QUINTERO JIMENEZ, DOLORES', 'Mujer', '0000-00-00', 36, '2022-05-30', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(342, 1016, '04575262X', 'REDONDO IBA?EZ, EMILIA', 'Mujer', '1965-12-26', 41, '2024-12-17', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(343, 956, '51069273G', 'MONTES SAIZ, ENRIQUE', 'Hombre', '1978-10-26', 27, '2023-05-25', 30, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(344, 799, '47409058D', 'RIBAS HINOJOSA, LETICIA', 'Mujer', '1994-07-08', 47, '2022-05-12', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(345, 955, '41746933R', 'SAETA TAYLOR, ISRAEL', 'Hombre', '2004-12-02', 49, '2023-05-22', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(346, 952, '76629342N', 'HERN?NDEZ ORTU?O, ISIDRO', 'Hombre', '1991-12-23', 2, '2023-05-15', 16, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(347, 636, '47252926R', 'RIBAS JUAN, MARGARITA', 'Mujer', '1986-08-22', 26, '2019-03-21', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(348, 758, '0033s', 'SALINAS CUBERO, SAUL', 'Hombre', '0000-00-00', 22, '0000-00-00', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(349, 756, '00044s', 'ARRIBAS SAMPER, BORIS', 'Hombre', '0000-00-00', 23, '0000-00-00', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(350, 445, '47254308A', 'RIBAS TORRES, SILVIA', 'Mujer', '1990-05-01', 1, '2018-01-19', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(351, 605, '0003t', 'VECCHIATO, DAMIANO', 'Hombre', '0000-00-00', 27, '0000-00-00', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(352, 768, '4888s', 'ESPINILLA PE?A, FRANCISCO JAVIER', 'Hombre', '0000-00-00', 39, '0000-00-00', 19, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(353, 961, '52902342L', 'MARTIN GONZALEZ, DAVID', 'Hombre', '1992-01-10', 46, '2023-05-25', 29, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(354, 958, '76413239V', 'COUSO BARBEITO, PABLO', 'Hombre', '1984-11-14', 27, '2023-05-23', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(355, 959, '48202081S', 'GARCIA RODRIGUEZ, ALVARO', 'Hombre', '2002-09-10', 46, '2023-05-23', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(356, 960, 'Y4454019Z', 'MORENO, JUSTIN MANKAGNA NATEDHIOU', 'Hombre', '1997-04-24', 46, '2023-05-23', 30, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(357, 198, '48550447T', 'ROBLES NAVARRO, MARIA', 'Mujer', '1983-07-08', 42, '2008-01-14', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(358, 944, 'Y2575156K', 'ROCA AGRAMONT, ESTEFANY', 'Mujer', '1997-07-19', 26, '2023-05-08', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(359, 613, '47408691X', 'RODRIGUEZ CANALES, RAQUEL', 'Mujer', '2000-01-11', 26, '2022-01-03', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(360, 966, '43478512W????????????????', 'RIBAS CAPLLONCH, MART?', 'Hombre', '2001-05-08', 34, '2023-06-02', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(361, 969, '41587673Q???? ', 'S?NCHEZ ARANDA, LU?S', 'Hombre', '2002-01-14', 2, '2023-06-12', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(362, 211, '46950344F', 'CALLE GARCIA, DAVID', 'Hombre', '0000-00-00', 2, '0000-00-00', 17, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(363, 409, '46959276S', 'RODRIGUEZ VENTURA, BEATRIZ', 'Mujer', '1985-10-20', 1, '2017-03-02', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(364, 974, '49417864H', 'SANCHEZ ATAHUI, ADELA', 'Mujer', '1974-06-08', 1, '2023-07-03', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(365, 971, '47433774T', 'MARIN ALCOBA, IKER', 'Hombre', '2004-08-08', 1, '2023-06-12', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(366, 988, 'Y0775250A', 'SANTOS QUI?ONES, MARIA', 'Mujer', '0000-00-00', 41, '2023-09-18', 27, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(367, 973, '41747630P', 'MOLL SALORD, MARC', 'Hombre', '2000-11-30', 34, '2023-06-13', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(368, 970, '41624312Q', 'HERRERO CHICANO, IZAN', 'Hombre', '2004-04-01', 26, '2023-06-09', 26, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(369, 421, 'Y0735535D', 'SAPONE, MARIA GIOVANNA', 'Mujer', '1983-01-26', 1, '2017-01-04', 23, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(370, 975, '47255373X', 'PERELLO DIEZ, MATEO', 'Hombre', '2000-07-21', 2, '2023-06-23', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(371, 976, '47433343Y', 'TUR ORVAY, MARC', 'Hombre', '2003-12-08', 2, '2023-06-23', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(372, 760, '0200s', 'SEARA CABO, ANDREA', 'Mujer', '0000-00-00', 47, '0000-00-00', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(373, 980, '47260535C', 'SERENO DOBRICK, JORGE', 'Hombre', '1998-10-23', 21, '2023-07-03', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(374, 981, 'Y8575787K', 'TARRAZO FARIAS, ERIC LUCAS', 'Hombre', '1997-11-16', 46, '2023-07-10', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(375, 982, '43192243Z', 'PASCUAL SEGURA, ADRIA', 'Hombre', '1988-01-05', 23, '2023-07-14', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(376, 978, '47260576S', 'MARI MAYANS, ESTEVE', 'Hombre', '1992-09-02', 2, '2023-07-01', 14, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(377, 983, 'X4561906V', 'BASAN, MAURA', 'Hombre', '1977-07-11', 1, '2023-08-07', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(378, 984, '54879544A', 'JUWARA GUAMANEH, KANTARA', 'Hombre', '2003-06-01', 27, '2023-08-15', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(379, 967, '48435055E', 'VI?UELA VILCHEZ, SERGIO', 'Hombre', '1979-01-22', 49, '2023-06-05', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(380, 985, '47409834A', 'HIDALGO SANCHEZ, ANTONIO MIGUEL', 'Hombre', '1999-08-28', 46, '2023-09-07', 29, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(381, 941, '47408054V', 'SOMOZA ARTS, LAURA', 'Mujer', '2002-01-31', 36, '2023-05-04', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(382, 637, '47253089A', 'SORIA PIEDRA, RAQUEL', 'Mujer', '1987-09-02', 26, '2019-03-20', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(383, 987, '46142863X', 'BERNUS BLANCH, CARLOS', 'Hombre', '1977-11-13', 42, '2023-09-11', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(384, 999, '43202267X\n', 'NICOLAU DUCKETT, EDUARD? \n', 'Hombre', '1990-06-25', 2, '2023-10-02', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(385, 1013, 'Z0925704M', 'SOSA INSFRAN, LIZ PAOLA', 'Mujer', '2002-01-24', 41, '2024-01-25', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(386, 780, 'Y8807536E', 'SOUZA SILVA, RANDALE', 'Mujer', '1994-11-10', 26, '2022-04-23', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(387, 1002, '41747270Q', 'RODRIGUEZ CONTRERAS, ALEXANDER', 'Hombre', '1997-11-01', 49, '2023-11-02', 28, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(388, 999995, '04305074A', 'IGLESIAS, AGUSTIN', 'Hombre', '2024-03-20', 34, '2024-03-20', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-20 09:49:06'),
-(390, 999993, '45692552Q', 'GUALDA ELFMARK, SAMUEL', 'Hombre', '2005-02-09', 34, '2024-03-20', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-20 09:56:39'),
-(391, 1003, 'X4299925Y', 'BOGDAN DORIAN, ALEXANDRU', 'Hombre', '1978-04-07', 2, '2023-11-10', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(392, 248, '34973158W', 'SUAREZ CABO, MARIA BELEN', 'Mujer', '1968-06-07', 26, '2011-06-01', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(393, 1005, '45440111T', 'FIGUERO LEON, ANTONIO TOMAS', 'Hombre', '1970-11-24', 34, '2023-11-17', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(394, 1006, '43166977W', 'MARROIG SANCHEZ, PEDRO', 'Hombre', '1982-01-16', 23, '2023-11-27', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(395, 964, '51150313S', 'SUAREZ RAMOS, SHEILA', 'Mujer', '1999-06-18', 36, '2023-06-01', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(396, 1008, 'X5622510E', 'LEIVA, JONATHAN SAUL', 'Hombre', '1984-08-05', 34, '2023-12-05', 19, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(397, 861, 'X6543893W', 'TANASE, NICOLETA', 'Mujer', '1978-10-05', 36, '2022-07-21', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(398, 1010, '47881150A', 'MOYA CORNET, BORJA', 'Hombre', '1988-09-03', 23, '2023-12-26', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(399, 1011, '53377271k', 'CALPE DOBON, JESUS', 'Hombre', '1983-06-07', 34, '2024-01-03', 16, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(400, 1012, 'Z0150541B', 'LAMOURI, ADAM', 'Hombre', '1997-02-10', 27, '2024-01-11', 27, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(401, 954, '48582161C', 'TEBAR TOLEDO, NURIA', 'Mujer', '1985-07-25', 2, '2023-05-26', 17, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(402, 1014, '47407793D', 'P?REZ TORRES, ALEJANDRO', 'Hombre', '1993-06-19', 2, '2024-02-01', 22, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(403, 949, '47257419D', 'TUR ESCANDELL, LIDIA', 'Mujer', '2000-10-01', 2, '2023-05-08', 12, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(404, 927, '75919619T', 'VELASCO ALMAGRO, MARINA', 'Mujer', '1998-11-25', 1, '2023-04-11', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(405, 1001, '46955550S', 'VICH MARI, LAURA\n', 'Mujer', '1983-07-06', 1, '2023-10-23', 23, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(406, 894, '47407636J\n', 'VILLAR DEL SAZ GARCIA, MARTA\n', 'Mujer', '1996-01-10', 26, '2022-12-05', 25, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(407, 999997, 'X7373408E', 'VON KLOT TRAUTVETTER, JOEL', 'Mujer', '2005-03-20', 21, '2023-03-28', 25, 0, 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
-(408, 999993, '000554s', 'SALES CASALI, JOAN', 'Hombre', '2024-03-06', 2, '2024-03-11', 18, 1, 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-20 09:55:28'),
-(409, 999994, '47258867P', 'VALDEZ CIUTAD, NICOLAS', 'Hombre', '2024-03-13', 21, '2024-04-08', 23, 1, 'No', 'n.a.', '2014-03-24 13:51:00', '2024-03-20 09:54:50'),
-(410, 999992, 'Y8989058M', 'BRATI, ALBAN', 'Hombre', '2000-03-28', 21, '2024-04-08', 23, 1, 'No', 'n.a.', '2014-03-24 13:51:00', '2024-03-20 09:48:09'),
-(411, 1020, '43805973N', 'PEREZ ANDREU RUBIO, JOSE ANTONIO', 'Hombre', '1971-12-29', 2, '2024-03-20', 11, 1, 'No', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00');
+INSERT INTO `trabajadores` (`id_trabajador`, `codigo_tr`, `dni_tr`, `nombre_tr`, `sexo_tr`, `fechanac_tr`, `categoria_tr`, `inicio_tr`, `centro_tr`, `activo_tr`, `formacionpdt_tr`, `informacion_tr`, `anotaciones_tr`, `fyh_creacion`, `fyh_actualizacion`) VALUES
+(1, 2, '41443686D', 'CARDONA VIUDA, RAFAEL', 'Hombre', '1964-04-16', 50, '1983-03-24', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-04-26 14:13:09'),
+(2, 6, '41451668X', 'FERRER TORRES, JOSE ANTONIO', 'Hombre', '1974-03-17', 31, '1995-05-15', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-04-26 14:14:27'),
+(3, 813, '77016973R', 'ABDELKADER BLANCO, DUNIA', 'Mujer', '1997-10-07', 36, '2022-05-23', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(4, 23, '41451240L', 'JUAN TORRES, JOSE ANTONIO', 'Hombre', '1969-05-29', 2, '2005-05-03', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(5, 26, '41445521G', 'GUASCH FERRER, VICENTE', 'Hombre', '1965-03-03', 32, '2014-10-01', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(6, 28, '41448434L', 'BONET RIERA, JOSE ANTONIO', 'Hombre', '1969-06-18', 32, '2008-01-01', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(7, 30, '41451861L', 'SERRA SERRA, JUAN', 'Hombre', '1970-06-29', 2, '1999-07-01', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(8, 1015, '47405158L', 'ALBA CALDERÓN, CRISTINA', 'Mujer', '1993-07-06', 26, '2024-02-05', 25, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-25 12:15:14'),
+(9, 44, '41461463F', 'ORTIZ BARBERA, ALEJANDRO', 'Hombre', '1980-07-05', 50, '1999-06-04', 13, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-07-15 13:43:10'),
+(10, 48, '41454605A', 'MARI SERRA, JUAN ANTONIO', 'Hombre', '1977-12-07', 22, '1999-06-27', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(11, 52, '41455077S', 'TUR RIBAS, VICENTE', 'Hombre', '1974-11-14', 32, '2000-08-24', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(12, 113, '46956466B', 'FERRER BONED, EDGAR', 'Hombre', '1985-02-23', 32, '2004-05-03', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(13, 119, '41450426X', 'COSTA ROIG, ANTONIO', 'Hombre', '1968-08-07', 2, '2005-04-04', 16, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(14, 121, '41453566E', 'GARCIA SERRA, ALEXANDRE', 'Hombre', '1972-02-03', 2, '2004-10-25', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(15, 129, '47251238S', 'COLOMAR LIX, GREGORI', 'Hombre', '1986-10-15', 22, '2014-08-01', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(16, 135, '41454248Z', 'TORRES TORRES, SERGIO', 'Hombre', '1973-09-27', 32, '2005-04-11', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(17, 140, '41458075T', 'MARI FERRER, JOSE VICENTE', 'Hombre', '1978-02-14', 22, '2005-05-16', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(18, 144, '46951202Z', 'GRACIA MARTINEZ, JOSE ANTONIO', 'Hombre', '1980-10-27', 34, '2005-05-19', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(19, 155, '10838430W', 'MUÑIZ RODRIGUEZ, GABRIEL', 'Hombre', '1964-01-09', 34, '2006-12-01', 7, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:26:45'),
+(20, 156, '41461863Q', 'CLAPES PRATS, JUAN', 'Hombre', '1975-08-20', 42, '2006-02-02', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(21, 170, '46955505Q', 'COSTA ESCANDELL, FRANCISCO JAVIER', 'Hombre', '1985-07-30', 50, '2013-07-01', 13, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(22, 174, '41450474N', 'MARIN MILES, DAVID', 'Hombre', '1974-12-23', 50, '2007-10-01', 16, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(23, 175, '41459089W', 'GIL MARI, JOSÉ MIGUEL', 'Hombre', '1976-12-16', 50, '2007-04-23', 11, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:27:05'),
+(24, 192, '21682866F', 'VENTEO MASIA, ROC', 'Hombre', '1981-05-21', 27, '2007-10-10', 29, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(25, 908, '47252607G', 'ALBA CALDERON, IRENE', 'Mujer', '1987-07-06', 1, '2023-03-13', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(26, 200, '47251838V', 'COSTA SERRA, JORGE', 'Hombre', '1986-10-23', 31, '2008-03-03', 10, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(27, 201, '41459188D', 'MARI GUASCH, JUAN ANTONIO', 'Hombre', '1975-11-20', 2, '2008-04-01', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(28, 203, '43180310H', 'LORENZO FERNANDEZ, MIGUEL ALBERTO', 'Hombre', '1973-10-15', 2, '2008-04-07', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(29, 204, '41455968D', 'RIERA SUÑER, JOSE', 'Hombre', '1973-10-23', 2, '2012-08-12', 13, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:28:42'),
+(30, 209, '41461892E', 'YERN RAMON, JAVIER', 'Hombre', '1981-05-21', 31, '2008-05-05', 10, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(31, 214, '47165760M', 'QUERALT GOMEZ, ALBERT', 'Hombre', '1991-11-15', 2, '2010-12-01', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(32, 216, '47252260W', 'MENDEZ INFANTE, LORENZO', 'Hombre', '1987-10-20', 32, '2015-07-06', 16, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(33, 225, '47253362T', 'TUR JUAN, MARCOS', 'Hombre', '1990-11-01', 31, '2016-06-01', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(34, 365, '09434532R', 'ALVAREZ LORENCES, PATRICIA', 'Mujer', '1976-12-14', 22, '2015-08-15', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(35, 227, '46959506S', 'SALAZAR PAGUIRIGAN, ALLAN JAMES', 'Hombre', '1972-08-21', 2, '2010-03-02', 13, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(36, 229, '41448429Z', 'VERDERA FERRER, SANTIAG', 'Hombre', '1969-02-02', 22, '2011-12-01', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-22 13:39:07'),
+(37, 234, '46955207V', 'FERNANDEZ RODRIGUEZ, ALEJANDRO', 'Hombre', '1986-09-04', 27, '2018-02-15', 29, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(38, 240, 'Y1179592M', 'XAVIER DA VEIGA, PABLO DANIEL', 'Hombre', '1983-02-11', 27, '2022-05-27', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-25 10:52:33'),
+(39, 793, '75900122F', 'ALVAREZ MADERAL, ESTHER', 'Mujer', '1994-05-29', 2, '2022-05-03', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(40, 160, '11417528Y', 'ALVAREZ MENES, DELFINA', 'Mujer', '0000-00-00', 26, '0000-00-00', 27, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(41, 226, '76947568X', 'ALVAREZ PEREZ, ALEJANDRA', 'Mujer', '1978-08-04', 1, '2010-07-05', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(42, 690, '02519411Z', 'ARRIBAS FERNANDEZ, MARIA JOSEFA', 'Mujer', '1959-10-12', 41, '2019-08-21', 27, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(43, 276, '46134871E', 'MENDEZ GONZALEZ, NORTO', 'Hombre', '1971-10-28', 2, '2015-08-15', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(44, 962, 'Y7248169D', 'ARRIETA, BERENICE DINA MARIA', 'Mujer', '1986-11-05', 26, '2023-05-31', 26, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(45, 278, '47251534N', 'BONED VARGAS, JOAN', 'Hombre', '1989-09-25', 42, '2022-04-19', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(46, 279, '41461615K', 'FERNANDEZ RODRIGUEZ, ROBERTO', 'Hombre', '1978-06-28', 27, '2012-11-30', 29, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(47, 288, '48397906H', 'NICOLAS ARCE, SERGIO', 'Hombre', '1982-09-14', 2, '2018-04-01', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(48, 295, '46959279H', 'MARI GUASCH, VICENT', 'Hombre', '1992-12-08', 2, '2018-03-20', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(49, 302, '47256498P', 'URETA JUAN, JAVIER', 'Hombre', '1987-08-31', 34, '2015-10-26', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(50, 830, 'Y3410568G', 'BANDEIRA DO NASCIMENTO DE AMORIN, ELISABETH', 'Mujer', '1967-04-24', 41, '2022-06-03', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-06-26 12:32:26'),
+(51, 315, '41738301V', 'TORRES CERDA, DAMIAN', 'Hombre', '1974-11-26', 22, '2015-08-15', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(52, 317, '47260464H', 'JIMENEZ TUR, DANIEL', 'Hombre', '1993-06-29', 27, '2016-02-26', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(53, 818, '75919048G', 'BARRANCO VERDEJO, LETICIA', 'Mujer', '1994-02-23', 36, '2022-05-30', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(54, 322, '46951850H', 'MARI MOYA, ARNALDO', 'Hombre', '1988-10-30', 2, '2014-11-01', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(55, 362, '41448394W', 'BELTRAN RIBAS, MARIA', 'Mujer', '1968-12-20', 1, '2015-11-01', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(56, 340, '47250209K', 'JUAN BONED, ANTONIO', 'Hombre', '1986-06-08', 32, '2015-03-02', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(57, 342, '47255357V', 'JUAN PALERM, JAUME', 'Hombre', '1995-05-28', 32, '2020-06-20', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(58, 346, '46958139M', 'GARCIA TORRES, DANIEL', 'Hombre', '1989-09-09', 22, '2015-05-01', 12, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(59, 349, '41510306K', 'AMARO JIMENEZ, CARLOS', 'Hombre', '1991-10-20', 23, '2016-03-30', 14, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(60, 352, '41458257K', 'ORTIZ CASTRO, JAVIER', 'Hombre', '1986-12-28', 21, '2014-10-22', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(61, 353, '48323417A', 'CASTRO ZARCO, JUAN JOSE', 'Hombre', '1981-10-14', 42, '2014-11-03', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(62, 354, '41449044P', 'MARI FERRER, ALEJANDRO', 'Hombre', '1969-02-03', 42, '2014-11-10', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(63, 356, '47405628Y', 'ALVAREZ ROBREDO, LUIS ANGEL', 'Hombre', '1996-10-24', 2, '2017-06-13', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(64, 357, '43162330R', 'MANZANARES BAÑOS, DAVID', 'Hombre', '1982-09-08', 34, '2015-02-07', 7, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:27:19'),
+(65, 820, '75884019G', 'BENITEZ SUBIAS, VANESA', 'Mujer', '1981-05-04', 40, '2022-06-01', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(66, 323, '74850412V', 'BERMEJO EXPOSITO, SARA', 'Mujer', '1980-11-03', 2, '2016-04-25', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(67, 373, '41460327K', 'DOMINGUEZ BAENA, DAVID', 'Hombre', '1980-05-09', 50, '2016-04-04', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(68, 379, '41456576L', 'BLASCO BARRERO, ISABEL MARIA', 'Mujer', '1982-07-18', 2, '2016-03-14', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(69, 376, '41454714C', 'MARIN CORTES, OSCAR', 'Hombre', '1977-01-06', 32, '2018-04-23', 13, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(70, 378, 'X8973539C', 'FERRARIS, DIEGO', 'Hombre', '1975-04-01', 48, '2017-04-03', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(71, 805, '47257531Y', 'BOGNANI, PAOLA', 'Mujer', '1993-10-21', 26, '2022-05-15', 25, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(72, 380, '47256098E', 'BONED ROIG, CARLES', 'Hombre', '1991-10-30', 34, '2017-07-30', 22, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(73, 382, '41524562V', 'SEGUI JUAN, JOSEP', 'Hombre', '1990-07-11', 22, '2017-05-01', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(74, 387, '32875243D', 'SUAREZ GARCIA, MARINO', 'Hombre', '1972-07-03', 31, '2016-04-07', 10, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(75, 397, '41445077C', 'FERRER RIBAS, JOSE', 'Hombre', '1963-11-13', 50, '2016-04-13', 15, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(76, 403, '42861727P', 'SANTANA SAAVEDRA, JOSE MANUEL', 'Hombre', '1971-01-01', 2, '2017-04-18', 11, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(77, 859, '43709565C', 'BONASTRA DE CASTRO, MARIA CARMEN', 'Mujer', '1970-07-01', 1, '2022-07-13', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(78, 410, '46993698Y', 'CONEJERO BERNAL, CRISTIAN', 'Hombre', '1990-04-29', 2, '2017-03-27', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(79, 907, '47259965W', 'BONET TRUJILLO, MARTA', 'Mujer', '1992-02-15', 26, '2023-03-13', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(80, 785, '43210704Y', 'BUGALLO ODELLA, SILVINA YANET', 'Mujer', '1982-12-26', 1, '2022-04-25', 26, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(81, 423, '47251833N', 'MARI RIERA, JUAN', 'Hombre', '1991-11-29', 34, '2019-04-23', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(82, 807, '30557702V', 'BURGOA ARANTZAMENDI, MIREN LORE', 'Mujer', '1963-03-01', 26, '2022-05-16', 26, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(83, 968, 'Y9980683P', 'CALVARI, MARIA FLORENCIA', 'Mujer', '1992-10-22', 26, '2023-06-05', 26, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(84, 438, '53244067X', 'CARBONELL MONZO, BORJA', 'Hombre', '1989-03-01', 2, '2017-05-01', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(85, 443, '78919718W', 'BASTERRECHEA CABALLERO, IRAITZ', 'Hombre', '1986-01-23', 23, '2019-04-10', 16, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(86, 897, '43167690W', 'CANAVES ROS, EVA MARIA', 'Mujer', '1984-03-30', 26, '2022-12-12', 26, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(87, 551, '41451673S', 'COSTA TUR, JOSE', 'Hombre', '1971-11-27', 32, '2019-01-31', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(88, 554, '47260066B', 'SERRA RIERA, JOSEP SALVADOR', 'Hombre', '1988-07-24', 27, '2017-04-22', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(89, 559, '47253295W', 'ROMERO GARCIA, CESAR', 'Hombre', '1993-01-02', 1, '2017-04-29', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(90, 38, '41461842H', 'CARAYOL NAVARRO, MARIA ROSARIO', 'Mujer', '1978-07-27', 1, '2003-05-05', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(91, 569, '47258460S', 'KEHRLI ESCANDELL, OSCAR ENRIQUE', 'Hombre', '1993-02-12', 34, '2017-05-29', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(92, 572, '47407097A', 'TEJADO DELGADO, DAVID', 'Hombre', '1995-10-24', 2, '2020-05-13', 15, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(93, 573, '46959646V', 'PERELLO GUASCH, JOSE ANTONIO', 'Hombre', '1981-04-01', 2, '2018-04-23', 13, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(94, 575, '47251776R', 'LINERO ALVAREZ, DAVID', 'Hombre', '1990-02-05', 2, '2018-03-19', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(95, 576, '47259122X', 'RAMON COSTA, JAUME', 'Hombre', '1996-05-21', 32, '2018-04-16', 8, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-29 10:57:15'),
+(96, 585, '47256454X', 'JUAN FERRER, JUAN ANTONIO', 'Hombre', '1992-02-05', 32, '2017-08-08', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(97, 937, '47406526F', 'CARBONELL MOYA, AINA', 'Mujer', '2000-10-07', 26, '2023-04-24', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(98, 588, '52726339N', 'JIMENEZ CAMPOS, JOAQUIN', 'Hombre', '1971-12-27', 27, '2017-12-04', 30, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(99, 593, '76904134T', 'ALVAREZ MARTINEZ, MIGUEL ANGEL', 'Hombre', '1979-08-13', 2, '2018-03-19', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(100, 598, '76635815E', 'PERAL SANCHEZ, JOSE MIGUEL', 'Hombre', '1990-01-01', 2, '2018-05-01', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(101, 601, '47258959P', 'ARABI GUINART, JOSEP', 'Hombre', '1994-12-11', 34, '2018-05-17', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(102, 607, '47406814L', 'RODRIGUEZ TORRES, JOEL', 'Hombre', '1996-05-10', 2, '2019-04-01', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(103, 608, '47259429H', 'CARDONA TORRES, JOAN LUIS', 'Hombre', '1998-05-25', 2, '2018-05-31', 9, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-11-18 10:05:18'),
+(104, 12, '41450383J', 'CARDONA TUR, CARMEN', 'Mujer', '1969-04-24', 1, '1995-04-20', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(105, 619, '47433721Q', 'TORRES GUASCH, ANDREU', 'Hombre', '1999-02-17', 34, '2021-06-01', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(106, 621, '47257449Q', 'MARI FERNANDEZ, ALEX', 'Hombre', '1997-08-15', 2, '2020-05-20', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(107, 938, '48606017W', 'CEBRIAN OLCINA, MARIA', 'Mujer', '1993-06-07', 26, '2023-04-25', 26, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(108, 635, '20194068E', 'LOPEZ CAMUS, RAFAEL', 'Hombre', '1973-08-14', 32, '2021-06-09', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(109, 808, '75902018V', 'CERRO MARTINEZ, ISABEL MARIA', 'Mujer', '1986-12-03', 49, '2022-05-17', 28, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(110, 1000, 'X6877939L', 'CHENTOUF, HANAN', 'Mujer', '1975-11-15', 41, '2023-10-09', 27, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(111, 639, '58056578R', 'SESAH ARTHUR, ROBERT KWESI', 'Hombre', '1965-08-09', 34, '2019-04-01', 12, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(112, 643, '41455802G', 'RIBAS RIBAS, JOSE VICENTE', 'Hombre', '1976-02-02', 50, '2021-07-12', 9, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(113, 849, 'Y7506494K', 'CHRIFI ALAOUI, MERYEM', 'Mujer', '1991-03-19', 40, '2022-06-29', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(114, 833, '41751244B', 'COLL DIAZ, MARTA', 'Mujer', '1997-02-08', 49, '2022-06-07', 28, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(115, 561, '48199132X', 'COSTA ROIG, MARIA NIEVES', 'Mujer', '1999-02-11', 2, '2019-05-13', 16, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(116, 672, '39892709Z', 'GRANDA GONZALEZ, JULIO CESAR', 'Hombre', '1979-03-29', 2, '2022-05-01', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(117, 674, 'Y0890212B', 'SPIESER JALBAUD, LOUIS ROBERT PIERRE', 'Hombre', '1994-04-28', 34, '2020-02-10', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(118, 675, '47405810G', 'FERRER FERRER, ADRIAN', 'Hombre', '1997-04-08', 2, '2022-07-01', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(119, 684, '47430090L', 'GIMENEZ TORRES, JUAN', 'Hombre', '2000-09-21', 2, '2022-07-01', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(120, 685, '47430809W', 'ESCANDELL ESCANDELL, LUIS', 'Hombre', '1997-12-07', 2, '2022-06-13', 15, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(121, 8, '22719306K', 'DE LA FUENTE TORRES, FRANCISCA', 'Mujer', '1962-04-18', 27, '2023-03-31', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-05-15 13:46:42'),
+(122, 691, '36011742K', 'MARTINEZ COBA, JULIO', 'Hombre', '1956-01-06', 42, '2021-07-17', 23, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(123, 696, '47406340M', 'TRELIS CARDONA, KILIAN', 'Hombre', '1989-01-31', 1, '2020-01-29', 23, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(124, 698, 'X8221056M', 'MARZAK, AHMED', 'Hombre', '1975-06-23', 33, '2020-03-01', 27, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(125, 699, '47251531D', 'PRIOR BONED, DAVID', 'Hombre', '1991-04-04', 1, '2020-03-03', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(126, 703, '54103381K', 'LECHUGA ESCUDERO, KEVIN', 'Hombre', '1992-10-02', 27, '2020-03-13', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(127, 705, '47255834B', 'COSTA ALBA, JAVIER', 'Hombre', '1995-07-17', 26, '2021-05-12', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(128, 706, '47258183Z', 'TUR HOMAR, GERARD', 'Hombre', '1996-11-18', 27, '2021-05-17', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-08-01 09:35:38'),
+(129, 277, '46956710W', 'DE LA TORRE BLANQUEZ, NURIA', 'Mujer', '1981-01-05', 42, '2012-11-20', 23, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(130, 708, '47432117E', 'GONZALEZ GONZALEZ, RAFAEL', 'Hombre', '1994-09-06', 2, '2021-12-09', 16, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(131, 709, '51428229E', 'PEREZ MORENO, SAMUEL', 'Hombre', '1979-06-20', 27, '2022-04-01', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(132, 710, '47408010L', 'MUÑOZ GUASCH, MARC', 'Hombre', '1997-08-25', 2, '2022-02-01', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:27:38'),
+(133, 711, '47406466Q', 'RAMON RIERA, IVAN', 'Hombre', '1997-07-11', 34, '2022-02-01', 16, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(134, 712, '72180413L', 'SANCHEZ - VALVERDE LOPE, JAVIER', 'Hombre', '1991-04-29', 2, '2022-05-02', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(135, 274, '46954609V', 'DELGADO ROIG, NOELIA', 'Mujer', '1981-07-29', 1, '2014-03-03', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-05-27 08:35:56'),
+(136, 716, '79326166V', 'AGEITOS BLANCO, MARCIAL', 'Hombre', '1978-10-31', 34, '2022-01-03', 20, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(137, 717, '47250165T', 'CABRERA VEGA, MARIA', 'Hombre', '1985-11-05', 26, '2022-06-20', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(138, 723, '47627004F', 'VIVES GARCIA, EMILI', 'Hombre', '1979-10-03', 42, '2021-08-01', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(139, 728, '41745970G', 'MORCILLO MORAN, AARÓN', 'Hombre', '1998-05-21', 27, '2022-07-04', 30, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-06-21 11:40:13'),
+(140, 731, '36088927H', 'COSTAS ALONSO, GERMAN', 'Hombre', '1967-04-17', 30, '2022-01-03', 10, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(141, 732, '53183489Z', 'ORTIZ GARCIA, GABRIEL', 'Hombre', '1983-03-03', 44, '2022-01-03', 20, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(142, 734, '47252943H', 'SORIANO TORRES, ALVARO', 'Hombre', '1993-06-09', 2, '2021-09-01', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(143, 735, '47826297M', 'VAZQUEZ GALLART, JORDI', 'Hombre', '1998-10-25', 39, '2022-02-04', 22, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(144, 736, '75814283G', 'ORTA ARIZA, JORGE', 'Hombre', '1978-06-22', 34, '2021-09-06', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(145, 739, '47259147N', 'MARTINEZ GARCIA, RODRIGO', 'Hombre', '1994-06-03', 31, '2021-09-06', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(146, 742, 'Y7375907M', 'RIVERA VEGA, OSCAR ANDRES', 'Hombre', '1976-04-02', 27, '2021-09-17', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-07-15 13:30:15'),
+(147, 744, '31257938H', 'LEON ALFEREZ, MANUEL', 'Hombre', '1968-04-15', 32, '2021-10-01', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(148, 746, '36040236H', 'COLLAZO VIDAL, CLAUDIO', 'Hombre', '1961-01-07', 30, '2022-01-03', 10, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(149, 747, '48320161J', 'RODES GARCIA, JORDI', 'Hombre', '1977-01-26', 34, '2022-06-03', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(150, 748, '41452880A', 'FERRER FERRER, FRANCISCO', 'Hombre', '1970-07-11', 26, '2022-01-13', 27, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(151, 749, '47259563Z', 'CARDONA BONET, GUILLEM', 'Hombre', '1996-10-23', 21, '2021-11-02', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(152, 750, '47253016E', 'SANCHO PEÑA, VICENTE', 'Hombre', '1992-09-20', 1, '2021-11-17', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(153, 752, '53552292N', 'LLANEZA NIETO, DAVID', 'Hombre', '1983-03-02', 34, '2021-11-30', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(154, 754, '43387524W', 'RODRIGUEZ DOMINGUEZ, YERAY', 'Hombre', '1996-05-05', 23, '2021-12-02', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(155, 755, '53647496L', 'SOTO URIA, DANIEL', 'Hombre', '1993-09-08', 38, '2021-12-26', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(156, 757, '45595342G', 'GOMEZ AVILES, MARIO', 'Hombre', '1975-06-25', 22, '2022-01-01', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(157, 759, '31694831A', 'ORTIZ MORILLAS, MANUEL JESUS', 'Hombre', '1976-04-06', 22, '2022-01-17', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-05-22 15:40:43'),
+(158, 761, '75874658G', 'SALVATIERRA HOYOS, DAVID', 'Hombre', '1975-03-20', 37, '2022-01-28', 20, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(159, 762, '22986182M', 'TABOADA DURRUTY, SEM JUAN ETIENN', 'Hombre', '1969-09-06', 23, '2022-01-31', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(160, 763, '32042371J', 'TOLEDO SERRATO, JORGE CARLOS', 'Hombre', '1971-02-21', 23, '2022-02-04', 20, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(161, 765, '75888668F', 'CASTRO MARIN, DANIEL', 'Hombre', '1982-03-05', 37, '2022-02-11', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(162, 909, 'Y0022563Z', 'DI NUNZIO, SANDRA', 'Mujer', '1981-10-12', 26, '2023-03-20', 27, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(163, 767, '51810146R', 'RODRIGUEZ NUÑEZ, VLADIMIR OMAR', 'Hombre', '1961-05-13', 32, '2022-02-21', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:31:16'),
+(164, 769, '75750319A', 'SABORIDO URIA, FRANCISCO JAVIER', 'Hombre', '1978-02-23', 32, '2022-03-25', 20, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(165, 770, '47406754M', 'ALBERT TUR, VICTOR', 'Hombre', '1999-05-13', 2, '2022-03-25', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(166, 771, '30570187J', 'GALDOS BARRANCO, CARLOS SABINO', 'Hombre', '1965-06-03', 22, '2022-04-05', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(167, 772, '47252226Z', 'HERRERA BERLANGA, SAMUEL', 'Hombre', '1989-10-13', 27, '2022-04-09', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(168, 963, 'Y5341537P', 'EL BAKKALI, SOUKAINA', 'Mujer', '1990-10-08', 41, '2023-06-01', 27, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(169, 777, '43158414H', 'DOMINGUEZ GONZALEZ-MIRAND, LUIS BART.', 'Hombre', '1987-08-24', 23, '2022-04-13', 20, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(170, 779, '43199194L', 'MICO CARBALLO, ALEJANDRO', 'Hombre', '1990-04-05', 27, '2022-04-22', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(171, 304, '41455361T', 'ESCANDELL ROIG, EVA MARIA', 'Mujer', '1976-02-12', 2, '2015-03-30', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(172, 781, '34095769V', 'GABARAIN SAIZ, MIKEL', 'Hombre', '1969-03-06', 27, '2022-04-25', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(173, 783, '47406595F', 'GONZALEZ PRATS, SERGIO', 'Hombre', '1998-07-09', 34, '2022-04-25', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(174, 644, 'Y3107583K', 'ESCOBAR ORTIZ, NELLY ELIZABETH', 'Mujer', '1989-05-10', 41, '2019-04-23', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(175, 950, '41753819X', 'ESCOBAR VAZQUEZ, DORA GRISELDA', 'Mujer', '1985-05-19', 49, '2023-05-11', 28, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(176, 787, '41740667Z', 'ORFILA PONS, PEDRO', 'Hombre', '1990-03-18', 26, '2022-04-25', 23, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(177, 788, '43176283Q', 'ALEMANY SASTRE, TOMAS', 'Hombre', '1991-12-22', 2, '2022-05-16', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(178, 789, '43051137J', 'SANCHEZ SANCHEZ, FRANCISCO', 'Hombre', '1969-06-20', 35, '2022-05-09', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(179, 790, '05394205S', 'BARTHELEMY PAZ, FERNANDO', 'Hombre', '1962-10-11', 35, '2022-05-02', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(180, 791, '72438626B', 'LERTXUNDI MURGIONDO, MIKEL AINGERU', 'Hombre', '1966-12-23', 2, '2022-05-02', 15, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(181, 792, '05929119H', 'GARCIA LUENGO, JAIME', 'Hombre', '1986-08-06', 34, '2022-05-03', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(182, 1019, 'Y8579851Z', 'ESCOBAR VAZQUEZ, KARIN GISSELLA', 'Mujer', '1998-06-12', 49, '2024-03-11', 28, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(183, 794, '53645317W', 'VALDEMORO BRAVO, ANGEL JOSE', 'Hombre', '1986-09-09', 2, '2022-05-03', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(184, 795, '47253251G', 'BOUZON SANCHEZ, NOEL', 'Hombre', '1986-11-06', 2, '2022-05-02', 11, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(185, 796, '31853714W', 'CORDOBA MORQUILLA, JORGE ALBERTO', 'Hombre', '1971-02-12', 37, '2022-05-03', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(186, 797, '32794348M', 'PEREZ ARES, JORGE AGUSTIN', 'Hombre', '1968-12-01', 40, '2022-05-03', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(187, 798, '31862676V', 'ROSA RIOS, VICTOR MANUEL', 'Hombre', '1975-11-19', 34, '2022-05-04', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(188, 804, 'Y3494139Q', 'F VARGAS, JOANIMARLY', 'Mujer', '1989-05-29', 26, '2022-05-12', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(189, 800, '41455438P', 'TORRES TUR, VICENTE', 'Hombre', '1973-09-02', 2, '2022-05-12', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(190, 801, '41746429A', 'VILLALONGA ENENTO, ENRIC', 'Hombre', '1992-08-06', 49, '2022-05-11', 28, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(191, 1009, '41752411M', 'FEBRER LLORENS, FRANCINA', 'Mujer', '2003-01-31', 49, '2023-12-05', 28, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(192, 979, '43476721M', 'FEMENIAS SUAREZ, CRISTINA', 'Mujer', '2000-11-08', 26, '2023-07-03', 26, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(193, 895, '47406769C\n', 'GARCIA GOMEZ, ANA MARIA', 'Mujer', '2001-02-18', 26, '2022-12-05', 29, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(194, 803, '30698172A', 'GARCIA LOPEZ, NAZARET', 'Mujer', '1997-10-21', 26, '2022-05-11', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-07-24 11:54:14'),
+(195, 802, '46952173L', 'GARCIA MARTINEZ, JESSICA', 'Mujer', '1978-10-29', 1, '2022-05-16', 23, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(196, 424, '49413954H', 'GARCIA RAMON, TATIANA', 'Mujer', '1992-10-12', 36, '2018-03-28', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(197, 809, '47406641F', 'MORENO RODRIGUEZ, ANTONIO', 'Hombre', '1999-08-20', 46, '2022-05-17', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(198, 811, '31849554M', 'GOMEZ GIL, MARIA LUISA', 'Mujer', '1967-12-05', 36, '2022-05-23', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(199, 812, 'X6867018T', 'EBIYON, BRIKINN', 'Hombre', '1974-07-14', 36, '2022-05-23', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(200, 951, '26243345T', 'GÓMEZ NEBRERA, VANESA', 'Mujer', '1985-06-30', 26, '2023-05-15', 26, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:33:37'),
+(201, 815, '47407071T', 'GUASCH MARI, VICENT', 'Hombre', '1994-12-12', 34, '2022-05-30', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(202, 816, '41447901S', 'TORRES RIBAS, JESUS', 'Hombre', '1966-11-07', 50, '2022-05-26', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(203, 817, '71157001S', 'CANTO VALLINA, FRANCISCO JOSE', 'Hombre', '1987-07-15', 22, '2022-05-28', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(204, 1007, 'Z1469612D', 'GUERRA, TAMARA', 'Mujer', '1968-12-26', 41, '2023-11-28', 27, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(205, 1017, '37342121B', 'GUITART FEMENIAS, MARIA HELENA', 'Mujer', '1982-09-10', 42, '2024-03-01', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(206, 766, '41461994D', 'GUTIERREZ VILAR, NOELIA', 'Mujer', '1982-05-18', 1, '2022-04-11', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(207, 821, '55143984N', 'CINSTITU UNGUREANU, MIHAI', 'Hombre', '1967-11-28', 2, '2022-06-27', 20, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(208, 822, '41455465N', 'RIERA JUAN, ANTONIO', 'Hombre', '1973-12-08', 1, '2022-05-30', 23, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(209, 823, '49569144G', 'GONZALEZ RUIZ, EDUARDO ASNALDO', 'Hombre', '1964-09-15', 2, '2022-06-06', 19, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(210, 824, '41738666Z', 'HURTADO ROMERO, JOSE', 'Hombre', '1972-10-29', 49, '2022-05-31', 28, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(211, 825, '50415682G', 'MARTINEZ GIRONES, JOAQUIN GERMAN', 'Hombre', '1958-06-10', 50, '2022-05-31', 15, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-07-08 08:50:02'),
+(212, 827, '40533957E', 'GARCIA BARCELO, ROGER', 'Hombre', '1980-11-16', 34, '2022-06-10', 20, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-23 10:07:53'),
+(213, 828, '48763537H', 'MORENO NAVARRO, ALEJANDRO', 'Hombre', '1995-02-01', 34, '2022-06-02', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(214, 829, 'Y4746951H', 'CRICCO, MAURO JOSE', 'Hombre', '1978-10-30', 23, '2022-06-02', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-07-22 09:10:49'),
+(215, 9, 'X9374424S', 'HURTADO GUTIERREZ, JOSELIN', 'Mujer', '1998-04-20', 26, '2023-03-02', 25, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-25 10:27:13'),
+(216, 831, '47431270A', 'MAÑEZ PLANELLS, ADRIA', 'Hombre', '2001-08-10', 2, '2022-06-16', 8, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:28:07'),
+(217, 832, '47408354H', 'COSTA TUMBACO, VICENTE ADRIAN', 'Hombre', '2002-12-02', 2, '2022-06-16', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(218, 1004, '47745858C', 'ISART ESTEVA, HELENA', 'Mujer', '1994-04-24', 26, '2023-11-15', 27, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(219, 835, '47406114D', 'ESCANDELL BONET, VICENTE', 'Hombre', '1997-08-21', 34, '2022-06-20', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(220, 836, '41604189H', 'ORTIZ GARCIA, FRANK', 'Hombre', '1994-07-20', 2, '2022-06-15', 19, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-28 11:04:14'),
+(221, 838, '41529072L', 'MIRANDA EXPOSITO, IVAN', 'Hombre', '1995-05-29', 2, '2022-06-13', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(222, 839, '75897162Z', 'TRIGUEROS GARCIA, DAVID', 'Hombre', '1994-12-15', 34, '2022-06-13', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(223, 840, '43480537A', 'FERNANDEZ SELS, PHILLIPP ALEXANDER', 'Hombre', '1988-05-17', 23, '2022-06-14', 19, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(224, 841, '75916337F', 'ALCALDE CAMPOS, ISMAEL', 'Hombre', '1992-02-09', 2, '2022-06-17', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(225, 842, 'Y1475040H', 'SOTO ARCILA, CRISTIAN ANDRES', 'Hombre', '1994-09-25', 2, '2022-06-17', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(226, 843, '45184490R', 'GALDOS BURGOA, AITOR', 'Hombre', '2003-08-25', 26, '2022-06-17', 26, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-06-03 11:15:40'),
+(227, 957, 'Y6149069X', 'LEIVA, MARIA EUGENIA', 'Mujer', '1982-10-11', 26, '2023-05-22', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(228, 986, '42264813J', 'LEÓN TRAVIESO, MELANI VICTORIA', 'Mujer', '1998-10-24', 36, '2023-09-07', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-25 12:15:35'),
+(229, 846, '78221701N', 'COLL CARRETERO, MACIA', 'Hombre', '1997-10-03', 26, '2022-06-20', 26, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-07-04 12:02:01'),
+(230, 847, '75960085D', 'JIMENEZ ANDRADES, JESUS', 'Hombre', '1986-10-15', 22, '2022-06-21', 20, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(231, 848, '42285827M', 'GARCIA GIMIENEZ, POL', 'Hombre', '1999-05-19', 2, '2022-06-30', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(232, 434, '34851226Q', 'LOPEZ DIAZ, ENCARNACION', 'Mujer', '1964-08-04', 41, '2017-03-30', 27, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(233, 850, '43460370F', 'MORENO CORRAL, MARC', 'Hombre', '2002-05-01', 34, '2022-06-29', 19, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(234, 851, '14592581R', 'RODRIGUEZ GONZALEZ, LUIS MIGUEL', 'Hombre', '1964-06-25', 2, '2022-07-01', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(235, 852, '47381207B', 'BARROS VALIÑA, JESUS MANUEL', 'Hombre', '0001-01-01', 32, '2022-07-05', 19, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:31:57'),
+(236, 853, '47408692B', 'ZITO MARIN, ALEXANDRO', 'Hombre', '1994-08-27', 2, '2022-07-07', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(237, 854, '48172744A', 'BIELSA GARCIA, CARLOS', 'Hombre', '1999-08-31', 34, '2022-07-08', 22, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(238, 855, '41524046F', 'JUAN FUSTER, JOSEP', 'Hombre', '1991-01-31', 23, '2022-07-10', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(239, 856, '18993007K', 'GARCIA RODRIGUEZ, JAVIER', 'Hombre', '1972-07-25', 36, '2022-07-14', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(240, 857, '53557520L', 'VAZQUEZ GUTIERREZ, PABLO', 'Hombre', '1987-03-21', 36, '2022-07-14', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(241, 858, '41755126Y', 'BURDILES VERA, DENIS ANDRES', 'Hombre', '2001-05-18', 49, '2022-07-12', 28, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(242, 646, '72079142V', 'LOPEZ GONZALEZ, ALEXANDRA', 'Mujer', '1986-05-05', 36, '2019-04-24', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(243, 860, '43208729D', 'REYNES GALLEGO, FRANCISCO ALEJANDRO', 'Hombre', '2001-07-18', 36, '2022-07-18', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(244, 242, '45590835M', 'MAÑAS RODRIGUEZ, MARIA DEL CARMEN', 'Mujer', '1976-10-16', 1, '2011-04-04', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(245, 862, '41752434M', 'SIERRA JARAMILLO, JEHINER ALEXANDER', 'Hombre', '1983-07-12', 2, '2022-07-25', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(246, 863, '75916933M', 'VALVERDE MARIN, LUIS MANUEL', 'Hombre', '1992-06-29', 2, '2022-07-25', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(247, 864, '78710782K', 'GORRIN ARMAS, RAMON ENRIQUE', 'Hombre', '1979-09-03', 37, '2022-07-27', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(248, 865, '10222676G', 'AATTAR BELKHYR, YASSINE', 'Hombre', '1994-01-08', 39, '2022-07-28', 19, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(249, 866, '48109447W', 'FRANCO  ROMERO, LUIS', 'Hombre', '2001-04-30', 2, '2022-07-28', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-05-07 13:33:03'),
+(250, 873, 'X4792566X', 'MARIN MARTINEZ, TATIANA   ', 'Mujer', '1997-01-18', 49, '2022-08-22', 28, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(251, 876, '78585873W', 'GARCIA PERESTELO, GUILLERMO  ', 'Hombre', '1990-11-17', 34, '2022-09-10', 14, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(252, 877, '34748377T', 'MORA VALERO, ORIOL', 'Hombre', '1978-12-13', 49, '2022-09-20', 28, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(253, 878, '75880541E', 'TOLEDO DIAZ, DANIEL', 'Hombre', '1976-10-23', 34, '2022-10-03', 20, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(254, 871, '41751177J', 'PONS SANCHEZ, MARC', 'Hombre', '1999-06-26', 49, '2022-08-18', 28, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(255, 319, '46957487C', 'MARIN ROMERO, EVA MARIA', 'Mujer', '1981-09-24', 1, '2014-03-03', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(256, 879, '45865637A', 'RAMOS BARROSO, MARCOS', 'Hombre', '1996-10-28', 23, '2022-10-07', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(257, 880, '78805146Q', 'AGEITOS BLANCO, MARTIN', 'Hombre', '1991-09-20', 34, '2022-10-12', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(258, 875, '71901257Z', 'ROCES MORAN, JAVIER', 'Hombre', '1995-09-05', 34, '2022-08-27', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(259, 874, '41502433Z', 'VALVERDE HERNANDO, RAUL', 'Hombre', '1976-04-17', 34, '2022-08-31', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(260, 881, '75900843S', 'RUIZ ESTRADA, MANUEL', 'Hombre', '1984-09-09', 34, '2022-10-14', 12, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(261, 647, '55469005C', 'MARQUES RIBEIRO, FERNANDA', 'Mujer', '1982-09-05', 26, '2019-04-25', 25, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(262, 883, '54148126P\n', 'ROSS SANTANA, ALEXEI', 'Hombre', '1969-09-22', 34, '2022-10-27', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(263, 884, '43156293J', 'BALEANI-SPRINGOLO SERRA, IGNACIO', 'Hombre', '1988-05-09', 23, '2022-10-28', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(264, 885, '48762559Y', 'MOLINA GRANIZO, PABLO', 'Hombre', '1997-04-17', 34, '2022-10-30', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(265, 886, '32862720K', 'RUIZ CEBADA, JOSE MARIA', 'Hombre', '1969-11-03', 34, '2022-11-07', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(266, 887, '13979231S', 'GOMEZ GOMEZ, JOSE RAMON', 'Hombre', '1975-08-21', 32, '2022-11-03', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(267, 745, '30657987E', 'MARTINEZ PERALTA, RUBEN ESTEBAN', 'Hombre', '0000-00-00', 32, '2021-10-04', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(268, 56, '41447907K', 'TORRES MUÑOZ, JAIME', 'Hombre', '1969-02-03', 34, '2022-11-01', 5, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:26:30'),
+(269, 753, '47260233V', 'VERDERA JUAN, FRANCISCO JAVIER', 'Hombre', '0000-00-00', 23, '2022-05-02', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(270, 707, '76260828G', 'MARTINEZ BARRERO, FELISA', 'Mujer', '1993-08-20', 26, '2021-12-29', 27, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(272, 891, '47260039F', 'MAYANS TORRES, PAU', 'Hombre', '1996-11-02', 23, '2022-12-01', 14, 1, 'Si', 'Si', '', '2014-03-24 13:51:00', '2024-07-10 07:56:43'),
+(273, 942, '47258302H', 'SANCHEZ ARIAS, ERIC JOSE', 'Hombre', '1995-05-11', 2, '2022-11-23', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(274, 893, '73397330Y', 'FERNÁNDEZ ROCA, JOAN', 'Hombre', '1996-11-30', 34, '2022-12-01', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-25 12:14:53'),
+(275, 882, '43038474T', 'MARTINEZ ROTGER, MARIA ANGELES', 'Mujer', '1996-11-03', 52, '2022-10-18', 26, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-11-12 14:02:55'),
+(276, 845, 'Y6047308R', 'MEZA ILARRAZA, LISSETTE ANAIS', 'Mujer', '1985-08-28', 49, '2022-06-20', 28, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(277, 896, '78640257Z', 'RODRIGUEZ GONZALEZ, DANIEL', 'Hombre', '1995-02-24', 39, '2022-12-03', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(278, 844, '18222644C', 'MIRALLES ARMERO, MARIA DEL MAR', 'Mujer', '1972-10-16', 52, '2022-06-20', 26, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-07-22 08:08:19'),
+(279, 892, '71657450F', 'LOPEZ MONTERO, GONZALO RAFAEL', 'Hombre', '1987-08-29', 44, '2022-12-02', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-07-10 07:57:39'),
+(280, 890, '78519795A', 'RODRIGUEZ SANTANA, ALEJANDRO MANUEL', 'Hombre', '1984-10-10', 34, '2022-12-17', 20, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(281, 898, '78769677J', 'MARTIN NUÑEZ, MIGUEL ANGEL', 'Hombre', '0000-00-00', 34, '2022-12-17', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-25 12:17:29'),
+(282, 900, '71639279Y', 'ESCALADA MARIN, DAVID', 'Hombre', '0000-00-00', 25, '2023-01-04', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(283, 899, 'Y9449622V', 'CANDELO CUERO, FAVER ODIMAR', 'Hombre', '1984-05-08', 27, '2022-01-03', 30, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(284, 901, '47409255E', 'SALOMON PADILLA, JOAN', 'Hombre', '1985-08-21', 27, '2022-01-17', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(285, 902, '47432042Q\n', 'FERRER FERRER, SERGI EDUARD', 'Hombre', '0000-00-00', 27, '2023-01-18', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(286, 903, '47433117X', 'RODRIGUEZ RODRIGUEZ, JOSE MARIA\n', 'Hombre', '1993-05-17', 27, '2023-02-01', 29, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(287, 7, '48198156T', 'FERRER ESCANDELL, DANIEL', 'Hombre', '2000-09-03', 1, '2023-02-05', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-30 10:36:35'),
+(288, 905, '76361137X', 'PEREZ ABELLEIRA, JOSE RAMON\n', 'Hombre', '1965-12-16', 34, '2023-02-22', 19, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(289, 906, '51118002L\n', 'ANGLADA REVENGA, JAIME\n', 'Hombre', '1991-05-09', 34, '2023-03-01', 12, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(290, 904, '79063365Z\n', 'MESA BASTIDA, CLAUDIO ARTURO', 'Hombre', '1993-09-11', 34, '2023-02-28', 12, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(291, 778, '22962290X', 'DONATE MARTINEZ, JOSE DOMINGO', 'Hombre', '1999-01-01', 2, '2022-01-15', 20, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(292, 556, '0002t', 'MIRANDA VILLACRESES, JOCELYNE PAMELA', 'Mujer', '0000-00-00', 26, '0000-00-00', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(293, 715, '47259258P', 'MORENO PLATA, NATALIA', 'Mujer', '1993-07-08', 26, '2022-04-29', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(294, 775, '46953726P', 'MORENO RODRIGUEZ, PROVIDENCIA', 'Mujer', '1977-03-05', 26, '2022-04-11', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-11-04 08:06:36'),
+(295, 870, '47664389V\n', 'LOZANO MORATA, JOSE', 'Hombre', '1989-11-08', 46, '2023-03-31', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(296, 965, '78720363B', 'NAVARRO BARRERA, JESICA', 'Mujer', '1983-08-27', 36, '2023-06-03', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(297, 634, '41461877F', 'NIETO ARRIBAS, EVA MARIA', 'Mujer', '1975-11-13', 26, '2019-02-20', 27, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(298, 910, '47405523Q', 'ARRIAZA RINCON, PATRICIO', 'Hombre', '1998-08-18', 46, '2023-03-29', 30, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(299, 911, '48198061C', 'FERNANDEZ SERRANO, ADRIAN', 'Hombre', '2001-02-12', 27, '2023-03-31', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(300, 915, '29198514Z', 'CARRIO GARCIA, JAIME', 'Hombre', '1977-07-23', 27, '2023-03-31', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(301, 912, 'X2746193Q', 'PASTANO, LUCA', 'Hombre', '1972-04-08', 46, '2023-03-31', 29, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(302, 917, '24373813T', 'CORTINA SALVAGO, GIOVANA', 'Hombre', '1977-09-25', 46, '2023-04-05', 29, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(303, 919, '47260798F ', 'GARCIOLO MARTOS, JUAN ANDRES', 'Hombre', '1995-08-14', 26, '2023-03-27', 25, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00');
+INSERT INTO `trabajadores` (`id_trabajador`, `codigo_tr`, `dni_tr`, `nombre_tr`, `sexo_tr`, `fechanac_tr`, `categoria_tr`, `inicio_tr`, `centro_tr`, `activo_tr`, `formacionpdt_tr`, `informacion_tr`, `anotaciones_tr`, `fyh_creacion`, `fyh_actualizacion`) VALUES
+(304, 920, 'X9240193N', 'GONZALEZ ANDRADE, JESUS ABEL', 'Hombre', '1994-12-26', 27, '2023-03-29', 29, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(305, 921, '47431252P', 'ALVADO BATLLORI, CARLOS', 'Hombre', '2004-03-17', 27, '2023-03-31', 29, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(306, 922, '52899577Z', 'CASAS SÁNCHEZ, DAVID', 'Hombre', '1992-02-07', 27, '2023-03-31', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-25 12:17:06'),
+(307, 923, 'Y2276896W', 'EL ABDELLAOUI, ALI', 'Hombre', '1994-02-01', 27, '2023-03-31', 30, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(308, 916, '52454673E', 'PIÑEIRO SANCHEZ, JOSE LUIS', 'Hombre', '1967-10-15', 34, '2023-03-31', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:32:25'),
+(309, 918, '78625879B', 'GONZÁLEZ YANES, JONATHAN', 'Hombre', '1986-08-31', 34, '2023-04-14', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:29:05'),
+(310, 924, '47406183D', 'TORRES PRATS, JOAN MARC', 'Hombre', '1997-05-06', 23, '2023-04-11', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(311, 925, '47259650D', 'COLOMAR MARTIN, DAVID', 'Hombre', '1997-07-03', 2, '2023-04-11', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(312, 926, '47431439B', 'CABEZUELO DELGADO, JAVIER', 'Hombre', '2004-01-05', 27, '2023-04-10', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(313, 868, '18217528X', 'OBRADOR FUSTER, MARGARITA', 'Mujer', '1967-04-24', 26, '2022-08-09', 26, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(314, 928, '11783785B', 'IGLESIAS CRUZ, JOSE MANUEL', 'Hombre', '1972-11-30', 34, '2023-04-14', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(315, 929, '39951732L', 'GARCIA CORTES, MIGUEL', 'Hombre', '2004-03-22', 46, '2023-04-17', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(316, 930, '47260660F', 'VERDERA SANCHEZ, ALEJANDRO', 'Hombre', '2003-03-14', 46, '2023-04-15', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-05-20 12:51:59'),
+(317, 931, 'Y9751913L', 'DELLE ROSE, GIULIO', 'Hombre', '1991-07-10', 46, '2023-04-15', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-05-28 08:10:26'),
+(318, 932, '71892660L', 'ÁLVAREZ SANCHEZ, MARIANO', 'Mujer', '1986-09-04', 34, '2023-04-26', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-25 12:11:33'),
+(319, 933, '41746000B', 'FULLANA AMORÓS, FRANCESC', 'Hombre', '1994-07-20', 49, '2023-04-24', 28, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:32:41'),
+(320, 934, '43199959W', 'URIBE PANIAGUA, ANTONIO', 'Hombre', '1989-11-23', 2, '2023-04-20', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(321, 935, '75906268N', 'SALVADOR HERNANDEZ, JOAQUIN', 'Hombre', '1990-05-01', 2, '2023-04-28', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(322, 972, '78219399X', 'OLIVA MONTAÑEZ, ALBA', 'Mujer', '1996-07-27', 26, '2023-06-12', 26, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(324, 786, '77322820V', 'PAREJA BRAVO, MERCEDES', 'Mujer', '1978-04-17', 26, '2022-04-25', 26, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-05-08 09:53:27'),
+(325, 936, '32695701M', 'RIVEIROS GUZMAN, RAMIRO', 'Hombre', '1980-11-21', 21, '2023-04-17', 32, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-04-26 14:30:07'),
+(326, 940, '47251062T', 'SOMOZA VICO, GONZALO\n', 'Hombre', '1967-10-30', 50, '2023-05-03', 15, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(327, 939, '10847465K', 'TRIGUERO MENDEZ, JESUS AVELINO', 'Hombre', '1965-12-08', 50, '2023-05-02', 9, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(328, 953, '54147855J', 'PÉREZ HERNÁNDEZ, EVELYN DESIREE', 'Mujer', '1996-10-01', 36, '2023-05-23', 5, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:29:32'),
+(329, 999996, 'X6922346J', 'BONERBA, LUCA', 'Hombre', '1979-11-09', 2, '2023-05-10', 17, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-12-09 08:45:04'),
+(330, 999995, '46957433N', 'RAMON PEREZ, JOSE OMAR', 'Hombre', '1989-11-19', 2, '2023-05-10', 7, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-12-09 08:45:33'),
+(331, 999947, 'Y8015386S', 'ZAHI, ADAM', 'Hombre', '2003-10-02', 2, '2023-05-10', 16, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(332, 943, '47431281Z', 'TORRES RAMON, JORDI', 'Hombre', '2002-02-10', 2, '2023-05-08', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(333, 587, '50903232T', 'PEREZ RUBIO, MARIA', 'Mujer', '1988-04-29', 43, '2017-10-17', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(334, 945, 'X3241976B', 'ROMANUTTI, WALTER RAUL', 'Hombre', '1973-06-11', 46, '2023-05-09', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(335, 946, '45896444J', 'CANO DOMINGUES, RAUL', 'Hombre', '1997-04-21', 46, '2023-05-15', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-05-20 13:13:19'),
+(336, 374, '46958026F', 'PLANELLS ROSELLO, MARIA JOSE', 'Mujer', '1983-07-17', 42, '2015-11-11', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(337, 1018, 'Y0611359X', 'POPA, DIANA CRISTINA', 'Mujer', '1993-07-29', 26, '2024-03-04', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(338, 948, 'X8501909M', 'BOTCA, SERGIU-ANDREI', 'Hombre', '1985-10-02', 2, '2023-05-08', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(339, 947, '47257718D', 'BONED CARBAJAL, SIMON', 'Hombre', '2001-12-19', 2, '2023-05-08', 16, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(340, 417, '43545801Q', 'PORRAS AGUILERA, BEATRIZ', 'Mujer', '1979-07-07', 22, '2016-06-15', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(341, 819, '17490024L', 'QUINTERO JIMENEZ, DOLORES', 'Mujer', '0000-00-00', 36, '2022-05-30', 19, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(342, 1016, '04575262X', 'REDONDO IBANEZ, EMILIA', 'Mujer', '1965-12-26', 41, '2024-12-17', 27, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-05-29 11:21:03'),
+(343, 956, '51069273G', 'MONTES SAIZ, ENRIQUE', 'Hombre', '1978-10-26', 27, '2023-05-25', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(344, 799, '47409058D', 'RIBAS HINOJOSA, LETICIA', 'Mujer', '1994-07-08', 47, '2022-05-12', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(345, 955, '41746933R', 'SAETA TAYLOR, ISRAEL', 'Hombre', '2004-12-02', 49, '2023-05-22', 28, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-05-20 13:13:47'),
+(346, 952, '76629342N', 'HERÁNDEZ ORTUÑO, ISIDRO', 'Hombre', '1991-12-23', 2, '2023-05-15', 8, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:34:17'),
+(347, 636, '47252926R', 'RIBAS JUAN, MARGARITA', 'Mujer', '1986-08-22', 26, '2019-03-21', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(348, 758, '0033s', 'SALINAS CUBERO, SAUL', 'Hombre', '0000-00-00', 22, '0000-00-00', 19, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(349, 756, '00044s', 'ARRIBAS SAMPER, BORIS', 'Hombre', '0000-00-00', 23, '0000-00-00', 19, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(350, 445, '47254308A', 'RIBAS TORRES, SILVIA', 'Mujer', '1990-05-01', 1, '2018-01-19', 23, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(351, 605, '0003t', 'VECCHIATO, DAMIANO', 'Hombre', '0000-00-00', 27, '0000-00-00', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(352, 768, '4888000s', 'ESPINILLA PEÑA, FRANCISCO JAVIER', 'Hombre', '1900-01-01', 39, '1900-01-01', 19, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-06-11 12:30:41'),
+(353, 961, '52902342L', 'MARTIN GONZALEZ, DAVID', 'Hombre', '1992-01-10', 46, '2023-05-25', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(354, 958, '76413239V', 'COUSO BARBEITO, PABLO', 'Hombre', '1984-11-14', 27, '2023-05-23', 30, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-07-04 12:00:18'),
+(355, 959, '48202081S', 'GARCIA RODRIGUEZ, ALVARO', 'Hombre', '2002-09-10', 46, '2023-05-23', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-06-20 11:46:11'),
+(356, 960, 'Y4454019Z', 'MORENO, JUSTIN MANKAGNA NATEDHIOU', 'Hombre', '1997-04-24', 46, '2023-05-23', 30, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(357, 198, '48550447T', 'ROBLES NAVARRO, MARIA', 'Mujer', '1983-07-08', 42, '2008-01-14', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(358, 944, 'Y2575156K', 'ROCA AGRAMONT, ESTEFANY', 'Mujer', '1997-07-19', 26, '2023-05-08', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(359, 613, '47408691X', 'RODRIGUEZ CANALES, RAQUEL', 'Mujer', '2000-01-11', 26, '2022-01-03', 23, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(360, 966, '43478512W', 'RIBAS CAPLLONCH, MARTÍ', 'Hombre', '2001-05-08', 34, '2023-06-02', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-25 12:16:21'),
+(361, 969, '41587673Q', 'SÁNCHEZ ARANDA, LUÍS', 'Hombre', '2002-01-14', 2, '2023-06-12', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:34:34'),
+(362, 211, '46950344F', 'CALLE GARCIA, DAVID', 'Hombre', '0000-00-00', 2, '0000-00-00', 17, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-25 10:46:03'),
+(363, 409, '46959276S', 'RODRIGUEZ VENTURA, BEATRIZ', 'Mujer', '1985-10-20', 1, '2017-03-02', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(364, 974, '49417864H', 'SANCHEZ ATAHUI, ADELA', 'Mujer', '1974-06-08', 1, '2023-07-03', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(365, 971, '47433774T', 'MARIN ALCOBA, IKER', 'Hombre', '2004-08-08', 1, '2023-06-12', 29, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(366, 988, 'Y0775250A', 'SANTOS QUIÑONES, MARIA', 'Mujer', '0000-00-00', 41, '2023-09-18', 27, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-03-25 12:15:59'),
+(367, 973, '41747630P', 'MOLL SALORD, MARC', 'Hombre', '2000-11-30', 34, '2023-06-13', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(368, 970, '41624312Q', 'HERRERO CHICANO, IZAN', 'Hombre', '2004-04-01', 26, '2023-06-09', 26, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(370, 975, '47255373X', 'PERELLO DIEZ, MATEO', 'Hombre', '2000-07-21', 2, '2023-06-23', 16, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(371, 976, '47433343Y', 'TUR ORVAY, MARC', 'Hombre', '2003-12-08', 2, '2023-06-23', 16, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(372, 760, '0200s', 'SEARA CABO, ANDREA', 'Mujer', '0000-00-00', 47, '0000-00-00', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(373, 980, '47260535C', 'SERENO DOBRICK, JORGE', 'Hombre', '1998-10-23', 21, '2023-07-03', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(374, 981, 'Y8575787K', 'TARRAZO FARIAS, ERIC LUCAS', 'Hombre', '1997-11-16', 46, '2023-07-10', 29, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-07-04 11:09:06'),
+(375, 982, '43192243Z', 'PASCUAL SEGURA, ADRIA', 'Hombre', '1988-01-05', 23, '2023-07-14', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(376, 978, '47260576S', 'MARI MAYANS, ESTEVE', 'Hombre', '1992-09-02', 2, '2023-07-01', 14, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(377, 983, 'X4561906V', 'BASAN, MAURA', 'Hombre', '1977-07-11', 1, '2023-08-07', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-04-23 14:37:43'),
+(378, 984, '54879544A', 'JUWARA GUAMANEH, KANTARA', 'Hombre', '2003-06-01', 27, '2023-08-15', 29, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(380, 985, '47409834A', 'HIDALGO SANCHEZ, ANTONIO MIGUEL', 'Hombre', '1999-08-28', 2, '2023-09-07', 33, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-05-23 14:34:52'),
+(381, 941, '47408054V', 'SOMOZA ARTS, LAURA', 'Mujer', '2002-01-31', 36, '2023-05-04', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(382, 637, '47253089A', 'SORIA PIEDRA, RAQUEL', 'Mujer', '1987-09-02', 26, '2019-03-20', 25, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(383, 987, '46142863X', 'BERNUS BLANCH, CARLOS', 'Hombre', '1977-11-13', 42, '2023-09-11', 23, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-11 09:59:39'),
+(384, 999, '43202267X', 'NICOLAU DUCKETT, EDUARD', 'Hombre', '1990-06-25', 2, '2023-10-02', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-10-08 11:34:52'),
+(385, 1013, 'Z0925704M', 'SOSA INSFRAN, LIZ PAOLA', 'Mujer', '2002-01-24', 41, '2024-01-25', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(386, 780, 'Y8807536E', 'SOUZA SILVA, RANDALE', 'Mujer', '1994-11-10', 26, '2022-04-23', 27, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(387, 1002, '41747270Q', 'RODRIGUEZ CONTRERAS, ALEXANDER', 'Hombre', '1997-11-01', 49, '2023-11-02', 28, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(388, 999995, '04305074A', 'IGLESIAS, AGUSTIN', 'Hombre', '2024-03-20', 34, '2024-03-20', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-12-09 08:45:18'),
+(390, 999993, '45692552Q', 'GUALDA ELFMARK, SAMUEL', 'Hombre', '2005-02-09', 34, '2024-03-20', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-12-09 08:45:48'),
+(391, 1003, 'X4299925Y', 'BOGDAN DORIAN, ALEXANDRU', 'Hombre', '1978-04-07', 2, '2023-11-10', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(392, 248, '34973158W', 'SUAREZ CABO, MARIA BELEN', 'Mujer', '1968-06-07', 26, '2011-06-01', 27, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(393, 1005, '45440111T', 'FIGUERO LEON, ANTONIO TOMAS', 'Hombre', '1970-11-24', 34, '2023-11-17', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(394, 1006, '43166977W', 'MARROIG SANCHEZ, PEDRO', 'Hombre', '1982-01-16', 23, '2023-11-27', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(395, 964, '51150313S', 'SUAREZ RAMOS, SHEILA', 'Mujer', '1999-06-18', 36, '2023-06-01', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(396, 1008, 'X5622510E', 'LEIVA, JONATHAN SAUL', 'Hombre', '1984-08-05', 34, '2023-12-05', 19, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(397, 861, 'X6543893W', 'TANASE, NICOLETA', 'Mujer', '1978-10-05', 36, '2022-07-21', 18, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(398, 1010, '47881150A', 'MOYA CORNET, BORJA', 'Hombre', '1988-09-03', 23, '2023-12-26', 16, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(399, 1011, '53377271k', 'CALPE DOBON, JESUS', 'Hombre', '1983-06-07', 34, '2024-01-03', 16, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(400, 1012, 'Z0150541B', 'LAMOURI, ADAM', 'Hombre', '1997-02-10', 27, '2024-01-11', 27, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(401, 954, '48582161C', 'TEBAR TOLEDO, NURIA', 'Mujer', '1985-07-25', 2, '2023-05-26', 17, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(402, 1014, '47407793D', 'PEREZ TORRES, ALEJANDRO', 'Hombre', '1993-06-19', 2, '2024-02-01', 22, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-05-27 13:49:31'),
+(403, 949, '47257419D', 'TUR ESCANDELL, LIDIA', 'Mujer', '2000-10-01', 2, '2023-05-08', 12, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(404, 927, '75919619T', 'VELASCO ALMAGRO, MARINA', 'Mujer', '1998-11-25', 1, '2023-04-11', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(405, 1001, '46955550S', 'VICH MARI, LAURA\n', 'Mujer', '1983-07-06', 1, '2023-10-23', 23, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(406, 894, '47407636J\n', 'VILLAR DEL SAZ GARCIA, MARTA\n', 'Mujer', '1996-01-10', 26, '2022-12-05', 25, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(407, 999997, 'X7373408E', 'VON KLOT TRAUTVETTER, JOEL', 'Mujer', '2005-03-20', 21, '2023-03-28', 25, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2014-03-24 13:51:00'),
+(408, 999993, '000554s', 'SALES CASALI, JOAN', 'Hombre', '2024-03-06', 2, '2024-03-11', 18, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-12-09 08:46:09'),
+(410, 999992, 'Y8989058M', 'BRATI, ALBAN', 'Hombre', '2000-03-28', 21, '2024-04-08', 23, 0, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-12-09 08:46:24'),
+(411, 1020, '43805973N', 'PEREZ ANDREU RUBIO, JOSE ANTONIO', 'Hombre', '1971-12-29', 2, '2024-03-20', 11, 1, 'Si', 'Si', 'n.a.', '2014-03-24 13:51:00', '2024-04-26 08:57:14'),
+(454, 30001, 'X9978251T', 'BELLINI, FRANCESCO', 'Hombre', '1980-01-01', 35, '2022-04-01', 35, 1, 'Si', 'Si', 'Director comercial', '2024-04-23 12:47:16', '2024-04-23 14:33:09'),
+(455, 30002, '41453655L', 'BONET TORRES, JOSE', 'Hombre', '1980-01-01', 42, '2021-05-17', 35, 1, 'Si', 'No', 'Departamento excursiones', '2024-04-23 12:48:22', '2024-04-23 14:37:31'),
+(456, 30003, 'Y2196923T', 'CEPPI, FABRIZIO', 'Hombre', '1980-01-01', 35, '2015-10-12', 35, 1, 'Si', 'Si', '', '2024-04-23 12:49:18', '2024-05-13 08:24:37'),
+(457, 30004, 'X8973539C', 'FERRARIS, DIEGO', 'Hombre', '1980-01-01', 43, '2017-04-03', 35, 1, 'Si', 'Si', '', '2024-04-23 12:50:39', '2024-05-13 08:25:54'),
+(458, 30005, 'Y2466999X', 'PORRA, NICOLA', 'Hombre', '1980-01-01', 35, '2023-06-27', 35, 1, 'Si', 'Si', '', '2024-04-23 12:51:22', '2024-05-13 08:26:25'),
+(459, 30006, '41455465N', 'RIERA JUAN, ANTONIO', 'Hombre', '1980-01-01', 35, '2022-05-30', 35, 1, 'Si', 'Si', '', '2024-04-23 12:52:02', '2024-05-13 08:25:17'),
+(460, 30007, '41446520Z', 'YERN TORRES, MARGARITA', 'Mujer', '1980-01-01', 1, '2023-05-22', 35, 1, 'Si', 'Si', '', '2024-04-23 12:52:57', '2024-07-29 09:42:43'),
+(461, 30008, '41454343V', 'TUR CHANDLEE, ATMA', 'Mujer', '1980-01-01', 51, '2023-06-01', 35, 0, 'Si', 'Si', '', '2024-04-23 12:56:04', '2024-05-22 09:13:29'),
+(462, 30009, 'Y1944559S', 'IOZZOLINO, DEBORAH PATRICIA', 'Mujer', '0980-01-01', 47, '2024-04-05', 35, 1, 'Si', 'Si', '', '2024-04-23 12:57:22', '2024-05-02 13:47:29'),
+(463, 30010, 'Y2196951M', 'CASO, ELISA', 'Mujer', '1980-01-01', 35, '2022-05-02', 35, 1, 'Si', 'Si', '', '2024-04-23 12:58:09', '2024-05-13 08:28:18'),
+(464, 30011, '54877720L', 'ENCARNACION ARAGON, DASLY JULEYSI', 'Hombre', '1980-01-01', 51, '2023-06-02', 35, 1, 'Si', 'Si', '', '2024-04-23 12:59:37', '2024-05-13 08:27:03'),
+(465, 30012, '54880889Z', 'GRASSO INZAURRALDE, FLORENCIA BELEN', 'Mujer', '1980-01-01', 47, '2024-04-05', 35, 1, 'Si', 'Si', '', '2024-04-23 13:00:23', '2024-05-02 13:47:43'),
+(466, 30013, 'Z1628484C', 'MELISA PREZIOSO, GISELLE', 'Mujer', '1997-01-26', 47, '2024-04-27', 35, 1, 'Si', 'Si', 'PARK&SAIL', '2024-04-26 08:52:39', '2024-06-17 14:52:27'),
+(467, 30014, 'Z0779292B', 'MARESCA, EVA ALEJANDRA', 'Mujer', '1990-03-07', 47, '2024-05-05', 35, 1, 'Si', 'Si', 'park&sail', '2024-04-26 08:55:09', '2024-05-24 13:11:18'),
+(468, 1021, '49416448M', 'COSTA TUMBACO, ISIDRO MIGUEL', 'Hombre', '1996-07-06', 36, '2024-03-19', 5, 1, 'Si', 'Si', '', '2024-04-29 14:39:58', '2024-04-29 14:39:58'),
+(469, 1022, 'X6599928D', 'PRUNDARU, ALINA IONELA  ', 'Mujer', '1975-06-18', 36, '2024-03-22', 18, 1, 'Si', 'Si', '', '2024-04-29 14:41:16', '2024-04-29 14:41:16'),
+(470, 1023, '48199345Q', 'SARMIENTO PALAU, AMANDA', 'Hombre', '2000-09-04', 26, '2024-03-25', 25, 0, 'Si', 'Si', '', '2024-04-29 14:42:38', '2024-04-29 14:42:45'),
+(471, 1024, '53631355R', 'SAOUDI CALLEAR, MELISSA', 'Mujer', '1993-10-04', 36, '2024-03-25', 18, 1, 'Si', 'Si', '', '2024-04-29 14:43:43', '2024-04-29 14:43:43'),
+(472, 1025, '49417261J', 'MALLA ZAMBRANO, JOSELYN MARISOL', 'Mujer', '1996-10-30', 26, '2024-04-06', 25, 1, 'Si', 'Si', '', '2024-04-29 14:45:40', '2024-04-29 14:45:40'),
+(473, 1026, 'Y7062305P', 'RAMIREZ CUELLAR, HENRY ANDRES', 'Hombre', '1978-07-05', 27, '2024-04-11', 30, 1, 'Si', 'Si', '', '2024-04-29 14:46:51', '2024-04-29 14:46:51'),
+(474, 1027, '41605316H', 'CAMARASA SINTES, DANIEL', 'Hombre', '1998-03-04', 49, '2024-04-15', 28, 1, 'Si', 'Si', '', '2024-04-29 14:47:42', '2024-04-29 14:47:42'),
+(475, 1028, '05325174F', 'BARREIRO DEL RIO, BORJA', 'Hombre', '1992-04-23', 2, '2024-05-01', 17, 1, 'Si', 'Si', '', '2024-04-29 14:48:49', '2024-04-30 13:36:02'),
+(476, 1029, '28815429V', 'LOZANO MARQUEZ, JUAN MANUEL', 'Hombre', '1984-09-29', 46, '2024-05-10', 29, 1, 'Si', 'Si', '', '2024-04-29 14:49:53', '2024-05-09 11:44:24'),
+(477, 1030, '53552434Q', 'PEREZ GARCIA, ALEJANDRO SENEN', 'Hombre', '1990-07-09', 25, '2024-04-26', 18, 1, 'Si', 'Si', '', '2024-04-29 14:50:51', '2024-05-13 08:09:47'),
+(479, 1032, '42257891Z', 'GONZALEZ DARIAS, LARA', 'Mujer', '1997-06-25', 36, '2024-04-24', 18, 1, 'Si', 'Si', '', '2024-04-29 14:52:50', '2024-05-13 08:10:10'),
+(481, 1034, '41571810T', 'FERNANDEZ MARTINEZ, ZAIRA', 'Mujer', '1992-02-16', 26, '2024-05-02', 26, 1, 'Si', 'Si', '', '2024-04-29 14:56:44', '2024-06-17 15:21:28'),
+(483, 20001, '47431466S', 'MOSQUERA PEÑA, EDNA PATRICIA', 'Mujer', '1966-07-27', 26, '2024-03-11', 36, 1, 'Si', 'Si', '', '2024-04-30 11:46:28', '2024-05-29 10:53:14'),
+(484, 1035, '49416128F', 'BAQUE PINCAY, AMANDA GABRIELA', 'Mujer', '1998-11-29', 26, '2024-05-06', 25, 1, 'Si', 'Si', '', '2024-05-03 14:15:36', '2024-05-27 08:54:19'),
+(485, 999991, '43184487D', 'LASTRES BERNET, RUBEN', 'Hombre', '2000-01-01', 2, '2024-05-01', 18, 0, 'Si', 'No', '', '2024-05-07 13:20:02', '2024-12-09 08:44:48'),
+(486, 1046, '43217473J', 'BORRAS SALOM, BARTOLOME', 'Hombre', '1997-06-03', 2, '2024-05-01', 18, 1, 'Si', 'Si', '', '2024-05-07 13:22:01', '2024-07-08 11:28:30'),
+(487, 1036, '13313641E', 'PEÑA MONROY, ALEXANDER', 'Hombre', '1976-11-21', 27, '2024-05-18', 30, 1, 'Si', 'Si', '', '2024-05-08 12:46:13', '2024-05-30 10:12:04'),
+(488, 1037, '49410395R', 'GOMEZ VIDAL, GABRIEL', 'Hombre', '2005-04-03', 27, '2024-05-18', 30, 1, 'Si', 'Si', '', '2024-05-08 12:47:03', '2024-05-31 12:24:20'),
+(489, 1038, 'Z0355368T', 'VERA PEREIRA, AUGUSTO HERNAN', 'Hombre', '1974-10-08', 27, '2024-05-10', 30, 1, 'Si', 'Si', '', '2024-05-08 12:47:55', '2024-05-09 14:02:05'),
+(490, 1039, '45775866R', 'MORALES SANTIAGO, MARIA', 'Mujer', '1992-09-12', 36, '2024-05-12', 19, 1, 'Si', 'Si', '', '2024-05-09 11:48:17', '2024-06-17 14:55:45'),
+(491, 30016, 'X4641830Q', 'RAYMOND MARTINEZ, SYLVAIN MARCEL', 'Hombre', '1980-06-05', 51, '2024-05-15', 35, 1, 'Si', 'No', '', '2024-05-14 10:37:29', '2024-05-20 11:55:07'),
+(492, 1040, 'X5622410Z', 'LEIVA, SALVADOR SAMUEL', 'Hombre', '1981-07-13', 34, '2024-05-16', 18, 1, 'Si', 'Si', '', '2024-05-14 11:18:28', '2024-05-29 15:05:10'),
+(493, 1041, '41752283S', 'OVIEDO LOPEZ, LYDIA', 'Mujer', '2000-08-21', 49, '2024-05-20', 28, 1, 'Si', 'Si', '', '2024-05-16 12:34:17', '2024-05-21 14:39:49'),
+(494, 1042, '45361498R', 'MOLINA GONZALEZ, JOSE ANTONIO', 'Hombre', '1997-03-18', 36, '2024-05-23', 5, 1, 'Si', 'Si', '', '2024-05-21 10:47:12', '2024-05-29 14:48:06'),
+(495, 1043, '31866080V', 'JIMENEZ ESCOBAR, PEDRO', 'Hombre', '1979-10-23', 2, '2024-05-30', 19, 1, 'Si', 'Si', '', '2024-05-23 14:21:37', '2024-07-15 09:52:41'),
+(496, 1044, '44388857F', 'ALVAREZ SAEZ, MARCOS', 'Hombre', '1974-02-22', 34, '2024-05-28', 5, 1, 'Si', 'Si', '', '2024-05-24 09:42:06', '2024-06-21 12:33:03'),
+(497, 20002, '46952099Z', 'TUR TORRES, JUAN', 'Hombre', '1983-03-25', 50, '2024-06-01', 31, 1, 'Si', 'Si', '', '2024-05-24 10:05:13', '2024-07-10 08:23:20'),
+(498, 20003, '71893833L', 'ALVAREZ MENENDEZ, DIEGO', 'Hombre', '1900-01-01', 32, '2022-03-14', 21, 1, 'Si', 'Si', '', '2024-05-24 13:55:10', '2024-05-28 15:48:05'),
+(499, 20004, '48582161C', 'TEBAR TOLEDO, NURIA', 'Mujer', '1985-07-25', 2, '2024-06-01', 21, 1, 'Si', 'Si', '', '2024-05-27 11:59:29', '2024-07-09 08:03:50'),
+(500, 20005, '43166977W', 'MARROIG SANCHEZ, PEDRO', 'Hombre', '1985-01-16', 50, '2024-05-29', 21, 1, 'Si', 'Si', '', '2024-05-27 12:15:12', '2024-07-09 08:22:08'),
+(501, 1045, '43179440E', 'ROIG MARISCAL, MARIA DE LA CABEZA', 'Mujer', '1990-04-01', 1, '2024-05-29', 4, 1, 'Si', 'Si', '**DISCAPICIDAD 60%**', '2024-05-27 12:32:46', '2024-07-15 09:53:17'),
+(502, 20006, '75907986M', 'PACHECO LOPEZ, ALVARO MIGUEL', 'Hombre', '1900-01-01', 34, '2024-05-06', 21, 1, 'Si', 'Si', '', '2024-05-27 13:28:25', '2024-07-09 08:03:06'),
+(503, 20007, '20545034P', 'CRUZ TUR, JUAN CARLOS', 'Hombre', '1900-01-01', 2, '2022-04-08', 21, 1, 'Si', 'Si', '', '2024-05-27 13:29:38', '2024-06-20 13:19:13'),
+(504, 20008, '52464840T', 'DE LA CALLE PINOS, ORIOL', 'Hombre', '1900-04-01', 2, '2022-05-12', 21, 1, 'Si', 'Si', '', '2024-05-27 13:30:22', '2024-06-20 13:12:20'),
+(505, 20009, '79223270T', 'CAMPOS GARCIA, ROQUE FELIX', 'Hombre', '1900-01-01', 2, '2023-10-04', 21, 1, 'Si', 'Si', '', '2024-05-27 13:31:05', '2024-06-20 13:19:38'),
+(506, 20010, '04859429N', 'DE LA CRUZ ARRIERO, ANDREA', 'Mujer', '1900-01-01', 34, '2022-05-02', 21, 1, 'Si', 'Si', '', '2024-05-27 13:31:47', '2024-06-17 12:27:39'),
+(507, 20011, '78290942T', 'ESCANDELL MARI, JAIME', 'Hombre', '1900-01-01', 22, '2000-11-13', 21, 1, 'Si', 'Si', '', '2024-05-27 13:32:21', '2024-06-17 12:20:58'),
+(508, 20012, '47260533H', 'JIMENEZ DOMINGUEZ, YERAY', 'Hombre', '1900-01-01', 2, '2023-06-01', 21, 1, 'Si', 'Si', '', '2024-05-27 13:33:04', '2024-07-09 07:53:42'),
+(509, 20013, '47250611D', 'MARI MOYA, SERGI', 'Hombre', '1900-01-01', 23, '2019-06-03', 21, 1, 'Si', 'Si', '', '2024-05-27 13:33:55', '2024-06-17 12:27:22'),
+(510, 20014, '04285731A', 'MUÑOZ SOLARTE, DAVID ALEJANDRO', 'Hombre', '1900-01-01', 34, '2022-09-27', 21, 1, 'Si', 'Si', '', '2024-05-27 13:34:43', '2024-06-17 14:12:53'),
+(511, 20015, '78538607R', 'REYES GONZALEZ, ALBERTO', 'Hombre', '1900-01-01', 32, '2021-11-22', 21, 1, 'Si', 'Si', '', '2024-05-27 13:35:24', '2024-06-20 13:20:44'),
+(512, 20016, '41460870N', 'TORRES TUR, JAIME', 'Hombre', '1900-01-01', 34, '2019-07-12', 21, 1, 'Si', 'Si', '', '2024-05-27 13:36:08', '2024-06-12 08:23:31'),
+(513, 20039, '47250511R', 'TUR TUR, HECTOR JOSE', 'Hombre', '1900-01-01', 23, '2022-04-06', 21, 1, 'Si', 'Si', '', '2024-05-27 13:36:47', '2024-06-20 13:34:03'),
+(514, 20017, '41444650J', 'VERDERA GUASCH, VICENTE', 'Hombre', '1900-01-01', 22, '2000-05-04', 21, 1, 'Si', 'Si', '', '2024-05-27 13:37:18', '2024-06-20 13:24:23'),
+(515, 20017, '78919718W', 'BASTERRECHEA CABALLERO, IRAITZ', 'Hombre', '1900-01-01', 50, '2019-10-09', 31, 1, 'Si', 'Si', 'TR- TRASMAPI\r\n', '2024-05-27 13:38:17', '2024-06-20 13:23:52'),
+(516, 20018, '47253457A', 'MARTINEZ NAVARRO, ALVARO JESUS', 'Hombre', '1900-01-01', 2, '2024-05-03', 31, 1, 'Si', 'Si', '', '2024-05-27 13:39:03', '2024-06-11 10:37:29'),
+(517, 20041, '41450426X', 'COSTA ROIG, ANTONIO', 'Hombre', '1900-01-01', 2, '2024-05-14', 31, 1, 'Si', 'Si', 'TR- TRASMAPI', '2024-05-27 13:40:08', '2024-06-11 10:38:38'),
+(518, 20018, '73397342H', 'FOIX BRETTO, ROBERTO', 'Hombre', '1900-01-01', 34, '2024-05-14', 31, 1, 'Si', 'Si', 'tr - trasmapi', '2024-05-27 13:48:46', '2024-06-11 10:21:12'),
+(519, 20019, '47407793D', 'PEREZ TORRES, ALEJANDRO', 'Hombre', '1900-01-01', 23, '2023-10-16', 31, 1, 'Si', 'Si', 'TR- TRASMAPI', '2024-05-27 13:50:44', '2024-06-20 13:24:59'),
+(521, 20020, '47433343Y', 'TUR ORVAY, MARC', 'Hombre', '1900-01-01', 2, '2024-05-14', 31, 1, 'Si', 'Si', 'TR', '2024-05-27 13:51:26', '2024-06-11 10:37:45'),
+(522, 20021, '41450461E', 'ESCANDELL MARI, JOSE MIGUEL', 'Hombre', '1900-01-01', 2, '2016-02-01', 38, 1, 'Si', 'Si', '', '2024-05-27 13:52:30', '2024-07-02 10:18:27'),
+(524, 20022, '71897475G', 'FERNANDEZ GONZALEZ, OSCAR PEDRO', 'Hombre', '1900-01-01', 2, '2022-06-13', 38, 1, 'Si', 'Si', '', '2024-05-27 13:53:35', '2024-06-20 13:25:33'),
+(525, 20023, '04149109R', 'GONZALEZ PINTO, JUAN JOSE', 'Hombre', '1900-01-01', 32, '2019-05-28', 38, 1, 'Si', 'Si', '', '2024-05-27 13:54:21', '2024-06-20 13:26:35'),
+(526, 20024, '47881150A', 'MOYA CORNET, BORJA', 'Hombre', '1900-01-01', 50, '2022-09-01', 38, 1, 'Si', 'Si', '', '2024-05-27 13:55:09', '2024-06-20 13:27:38'),
+(527, 20025, '46951794P', 'BUFI BONET, JUAN JOSE', 'Hombre', '1900-01-01', 2, '2024-05-03', 39, 1, 'Si', 'Si', '', '2024-05-27 13:56:17', '2024-07-02 10:16:47'),
+(528, 20026, '47258460S', 'KEHRLI ESCANDELL, OSCAR ENRIQUE', 'Hombre', '1900-01-01', 34, '2024-05-03', 39, 1, 'Si', 'Si', 'TR- TRASMAPI', '2024-05-27 13:57:10', '2024-07-02 10:17:13'),
+(529, 20026, '47406183D', 'TORRES PRATS, JOAN MARC', 'Hombre', '1900-01-01', 50, '2024-05-06', 39, 1, 'Si', 'Si', 'TR- TRASMAPI', '2024-05-27 13:57:54', '2024-07-02 10:17:01'),
+(530, 20027, '18977845Q', 'COMPTE LORIENTE, RAFAEL', 'Hombre', '1900-01-01', 2, '2024-05-14', 39, 1, 'Si', 'Si', '', '2024-05-27 13:59:01', '2024-07-02 10:17:27'),
+(531, 20028, '47259122X', 'RAMON COSTA, JAUME', 'Hombre', '1900-01-01', 32, '2024-05-14', 31, 0, 'Si', 'Si', '', '2024-05-28 13:26:16', '2024-10-29 10:57:46'),
+(532, 20028, 'Y0009879A', 'BERTUCCI, GIULIA', 'Mujer', '1900-01-01', 1, '1900-01-01', 36, 0, 'Si', 'No', '', '2024-05-28 15:52:13', '2024-07-15 10:53:54'),
+(533, 20029, 'X0049508N', 'WENHAM, PAUL JOHN CHARLES', 'Hombre', '1900-01-01', 1, '1900-01-01', 40, 1, 'Si', 'Si', '*FORMENTERA*', '2024-05-28 15:56:58', '2024-07-15 11:33:59'),
+(534, 20030, '47895114Y', 'MARQUEZ HERNANDEZ, MARINA', 'Mujer', '1900-01-01', 1, '1900-01-01', 40, 0, 'Si', 'No', '', '2024-05-28 16:01:37', '2024-07-15 10:54:18'),
+(535, 20031, '46953440K', 'MAYANS SERRA, MARI CARMEN', 'Mujer', '1900-01-01', 1, '1900-01-01', 40, 1, 'Si', 'Si', '', '2024-05-28 16:02:24', '2024-07-15 10:56:24'),
+(536, 30017, '30227147H', 'FERNÁNDEZ CUTILLA, ESPERANZA MACARENA', 'Mujer', '1983-11-22', 1, '2024-05-28', 35, 1, 'Si', 'Si', '', '2024-05-29 07:43:08', '2024-06-21 10:25:20'),
+(537, 20032, 'Y2396524F', 'MIGOTTO, KATIUSCIA', 'Mujer', '1900-01-01', 1, '2023-01-30', 34, 1, 'Si', 'Si', '', '2024-05-29 08:09:21', '2024-07-15 10:58:28'),
+(538, 20033, '48318797Y', 'VIVES SABATER, SONIA', 'Mujer', '1900-01-01', 2, '1900-01-01', 6, 0, 'Si', 'Si', '', '2024-05-29 08:20:29', '2024-07-15 11:13:54'),
+(539, 20034, '41448241X', 'SALA ROIG, MARIA ROSA', 'Mujer', '1900-01-01', 26, '1900-01-01', 41, 1, 'Si', 'Si', '', '2024-05-29 11:14:12', '2024-07-15 11:00:55'),
+(540, 20035, '53615087V', 'HERNANDEZ LEMOS, JOANA CATARINA', 'Mujer', '1900-01-01', 26, '1900-01-01', 36, 1, 'Si', 'Si', '', '2024-05-29 11:15:19', '2024-08-12 09:07:12'),
+(541, 20036, '45363845W', 'SUAREZ, ESTEFANIA', 'Mujer', '1900-01-01', 26, '1900-01-01', 36, 0, 'Si', 'No', '', '2024-05-29 11:16:30', '2024-07-15 11:03:43'),
+(542, 20036, '47260561T', 'REDONDO REDONDO, ANDREA', 'Mujer', '1900-01-01', 26, '1900-01-01', 36, 1, 'Si', 'Si', '', '2024-05-29 11:21:58', '2024-07-15 11:40:51'),
+(543, 20037, '46957214T', 'SOBREVILLA RODRIGUEZ, MARTA', 'Mujer', '1900-01-01', 26, '1900-01-01', 36, 1, 'Si', 'Si', '', '2024-05-29 11:41:55', '2024-07-15 11:18:06'),
+(544, 20037, '48231910J', 'RODRIGUEZ QUIROS, NURIA', 'Mujer', '1900-01-01', 26, '2023-08-02', 36, 1, 'Si', 'Si', '', '2024-05-29 11:45:50', '2024-05-29 13:09:06'),
+(545, 20038, '47431235Z', 'CARRETERO GARCIA, MIGUEL', 'Hombre', '2023-10-25', 2, '2024-06-01', 39, 1, 'Si', 'Si', '', '2024-05-31 10:04:05', '2024-06-11 10:38:14'),
+(546, 967, '48435055E', 'VIÑUELA VILCHEZ, SERGIO', 'Hombre', '1979-01-22', 27, '2024-06-03', 30, 1, 'Si', 'Si', '', '2024-05-31 12:52:31', '2024-05-31 12:52:31'),
+(547, 1048, '47431235Z', 'CARRETERO GARCIA, MIGUEL', 'Hombre', '2003-10-25', 2, '2024-06-03', 15, 1, 'Si', 'Si', '', '2024-06-05 09:21:55', '2024-07-11 11:37:56'),
+(548, 1049, '54245617W', 'CHOPO MOLINA, ALBERTO', 'Hombre', '2003-01-10', 2, '2024-06-09', 5, 1, 'Si', 'Si', '', '2024-06-05 09:27:00', '2024-06-17 13:59:56'),
+(549, 20040, 'Y1949670C', 'FABBIANI, FRANCESCA', 'Mujer', '1900-01-01', 1, '1900-01-01', 40, 1, 'Si', 'Si', '', '2024-06-05 09:39:21', '2024-06-05 09:39:21'),
+(550, 1051, '48785282M', 'URIOS ROMERO, SERGIO', 'Hombre', '1997-09-03', 23, '2024-06-13', 19, 1, 'Si', 'Si', '', '2024-06-06 12:59:56', '2024-06-18 11:04:24'),
+(551, 1052, '79087919G', 'LEON PERDOMO, NAIRA TAMARA', 'Mujer', '1991-10-12', 2, '2024-06-21', 17, 1, 'Si', 'Si', '', '2024-06-11 08:02:21', '2024-08-07 13:39:58'),
+(552, 20042, '47433205Y', 'SANCHEZ GIMENEZ, CARLA PATRICIA', 'Mujer', '2005-04-20', 26, '2024-06-15', 41, 1, 'Si', 'Si', '', '2024-06-11 08:10:05', '2024-06-17 12:09:43'),
+(553, 999990, '43233709B', 'ARBONA GELABERT, ANDREU', 'Hombre', '1900-01-01', 2, '2024-04-03', 19, 0, 'Si', 'Si', '', '2024-06-11 12:18:18', '2024-12-09 08:46:37'),
+(554, 888, '36528166A', 'RUBERT JIMENEZ, DIEGO JAVIER', 'Hombre', '1975-10-09', 22, '2022-11-21', 18, 1, 'Si', 'Si', 'n.a.', '2024-06-11 12:32:06', '2024-06-12 08:19:46'),
+(555, 1050, '45188760Q', 'MOYA CARDELL, VICTORIA', 'Mujer', '2000-10-01', 26, '2024-06-08', 26, 1, 'Si', 'Si', '', '2024-06-12 07:47:46', '2024-06-20 08:51:20'),
+(556, 1047, '43469806J', 'ORTIZ ALEMANY, ENRIC', 'Hombre', '2001-10-04', 34, '2001-06-06', 17, 1, 'Si', 'Si', '', '2024-06-12 12:56:47', '2024-06-12 13:53:55'),
+(557, 20043, '47260071Q', 'JUAN CASTELLO, SILVIA', 'Mujer', '1984-11-24', 2, '2024-06-01', 21, 1, 'Si', 'Si', '', '2024-06-17 13:02:49', '2024-07-22 07:35:01'),
+(558, 1053, '45099615L', 'MOHAMED HAMED, YASMINA', 'Mujer', '1991-11-24', 36, '2024-06-19', 19, 1, 'Si', 'Si', '', '2024-06-17 14:04:38', '2024-07-03 09:40:42'),
+(559, 20044, '43176283Q', 'ALEMANY SASTRE, TOMAS', 'Hombre', '1991-11-22', 23, '2024-06-10', 21, 1, 'Si', 'Si', '', '2024-06-17 14:26:24', '2024-07-09 08:02:37'),
+(560, 30018, '48199722W', 'ROYO YERN, CARLA', 'Mujer', '2006-07-24', 51, '2024-06-24', 35, 1, 'Si', 'Si', '', '2024-06-21 13:26:13', '2024-07-11 08:15:58'),
+(561, 1054, 'Y6036762N', 'FLORES FUENTES, GARY BERNARD', 'Hombre', '1977-01-04', 25, '2024-06-24', 18, 1, 'Si', 'Si', '', '2024-06-21 13:45:39', '2024-07-19 09:34:49'),
+(562, 1055, '43483333Q', 'SERRA BELEDO, PAULA', 'Mujer', '2002-03-14', 26, '2024-06-24', 26, 1, 'Si', 'Si', '', '2024-06-21 14:36:07', '2024-07-04 13:56:06'),
+(563, 20045, '47430090L', 'GIMENEZ TORRES, JUAN', 'Hombre', '1900-01-01', 2, '2024-07-01', 31, 1, 'No', 'No', '', '2024-06-25 13:02:48', '2024-06-25 13:02:48'),
+(564, 20046, '47260576S', 'MARI MAYANS, ESTEVE', 'Hombre', '1992-09-02', 2, '2024-07-01', 21, 1, 'Si', 'Si', '', '2024-06-25 13:08:01', '2024-07-17 13:42:23'),
+(565, 30019, '47408934T', 'NUÑEZ MARÍ, NEREA', 'Mujer', '0001-01-01', 51, '2024-07-01', 35, 1, 'Si', 'Si', '', '2024-06-26 09:05:33', '2024-06-26 09:05:33'),
+(566, 30020, '47430960S', 'GASCON JUAN, ADRIÁ', 'Hombre', '0001-01-01', 51, '2024-07-01', 35, 1, 'Si', 'Si', '', '2024-06-26 09:16:48', '2024-06-26 09:16:48'),
+(567, 30021, '47433426V', 'ROSELLO RODRIGUEZ, YARA', 'Hombre', '2006-03-21', 51, '2024-07-01', 35, 1, 'Si', 'Si', '', '2024-06-27 08:32:21', '2024-07-30 09:04:59'),
+(568, 20047, '49415664A', 'RAMON RIERA, ALEJANDRO', 'Hombre', '2004-12-22', 34, '2024-06-28', 31, 1, 'Si', 'Si', '', '2024-06-27 09:22:25', '2024-07-09 08:13:05'),
+(569, 1056, '39385910C', 'LACRUZ MESA, OLGA', 'Mujer', '1992-10-22', 52, '2024-07-01', 26, 1, 'Si', 'Si', '', '2024-06-28 12:30:17', '2024-07-22 08:06:55'),
+(570, 1057, '43052448J', 'PICORNELL CARVAJAL, MIGUEL', 'Hombre', '1968-12-30', 2, '2024-07-03', 18, 1, 'Si', 'Si', '', '2024-07-02 12:44:30', '2024-07-03 13:35:21'),
+(571, 30022, '49410317S', 'SASTRE CASTELLO, NEUS', 'Mujer', '0001-01-01', 1, '2024-07-03', 35, 1, 'Si', 'Si', '', '2024-07-03 09:13:04', '2024-07-15 13:32:13'),
+(572, 30023, '46959841M', 'ORTIZ ASENSIO, DESIRÉE', 'Mujer', '1986-11-28', 26, '2024-07-05', 45, 1, 'Si', 'Si', '', '2024-07-04 09:51:11', '2024-07-29 09:34:35'),
+(573, 20048, '47260537E', 'FERRER LOPEZ, JOSE SERGIO', 'Hombre', '1992-02-06', 34, '2024-07-01', 38, 1, 'No', 'No', '', '2024-07-08 07:27:26', '2024-07-08 07:27:26'),
+(574, 20049, '76904134T ', 'ALVAREZ MARTINEZ, MIGUEL ANGEL', 'Hombre', '1979-08-13', 2, '2024-07-01', 31, 1, 'Si', 'Si', '', '2024-07-08 07:29:14', '2024-08-26 09:29:21'),
+(575, 20050, '47260085F', 'GONZALEZ JUAN, JOSE EMILIO', 'Hombre', '0001-01-01', 34, '2024-07-01', 21, 1, 'Si', 'Si', '', '2024-07-09 07:57:48', '2024-07-22 07:36:25'),
+(576, 93, '41449240C', 'VERDERA CASTELLO, VICENTE', 'Hombre', '1968-01-14', 2, '2005-03-06', 16, 1, 'Si', 'Si', '', '2024-07-10 07:54:25', '2024-07-10 07:54:34'),
+(577, 20051, '47257718D', 'BONED CARBAJAL, SIMON', 'Hombre', '2001-12-19', 2, '2024-07-10', 39, 1, 'Si', 'Si', '', '2024-07-10 08:33:17', '2024-07-26 11:03:14'),
+(578, 20052, '54123624R', 'PALMES VELAZQUEZ, MARIO', 'Hombre', '1989-04-06', 34, '2024-07-17', 38, 1, 'Si', 'Si', '', '2024-07-12 13:51:24', '2024-07-22 07:35:16'),
+(579, 20053, '41450474N', 'MARIN MILES, DAVID', 'Hombre', '2024-08-01', 50, '2024-08-01', 31, 1, 'Si', 'No', '', '2024-07-22 08:32:20', '2024-08-07 09:53:25'),
+(580, 20054, '40533957E', 'GARCIA BARCELO, ROGER', 'Hombre', '1980-11-16', 32, '2024-08-01', 31, 0, 'Si', 'No', '', '2024-07-22 08:33:35', '2024-10-23 10:08:11'),
+(581, 20055, '05325174F', 'BARREIRO DEL RIO, BORJA', 'Hombre', '1992-04-23', 2, '2024-08-01', 31, 1, 'Si', 'No', '', '2024-07-22 08:35:48', '2024-08-07 09:53:12'),
+(582, 20056, '47260701W', 'ROIG IBAÑEZ, ERIKA', 'Mujer', '2001-02-11', 26, '2024-07-23', 36, 1, 'Si', 'Si', '**FORMENTERA**', '2024-07-22 09:27:26', '2024-08-14 09:16:18'),
+(583, 1058, '46952099Z', 'TUR TORRES, JUAN', 'Hombre', '1983-03-25', 50, '2024-07-31', 13, 1, 'Si', 'Si', '', '2024-07-24 11:30:45', '2024-08-01 14:01:03'),
+(584, 20056, '38892709Z', 'GRANDA GONZALEZ, JULIO CESAR', 'Hombre', '0001-01-01', 23, '2024-08-01', 31, 1, 'Si', 'No', '', '2024-07-24 12:11:59', '2024-08-07 09:53:38'),
+(585, 1059, '18977845Q', 'COMPTE LORIENTE, RAFAEL', 'Hombre', '1900-01-01', 50, '2024-07-26', 15, 1, 'Si', 'Si', '', '2024-07-26 08:43:53', '2024-07-26 11:04:39'),
+(586, 20057, '41604189H', 'ORTIZ GARCIA, FRANK', 'Hombre', '1994-07-20', 2, '2024-08-06', 21, 0, 'No', 'No', '', '2024-08-06 07:08:51', '2024-10-28 11:03:56'),
+(587, 20057, '41445521G', 'GUASCH FERRER, VICENTE', 'Hombre', '1965-03-03', 32, '2024-08-14', 21, 1, 'No', 'No', '', '2024-08-07 07:25:41', '2024-08-07 07:25:41'),
+(588, 1060, '79073421L', 'ACOSTA PIÑEIRO, BORJA', 'Hombre', '1994-05-24', 23, '2024-08-10', 18, 1, 'Si', 'Si', '', '2024-08-09 13:34:56', '2024-08-19 09:52:43'),
+(589, 30024, '53615087V', 'HERNANDEZ LEMOS, JOANA CATARINA', 'Hombre', '1993-07-17', 51, '2024-08-13', 45, 1, 'Si', 'No', '', '2024-08-12 09:09:24', '2024-08-19 09:55:25'),
+(590, 1061, '53118178T', 'PIÑON FERREIRA, MANUEL', 'Hombre', '1986-12-29', 2, '2024-08-13', 33, 1, 'Si', 'Si', '', '2024-08-12 13:37:11', '2024-08-13 12:25:49'),
+(591, 30025, '47257898M', 'MORANTE VERA, DAVID', 'Hombre', '1993-07-01', 51, '2024-08-16', 35, 1, 'Si', 'No', '', '2024-08-14 09:06:45', '2024-08-23 09:22:29'),
+(592, 20058, '47165760M', 'QUERALT GOMEZ, ALBERT', 'Hombre', '1991-11-15', 2, '2024-08-01', 21, 1, 'No', 'No', '', '2024-08-22 10:29:18', '2024-08-22 10:29:18'),
+(593, 751, '73397342H', 'FOIX BRETO, ROBERTO', 'Hombre', '0001-01-01', 34, '2024-07-01', 8, 1, 'Si', 'Si', '', '2024-08-22 11:22:00', '2024-08-22 11:22:00'),
+(594, 1062, '43184487D', 'LASTRES BERNET, RUBEN', 'Hombre', '1998-11-06', 2, '2024-08-29', 19, 1, 'Si', 'Si', '', '2024-08-27 12:32:04', '2024-09-10 13:14:20'),
+(595, 1063, '47253457A', 'MARTINEZ NAVARRO, ALVARO JESUS', 'Hombre', '1993-12-24', 2, '2024-09-01', 5, 1, 'Si', 'No', '', '2024-08-28 13:41:56', '2024-09-11 14:08:24'),
+(596, 1064, '54123624R', 'PALMES VELAZQUEZ, MARIO', 'Hombre', '1989-04-06', 34, '2024-09-01', 5, 1, 'Si', 'Si', '', '2024-08-28 13:42:56', '2024-10-21 13:14:05'),
+(597, 1065, '24543144M', 'BORDAGARAY CARDOZO, ALEXIS', 'Hombre', '1977-11-07', 34, '2024-08-30', 19, 1, 'Si', 'Si', '', '2024-08-28 13:45:38', '2024-12-20 12:54:52'),
+(598, 1066, '53552952M', 'ALONSO YAÑEZ, ENOL', 'Hombre', '1993-12-16', 2, '2024-09-03', 19, 1, 'Si', 'No', '', '2024-08-30 12:47:39', '2024-09-17 08:37:45'),
+(599, 20059, '47430809W', 'ESCANDELL ESCANDELL, LUIS', 'Hombre', '1992-07-05', 2, '2024-09-14', 39, 1, 'Si', 'No', '', '2024-09-09 08:01:32', '2024-10-02 07:43:17'),
+(600, 1067, '47379205X', 'PERALTA ALLO, DIEGO', 'Hombre', '1988-10-12', 34, '2024-09-18', 19, 1, 'Si', 'Si', '', '2024-09-13 11:14:05', '2024-09-20 14:00:36'),
+(601, 1068, '47259836B', 'MAZUELOS GARCIA, FRANCISCO', 'Hombre', '1999-06-17', 34, '2024-09-20', 5, 1, 'Si', 'Si', '', '2024-09-17 13:36:46', '2024-09-20 13:45:12'),
+(602, 20060, 'Y4746951H', 'CRICCO, MAURO JOSE', 'Hombre', '1978-10-30', 23, '2024-06-02', 31, 1, 'Si', 'No', '', '2024-09-23 09:19:02', '2024-10-02 07:49:51'),
+(603, 20061, '47407071T', 'GUASCH MARI, VICENT', 'Hombre', '1994-12-12', 34, '2024-05-25', 31, 1, 'Si', 'No', '', '2024-09-23 09:20:09', '2024-10-02 07:50:08'),
+(604, 1069, 'Y4257900Q', 'VITHANA PATHIRANALAGE, SHAINI DEVTHILINE', 'Hombre', '2000-07-17', 52, '2024-09-30', 26, 1, 'Si', 'Si', '', '2024-09-26 13:49:59', '2024-10-02 10:42:56'),
+(605, 1070, '09014669A', 'RODRIGUEZ MARTINEZ, RAFAEL', 'Hombre', '1977-10-10', 50, '2024-09-28', 33, 1, 'Si', 'Si', '', '2024-09-26 13:51:03', '2024-09-30 08:52:30'),
+(606, 1071, '78218782Z', 'BAUWELINCK CARMONA, REBECCA          ', 'Hombre', '1993-05-16', 52, '2024-10-01', 26, 1, 'Si', 'Si', '', '2024-10-01 09:49:23', '2024-10-02 10:43:10'),
+(607, 1072, '43461835T', 'ROMAN BARBIERI, SOFIA BELEN        ', 'Mujer', '1995-10-07', 1, '2024-10-14', 23, 1, 'Si', 'Si', 'Teletrabajo', '2024-10-11 09:20:19', '2024-10-16 10:30:19'),
+(608, 1073, '05377759Z', 'MERINO GARCIA, LUIS', 'Hombre', '1962-03-15', 35, '2024-10-22', 23, 1, 'Si', 'Si', '', '2024-10-24 12:25:58', '2024-11-11 11:07:05'),
+(609, 1074, '47255257D', 'AHAMIDAN BEN CHEBTIT, FATIMA ZAHRAA', 'Hombre', '1986-11-02', 1, '2024-11-18', 23, 1, 'Si', 'Si', '', '2024-11-11 11:09:47', '2024-11-18 09:57:19'),
+(610, 1075, '31866464X', 'SANCHEZ BERNAL, JORGE JESUS', 'Hombre', '1972-08-21', 2, '2024-12-01', 19, 1, 'Si', 'Si', '', '2024-11-27 08:37:37', '2024-12-03 08:23:21'),
+(611, 1076, 'X9101709B', 'SMITH, SIANA LOUISE', 'Hombre', '1991-10-26', 52, '2024-12-01', 26, 1, 'Si', 'Si', '', '2024-11-29 10:35:37', '2024-12-09 08:54:01'),
+(612, 999989, '47432344L', 'ROSELLÓ TORRES, PAU', 'Hombre', '2002-11-08', 2, '2024-12-12', 7, 1, 'Si', 'Si', 'ALUMNO', '2024-12-09 08:49:25', '2024-12-16 09:23:40'),
+(613, 999988, '47432793P', 'TUR TUR, XAVIER', 'Hombre', '2002-09-19', 2, '2024-12-12', 22, 1, 'Si', 'Si', 'ALUMNO', '2024-12-09 08:51:06', '2024-12-17 12:08:38');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `trabajador_citarm`
+-- Estructura de la taula `trabajador_citarm`
 --
 
 CREATE TABLE `trabajador_citarm` (
@@ -6036,12 +8221,45 @@ CREATE TABLE `trabajador_citarm` (
   `id_recomed` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+-- --------------------------------------------------------
+
 --
--- Índices para tablas volcadas
+-- Estructura de la taula `vacacion_con`
+--
+
+CREATE TABLE `vacacion_con` (
+  `id_vac_consumida` int(11) NOT NULL,
+  `id_trabajador` int(11) NOT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_fin` date DEFAULT NULL,
+  `consumido` float NOT NULL,
+  `descuenta` tinyint(1) NOT NULL,
+  `notas` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `vacacion_gen`
+--
+
+CREATE TABLE `vacacion_gen` (
+  `id_vac_generada` int(11) NOT NULL,
+  `id_trabajador` int(11) NOT NULL,
+  `id_centro` int(11) DEFAULT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_fin` date DEFAULT NULL,
+  `concepto` varchar(255) DEFAULT NULL,
+  `regimen` float NOT NULL,
+  `generado` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Índexs per a les taules bolcades
 --
 
 --
--- Indices de la tabla `accidentes`
+-- Índexs per a la taula `accidentes`
 --
 ALTER TABLE `accidentes`
   ADD PRIMARY KEY (`id_accidente`),
@@ -6061,79 +8279,79 @@ ALTER TABLE `accidentes`
   ADD KEY `tipoaccidente_ace` (`tipoaccidente_ace`);
 
 --
--- Indices de la tabla `ace_actividadfisica`
+-- Índexs per a la taula `ace_actividadfisica`
 --
 ALTER TABLE `ace_actividadfisica`
   ADD PRIMARY KEY (`id_actividadfisica`);
 
 --
--- Indices de la tabla `ace_agentematerial`
+-- Índexs per a la taula `ace_agentematerial`
 --
 ALTER TABLE `ace_agentematerial`
   ADD PRIMARY KEY (`id_agentematerial`);
 
 --
--- Indices de la tabla `ace_agentematerialdesv`
+-- Índexs per a la taula `ace_agentematerialdesv`
 --
 ALTER TABLE `ace_agentematerialdesv`
   ADD PRIMARY KEY (`id_agentematerialdesv`);
 
 --
--- Indices de la tabla `ace_agentematerialles`
+-- Índexs per a la taula `ace_agentematerialles`
 --
 ALTER TABLE `ace_agentematerialles`
   ADD PRIMARY KEY (`id_agentematerialles`);
 
 --
--- Indices de la tabla `ace_desviacion`
+-- Índexs per a la taula `ace_desviacion`
 --
 ALTER TABLE `ace_desviacion`
   ADD PRIMARY KEY (`id_desviacion`);
 
 --
--- Indices de la tabla `ace_formacontacto`
+-- Índexs per a la taula `ace_formacontacto`
 --
 ALTER TABLE `ace_formacontacto`
   ADD PRIMARY KEY (`id_formacontacto`);
 
 --
--- Indices de la tabla `ace_gravedad`
+-- Índexs per a la taula `ace_gravedad`
 --
 ALTER TABLE `ace_gravedad`
   ADD PRIMARY KEY (`id_gravedad`);
 
 --
--- Indices de la tabla `ace_partecuerpo`
+-- Índexs per a la taula `ace_partecuerpo`
 --
 ALTER TABLE `ace_partecuerpo`
   ADD PRIMARY KEY (`id_partecuerpo`);
 
 --
--- Indices de la tabla `ace_procesotrabajo`
+-- Índexs per a la taula `ace_procesotrabajo`
 --
 ALTER TABLE `ace_procesotrabajo`
   ADD PRIMARY KEY (`id_procesotrabajo`);
 
 --
--- Indices de la tabla `ace_tipoaccidente`
+-- Índexs per a la taula `ace_tipoaccidente`
 --
 ALTER TABLE `ace_tipoaccidente`
   ADD PRIMARY KEY (`id_tipoaccidente`);
 
 --
--- Indices de la tabla `ace_tipolesion`
+-- Índexs per a la taula `ace_tipolesion`
 --
 ALTER TABLE `ace_tipolesion`
   ADD PRIMARY KEY (`id_tipolesion`);
 
 --
--- Indices de la tabla `ace_tipolugar`
+-- Índexs per a la taula `ace_tipolugar`
 --
 ALTER TABLE `ace_tipolugar`
   ADD PRIMARY KEY (`id_tipolugar`);
 
 --
--- Indices de la tabla `ag_acciones`
+-- Índexs per a la taula `ag_acciones`
 --
 ALTER TABLE `ag_acciones`
   ADD PRIMARY KEY (`id_accion`),
@@ -6141,21 +8359,22 @@ ALTER TABLE `ag_acciones`
   ADD KEY `responsable_acc` (`responsable_acc`);
 
 --
--- Indices de la tabla `ag_actividad`
+-- Índexs per a la taula `ag_actividad`
 --
 ALTER TABLE `ag_actividad`
   ADD PRIMARY KEY (`id_actividad`),
   ADD KEY `id_tarea` (`id_tarea`);
 
 --
--- Indices de la tabla `ag_proyecto`
+-- Índexs per a la taula `ag_proyecto`
 --
 ALTER TABLE `ag_proyecto`
   ADD PRIMARY KEY (`id_proyecto`),
-  ADD KEY `responsable_py` (`responsable_py`);
+  ADD KEY `responsable_py` (`responsable_py`),
+  ADD KEY `empresa_py` (`empresa_py`);
 
 --
--- Indices de la tabla `ag_tareas`
+-- Índexs per a la taula `ag_tareas`
 --
 ALTER TABLE `ag_tareas`
   ADD PRIMARY KEY (`id_tarea`),
@@ -6165,14 +8384,14 @@ ALTER TABLE `ag_tareas`
   ADD KEY `accionprl_ta` (`accionprl_ta`);
 
 --
--- Indices de la tabla `categorias`
+-- Índexs per a la taula `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`),
   ADD KEY `departamento_cat` (`departamento_cat`);
 
 --
--- Indices de la tabla `centros`
+-- Índexs per a la taula `centros`
 --
 ALTER TABLE `centros`
   ADD PRIMARY KEY (`id_centro`),
@@ -6180,38 +8399,115 @@ ALTER TABLE `centros`
   ADD KEY `FK_tipo_cen` (`tipo_cen`) USING BTREE;
 
 --
--- Indices de la tabla `citas_rm`
+-- Índexs per a la taula `citas_rm`
 --
 ALTER TABLE `citas_rm`
   ADD PRIMARY KEY (`id_citarm`),
   ADD KEY `trabajador_citarm` (`trabajador_crm`);
 
 --
--- Indices de la tabla `departamentos`
+-- Índexs per a la taula `departamentos`
 --
 ALTER TABLE `departamentos`
   ADD PRIMARY KEY (`id_departamento`);
 
 --
--- Indices de la tabla `emailsinteres`
+-- Índexs per a la taula `documentos`
+--
+ALTER TABLE `documentos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índexs per a la taula `emailsinteres`
 --
 ALTER TABLE `emailsinteres`
   ADD PRIMARY KEY (`id_emailinteres`);
 
 --
--- Indices de la tabla `empresa`
+-- Índexs per a la taula `empresa`
 --
 ALTER TABLE `empresa`
   ADD PRIMARY KEY (`id_empresa`);
 
 --
--- Indices de la tabla `estadisticas`
+-- Índexs per a la taula `epis`
+--
+ALTER TABLE `epis`
+  ADD PRIMARY KEY (`id_epi`);
+
+--
+-- Índexs per a la taula `er_controlevaluaciones`
+--
+ALTER TABLE `er_controlevaluaciones`
+  ADD PRIMARY KEY (`id_controleval`),
+  ADD KEY `centro_cev` (`centro_cev`),
+  ADD KEY `tipoevaluacion_cev` (`tipoevaluacion_cev`);
+
+--
+-- Índexs per a la taula `er_elementos_revisionmaq`
+--
+ALTER TABLE `er_elementos_revisionmaq`
+  ADD PRIMARY KEY (`id_elemento`);
+
+--
+-- Índexs per a la taula `er_evaluacion`
+--
+ALTER TABLE `er_evaluacion`
+  ADD PRIMARY KEY (`id_evaluacion`),
+  ADD KEY `centro_er` (`centro_er`),
+  ADD KEY `responsable_er` (`responsable_er`);
+
+--
+-- Índexs per a la taula `er_filamedidas`
+--
+ALTER TABLE `er_filamedidas`
+  ADD PRIMARY KEY (`id_filamedida`),
+  ADD KEY `medida_fm` (`medida_fm`),
+  ADD KEY `filaeval_fm` (`filaeval_fm`);
+
+--
+-- Índexs per a la taula `er_filas`
+--
+ALTER TABLE `er_filas`
+  ADD PRIMARY KEY (`id_filaeval`),
+  ADD KEY `riesgo_fer` (`riesgo_fer`),
+  ADD KEY `puestocentro_fer` (`puestocentro_fer`);
+
+--
+-- Índexs per a la taula `er_medidas`
+--
+ALTER TABLE `er_medidas`
+  ADD PRIMARY KEY (`id_medida`);
+
+--
+-- Índexs per a la taula `er_puestocentro`
+--
+ALTER TABLE `er_puestocentro`
+  ADD PRIMARY KEY (`id_puestocentro`),
+  ADD KEY `evaluacion_pc` (`evaluacion_pc`);
+
+--
+-- Índexs per a la taula `er_puestocentro_epi`
+--
+ALTER TABLE `er_puestocentro_epi`
+  ADD PRIMARY KEY (`id_pc_epi`),
+  ADD KEY `id_puestocentro` (`id_puestocentro`),
+  ADD KEY `id_epi` (`id_epi`);
+
+--
+-- Índexs per a la taula `er_riesgos`
+--
+ALTER TABLE `er_riesgos`
+  ADD PRIMARY KEY (`id_riesgo`);
+
+--
+-- Índexs per a la taula `estadisticas`
 --
 ALTER TABLE `estadisticas`
   ADD PRIMARY KEY (`id_estadistica`);
 
 --
--- Indices de la tabla `formacion`
+-- Índexs per a la taula `formacion`
 --
 ALTER TABLE `formacion`
   ADD PRIMARY KEY (`id_formacion`),
@@ -6220,7 +8516,7 @@ ALTER TABLE `formacion`
   ADD KEY `formador_fr` (`formador_fr`);
 
 --
--- Indices de la tabla `form_asistencia`
+-- Índexs per a la taula `form_asistencia`
 --
 ALTER TABLE `form_asistencia`
   ADD PRIMARY KEY (`id_formasistencia`),
@@ -6228,51 +8524,98 @@ ALTER TABLE `form_asistencia`
   ADD KEY `trabajadores_fas` (`idtrabajador_fas`);
 
 --
--- Indices de la tabla `logformacion_trabajadores`
+-- Índexs per a la taula `info_documentos`
+--
+ALTER TABLE `info_documentos`
+  ADD PRIMARY KEY (`id_infodoc`);
+
+--
+-- Índexs per a la taula `info_entregainfo`
+--
+ALTER TABLE `info_entregainfo`
+  ADD PRIMARY KEY (`id_entregainfo`),
+  ADD KEY `id_trabajador` (`id_trabajador`),
+  ADD KEY `id_infodoc` (`id_infodoc`);
+
+--
+-- Índexs per a la taula `inv_maquinaria`
+--
+ALTER TABLE `inv_maquinaria`
+  ADD PRIMARY KEY (`id_maquina`),
+  ADD KEY `tipo_maq` (`tipo_maq`);
+
+--
+-- Índexs per a la taula `inv_revision_oficial`
+--
+ALTER TABLE `inv_revision_oficial`
+  ADD PRIMARY KEY (`id_revisionoficial`),
+  ADD KEY `id_equipo` (`id_equipo`);
+
+--
+-- Índexs per a la taula `logformacion_trabajadores`
 --
 ALTER TABLE `logformacion_trabajadores`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `reconocimientos`
+-- Índexs per a la taula `mto_maquinaria`
+--
+ALTER TABLE `mto_maquinaria`
+  ADD PRIMARY KEY (`id_mtomaquina`),
+  ADD KEY `id_maquina` (`id_maquina`);
+
+--
+-- Índexs per a la taula `reconocimientos`
 --
 ALTER TABLE `reconocimientos`
   ADD PRIMARY KEY (`id_reconocimiento`),
-  ADD KEY `id_trabajador` (`id_trabajador`);
+  ADD KEY `trabajador_rm` (`trabajador_rm`);
 
 --
--- Indices de la tabla `responsables`
+-- Índexs per a la taula `responsables`
 --
 ALTER TABLE `responsables`
   ADD PRIMARY KEY (`id_responsable`);
 
 --
--- Indices de la tabla `tb_perfiles`
+-- Índexs per a la taula `tb_perfiles`
 --
 ALTER TABLE `tb_perfiles`
   ADD PRIMARY KEY (`id_perfil`);
 
 --
--- Indices de la tabla `tb_usuarios`
+-- Índexs per a la taula `tb_usuarios`
 --
 ALTER TABLE `tb_usuarios`
   ADD PRIMARY KEY (`id_usuario`),
   ADD KEY `FK_perfil_usr` (`id_perfil`);
 
 --
--- Indices de la tabla `tipocentros`
+-- Índexs per a la taula `tipocentros`
 --
 ALTER TABLE `tipocentros`
   ADD PRIMARY KEY (`id_tipocentro`);
 
 --
--- Indices de la tabla `tipoformacion`
+-- Índexs per a la taula `tipoevaluacion`
+--
+ALTER TABLE `tipoevaluacion`
+  ADD PRIMARY KEY (`id_tipoevaluacion`);
+
+--
+-- Índexs per a la taula `tipoformacion`
 --
 ALTER TABLE `tipoformacion`
   ADD PRIMARY KEY (`id_tipoformacion`);
 
 --
--- Indices de la tabla `trabajadores`
+-- Índexs per a la taula `tipomaquinas`
+--
+ALTER TABLE `tipomaquinas`
+  ADD PRIMARY KEY (`id_tipomaquina`);
+
+--
+-- Índexs per a la taula `trabajadores`
 --
 ALTER TABLE `trabajadores`
   ADD PRIMARY KEY (`id_trabajador`),
@@ -6280,7 +8623,7 @@ ALTER TABLE `trabajadores`
   ADD KEY `categoria_tr` (`categoria_tr`);
 
 --
--- Indices de la tabla `trabajador_citarm`
+-- Índexs per a la taula `trabajador_citarm`
 --
 ALTER TABLE `trabajador_citarm`
   ADD PRIMARY KEY (`id_trabreco`),
@@ -6288,171 +8631,306 @@ ALTER TABLE `trabajador_citarm`
   ADD KEY `id_recomed` (`id_recomed`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- Índexs per a la taula `vacacion_con`
+--
+ALTER TABLE `vacacion_con`
+  ADD PRIMARY KEY (`id_vac_consumida`),
+  ADD KEY `id_trabajador` (`id_trabajador`);
+
+--
+-- Índexs per a la taula `vacacion_gen`
+--
+ALTER TABLE `vacacion_gen`
+  ADD PRIMARY KEY (`id_vac_generada`),
+  ADD KEY `id_trabajador` (`id_trabajador`),
+  ADD KEY `id_centro` (`id_centro`);
+
+--
+-- AUTO_INCREMENT per les taules bolcades
 --
 
 --
--- AUTO_INCREMENT de la tabla `accidentes`
+-- AUTO_INCREMENT per la taula `accidentes`
 --
 ALTER TABLE `accidentes`
-  MODIFY `id_accidente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_accidente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
--- AUTO_INCREMENT de la tabla `ace_formacontacto`
+-- AUTO_INCREMENT per la taula `ace_formacontacto`
 --
 ALTER TABLE `ace_formacontacto`
-  MODIFY `id_formacontacto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id_formacontacto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
--- AUTO_INCREMENT de la tabla `ace_gravedad`
+-- AUTO_INCREMENT per la taula `ace_gravedad`
 --
 ALTER TABLE `ace_gravedad`
-  MODIFY `id_gravedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_gravedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `ace_tipoaccidente`
+-- AUTO_INCREMENT per la taula `ace_tipoaccidente`
 --
 ALTER TABLE `ace_tipoaccidente`
-  MODIFY `id_tipoaccidente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_tipoaccidente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `ag_acciones`
+-- AUTO_INCREMENT per la taula `ag_acciones`
 --
 ALTER TABLE `ag_acciones`
-  MODIFY `id_accion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_accion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
--- AUTO_INCREMENT de la tabla `ag_actividad`
+-- AUTO_INCREMENT per la taula `ag_actividad`
 --
 ALTER TABLE `ag_actividad`
-  MODIFY `id_actividad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_actividad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 
 --
--- AUTO_INCREMENT de la tabla `ag_proyecto`
+-- AUTO_INCREMENT per la taula `ag_proyecto`
 --
 ALTER TABLE `ag_proyecto`
-  MODIFY `id_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT de la tabla `ag_tareas`
+-- AUTO_INCREMENT per la taula `ag_tareas`
 --
 ALTER TABLE `ag_tareas`
-  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
 
 --
--- AUTO_INCREMENT de la tabla `categorias`
+-- AUTO_INCREMENT per la taula `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT de la tabla `centros`
+-- AUTO_INCREMENT per la taula `centros`
 --
 ALTER TABLE `centros`
-  MODIFY `id_centro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_centro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT de la tabla `citas_rm`
+-- AUTO_INCREMENT per la taula `citas_rm`
 --
 ALTER TABLE `citas_rm`
-  MODIFY `id_citarm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_citarm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
--- AUTO_INCREMENT de la tabla `departamentos`
+-- AUTO_INCREMENT per la taula `departamentos`
 --
 ALTER TABLE `departamentos`
-  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `emailsinteres`
+-- AUTO_INCREMENT per la taula `documentos`
+--
+ALTER TABLE `documentos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT per la taula `emailsinteres`
 --
 ALTER TABLE `emailsinteres`
-  MODIFY `id_emailinteres` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_emailinteres` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de la tabla `empresa`
+-- AUTO_INCREMENT per la taula `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `estadisticas`
+-- AUTO_INCREMENT per la taula `epis`
+--
+ALTER TABLE `epis`
+  MODIFY `id_epi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT per la taula `er_controlevaluaciones`
+--
+ALTER TABLE `er_controlevaluaciones`
+  MODIFY `id_controleval` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+
+--
+-- AUTO_INCREMENT per la taula `er_elementos_revisionmaq`
+--
+ALTER TABLE `er_elementos_revisionmaq`
+  MODIFY `id_elemento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT per la taula `er_evaluacion`
+--
+ALTER TABLE `er_evaluacion`
+  MODIFY `id_evaluacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT per la taula `er_filamedidas`
+--
+ALTER TABLE `er_filamedidas`
+  MODIFY `id_filamedida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
+
+--
+-- AUTO_INCREMENT per la taula `er_filas`
+--
+ALTER TABLE `er_filas`
+  MODIFY `id_filaeval` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+
+--
+-- AUTO_INCREMENT per la taula `er_medidas`
+--
+ALTER TABLE `er_medidas`
+  MODIFY `id_medida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT per la taula `er_puestocentro`
+--
+ALTER TABLE `er_puestocentro`
+  MODIFY `id_puestocentro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT per la taula `er_puestocentro_epi`
+--
+ALTER TABLE `er_puestocentro_epi`
+  MODIFY `id_pc_epi` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la taula `er_riesgos`
+--
+ALTER TABLE `er_riesgos`
+  MODIFY `id_riesgo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+
+--
+-- AUTO_INCREMENT per la taula `estadisticas`
 --
 ALTER TABLE `estadisticas`
-  MODIFY `id_estadistica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_estadistica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `formacion`
+-- AUTO_INCREMENT per la taula `formacion`
 --
 ALTER TABLE `formacion`
-  MODIFY `id_formacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_formacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
 
 --
--- AUTO_INCREMENT de la tabla `form_asistencia`
+-- AUTO_INCREMENT per la taula `form_asistencia`
 --
 ALTER TABLE `form_asistencia`
-  MODIFY `id_formasistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_formasistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=425;
 
 --
--- AUTO_INCREMENT de la tabla `logformacion_trabajadores`
+-- AUTO_INCREMENT per la taula `info_documentos`
+--
+ALTER TABLE `info_documentos`
+  MODIFY `id_infodoc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT per la taula `info_entregainfo`
+--
+ALTER TABLE `info_entregainfo`
+  MODIFY `id_entregainfo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT per la taula `inv_maquinaria`
+--
+ALTER TABLE `inv_maquinaria`
+  MODIFY `id_maquina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT per la taula `inv_revision_oficial`
+--
+ALTER TABLE `inv_revision_oficial`
+  MODIFY `id_revisionoficial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT per la taula `logformacion_trabajadores`
 --
 ALTER TABLE `logformacion_trabajadores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `reconocimientos`
+-- AUTO_INCREMENT per la taula `mto_maquinaria`
+--
+ALTER TABLE `mto_maquinaria`
+  MODIFY `id_mtomaquina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT per la taula `reconocimientos`
 --
 ALTER TABLE `reconocimientos`
-  MODIFY `id_reconocimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id_reconocimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=702;
 
 --
--- AUTO_INCREMENT de la tabla `responsables`
+-- AUTO_INCREMENT per la taula `responsables`
 --
 ALTER TABLE `responsables`
-  MODIFY `id_responsable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_responsable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT de la tabla `tb_perfiles`
+-- AUTO_INCREMENT per la taula `tb_perfiles`
 --
 ALTER TABLE `tb_perfiles`
-  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de la tabla `tb_usuarios`
+-- AUTO_INCREMENT per la taula `tb_usuarios`
 --
 ALTER TABLE `tb_usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT de la tabla `tipocentros`
+-- AUTO_INCREMENT per la taula `tipocentros`
 --
 ALTER TABLE `tipocentros`
   MODIFY `id_tipocentro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `tipoformacion`
+-- AUTO_INCREMENT per la taula `tipoevaluacion`
+--
+ALTER TABLE `tipoevaluacion`
+  MODIFY `id_tipoevaluacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT per la taula `tipoformacion`
 --
 ALTER TABLE `tipoformacion`
-  MODIFY `id_tipoformacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_tipoformacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de la tabla `trabajadores`
+-- AUTO_INCREMENT per la taula `tipomaquinas`
+--
+ALTER TABLE `tipomaquinas`
+  MODIFY `id_tipomaquina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT per la taula `trabajadores`
 --
 ALTER TABLE `trabajadores`
-  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=445;
+  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=614;
 
 --
--- AUTO_INCREMENT de la tabla `trabajador_citarm`
+-- AUTO_INCREMENT per la taula `trabajador_citarm`
 --
 ALTER TABLE `trabajador_citarm`
   MODIFY `id_trabreco` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Restricciones para tablas volcadas
+-- AUTO_INCREMENT per la taula `vacacion_con`
+--
+ALTER TABLE `vacacion_con`
+  MODIFY `id_vac_consumida` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la taula `vacacion_gen`
+--
+ALTER TABLE `vacacion_gen`
+  MODIFY `id_vac_generada` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restriccions per a les taules bolcades
 --
 
 --
--- Filtros para la tabla `accidentes`
+-- Restriccions per a la taula `accidentes`
 --
 ALTER TABLE `accidentes`
   ADD CONSTRAINT `accidentes_ibfk_1` FOREIGN KEY (`procesotrabajo_ace`) REFERENCES `ace_procesotrabajo` (`id_procesotrabajo`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -6470,26 +8948,27 @@ ALTER TABLE `accidentes`
   ADD CONSTRAINT `accidentes_ibfk_9` FOREIGN KEY (`gradolesion_ace`) REFERENCES `ace_gravedad` (`id_gravedad`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `ag_acciones`
+-- Restriccions per a la taula `ag_acciones`
 --
 ALTER TABLE `ag_acciones`
   ADD CONSTRAINT `ag_acciones_ibfk_1` FOREIGN KEY (`centro_acc`) REFERENCES `centros` (`id_centro`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `ag_acciones_ibfk_2` FOREIGN KEY (`responsable_acc`) REFERENCES `responsables` (`id_responsable`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `ag_actividad`
+-- Restriccions per a la taula `ag_actividad`
 --
 ALTER TABLE `ag_actividad`
   ADD CONSTRAINT `ag_actividad_ibfk_1` FOREIGN KEY (`id_tarea`) REFERENCES `ag_tareas` (`id_tarea`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `ag_proyecto`
+-- Restriccions per a la taula `ag_proyecto`
 --
 ALTER TABLE `ag_proyecto`
-  ADD CONSTRAINT `ag_proyecto_ibfk_1` FOREIGN KEY (`responsable_py`) REFERENCES `responsables` (`id_responsable`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `ag_proyecto_ibfk_1` FOREIGN KEY (`responsable_py`) REFERENCES `responsables` (`id_responsable`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `ag_proyecto_ibfk_2` FOREIGN KEY (`empresa_py`) REFERENCES `empresa` (`id_empresa`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `ag_tareas`
+-- Restriccions per a la taula `ag_tareas`
 --
 ALTER TABLE `ag_tareas`
   ADD CONSTRAINT `ag_tareas_ibfk_1` FOREIGN KEY (`id_proyecto`) REFERENCES `ag_proyecto` (`id_proyecto`) ON DELETE NO ACTION ON UPDATE CASCADE,
@@ -6498,26 +8977,60 @@ ALTER TABLE `ag_tareas`
   ADD CONSTRAINT `ag_tareas_ibfk_5` FOREIGN KEY (`accionprl_ta`) REFERENCES `ag_acciones` (`id_accion`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `categorias`
+-- Restriccions per a la taula `categorias`
 --
 ALTER TABLE `categorias`
   ADD CONSTRAINT `categorias_ibfk_1` FOREIGN KEY (`departamento_cat`) REFERENCES `departamentos` (`id_departamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `centros`
+-- Restriccions per a la taula `centros`
 --
 ALTER TABLE `centros`
   ADD CONSTRAINT `centros_ibfk_1` FOREIGN KEY (`empresa_cen`) REFERENCES `empresa` (`id_empresa`) ON UPDATE CASCADE,
   ADD CONSTRAINT `centros_ibfk_2` FOREIGN KEY (`tipo_cen`) REFERENCES `tipocentros` (`id_tipocentro`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `citas_rm`
+-- Restriccions per a la taula `citas_rm`
 --
 ALTER TABLE `citas_rm`
   ADD CONSTRAINT `citas_rm_ibfk_1` FOREIGN KEY (`id_citarm`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `formacion`
+-- Restriccions per a la taula `er_controlevaluaciones`
+--
+ALTER TABLE `er_controlevaluaciones`
+  ADD CONSTRAINT `er_controlevaluaciones_ibfk_1` FOREIGN KEY (`tipoevaluacion_cev`) REFERENCES `tipoevaluacion` (`id_tipoevaluacion`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `er_controlevaluaciones_ibfk_2` FOREIGN KEY (`centro_cev`) REFERENCES `centros` (`id_centro`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restriccions per a la taula `er_evaluacion`
+--
+ALTER TABLE `er_evaluacion`
+  ADD CONSTRAINT `er_evaluacion_ibfk_1` FOREIGN KEY (`centro_er`) REFERENCES `centros` (`id_centro`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `er_evaluacion_ibfk_2` FOREIGN KEY (`responsable_er`) REFERENCES `responsables` (`id_responsable`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Restriccions per a la taula `er_filamedidas`
+--
+ALTER TABLE `er_filamedidas`
+  ADD CONSTRAINT `er_filamedidas_ibfk_1` FOREIGN KEY (`filaeval_fm`) REFERENCES `er_filas` (`id_filaeval`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `er_filamedidas_ibfk_2` FOREIGN KEY (`medida_fm`) REFERENCES `er_medidas` (`id_medida`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Restriccions per a la taula `er_filas`
+--
+ALTER TABLE `er_filas`
+  ADD CONSTRAINT `er_filas_ibfk_2` FOREIGN KEY (`puestocentro_fer`) REFERENCES `er_puestocentro` (`id_puestocentro`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `er_filas_ibfk_3` FOREIGN KEY (`riesgo_fer`) REFERENCES `er_riesgos` (`id_riesgo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restriccions per a la taula `er_puestocentro`
+--
+ALTER TABLE `er_puestocentro`
+  ADD CONSTRAINT `er_puestocentro_ibfk_1` FOREIGN KEY (`evaluacion_pc`) REFERENCES `er_evaluacion` (`id_evaluacion`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restriccions per a la taula `formacion`
 --
 ALTER TABLE `formacion`
   ADD CONSTRAINT `formacion_ibfk_1` FOREIGN KEY (`tipo_fr`) REFERENCES `tipoformacion` (`id_tipoformacion`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -6525,29 +9038,66 @@ ALTER TABLE `formacion`
   ADD CONSTRAINT `formacion_ibfk_5` FOREIGN KEY (`formador_fr`) REFERENCES `responsables` (`id_responsable`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `form_asistencia`
+-- Restriccions per a la taula `form_asistencia`
 --
 ALTER TABLE `form_asistencia`
   ADD CONSTRAINT `form_asistencia_ibfk_1` FOREIGN KEY (`idtrabajador_fas`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `reconocimientos`
+-- Restriccions per a la taula `info_entregainfo`
 --
-ALTER TABLE `reconocimientos`
-  ADD CONSTRAINT `reconocimientos_ibfk_1` FOREIGN KEY (`id_reconocimiento`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `info_entregainfo`
+  ADD CONSTRAINT `info_entregainfo_ibfk_1` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `info_entregainfo_ibfk_2` FOREIGN KEY (`id_infodoc`) REFERENCES `info_documentos` (`id_infodoc`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tb_usuarios`
+-- Restriccions per a la taula `inv_maquinaria`
+--
+ALTER TABLE `inv_maquinaria`
+  ADD CONSTRAINT `inv_maquinaria_ibfk_1` FOREIGN KEY (`tipo_maq`) REFERENCES `tipomaquinas` (`id_tipomaquina`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restriccions per a la taula `inv_revision_oficial`
+--
+ALTER TABLE `inv_revision_oficial`
+  ADD CONSTRAINT `inv_revision_oficial_ibfk_1` FOREIGN KEY (`id_equipo`) REFERENCES `inv_maquinaria` (`id_maquina`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restriccions per a la taula `mto_maquinaria`
+--
+ALTER TABLE `mto_maquinaria`
+  ADD CONSTRAINT `mto_maquinaria_ibfk_1` FOREIGN KEY (`id_maquina`) REFERENCES `inv_maquinaria` (`id_maquina`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restriccions per a la taula `reconocimientos`
+--
+ALTER TABLE `reconocimientos`
+  ADD CONSTRAINT `reconocimientos_ibfk_1` FOREIGN KEY (`trabajador_rm`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restriccions per a la taula `tb_usuarios`
 --
 ALTER TABLE `tb_usuarios`
   ADD CONSTRAINT `tb_usuarios_ibfk_1` FOREIGN KEY (`id_perfil`) REFERENCES `tb_perfiles` (`id_perfil`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `trabajadores`
+-- Restriccions per a la taula `trabajadores`
 --
 ALTER TABLE `trabajadores`
   ADD CONSTRAINT `trabajadores_ibfk_2` FOREIGN KEY (`centro_tr`) REFERENCES `centros` (`id_centro`) ON UPDATE CASCADE,
   ADD CONSTRAINT `trabajadores_ibfk_3` FOREIGN KEY (`categoria_tr`) REFERENCES `categorias` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restriccions per a la taula `vacacion_con`
+--
+ALTER TABLE `vacacion_con`
+  ADD CONSTRAINT `vacacion_con_ibfk_1` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restriccions per a la taula `vacacion_gen`
+--
+ALTER TABLE `vacacion_gen`
+  ADD CONSTRAINT `vacacion_gen_ibfk_1` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajadores` (`id_trabajador`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

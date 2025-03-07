@@ -1,6 +1,24 @@
 <?php
+session_start();
 include('../../app/config.php');
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['sesion_email'])) {
+    header('Location: ' . $URL . '/login.php');
+    exit();
+}
+
+// Verificar si el usuario tiene permiso para acceder a esta página
+if ($_SESSION['perfil_usr'] !== 'ADMINISTRADOR' && $_SESSION['perfil_usr'] !== 'USUARIO_PRL') {
+    // Si el usuario no es administrador, redirigirlo a su dashboard de usuario
+    header('Location: ' . $URL . '/admin/acceso_nopermitido.php');
+    exit();
+}
+
+// Incluir la cabecera de la página
 include('../../admin/layout/parte1.php');
+
+// Cargar los datos necesarios
 include('../../app/controllers/formaciones/listado_formaciones.php');
 include('../../app/controllers/pruebas/listado_trabajadores.php');
 include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones.php');
@@ -126,7 +144,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                     <tr>
                         <th style="text-align: center">Num.</th>
                         <th style="text-align: center">Formacion nº</th>
-                        <th style="text-align: center">Empresa</th>
+						 <th style="text-align: center">Empresa</th>
                         <th style="text-align: center">Tipo Form.</th>
                         <th style="text-align: center">Nombre trab.</th>
                         <th style="text-align: center">Fecha Form.</th>
@@ -145,7 +163,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                         <tr>
                             <td style="text-align: center"><?php echo $contador; ?></td>
                             <td style="text-align: center"><?php echo $formaciones_dato['nroformacion']; ?></td>
-                            <td style="text-align: center"><?php echo $formaciones_dato['nombre_emp']; ?></td>
+							<td style="text-align: center"><?php echo $formaciones_dato['nombre_emp']; ?></td>
                             <td>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-tipoformacion<?php echo $id_formacion; ?>">
@@ -269,7 +287,7 @@ include('../../admin/layout/mensaje.php');
 <script>
     $(function() {
         $("#example1").DataTable({
-            "pageLength": 5,
+            "pageLength": 10,
             "language": {
                 "emptyTable": "No hay información",
                 "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",

@@ -38,7 +38,6 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 <!-- /.content- -->
 <div class="content">
 
-   
     <div class="row">
         <div class="col-md-7">
 
@@ -308,41 +307,42 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                 <div id="respuesta_registro_formacion"></div>
                                 <script>
                                     $('#btn_guardar_formacion').click(function() {
-                                        var nroformacion = '<?php echo $contador_formaciones ?>';
-                                        var tipo_fr = $('#tipo_fr').val();
-                                        var fecha_fr = $('#fecha_fr').val();
-                                        var fechacad_fr = $('#fechacad_fr').val();
-                                        var formador_fr = $('#formador_fr').val();
+                                            var nroformacion = '<?php echo $contador_formaciones ?>';
+                                            var tipo_fr = $('#tipo_fr').val();
+                                            var fecha_fr = $('#fecha_fr').val();
+                                            var fechacad_fr = $('#fechacad_fr').val();
+                                            var formador_fr = $('#formador_fr').val();
 
 
-                                        if (fecha_fr == "") {
-                                            alert("debe indicar la fecha de formacion");
+                                            if (fecha_fr == "") {
+                                                alert("debe indicar la fecha de formacion");
 
-                                        } else if (nroformacion == "") {
-                                            alert("debe indicar el numero de formacion");
+                                            } else if (nroformacion == "") {
+                                                alert("debe indicar el numero de formacion");
 
-                                        } else {
-                                            var url = "../../app/controllers/formaciones/registrar_formacion.php";
-                                            $.get(url, {
-                                                nroformacion: nroformacion,
-                                                tipo_fr: tipo_fr,
-                                                fecha_fr: fecha_fr,
-                                                fechacad_fr: fechacad_fr,
-                                                formador_fr: formador_fr
-                                            }, function(datos) {
-                                                $('#respuesta_registro_formacion').html(datos);
-                                            })
+                                            } else{
+                                                var url = "../../app/controllers/formaciones/registrar_formacion.php";
+                                                $.get(url, {
+                                                    nroformacion: nroformacion,
+                                                    tipo_fr: tipo_fr,
+                                                    fecha_fr: fecha_fr,
+                                                    fechacad_fr: fechacad_fr,
+                                                    formador_fr: formador_fr
+                                                }, function(datos) {
+                                                    $('#respuesta_registro_formacion').html(datos);
+                                                })
                                             /*} else($tipo_fr == 1) {
                                                 <?php
-                                                $sentencia2 = $pdo->prepare("UPDATE trabajadores as tr SET tr.formacionpdt_tr = $fecha_tr 
+                                                $sentencia2 = $pdo -> prepare("UPDATE trabajadores as tr SET tr.formacionpdt_tr = $fecha_tr 
                                                 INNER JOIN form_asistencia as fas ON tr.id_trabajador = fas.idtrabajador_fas
                                                 INNER JOIN formacion as fr ON fas.nroformacion = fr.nroformacion WHERE tr.id_trabajador = fas.idtrabajador_fas");
-                                                $sentencia2->bindParam('formacionpdt_tr', $fecha_fr);
+                                                $sentencia2 -> bindParam('formacionpdt_tr', $fecha_fr);
                                                 ?>
                                             }*/
 
                                         }
-                                    });
+                                    }
+                                    );
                                 </script>
 
                             </div>
@@ -355,13 +355,12 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
             </div>
         </div>
-        <div class="col-md-1">
-        <div class="btn-text-center">
+			
+    </div>
+		<div class="btn-text-center">
             <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador" title="Añadir nuevo trabajador"><i class="bi bi-person-plus-fill"></i>AÑADIR NUEVO TRABAJADOR</button>
         </div>
-    </div>
-
-    <!-- inicio modal nuevo trabajador-->
+		<!-- inicio modal nuevo trabajador-->
     <div class="modal fade" id="modal-nuevotrabajador">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -537,7 +536,6 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
         </div>
     </div>
     <!--fin modal-->
-    </div>
 
 </div>
 

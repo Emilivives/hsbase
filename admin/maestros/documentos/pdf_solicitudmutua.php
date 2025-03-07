@@ -41,8 +41,10 @@ foreach ($accidentes_datos as $accidentes_dato) {
     $inicio_trabajador_ace = $accidentes_dato['inicio_tr'];
     $categoria_trabajador_ace = $accidentes_dato['nombre_cat'];
     $categoria_descripcion_ace = $accidentes_dato['descripcion_cat'];
-    $departamento_trabajador_ace = $accidentes_dato['departamento_cat'];
+    $departamento_trabajador_ace = $accidentes_dato['nombre_dpo'];
     $centro_ace = $accidentes_dato['nombre_cen'];
+	$tipocen_ace = $accidentes_dato['nombre_tc'];
+	$direccion_ace = $accidentes_dato['direccion_cen'];
     $empresa_ace = $accidentes_dato['nombre_emp'];
     $razonsocial_ace = $accidentes_dato['razonsocial_emp'];
     $modalidadprl_ace = $accidentes_dato['modalidadprl_emp'];
@@ -131,8 +133,8 @@ $mes = date("m", $fechaentera);
 $dia = date("d", $fechaentera);
 
 $horaentera = strtotime($hora_ace);
-$hora = date("H", $fechaentera);
-$minutos = date("i", $fechaentera);
+$hora = date("H", $horaentera);
+$minutos = date("i", $horaentera);
 
 $fechaahora = strtotime($fechahora);
 $anioahora = date("Y", $fechaentera);
@@ -143,7 +145,6 @@ $diaahora = date("d", $fechaentera);
 ///// traer datos de accionprl
 
 $pdf = new FPDI();
-
 # Pagina 1  (X-horizontal Y-vertical)
 $pdf->AddPage();
 $pdf->setSourceFile('Files_Pdf/18_04_2024_SOLICITUD_ASISTENCIA_MUTUA.pdf');
@@ -170,10 +171,15 @@ $categoria_trabajador_ace = mb_convert_encoding($categoria_trabajador_ace, 'ISO-
 $pdf->Write(10, $categoria_trabajador_ace);
 
 
-$pdf->SetFont('Arial', '', '6');
-$pdf->SetXY(20, 120);
+
+$pdf->SetFont('Arial', '', 6);
+$pdf->SetXY(20, 118);
 $categoria_descripcion_ace = mb_convert_encoding($categoria_descripcion_ace, 'ISO-8859-1', 'UTF-8');
-$pdf->Write(2, $categoria_descripcion_ace);
+
+// Imprime el texto en varias líneas con alineación a la izquierda
+$pdf->MultiCell(175, 2, $categoria_descripcion_ace);
+
+
 
 
 $pdf->SetFont('Arial', '', '13');
@@ -194,9 +200,20 @@ $pdf->SetXY(160, 153);
 $pdf->Write(10, $hora);
 
 $pdf->SetFont('Arial', '', '10');
+$pdf->SetXY(60, 165);
+$centro_ace = mb_convert_encoding($centro_ace, 'ISO-8859-1', 'UTF-8');
+$pdf->Write(10, $centro_ace );
+
+$pdf->SetFont('Arial', '', '10');
 $pdf->SetXY(20, 170);
-$detalleslugar_ace = mb_convert_encoding($detalleslugar_ace, 'ISO-8859-1', 'UTF-8');
-$pdf->Write(10, $detalleslugar_ace);
+$tipocen_ace = mb_convert_encoding($tipocen_ace, 'ISO-8859-1', 'UTF-8');
+$pdf->Write(10, '('.$tipocen_ace.')' );
+
+$pdf->SetFont('Arial', '', '10');
+$pdf->SetXY(45, 170);
+$direccion_ace = mb_convert_encoding($direccion_ace, 'ISO-8859-1', 'UTF-8');
+$pdf->Write(10, $direccion_ace);
+
 
 $pdf->SetFont('Arial', '', '10');
 $pdf->SetXY(20, 182);
@@ -204,9 +221,10 @@ $observproceso_ace = mb_convert_encoding($observproceso_ace, 'ISO-8859-1', 'UTF-
 $pdf->Write(10, $observproceso_ace);
 
 $pdf->SetFont('Arial', '', '10');
-$pdf->SetXY(20, 202);
+$pdf->SetXY(20, 203);
 $descripcion_ace = mb_convert_encoding($descripcion_ace, 'ISO-8859-1', 'UTF-8');
-$pdf->Write(10, $descripcion_ace);
+// Imprime el texto en varias líneas con alineación a la izquierda
+$pdf->MultiCell(170, 4, $descripcion_ace);
 
 $pdf->SetFont('Arial', '', '10');
 $pdf->SetXY(20, 222);
@@ -243,7 +261,7 @@ $pdf->Write(10, $anio);
 //setFont ('S' - SUBRAYA 
 
 
-$pdf->Output('Files_Pdf/SOLICITUD_ASISTENCIA_MUTUA_TRASMAPI.pdf', 'D'); //SALIDA DEL PDF
+$pdf->Output('asistencia_mutua_'.$trabajador_ace.'_'.$dia.'_'.$mes.'_'.$anio.'_.pdf', 'D'); //SALIDA DEL PDF
 //    $pdf->Output('original_update.pdf', 'F');
 //    $pdf->Output('original_update.pdf', 'I'); //PARA ABRIL EL PDF EN OTRA VENTANA
 //	  $pdf->Output('original_update.pdf', 'D'); //PARA FORZAR LA DESCARGA

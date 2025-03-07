@@ -3,6 +3,7 @@ include('../../app/config.php');
 include('../../admin/layout/parte1.php');
 include('../../app/controllers/pruebas/listado_trabajadores.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
+include('../../app/controllers/maestros/empresas/listado_empresas.php');
 include('../../app/controllers/actividad/listado_proyectos.php');
 include('../../app/controllers/actividad/listado_tareas.php');
 include('../../app/controllers/maestros/responsables/listado_responsables.php');
@@ -157,14 +158,33 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
 
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Nombre Proyecto</label>
                                                 <input type="text" name="nombre_py" class="form-control" required>
                                             </div>
                                         </div>
+                                        <div class="col-md-3">
+                                            <label for="" class="col-form-label col-sm-6">Empresa:</label>
+                                            <div class="col-sm-12">
+                                                <select name="empresa_py" id="" class="form-control" required>
+                                                    <?php
+                                                    foreach ($empresas_datos as $empresas_dato) {
+                                                    ?>
+                                                        <option value="<?php echo $empresas_dato['id_empresa']; ?>"> <?php echo $empresas_dato['nombre_emp']; ?> </option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
 
-                                        <div class="col-md-4">
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        <div class="col-md-3">
                                             <label for="">Responsable</label>
                                             <select name="responsable_py" id="" class="form-control">
                                                 <?php
@@ -192,7 +212,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
                                         </div>
                                         <div class="col-md-2">
-                                            
+
 
                                         </div>
 
@@ -203,7 +223,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                 <option value="Activo">Activo</option>
                                                 <option value="Finalizado">Finalizado</option>
                                                 <option value="Cancelado">Cancelado</option>
-                                               
+
                                             </select>
 
                                         </div>
@@ -212,14 +232,14 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                     <hr>
 
                                     <div class="row">
-                                    <div class="col-sm-12">
-                                                <div class="form-group row">
-                                                    <label for="descripcion_acc" class="col-form-label col-sm-2">Descripción proyecto:</label>
-                                                    <div class="col-sm-12">
-                                                        <textarea class="form-control" name="descripcion_py" value="" rows="3" required></textarea>
-                                                    </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group row">
+                                                <label for="descripcion_acc" class="col-form-label col-sm-2">Descripción proyecto:</label>
+                                                <div class="col-sm-12">
+                                                    <textarea class="form-control" name="descripcion_py" value="" rows="3" required></textarea>
                                                 </div>
                                             </div>
+                                        </div>
 
 
                                     </div>
@@ -243,21 +263,23 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                         <colgroup>
                             <col width="5%">
                             <col width="35%">
+                            <col width="15%">
+                            <col width="7%">
+                            <col width="7%">
                             <col width="10%">
-                            <col width="10%">
-                            <col width="20%">
-                            <col width="10%">
-                            <col width="10%">
+                            <col width="7%">
+                            <col width="8%">
 
                         </colgroup>
                         <thead class="table-dark">
                             <tr>
                                 <th style="text-align: center">#</th>
                                 <th style="text-align: left">Proyecto</th>
+                                <th style="text-align: left">Empresa</th>
                                 <th style="text-align: left">Fecha In.</th>
                                 <th style="text-align: left">Fecha Fin</th>
-                                <th style="text-align: left">Avance</th>
-                                <th style="text-align: left">Estado</th>
+                                <th style="text-align: center">Avance</th>
+                                <th style="text-align: center">Estado</th>
                                 <th style="text-align: center">Opciones</th>
                             </tr>
                         </thead>
@@ -265,20 +287,47 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                             <?php
                             $contador = 0;
                             foreach ($proyectos as $proyecto) {
-                                $contador = $contador + 1;
                                 $id_proyecto = $proyecto['id_proyecto'];
+                                $contador_total = 0;
+                                $contador_completado = 0;
+
+                                // Consultamos las tareas de este proyecto específico
+                                $sql_tareas = "SELECT * FROM ag_tareas WHERE id_proyecto = :id_proyecto";
+                                $query_tareas = $pdo->prepare($sql_tareas);
+                                $query_tareas->bindParam(':id_proyecto', $id_proyecto, PDO::PARAM_INT);
+                                $query_tareas->execute();
+                                $tareas_proyecto = $query_tareas->fetchAll(PDO::FETCH_ASSOC);
+
+                                // Filtramos las tareas del proyecto actual
+                                foreach ($tareas_proyecto as $tarea) {
+                                    $contador_total++; // Incrementamos el total de tareas
+
+                                    if ($tarea['estado_ta'] == 'Completado') {
+                                        $contador_completado++; // Incrementamos el contador de tareas completadas
+                                    }
+                                }
+
+
+                                // Calculamos el porcentaje de avance
+                                $avance = $contador_total > 0 ? ($contador_completado / $contador_total) * 100 : 0;
                             ?>
 
-                                <tr>
-                                    <td style="text-align: center"><b><?php echo $contador; ?></b></td>
-                                    <td style="text-align: left"><b><?php echo $proyecto['nombre_py']; ?></b>
 
-                                    </td>
+                                <tr>
+                                    <td style="text-align: center"></td>
+                                    <td style="text-align: left"><b><?php echo $proyecto['nombre_py']; ?></b></td>
+                                    <td style="text-align: left"><b><?php echo $proyecto['nombre_emp']; ?></b></td>
                                     <td style="text-align: left"><?php echo $newdate = date("d-m-Y", strtotime($proyecto['fechainicio_py'])) ?></td>
                                     <td style="text-align: left"><?php echo $newdate = date("d-m-Y", strtotime($proyecto['fechafin_py'])) ?></td>
-                                    <td style="text-align: left"><?php echo $proyecto['responsable_py']; ?></td>
-
-                                    <td style="text-align: left;"><?php $proyecto['estado_py'];
+                                    <!-- Aquí agregamos la barra de progreso -->
+                                    <td style="text-align: left">
+                                        <div class="progress" style="height: 25px; background-color:rgb(138, 138, 138);">
+                                            <div class="progress-bar" role="progressbar" style="width: <?php echo number_format($avance, 1); ?>%;" aria-valuenow="<?php echo number_format($avance, 1); ?>" aria-valuemin="0" aria-valuemax="100">
+                                                <?php echo number_format($avance, 1); ?>%
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="text-align: center;"><?php $proyecto['estado_py'];
                                                                     if ($proyecto['estado_py'] == 'Activo') { ?>
                                             <span class='badge badge-success'>ACTIVO</span>
                                         <?php
@@ -298,6 +347,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
                                             <a href="show.php?id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
 
+                                            <a href="../../app/controllers/actividad/duplicar_proyecto.php?id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-warning btn-sm btn-font-size" onclick="return confirm('¿Realmente desea duplicar el proyecto PRL?')" title="Duplicar Proyecto PRL"><i class="bi bi-copy"></i></a>
 
                                             <a href="../../app/controllers/actividad/delete_proyecto.php?id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar la el proyecto PRL?')" title="Eliminar Proyecto PRL"><i class="bi bi-trash-fill"></i></a>
 
@@ -352,23 +402,46 @@ include('../../admin/layout/mensaje.php');
 
 <script>
     $(function() {
+        // Ordenación personalizada para fechas en formato dd-mm-yyyy
+        $.fn.dataTable.ext.type.order['date-dd-mm-yyyy-pre'] = function(data) {
+            if (!data) return 0;
+            const cleanData = data.replace(/<[^>]+>/g, ''); // Limpiar etiquetas HTML
+            const [day, month, year] = cleanData.split('-').map(Number);
+            return new Date(year, month - 1, day).getTime();
+        };
+
+        // Configurar DataTables
         $("#example1").DataTable({
-            "pageLength": 5,
+            "pageLength": 20,
+            "order": [
+                [3, 'desc'] // Ordenar por la columna de fecha (columna 3)
+            ],
+            "columnDefs": [{
+                    targets: 0, // Columna del contador
+                    orderable: false, // No ordenable
+                    searchable: false, // No buscable
+                    render: function(data, type, row, meta) {
+                        return meta.row + 1; // Contador dinámico
+                    }
+                },
+                {
+                    targets: 3, // Columna de fechas
+                    type: 'date-dd-mm-yyyy' // Usar el tipo de ordenación personalizado
+                }
+            ],
             "language": {
                 "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ Tareas",
-                "infoEmpty": "Mostrando 0 a 0 de 0 Usuarios",
-                "infoFiltered": "(Filtrado de MAX total Usuarios)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Usuarios",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ proyectos",
+                "infoEmpty": "Mostrando 0 a 0 de 0 proyectos",
+                "infoFiltered": "(Filtrado de _MAX_ total proyectos)",
+                "lengthMenu": "Mostrar _MENU_ proyectos",
                 "loadingRecords": "Cargando...",
                 "processing": "Procesando...",
                 "search": "Buscador:",
                 "zeroRecords": "Sin resultados encontrados",
                 "paginate": {
                     "first": "Primero",
-                    "last": "Ultimo",
+                    "last": "Último",
                     "next": "Siguiente",
                     "previous": "Anterior"
                 }
@@ -402,8 +475,6 @@ include('../../admin/layout/mensaje.php');
                 {
                     extend: "colvis",
                     text: "Visor de columnas",
-                    /*collectionLayout: "fixed three-column" */
-
                 }
             ],
         }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");

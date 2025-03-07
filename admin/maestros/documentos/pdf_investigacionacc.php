@@ -91,9 +91,11 @@ foreach ($accidentes_datos as $accidentes_dato) {
     $istestigos_ace = $accidentes_dato['istestigos_ace'];
     $detallestestigo_ace = $accidentes_dato['detallestestigo_ace'];
     $declaraciontestigo_ace = $accidentes_dato['declaraciontestigo_ace'];
+	$codtipolesion_ace = $accidentes_dato['codtipolesion_tl'];
     $tipolesion_ace = $accidentes_dato['tipolesion_tl'];
     $gradolesion_ace = $accidentes_dato['gravedad_gr'];
     $partecuerpo_ace = $accidentes_dato['partecuerpo_pc'];
+	$codpartecuerpo_ace = $accidentes_dato['codpartecuerpo_pc'];
     $isevacuacion_ace = $accidentes_dato['isevacuacion_ace'];
     $lugarevacuacion_ace = $accidentes_dato['lugarevacuacion_ace'];
     $centromedico_ace = $accidentes_dato['centromedico_ace'];
@@ -128,6 +130,15 @@ foreach ($accidentes_datos as $accidentes_dato) {
     $fecharevision_ace = $accidentes_dato['fecharevision_ace'];
 }
 
+    // Convertir la fecha a un objeto DateTime
+    $fecha = new DateTime($fecha_ace);
+
+    // Crear un formateador de fechas para obtener el día de la semana en español
+    $formatter = new IntlDateFormatter('es_ES', IntlDateFormatter::FULL, IntlDateFormatter::NONE, 'Europe/Madrid', IntlDateFormatter::TRADITIONAL, 'eeee');
+
+    // Formatear la fecha para obtener el día de la semana
+    $diasemana = $formatter->format($fecha);
+
 $fechaentera = strtotime($fecha_ace);
 $anio = date("Y", $fechaentera);
 $mes = date("m", $fechaentera);
@@ -143,27 +154,38 @@ $mesahora = date("m", $fechaentera);
 $diaahora = date("d", $fechaentera);
 
 
-if ($fechabaja_ace == '0001-01-01' ) {
-    $fechabaja_ace = 'N/A';
+if ($fecharevision_ace !== null && strtotime($fecharevision_ace) !== false) {
+    $fecharevision_ace = date("d-m-Y", strtotime($fecharevision_ace));
 } else {
-    $fechabaja_ace = $fechabaja_ace;
+    $fecharevision_ace = ''; // Asignar un valor predeterminado si la variable es null o no es una fecha válida
+}
+if ($fechacumplimen_ace !== null && strtotime($fechacumplimen_ace) !== false) {
+    $fechacumplimen_ace = date("d-m-Y", strtotime($fechacumplimen_ace));
+} else {
+    $fechacumplimen_ace = ''; // Asignar un valor predeterminado si la variable es null o no es una fecha válida
+}
+if ($fechainvestiga_ace !== null && strtotime($fechainvestiga_ace) !== false) {
+    $fechainvestiga_ace = date("d-m-Y", strtotime($fechainvestiga_ace));
+} else {
+    $fechainvestiga_ace = ''; // Asignar un valor predeterminado si la variable es null o no es una fecha válida
 }
 
-
-if ($fechaantesrecaida_ace == '0001-01-01') {
-    $fechaantesrecaida_ace = 'N/A';
+if ($fechabaja_ace !== null && strtotime($fechabaja_ace) !== false) {
+    $fechabaja_ace = date("d-m-Y", strtotime($fechabaja_ace));
 } else {
-    $fechaantesrecaida_ace = $fechaantesrecaida_ace;
+    $fechabaja_ace = ''; // Asignar un valor predeterminado si la variable es null o no es una fecha válida
 }
+
 
 
 ///// traer datos de accionprl
 
 $pdf = new FPDI();
 
+
 # Pagina 1  (X-horizontal Y-vertical)
 $pdf->AddPage();
-$pdf->setSourceFile('Files_Pdf/08_05_2024_investaccidente-A.pdf');
+$pdf->setSourceFile('Files_Pdf/09_05_2024_investaccidente.pdf');
 $tplIdx1 = $pdf->importPage(1);
 $pdf->useTemplate($tplIdx1); 
 
@@ -225,7 +247,7 @@ $pdf->Write(10, $razonsocial_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 139);
-$centro_ace = mb_convert_encoding($diadescanso_ace, 'ISO-8859-1', 'UTF-8');
+$centro_ace = mb_convert_encoding($centro_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $centro_ace);
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 144);
@@ -253,8 +275,13 @@ $pdf->Write(10, $fecha_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 208);
-$fechabaja_ace = mb_convert_encoding(date("d-m-Y", strtotime($fechabaja_ace)), 'ISO-8859-1', 'UTF-8');
+$fechabaja_ace = mb_convert_encoding($fechabaja_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $fechabaja_ace);
+
+$pdf->SetFont('helvetica', '', '8');
+$pdf->SetXY(75, 213);
+$diasemana = mb_convert_encoding($diasemana, 'ISO-8859-1', 'UTF-8');
+$pdf->Write(10, $diasemana);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 218);
@@ -283,13 +310,13 @@ $pdf->Write(10, $semanadescanso_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 239);
-$isevacuacion_ace = mb_convert_encoding($isevacuacion_ace, 'ISO-8859-1', 'UTF-8');
-$pdf->Write(10, $isevacuacion_ace);
+$isevaluadoriesgo_ace = mb_convert_encoding($isevaluadoriesgo_ace, 'ISO-8859-1', 'UTF-8');
+$pdf->Write(10, $isevaluadoriesgo_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 244);
-$isevaluadoriesgo_ace = mb_convert_encoding($isevaluadoriesgo_ace, 'ISO-8859-1', 'UTF-8');
-$pdf->Write(10, $isevaluadoriesgo_ace);
+$evalconriesgo_ace = mb_convert_encoding($evalconriesgo_ace, 'ISO-8859-1', 'UTF-8');
+$pdf->Write(10, $evalconriesgo_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 249);
@@ -298,9 +325,10 @@ $pdf->Write(10, $isrecaida_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(175, 249);
-$fechaantesrecaida_ace = mb_convert_encoding($fechaantesrecaida_ace, 'ISO-8859-1', 'UTF-8');
-$pdf->Write(10, $fechaantesrecaida_ace);
+$fechaantesrecaida_ace = mb_convert_encoding($fechaantesrecaida_ace ?? '', 'ISO-8859-1', 'UTF-8');
 
+
+$pdf->Write(10, $fechaantesrecaida_ace);
 
 # Pagina 2
 $pdf->AddPage();
@@ -321,6 +349,12 @@ $pdf->SetFont('helvetica', '', '7');
 $pdf->SetXY(75, 67);
 $codtipolugar_ace = mb_convert_encoding($codtipolugar_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(8, $codtipolugar_ace);
+
+$pdf->SetFont('helvetica', '', '7');
+$pdf->SetXY(75, 73);
+$zonalugar_ace = mb_convert_encoding($zonalugar_ace, 'ISO-8859-1', 'UTF-8');
+$pdf->Write(8, $zonalugar_ace);
+
 
 $pdf->SetFont('helvetica', '', '7');
 $pdf->SetXY(75, 77);
@@ -435,6 +469,7 @@ $pdf->Write(10, $observmatlesi_ace);
 
 $pdf->SetFont('helvetica', '', '7');
 $pdf->SetXY(75, 157);
+$numtrafectados_ace = strval($numtrafectados_ace);
 $numtrafectados_ace = mb_convert_encoding($numtrafectados_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $numtrafectados_ace);
 
@@ -459,9 +494,14 @@ $declaraciontestigo_ace = mb_convert_encoding($declaraciontestigo_ace, 'ISO-8859
 $pdf->Write(3,$declaraciontestigo_ace);
 
 $pdf->SetFont('helvetica', '', '7');
-$pdf->SetXY(75, 228);
+$pdf->SetXY(88, 228);
 $tipolesion_ace = mb_convert_encoding($tipolesion_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $tipolesion_ace);
+
+$pdf->SetFont('helvetica', '', '7');
+$pdf->SetXY(75, 228);
+$codtipolesion_ace = mb_convert_encoding($codtipolesion_ace, 'ISO-8859-1', 'UTF-8');
+$pdf->Write(10, $codtipolesion_ace);
 
 $pdf->SetFont('helvetica', '', '7');
 $pdf->SetXY(75, 233);
@@ -470,6 +510,11 @@ $pdf->Write(10, $gradolesion_ace);
 
 $pdf->SetFont('helvetica', '', '7');
 $pdf->SetXY(75, 238);
+$codpartecuerpo_ace = mb_convert_encoding($codpartecuerpo_ace, 'ISO-8859-1', 'UTF-8');
+$pdf->Write(10, $codpartecuerpo_ace);
+
+$pdf->SetFont('helvetica', '', '7');
+$pdf->SetXY(88, 238);
 $partecuerpo_ace = mb_convert_encoding($partecuerpo_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $partecuerpo_ace);
 
@@ -495,7 +540,7 @@ $pdf->Write(10, $detallescentromed_ace);
 
 $pdf->SetFont('helvetica', '', '7');
 $pdf->SetXY(75, 264);
-$recomedincorp_ace = mb_convert_encoding($recomedincorp_ace, 'ISO-8859-1', 'UTF-8');
+$recomedincorp_ace = mb_convert_encoding($recomedincorp_ace ?? '', 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $recomedincorp_ace);
 
 
@@ -612,12 +657,10 @@ $pdf->Write(10, $cargoinvesiga_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 250);
-$fechainvestiga_ace = mb_convert_encoding(date("d-m-Y", strtotime($fechainvestiga_ace)), 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $fechainvestiga_ace);
 
 $pdf->SetFont('helvetica', '', '8');
 $pdf->SetXY(75, 255);
-$fechacumplimen_ace = mb_convert_encoding(date("d-m-Y", strtotime($fechacumplimen_ace)), 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $fechacumplimen_ace);
 
 $pdf->SetFont('helvetica', '', '8');
@@ -626,8 +669,7 @@ $revisadopor_ace = mb_convert_encoding($revisadopor_ace, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(10, $revisadopor_ace);
 
 $pdf->SetFont('helvetica', '', '8');
-$pdf->SetXY(75, 271);
-$fecharevision_ace = mb_convert_encoding(date("d-m-Y", strtotime($fecharevision_ace)), 'ISO-8859-1', 'UTF-8');
+$pdf->SetXY(125, 266);
 $pdf->Write(10, $fecharevision_ace);
 
 
@@ -641,7 +683,7 @@ $pdf->Write(10, $fecharevision_ace);
 //setFont ('S' - SUBRAYA 
 
 
-$pdf->Output('Files_Pdf/SOLICITUD_ASISTENCIA_MUTUA_TRASMAPI.pdf', 'D'); //SALIDA DEL PDF
+$pdf->Output('invest_acc'.$trabajador_ace.''.$fecha_ace.'.pdf', 'D'); //SALIDA DEL PDF
 //    $pdf->Output('original_update.pdf', 'F');
 //    $pdf->Output('original_update.pdf', 'I'); //PARA ABRIL EL PDF EN OTRA VENTANA
 //	  $pdf->Output('original_update.pdf', 'D'); //PARA FORZAR LA DESCARGA

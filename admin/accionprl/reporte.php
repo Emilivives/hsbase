@@ -1,35 +1,8 @@
 <?php
-//============================================================+
-// File name   : example_001.php
-// Begin       : 2008-03-04
-// Last Update : 2013-05-14
-//
-// Description : Example 001 for TCPDF class
-//               Default Header and Footer
-//
-// Author: Nicola Asuni
-//
-// (c) Copyright:
-//               Nicola Asuni
-//               Tecnick.com LTD
-//               www.tecnick.com
-//               info@tecnick.com
-//============================================================+
-
-/**
- * Creates an example PDF TEST document using TCPDF
- * @package com.tecnick.tcpdf
- * @abstract TCPDF - Example: Default Header and Footer
- * @author Nicola Asuni
- * @since 2008-03-04
- * @group header
- * @group footer
- * @group page
- * @group pdf
- */
-
-// Include the main TCPDF library (search for installation path).
+// Incluir la librería TCPDF
 require_once('../../public/TCPDF/tcpdf.php');
+
+// Incluir archivos de configuración y datos
 include('../../app/config.php');
 include('../../app/controllers/actividad/listado_accionprl.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
@@ -39,94 +12,99 @@ include('../../app/controllers/trabajadores/listado_trabajadores.php');
 include('../../app/controllers/maestros/responsables/listado_responsables.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
 
-///// traer datos de accion prl
+// Obtener datos de la acción PRL
 foreach ($accionprl_datos as $accionprl_dato) {
     $codigo_acc = $accionprl_dato['codigo_acc'];
     $fecha_acc = $accionprl_dato['fecha_acc'];
     $centro_acc = $accionprl_dato['nombre_cen'];
-    $origen_acc = $accionprl_dato['origen_acc'];
-    $detalleorigen_acc = $accionprl_dato['detalleorigen_acc'];
-    $prioridad_acc = $accionprl_dato['prioridad_acc'];
-    $descripcion_acc = $accionprl_dato['descripcion_acc'];
-    $responsable_acc = $accionprl_dato['nombre_resp'];
-    $fechaprevista_acc = $accionprl_dato['fechaprevista_acc'];
-    $fechaprevista_acc = $accionprl_dato['fechaprevista_acc'];
-    $fecharea_acc = $accionprl_dato['fecharea_acc'];
-    $fechaveri_acc = $accionprl_dato['fechaveri_acc'];
-    $avance_acc = $accionprl_dato['avance_acc'];
-    $estado_acc = $accionprl_dato['estado_acc'];
-    $accpropuesta_acc = $accionprl_dato['accpropuesta_acc'];
-    $accrealizada_acc = $accionprl_dato['accrealizada_acc'];
-    $seguimiento_acc = $accionprl_dato['seguimiento_acc'];
-    $recursos_acc = $accionprl_dato['recursos_acc'];
+    $nombre_emp = $accionprl_dato['nombre_emp'];
+    $razonsocial_emp = $accionprl_dato['razonsocial_emp'];
+    $direccion_emp = $accionprl_dato['direccion_emp'];
+    $logo_emp = $accionprl_dato['logo_emp'];
     $imagen1_acc = $accionprl_dato['imagen1_acc'];
     $imagen2_acc = $accionprl_dato['imagen2_acc'];
 }
-///// traer datos de accionprl
 
-// Ruta de la primera imagen
+// Definir la ruta del logo de la empresa
+$logo_path = '../../admin/maestros/centros/img/' . $logo_emp;
 $image1 = '../../admin/accionprl/image/' . $imagen1_acc;
-// Ruta de la segunda imagen
 $image2 = '../../admin/accionprl/image/' . $imagen2_acc;
 
+// Clase personalizada para modificar la cabecera y el pie de página
+class MYPDF extends TCPDF {
+    public function Header() {
+        global $logo_path, $razonsocial_emp;  // Acceder a las variables globales
+    
+        // Verificar si el archivo de imagen del logo existe
+        if (file_exists($logo_path) && !empty($logo_path)) {
+            $this->Image($logo_path, 10, 10, 30); // (X, Y, Ancho)
+        }
+    
+     // Configurar color del texto (Ejemplo: Azul oscuro)
+    $this->SetTextColor(109, 109, 109);
 
+    // Configurar fuente y mostrar título centrado
+    $this->SetFont('helvetica', 'B', 12);
+    $this->Cell(0, 24, $razonsocial_emp, 0, 1, 'C'); // Centrado
+    
+    // Subir la posición Y antes de la línea
+    $yPosition = $this->GetY() - 2; // Mueve la línea 5 unidades hacia arriba
 
+    // Dibujar una línea horizontal debajo del encabezado
+    $this->SetLineWidth(0.5); // Grosor de la línea
+    $this->Line(10, $yPosition, 200, $yPosition); // Línea más arriba
 
-///// traer datos de centro trabajo
+    $this->Ln(2); // Espacio después de la línea
+    }
 
-// create new PDF document
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    // Sobrescribir el Footer() para mostrar la razón social en lugar del número de página
+    public function Footer() {
+        global $razonsocial_emp, $direccion_emp;
 
-$PDF_HEADER_TITLE = 'SERVICIOS Y CONCESIONES MARITIMAS IBICENCAS S.A.';
-$PDF_HEADER_STRING ='C/ Aragón 71 - 07800 Ibiza';
-$PDF_HEADER_LOGO = 'LOGO TRASMAPI.jpg';
-// set document information
+        // Dibujar una línea horizontal debajo del encabezado
+        $this->SetLineWidth(0.5); // Grosor de la línea
+        $this->Line(10, $this->GetY(), 200, $this->GetY()); // Línea de borde a borde
+
+        // Establecer la fuente
+        $this->SetFont('helvetica', '', 8);
+
+        // Posición a 1.5 cm desde el fondo
+        $this->SetY(-15);
+
+        // Mostrar la razón social centrada en el pie de página
+        $this->Cell(0, 15, $razonsocial_emp.' - '.$direccion_emp, 0, 0, 'C'); // Centrado
+    }
+}
+
+// Crear nueva instancia del PDF con nuestra clase personalizada
+$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+// Configurar el documento
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('HS BASE');
-$pdf->SetTitle('Report Accion Correctora');
+$pdf->SetTitle('Reporte de Acción Correctora');
 $pdf->SetSubject('HSBASE');
-$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+$pdf->SetKeywords('TCPDF, PDF, reporte, acción correctora');
 
-// set default header data
-$pdf->SetHeaderData($PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, $PDF_HEADER_TITLE, $PDF_HEADER_STRING);
-
-// set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-
-// set default monospaced font
-$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
-// set margins
+// Configurar márgenes
 $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
-// set auto page breaks
+// Configurar salto automático de página
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
-// set image scale factor
+// Configurar escala de imágenes
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-// set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-    require_once(dirname(__FILE__).'/lang/eng.php');
-    $pdf->setLanguageArray($l);
-}
-// set JPEG quality
-$pdf->setJPEGQuality(75);
-// ---------------------------------------------------------
 
-// set font
+// Definir contenido HTML para el PDF
 $pdf->SetFont('helvetica', '', 9);
 
-//Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=0, $link='', $stretch=0, $ignore_min_height=false, $calign='T', $valign='M')
+// HTML para mostrar imágenes y texto
+$html = '
 
-
-//create some HTML content
-$html ='
-
-<h1 style="text-align: center">ACCIÓN CORRECTORA</h1>
+<h1 style="text-align: center">ACCIÓN PREVENTIVA / CORRECTORA</h1>
 
 <br>
 <p></p>
@@ -134,7 +112,7 @@ $html ='
 <table border="0">
 <tr>
 <td style="height: 20px; background-color: #ffffff; text-align: left"><b>Num. accion PRL:</b></td>
-<td>'.$id_accion.'</td>
+<td>'.$codigo_acc.'</td>
 <td><b>Fecha apertura:</b></td>
 <td>'.$fecha_acc.'</td>
 <td style="height: 20px; background-color: #ffffff; text-align: right"><b>% Avance:</b></td>
@@ -157,7 +135,7 @@ $html ='
 <td style="width: 630px;  background-color: #ffffff; text-align: left"><b>Descripcion:</b></td>
 </tr>
 <tr>
-<td style="width: 630px;height: 100px;">'.$descripcion_acc.'</td>
+<td style="width: 630px;height: 60px;">'.$descripcion_acc.'</td>
 </tr>
 </table>
 
@@ -205,7 +183,7 @@ $html ='
 <td>'.$fecharea_acc.'</td>
 
 <td style="width: 150px;height: 20px;background-color: #ffffff; text-align: left"><b>Recursos económicos:</b></td>
-<td>'.$recursos_acc.'</td>
+<td>'.$recursos_acc.'  eur.</td>
 </tr>
 <tr>
 
@@ -220,7 +198,7 @@ $html ='
 <td style="width: 630px;  background-color: #ffffff; text-align: left"><b>Comentarios:</b></td>
 </tr>
 <tr>
-<td style="width: 630px;height: 100px;">'.$seguimiento_acc.'</td>
+<td style="width: 630px;height: 60px;">'.$seguimiento_acc.'</td>
 </tr>
 </table>
 
@@ -230,27 +208,35 @@ $html ='
 <table border="0">
 
 <tr style="text-align:center">
-        <td colspan="3" style="height: 20px; background-color: #ffffff; text-align: left"><b>Imagenes:</b></td>
-    </tr>
-       <tr>
-        <td colspan="2" style="height: 20px;"></td>
-    </tr>
-    <tr>
-       <td style="width: 50px;"></td>
-        <td style="width: 200px; text-align: center;">
-            <img src="'.$image1.'" style="max-height: 150px; width: auto;">
-        </td>
-        <td style="width: 100px;"></td>
-        <td style="width: 200px; text-align: center;">
-            <img src="'.$image2.'" style="max-height: 150px; width: auto;">
-        </td>
-    </tr>
-</table>
+    <td colspan="3" style="height: 20px; background-color: #ffffff; text-align: left"><b>Imágenes:</b></td>
+</tr>
+<tr>
+    <td colspan="2" style="height: 10px;"></td>
+</tr>
+<tr>
+    <td style="width: 80px;"></td>';
 
+// Agregar la primera imagen solo si existe
+if (file_exists($image1)) {
+    $html .= '<td style="width: 140px; text-align: center;">
+                <img src="'.$image1.'" style="max-height: 150px; width: auto;">
+              </td>';
+} else {
+    $html .= '<td style="width: 140px; text-align: center;">(Sin imagen)</td>';
+}
 
+$html .= '<td style="width: 100px;"></td>';
 
+// Agregar la segunda imagen solo si existe
+if (file_exists($image2)) {
+    $html .= '<td style="width: 140px; text-align: center;">
+                <img src="'.$image2.'" style="max-height: 150px; width: auto;">
+              </td>';
+} else {
+    $html .= '<td style="width: 140px; text-align: center;">(Sin imagen)</td>';
+}
 
-';
+$html .= '</tr></table>';
 
 $pdf->AddPage();
 
@@ -258,10 +244,6 @@ $pdf->AddPage();
 // Output the HTML content
 $pdf->writeHTML($html, true, false, true, false, '');
 
-
-//Close and output PDF document
+// Cerrar y generar el PDF
 $pdf->Output('hsbase_accion_PRL.pdf', 'I');
-
-//============================================================+
-// END OF FILE
-//============================================================+
+?>

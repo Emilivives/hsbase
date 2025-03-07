@@ -81,6 +81,7 @@ foreach ($puestoarea_datos as $puestoarea_dato) {
     $descripcion_pc = $puestoarea_dato['descripcion_pc'];
     $nombre_cen = $puestoarea_dato['nombre_cen'];
     $nombre_emp = $puestoarea_dato['razonsocial_emp'];
+    $logo_emp = $puestoarea_dato['logo_emp'];
     $fecha_er = $puestoarea_dato['fecha_er'];
     $nombre_er = $puestoarea_dato['nombre_er'];
     $tipoevaluacion_er = $puestoarea_dato['tipoevaluacion_er'];
@@ -100,6 +101,8 @@ $epis_pc_formateado = str_replace(',', "\n", $epis_pc);
 $prodquim_pc_formateado = str_replace(',', "\n", $prodquim_pc);
 $metodos_pc_formateado = str_replace(',', "\n", $metodos_pc);
 $factorpsico_pc_formateado = str_replace(',', "\n", $factorpsico_pc);
+
+$logo_path = '../../admin/maestros/centros/img/' . $logo_emp;
 
 // Crear una clase extendida de TCPDF para personalizar la cabecera
 class MYPDF extends TCPDF
@@ -127,14 +130,13 @@ class MYPDF extends TCPDF
     // Sobrescribir el método Header para personalizar la cabecera
     public function Header()
     {
+        global $logo_path;
         // Ruta del logo
-        $logo = '../../admin/maestros/centros/img/2024-04-23-12-14-23__LOGO TRASMAPI.jpg';
-
-        // Comprobar si el archivo del logo existe
-        if (file_exists($logo)) {
-            // Insertar el logo en la cabecera (posición X: 15, Y: 10, ancho: 30)
-            $this->Image($logo, 15, 10, 30, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+         // Verificar si el archivo de imagen del logo existe
+         if (file_exists($logo_path) && !empty($logo_path)) {
+            $this->Image($logo_path, 15, 10, 30); // (X, Y, Ancho)
         }
+    
 
         // Establecer la fuente para el encabezado
         $this->SetFont('helvetica', 'B', 12);

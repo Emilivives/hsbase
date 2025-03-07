@@ -55,18 +55,18 @@ try {
         session_start();
         $_SESSION['mensaje'] = "Puesto/area actualizado correctamente";
         $_SESSION['icono'] = 'success';
-       header('Location: ' . $URL . "/admin/pruebas/show_puestoarea.php?id_puestocentro=$id_puestocentro&id_evaluacion=$evaluacion_pc");
+       header('Location: ' . $URL . "/admin/evaluacion/show_puestoarea.php?id_puestocentro=$id_puestocentro&id_evaluacion=$evaluacion_pc");
     } else {
         session_start();
         $_SESSION['mensaje'] = "Evaluación NO actualizada";
         $_SESSION['icono'] = 'warning';
-       header('Location: ' . $URL . "/admin/pruebas/show_puestoarea.php?id_puestocentro=$id_puestocentro&id_evaluacion=$evaluacion_pc");
+       header('Location: ' . $URL . "/admin/evaluacion/show_puestoarea.php?id_puestocentro=$id_puestocentro&id_evaluacion=$evaluacion_pc");
     }
 } catch (PDOException $e) {
     // Manejo de errores
     session_start();
     $_SESSION['mensaje'] = "Error en la base de datos: " . $e->getMessage();
     $_SESSION['icono'] = 'danger';
-    header('Location: ' . $URL . "/admin/pruebas/show_er.php?id_evaluacion=$evaluacion_pc");
+    header('Location: ' . $URL . "/admin/evaluacion/show_er.php?id_evaluacion=$evaluacion_pc");
 }
 ?>

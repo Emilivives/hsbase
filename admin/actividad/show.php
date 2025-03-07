@@ -5,6 +5,7 @@ $id_proyecto = $_GET['id_proyecto'];
 include('../../app/controllers/actividad/datos_proyecto.php');
 include('../../app/controllers/actividad/listado_tareas.php');
 include('../../app/controllers/actividad/tareas_proyecto.php');
+include('../../app/controllers/maestros/empresas/listado_empresas.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
 include('../../app/controllers/maestros/responsables/listado_responsables.php');
 include('../../app/controllers/actividad/listado_accionprl.php');
@@ -120,10 +121,18 @@ include('../../app/controllers/actividad/listado_accionprl.php');
 
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <h5><b><?php echo $descripcion_py ?></b></h5>
                     </div>
                     <div class="col-md-2">
+                        <dl>
+                            <dt><b class="border-bottom border-primary">Empresa</b></dt>
+                            <dd><?php echo $empresa_py ?></dd>
+
+
+                        </dl>
+                    </div>
+                    <div class="col-md-1">
                         <dl>
                             <dt><b class="border-bottom border-primary">Estado </b></dt>
                             <dd><?php $estado_py;
@@ -177,10 +186,22 @@ include('../../app/controllers/actividad/listado_accionprl.php');
 
                         <a class="btn btn-text-right btn-outline-dark btn-sm" title="Ver anterior" href="../actividad/proyectos.php">Volver</a>
                         <!--boton modal-->
-                        <div class="btn-text-right">
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevatarea">Añadir Tarea</button>
-                        </div>
+                        <div class="d-flex justify-content-start">
+                            <!-- Botón Añadir Tarea -->
 
+
+                            <!-- Dropdown Imprimir -->
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    IMPRIMIR
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" style="color:#ddd" href="reporte_programacionanual.php?id_proyecto=<?php echo $id_proyecto; ?>" target="_blank" class="btn btn-warning btn-sm" title="PROGRAMACION"> <i class="bi bi-printer"></i> PROGRAMACION</a>
+                                    <a class="dropdown-item" style="color:#ddd" href="reporte_memoriaanual.php?id_proyecto=<?php echo $id_proyecto; ?>" target="_blank" class="btn btn-warning btn-sm" title="MEMORIA"> <i class="bi bi-printer"></i> MEMORIA</a>
+                                    <a class="dropdown-item" style="color: #ddd;" href="" target="_blank"><i class="bi bi-copy"></i> FICHA</a>
+                                </div>
+                            </div>
+                        </div>
                         <!--inicio modal modificar proyecto-->
                         <div class="modal fade" id="modal-editarproyecto<?php echo $id_proyecto; ?>" tabindex="-1" aria-labelledby="exampleModalLabel">
                             <div class="modal-dialog modal-xl">
@@ -206,8 +227,26 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                                                         <input type="text" value="<?php echo $proyecto['nombre_py'] ?>" name="nombre_py" class="form-control">
                                                     </div>
 
+                                                    <div class="col-sm-3">
+                                                        <label for="" class="col-form-label col-sm-3">Empresa:</label>
+                                                        <div class="col-sm-12">
+                                                            <select name="empresa_py" id="" class="form-control" required>
+                                                                <?php
+                                                                foreach ($empresas_datos as $empresas_dato) {
+                                                                    $empresa_tabla = $empresas_dato['nombre_emp'];
+                                                                    $id_empresa = $empresas_dato['id_empresa']; ?>
+                                                                    <option value="<?php echo $id_empresa; ?>" <?php if ($empresa_tabla == $empresa_py) { ?> selected="selected" <?php } ?> nombre_emp="<?php echo $empresas_dato['nombre_emp']; ?>">
+                                                                        <?php echo  $empresa_tabla; ?>
+                                                                    </option>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </select>
 
-                                                    <div class="col-sm-5">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-4">
                                                         <label for="" class="col-form-label col-sm-3">Responsable:</label>
                                                         <div class="col-sm-9">
                                                             <select name="responsable_py" id="" class="form-control" required>
@@ -565,19 +604,14 @@ include('../../app/controllers/actividad/listado_accionprl.php');
 
                                                             ?></td>
 
-                            <td style="text-align: center;"><?php
-                                                            if ($tarea_proyecto['fecha_ta'] < $hoy and $tarea_proyecto['estado_ta'] != 'Completado') { ?>
+                            <td style="text-align: center;">
+                                <?php if ($tarea_proyecto['fecha_ta'] < $hoy && $tarea_proyecto['estado_ta'] != 'Completado') { ?>
                                     <span class='badge-wh-1'>
-                                        <h6><?php echo date("d-m-Y", strtotime($tarea_proyecto['fecha_ta'])); ?></h6>
+                                        <h6><?= date("d-m-Y", strtotime($tarea_proyecto['fecha_ta'])); ?></h6>
                                     </span>
-
-                                <?php
-                                                            } else {
-                                                                echo date("d-m-Y", strtotime($tarea_proyecto['fecha_ta']));
-                                                            }
-                                ?>
-
-
+                                <?php } else { ?>
+                                    <?= date("d-m-Y", strtotime($tarea_proyecto['fecha_ta'])); ?>
+                                <?php } ?>
                             </td>
                             <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($tarea_proyecto['fechareal_ta'])) ?></td>
                             <td style="text-align: center"><?php $tarea_proyecto['estado_ta'];
@@ -861,12 +895,30 @@ foreach ($tareas_proyectos as $tarea_proyecto) {
 
 <script>
     $(function() {
+        // Definir el tipo de ordenación para fechas en formato dd-mm-yyyy
+        $.fn.dataTable.ext.type.order['date-dd-mm-yyyy-pre'] = function (data) {
+            if (!data) return 0; // Si no hay datos, devolver 0
+            // Quitar etiquetas HTML (como <span>, <h6>, etc.)
+            let cleanData = data.replace(/<[^>]+>/g, '');
+            // Dividir la fecha en día, mes y año
+            const [day, month, year] = cleanData.split('-').map(Number);
+            // Devolver el timestamp para la ordenación
+            return new Date(year, month - 1, day).getTime();
+        };
+
+        // Inicializar la tabla DataTable
         $("#example1").DataTable({
             "pageLength": 25,
             "order": [
-                [9, 'desc'],
+                [9, 'desc'], // Primera columna para ordenación (ajusta si es necesario)
                 [7, "asc"],
                 [0, "asc"]
+            ],
+            "columnDefs": [
+                {
+                    targets: 7, // Índice de la columna donde está la fecha (ajusta si es necesario)
+                    type: 'date-dd-mm-yyyy' // Usa el tipo de ordenación personalizado
+                }
             ],
             "language": {
                 "emptyTable": "No hay información",
@@ -888,28 +940,17 @@ foreach ($tareas_proyectos as $tarea_proyecto) {
             "responsive": true,
             "lengthChange": true,
             "autoWidth": false,
-            buttons: [{
+            buttons: [ // Configuración de botones
+                {
                     extend: "collection",
                     text: "Reportes",
                     orientation: "landscape",
-                    buttons: [{
-                            text: "Copiar",
-                            extend: "copy"
-                        },
-                        {
-                            extend: "pdf",
-                            orientation: "landscape",
-                        },
-                        {
-                            extend: "csv"
-                        },
-                        {
-                            extend: "excel"
-                        },
-                        {
-                            text: "Imprimir",
-                            extend: "print"
-                        }
+                    buttons: [
+                        { text: "Copiar", extend: "copy" },
+                        { extend: "pdf", orientation: "landscape" },
+                        { extend: "csv" },
+                        { extend: "excel" },
+                        { text: "Imprimir", extend: "print" }
                     ]
                 },
                 {
@@ -946,5 +987,6 @@ foreach ($tareas_proyectos as $tarea_proyecto) {
         });
     });
 </script>
+
 
 </html>

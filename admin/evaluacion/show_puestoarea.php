@@ -1,5 +1,19 @@
 <?php
+session_start();
 include('../../app/config.php');
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['sesion_email'])) {
+    header('Location: ' . $URL . '/login.php');
+    exit();
+}
+
+// Verificar si el usuario tiene permiso para acceder a esta página
+if ($_SESSION['perfil_usr'] !== 'ADMINISTRADOR' && $_SESSION['perfil_usr'] !== 'USUARIO_PRL') {
+    // Si el usuario no es administrador, redirigirlo a su dashboard de usuario
+    header('Location: ' . $URL . '/admin/acceso_nopermitido.php');
+    exit();
+}
 include('../../admin/layout/parte1.php');
 $id_puestocentro = $_GET['id_puestocentro'];
 $id_evaluacion = $_GET['id_evaluacion'];
@@ -152,6 +166,49 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
             border-radius: 5px;
         }
 
+        /* Cambia el fondo del dropdown */
+        .select2-container--bootstrap4 .select2-dropdown {
+            background-color: rgb(207, 205, 205);
+            /* Cambia este color según necesites */
+
+        }
+
+        /* Cambia el fondo de los elementos al pasar el mouse */
+        .select2-container--bootstrap4 .select2-results__option--highlighted {
+            background-color: rgb(0, 60, 255) !important;
+            color: white !important;
+        }
+
+        /* Agregar borde al dropdown (lista desplegable) */
+        .select2-container--bootstrap4 .select2-dropdown {
+            border: 8px solid #ffcc00 !important;
+            border-radius: 5px;
+        }
+
+
+        /* Estilos personalizados para las pestañas */
+        .nav-tabs .nav-link.active {
+            background-color: #007bff;
+            /* Azul para la pestaña activa */
+            color: white;
+            border-color: #007bff;
+        }
+
+        .nav-tabs .nav-link {
+            background-color: #6c757d;
+            /* Gris para la pestaña inactiva */
+            color: white;
+            border-color: #6c757d;
+        }
+
+        .nav-tabs .nav-link:hover {
+            background-color: rgb(235, 236, 144);
+            /* Gris más oscuro al pasar el ratón */
+            color: black;
+            border-color: rgb(235, 236, 144);
+        }
+
+
         /* Ajustar la duración de la animación del collapse */
         .collapse {
             transition: height 2s ease;
@@ -161,6 +218,13 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
         .collapse.show {
             transition: height 2s ease;
             /* Asegúrate de que la transición también se aplique al estado mostrado */
+        }
+
+        .dropdown-item:hover {
+            color: #000;
+            /* Color negro al pasar el mouse */
+            background-color: #0080ff;
+            /* Fondo blanco al pasar el mouse */
         }
     </style>
 
@@ -276,13 +340,16 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                         ?>
 
 
-                        <!-- Botón para Volver -->
-
-
-                        <!-- Botón para Generar Reporte -->
-                        <a href="reporte_puestoarea.php?id_puestocentro=<?php echo $id_puestocentro; ?>" class="btn btn-warning btn-sm w-100" title="Generar reporte" target="_blank">
-                            <i class="fa-regular fa-file-lines"></i> Imprimir
-                        </a>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                IMPRIMIR
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" style="color:#ddd" href="reporte_puestoarea.php?id_puestocentro=<?php echo $id_puestocentro; ?>" target="_blank" class="btn btn-warning btn-sm" title="EVALUACION"> <i class="bi bi-printer"></i> IMPRIMIR ER</a></a>
+                                <a class="dropdown-item" style="color: #ddd;" href="planificacion_er.php?id_puestocentro=<?php echo $id_puestocentro; ?>" class="btn btn-danger btn-sm btn-font-size" title="Imprimir planificacion preventiva"><i class="bi bi-printer"></i> PLANIFICACIÓN</a>
+                                <a class="dropdown-item" style="color: #ddd;" href="ficha_infopuestoarea.php?id_puestocentro=<?php echo $id_puestocentro; ?>" target="_blank"><i class="bi bi-copy"></i> FICHA PUESTO</a>
+                            </div>
+                        </div>
                         <!--inicio modal modificar proyecto-->
                         <div class="modal fade" id="modal-editapuestoarea<?php echo $id_puestocentro ?>">
                             <div class="modal-dialog modal-xl">
@@ -922,1473 +989,1432 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color:whitesmoke">
-                            <h5 class="modal-title" id="modal-nuevoriesgo"><i class="bi bi-plus-lg"></i> Nuevo Riesgo</h5>
-                            <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title" id="modal-nuevoriesgo"><i class="bi bi-plus-lg"></i> Nuevo Riesgo - Evaluacion: <?php echo $codigo_er ?> - Puesto / Area: <?php echo $puestoarea_pc ?></h5>
+                            <button type="button" class="close" style="color: black;" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <form action="../../app/controllers/evaluacion/create_filariesgo.php" method="post" enctype="multipart/form-data">
 
-                            <form action="../../app/controllers/evaluacion/create_filariesgo.php" method="post" enctype="multipart/form-data">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Evaluacion: <?php echo $codigo_er ?></label>
-                                            <input type="text" value="<?php echo $id_evaluacion ?>" name="id_evaluacion" class="form-control" hidden>
-
+                            <div class="modal-body">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="identificacion-tab" data-toggle="tab" href="#identificacion" role="tab" aria-controls="identificacion" aria-selected="true">Identificación de riesgos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="planificacion-tab" data-toggle="tab" href="#planificacion" role="tab" aria-controls="planificacion" aria-selected="false">Planificación + Imágenes</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="identificacion" role="tabpanel" aria-labelledby="identificacion-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" value="<?php echo $id_evaluacion ?>" name="id_evaluacion" class="form-control" hidden>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" value="<?php echo $id_puestocentro ?>" name="puestocentro_fer" class="form-control" hidden>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Puesto / Area: <?php echo $puestoarea_pc ?></label>
-                                            <input type="text" value="<?php echo $id_puestocentro ?>" name="puestocentro_fer" class="form-control" hidden>
-
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group" style="background-color: #0080c0; padding: 2px; border-radius: 5px; margin-bottom: 10px;">
+                                                    <label style="text-align: center; color: #ffffff;">
+                                                        <h5 style="margin: 0;">Identificación de riesgos:</h5>
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group" style="background-color: #0080c0; padding: 2px; border-radius: 5px; margin-bottom: 10px;">
-                                            <label style="text-align: center; color: #ffffff;">
-                                                <h5 style="margin: 0;">Identificacion Riesgo:</h5>
-                                            </label>
+                                        <div class="row">
+                                            <div class="col-md-11">
+                                                <label for="riesgo">Riesgo</label>
+                                                <div class="input-group">
+                                                    <select name="riesgo_fer" id="id_riesgo" class="id_riesgo">
+                                                        <option value="">Seleccione un riesgo</option>
+                                                        <?php
+                                                        foreach ($riesgos_datos as $riesgos_dato) { ?>
+                                                            <option value="<?php echo $riesgos_dato['id_riesgo']; ?>">
+                                                                <?php echo $riesgos_dato['codigoriesgo']; ?> - <?php echo  $riesgos_dato['fraseriesgo'];  ?>
+                                                            </option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-11">
-                                        <label for="riesgo">Riesgo</label>
-                                        <div class="input-group">
-                                            <select name="riesgo_fer" id="id_riesgo" class="id_riesgo">
-                                                <option value="">Seleccione un riesgo</option>
-                                                <?php
-                                                foreach ($riesgos_datos as $riesgos_dato) { ?>
-                                                    <option value="<?php echo $riesgos_dato['id_riesgo']; ?>">
-                                                        <?php echo $riesgos_dato['codigoriesgo']; ?> - <?php echo  $riesgos_dato['fraseriesgo'];  ?>
-
-
-                                                    </option>
-                                                <?php
-                                                }
-                                                ?>
-                                            </select>
-
+                                        </br>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label for="">Descripción</label>
+                                                <textarea class="form-control" name="frasefila_fer" rows="4"></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                </br>
-
-                                <div class="row">
-                                    <div class="form-group">
-                                        <label for="">Descripción</label>
-                                        <textarea class="form-control" name="frasefila_fer" rows="4"></textarea>
-                                    </div>
-                                </div>
-
-                                <!-- Nueva sección para Probabilidad, Gravedad y Nivel de Riesgo -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="probabilidad_fer">Probabilidad</label>
-                                            <select name="probabilidad_fer" id="probabilidad_fer" class="form-control">
-                                                <option value="">Seleccione</option>
-                                                <option value="Baja">Baja</option>
-                                                <option value="Media">Media</option>
-                                                <option value="Alta">Alta</option>
-                                            </select>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="probabilidad_fer">Probabilidad</label>
+                                                    <select name="probabilidad_fer" id="probabilidad_fer" class="form-control">
+                                                        <option value="">Seleccione</option>
+                                                        <option value="Baja">Baja</option>
+                                                        <option value="Media">Media</option>
+                                                        <option value="Alta">Alta</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="gravedad_fer">Consecuencias</label>
+                                                    <select name="gravedad_fer" id="gravedad_fer" class="form-control">
+                                                        <option value="">Seleccione</option>
+                                                        <option value="Ligeramente Dañino">Ligeramente Dañino</option>
+                                                        <option value="Dañino">Dañino</option>
+                                                        <option value="Extremadamente Dañino">Extremadamente Dañino</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="nivelriesgo_fer">Nivel de Riesgo</label>
+                                                    <input type="text" id="nivelriesgo_fer" name="nivelriesgo_fer" class="form-control" readonly>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="gravedad_fer">Consecuencias</label>
-                                            <select name="gravedad_fer" id="gravedad_fer" class="form-control">
-                                                <option value="">Seleccione</option>
-                                                <option value="Ligeramente Dañino">Ligeramente Dañino</option>
-                                                <option value="Dañino">Dañino</option>
-                                                <option value="Extremadamente Dañino">Extremadamente Dañino</option>
-                                            </select>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="riesgo">Medidas</label>
+                                                <div class="input-group">
+                                                    <select name="medida_fm[]" id="medida_fm" class="medida_fm" multiple="multiple">
+                                                        <option value="">Seleccione Medidas</option>
+                                                        <?php
+                                                        foreach ($medidas_datos as $medidas_dato) { ?>
+                                                            <option value="<?php echo $medidas_dato['id_medida']; ?>">
+                                                                <?php echo $medidas_dato['codigomedida']; ?> - <?php echo  $medidas_dato['frasemedida'];  ?>
+                                                            </option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <button type="button" class="btn btn-sm btn-secondary" id="openNewTabButton" style="padding: 2px 10px; font-size: 14px;"><i class="bi bi-plus-lg"></i> Añadir medida</button>
+                                                <button type="button" class="btn btn-sm btn-primary" id="updateMedidasButton" style="padding: 2px 10px; font-size: 14px;"><i class="bi bi-arrow-repeat"></i> Actualizar</button>
+                                            </div>
                                         </div>
+                                        <hr>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="nivelriesgo_fer">Nivel de Riesgo</label>
-                                            <input type="text" id="nivelriesgo_fer" name="nivelriesgo_fer" class="form-control" readonly>
+                                    <div class="tab-pane fade" id="planificacion" role="tabpanel" aria-labelledby="planificacion-tab">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group" style="background-color: #0080c0; padding: 2px; border-radius: 5px; margin-bottom: 10px;">
+                                                    <label style="text-align: center; color: #ffffff;">
+                                                        <h5 style="margin: 0;">Planificación actividad preventiva:</h5>
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label for="riesgo">Medidas</label>
-                                        <div class="input-group">
-                                            <select name="medida_fm[]" id="medida_fm" class="medida_fm" multiple="multiple">
-                                                <option value="">Seleccione Medidas</option>
-                                                <?php
-                                                foreach ($medidas_datos as $medidas_dato) { ?>
-                                                    <option value="<?php echo $medidas_dato['id_medida']; ?>">
-                                                        <?php echo $medidas_dato['codigomedida']; ?> - <?php echo  $medidas_dato['frasemedida'];  ?>
-
-
-                                                    </option>
-                                                <?php
-                                                }
-                                                ?>
-                                            </select>
-
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="planresponsable_fer">Responsable</label>
+                                                    <select name="planresponsable_fer" id="planresponsable_fer" class="form-select">
+                                                        <option value="">Seleccione</option>
+                                                        <option value="Trabajador">Trabajador</option>
+                                                        <option value="Responsable departamento">Responsable departamento</option>
+                                                        <option value="Gerencia empresa">Gerencia empresa</option>
+                                                        <option value="Trabajador designado">Trabajador designado</option>
+                                                        <option value="SPA">SPA</option>
+                                                        <option value="Otros">Otros</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="form-group">
+                                                    <label for="">Coste</label>
+                                                    <input type="text" name="plancoste_fer" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label for="planaccion_fer">Acción</label>
+                                                    <select name="planaccion_fer" id="planaccion_fer" class="form-select">
+                                                        <option value="">Seleccione</option>
+                                                        <option value="Durante los trabajos">Durante los trabajos</option>
+                                                        <option value="Previo a los trabajos">Previo a los trabajos</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="planprioridad_fer">Prioridad</label>
+                                                    <select name="planprioridad_fer" id="planprioridad_fer" class="form-select">
+                                                        <option value="">Seleccione</option>
+                                                        <option value="Periodica">Periodica</option>
+                                                        <option value="Urgente">Urgente</option>
+                                                        <option value="Alta">Alta</option>
+                                                        <option value="Media">Media</option>
+                                                        <option value="Baja">Baja</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <button type="button" class="btn btn-sm btn-secondary" id="openNewTabButton" style="padding: 2px 10px; font-size: 14px;"><i class="bi bi-plus-lg"></i> Añadir medida</button>
-                                        <button type="button" class="btn btn-sm btn-primary" id="updateMedidasButton" style="padding: 2px 10px; font-size: 14px;"><i class="bi bi-arrow-repeat"></i> Actualizar</button>
-                                    </div>
-
-                                </div>
-
-                                <hr>
-
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group" style="background-color: #0080c0; padding: 2px; border-radius: 5px; margin-bottom: 10px;">
-                                            <label style="text-align: center; color: #ffffff;">
-                                                <h5 style="margin: 0;">Planificación actividad preventiva:</h5>
-                                            </label>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label for="planmetodo_fer">Método Operativo</label>
+                                                    <select name="planmetodo_fer" id="planmetodo_fer" class="planmetodo_fer">
+                                                        <option value="">Seleccione</option>
+                                                        <option value="N/A">N/A</option>
+                                                        <option style="color:#ffffff; background-color: #808080" value="">MÉTODOS ESPECÍFICOS</option>
+                                                        <option value="Mantenimiento preventivo">Mantenimiento preventivo</option>
+                                                        <option value="Comprobación de energías">Comprobación de energías</option>
+                                                        <option value="Consignación de equipos de Tº">Consignación de equipos de Tº</option>
+                                                        <option value="Rampas de las embarcaciones">Rampas de las embarcaciones</option>
+                                                        <option value="Trabajos en espacios cerrados">Trabajos en espacios cerrados</option>
+                                                        <option value="Ordenam. amarre y atraque">Ordenam. amarre y atraque</option>
+                                                        <option value="Acceso embarcaciones">Acceso embarcaciones</option>
+                                                        <option value="Limpieza de embarcaciones">Limpieza de embarcaciones</option>
+                                                        <option value="Conexion electr. y agua en emb.">Conexion electr. y agua en emb.</option>
+                                                        <option value="Tratamientos de superficies O.V.">Tratamientos de superficies O.V.</option>
+                                                        <option value="Traslado emb. a área reparado">Traslado emb. a área reparado</option>
+                                                        <option value="Apuntalamiento embarcaciones">Apuntalamiento embarcaciones</option>
+                                                        <option value="Tº superfic. emb. fondeadas">Tº superfic. emb. fondeadas</option>
+                                                        <option value="Manipulación de bidones">Manipulación de bidones</option>
+                                                        <option value="Uso herramientas manuales">Uso herramientas manuales</option>
+                                                        <option value="Uso de herramientas portátiles">Uso de herramientas portátiles</option>
+                                                        <option value="Uso de escaleras manuales">Uso de escaleras manuales</option>
+                                                        <option value="Andamios de borriquetas">Andamios de borriquetas</option>
+                                                        <option value="Andamios tubulares">Andamios tubulares</option>
+                                                        <option value="Uso PEMP">Uso PEMP</option>
+                                                        <option value="Trabajos verticales">Trabajos verticales</option>
+                                                        <option value="Trabajos en cubiertas">Trabajos en cubiertas</option>
+                                                        <option value="Operativa en bodega">Operativa en bodega</option>
+                                                        <option value="Trabajos en fosos">Trabajos en fosos</option>
+                                                        <option value="Trabajos de soldadura">Trabajos de soldadura</option>
+                                                        <option value="Trabajos eléctricos">Trabajos eléctricos</option>
+                                                        <option value="Guía uso de guantes">Guía uso de guantes</option>
+                                                        <option value="SGS(Manual de gestión de buque)">SGS(Manual de gestión de buque)</option>
+                                                        <option style="color:#ffffff; background-color: #808080" value="">MÉTODOS GENERALES</option>
+                                                        <option value="Prevención de accidentes in itinere">Prevención de accidentes in itinere</option>
+                                                        <option value="Vigilancia de la salud">Vigilancia de la salud</option>
+                                                        <option value="Golpe de Calor- RAD UV">Golpe de Calor- RAD UV</option>
+                                                        <option value="Tr. sensibles: embarazadas, menores o trab. Con rest. médic">Tr. sensibles: embarazadas, menores o trab. Con rest. médic</option>
+                                                        <option value="EPIS">EPIS</option>
+                                                        <option value="Sistema de etiquetado Productos químicos">Sistema de etiquetado Productos químicos</option>
+                                                        <option value="Manipulación manual de cargas">Manipulación manual de cargas</option>
+                                                        <option value="Uso escaleras de mano">Uso escaleras de mano</option>
+                                                        <option value="Diseño seguro de trabajos">Diseño seguro de trabajos</option>
+                                                        <option value="Uso de herramientas manuales">Uso de herramientas manuales</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="planformacion_fer">Formación</label>
+                                                    <select name="planformacion_fer" id="planformacion_fer" class="form-select">
+                                                        <option value="">Seleccione</option>
+                                                        <option value="Si">Si</option>
+                                                        <option value="N/A">N/A</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="planinformacion_fer">Información</label>
+                                                    <select name="planinformacion_fer" id="planinformacion_fer" class="form-select">
+                                                        <option value="">Seleccione</option>
+                                                        <option value="Si">Si</option>
+                                                        <option value="N/A">N/A</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="planresponsable_fer">Responsable</label>
-                                            <select name="planresponsable_fer" id="planresponsable_fer" class="form-select">
-                                                <option value="">Seleccione</option>
-                                                <option value="Trabajador">Trabajador</option>
-                                                <option value="Responsable departamento">Responsable departamento</option>
-                                                <option value="Gerencia empresa">Gerencia empresa</option>
-                                                <option value="Trabajador designado">Trabajador designado</option>
-                                                <option value="SPA">SPA</option>
-                                                <option value="Otros">Otros</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-md-1">
-                                        <div class="form-group">
-                                            <label for="">Coste</label>
-                                            <input type="text" name="plancoste_fer" class="form-control">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label for="planaccion_fer">Accion</label>
-                                            <select name="planaccion_fer" id="planaccion_fer" class="form-select">
-                                                <option value="">Seleccione</option>
-                                                <option value="Durante los trabajos">Durante los trabajos</option>
-                                                <option value="Previo a los trabajos">Previo a los trabajos</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="planprioridad_fer">Prioridad</label>
-                                            <select name="planprioridad_fer" id="planprioridad_fer" class="form-select">
-                                                <option value="">Seleccione</option>
-                                                <option value="Periodica">Periodica</option>
-                                                <option value="Urgente">Urgente</option>
-                                                <option value="Alta">Alta</option>
-                                                <option value="Media">Media</option>
-                                                <option value="Baja">Baja</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="planmetodo_fer">Metodo Operativo</label>
-                                            <select name="planmetodo_fer" id="planmetodo_fer" class="planmetodo_fer">
-                                                <option value="">Seleccione</option>
-                                                <option value="N/A">N/A</option>
-                                                <option style="color:#ffffff; background-color: #808080" value="">METODOS ESPECÍFICOS</option>
-                                                <option value="Mantenimiento preventivo">Mantenimiento preventivo</option>
-                                                <option value="Comprobación de energías">Comprobación de energías</option>
-                                                <option value="Consignación de equipos de Tº">Consignación de equipos de Tº</option>
-                                                <option value="Rampas de las embarcaciones">Rampas de las embarcaciones</option>
-                                                <option value="Trabajos en espacios cerrados">Trabajos en espacios cerrados</option>
-                                                <option value="Ordenam. amarre y atraque">Ordenam. amarre y atraque</option>
-                                                <option value="Acceso embarcaciones">Acceso embarcaciones</option>
-                                                <option value="Limpieza de embarcaciones">Limpieza de embarcaciones</option>
-                                                <option value="Conexion electr. y agua en emb.">Conexion electr. y agua en emb.</option>
-                                                <option value="Tratamientos de superficies O.V.">Tratamientos de superficies O.V.</option>
-                                                <option value="Traslado emb. a área reparado">Traslado emb. a área reparado</option>
-                                                <option value="Apuntalamiento embarcaciones">Apuntalamiento embarcaciones</option>
-                                                <option value="Tº superfic. emb. fondeadas">Tº superfic. emb. fondeadas</option>
-                                                <option value="Manipulación de bidones">OtrManipulación de bidonesos</option>
-                                                <option value="Uso herramientas manuales">Uso herramientas manuales</option>
-                                                <option value="Uso de herramientas portátiles">Uso de herramientas portátiles</option>
-                                                <option value="Uso de escaleras manuales">Uso de escaleras manuales</option>
-                                                <option value="Andamios de borriquetas">Andamios de borriquetas</option>
-                                                <option value="Andamios tubulares">Andamios tubulares</option>
-                                                <option value="Uso PEMP">Uso PEMP</option>
-                                                <option value="Trabajos verticales">Trabajos verticales</option>
-                                                <option value="Trabajos en cubiertas">Trabajos en cubiertas</option>
-                                                <option value="Operativa en bodega">Operativa en bodega</option>
-                                                <option value="Trabajos en fosos">Trabajos en fosos</option>
-                                                <option value="Trabajos de soldadura">Trabajos de soldadura</option>
-                                                <option value="Trabajos eléctricos">Trabajos eléctricos</option>
-                                                <option value="Guía uso de guantes">Guía uso de guantes</option>
-                                                <option value="SGS(Manual de gestión de buque)">SGS(Manual de gestión de buque)</option>
-                                                <option style="color:#ffffff; background-color: #808080" value="">METODOS GENERALES</option>
-                                                <option value="Prevención de accidentes in itinere">Prevención de accidentes in itinere</option>
-                                                <option value="Vigilancia de la salud">Vigilancia de la salud</option>
-                                                <option value="Golpe de Calor- RAD UV">Golpe de Calor- RAD UV</option>
-                                                <option value="Tr. sensibles: embarazadas, menores o trab. Con rest. médic">Tr. sensibles: embarazadas, menores o trab. Con rest. médic</option>
-                                                <option value="EPIS">EPIS</option>
-                                                <option value="Sistema de etiquetado Productos químicos">Sistema de etiquetado Productos químicos</option>
-                                                <option value="Manipulación manual de cargas">Manipulación manual de cargas</option>
-                                                <option value="Uso escaleras de mano">Uso escaleras de mano</option>
-                                                <option value="Diseño seguro de trabajos">Diseño seguro de trabajos</option>
-                                                <option value="Uso de herramientas manuales">Uso de herramientas manuales</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="planformacion_fer">Formacion</label>
-                                            <select name="planformacion_fer" id="planformacion_fer" class="form-select">
-                                                <option value="">Seleccione</option>
-                                                <option value="Si">Si</option>
-                                                <option value="N/A">N/A</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="planinformacion_fer">Informacion</label>
-                                            <select name="planinformacion_fer" id="planinformacion_fer" class="form-select">
-                                                <option value="">Seleccione</option>
-                                                <option value="Si">Si</option>
-                                                <option value="N/A">N/A</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-
-
-                                <div class="card card-outline card-primary" id="headingfour">
-                                    <div class="card-header">
-                                        <h3 class="card-title"><i class="bi bi-plus-square-fill" style="text-align: left;"></i> Imagenes</h3>
-                                        <div class="card-tools">
-                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div id="collapseFour" class="collapse" aria-labelledby="headingfour">
-                                        <div class="card-body">
-
-
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group row">
-                                                        <div class="col-md-12">
-                                                            <label for="file1">Imagen del Riesgo</label>
-                                                            <input type="file" name="imgriesgo_fer" class="form-control" id="file1">
-                                                            <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" role="button" title="Reduce tamaño imagen" target="_blank">
-                                                                Max. 1Mb
-                                                            </a>
-                                                            <br>
-                                                            <!-- Contenedor para la vista previa de la imagen -->
-                                                            <div id="list1">
+                                        <div class="card card-outline card-primary" id="headingfour">
+                                            <div class="card-header">
+                                                <h3 class="card-title"><i class="bi bi-plus-square-fill" style="text-align: left;"></i> Imágenes</h3>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div id="collapseFour" class="collapse show" aria-labelledby="headingfour">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-12">
+                                                                    <label for="file1">Imagen del Riesgo</label>
+                                                                    <input type="file" name="imgriesgo_fer" class="form-control" id="file1">
+                                                                    <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" role="button" title="Reduce tamaño imagen" target="_blank">
+                                                                        Max. 1Mb
+                                                                    </a>
+                                                                    <br>
+                                                                    <div id="list1"></div>
+                                                                    <script>
+                                                                        function archivo1(evt) {
+                                                                            var files = evt.target.files;
+                                                                            for (var i = 0, f; f = files[i]; i++) {
+                                                                                if (!f.type.match('image.*')) {
+                                                                                    continue;
+                                                                                }
+                                                                                var reader = new FileReader();
+                                                                                reader.onload = (function(theFile) {
+                                                                                    return function(e) {
+                                                                                        document.getElementById('list1').innerHTML = '<img class="thumb thumbnail" src="' + e.target.result + '" width="100%" title="' + escape(theFile.name) + '"/>';
+                                                                                    };
+                                                                                })(f);
+                                                                                reader.readAsDataURL(f);
+                                                                            }
+                                                                        }
+                                                                        document.getElementById('file1').addEventListener('change', archivo1, false);
+                                                                    </script>
+                                                                </div>
                                                             </div>
-                                                            <script>
-                                                                function archivo1(evt) {
-                                                                    var files = evt.target.files; // FileList object
-                                                                    for (var i = 0, f; f = files[i]; i++) {
-                                                                        if (!f.type.match('image.*')) {
-                                                                            continue;
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-10">
+                                                                    <label for="">Imagen Preventiva</label>
+                                                                    <input type="file" name="imgplan_fer" class="form-control" id="file2">
+                                                                    <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" title="Reduce tamaño imagen" role="button" target="_blank">
+                                                                        Max. 1Mb
+                                                                    </a>
+                                                                    <br>
+                                                                    <output id="list2"></output>
+                                                                    <script>
+                                                                        function archivo2(evt) {
+                                                                            var files = evt.target.files;
+                                                                            for (var i = 0, f; f = files[i]; i++) {
+                                                                                if (!f.type.match('image.*')) {
+                                                                                    continue;
+                                                                                }
+                                                                                var reader = new FileReader();
+                                                                                reader.onload = (function(theFile) {
+                                                                                    return function(e) {
+                                                                                        document.getElementById("list2").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                                                                    };
+                                                                                })(f);
+                                                                                reader.readAsDataURL(f);
+                                                                            }
                                                                         }
-                                                                        var reader = new FileReader();
-                                                                        reader.onload = (function(theFile) {
-                                                                            return function(e) {
-                                                                                document.getElementById('list1').innerHTML = '<img class="thumb thumbnail" src="' + e.target.result + '" width="100%" title="' + escape(theFile.name) + '"/>';
-                                                                            };
-                                                                        })(f);
-                                                                        reader.readAsDataURL(f);
-                                                                    }
-                                                                }
-                                                                document.getElementById('file1').addEventListener('change', archivo1, false);
-                                                            </script>
+                                                                        document.getElementById('file2').addEventListener('change', archivo2, false);
+                                                                    </script>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-                                                <div class="col-sm-6">
-                                                    <div class="form-group row">
-                                                        <div class="col-md-10">
-                                                            <label for="">Imagen Preventiva </label>
-                                                            <input type="file" name="imgplan_fer" class="form-control" id="file2">
-                                                            <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" title="Reduce tamaño imagen" role="button" target="_blank">
-                                                                Max. 1Mb
-                                                            </a>
-                                                            <br>
-                                                            <output id="list2">
-                                                            </output>
-                                                            <script>
-                                                                function archivo2(evt) {
-                                                                    var files = evt.target.files; // FileList object
-                                                                    // Obtenemos la imagen del campo "file2".
-                                                                    for (var i = 0, f; f = files[i]; i++) {
-                                                                        //Solo admitimos imágenes.
-                                                                        if (!f.type.match('image.*')) {
-                                                                            continue;
-                                                                        }
-                                                                        var reader = new FileReader();
-                                                                        reader.onload = (function(theFile) {
-                                                                            return function(e) {
-                                                                                // Insertamos la imagen
-                                                                                document.getElementById("list2").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
-                                                                            };
-                                                                        })(f);
-                                                                        reader.readAsDataURL(f);
+    <div class="card-body">
+        <table id="example1" class="table compact stripe hover">
+            <colgroup>
+                <col width="1%">
+                <col width="20%">
+                <col width="35%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="6%">
+            </colgroup>
+            <thead class="table-secondary">
+                <tr>
+                    <th style="text-align: center">#</th>
+                    <th style="text-align: left">RIESGO</th>
+                    <th style="text-align: left">Descripcion</th>
+                    <th style="text-align: center">Probabilidad</th>
+                    <th style="text-align: center">Consecuencias</th>
+                    <th style="text-align: center">Nivel Riesgo</th>
+                    <th style="text-align: center">-</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $contador_riesgos = 0;
+                foreach ($filaseval_datos as $filaseval_dato) {
+                    $contador_riesgos++;
+                    $id_filaeval = $filaseval_dato['id_filaeval'];
+                ?>
+                    <tr>
+                        <td style="text-align: center; color:#ffffff; background-color: #0080c0"><?php echo $contador_riesgos ?></td>
+                        <td style="text-align: left"><b><?php echo $filaseval_dato['codigoriesgo']; ?> - <?php echo $filaseval_dato['fraseriesgo']; ?></b></td>
+                        <td style="text-align: left"><?php echo $filaseval_dato['frasefila_fer']; ?></td>
+                        <td style="text-align: center"><?php echo $filaseval_dato['probabilidad_fer']; ?></td>
+                        <td style="text-align: center"><?php echo $filaseval_dato['gravedad_fer']; ?></td>
+                        <td style="text-align: center">
+                            <?php
+                            $nivelriesgo = $filaseval_dato['nivelriesgo_fer'];
+                            switch ($nivelriesgo) {
+                                case 'Riesgo Trivial':
+                                    echo "<span class='badge-wh-1'><h6><b>Riesgo Trivial</b></h6></span>";
+                                    break;
+                                case 'Riesgo Tolerable':
+                                    echo "<span class='badge-wh-2'><h6><b>Riesgo Tolerable</b></h6></span>";
+                                    break;
+                                case 'Riesgo Moderado':
+                                    echo "<span class='badge-wh-3'><h6><b>Riesgo Moderado</b></h6></span>";
+                                    break;
+                                case 'Riesgo Importante':
+                                    echo "<span class='badge-wh-4'><h6><b>Riesgo Importante</b></h6></span>";
+                                    break;
+                                case 'Riesgo Intolerable':
+                                    echo "<span class='badge-wh-5'><h6><b>Riesgo Intolerable</b></h6></span>";
+                                    break;
+                                default:
+                                    echo "<span class='badge-wh-6'><h6><b>Desconocido</b></h6></span>";
+                                    break;
+                            }
+                            ?>
+                        </td>
+                        </td>
+                        <td style="text-align: left">
+                            <!-- Contenedor que hace que los botones estén uno al lado del otro -->
+                            <div class="d-inline-flex">
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#measures-<?php echo $contador_riesgos; ?>, #planificacion-<?php echo $contador_riesgos; ?>">
+                                    <i class="bi bi-caret-down-fill"></i>
+
+                                </button>
+                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-editarriesgo-<?php echo $id_filaeval ?>" title="Editar riesgo"><i class="bi bi-pencil-square"></i></button>
+                                <!-- Modal para editar riesgo -->
+                                <?php include('../../app/controllers/evaluacion/datos_filariesgo.php'); ?>
+                                <div class="modal fade" id="modal-editarriesgo-<?php echo $id_filaeval ?>">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color:gold">
+                                                <h5 class="modal-title"><i class="bi bi-plus-lg"></i> Editar Riesgo</h5>
+                                                <button type="button" class="close" style="color: black;" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+
+
+                                                <form id="form-editarriesgo-<?php echo $id_filaeval ?>" action="../../app/controllers/evaluacion/update_filariesgo.php" method="post" enctype="multipart/form-data">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">Riesgo: <?php echo $filariesgo_dato['id_filaeval'] ?></label>
+                                                                <input type="text" value="<?php echo $id_filaeval ?>" name="id_filaeval" class="form-control" hidden>
+                                                                <input type="text" value="<?php echo $id_evaluacion ?>" name="id_evaluacion" class="form-control" hidden>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">Puesto: <?php echo $puestoarea_pc ?></label>
+                                                                <label for="">Riesgo: <?php echo $riesgo_fer ?></label>
+                                                                <input type="text" value="<?php echo $id_puestocentro ?>" name="puestocentro_fer" class="form-control" hidden>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-11">
+                                                            <label for="riesgo_fer">Riesgo</label>
+                                                            <div class="input-group">
+                                                                <select name="riesgo_fer" id="riesgo_fer" class="form-control">
+                                                                    <?php
+                                                                    // Asegúrate de que la variable $riesgo_fer esté definida y tenga el valor deseado
+                                                                    $selected_riesgo_id = isset($riesgo_fer) ? $riesgo_fer : ''; // Valor a preseleccionar
+
+                                                                    foreach ($riesgos_datos as $riesgos_dato) {
+                                                                        $fraseriesgo = $riesgos_dato['fraseriesgo'];
+                                                                        $codigoriesgo = $riesgos_dato['codigoriesgo'];
+                                                                        $riesgo_id = $riesgos_dato['id_riesgo']; // Suponiendo que 'id' es la clave primaria en tu tabla
+
+                                                                        // Mostrar la opción seleccionada
+                                                                        $is_selected = ($riesgo_id == $selected_riesgo_id) ? 'selected="selected"' : '';
+                                                                    ?>
+
+                                                                        <option value="<?php echo $riesgo_id; ?>" <?php echo $is_selected; ?>
+                                                                            fraseriesgo="<?php echo $fraseriesgo; ?>"
+                                                                            codigoriesgo="<?php echo $codigoriesgo; ?>">
+                                                                            <?php echo $codigoriesgo; ?> - <?php echo $fraseriesgo; ?>
+                                                                        </option>
+
+                                                                    <?php
                                                                     }
-                                                                }
-                                                                document.getElementById('file2').addEventListener('change', archivo2, false);
-                                                            </script>
+                                                                    ?>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
+                                                    </br>
+
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <label for="">Descripción</label>
+                                                            <textarea class="form-control" name="frasefila_fer" value="" rows="3"><?php echo $frasefila_fer ?></textarea>
+
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <!-- Nueva sección para Probabilidad, Gravedad y Nivel de Riesgo -->
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="probabilidad_fer_edit">Probabilidad</label>
+                                                                <select name="probabilidad_fer" id="probabilidad_fer_edit_<?php echo $id_filaeval; ?>" class="form-select">
+                                                                    <option value="Baja" <?php echo $probabilidad_fer == 'Baja' ? 'selected' : ''; ?>>Baja</option>
+                                                                    <option value="Media" <?php echo $probabilidad_fer == 'Media' ? 'selected' : ''; ?>>Media</option>
+                                                                    <option value="Alta" <?php echo $probabilidad_fer == 'Alta' ? 'selected' : ''; ?>>Alta</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="gravedad_fer_edit">Consecuencias</label>
+                                                                <select name="gravedad_fer" id="gravedad_fer_edit_<?php echo $id_filaeval; ?>" class="form-select">
+
+                                                                    <option value="Ligeramente Dañino" <?php echo $gravedad_fer == 'Ligeramente Dañino' ? 'selected' : ''; ?>>Ligeramente Dañino</option>
+                                                                    <option value="Dañino" <?php echo $gravedad_fer == 'Dañino' ? 'selected' : ''; ?>>Dañino</option>
+                                                                    <option value="Extremadamente Dañino" <?php echo $gravedad_fer == 'Extremadamente Dañino' ? 'selected' : ''; ?>>Extremadamente Dañino</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="nivelriesgo_fer_edit">Nivel de Riesgo</label>
+                                                                <input type="text" id="nivelriesgo_fer_edit_<?php echo $id_filaeval; ?>" name="nivelriesgo_fer" class="form-control" readonly>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <hr>
+
+
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group" style="background-color: #0080c0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                                                                <label style="text-align: center; color: #ffffff;">
+                                                                    <h5 style="margin: 0;">Planificación actividad preventiva:</h5>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="planresponsable_fer">Responsable</label>
+                                                                <select name="planresponsable_fer" id="planresponsable_fer" class="form-select">
+                                                                    <option value="Trabajador" <?php echo $planresponsable_fer == 'Trabajador' ? 'selected' : ''; ?>>Trabajador</option>
+                                                                    <option value="Responsable departamento" <?php echo $planresponsable_fer == 'Responsable departamento' ? 'selected' : ''; ?>>Responsable departamento</option>
+                                                                    <option value="Gerencia empresa" <?php echo $planresponsable_fer == 'Gerencia empresa' ? 'selected' : ''; ?>>Gerencia empresa</option>
+                                                                    <option value="Trabajador designado" <?php echo $planresponsable_fer == 'Trabajador designado' ? 'selected' : ''; ?>>Trabajador designado</option>
+                                                                    <option value="SPA" <?php echo $planresponsable_fer == 'SPA' ? 'selected' : ''; ?>>SPA</option>
+                                                                    <option value="Otros" <?php echo $planresponsable_fer == 'Otros' ? 'selected' : ''; ?>>Otros</option>
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-md-1">
+                                                            <div class="form-group">
+                                                                <label for="">Coste</label>
+                                                                <input type="text" name="plancoste_fer" value="<?php echo $plancoste_fer ?>" class="form-control">
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-md-5">
+                                                            <div class="form-group">
+                                                                <label for="planaccion_fer">Accion</label>
+                                                                <select name="planaccion_fer" id="planaccion_fer" class="form-select">
+                                                                    <option value="Durante los trabajos" <?php echo $planaccion_fer == 'Durante los trabajos' ? 'selected' : ''; ?>>Previo a los trabajos</option>
+                                                                    <option value="Previo a los trabajos" <?php echo $planaccion_fer == 'Previo a los trabajos' ? 'selected' : ''; ?>>Previo a los trabajos</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label for="planprioridad_fer">Prioridad</label>
+                                                                <select name="planprioridad_fer" id="planprioridad_fer" class="form-select">
+                                                                    <option value="Periodica" <?php echo $planprioridad_fer == 'Periodica' ? 'selected' : ''; ?>>Periodica</option>
+                                                                    <option value="Urgente" <?php echo $planprioridad_fer == 'Urgente' ? 'selected' : ''; ?>>Urgente</option>
+                                                                    <option value="Alta" <?php echo $planprioridad_fer == 'Alta' ? 'selected' : ''; ?>>Alta</option>
+                                                                    <option value="Media" <?php echo $planprioridad_fer == 'Media' ? 'selected' : ''; ?>>Media</option>
+                                                                    <option value="Baja" <?php echo $planprioridad_fer == 'Baja' ? 'selected' : ''; ?>>Baja</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div class="form-group">
+                                                                <label for="planmetodo_fer">Metodo Operativo</label>
+                                                                <select name="planmetodo_fer" id="planmetodo_fer2" class="form-select">
+                                                                    <option value="N/A" <?php echo $planmetodo_fer == 'Baja' ? 'selected' : ''; ?>>N/A</option>
+                                                                    <option style="color:#ffffff; background-color: #808080" value="">METODOS ESPECÍFICOS</option>
+                                                                    <option value="Mantenimiento preventivo" <?php echo $planmetodo_fer == 'Mantenimiento preventivo' ? 'selected' : ''; ?>>Mantenimiento preventivo</option>
+                                                                    <option value="Comprobación de energías" <?php echo $planmetodo_fer == 'Comprobación de energías' ? 'selected' : ''; ?>>Comprobación de energías</option>
+                                                                    <option value="Consignación de equipos de Tº" <?php echo $planmetodo_fer == 'Consignación de equipos de Tº' ? 'selected' : ''; ?>>Consignación de equipos de Tº</option>
+                                                                    <option value="Rampas de las embarcaciones" <?php echo $planmetodo_fer == 'Rampas de las embarcaciones' ? 'selected' : ''; ?>>Rampas de las embarcaciones</option>
+                                                                    <option value="Trabajos en espacios cerrados" <?php echo $planmetodo_fer == 'Trabajos en espacios cerrados' ? 'selected' : ''; ?>>Trabajos en espacios cerrados</option>
+                                                                    <option value="Ordenam. amarre y atraque" <?php echo $planmetodo_fer == 'Ordenam. amarre y atraque' ? 'selected' : ''; ?>>Ordenam. amarre y atraque</option>
+                                                                    <option value="Acceso embarcaciones" <?php echo $planmetodo_fer == 'Acceso embarcaciones' ? 'selected' : ''; ?>>Acceso embarcaciones</option>
+                                                                    <option value="Limpieza de embarcaciones" <?php echo $planmetodo_fer == 'Limpieza de embarcaciones' ? 'selected' : ''; ?>>Limpieza de embarcaciones</option>
+                                                                    <option value="Conexion electr. y agua en emb." <?php echo $planmetodo_fer == 'Conexion electr. y agua en emb.' ? 'selected' : ''; ?>>Conexion electr. y agua en emb.</option>
+                                                                    <option value="Tratamientos de superficies O.V." <?php echo $planmetodo_fer == 'Tratamientos de superficies O.V.' ? 'selected' : ''; ?>>Tratamientos de superficies O.V.</option>
+                                                                    <option value="Traslado emb. a área reparado" <?php echo $planmetodo_fer == 'Traslado emb. a área reparado' ? 'selected' : ''; ?>>Traslado emb. a área reparado</option>
+                                                                    <option value="Apuntalamiento embarcaciones" <?php echo $planmetodo_fer == 'Apuntalamiento embarcaciones' ? 'selected' : ''; ?>>Apuntalamiento embarcaciones</option>
+                                                                    <option value="Tº superfic. emb. fondeadas" <?php echo $planmetodo_fer == 'Tº superfic. emb. fondeadas' ? 'selected' : ''; ?>>Tº superfic. emb. fondeadas</option>
+                                                                    <option value="Manipulación de bidones" <?php echo $planmetodo_fer == 'Manipulación de bidones' ? 'selected' : ''; ?>>Manipulación de bidonesos</option>
+                                                                    <option value="Uso herramientas manuales" <?php echo $planmetodo_fer == 'Uso herramientas manuales' ? 'selected' : ''; ?>>Uso herramientas manuales</option>
+                                                                    <option value="Uso de herramientas portátiles" <?php echo $planmetodo_fer == 'Uso de herramientas portátiles' ? 'selected' : ''; ?>>Uso de herramientas portátiles</option>
+                                                                    <option value="Uso de escaleras manuales" <?php echo $planmetodo_fer == 'Uso de escaleras manuales' ? 'selected' : ''; ?>>Uso de escaleras manuales</option>
+                                                                    <option value="Andamios de borriquetas" <?php echo $planmetodo_fer == 'Andamios de borriquetas' ? 'selected' : ''; ?>>Andamios de borriquetas</option>
+                                                                    <option value="Andamios tubulares" <?php echo $planmetodo_fer == 'Andamios tubulares' ? 'selected' : ''; ?>>Andamios tubulares</option>
+                                                                    <option value="Uso PEMP" <?php echo $planmetodo_fer == 'Uso PEMP' ? 'selected' : ''; ?>>Uso PEMP</option>
+                                                                    <option value="Trabajos verticales" <?php echo $planmetodo_fer == 'Trabajos verticales' ? 'selected' : ''; ?>>Trabajos verticales</option>
+                                                                    <option value="Trabajos en cubiertas" <?php echo $planmetodo_fer == 'Trabajos en cubiertas' ? 'selected' : ''; ?>>Trabajos en cubiertas</option>
+                                                                    <option value="Operativa en bodega" <?php echo $planmetodo_fer == 'Operativa en bodega' ? 'selected' : ''; ?>>Operativa en bodega</option>
+                                                                    <option value="Trabajos en fosos" <?php echo $planmetodo_fer == 'Trabajos en fosos' ? 'selected' : ''; ?>>Trabajos en fosos</option>
+                                                                    <option value="Trabajos de soldadura" <?php echo $planmetodo_fer == 'Trabajos de soldadura' ? 'selected' : ''; ?>>Trabajos de soldadura</option>
+                                                                    <option value="Trabajos eléctricos" <?php echo $planmetodo_fer == 'Trabajos eléctricos' ? 'selected' : ''; ?>>Trabajos eléctricos</option>
+                                                                    <option value="Guía uso de guantes" <?php echo $planmetodo_fer == 'Guía uso de guantes' ? 'selected' : ''; ?>>Guía uso de guantes</option>
+                                                                    <option value="SGS(Manual de gestión de buque)" <?php echo $planmetodo_fer == 'SGS(Manual de gestión de buque)' ? 'selected' : ''; ?>>SGS(Manual de gestión de buque)</option>
+                                                                    <option style="color:#ffffff; background-color: #808080" value="">METODOS GENERALES</option>
+                                                                    <option value="Prevención de accidentes in itinere" <?php echo $planmetodo_fer == 'Baja' ? 'selected' : ''; ?>>Prevención de accidentes in itinere</option>
+                                                                    <option value="Vigilancia de la salud" <?php echo $planmetodo_fer == 'Prevención de accidentes in itinere' ? 'selected' : ''; ?>>Vigilancia de la salud</option>
+                                                                    <option value="Golpe de Calor- RAD UV" <?php echo $planmetodo_fer == 'Golpe de Calor- RAD UV' ? 'selected' : ''; ?>>Golpe de Calor- RAD UV</option>
+                                                                    <option value="Tr. sensibles: embarazadas, menores o trab. Con rest. médic" <?php echo $planmetodo_fer == 'Tr. sensibles: embarazadas, menores o trab. Con rest. médic' ? 'selected' : ''; ?>>Tr. sensibles: embarazadas, menores o trab. Con rest. médic</option>
+                                                                    <option value="EPIS" <?php echo $planmetodo_fer == 'EPIS' ? 'selected' : ''; ?>>EPIS</option>
+                                                                    <option value="Sistema de etiquetado Productos químicos" <?php echo $planmetodo_fer == 'Sistema de etiquetado Productos químicos' ? 'selected' : ''; ?>>Sistema de etiquetado Productos químicos</option>
+                                                                    <option value="Manipulación manual de cargas" <?php echo $planmetodo_fer == 'Manipulación manual de cargas' ? 'selected' : ''; ?>>Manipulación manual de cargas</option>
+                                                                    <option value="Uso escaleras de mano" <?php echo $planmetodo_fer == 'Uso escaleras de mano' ? 'selected' : ''; ?>>Uso escaleras de mano</option>
+                                                                    <option value="Diseño seguro de trabajos" <?php echo $planmetodo_fer == 'Diseño seguro de trabajos' ? 'selected' : ''; ?>>Diseño seguro de trabajos</option>
+                                                                    <option value="Uso de herramientas manuales" <?php echo $planmetodo_fer == 'Uso de herramientas manuales' ? 'selected' : ''; ?>>Uso de herramientas manuales</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label for="planformacion_fer">Formacion</label>
+                                                                <select name="planformacion_fer" id="planformacion_fer" class="form-select">
+                                                                    <option value="">Seleccione</option>
+                                                                    <option value="Si">Si</option>
+                                                                    <option value="N/A">N/A</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label for="planinformacion_fer">Informacion</label>
+                                                                <select name="planinformacion_fer" id="planinformacion_fer" class="form-select">
+                                                                    <option value="">Seleccione</option>
+                                                                    <option value="Si">Si</option>
+                                                                    <option value="N/A">N/A</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+
+                                                    <div class="card card-outline card-primary" id="headingfour">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title"><i class="bi bi-plus-square-fill" style="text-align: left;"></i> Imagenes</h3>
+                                                            <div class="card-tools">
+                                                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                    <i class="fas fa-minus"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div id="collapseFour" class="collapse" aria-labelledby="headingfour">
+                                                            <div class="card-body">
+
+
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group row">
+                                                                            <div class="col-md-10">
+                                                                                <label for="">Imagen del Riesgo </label>
+                                                                                <input type="file" name="imgriesgo_fer" class="form-control" id="file1">
+                                                                                <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" role="button" title="Reduce tamaño imagen" target="_blank">
+                                                                                    Max. 1Mb
+                                                                                </a>
+                                                                                <br>
+                                                                                <output id="list1">
+                                                                                    <img src="<?php echo $URL . '/admin/evaluacion/image/' . $imgriesgo_fer; ?>" width="100%" alt="Imagen del Riesgo">
+
+                                                                                </output>
+                                                                                <script>
+                                                                                    function archivo1(evt) {
+                                                                                        var files = evt.target.files; // FileList object
+                                                                                        // Obtenemos la imagen del campo "file1".
+                                                                                        for (var i = 0, f; f = files[i]; i++) {
+                                                                                            //Solo admitimos imágenes.
+                                                                                            if (!f.type.match('image.*')) {
+                                                                                                continue;
+                                                                                            }
+                                                                                            var reader = new FileReader();
+                                                                                            reader.onload = (function(theFile) {
+                                                                                                return function(e) {
+                                                                                                    // Insertamos la imagen
+                                                                                                    document.getElementById("list1").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                                                                                };
+                                                                                            })(f);
+                                                                                            reader.readAsDataURL(f);
+                                                                                        }
+                                                                                    }
+                                                                                    document.getElementById('file1').addEventListener('change', archivo1, false);
+                                                                                </script>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group row">
+                                                                            <div class="col-md-10">
+                                                                                <label for="">Imagen Preventiva </label>
+                                                                                <input type="file" name="imgplan_fer" class="form-control" id="file2">
+                                                                                <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" title="Reduce tamaño imagen" role="button" target="_blank">
+                                                                                    Max. 1Mb
+                                                                                </a>
+                                                                                <br>
+                                                                                <output id="list2">
+                                                                                    <img src="<?php echo $URL . '/admin/evaluacion/image/' . $imgplan_fer; ?>" width="100%" alt="Imagen del Riesgo">
+
+                                                                                </output>
+                                                                                <script>
+                                                                                    function archivo2(evt) {
+                                                                                        var files = evt.target.files; // FileList object
+                                                                                        // Obtenemos la imagen del campo "file2".
+                                                                                        for (var i = 0, f; f = files[i]; i++) {
+                                                                                            //Solo admitimos imágenes.
+                                                                                            if (!f.type.match('image.*')) {
+                                                                                                continue;
+                                                                                            }
+                                                                                            var reader = new FileReader();
+                                                                                            reader.onload = (function(theFile) {
+                                                                                                return function(e) {
+                                                                                                    // Insertamos la imagen
+                                                                                                    document.getElementById("list2").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                                                                                };
+                                                                                            })(f);
+                                                                                            reader.readAsDataURL(f);
+                                                                                        }
+                                                                                    }
+                                                                                    document.getElementById('file2').addEventListener('change', archivo2, false);
+                                                                                </script>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="modal-footer">
+
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                        <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!--fin modal-->
+
+
+                                </div>
+                                <!-- Modal para ver y actualizar imágenes -->
+                                <div class="modal fade" id="modal-verimagenes-<?php echo $id_filaeval; ?>">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color:#007bff">
+                                                <h5 class="modal-title"><i class="bi bi-plus-lg"></i> Imágenes</h5>
+                                                <button type="button" class="close" style="color: black;" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
 
+                                            <!-- Formulario que envía las imágenes al controlador update_filariesgoimagen.php -->
+                                            <form action="../../app/controllers/evaluacion/update_filariesgoimagen.php" method="POST" enctype="multipart/form-data">
+
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <!-- Input oculto para enviar el ID de la fila y otros datos necesarios -->
+                                                        <input type="hidden" name="id_filaeval" value="<?php echo $id_filaeval; ?>">
+                                                        <input type="hidden" name="id_evaluacion" value="<?php echo $id_evaluacion; ?>">
+                                                        <input type="hidden" name="puestocentro_fer" value="<?php echo $puestocentro_fer; ?>">
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-10">
+                                                                    <label for="">Imagen del Riesgo </label>
+                                                                    <input type="file" name="imgriesgo_fer" class="form-control" id="file1">
+                                                                    <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" role="button" title="Reduce tamaño imagen" target="_blank">
+                                                                        Max. 1Mb
+                                                                    </a>
+                                                                    <br>
+                                                                    <output id="list1">
+                                                                        <img src="<?php echo $URL . '/admin/evaluacion/image/' . $imgriesgo_fer; ?>" width="100%" alt="Imagen del Riesgo">
+                                                                    </output>
+                                                                    <!-- Campo oculto para guardar el nombre de la imagen actual -->
+                                                                    <input type="hidden" name="imgriesgo_fer_existente" value="<?php echo $imgriesgo_fer; ?>">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-10">
+                                                                    <label for="">Imagen Preventiva </label>
+                                                                    <input type="file" name="imgplan_fer" class="form-control" id="file2">
+                                                                    <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" title="Reduce tamaño imagen" role="button" target="_blank">
+                                                                        Max. 1Mb
+                                                                    </a>
+                                                                    <br>
+                                                                    <output id="list2">
+                                                                        <img src="<?php echo $URL . '/admin/evaluacion/image/' . $imgplan_fer; ?>" width="100%" alt="Imagen Preventiva">
+                                                                    </output>
+                                                                    <!-- Campo oculto para guardar el nombre de la imagen actual -->
+                                                                    <input type="hidden" name="imgplan_fer_existente" value="<?php echo $imgplan_fer; ?>">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Footer con los botones para cerrar o guardar los cambios -->
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                    <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
 
+                                <div class="div">
+                                    <a class="btn btn-danger btn-sm" href="../../app/controllers/evaluacion/delete_filariesgo.php?id_filaeval=<?php echo $id_filaeval; ?>&id_puestocentro=<?php echo $id_puestocentro; ?>&id_evaluacion=<?php echo $id_evaluacion; ?>"
+                                        onclick="return confirm('¿Realmente desea eliminar el Puesto / Area evaluado?')" title="Eliminar Puesto / Area evaluada">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Fila para las medidas preventivas -->
+                    <tr id="measures-<?php echo $contador_riesgos; ?>" class="collapse">
+                        <td colspan="8" style="text-align: left; background-color: #eaeaea; border: 1px solid #ddd;">
+                            <strong style="color: #007bff;">Medidas preventivas:</strong><br>
+                            <?php foreach ($filaseval_dato['medidas'] as $medida) { ?>
+                                <div style="border-bottom: 1px solid #ccc; padding: 5px 0; display: flex; justify-content: space-between; align-items: center;">
+                                    <!-- Mostrar la frasemedida -->
+                                    <span><?php echo nl2br(htmlspecialchars($medida['frasemedida'], ENT_QUOTES, 'UTF-8')); ?></span>
+
+                                    <!-- Preparar la frasemedida para JavaScript -->
+                                    <?php $frasemedida_js = str_replace(array("\r", "\n"), array("\\r", "\\n"), addslashes($medida['frasemedida'])); ?>
+
+                                    <!-- Contenedor de botones para asegurar la alineación -->
+                                    <div style="display: flex; gap: 5px;">
+                                        <!-- Botón para editar -->
+                                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                            data-bs-target="#editMedidaModal"
+                                            onclick="loadMedidaData(<?php echo $medida['id_medida']; ?>, '<?php echo addslashes($medida['codigomedida']); ?>', '<?php echo $frasemedida_js; ?>')">
+                                            <i class="fas fa-pencil-alt"></i> <!-- Ícono de lápiz -->
+                                        </button>
+
+                                        <!-- Botón para eliminar -->
+                                        <button class="btn btn-sm btn-danger" onclick="confirmDelete(<?php echo $medida['id_medida']; ?>)">
+                                            <i class="fas fa-trash-alt"></i> <!-- Ícono de papelera -->
+                                        </button>
+
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </td>
+
+                    </tr>
+
+                    <!-- Fila para las planificacion -->
+                    <tr id="planificacion-<?php echo $contador_riesgos; ?>" class="collapse">
+                        <td colspan="8" style="text-align: left; background-color: #f1e7cd; border: 1px solid #ddd;">
+                            <strong style="color: #007bff;">Planificación actividad preventiva:</strong><br>
+
+                            <!-- Aquí agregamos las nuevas columnas -->
+                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                <div style="flex: 10;">
+                                    <strong>Responsable:</strong>
+                                    <p><?php echo $filaseval_dato['planresponsable_fer']; ?></p>
+                                </div>
+                                <div style="flex: 3;">
+                                    <strong>Coste:</strong>
+                                    <p><?php echo $filaseval_dato['plancoste_fer']; ?></p>
+                                </div>
+                                <div style="flex: 15;">
+                                    <strong>Acción:</strong>
+                                    <p><?php echo $filaseval_dato['planaccion_fer']; ?></p>
+                                </div>
+                                <div style="flex: 10;">
+                                    <strong>Prioridad:</strong>
+                                    <p><?php echo $filaseval_dato['planprioridad_fer']; ?></p>
+                                </div>
+                                <div style="flex: 25;">
+                                    <strong>Método:</strong>
+                                    <p><?php echo $filaseval_dato['planmetodo_fer']; ?></p>
+                                </div>
+                                <div style="flex: 10;">
+                                    <strong>Formación:</strong>
+                                    <p><?php echo $filaseval_dato['planformacion_fer']; ?></p>
+                                </div>
+                                <div style="flex: 10;">
+                                    <strong>Información:</strong>
+                                    <p><?php echo $filaseval_dato['planinformacion_fer']; ?></p>
+                                </div>
+
+                                <div style="flex: 5;">
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-verimagenes-<?php echo $id_filaeval ?>"><i class="bi bi-eye"></i>imagenes</button>
 
 
-                                <div class="modal-footer">
-
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
 
                                 </div>
-                            </form>
-                        </div>
-                    </div>
+                                <div style="flex: 5;">
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-planificar-<?php echo $medida['id_medida']; ?>"><i class="bi bi-eye"></i>Enviar a planificacion</button>
+                                </div>
+                                <!--inicio modal nuev accion prl-->
+                                <div class="modal fade" id="modal-planificar-<?php echo $medida['id_medida']; ?>">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color:#0000a0;color:white">
+                                                <h5 class="modal-title" id="modal-planificar-<?php echo $medida['id_medida']; ?>">Nuevo Accion Correctora o Preventiva</h5>
+                                                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
 
-                </div>
-
-                <!--fin modal-->
-
-
-            </div>
-            <div class="card-body">
-                <table id="example1" class="table compact stripe hover">
-                    <colgroup>
-                        <col width="1%">
-                        <col width="20%">
-                        <col width="35%">
-                        <col width="10%">
-                        <col width="10%">
-                        <col width="10%">
-                        <col width="6%">
-                    </colgroup>
-                    <thead class="table-secondary">
-                        <tr>
-                            <th style="text-align: center">#</th>
-                            <th style="text-align: left">RIESGO</th>
-                            <th style="text-align: left">Descripcion</th>
-                            <th style="text-align: center">Probabilidad</th>
-                            <th style="text-align: center">Consecuencias</th>
-                            <th style="text-align: center">Nivel Riesgo</th>
-                            <th style="text-align: center">-</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $contador_riesgos = 0;
-                        foreach ($filaseval_datos as $filaseval_dato) {
-                            $contador_riesgos++;
-                            $id_filaeval = $filaseval_dato['id_filaeval'];
-                        ?>
-                            <tr>
-                                <td style="text-align: center; color:#ffffff; background-color: #0080c0"><?php echo $contador_riesgos ?></td>
-                                <td style="text-align: left"><b><?php echo $filaseval_dato['codigoriesgo']; ?> - <?php echo $filaseval_dato['fraseriesgo']; ?></b></td>
-                                <td style="text-align: left"><?php echo $filaseval_dato['frasefila_fer']; ?></td>
-                                <td style="text-align: center"><?php echo $filaseval_dato['probabilidad_fer']; ?></td>
-                                <td style="text-align: center"><?php echo $filaseval_dato['gravedad_fer']; ?></td>
-                                <td style="text-align: center">
-                                    <?php
-                                    $nivelriesgo = $filaseval_dato['nivelriesgo_fer'];
-                                    switch ($nivelriesgo) {
-                                        case 'Riesgo Trivial':
-                                            echo "<span class='badge-wh-1'><h6><b>Riesgo Trivial</b></h6></span>";
-                                            break;
-                                        case 'Riesgo Tolerable':
-                                            echo "<span class='badge-wh-2'><h6><b>Riesgo Tolerable</b></h6></span>";
-                                            break;
-                                        case 'Riesgo Moderado':
-                                            echo "<span class='badge-wh-3'><h6><b>Riesgo Moderado</b></h6></span>";
-                                            break;
-                                        case 'Riesgo Importante':
-                                            echo "<span class='badge-wh-4'><h6><b>Riesgo Importante</b></h6></span>";
-                                            break;
-                                        case 'Riesgo Intolerable':
-                                            echo "<span class='badge-wh-5'><h6><b>Riesgo Intolerable</b></h6></span>";
-                                            break;
-                                        default:
-                                            echo "<span class='badge-wh-6'><h6><b>Desconocido</b></h6></span>";
-                                            break;
-                                    }
-                                    ?>
-                                </td>
-                                </td>
-                                <td style="text-align: left">
-                                    <!-- Contenedor que hace que los botones estén uno al lado del otro -->
-                                    <div class="d-inline-flex">
-                                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#measures-<?php echo $contador_riesgos; ?>, #planificacion-<?php echo $contador_riesgos; ?>">
-                                            <i class="bi bi-caret-down-fill"></i>
-
-                                        </button>
-                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-editarriesgo-<?php echo $id_filaeval ?>" title="Editar riesgo"><i class="bi bi-pencil-square"></i></button>
-                                        <!-- Modal para editar riesgo -->
-                                        <?php include('../../app/controllers/evaluacion/datos_filariesgo.php'); ?>
-                                        <div class="modal fade" id="modal-editarriesgo-<?php echo $id_filaeval ?>">
-                                            <div class="modal-dialog modal-xl">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="background-color:gold">
-                                                        <h5 class="modal-title"><i class="bi bi-plus-lg"></i> Editar Riesgo</h5>
-                                                        <button type="button" class="close" style="color: black;" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
+                                                <form action="../../app/controllers/actividad/create_accion.php" method="post" enctype="multipart/form-data">
 
 
+                                                    <div class="well">
+                                                        <div class="row">
 
-                                                        <form id="form-editarriesgo-<?php echo $id_filaeval ?>" action="../../app/controllers/evaluacion/update_filariesgo.php" method="post" enctype="multipart/form-data">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label for="">Riesgo: <?php echo $filariesgo_dato['id_filaeval'] ?></label>
-                                                                        <input type="text" value="<?php echo $id_filaeval ?>" name="id_filaeval" class="form-control" hidden>
-                                                                        <input type="text" value="<?php echo $id_evaluacion ?>" name="id_evaluacion" class="form-control" hidden>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group row">
+                                                                    <label for="nombre" class="col-form-label col-sm-3">Accion Nº:</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" class="form-control" name="codigo_acc" id="" value="" placeholder="" tabindex="1">
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label for="">Puesto: <?php echo $puestoarea_pc ?></label>
-                                                                        <label for="">Riesgo: <?php echo $riesgo_fer ?></label>
-                                                                        <input type="text" value="<?php echo $id_puestocentro ?>" name="puestocentro_fer" class="form-control" hidden>
+                                                            </div>
 
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group row">
+                                                                    <label for="nombre" class="col-form-label col-sm-3">Fecha:</label>
+                                                                    <div class="col-sm-5">
+                                                                        <input type="date" name="fecha_acc" id="fecha_acc" value="" class="form-control" tabindex="1">
                                                                     </div>
                                                                 </div>
 
 
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-md-11">
-                                                                    <label for="riesgo_fer">Riesgo</label>
-                                                                    <div class="input-group">
-                                                                        <select name="riesgo_fer" id="riesgo_fer" class="form-control">
+                                                        </div>
+                                                        <div class="row">
+
+
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group row">
+                                                                    <label for="centro" class="col-form-label col-sm-3">Centro: *</label>
+                                                                    <div class="col-sm-7">
+                                                                        <select name="centro_acc" id="btn_centro" class="form-control" required>
+                                                                            <option value="0">--Seleccione centro--</option>
                                                                             <?php
-                                                                            // Asegúrate de que la variable $riesgo_fer esté definida y tenga el valor deseado
-                                                                            $selected_riesgo_id = isset($riesgo_fer) ? $riesgo_fer : ''; // Valor a preseleccionar
-
-                                                                            foreach ($riesgos_datos as $riesgos_dato) {
-                                                                                $fraseriesgo = $riesgos_dato['fraseriesgo'];
-                                                                                $codigoriesgo = $riesgos_dato['codigoriesgo'];
-                                                                                $riesgo_id = $riesgos_dato['id_riesgo']; // Suponiendo que 'id' es la clave primaria en tu tabla
-
-                                                                                // Mostrar la opción seleccionada
-                                                                                $is_selected = ($riesgo_id == $selected_riesgo_id) ? 'selected="selected"' : '';
-                                                                            ?>
-
-                                                                                <option value="<?php echo $riesgo_id; ?>" <?php echo $is_selected; ?>
-                                                                                    fraseriesgo="<?php echo $fraseriesgo; ?>"
-                                                                                    codigoriesgo="<?php echo $codigoriesgo; ?>">
-                                                                                    <?php echo $codigoriesgo; ?> - <?php echo $fraseriesgo; ?>
-                                                                                </option>
-
+                                                                            foreach ($centros_datos as $centros_dato) { ?>
+                                                                                <option value="<?php echo $centros_dato['id_centro']; ?>" nombre_cen="<?php echo $centros_dato['nombre_cen']; ?>">
+                                                                                    <?php echo $centros_dato['nombre_cen']; ?> </option>
                                                                             <?php
                                                                             }
                                                                             ?>
                                                                         </select>
                                                                     </div>
+
                                                                 </div>
+
                                                             </div>
 
-                                                            </br>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group row">
+                                                                    <label for="prioridad" class="col-form-label col-sm-3">Prioridad:</label>
+                                                                    <div class="col-sm-6">
+                                                                        <select class="form-select" name="prioridad_acc" aria-label="Default select example">
+                                                                            <option value="-">Selecciona lugar</option>
 
-                                                            <div class="row">
-                                                                <div class="form-group">
-                                                                    <label for="">Descripción</label>
-                                                                    <textarea class="form-control" name="frasefila_fer" value="" rows="3"><?php echo $frasefila_fer ?></textarea>
-
-                                                                </div>
-                                                            </div>
-
-
-
-                                                            <!-- Nueva sección para Probabilidad, Gravedad y Nivel de Riesgo -->
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="probabilidad_fer_edit">Probabilidad</label>
-                                                                        <select name="probabilidad_fer" id="probabilidad_fer_edit_<?php echo $id_filaeval; ?>" class="form-select">
-                                                                            <option value="Baja" <?php echo $probabilidad_fer == 'Baja' ? 'selected' : ''; ?>>Baja</option>
-                                                                            <option value="Media" <?php echo $probabilidad_fer == 'Media' ? 'selected' : ''; ?>>Media</option>
-                                                                            <option value="Alta" <?php echo $probabilidad_fer == 'Alta' ? 'selected' : ''; ?>>Alta</option>
+                                                                            <option value="Baja">Baja (< 3 meses)</option>
+                                                                            <option value="Media">Media (< 1 meses)</option>
+                                                                            <option value="Alta">Alta (< 10 dias)</option>
+                                                                            <option value="Urgente">Urgente (< 24 - 48 hrs)</option>
                                                                         </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="gravedad_fer_edit">Consecuencias</label>
-                                                                        <select name="gravedad_fer" id="gravedad_fer_edit_<?php echo $id_filaeval; ?>" class="form-select">
 
-                                                                            <option value="Ligeramente Dañino" <?php echo $gravedad_fer == 'Ligeramente Dañino' ? 'selected' : ''; ?>>Ligeramente Dañino</option>
-                                                                            <option value="Dañino" <?php echo $gravedad_fer == 'Dañino' ? 'selected' : ''; ?>>Dañino</option>
-                                                                            <option value="Extremadamente Dañino" <?php echo $gravedad_fer == 'Extremadamente Dañino' ? 'selected' : ''; ?>>Extremadamente Dañino</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="nivelriesgo_fer_edit">Nivel de Riesgo</label>
-                                                                        <input type="text" id="nivelriesgo_fer_edit_<?php echo $id_filaeval; ?>" name="nivelriesgo_fer" class="form-control" readonly>
+
+
 
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group row">
+
+                                                                    <label for="" class="col-form-label col-sm-3">Responsable *</label>
+                                                                    <div class="col-sm-9">
+                                                                        <select name="responsable_acc" id="" class="form-control" required>
+                                                                            <option value="">--Seleccione Responsable--</option>
+                                                                            <?php
+                                                                            foreach ($responsables_datos as $responsables_dato) { ?>
+                                                                                <option value="<?php echo $responsables_dato['id_responsable']; ?>"><?php echo $responsables_dato['nombre_resp']; ?> | <?php echo $responsables_dato['cargo_resp']; ?> </option>
+                                                                            <?php
+                                                                            }
+                                                                            ?>
+                                                                        </select>
 
 
-                                                            <hr>
-
-
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group" style="background-color: #0080c0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
-                                                                        <label style="text-align: center; color: #ffffff;">
-                                                                            <h5 style="margin: 0;">Planificación actividad preventiva:</h5>
-                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div id="accordion">
 
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label for="planresponsable_fer">Responsable</label>
-                                                                        <select name="planresponsable_fer" id="planresponsable_fer" class="form-select">
-                                                                            <option value="Trabajador" <?php echo $planresponsable_fer == 'Trabajador' ? 'selected' : ''; ?>>Trabajador</option>
-                                                                            <option value="Responsable departamento" <?php echo $planresponsable_fer == 'Responsable departamento' ? 'selected' : ''; ?>>Responsable departamento</option>
-                                                                            <option value="Gerencia empresa" <?php echo $planresponsable_fer == 'Gerencia empresa' ? 'selected' : ''; ?>>Gerencia empresa</option>
-                                                                            <option value="Trabajador designado" <?php echo $planresponsable_fer == 'Trabajador designado' ? 'selected' : ''; ?>>Trabajador designado</option>
-                                                                            <option value="SPA" <?php echo $planresponsable_fer == 'SPA' ? 'selected' : ''; ?>>SPA</option>
-                                                                            <option value="Otros" <?php echo $planresponsable_fer == 'Otros' ? 'selected' : ''; ?>>Otros</option>
-                                                                        </select>
-
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <div class="col-md-1">
-                                                                    <div class="form-group">
-                                                                        <label for="">Coste</label>
-                                                                        <input type="text" name="plancoste_fer" value="<?php echo $plancoste_fer ?>" class="form-control">
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <div class="col-md-5">
-                                                                    <div class="form-group">
-                                                                        <label for="planaccion_fer">Accion</label>
-                                                                        <select name="planaccion_fer" id="planaccion_fer" class="form-select">
-                                                                            <option value="Durante los trabajos" <?php echo $planaccion_fer == 'Durante los trabajos' ? 'selected' : ''; ?>>Previo a los trabajos</option>
-                                                                            <option value="Previo a los trabajos" <?php echo $planaccion_fer == 'Previo a los trabajos' ? 'selected' : ''; ?>>Previo a los trabajos</option>
-
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="form-group">
-                                                                        <label for="planprioridad_fer">Prioridad</label>
-                                                                        <select name="planprioridad_fer" id="planprioridad_fer" class="form-select">
-                                                                            <option value="Periodica" <?php echo $planprioridad_fer == 'Periodica' ? 'selected' : ''; ?>>Periodica</option>
-                                                                            <option value="Urgente" <?php echo $planprioridad_fer == 'Urgente' ? 'selected' : ''; ?>>Urgente</option>
-                                                                            <option value="Alta" <?php echo $planprioridad_fer == 'Alta' ? 'selected' : ''; ?>>Alta</option>
-                                                                            <option value="Media" <?php echo $planprioridad_fer == 'Media' ? 'selected' : ''; ?>>Media</option>
-                                                                            <option value="Baja" <?php echo $planprioridad_fer == 'Baja' ? 'selected' : ''; ?>>Baja</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-8">
-                                                                    <div class="form-group">
-                                                                        <label for="planmetodo_fer">Metodo Operativo</label>
-                                                                        <select name="planmetodo_fer" id="planmetodo_fer2" class="form-select">
-                                                                            <option value="N/A" <?php echo $planmetodo_fer == 'Baja' ? 'selected' : ''; ?>>N/A</option>
-                                                                            <option style="color:#ffffff; background-color: #808080" value="">METODOS ESPECÍFICOS</option>
-                                                                            <option value="Mantenimiento preventivo" <?php echo $planmetodo_fer == 'Mantenimiento preventivo' ? 'selected' : ''; ?>>Mantenimiento preventivo</option>
-                                                                            <option value="Comprobación de energías" <?php echo $planmetodo_fer == 'Comprobación de energías' ? 'selected' : ''; ?>>Comprobación de energías</option>
-                                                                            <option value="Consignación de equipos de Tº" <?php echo $planmetodo_fer == 'Consignación de equipos de Tº' ? 'selected' : ''; ?>>Consignación de equipos de Tº</option>
-                                                                            <option value="Rampas de las embarcaciones" <?php echo $planmetodo_fer == 'Rampas de las embarcaciones' ? 'selected' : ''; ?>>Rampas de las embarcaciones</option>
-                                                                            <option value="Trabajos en espacios cerrados" <?php echo $planmetodo_fer == 'Trabajos en espacios cerrados' ? 'selected' : ''; ?>>Trabajos en espacios cerrados</option>
-                                                                            <option value="Ordenam. amarre y atraque" <?php echo $planmetodo_fer == 'Ordenam. amarre y atraque' ? 'selected' : ''; ?>>Ordenam. amarre y atraque</option>
-                                                                            <option value="Acceso embarcaciones" <?php echo $planmetodo_fer == 'Acceso embarcaciones' ? 'selected' : ''; ?>>Acceso embarcaciones</option>
-                                                                            <option value="Limpieza de embarcaciones" <?php echo $planmetodo_fer == 'Limpieza de embarcaciones' ? 'selected' : ''; ?>>Limpieza de embarcaciones</option>
-                                                                            <option value="Conexion electr. y agua en emb." <?php echo $planmetodo_fer == 'Conexion electr. y agua en emb.' ? 'selected' : ''; ?>>Conexion electr. y agua en emb.</option>
-                                                                            <option value="Tratamientos de superficies O.V." <?php echo $planmetodo_fer == 'Tratamientos de superficies O.V.' ? 'selected' : ''; ?>>Tratamientos de superficies O.V.</option>
-                                                                            <option value="Traslado emb. a área reparado" <?php echo $planmetodo_fer == 'Traslado emb. a área reparado' ? 'selected' : ''; ?>>Traslado emb. a área reparado</option>
-                                                                            <option value="Apuntalamiento embarcaciones" <?php echo $planmetodo_fer == 'Apuntalamiento embarcaciones' ? 'selected' : ''; ?>>Apuntalamiento embarcaciones</option>
-                                                                            <option value="Tº superfic. emb. fondeadas" <?php echo $planmetodo_fer == 'Tº superfic. emb. fondeadas' ? 'selected' : ''; ?>>Tº superfic. emb. fondeadas</option>
-                                                                            <option value="Manipulación de bidones" <?php echo $planmetodo_fer == 'Manipulación de bidones' ? 'selected' : ''; ?>>Manipulación de bidonesos</option>
-                                                                            <option value="Uso herramientas manuales" <?php echo $planmetodo_fer == 'Uso herramientas manuales' ? 'selected' : ''; ?>>Uso herramientas manuales</option>
-                                                                            <option value="Uso de herramientas portátiles" <?php echo $planmetodo_fer == 'Uso de herramientas portátiles' ? 'selected' : ''; ?>>Uso de herramientas portátiles</option>
-                                                                            <option value="Uso de escaleras manuales" <?php echo $planmetodo_fer == 'Uso de escaleras manuales' ? 'selected' : ''; ?>>Uso de escaleras manuales</option>
-                                                                            <option value="Andamios de borriquetas" <?php echo $planmetodo_fer == 'Andamios de borriquetas' ? 'selected' : ''; ?>>Andamios de borriquetas</option>
-                                                                            <option value="Andamios tubulares" <?php echo $planmetodo_fer == 'Andamios tubulares' ? 'selected' : ''; ?>>Andamios tubulares</option>
-                                                                            <option value="Uso PEMP" <?php echo $planmetodo_fer == 'Uso PEMP' ? 'selected' : ''; ?>>Uso PEMP</option>
-                                                                            <option value="Trabajos verticales" <?php echo $planmetodo_fer == 'Trabajos verticales' ? 'selected' : ''; ?>>Trabajos verticales</option>
-                                                                            <option value="Trabajos en cubiertas" <?php echo $planmetodo_fer == 'Trabajos en cubiertas' ? 'selected' : ''; ?>>Trabajos en cubiertas</option>
-                                                                            <option value="Operativa en bodega" <?php echo $planmetodo_fer == 'Operativa en bodega' ? 'selected' : ''; ?>>Operativa en bodega</option>
-                                                                            <option value="Trabajos en fosos" <?php echo $planmetodo_fer == 'Trabajos en fosos' ? 'selected' : ''; ?>>Trabajos en fosos</option>
-                                                                            <option value="Trabajos de soldadura" <?php echo $planmetodo_fer == 'Trabajos de soldadura' ? 'selected' : ''; ?>>Trabajos de soldadura</option>
-                                                                            <option value="Trabajos eléctricos" <?php echo $planmetodo_fer == 'Trabajos eléctricos' ? 'selected' : ''; ?>>Trabajos eléctricos</option>
-                                                                            <option value="Guía uso de guantes" <?php echo $planmetodo_fer == 'Guía uso de guantes' ? 'selected' : ''; ?>>Guía uso de guantes</option>
-                                                                            <option value="SGS(Manual de gestión de buque)" <?php echo $planmetodo_fer == 'SGS(Manual de gestión de buque)' ? 'selected' : ''; ?>>SGS(Manual de gestión de buque)</option>
-                                                                            <option style="color:#ffffff; background-color: #808080" value="">METODOS GENERALES</option>
-                                                                            <option value="Prevención de accidentes in itinere" <?php echo $planmetodo_fer == 'Baja' ? 'selected' : ''; ?>>Prevención de accidentes in itinere</option>
-                                                                            <option value="Vigilancia de la salud" <?php echo $planmetodo_fer == 'Prevención de accidentes in itinere' ? 'selected' : ''; ?>>Vigilancia de la salud</option>
-                                                                            <option value="Golpe de Calor- RAD UV" <?php echo $planmetodo_fer == 'Golpe de Calor- RAD UV' ? 'selected' : ''; ?>>Golpe de Calor- RAD UV</option>
-                                                                            <option value="Tr. sensibles: embarazadas, menores o trab. Con rest. médic" <?php echo $planmetodo_fer == 'Tr. sensibles: embarazadas, menores o trab. Con rest. médic' ? 'selected' : ''; ?>>Tr. sensibles: embarazadas, menores o trab. Con rest. médic</option>
-                                                                            <option value="EPIS" <?php echo $planmetodo_fer == 'EPIS' ? 'selected' : ''; ?>>EPIS</option>
-                                                                            <option value="Sistema de etiquetado Productos químicos" <?php echo $planmetodo_fer == 'Sistema de etiquetado Productos químicos' ? 'selected' : ''; ?>>Sistema de etiquetado Productos químicos</option>
-                                                                            <option value="Manipulación manual de cargas" <?php echo $planmetodo_fer == 'Manipulación manual de cargas' ? 'selected' : ''; ?>>Manipulación manual de cargas</option>
-                                                                            <option value="Uso escaleras de mano" <?php echo $planmetodo_fer == 'Uso escaleras de mano' ? 'selected' : ''; ?>>Uso escaleras de mano</option>
-                                                                            <option value="Diseño seguro de trabajos" <?php echo $planmetodo_fer == 'Diseño seguro de trabajos' ? 'selected' : ''; ?>>Diseño seguro de trabajos</option>
-                                                                            <option value="Uso de herramientas manuales" <?php echo $planmetodo_fer == 'Uso de herramientas manuales' ? 'selected' : ''; ?>>Uso de herramientas manuales</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-
-
-                                                                <div class="col-md-2">
-                                                                    <div class="form-group">
-                                                                        <label for="planformacion_fer">Formacion</label>
-                                                                        <select name="planformacion_fer" id="planformacion_fer" class="form-select">
-                                                                            <option value="">Seleccione</option>
-                                                                            <option value="Si">Si</option>
-                                                                            <option value="N/A">N/A</option>
-
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="form-group">
-                                                                        <label for="planinformacion_fer">Informacion</label>
-                                                                        <select name="planinformacion_fer" id="planinformacion_fer" class="form-select">
-                                                                            <option value="">Seleccione</option>
-                                                                            <option value="Si">Si</option>
-                                                                            <option value="N/A">N/A</option>
-
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-
-                                                            </div>
-
-
-                                                            <div class="card card-outline card-primary" id="headingfour">
-                                                                <div class="card-header">
-                                                                    <h3 class="card-title"><i class="bi bi-plus-square-fill" style="text-align: left;"></i> Imagenes</h3>
-                                                                    <div class="card-tools">
-                                                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                                            <i class="fas fa-minus"></i>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                                <div id="collapseFour" class="collapse" aria-labelledby="headingfour">
-                                                                    <div class="card-body">
-
+                                                                <div class="card card-outline card-primary" id="panelsStayOpen-headingone">
+                                                                    <div class="card-header">
+                                                                        <h3 class="card-title"><i class="bi bi-person-fill" style="text-align: left;"></i> 1. Detalles / Descripción</h3>
+                                                                        <div class="card-tools">
+                                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                                                                                <i class="fas fa-list"></i>
+                                                                            </button>
+                                                                        </div>
 
                                                                         <div class="row">
-                                                                            <div class="col-sm-6">
-                                                                                <div class="form-group row">
-                                                                                    <div class="col-md-10">
-                                                                                        <label for="">Imagen del Riesgo </label>
-                                                                                        <input type="file" name="imgriesgo_fer" class="form-control" id="file1">
-                                                                                        <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" role="button" title="Reduce tamaño imagen" target="_blank">
-                                                                                            Max. 1Mb
-                                                                                        </a>
-                                                                                        <br>
-                                                                                        <output id="list1">
-                                                                                            <img src="<?php echo $URL . '/admin/evaluacion/image/' . $imgriesgo_fer; ?>" width="100%" alt="Imagen del Riesgo">
-
-                                                                                        </output>
-                                                                                        <script>
-                                                                                            function archivo1(evt) {
-                                                                                                var files = evt.target.files; // FileList object
-                                                                                                // Obtenemos la imagen del campo "file1".
-                                                                                                for (var i = 0, f; f = files[i]; i++) {
-                                                                                                    //Solo admitimos imágenes.
-                                                                                                    if (!f.type.match('image.*')) {
-                                                                                                        continue;
-                                                                                                    }
-                                                                                                    var reader = new FileReader();
-                                                                                                    reader.onload = (function(theFile) {
-                                                                                                        return function(e) {
-                                                                                                            // Insertamos la imagen
-                                                                                                            document.getElementById("list1").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
-                                                                                                        };
-                                                                                                    })(f);
-                                                                                                    reader.readAsDataURL(f);
-                                                                                                }
-                                                                                            }
-                                                                                            document.getElementById('file1').addEventListener('change', archivo1, false);
-                                                                                        </script>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-sm-6">
-                                                                                <div class="form-group row">
-                                                                                    <div class="col-md-10">
-                                                                                        <label for="">Imagen Preventiva </label>
-                                                                                        <input type="file" name="imgplan_fer" class="form-control" id="file2">
-                                                                                        <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" title="Reduce tamaño imagen" role="button" target="_blank">
-                                                                                            Max. 1Mb
-                                                                                        </a>
-                                                                                        <br>
-                                                                                        <output id="list2">
-                                                                                            <img src="<?php echo $URL . '/admin/evaluacion/image/' . $imgplan_fer; ?>" width="100%" alt="Imagen del Riesgo">
-
-                                                                                        </output>
-                                                                                        <script>
-                                                                                            function archivo2(evt) {
-                                                                                                var files = evt.target.files; // FileList object
-                                                                                                // Obtenemos la imagen del campo "file2".
-                                                                                                for (var i = 0, f; f = files[i]; i++) {
-                                                                                                    //Solo admitimos imágenes.
-                                                                                                    if (!f.type.match('image.*')) {
-                                                                                                        continue;
-                                                                                                    }
-                                                                                                    var reader = new FileReader();
-                                                                                                    reader.onload = (function(theFile) {
-                                                                                                        return function(e) {
-                                                                                                            // Insertamos la imagen
-                                                                                                            document.getElementById("list2").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
-                                                                                                        };
-                                                                                                    })(f);
-                                                                                                    reader.readAsDataURL(f);
-                                                                                                }
-                                                                                            }
-                                                                                            document.getElementById('file2').addEventListener('change', archivo2, false);
-                                                                                        </script>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
 
                                                                         </div>
 
                                                                     </div>
-                                                                </div>
-                                                            </div>
+                                                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
 
 
-
-                                                            <div class="modal-footer">
-
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
-
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <!--fin modal-->
-
-
-                                        </div>
-                                        <!-- Modal para ver y actualizar imágenes -->
-                                        <div class="modal fade" id="modal-verimagenes-<?php echo $id_filaeval; ?>">
-                                            <div class="modal-dialog modal-xl">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="background-color:#007bff">
-                                                        <h5 class="modal-title"><i class="bi bi-plus-lg"></i> Imágenes</h5>
-                                                        <button type="button" class="close" style="color: black;" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-
-                                                    <!-- Formulario que envía las imágenes al controlador update_filariesgoimagen.php -->
-                                                    <form action="../../app/controllers/evaluacion/update_filariesgoimagen.php" method="POST" enctype="multipart/form-data">
-
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <!-- Input oculto para enviar el ID de la fila y otros datos necesarios -->
-                                                                <input type="hidden" name="id_filaeval" value="<?php echo $id_filaeval; ?>">
-                                                                <input type="hidden" name="id_evaluacion" value="<?php echo $id_evaluacion; ?>">
-                                                                <input type="hidden" name="puestocentro_fer" value="<?php echo $puestocentro_fer; ?>">
-
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-10">
-                                                                            <label for="">Imagen del Riesgo </label>
-                                                                            <input type="file" name="imgriesgo_fer" class="form-control" id="file1">
-                                                                            <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" role="button" title="Reduce tamaño imagen" target="_blank">
-                                                                                Max. 1Mb
-                                                                            </a>
-                                                                            <br>
-                                                                            <output id="list1">
-                                                                                <img src="<?php echo $URL . '/admin/evaluacion/image/' . $imgriesgo_fer; ?>" width="100%" alt="Imagen del Riesgo">
-                                                                            </output>
-                                                                            <!-- Campo oculto para guardar el nombre de la imagen actual -->
-                                                                            <input type="hidden" name="imgriesgo_fer_existente" value="<?php echo $imgriesgo_fer; ?>">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-10">
-                                                                            <label for="">Imagen Preventiva </label>
-                                                                            <input type="file" name="imgplan_fer" class="form-control" id="file2">
-                                                                            <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" title="Reduce tamaño imagen" role="button" target="_blank">
-                                                                                Max. 1Mb
-                                                                            </a>
-                                                                            <br>
-                                                                            <output id="list2">
-                                                                                <img src="<?php echo $URL . '/admin/evaluacion/image/' . $imgplan_fer; ?>" width="100%" alt="Imagen Preventiva">
-                                                                            </output>
-                                                                            <!-- Campo oculto para guardar el nombre de la imagen actual -->
-                                                                            <input type="hidden" name="imgplan_fer_existente" value="<?php echo $imgplan_fer; ?>">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- Footer con los botones para cerrar o guardar los cambios -->
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                            <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="div">
-                                            <a class="btn btn-danger btn-sm" href="../../app/controllers/evaluacion/delete_filariesgo.php?id_filaeval=<?php echo $id_filaeval; ?>&id_puestocentro=<?php echo $id_puestocentro; ?>&id_evaluacion=<?php echo $id_evaluacion; ?>"
-                                                onclick="return confirm('¿Realmente desea eliminar el Puesto / Area evaluado?')" title="Eliminar Puesto / Area evaluada">
-                                                <i class="bi bi-trash"></i>
-                                            </a>
-                                        </div>
-
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Fila para las medidas preventivas -->
-                            <tr id="measures-<?php echo $contador_riesgos; ?>" class="collapse">
-                                <td colspan="8" style="text-align: left; background-color: #eaeaea; border: 1px solid #ddd;">
-                                    <strong style="color: #007bff;">Medidas preventivas:</strong><br>
-                                    <?php foreach ($filaseval_dato['medidas'] as $medida) { ?>
-                                        <div style="border-bottom: 1px solid #ccc; padding: 5px 0; display: flex; justify-content: space-between; align-items: center;">
-                                            <!-- Mostrar la frasemedida -->
-                                            <span><?php echo nl2br(htmlspecialchars($medida['frasemedida'], ENT_QUOTES, 'UTF-8')); ?></span>
-
-                                            <!-- Preparar la frasemedida para JavaScript -->
-                                            <?php $frasemedida_js = str_replace(array("\r", "\n"), array("\\r", "\\n"), addslashes($medida['frasemedida'])); ?>
-
-                                            <!-- Contenedor de botones para asegurar la alineación -->
-                                            <div style="display: flex; gap: 5px;">
-                                                <!-- Botón para editar -->
-                                                <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                                    data-bs-target="#editMedidaModal"
-                                                    onclick="loadMedidaData(<?php echo $medida['id_medida']; ?>, '<?php echo addslashes($medida['codigomedida']); ?>', '<?php echo $frasemedida_js; ?>')">
-                                                    <i class="fas fa-pencil-alt"></i> <!-- Ícono de lápiz -->
-                                                </button>
-
-                                                <!-- Botón para eliminar -->
-                                                <button class="btn btn-sm btn-danger" onclick="confirmDelete(<?php echo $medida['id_medida']; ?>)">
-                                                    <i class="fas fa-trash-alt"></i> <!-- Ícono de papelera -->
-                                                </button>
-
-                                            </div>
-                                        </div>
-                                    <?php } ?>
-                                </td>
-
-                            </tr>
-
-                            <!-- Fila para las planificacion -->
-                            <tr id="planificacion-<?php echo $contador_riesgos; ?>" class="collapse">
-                                <td colspan="8" style="text-align: left; background-color: #f1e7cd; border: 1px solid #ddd;">
-                                    <strong style="color: #007bff;">Planificación actividad preventiva:</strong><br>
-
-                                    <!-- Aquí agregamos las nuevas columnas -->
-                                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                        <div style="flex: 10;">
-                                            <strong>Responsable:</strong>
-                                            <p><?php echo $filaseval_dato['planresponsable_fer']; ?></p>
-                                        </div>
-                                        <div style="flex: 3;">
-                                            <strong>Coste:</strong>
-                                            <p><?php echo $filaseval_dato['plancoste_fer']; ?></p>
-                                        </div>
-                                        <div style="flex: 15;">
-                                            <strong>Acción:</strong>
-                                            <p><?php echo $filaseval_dato['planaccion_fer']; ?></p>
-                                        </div>
-                                        <div style="flex: 10;">
-                                            <strong>Prioridad:</strong>
-                                            <p><?php echo $filaseval_dato['planprioridad_fer']; ?></p>
-                                        </div>
-                                        <div style="flex: 25;">
-                                            <strong>Método:</strong>
-                                            <p><?php echo $filaseval_dato['planmetodo_fer']; ?></p>
-                                        </div>
-                                        <div style="flex: 10;">
-                                            <strong>Formación:</strong>
-                                            <p><?php echo $filaseval_dato['planformacion_fer']; ?></p>
-                                        </div>
-                                        <div style="flex: 10;">
-                                            <strong>Información:</strong>
-                                            <p><?php echo $filaseval_dato['planinformacion_fer']; ?></p>
-                                        </div>
-
-                                        <div style="flex: 5;">
-                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-verimagenes-<?php echo $id_filaeval ?>"><i class="bi bi-eye"></i>imagenes</button>
-
-
-
-                                        </div>
-                                        <div style="flex: 5;">
-                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-planificar-<?php echo $medida['id_medida']; ?>"><i class="bi bi-eye"></i>Enviar a planificacion</button>
-                                        </div>
-                                        <!--inicio modal nuev accion prl-->
-                                        <div class="modal fade" id="modal-planificar-<?php echo $medida['id_medida']; ?>">
-                                            <div class="modal-dialog modal-xl">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="background-color:#0000a0;color:white">
-                                                        <h5 class="modal-title" id="modal-planificar-<?php echo $medida['id_medida']; ?>">Nuevo Accion Correctora o Preventiva</h5>
-                                                        <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-
-                                                        <form action="../../app/controllers/actividad/create_accion.php" method="post" enctype="multipart/form-data">
-
-
-                                                            <div class="well">
-                                                                <div class="row">
-
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group row">
-                                                                            <label for="nombre" class="col-form-label col-sm-3">Accion Nº:</label>
-                                                                            <div class="col-sm-6">
-                                                                                <input type="text" class="form-control" name="codigo_acc" id="" value="" placeholder="" tabindex="1">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group row">
-                                                                            <label for="nombre" class="col-form-label col-sm-3">Fecha:</label>
-                                                                            <div class="col-sm-5">
-                                                                                <input type="date" name="fecha_acc" id="fecha_acc" value="" class="form-control" tabindex="1">
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-
-
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group row">
-                                                                            <label for="centro" class="col-form-label col-sm-3">Centro: *</label>
-                                                                            <div class="col-sm-7">
-                                                                                <select name="centro_acc" id="btn_centro" class="form-control" required>
-                                                                                    <option value="0">--Seleccione centro--</option>
-                                                                                    <?php
-                                                                                    foreach ($centros_datos as $centros_dato) { ?>
-                                                                                        <option value="<?php echo $centros_dato['id_centro']; ?>" nombre_cen="<?php echo $centros_dato['nombre_cen']; ?>">
-                                                                                            <?php echo $centros_dato['nombre_cen']; ?> </option>
-                                                                                    <?php
-                                                                                    }
-                                                                                    ?>
-                                                                                </select>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group row">
-                                                                            <label for="prioridad" class="col-form-label col-sm-3">Prioridad:</label>
-                                                                            <div class="col-sm-6">
-                                                                                <select class="form-select" name="prioridad_acc" aria-label="Default select example">
-                                                                                    <option value="-">Selecciona lugar</option>
-
-                                                                                    <option value="Baja">Baja (< 3 meses)</option>
-                                                                                    <option value="Media">Media (< 1 meses)</option>
-                                                                                    <option value="Alta">Alta (< 10 dias)</option>
-                                                                                    <option value="Urgente">Urgente (< 24 - 48 hrs)</option>
-                                                                                </select>
-
-
-
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group row">
-
-                                                                            <label for="" class="col-form-label col-sm-3">Responsable *</label>
-                                                                            <div class="col-sm-9">
-                                                                                <select name="responsable_acc" id="" class="form-control" required>
-                                                                                    <option value="">--Seleccione Responsable--</option>
-                                                                                    <?php
-                                                                                    foreach ($responsables_datos as $responsables_dato) { ?>
-                                                                                        <option value="<?php echo $responsables_dato['id_responsable']; ?>"><?php echo $responsables_dato['nombre_resp']; ?> | <?php echo $responsables_dato['cargo_resp']; ?> </option>
-                                                                                    <?php
-                                                                                    }
-                                                                                    ?>
-                                                                                </select>
-
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div id="accordion">
-
-                                                                        <div class="card card-outline card-primary" id="panelsStayOpen-headingone">
-                                                                            <div class="card-header">
-                                                                                <h3 class="card-title"><i class="bi bi-person-fill" style="text-align: left;"></i> 1. Detalles / Descripción</h3>
-                                                                                <div class="card-tools">
-                                                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-                                                                                        <i class="fas fa-list"></i>
-                                                                                    </button>
-                                                                                </div>
+                                                                        <div class="card-body">
+                                                                            <div class="row">
 
                                                                                 <div class="row">
-
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-
-
-                                                                                <div class="card-body">
-                                                                                    <div class="row">
-
-                                                                                        <div class="row">
+                                                                                    <div class="col-sm-12">
+                                                                                        <div class="form-group row">
+                                                                                            <label for="descripcion_acc" class="col-form-label col-sm-2">Descripcion:</label>
                                                                                             <div class="col-sm-12">
-                                                                                                <div class="form-group row">
-                                                                                                    <label for="descripcion_acc" class="col-form-label col-sm-2">Descripcion:</label>
-                                                                                                    <div class="col-sm-12">
-                                                                                                        <textarea class="form-control" name="descripcion_acc" value="" rows="3"></textarea>
-                                                                                                    </div>
-                                                                                                </div>
+                                                                                                <textarea class="form-control" name="descripcion_acc" value="" rows="3"></textarea>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-sm-5">
-                                                                                            <div class="form-group row">
-                                                                                                <label for="origen_acc" class="col-form-label col-sm-3">Origen:</label>
-                                                                                                <div class="col-sm-9">
-                                                                                                    <select class="form-select" name="origen_acc" aria-label="Default select example">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-sm-5">
+                                                                                    <div class="form-group row">
+                                                                                        <label for="origen_acc" class="col-form-label col-sm-3">Origen:</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <select class="form-select" name="origen_acc" aria-label="Default select example">
 
-                                                                                                        <option value="-">Seleccione</option>
+                                                                                                <option value="-">Seleccione</option>
 
-                                                                                                        <option value="Evaluacion de riesgos">Evaluacion de riesgos</option>
-                                                                                                        <option value="Accidente de trabajo">Accidente de trabajo</option>
-                                                                                                        <option value="Propuesta de mejora">Propuesta de mejora</option>
-                                                                                                        <option value="Comunicado de riesgos">Comunicado de riesgos</option>
-                                                                                                        <option value="Otros">Otros</option>
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                            </div>
+                                                                                                <option value="Evaluacion de riesgos">Evaluacion de riesgos</option>
+                                                                                                <option value="Accidente de trabajo">Accidente de trabajo</option>
+                                                                                                <option value="Propuesta de mejora">Propuesta de mejora</option>
+                                                                                                <option value="Comunicado de riesgos">Comunicado de riesgos</option>
+                                                                                                <option value="Otros">Otros</option>
+                                                                                            </select>
                                                                                         </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-7">
+                                                                                    <div class="form-group row">
+                                                                                        <label for="detalleorigen_acc" class="col-form-label col-sm-5">Informe procedencia / detalles:</label>
                                                                                         <div class="col-sm-7">
-                                                                                            <div class="form-group row">
-                                                                                                <label for="detalleorigen_acc" class="col-form-label col-sm-5">Informe procedencia / detalles:</label>
-                                                                                                <div class="col-sm-7">
-                                                                                                    <input type="text" name="detalleorigen_acc" id="" class="form-control" value="">
-                                                                                                </div>
-                                                                                            </div>
+                                                                                            <input type="text" name="detalleorigen_acc" id="" class="form-control" value="">
                                                                                         </div>
-
-
                                                                                     </div>
-
                                                                                 </div>
+
+
                                                                             </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="card card-outline card-primary" id="headingtwo">
+                                                                    <div class="card-header">
+                                                                        <h3 class="card-title"><i class="fa fa-book" style="text-align: left;"></i> 2. Medidas preventivas / correctoras</h3>
+                                                                        <div class="card-tools">
+                                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                <i class="fas fa-minus"></i>
+                                                                            </button>
                                                                         </div>
 
-                                                                        <div class="card card-outline card-primary" id="headingtwo">
-                                                                            <div class="card-header">
-                                                                                <h3 class="card-title"><i class="fa fa-book" style="text-align: left;"></i> 2. Medidas preventivas / correctoras</h3>
-                                                                                <div class="card-tools">
-                                                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                                        <i class="fas fa-minus"></i>
-                                                                                    </button>
-                                                                                </div>
+                                                                        <div class="row">
 
-                                                                                <div class="row">
-
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div id="collapseTwo" class="collapse" aria-labelledby="collapseTwo">
-                                                                                <div class="card-body">
-                                                                                    <div class="row">
-                                                                                        <div class="col-sm-12">
-                                                                                            <div class="form-group row">
-                                                                                                <label for="accpropuesta_acc" class="col-form-label col-sm-2">Accion propuesta:</label>
-                                                                                                <div class="col-sm-12">
-                                                                                                    <textarea class="form-control" name="accpropuesta_acc" value="" rows="2"></textarea>
-                                                                                                </div>
-
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-
-
-
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-sm-12">
-                                                                                            <div class="form-group row">
-                                                                                                <label for="accrealizada_acc" class="col-form-label col-sm-2">Acción realizada:</label>
-                                                                                                <div class="col-sm-12">
-                                                                                                    <textarea class="form-control" name="accrealizada_acc" value="" rows="2"></textarea>
-                                                                                                </div>
-
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
                                                                         </div>
 
-                                                                        <div class="card card-outline card-primary" id="headingthree">
-                                                                            <div class="card-header">
-                                                                                <h3 class="card-title"><i class="bi bi-geo-alt-fill" style="text-align: left;"></i> 3. Seguimiento</h3>
-                                                                                <div class="card-tools">
-                                                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                                        <i class="fas fa-minus"></i>
-                                                                                    </button>
-                                                                                </div>
-
-                                                                                <div class="row">
-
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div id="collapseThree" class="collapse" aria-labelledby="headingthree">
-                                                                                <div class="card-body">
-                                                                                    <div class="row">
-                                                                                        <div class="col-sm-4">
-                                                                                            <div class="form-group row">
-
-                                                                                                <label for="fechaprevista_acc" class="col-form-label col-sm-6">Fecha cierre prevista:</label>
-                                                                                                <div class="col-sm-6">
-                                                                                                    <input type="date" name="fechaprevista_acc" id="fechaprevista_acc" value="" class="form-control" tabindex="1">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-
-
-
-                                                                                        <div class="col-sm-4">
-                                                                                            <div class="form-group row">
-
-                                                                                                <label for="fechaprevista_acc" class="col-form-label col-sm-6">Fecha cierre real:</label>
-                                                                                                <div class="col-sm-6">
-                                                                                                    <input type="date" name="fecharea_acc" id="fecharea_acc" value="" class="form-control" tabindex="1">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-
-
-                                                                                        <div class="col-sm-4">
-                                                                                            <div class="form-group row">
-
-                                                                                                <label for="fechaveri_acc" class="col-form-label col-sm-6">Fecha verificación:</label>
-                                                                                                <div class="col-sm-6">
-                                                                                                    <input type="date" name="fechaveri_acc" id="fechaveri_acc" value="<?php echo $fechaveri_acc ?>" class="form-control" tabindex="1">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-sm-4">
-                                                                                            <div class="form-group row">
-                                                                                                <label for="recursos_acc" class="col-form-label col-sm-5">Recursos (Eur):</label>
-                                                                                                <div class="col-sm-4">
-                                                                                                    <input type="text" name="recursos_acc" id="" value="" class="form-control" tabindex="1">
-                                                                                                </div>
-
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-sm-4">
-                                                                                            <div class="form-group row">
-                                                                                                <label for="avance_acc" class="col-form-label col-sm-3">Avance:</label>
-                                                                                                <div class="col-sm-6">
-                                                                                                    <select class="form-select" name="avance_acc" aria-label="Default select example">
-                                                                                                        <option value="-">-</option>
-
-                                                                                                        <option value="0%">0%</option>
-                                                                                                        <option value="25%">25%</option>
-                                                                                                        <option value="50%">50%</option>
-                                                                                                        <option value="85%">85%</option>
-                                                                                                        <option value="100%">100%</option>
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-sm-4">
-                                                                                            <div class="form-group row">
-                                                                                                <label for="estado_acc" class="col-form-label col-sm-3">Estado:</label>
-                                                                                                <div class="col-sm-7">
-                                                                                                    <select class="form-select" name="estado_acc" aria-label="Default select example">
-                                                                                                        <option value="-">-</option>
-
-                                                                                                        <option value="Abierta">Abierta</option>
-                                                                                                        <option value="Comunicada">Comunicada</option>
-                                                                                                        <option value="En curso">En curso</option>
-                                                                                                        <option value="Finalizada">Finalizada</option>
-                                                                                                        <option value="Cerrada">Cerrada</option>
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-
-
-                                                                                    </div>
-                                                                                    <hr>
-                                                                                    <div class="row">
+                                                                    </div>
+                                                                    <div id="collapseTwo" class="collapse" aria-labelledby="collapseTwo">
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="form-group row">
+                                                                                        <label for="accpropuesta_acc" class="col-form-label col-sm-2">Accion propuesta:</label>
                                                                                         <div class="col-sm-12">
-                                                                                            <div class="form-group row">
-                                                                                                <label for="seguimiento_acc" class="col-form-label col-sm-3">Seguimiento acción: (fecha y detalles)</label>
-                                                                                                <div class="col-sm-9">
-                                                                                                    <textarea class="form-control" name="seguimiento_acc" value="" rows="4"></textarea>
-                                                                                                </div>
-                                                                                            </div>
+                                                                                            <textarea class="form-control" name="accpropuesta_acc" value="" rows="2"></textarea>
                                                                                         </div>
-
 
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
+                                                                            <div class="row">
 
 
 
-                                                                        <div class="card card-outline card-primary" id="headingfour">
-                                                                            <div class="card-header">
-                                                                                <h3 class="card-title"><i class="bi bi-plus-square-fill" style="text-align: left;"></i> 4. Comentarios y imagenes</h3>
-                                                                                <div class="card-tools">
-                                                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                                                        <i class="fas fa-minus"></i>
-                                                                                    </button>
-                                                                                </div>
                                                                             </div>
-                                                                            <div id="collapseFour" class="collapse" aria-labelledby="headingfour">
-                                                                                <div class="card-body">
-                                                                                    <div class="row">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="form-group row">
+                                                                                        <label for="accrealizada_acc" class="col-form-label col-sm-2">Acción realizada:</label>
                                                                                         <div class="col-sm-12">
-                                                                                            <div class="form-group row">
-                                                                                                <label for="accrealizada_acc" class="col-form-label col-sm-6">Comentarios y anotaciones:</label>
-                                                                                                <div class="col-sm-12">
-                                                                                                    <textarea class="form-control" name="accrealizada_acc" value="" rows="2"></textarea>
-                                                                                                </div>
-
-                                                                                            </div>
+                                                                                            <textarea class="form-control" name="accrealizada_acc" value="" rows="2"></textarea>
                                                                                         </div>
 
                                                                                     </div>
-
-
-                                                                                    <div class="row">
-                                                                                        <div class="col-sm-6">
-                                                                                            <div class="form-group row">
-                                                                                                <div class="col-md-8">
-                                                                                                    <label for="">Imagen 1 </label>
-                                                                                                    <input type="file" name="imagen1_acc" class="form-control" id="file1">
-                                                                                                    <br>
-                                                                                                    <output id="list1">
-                                                                                                    </output>
-                                                                                                    <script>
-                                                                                                        function archivo1(evt) {
-                                                                                                            var files = evt.target.files; // FileList object
-                                                                                                            // Obtenemos la imagen del campo "file1".
-                                                                                                            for (var i = 0, f; f = files[i]; i++) {
-                                                                                                                //Solo admitimos imágenes.
-                                                                                                                if (!f.type.match('image.*')) {
-                                                                                                                    continue;
-                                                                                                                }
-                                                                                                                var reader = new FileReader();
-                                                                                                                reader.onload = (function(theFile) {
-                                                                                                                    return function(e) {
-                                                                                                                        // Insertamos la imagen
-                                                                                                                        document.getElementById("list1").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
-                                                                                                                    };
-                                                                                                                })(f);
-                                                                                                                reader.readAsDataURL(f);
-                                                                                                            }
-                                                                                                        }
-                                                                                                        document.getElementById('file1').addEventListener('change', archivo1, false);
-                                                                                                    </script>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <div class="col-sm-6">
-                                                                                            <div class="form-group row">
-                                                                                                <div class="col-md-8">
-                                                                                                    <label for="">Imagen 2 </label>
-                                                                                                    <input type="file" name="imagen2_acc" class="form-control" id="file2">
-                                                                                                    <br>
-                                                                                                    <output id="list2">
-                                                                                                    </output>
-                                                                                                    <script>
-                                                                                                        function archivo2(evt) {
-                                                                                                            var files = evt.target.files; // FileList object
-                                                                                                            // Obtenemos la imagen del campo "file2".
-                                                                                                            for (var i = 0, f; f = files[i]; i++) {
-                                                                                                                //Solo admitimos imágenes.
-                                                                                                                if (!f.type.match('image.*')) {
-                                                                                                                    continue;
-                                                                                                                }
-                                                                                                                var reader = new FileReader();
-                                                                                                                reader.onload = (function(theFile) {
-                                                                                                                    return function(e) {
-                                                                                                                        // Insertamos la imagen
-                                                                                                                        document.getElementById("list2").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
-                                                                                                                    };
-                                                                                                                })(f);
-                                                                                                                reader.readAsDataURL(f);
-                                                                                                            }
-                                                                                                        }
-                                                                                                        document.getElementById('file2').addEventListener('change', archivo2, false);
-                                                                                                    </script>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                    </div>
-
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <hr>
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <a href="" class="btn btn-secondary">Cancelar</a>
-                                                                    <input type="submit" class="btn btn-primary" value="Guardar">
+
+                                                                <div class="card card-outline card-primary" id="headingthree">
+                                                                    <div class="card-header">
+                                                                        <h3 class="card-title"><i class="bi bi-geo-alt-fill" style="text-align: left;"></i> 3. Seguimiento</h3>
+                                                                        <div class="card-tools">
+                                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                                <i class="fas fa-minus"></i>
+                                                                            </button>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div id="collapseThree" class="collapse" aria-labelledby="headingthree">
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="form-group row">
+
+                                                                                        <label for="fechaprevista_acc" class="col-form-label col-sm-6">Fecha cierre prevista:</label>
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="date" name="fechaprevista_acc" id="fechaprevista_acc" value="" class="form-control" tabindex="1">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+
+
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="form-group row">
+
+                                                                                        <label for="fechaprevista_acc" class="col-form-label col-sm-6">Fecha cierre real:</label>
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="date" name="fecharea_acc" id="fecharea_acc" value="" class="form-control" tabindex="1">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="form-group row">
+
+                                                                                        <label for="fechaveri_acc" class="col-form-label col-sm-6">Fecha verificación:</label>
+                                                                                        <div class="col-sm-6">
+                                                                                            <input type="date" name="fechaveri_acc" id="fechaveri_acc" value="<?php echo $fechaveri_acc ?>" class="form-control" tabindex="1">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="form-group row">
+                                                                                        <label for="recursos_acc" class="col-form-label col-sm-5">Recursos (Eur):</label>
+                                                                                        <div class="col-sm-4">
+                                                                                            <input type="text" name="recursos_acc" id="" value="" class="form-control" tabindex="1">
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="form-group row">
+                                                                                        <label for="avance_acc" class="col-form-label col-sm-3">Avance:</label>
+                                                                                        <div class="col-sm-6">
+                                                                                            <select class="form-select" name="avance_acc" aria-label="Default select example">
+                                                                                                <option value="-">-</option>
+
+                                                                                                <option value="0%">0%</option>
+                                                                                                <option value="25%">25%</option>
+                                                                                                <option value="50%">50%</option>
+                                                                                                <option value="85%">85%</option>
+                                                                                                <option value="100%">100%</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="form-group row">
+                                                                                        <label for="estado_acc" class="col-form-label col-sm-3">Estado:</label>
+                                                                                        <div class="col-sm-7">
+                                                                                            <select class="form-select" name="estado_acc" aria-label="Default select example">
+                                                                                                <option value="-">-</option>
+
+                                                                                                <option value="Abierta">Abierta</option>
+                                                                                                <option value="Comunicada">Comunicada</option>
+                                                                                                <option value="En curso">En curso</option>
+                                                                                                <option value="Finalizada">Finalizada</option>
+                                                                                                <option value="Cerrada">Cerrada</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                            <hr>
+                                                                            <div class="row">
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="form-group row">
+                                                                                        <label for="seguimiento_acc" class="col-form-label col-sm-3">Seguimiento acción: (fecha y detalles)</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <textarea class="form-control" name="seguimiento_acc" value="" rows="4"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <div class="card card-outline card-primary" id="headingfour">
+                                                                    <div class="card-header">
+                                                                        <h3 class="card-title"><i class="bi bi-plus-square-fill" style="text-align: left;"></i> 4. Comentarios y imagenes</h3>
+                                                                        <div class="card-tools">
+                                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                                <i class="fas fa-minus"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="collapseFour" class="collapse" aria-labelledby="headingfour">
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="form-group row">
+                                                                                        <label for="accrealizada_acc" class="col-form-label col-sm-6">Comentarios y anotaciones:</label>
+                                                                                        <div class="col-sm-12">
+                                                                                            <textarea class="form-control" name="accrealizada_acc" value="" rows="2"></textarea>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+
+                                                                            <div class="row">
+                                                                                <div class="col-sm-6">
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-md-8">
+                                                                                            <label for="">Imagen 1 </label>
+                                                                                            <input type="file" name="imagen1_acc" class="form-control" id="file1">
+                                                                                            <br>
+                                                                                            <output id="list1">
+                                                                                            </output>
+                                                                                            <script>
+                                                                                                function archivo1(evt) {
+                                                                                                    var files = evt.target.files; // FileList object
+                                                                                                    // Obtenemos la imagen del campo "file1".
+                                                                                                    for (var i = 0, f; f = files[i]; i++) {
+                                                                                                        //Solo admitimos imágenes.
+                                                                                                        if (!f.type.match('image.*')) {
+                                                                                                            continue;
+                                                                                                        }
+                                                                                                        var reader = new FileReader();
+                                                                                                        reader.onload = (function(theFile) {
+                                                                                                            return function(e) {
+                                                                                                                // Insertamos la imagen
+                                                                                                                document.getElementById("list1").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                                                                                            };
+                                                                                                        })(f);
+                                                                                                        reader.readAsDataURL(f);
+                                                                                                    }
+                                                                                                }
+                                                                                                document.getElementById('file1').addEventListener('change', archivo1, false);
+                                                                                            </script>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-sm-6">
+                                                                                    <div class="form-group row">
+                                                                                        <div class="col-md-8">
+                                                                                            <label for="">Imagen 2 </label>
+                                                                                            <input type="file" name="imagen2_acc" class="form-control" id="file2">
+                                                                                            <br>
+                                                                                            <output id="list2">
+                                                                                            </output>
+                                                                                            <script>
+                                                                                                function archivo2(evt) {
+                                                                                                    var files = evt.target.files; // FileList object
+                                                                                                    // Obtenemos la imagen del campo "file2".
+                                                                                                    for (var i = 0, f; f = files[i]; i++) {
+                                                                                                        //Solo admitimos imágenes.
+                                                                                                        if (!f.type.match('image.*')) {
+                                                                                                            continue;
+                                                                                                        }
+                                                                                                        var reader = new FileReader();
+                                                                                                        reader.onload = (function(theFile) {
+                                                                                                            return function(e) {
+                                                                                                                // Insertamos la imagen
+                                                                                                                document.getElementById("list2").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
+                                                                                                            };
+                                                                                                        })(f);
+                                                                                                        reader.readAsDataURL(f);
+                                                                                                    }
+                                                                                                }
+                                                                                                document.getElementById('file2').addEventListener('change', archivo2, false);
+                                                                                            </script>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </form>
+                                                        </div>
                                                     </div>
-                                                </div>
-
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <a href="" class="btn btn-secondary">Cancelar</a>
+                                                            <input type="submit" class="btn btn-primary" value="Guardar">
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-
-                                            <!--fin modal-->
-
-
                                         </div>
-
-
 
                                     </div>
-                                </td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-                    </tbody>
-                    <!-- Modal para editar la medida -->
-                    <div class="modal fade" id="editMedidaModal" tabindex="-1" aria-labelledby="editMedidaModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="editMedidaModalLabel">Editar Medida</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                    <!--fin modal-->
+
+
                                 </div>
-                                <div class="modal-body">
-                                    <form id="editMedidaForm">
-                                        <input type="hidden" name="id_medida" id="id_medida">
-
-                                        <div class="mb-3">
-                                            <label for="codigomedida" class="form-label">Código Medida</label>
-                                            <input type="text" class="form-control" id="codigomedida" name="codigomedida" required>
-                                        </div>
 
 
-                                        <div class="mb-3">
-                                            <label for="frasemedida" class="form-label">Frase Medida</label>
-                                            <textarea class="form-control" id="frasemedida" name="frasemedida" rows="10" required></textarea>
-                                        </div>
 
-                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                                    </form>
-                                </div>
                             </div>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+            <!-- Modal para editar la medida -->
+            <div class="modal fade" id="editMedidaModal" tabindex="-1" aria-labelledby="editMedidaModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editMedidaModalLabel">Editar Medida</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editMedidaForm">
+                                <input type="hidden" name="id_medida" id="id_medida">
+
+                                <div class="mb-3">
+                                    <label for="codigomedida" class="form-label">Código Medida</label>
+                                    <input type="text" class="form-control" id="codigomedida" name="codigomedida" required>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label for="frasemedida" class="form-label">Frase Medida</label>
+                                    <textarea class="form-control" id="frasemedida" name="frasemedida" rows="10" required></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                            </form>
                         </div>
                     </div>
-
-
-
-
-
-                </table>
+                </div>
             </div>
 
-        </div>
+
+
+
+
+        </table>
     </div>
+
+</div>
+</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -2401,8 +2427,11 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
             placeholder: "Seleccione", // Esto añade el texto placeholder
             allowClear: true,
             width: '100%' // Asegura que el Select2 ocupe el 100% del ancho de su contenedor
+
         });
     });
+
+
 
     document.getElementById('openNewTabButton').addEventListener('click', function() {
         // Definir las dimensiones de la nueva ventana

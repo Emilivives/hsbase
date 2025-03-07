@@ -10,7 +10,7 @@ $puestocentro_fer = isset($_POST['puestocentro_fer']) ? $_POST['puestocentro_fer
 if (isset($_FILES['imgriesgo_fer']) && $_FILES['imgriesgo_fer']['error'] == UPLOAD_ERR_OK) {
     $nombreDelArchivo = date("Y-m-d-h-i-s");
     $filename = $nombreDelArchivo . "__" . $_FILES['imgriesgo_fer']['name'];
-    $location = "../../../admin/pruebas/image/" . $filename;
+    $location = "../../../admin/evaluacion/image/" . $filename;
     move_uploaded_file($_FILES['imgriesgo_fer']['tmp_name'], $location);
 } else {
     // Mantener la imagen de riesgo existente si no se ha subido una nueva
@@ -21,7 +21,7 @@ if (isset($_FILES['imgriesgo_fer']) && $_FILES['imgriesgo_fer']['error'] == UPLO
 if (isset($_FILES['imgplan_fer']) && $_FILES['imgplan_fer']['error'] == UPLOAD_ERR_OK) {
     $nombreDelArchivo = date("Y-m-d-h-i-s");
     $filename2 = $nombreDelArchivo . "__" . $_FILES['imgplan_fer']['name'];
-    $location2 = "../../../admin/pruebas/image/" . $filename2;
+    $location2 = "../../../admin/evaluacion/image/" . $filename2;
     move_uploaded_file($_FILES['imgplan_fer']['tmp_name'], $location2);
 } else {
     // Mantener la imagen preventiva existente si no se ha subido una nueva
@@ -51,7 +51,7 @@ try {
     session_start();
     $_SESSION['mensaje'] = "Imágenes actualizadas correctamente";
     $_SESSION['icono'] = 'success';
-    header("Location: " . $URL . "/admin/pruebas/show_puestoarea.php?id_puestocentro=$puestocentro_fer&id_evaluacion=$id_evaluacion");
+    header("Location: " . $URL . "/admin/evaluacion/show_puestoarea.php?id_puestocentro=$puestocentro_fer&id_evaluacion=$id_evaluacion");
     exit();
 
 } catch (PDOException $e) {
@@ -59,7 +59,7 @@ try {
     session_start();
     $_SESSION['mensaje'] = "Error en la base de datos: " . $e->getMessage();
     $_SESSION['icono'] = 'warning';
-    header("Location: " . $URL . "/admin/pruebas/show_puestoarea.php?id_puestocentro=$puestocentro_fer&id_evaluacion=$id_evaluacion");
+    header("Location: " . $URL . "/admin/evaluacion/show_puestoarea.php?id_puestocentro=$puestocentro_fer&id_evaluacion=$id_evaluacion");
     exit();
 
 } catch (Exception $e) {
@@ -67,7 +67,7 @@ try {
     session_start();
     $_SESSION['mensaje'] = "Error inesperado: " . $e->getMessage();
     $_SESSION['icono'] = 'warning';
-    header("Location: " . $URL . "/admin/pruebas/show_puestoarea.php?id_puestocentro=$puestocentro_fer&id_evaluacion=$id_evaluacion");
+    header("Location: " . $URL . "/admin/evaluacion/show_puestoarea.php?id_puestocentro=$puestocentro_fer&id_evaluacion=$id_evaluacion");
     exit();
 }
 ?>

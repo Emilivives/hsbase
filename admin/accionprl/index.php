@@ -1,5 +1,19 @@
 <?php
+session_start();
 include('../../app/config.php');
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['sesion_email'])) {
+    header('Location: ' . $URL . '/login.php');
+    exit();
+}
+
+// Verificar si el usuario tiene permiso para acceder a esta página
+if ($_SESSION['perfil_usr'] !== 'ADMINISTRADOR' && $_SESSION['perfil_usr'] !== 'USUARIO_PRL') {
+    // Si el usuario no es administrador, redirigirlo a su dashboard de usuario
+    header('Location: ' . $URL . '/admin/acceso_nopermitido.php');
+    exit();
+}
 include('../../admin/layout/parte1.php');
 include('../../app/controllers/pruebas/listado_trabajadores.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
@@ -21,6 +35,36 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
     .btn-font-size {
         font-size: 12px;
     }
+
+    .btn-small {
+        font-size: 0.8rem;
+        /* Tamaño de fuente más pequeño */
+        padding: 0.2rem 0.4rem;
+        /* Tamaño de relleno más pequeño */
+        border-radius: 0.2rem;
+        /* Radio de borde pequeño */
+        line-height: 1;
+        /* Ajustar la altura de línea para un tamaño de botón más pequeño */
+        }
+
+        .small-box {
+            padding: 7px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .small-box .inner {
+            padding: 0;
+        }
+        .small-box h2 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        .small-box p {
+            font-size: 0.8rem;
+            margin: 0;
+        }
+     
+
 </style>
 
 
@@ -47,87 +91,50 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
 
 <div class="row">
-    <div class="col-lg-2 col-6">
-        <!-- small box -->
-        <div class="small-box bg-light shadow-sm border">
-            <div class="inner">
-                <?php
-                $fechahoraentera = strtotime($fechahora);
-                $anio = date("Y", $fechahoraentera);
-                $contador_de_acciones = 0;
-                foreach ($accionprl_datos as $accionprl_dato) {
-                    if ((date("Y", strtotime($accionprl_dato['fecha_acc'])) == $anio)) {
-                        $contador_de_acciones = $contador_de_acciones + 1;
+        <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <div class="small-box bg-light shadow-sm border">
+                <div class="inner">
+                    <?php
+                    $fechahoraentera = strtotime($fechahora);
+                    $anio = date("Y", $fechahoraentera);
+                    $contador_de_acciones = 0;
+                    foreach ($accionprl_datos as $accionprl_dato) {
+                        if ((date("Y", strtotime($accionprl_dato['fecha_acc'])) == $anio)) {
+                            $contador_de_acciones = $contador_de_acciones + 1;
+                        }
                     }
-                }
-                ?>
-
-                <h2><?php echo $contador_de_acciones; ?><sup style="font-size: 20px"></h2>
-                <p>Acciones Preventivas en <?php echo  $anio ?></p>
+                    ?>
+                    <h2><?php echo $contador_de_acciones; ?><sup style="font-size: 20px"></sup></h2>
+                    <p>Acciones Preventivas en <?php echo $anio; ?></p>
+                </div>
+                
             </div>
-            <div class="icon">
-                <i class="fa-solid fa-list"></i>
-            </div>
-
         </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-1 col-6">
-        <!-- small box -->
-        <div class="small-box bg-light shadow-sm border">
-            <div class="inner">
-                <?php
-                $fechahoraentera = strtotime($fechahora);
-                $anio = date("Y", $fechahoraentera);
-                $contador_de_acciones_abiertas = 0;
-                foreach ($accionprl_datos as $accionprl_dato) {
-                    if ($accionprl_dato['estado_acc'] != 'Cerrada') {
-                        $contador_de_acciones_abiertas = $contador_de_acciones_abiertas + 1;
+        <!-- ./col -->
+        <div class="col-lg-1 col-6">
+            <!-- small box -->
+            <div class="small-box bg-light shadow-sm border">
+                <div class="inner">
+                    <?php
+                    $fechahoraentera = strtotime($fechahora);
+                    $anio = date("Y", $fechahoraentera);
+                    $contador_de_acciones_abiertas = 0;
+                    foreach ($accionprl_datos as $accionprl_dato) {
+                        if ($accionprl_dato['estado_acc'] != 'Cerrada') {
+                            $contador_de_acciones_abiertas = $contador_de_acciones_abiertas + 1;
+                        }
                     }
-                }
-                ?>
-
-                <h2><?php echo $contador_de_acciones_abiertas; ?><sup style="font-size: 20px"></h2>
-                <p>Acciones abiertas</p>
-            </div>
-            <div class="icon">
-                <i class="fa-solid fa-clock"></i>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box">
-            <div class="inner">
-                <h2>44</h2>
-
-                <p>User Registrations</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-person-add"></i>
+                    ?>
+                    <h2><?php echo $contador_de_acciones_abiertas; ?><sup style="font-size: 20px"></sup></h2>
+                    <p>Acciones abiertas</p>
+                </div>
+              
             </div>
         </div>
+        <!-- ./col -->
     </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box">
-            <div class="inner">
-                <h2>65</h2>
 
-                <p>Unique Visitors</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-
-        </div>
-    </div>
-    <!-- ./col -->
-</div>
 <!-- /.content-header -->
 
 <div class="row">
@@ -177,7 +184,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                 <div class="form-group row">
                                                     <label for="nombre" class="col-form-label col-sm-3">Fecha:</label>
                                                     <div class="col-sm-5">
-                                                        <input type="date" name="fecha_acc" id="fecha_acc" value="" class="form-control" tabindex="1">
+                                                        <input type="date" name="fecha_acc" id="fecha_acc" value="" class="form-control" tabindex="1" required>
                                                     </div>
                                                 </div>
 
@@ -508,6 +515,9 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                         <div class="col-md-8">
                                                                             <label for="">Imagen 1 </label>
                                                                             <input type="file" name="imagen1_acc" class="form-control" id="file1">
+                                                                            <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" role="button" target="_blank">
+                                                                                Max. 1Mb
+                                                                            </a>
                                                                             <br>
                                                                             <output id="list1">
                                                                             </output>
@@ -535,12 +545,15 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                          
+
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group row">
                                                                         <div class="col-md-8">
                                                                             <label for="">Imagen 2 </label>
                                                                             <input type="file" name="imagen2_acc" class="form-control" id="file2">
+                                                                            <a href="https://www.iloveimg.com/es/comprimir-imagen/comprimir-jpg" class="btn btn-outline-danger btn-small" role="button" target="_blank">
+                                                                                Max. 1Mb
+                                                                            </a>
                                                                             <br>
                                                                             <output id="list2">
                                                                             </output>
@@ -596,40 +609,79 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                 </div>
 
                 <div class="card-body">
-                    <table id="example1" class="table tabe-hover table-condensed">
+                    <table id="example1" class="table table-hover table-condensed">
                         <colgroup>
                             <col width="3%">
-                            <col width="4%">
-                            <col width="4%">
-                            <col width="4%">
-                            <col width="7%">
-                            <col width="12%">
-                            <col width="5%">
-                            <col width="12%">
-                            <col width="5%">
-                            <col width="5%">
                             <col width="5%">
                             <col width="3%">
-
-
+                            <col width="3%">
+                            <col width="7%">
+                            <col width="25%">
+                            <col width="5%">
+                            <col width="15%">
+                            <col width="4%">
+                            <col width="3%">
+                            <col width="3%">
+                            <col width="3%">
                         </colgroup>
                         <thead class="table-dark">
                             <tr>
-                                <th style="text-align: center">#</th>
                                 <th style="text-align: left">Codigo</th>
                                 <th style="text-align: left">Fecha</th>
                                 <th style="text-align: center">Prioridad</th>
+                                <th style="text-align: center">Empresa</th>
                                 <th style="text-align: left">Centro</th>
                                 <th style="text-align: left">Descripción</th>
                                 <th style="text-align: left">Responsable</th>
                                 <th style="text-align: left">Medida</th>
-                                <th style="text-align: left">Fecha prevista</th>
-                                <th style="text-align: left">Fecha realizada</th>
+                                <th style="text-align: left">Realizada</th>
                                 <th style="text-align: left">Estado</th>
-                                <th style="text-align: left">ACCIONES
-
+                                <th style="text-align: left">Avance</th>
+                                <th style="text-align: left">ACCIONES</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th><input type="text" placeholder="Filtrar Código" /></th>
+                                <th><input type="text" placeholder="Filtrar Fecha" /></th>
+                                <th>
+                                    <select>
+                                        <option value="">Todos</option>
+                                        <option value="Baja">Baja</option>
+                                        <option value="Media">Media</option>
+                                        <option value="Alta">Alta</option>
+                                        <option value="Urgente">Urgente</option>
+                                    </select>
+                                </th>
+                                <th><input type="text" placeholder="Filtrar empresa" /></th>
+                                <th><input type="text" placeholder="Filtrar Centro" /></th>
+                                <th><input type="text" placeholder="Filtrar Descripción" /></th>
+                                <th><input type="text" placeholder="Filtrar Responsable" /></th>
+                                <th><input type="text" placeholder="Filtrar Medida" /></th>
+                                <th><input type="text" placeholder="Filtrar Fecha" /></th>
+                                <th>
+                                    <select>
+                                        <option value="">Todos</option>
+                                        <option value="Cerrada">Cerrada</option>
+                                        <option value="En curso">En curso</option>
+                                        <option value="Comunicada">Comunicada</option>
+                                        <option value="Abierta">Abierta</option>
+                                        <option value="Finalizada">Finalizada</option>
+                                    </select>
+                                </th>
+                                <th>
+                                    <select>
+                                        <option value="">Todos</option>
+                                        <option value="0%">0%</option>
+                                        <option value="25%">25%</option>
+                                        <option value="50%">50%</option>
+                                        <option value="85%">85%</option>
+                                        <option value="100%">100%</option>
+                                    </select>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
                         <tbody>
                             <?php
                             $contador = 0;
@@ -637,9 +689,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                 $contador = $contador + 1;
                                 $id_accion = $accionprl_dato['id_accion'];
                             ?>
-
                                 <tr>
-                                    <td style="text-align: center"><b><?php echo $contador; ?></b></td>
                                     <td style="text-align: left"><b><?php echo $accionprl_dato['codigo_acc']; ?></b></td>
                                     <td style="text-align: left"><b><?php echo $accionprl_dato['fecha_acc']; ?></b></td>
                                     <td style="text-align: center"><?php $accionprl_dato['prioridad_acc']; ?>
@@ -654,16 +704,14 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                             <span class='badge badge-danger'>Urgente</span>
                                         <?php                       }
                                         ?>
-
-
                                     </td>
+                                    <td style="text-align: left"><?php echo $accionprl_dato['nombre_emp']; ?></td>
+
                                     <td style="text-align: left"><?php echo $accionprl_dato['nombre_cen']; ?></td>
                                     <td style="text-align: left"><?php echo $accionprl_dato['descripcion_acc']; ?></td>
                                     <td style="text-align: left"><?php echo $accionprl_dato['nombre_resp']; ?></td>
                                     <td style="text-align: left"><?php echo $accionprl_dato['accpropuesta_acc']; ?></td>
-                                    <td style="text-align: left"><?php echo $accionprl_dato['fechaprevista_acc']; ?></td>
                                     <td style="text-align: left"><?php echo $accionprl_dato['fecharea_acc']; ?></td>
-
                                     <td style="text-align: left"><?php $accionprl_dato['estado_acc']; ?>
                                         <?php if ($accionprl_dato['estado_acc'] == "Cerrada") { ?>
                                             <span class='badge badge-success'>Cerrada</span>
@@ -678,29 +726,42 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                             <span class='badge badge-primary'>Finalizada</span>
                                         <?php                       }
                                         ?>
-
-
                                     </td>
-
-
-                                    <td style="text-align: center">
+                                    <td style="text-align: left"><?php $accionprl_dato['avance_acc']; ?>
+                                        <?php if ($accionprl_dato['avance_acc'] == "0%") { ?>
+                                            <span class='badge badge-danger'>0%</span>
+                                        <?php
+                                        } else if ($accionprl_dato['avance_acc'] == "25%") { ?>
+                                            <span class='badge badge-warning'>25%</span>
+                                        <?php                       } else if ($accionprl_dato['avance_acc'] == "50%") { ?>
+                                            <span class='badge badge-primary'>50%</span>
+                                        <?php                       } else if ($accionprl_dato['avance_acc'] == "85%") { ?>
+                                            <span class='badge badge-info'>85%</span>
+                                        <?php                       } else if ($accionprl_dato['avance_acc'] == "100%") { ?>
+                                            <span class='badge badge-success'>100%</span>
+                                        <?php                       }
+                                        ?>
+                                    </td>
+                                    <td style="text-align: left">
                                         <div class="dropdown">
-                                            <a href="show.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-warning btn-sm" title="Accede"> <i class="bi bi-folder"></i> Ver</a></a>
-                                            <a href="../../app/controllers/actividad/delete_accion.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar la accion PRL?')" title="Eliminar Accion PRL"><i class="bi bi-trash-fill"></i></a>
+                                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Acciones
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="show.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-warning btn-sm" title="Accede"> <i class="bi bi-folder"></i> Ver</a></a>
+                                                <a class="dropdown-item" href="../../app/controllers/actividad/delete_accion.php?id_accion=<?php echo $id_accion; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar la evalucion PRL?')" title="Eliminar Evaluacion PRL"><i class="bi bi-trash-fill"></i> Eliminar</a>
+                                                <a class="dropdown-item" href="reporte.php?id_accion=<?php echo $id_accion; ?>" target="_blank"><i class="bi bi-printer"></i> Imprimir</a>
+                                            </div>
                                         </div>
-
                                     </td>
-
                                 </tr>
                             <?php
                             }
                             ?>
-
                         </tbody>
-
                     </table>
-
                 </div>
+
 
             </div>
         </div>
@@ -712,28 +773,17 @@ include('../../admin/layout/parte2.php');
 include('../../admin/layout/mensaje.php');
 ?>
 
-<!--<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>-->
+
 
 <script>
     $(function() {
-        $("#example1").DataTable({
+        // Configuración de DataTables con filtros por columna
+        var table = $("#example1").DataTable({
             "pageLength": 5,
+            "order": [
+                [1, 'desc'],
+                [0, 'desc']
+            ],
             "language": {
                 "emptyTable": "No hay información",
                 "info": "Mostrando _START_ a _END_ de _TOTAL_ Acciones PRL",
@@ -756,16 +806,35 @@ include('../../admin/layout/mensaje.php');
             "responsive": true,
             "lengthChange": true,
             "autoWidth": false,
+            // Inicializamos los filtros por columna
+            initComplete: function() {
+                // Aplicar búsqueda por columna
+                this.api().columns().every(function(index) {
+                    var column = this;
+                    var input = $('tfoot th:eq(' + index + ') input, tfoot th:eq(' + index + ') select');
+
+                    // No configuramos el filtro para la columna de acciones
+                    if (index === 10) return;
+
+                    input.on('keyup change', function() {
+                        column
+                            .search($(this).val())
+                            .draw();
+                    });
+                });
+            },
             buttons: [{
                     extend: "collection",
                     text: "Reportes",
-                    orientation: "landscape",
                     buttons: [{
                             text: "Copiar",
                             extend: "copy"
                         },
                         {
-                            extend: "pdf"
+                            extend: "pdf",
+                            orientation: "landscape",
+                            pageSize: "A4",
+                            title: "ACCIONES PREVENTIVAS - CORRECTORAS"
                         },
                         {
                             extend: "csv"
@@ -775,17 +844,39 @@ include('../../admin/layout/mensaje.php');
                         },
                         {
                             text: "Imprimir",
-                            extend: "print"
+                            extend: "print",
+                            orientation: "landscape",
+                            pageSize: "A4"
                         }
                     ]
                 },
                 {
                     extend: "colvis",
                     text: "Visor de columnas",
-                    /*collectionLayout: "fixed three-column" */
-
+                    orientation: "landscape"
                 }
             ],
         }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
+
+        // Estilos para los filtros
+        $("#example1 tfoot th").each(function() {
+            $(this).css('padding', '10px 5px');
+        });
+
+        $("#example1 tfoot input").css({
+            'width': '100%',
+            'font-size': '12px',
+            'border': '4px solid #ddd',
+            'border-radius': '4px',
+            'padding': '5px'
+        });
+
+        $("#example1 tfoot select").css({
+            'width': '100%',
+            'font-size': '12px',
+            'border': '4px solid #ddd',
+            'border-radius': '4px',
+            'padding': '5px'
+        });
     });
 </script>

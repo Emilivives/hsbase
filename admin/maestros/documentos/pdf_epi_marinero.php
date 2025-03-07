@@ -38,7 +38,7 @@ foreach ($trabajador_datos as $trabajador_dato) {
 }
 
 
-
+$nombre_tr = mb_convert_encoding($nombre_tr, 'ISO-8859-1', 'UTF-8');
 ///// traer datos de accionprl
 
 $pdf = new FPDI();
@@ -49,7 +49,7 @@ $pdf->SetAutoPageBreak(false);
 
 # Pagina 1
 $pdf->AddPage();
-$pdf->setSourceFile('Files_Pdf/18_04_2024_epis-marinero.pdf');
+$pdf->setSourceFile('Files_Pdf/28_05_2024_epis-marinero.pdf');
 $tplIdx1 = $pdf->importPage(1);
 $pdf->useTemplate($tplIdx1); 
 $pdf->SetFont('Arial', '', '9'); 
@@ -77,11 +77,12 @@ $pdf->SetFont('Arial', 'B', '6');
 $pdf->SetXY(80, 282);
 $pdf->SetTextColor(255,255,255);
 $pdf->Write(10, $direccionemp_tr);
+
 // setFont ('B' - NEGRITA 
 //setFont ('I' - ITALICA 
 //setFont ('S' - SUBRAYA 
 
-$pdf->Output(''.$trabajador_dato['nombre_tr'].'_epis.pdf', 'D'); 
+$pdf->Output($nombre_tr.'_epis.pdf', 'D'); 
 //SALIDA DEL PDF
 
 //    $pdf->Output('original_update.pdf', 'F');

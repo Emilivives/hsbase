@@ -22,34 +22,22 @@ $evalconriesgo_ace = $_POST['evalconriesgo_ace'];
 $isrecaida_ace = $_POST['isrecaida_ace'];
 $fechaantesrecaida_ace = $_POST['fechaantesrecaida_ace'];
 $descripcion_ace = $_POST['descripcion_ace'];
-
-$tipolugar_ace = !empty($_POST['tipolugar_ace']) ? $_POST['tipolugar_ace'] : NULL;
-
+$tipolugar_ace = $_POST['tipolugar_ace'];
 $zonalugar_ace = $_POST['zonalugar_ace'];
 $observaclugar_ace = $_POST['observaclugar_ace'];
-
-$procesotrabajo_ace = !empty($_POST['procesotrabajo_ace']) ? $_POST['procesotrabajo_ace'] : NULL;
-
+$procesotrabajo_ace = $_POST['procesotrabajo_ace'];
 $observproceso_ace = $_POST['observproceso_ace'];
-
-$tipoactividad_ace = !empty($_POST['tipoactividad_ace']) ? $_POST['tipoactividad_ace'] : NULL;
-
+$tipoactividad_ace = $_POST['tipoactividad_ace'];
 $observtipoactiv_ace = $_POST['observtipoactiv_ace'];
-
-$agentematerial_ace = !empty($_POST['agentematerial_ace']) ? $_POST['agentematerial_ace'] : NULL;
-
+$agentematerial_ace = $_POST['agentematerial_ace'];
 $observagmaterial_ace = $_POST['observagmaterial_ace'];
-
-$desviacion_ace = !empty($_POST['desviacion_ace']) ? $_POST['desviacion_ace'] : NULL;
+$desviacion_ace = $_POST['desviacion_ace'];
 $observdesviacion_ace = $_POST['observdesviacion_ace'];
-
-$agmaterdesv_ace = !empty($_POST['agmaterdesv_ace']) ? $_POST['agmaterdesv_ace'] : NULL;
+$agmaterdesv_ace = $_POST['agmaterdesv_ace'];
 $observagendesv_ace = $_POST['observagendesv_ace'];
-
-$formacontacto_ace = !empty($_POST['formacontacto_ace']) ? $_POST['formacontacto_ace'] : NULL;
+$formacontacto_ace = $_POST['formacontacto_ace'];
 $observformacont_ace = $_POST['observformacont_ace'];
-
-$matercasusalesi_ace = !empty($_POST['matercasusalesi_ace']) ? $_POST['matercasusalesi_ace'] : NULL;
+$matercasusalesi_ace = $_POST['matercasusalesi_ace'];
 $observmatlesi_ace = $_POST['observmatlesi_ace'];
 $numtrafectados_ace = $_POST['numtrafectados_ace'];
 $declaraciontrab_ace = $_POST['declaraciontrab_ace'];
@@ -118,18 +106,15 @@ if (empty($fechainvestiga_ace)) {
 if (empty($fecharevision_ace)) {
     $fecharevision_ace = null;
 }
-if (empty($tipolugar_ace)) {
-    $tipolugar = null;
-}
+
 
 
 if (empty($hora_ace)) {
     $hora_ace = null;
 }
-if (empty($diasbaja_ace)) {
-    $diasbaja_ace = 0;
+if($diasbaja_ace = "-"){
+$diasbaja_ace = null;
 }
-
 if($numtrafectados_ace = "-"){
 $numtrafectados_ace = null;
 }

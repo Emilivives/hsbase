@@ -4,6 +4,7 @@ include('../../../app/config.php');
 
 $id_proyecto = $_POST['id_proyecto'];
 $nombre_py = $_POST['nombre_py'];
+$empresa_py = $_POST['empresa_py'];
 $responsable_py = $_POST['responsable_py'];
 $descripcion_py = $_POST['descripcion_py'];
 $estado_py = $_POST['estado_py'];
@@ -14,6 +15,7 @@ $fechafin_py = $_POST['fechafin_py'];
 $sentencia = $pdo->prepare("UPDATE ag_proyecto
 SET 
 nombre_py=:nombre_py, 
+empresa_py=:empresa_py,
 responsable_py=:responsable_py, 
 descripcion_py=:descripcion_py, 
 estado_py=:estado_py, 
@@ -22,6 +24,7 @@ fechafin_py=:fechafin_py
 WHERE id_proyecto =:id_proyecto");
 
 $sentencia->bindParam('id_proyecto', $id_proyecto);    
+$sentencia->bindParam('empresa_py', $empresa_py);    
 $sentencia->bindParam('nombre_py', $nombre_py);    
 $sentencia->bindParam('responsable_py', $responsable_py);
 $sentencia->bindParam('descripcion_py', $descripcion_py);

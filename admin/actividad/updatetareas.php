@@ -1,5 +1,19 @@
 <?php
+session_start();
 include('../../app/config.php');
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['sesion_email'])) {
+    header('Location: ' . $URL . '/login.php');
+    exit();
+}
+
+// Verificar si el usuario tiene permiso para acceder a esta página
+if ($_SESSION['perfil_usr'] !== 'ADMINISTRADOR' && $_SESSION['perfil_usr'] !== 'USUARIO_PRL') {
+    // Si el usuario no es administrador, redirigirlo a su dashboard de usuario
+    header('Location: ' . $URL . '/admin/acceso_nopermitido.php');
+    exit();
+}
 include('../../admin/layout/parte1.php');
 $id_tarea = $_GET['id_tarea'];
 $id_proyecto = $_GET['id_proyecto'];
@@ -57,6 +71,8 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                 <form action="../../app/controllers/actividad/update_tarea.php" method="post">
 
                     <div class="row">
+
+
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">Tarea <b>*</b></label>
@@ -118,8 +134,8 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                     foreach ($proyectos as $proyecto) {
                                         $proyecto_tabla = $proyecto['nombre_py'];
                                         $id_proyecto = $proyecto['id_proyecto']; ?>
-                                        <option value="<?php echo $id_proyecto; ?>" <?php if ($proyecto_tabla == $id_proyecto) { ?> selected="selected" <?php } ?>>
-                                            <?php echo  $proyecto_tabla; ?>
+                                        <option value="<?php echo $id_proyecto; ?>" <?php if ($id_proyecto == $id_proyecto1) { ?> selected="selected" <?php } ?>>
+                                            <?php echo $proyecto_tabla; ?>
                                         </option>
                                     <?php
                                     }
@@ -188,7 +204,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
                                 </select>
                             </div>
-                        
+
 
                             <div class="col-md-2">
                                 <label for="">Accion Preventiva </label>

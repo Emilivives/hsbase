@@ -1,5 +1,19 @@
 <?php
+session_start();
 include('../../app/config.php');
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['sesion_email'])) {
+    header('Location: ' . $URL . '/login.php');
+    exit();
+}
+
+// Verificar si el usuario tiene permiso para acceder a esta página
+if ($_SESSION['perfil_usr'] !== 'ADMINISTRADOR' && $_SESSION['perfil_usr'] !== 'USUARIO_PRL') {
+    // Si el usuario no es administrador, redirigirlo a su dashboard de usuario
+    header('Location: ' . $URL . '/admin/acceso_nopermitido.php');
+    exit();
+}
 include('../../admin/layout/parte1.php');
 $id_tarea = $_GET['id_tarea'];
 $id_proyecto1 = $_GET['id_proyecto'];
@@ -30,8 +44,8 @@ include('../../app/controllers/actividad/listado_actividades.php');
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                    <li class="breadcrumb-item">Actividades</a></li>
-                    <li class="breadcrumb-item"><a href="show.php?id_proyecto=<?php echo $id_proyecto1 ?>">Proyectos</a></li>
+                    <li class="breadcrumb-item"><a href="#">Actividades</a></li>
+                    <li class="breadcrumb-item">Proyectos</li>
                     <li class="breadcrumb-item active">Tarea</li>
                 </ol>
             </div><!-- /.col -->
@@ -136,12 +150,16 @@ include('../../app/controllers/actividad/listado_actividades.php');
                         </dl>
                     </div>
                     <div class="col-md-1">
-                        <div class="row">
-                            <button type="button" class="btn btn-outline-warning btn-sm"><a href="updatetareas.php?id_tarea=<?php echo $id_tarea ?>&id_proyecto=<?php echo $id_proyecto1 ?>">Editar</a>
+
+                       <div class="row">
+                            <button type="button" class="btn btn-outline-warning btn-sm"><a href="updatetareas.php?id_tarea=<?php echo $id_tarea ?>&id_proyecto=<?php echo $id_proyecto1 ?>">Editar</a></button>
                         </div>
+						<br>
                         <div class="row">
-                            <button type="button" class="btn btn-outline-primary btn-sm"><a href="show.php?id_proyecto=<?php echo $id_proyecto1 ?>">Volver</a>
+                            <button type="button" class="btn btn-outline-primary btn-sm"><a href="show.php?id_proyecto=<?php echo $id_proyecto1 ?>"><i class="bi bi-box-arrow-right"></i> Volver</a></button>
+							   
                         </div>
+
                     </div>
 
                 </div>
@@ -195,12 +213,13 @@ include('../../app/controllers/actividad/listado_actividades.php');
                                             <div class="form-group">
                                                 <label for="">Tarea: <?php echo $id_tarea ?></label>
                                                 <input type="text" value="<?php echo $id_tarea ?>" name="id_tarea" class="form-control" hidden>
+												 
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Proyecto: <?php echo $id_proyecto ?></label>
-                                                <input type="text" value="<?php echo $id_proyecto ?>" name="id_proyecto" class="form-control" hidden>
+                                                <input type="text" value="<?php echo $id_proyecto1 ?>" name="id_proyecto" class="form-control" hidden>
                                             </div>
                                         </div>
                                     </div>
@@ -293,7 +312,7 @@ include('../../app/controllers/actividad/listado_actividades.php');
                         foreach ($actividades as $actividad) {
                             $contador = $contador + 1;
                             $id_actividad = $actividad['id_actividad'];
-
+                         
                         ?>
 
                             <tr>
@@ -304,25 +323,13 @@ include('../../app/controllers/actividad/listado_actividades.php');
                                 <td style="text-align: left"><?php echo $actividad['responsable_acc']; ?></td>
                                 <td style="text-align: left"><?php echo $actividad['detalles_acc']; ?></td>
                                 </td>
-
-
                                 <td style="text-align: center">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-font-size" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Opciones
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-dark dropdown-font-size" aria-labelledby="dropdownMenuButton2">
-                                            <li><a class="dropdown-item" href="#">Ver</a></li>
-                                            <li><a class="dropdown-item" href="#">Editar</a></li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li><a class="dropdown-item" href="../../app/controllers/actividad/delete_actividad.php?id_actividad=<?php echo $id_actividad; ?>& id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $id_proyecto; ?>" onclick="return confirm('¿Realmente desea eliminar la el proyecto PRL?')">Eliminar</a></li>
-
-                                        </ul>
+                                    <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
+                                                                              <a href="../../app/controllers/actividad/delete_actividad.php?id_actividad=<?php echo $id_actividad;?>& id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar el registro?')" title="Eliminar actividad"><i class="bi bi-trash-fill"></i> </a>
                                     </div>
-
                                 </td>
+
+                               
 
                             </tr>
                         <?php

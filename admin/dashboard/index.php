@@ -36,10 +36,8 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
       <!-- ./col -->
       <div class="col-lg-2 col-6">
         <div class="btn-text-center">
-          <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador" title="Añadir nuevo trabajador"><i class="bi bi-person-plus-fill"></i>AÑADIR NUEVO TRABAJADOR</button>
-        </div>
-        <div class="btn-text-center">
-          <a href="../accidentes/create.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-list-ul"></i> Nueva Investigacion accidente</a>
+          <button type="button" class="btn btn-warning btn-block btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador" title="Añadir nuevo trabajador"><i class="bi bi-person-plus-fill"></i>AÑADIR NUEVO TRABAJADOR</button>
+
         </div>
         <div class="row">
 
@@ -52,7 +50,7 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
 
 
-        <!-- inicio modal nuevo trabajador-->
+   <!-- inicio modal nuevo trabajador-->
         <div class="modal fade" id="modal-nuevotrabajador">
           <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -67,61 +65,61 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                 <form action="../../app/controllers/trabajadores/create.php" method="post" enctype="multipart/form-data">
 
 
-                  <div class="row">
-                    <div class="col-md-2">
-                      <div class="form-group">
-                        <label for="">Codigo</label>
-                        <input type="text" name="codigo_tr" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="form-group">
-                        <label for="">DNI/NIE</label>
-                        <input type="text" name="dni_tr" class="form-control" required>
-                      </div>
-                    </div>
+                <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="">Codigo</label>
+                                        <input type="text" name="codigo_tr" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="">DNI/NIE</label>
+                                        <input type="text" name="dni_tr" class="form-control" required>
+                                    </div>
+                                </div>
 
 
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="">APELLIDOS, NOMBRE</label>
-                        <input type="text" name="nombre_tr" class="form-control" required>
-                      </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">APELLIDOS, NOMBRE</label>
+                                        <input type="text" name="nombre_tr" class="form-control" required>
+                                    </div>
 
-                    </div>
-                    <div class="col-md-2">
-                      <br>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sexo_tr" id="flexRadioDefault1" value="Hombre" checked>
-                        <label class="form-check-label" for="flexRadioDefault3">
-                          <b>Hombre</b>
-                        </label>
-                      </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <br>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexo_tr" id="flexRadioDefault1" value="Hombre" checked>
+                                        <label class="form-check-label" for="flexRadioDefault3">
+                                            <b>Hombre</b>
+                                        </label>
+                                    </div>
 
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sexo_tr" id="flexRadioDefault2" value="Mujer">
-                        <label class="form-check-label" for="flexRadioDefault4">
-                          <b>Mujer</b>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexo_tr" id="flexRadioDefault2" value="Mujer">
+                                        <label class="form-check-label" for="flexRadioDefault4">
+                                            <b>Mujer</b>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
 
-                  <div class="row">
-                    <div class="col-md-2">
-                      <div class="form-group">
-                        <label for="">Fecha Nacimiento</label>
-                        <input type="date" name="fechanac_tr" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="form-group">
-                        <label for="">Fecha Inicio</label>
-                        <input type="date" name="inicio_tr" class="form-control" required>
-                      </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="">Fecha Nacimiento</label>
+                                        <input type="date" name="fechanac_tr" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="">Fecha Inicio</label>
+                                        <input type="date" name="inicio_tr" class="form-control" required>
+                                    </div>
 
-                    </div>
-                    <!--
+                                </div>
+                                <!--
                                 <div class="col-md-2">
                                     <label for="">Sexo</label>
                                     <select class="form-select form-select-sm" name="sexo_tr" aria-label=".form-select-sm example">
@@ -131,90 +129,90 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                     </select>
 
                                 </div>-->
-                    <div class="col-md-1">
-                    </div>
+                                <div class="col-md-1">
+                                </div>
 
 
 
-                    <div class="col-md-3">
-                      <br>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="formacionpdt_tr" id="flexRadioDefault3" value="No" checked>
-                        <label class="form-check-label" for="flexRadioDefault3">
-                          <b>NO FORMADO PRL</b>
-                        </label>
-                      </div>
+                                <div class="col-md-3">
+                                    <br>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="formacionpdt_tr" id="flexRadioDefault3" value="No" checked>
+                                        <label class="form-check-label" for="flexRadioDefault3">
+                                            <b>NO FORMADO PRL</b>
+                                        </label>
+                                    </div>
 
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="formacionpdt_tr" id="flexRadioDefault4" value="Si">
-                        <label class="form-check-label" for="flexRadioDefault4">
-                          <b>FORMADO PRL</b>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <br>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="informacion_tr" id="flexRadioDefault3" value="No" checked>
-                        <label class="form-check-label" for="flexRadioDefault5">
-                          <b>NO INFORMADO PRL</b>
-                        </label>
-                      </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="formacionpdt_tr" id="flexRadioDefault4" value="Si">
+                                        <label class="form-check-label" for="flexRadioDefault4">
+                                            <b>FORMADO PRL</b>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <br>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="informacion_tr" id="flexRadioDefault3" value="No" checked>
+                                        <label class="form-check-label" for="flexRadioDefault5">
+                                            <b>NO INFORMADO PRL</b>
+                                        </label>
+                                    </div>
 
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="informacion_tr" id="flexRadioDefault4" value="Si">
-                        <label class="form-check-label" for="flexRadioDefault6">
-                          <b>INFORMADO PRL</b>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="row">
-                    <div class="col-md-5">
-                      <div class="form-group">
-                        <label for="">Centro Trabajo</label>
-                        <select name="centro_tr" id="" class="form-control">
-                          <?php
-                          foreach ($centros_datos as $centros_dato) { ?>
-                            <option value="<?php echo $centros_dato['id_centro']; ?>"><?php echo $centros_dato['nombre_cen']; ?></option>
-                          <?php
-                          }
-                          ?>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-5">
-                      <div class="form-group">
-                        <label for="">Categoria</label>
-                        <select name="categoria_tr" id="" class="form-control">
-                          <option value="0">--Seleccione categoria--</option>
-                          <?php
-                          foreach ($categorias_datos as $categorias_dato) { ?>
-                            <option value="<?php echo $categorias_dato['id_categoria']; ?>"><?php echo $categorias_dato['nombre_cat']; ?> </option>
-                            </option>
-                          <?php
-                          }
-                          ?>
-                        </select>
-
-                      </div>
-                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="informacion_tr" id="flexRadioDefault4" value="Si">
+                                        <label class="form-check-label" for="flexRadioDefault6">
+                                            <b>INFORMADO PRL</b>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
 
 
-                  </div>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="form-group">
-                        <label for="">ANOTACIONES</label>
-                        <input type="text" name="anotaciones_tr" class="form-control">
-                      </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="">Centro Trabajo</label>
+                                        <select name="centro_tr" id="" class="form-control">
+                                            <?php
+                                            foreach ($centros_datos as $centros_dato) { ?>
+                                                <option value="<?php echo $centros_dato['id_centro']; ?>"><?php echo $centros_dato['nombre_cen']; ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="">Categoria</label>
+                                        <select name="categoria_tr" id="" class="form-control">
+                                            <option value="0">--Seleccione categoria--</option>
+                                            <?php
+                                            foreach ($categorias_datos as $categorias_dato) { ?>
+                                                <option value="<?php echo $categorias_dato['id_categoria']; ?>"><?php echo $categorias_dato['nombre_cat']; ?> </option>
+                                                </option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
 
-                    </div>
-                  </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="">ANOTACIONES</label>
+                                        <input type="text" name="anotaciones_tr" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>
                   <div class="modal-footer">
 
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -228,7 +226,6 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
           </div>
         </div>
         <!--fin modal-->
-
       </div>
 
       <div class="col-lg-2 col-6">
@@ -319,15 +316,15 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                   <col width="30%">
                   <col width="20%">
                   <col width="10%">
-                  <col width="20%">
-                  <col width="10%">
-                  <col width="10%">
+                  <col width="15%">
+                  <col width="7%">
+                  <col width="7%">
 
                 </colgroup>
                 <thead class="table-dark">
                   <tr>
                     <th style="text-align: left">Trabajador</th>
-                    <th style="text-align: left">Cia.</th>
+                    <th style="text-align: left">Empresa</th>
                     <th style="text-align: left">Inicio</th>
                     <th style="text-align: left">Categoria</th>
                     <th style="text-align: center">Formado</th>
@@ -641,12 +638,11 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                             <span class='badge badge-danger' style="font-size: 15px;"><?php echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?></span>
                           <?php
                                                       } else if ($tareapendiente['fecha_ta'] < $newdate_future) { ?>
-                            <span class='badge badge-success' style="font-size: 15px;"><?php echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?></span>
-                          <?php
-                                                      } else {
-                                                        echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?>
+                            <span class='badge badge-success'style="font-size: 15px;"><?php echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?></span>
+                            <?php
+                                                    } else {echo date("d-m-Y", strtotime($tareapendiente['fecha_ta'])) ?>
 
-
+                     
                           <?php
                                                       }
                           ?>
@@ -882,10 +878,10 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                       <td style="text-align: left"><?php echo $accidentes_dato['gravedad_gr']; ?></td>
                       <td style="text-align: center;"><?php $accidentes_dato['comunicado_ace'];
                                                       if ($accidentes_dato['comunicado_ace'] == "SI") { ?>
-                          <span class='badge badge-success' style="font-size: 15px;">SI</span>
+                          <span class='badge badge-success'style="font-size: 15px;">SI</span>
                         <?php
                                                       } else if ($accidentes_dato['comunicado_ace'] == "NO") { ?>
-                          <span class='badge badge-warning' style="font-size: 15px;">NO</span>
+                          <span class='badge badge-warning'style="font-size: 15px;">NO</span>
                         <?php                       }
                         ?>
 

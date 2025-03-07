@@ -6,7 +6,7 @@ $id_accidente = $_GET['id_accidente'];
 $sql = "SELECT ace.id_accidente as id_accidente, 
 ace.nroaccidente_ace as nroaccidente_ace, pt.procesotrabajo_pt as procesotrabajo_pt, ace.comunicado_ace as comunicado_ace,
 tr.nombre_tr as nombre_tr, tr.dni_tr as dni_tr, tr.sexo_tr as sexo_tr, tr.fechanac_tr as fechanac_tr, tr.inicio_tr as inicio_tr, cat.nombre_cat as nombre_cat, cat.descripcion_cat as descripcion_cat, dep.nombre_dpo as nombre_dpo, 
-cen.nombre_cen as nombre_cen, emp.nombre_emp as nombre_emp, emp.razonsocial_emp as razonsocial_emp, emp.modalidadprl_emp as modalidadprl_emp,
+cen.nombre_cen as nombre_cen, tc.nombre_tc as nombre_tc, cen.direccion_cen as direccion_cen, emp.nombre_emp as nombre_emp, emp.razonsocial_emp as razonsocial_emp, emp.modalidadprl_emp as modalidadprl_emp,
 ace.lugar_ace as lugar_ace, ace.detalleslugar_ace as detalleslugar_ace, ta.tipoaccidente_ta as tipoaccidente_ta, 
 ace.fecha_ace as fecha_ace, ace.fechabaja_ace as fechabaja_ace, ace.hora_ace as hora_ace, ace.horatrabajo_ace as horatrabajo_ace, 
 ace.trabajohabitual_ace as trabajohabitual_ace, ace.diadescanso_ace as diadescanso_ace, ace.semanadescanso_ace as semanadescanso_ace, ace.diasbaja_ace as diasbaja_ace,
@@ -22,8 +22,7 @@ fc.formacontacto_fc as formacontacto_fc, fc.codformacont_fc as codformacont_fc, 
 aml.agentematerialles_aml as agentematerialles_aml, aml.codagentematles_aml as codagentematles_aml, ace.observmatlesi_ace as observmatlesi_ace, 
 ace.numtrafectados_ace as numtrafectados_ace, 
 ace.declaraciontrab_ace as declaraciontrab_ace, ace.istestigos_ace as istestigos_ace, ace.detallestestigo_ace as detallestestigo_ace, 
-ace.declaraciontestigo_ace as declaraciontestigo_ace, tl.codtipolesion_tl as codtipolesion_tl, tl.tipolesion_tl as tipolesion_tl,gr.gravedad_gr as gravedad_gr, 
-pc.partecuerpo_pc as partecuerpo_pc, ace.isevacuacion_ace as isevacuacion_ace, ace.lugarevacuacion_ace as lugarevacuacion_ace, 
+ace.declaraciontestigo_ace as declaraciontestigo_ace, tl.codtipolesion_tl as codtipolesion_tl, tl.tipolesion_tl as tipolesion_tl,gr.gravedad_gr as gravedad_gr, pc.codpartecuerpo_pc as codpartecuerpo_pc, pc.partecuerpo_pc as partecuerpo_pc, ace.isevacuacion_ace as isevacuacion_ace, ace.lugarevacuacion_ace as lugarevacuacion_ace, 
 ace.centromedico_ace as centromedico_ace, ace.detallescentromed_ace as detallescentromed_ace, ace.recomedincorp_ace as recomedincorp_ace, 
 ace.recinedtrab_ace as recinedtrab_ace, ace.istrformado_ace as istrformado_ace, ace.istrinformado_ace as istrinformado_ace, 
 ace.protcolectivadisp_ace as protcolectivadisp_ace, ace.protcolecnecesa_ace as protcolecnecesa_ace, ace.observprotcol_ace as observprotcol_ace, 
@@ -39,6 +38,7 @@ INNER JOIN `trabajadores` as tr ON ace.trabajador_ace = tr.id_trabajador
 INNER JOIN `categorias` as cat ON tr.categoria_tr = cat.id_categoria
 INNER JOIN `departamentos` as dep ON cat.departamento_cat = id_departamento
 INNER JOIN `centros` as cen ON ace.centro_ace = cen.id_centro
+INNER JOIN `tipocentros` as tc ON cen.tipo_cen = tc.id_tipocentro
 INNER JOIN `empresa` as emp ON cen.empresa_cen = emp.id_empresa
 INNER JOIN `ace_procesotrabajo` as pt ON ace.procesotrabajo_ace = pt.id_procesotrabajo
 INNER JOIN `ace_actividadfisica` as af ON ace.tipoactividad_ace = af.id_actividadfisica
@@ -70,6 +70,8 @@ foreach ($accidentes_datos as $accidentes_dato) {
     $categoria_descripcion_ace = $accidentes_dato['descripcion_cat'];
     $departamento_trabajador_ace = $accidentes_dato['nombre_dpo'];
     $centro_ace = $accidentes_dato['nombre_cen'];
+	$tipocen_ace = $accidentes_dato['nombre_tc'];
+	$direccion_ace = $accidentes_dato['direccion_cen'];
     $empresa_ace = $accidentes_dato['nombre_emp'];
     $razonsocial_ace = $accidentes_dato['razonsocial_emp'];
     $modalidadprl_ace = $accidentes_dato['modalidadprl_emp'];
@@ -121,7 +123,8 @@ foreach ($accidentes_datos as $accidentes_dato) {
     $declaraciontestigo_ace = $accidentes_dato['declaraciontestigo_ace'];
     $tipolesion_ace = $accidentes_dato['tipolesion_tl'];
     $gradolesion_ace = $accidentes_dato['gravedad_gr'];
-    $partecuerpo_ace = $accidentes_dato['partecuerpo_pc'];
+    $codpartecuerpo_ace = $accidentes_dato['codpartecuerpo_pc'];
+	$partecuerpo_ace = $accidentes_dato['partecuerpo_pc'];
     $isevacuacion_ace = $accidentes_dato['isevacuacion_ace'];
     $lugarevacuacion_ace = $accidentes_dato['lugarevacuacion_ace'];
     $centromedico_ace = $accidentes_dato['centromedico_ace'];

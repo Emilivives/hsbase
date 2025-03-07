@@ -23,7 +23,8 @@ include('../../../app/controllers/maestros/empresas/datos_empresa.php');
 
                 </div>
                 <div class="card-body">
-                    <form action="../../../app/controllers/maestros/empresas/update.php" method="post">
+                    <form action="../../../app/controllers/maestros/empresas/updtate.php" method="post" enctype="multipart/form-data">
+
 
                         <div class="row">
                             <div class="col-md-6">
@@ -58,38 +59,32 @@ include('../../../app/controllers/maestros/empresas/datos_empresa.php');
                                     <input type="text" name="modalidadprl_emp" value="<?php echo $modalidadprl_emp ?>" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <!-- Subida de Imagen con Vista Previa -->
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Logo Empresa</label>
-                                    <input type="file" name="" class="form-control" id="file">
-                                    <input type="text" name="logo_emp" value="<?php echo $logo_emp; ?>" hidden>
+                                    <label for="image">Logo Empresa</label>
+                                    <input type="file" id="image" name="image" class="form-control">
+                                    <input type="hidden" name="logo_actual" value="<?php echo $logo_emp; ?>">
+
                                     <br>
-                                    <output id="list" >
-                                        <img src="<?php echo $URL . "/admin/maestros/centros/img/" . $logo_emp; ?>" width="100%" alt="">
-                                    </output>
-                                    <script>
-                                        function archivo(evt) {
-                                            var files = evt.target.files; // FileList object
-                                            // Obtenemos la imagen del campo "file".
-                                            for (var i = 0, f; f = files[i]; i++) {
-                                                //Solo admitimos imágenes.
-                                                if (!f.type.match('image.*')) {
-                                                    continue;
-                                                }
-                                                var reader = new FileReader();
-                                                reader.onload = (function(theFile) {
-                                                    return function(e) {
-                                                        // Insertamos la imagen
-                                                        document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="', e.target.result, '" width="100%" title="', escape(theFile.name), '"/>'].join('');
-                                                    };
-                                                })(f);
-                                                reader.readAsDataURL(f);
-                                            }
-                                        }
-                                        document.getElementById('file').addEventListener('change', archivo, false);
-                                    </script>
+                                    <div id="preview">
+                                        <img id="logoPreview" src="<?php echo $URL . "/admin/maestros/centros/img/" . $logo_emp; ?>" width="100%" alt="">
+                                    </div>
                                 </div>
                             </div>
+                            <!-- JavaScript para Vista Previa de Imagen -->
+                            <script>
+                                document.getElementById('image').addEventListener('change', function(event) {
+                                    var files = event.target.files;
+                                    if (files.length > 0) {
+                                        var reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            document.getElementById('logoPreview').src = e.target.result;
+                                        };
+                                        reader.readAsDataURL(files[0]);
+                                    }
+                                });
+                            </script>
 
                             <hr>
                             <div class="row">

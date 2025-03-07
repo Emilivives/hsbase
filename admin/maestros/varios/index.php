@@ -218,16 +218,15 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                 <th style="text-align: center">Num.</th>
                                 <th style="text-align: center">Nombre departamento</th>
                                 <th style="text-align: center">Descripción</th>
+                                <th style="text-align: center">Teléfono</th>
                                 <th style="text-align: center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-
-
                             <?php
                             $contadoremailsinteres_dato = 0;
                             foreach ($emailsinteres_datos as $emailsinteres_dato) {
-                                $contadoremailsinteres_dato = $contadoremailsinteres_dato + 1;
+                                $contadoremailsinteres_dato++;
                                 $id_emailinteres = $emailsinteres_dato['id_emailinteres'];
                             ?>
                                 <tr>
@@ -235,25 +234,86 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                     <td><?php echo $emailsinteres_dato['nombre_ei']; ?></td>
                                     <td><?php echo $emailsinteres_dato['email_ei']; ?></td>
                                     <td><?php echo $emailsinteres_dato['telefono_ei']; ?></td>
-
                                     <td style="text-align: center">
-                                        <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                            <a href="update.php?id_responsable=<?php echo $id_responsable ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                            <a href="delete.php?id_responsable=<?php echo $id_responsable ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <!-- Botón para abrir el modal -->
+                                            <button class="btn btn-warning btn-sm btn-edit"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editModal"
+                                                data-id="<?php echo $id_emailinteres; ?>"
+                                                data-nombre="<?php echo $emailsinteres_dato['nombre_ei']; ?>"
+                                                data-email="<?php echo $emailsinteres_dato['email_ei']; ?>"
+                                                data-telefono="<?php echo $emailsinteres_dato['telefono_ei']; ?>">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
 
+                                            <a href="delete.php?id_emailinteres=<?php echo $id_emailinteres ?>"
+                                                class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash3-fill"></i>
+                                            </a>
                                         </div>
                                     </td>
-
                                 </tr>
-                            <?php
-                            }
-                            ?>
-
+                            <?php } ?>
                         </tbody>
-
                     </table>
-
                 </div>
+
+                <!-- Modal de edición -->
+                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editModalLabel">Editar Contacto de Interés</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <form action="../../../app/controllers/maestros/emailsinteres/update.php" method="POST">
+                                <div class="modal-body">
+                                    <input type="hidden" name="id_emailinteres" id="edit-id">
+
+                                    <div class="mb-3">
+                                        <label for="edit-nombre" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" name="nombre_ei" id="edit-nombre" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="edit-email" class="form-label">Correo Electrónico</label>
+                                        <input type="email" class="form-control" name="email_ei" id="edit-email" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="edit-telefono" class="form-label">Teléfono</label>
+                                        <input type="text" class="form-control" name="telefono_ei" id="edit-telefono" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const editButtons = document.querySelectorAll(".btn-edit");
+                        editButtons.forEach(button => {
+                            button.addEventListener("click", function() {
+                                const id = this.getAttribute("data-id");
+                                const nombre = this.getAttribute("data-nombre");
+                                const email = this.getAttribute("data-email");
+                                const telefono = this.getAttribute("data-telefono");
+
+                                document.getElementById("edit-id").value = id;
+                                document.getElementById("edit-nombre").value = nombre;
+                                document.getElementById("edit-email").value = email;
+                                document.getElementById("edit-telefono").value = telefono;
+                            });
+                        });
+                    });
+                </script>
+
 
             </div>
 
@@ -280,7 +340,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                 <div class="modal fade" id="modal-nuevodepartamento">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
-                            <div class="modal-header" style="background-color:#808000 ;color:white">
+                            <div class="modal-header bg-primary text-white" style="background-color:#808000 ;color:white">
                                 <h5 class="modal-title" id="modal-nuevodepartamento">Departamento empresa</h5>
                                 <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -337,30 +397,90 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                             <?php
                             $contadordepartamentos_dato = 0;
                             foreach ($departamentos_datos as $departamentos_dato) {
-                                $contadordepartamentos_dato = $contadordepartamentos_dato + 1;
+                                $contadordepartamentos_dato++;
                                 $id_departamento = $departamentos_dato['id_departamento'];
                             ?>
                                 <tr>
                                     <td><?php echo $contadordepartamentos_dato; ?></td>
-                                    <td><?php echo $departamentos_dato['nombre_dpo']; ?></td>
-                                    <td><?php echo $departamentos_dato['descripcion_dpo']; ?></td>
-
+                                    <td><?php echo htmlspecialchars($departamentos_dato['nombre_dpo']); ?></td>
+                                    <td><?php echo htmlspecialchars($departamentos_dato['descripcion_dpo']); ?></td>
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                            <a href="update.php?id_departamento=<?php echo $id_departamento ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                            <a href="delete.php?id_departamento=<?php echo $id_departameto ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                            <button class="btn btn-warning btn-sm btn-edit"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editModal2"
+                                                data-id="<?php echo $id_departamento; ?>"
+                                                data-nombre="<?php echo htmlspecialchars($departamentos_dato['nombre_dpo']); ?>"
+                                                data-descripcion="<?php echo htmlspecialchars($departamentos_dato['descripcion_dpo']); ?>">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
 
+                                            <a href="delete.php?id_departamento=<?php echo $id_departamento ?>"
+                                                class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash3-fill"></i>
+                                            </a>
                                         </div>
                                     </td>
-
                                 </tr>
                             <?php
                             }
                             ?>
-
                         </tbody>
-
                     </table>
+
+                    <!-- Modal de Edición (DEBE ESTAR FUERA DE LA TABLA) -->
+                    <div class="modal fade" id="editModal2" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary text-white">
+                                    <h5 class="modal-title" id="editModalLabel">Editar Departamento</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                </div>
+                                <form action="../../../app/controllers/maestros/departamentos/update.php" method="POST">
+                                    <div class="modal-body">
+                                        <input type="hidden" name="id_departamento" id="edit-id">
+
+                                        <div class="mb-3">
+                                            <label for="edit-nombre2" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" name="nombre_dpo" id="edit-nombre2" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="edit-descripcion2" class="form-label">Descripción</label>
+                                            <textarea class="form-control" name="descripcion_dpo" id="edit-descripcion2" rows="4" required></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            const editButtons = document.querySelectorAll(".btn-edit");
+                            editButtons.forEach(button => {
+                                button.addEventListener("click", function() {
+                                    const id = this.getAttribute("data-id");
+                                    const nombre = this.getAttribute("data-nombre");
+                                    const descripcion = this.getAttribute("data-descripcion");
+
+                                    console.log("ID:", id);
+                                    console.log("Nombre:", nombre);
+                                    console.log("Descripción:", descripcion);
+
+                                    document.getElementById("edit-id").value = id;
+                                    document.getElementById("edit-nombre2").value = nombre;
+                                    document.getElementById("edit-descripcion2").value = descripcion;
+                                });
+                            });
+                        });
+                    </script>
+
 
                 </div>
 

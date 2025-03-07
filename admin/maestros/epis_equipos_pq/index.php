@@ -1,14 +1,11 @@
 <?php
 include('../../../app/config.php');
 include('../../../admin/layout/parte1.php');
-include('../../../app/controllers/maestros/evaluacion/listado_tipoevaluacion.php');
-include('../../../app/controllers/maestros/emailsinteres/listado_emailsinteres.php');
-include('../../../app/controllers/maestros/empresas/listado_empresas.php');
 include('../../../app/controllers/maestros/epis_equipos_pq/listado_epi.php');
-include('../../../app/controllers/maestros/evaluacion/listado_medidas.php');
+include('../../../app/controllers/maestros/epis_equipos_pq/listado_tipomaquina.php');
+include('../../../app/controllers/maestros/epis_equipos_pq/listado_elementosrevision.php');
 include('../../../app/controllers/maestros/departamentos/listado_departamentos.php');
 include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php');
-
 
 ?>
 <html>
@@ -36,10 +33,9 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
 
 <div class="container-fluid">
 
-
     <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card card-outline card-primary">
                 <div class="card-header col-md-12">
                     <h3 class="card-title"><b>Equipos de protección individual (EPIs)</b></h3>
@@ -75,7 +71,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -84,7 +80,7 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                             </div>
                                         </div>
                                     </div>
-                                   
+
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -96,7 +92,6 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                     </div>
 
                 </div>
-
 
                 <!--fin modal-->
 
@@ -126,7 +121,6 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
                                             <a href="../../../app/controllers/maestros/evaluacion/delete.php?id_tipoevaluacion=<?php echo $id_tipoevaluacion ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Realmente desea eliminar responsable?')" title="Eliminar responsable"><i class="bi bi-trash3-fill"></i></a>
 
-
                                         </div>
                                     </td>
 
@@ -143,14 +137,12 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
 
             </div>
 
-
         </div>
 
-
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="card card-outline card-primary">
                 <div class="card-header col-md-12">
-                    <h3 class="card-title"><b>Riesgos</b></h3>
+                    <h3 class="card-title"><b>Tipo Maquinas (equipos de trabajo)</b></h3>
                     <style>
                         .btn-text-right {
                             text-align: right;
@@ -158,28 +150,28 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                     </style>
                     <!-- Button trigger modal -->
                     <div class="btn-text-right">
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevoriesgo">Añadir Riesgo</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevotipomaquina">Añadir tipo</button>
                     </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="modal-nuevoriesgo">
-                    <div class="modal-dialog modal-xl">
+                <div class="modal fade" id="modal-nuevotipomaquina">
+                    <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header" style="background-color:#808000 ;color:white">
-                                <h5 class="modal-title" id="modal-nuevodirecciones">Nuevo Riesgo</h5>
+                            <div class="modal-header" style="background-color:#0080c0 ;color:white">
+                                <h5 class="modal-title" id="modal-nuevodirecciones">Nuevo tipo</h5>
                                 <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
 
-                                <form action="../../../app/controllers/maestros/evaluacion/create_riesgo.php" method="post" enctype="multipart/form-data">
+                                <form action="../../../app/controllers/maestros/epis_equipos_pq/create_tipomaquina.php" method="post" enctype="multipart/form-data">
 
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="">Codigo Riesgo <b>*</b></label>
-                                                <input type="text" name="codigoriesgo" class="form-control" required>
+                                                <label for="">Tipo Maquina <b>*</b></label>
+                                                <input type="text" name="nombre_tm" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
@@ -187,8 +179,8 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="">Frase Riesgo</label>
-                                                <input type="text" name="fraseriesgo" class="form-control" required>
+                                                <label for="">Clasificacion</label>
+                                                <input type="text" name="clase_tm" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
@@ -202,45 +194,42 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                     </div>
 
                 </div>
-
 
                 <!--fin modal-->
 
                 <div class="card-body">
                     <table id="example2" class="table table-striped table-bordered table-hover">
                         <colgroup>
-                            <col width="10%">
-                            <col width="10%">
-                            <col width="70%">
-                            <col width="10%">
+                            <col width="5%">
+                            <col width="50%">
+                            <col width="40%">
+                            <col width="5%">
 
                         </colgroup>
                         <thead>
                             <tr>
-                                <th style="text-align: center">#</th>
-                                <th style="text-align: center">Codigo</th>
-                                <th style="text-align: center">Frase Riesgo</th>
+                                <th style="text-align: center"></th>
+                                <th style="text-align: center">Tipo Maq.</th>
+                                <th style="text-align: center">Clase</th>
                                 <th style="text-align: center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
 
-
                             <?php
-                            $contador_riesgos = 0;
-                            foreach ($riesgos_datos as $riesgos_dato) {
-                                $contador_riesgos = $contador_riesgos + 1;
-                                $id_riesgo = $riesgos_dato['id_riesgo'];
+                            $contador_tipomaquina = 0;
+                            foreach ($tipomaquina_datos as $tipomaquina_dato) {
+                                $contador_tipomaquina = $contador_tipomaquina + 1;
+                                $id_tipomaquina = $tipomaquina_dato['id_tipomaquina'];
                             ?>
                                 <tr>
-                                    <td style="text-align: center"><?php echo $contador_riesgos; ?></td>
-                                    <td style="text-align: center"><?php echo $riesgos_dato['codigoriesgo']; ?></td>
-                                    <td style="text-align: left"><?php echo $riesgos_dato['fraseriesgo']; ?></td>
+                                    <td style="text-align: center"><?php echo $contador_tipomaquina; ?></td>
+                                    <td style="text-align: left"><?php echo $tipomaquina_dato['nombre_tm']; ?></td>
+                                    <td style="text-align: left"><?php echo $tipomaquina_dato['clase_tm']; ?></td>
 
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                            <a href="update.php?id_responsable=<?php echo $id_responsable ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                            <a href="delete.php?id_responsable=<?php echo $id_responsable ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                            <a href="../../../app/controllers/maestros/epis_equipos_pq/delete_tipomaquina.php?id_tipomaquina=<?php echo $id_tipomaquina ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
 
                                         </div>
                                     </td>
@@ -258,15 +247,12 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
 
             </div>
 
-
         </div>
 
-    </div>
-    <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card card-outline card-primary">
                 <div class="card-header col-md-12">
-                    <h3 class="card-title"><b>Medidas</b></h3>
+                    <h3 class="card-title"><b>Elementos de Revisión</b></h3>
                     <style>
                         .btn-text-right {
                             text-align: right;
@@ -274,62 +260,43 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                     </style>
                     <!-- Button trigger modal -->
                     <div class="btn-text-right">
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevamedida">Añadir Medida</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevoelemento">Añadir Elemento</button>
                     </div>
                 </div>
+
                 <!-- Modal -->
-                <div class="modal fade" id="modal-nuevamedida">
-                    <div class="modal-dialog modal-xl">
+                <div class="modal fade" id="modal-nuevoelemento">
+                    <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header" style="background-color:#808000 ;color:white">
-                                <h5 class="modal-title" id="modal-nuevodirecciones">Nuevo Medida</h5>
+                            <div class="modal-header" style="background-color:#0080c0; color:white">
+                                <h5 class="modal-title" id="modal-nuevoelemento">Nuevo Elemento de Revisión</h5>
                                 <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-
-                                <form action="../../../app/controllers/maestros/evaluacion/create_medida.php" method="post" enctype="multipart/form-data">
-
-
+                                <form action="../../../app/controllers/maestros/epis_equipos_pq/create_elementosrevision.php" method="post" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="descripcion">Descripción <b>*</b></label>
+                                                <input type="text" name="descripcion" id="descripcion" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="codigomedida" class="col-form-label col-sm-3">Código*</label>
-                                                <div class="col-sm-8">
-                                                <select name="codigomedida" id="id_riesgo" class="id_riesgo">
-                                                        <option value="">Seleccione un riesgo</option>
-                                                        <?php
-                                                        foreach ($riesgos_datos as $riesgos_dato) { ?>
-                                                            <option value="<?php echo $riesgos_dato['codigoriesgo']; ?>">
-                                                                <?php echo $riesgos_dato['codigoriesgo']; ?> - <?php echo  $riesgos_dato['fraseriesgo'];  ?>
-
-
-                                                            </option>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                  
-                                    <br>
-
-
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Frase Medida</label>
-                                                <textarea class="form-control" name="frasemedida" rows="4" required></textarea>
+                                                <label for="tipo">Tipo <b>*</b></label>
+                                                <select name="tipo" id="tipo" class="form-control" required>
+                                                    <option value="RESPUESTA">Respuesta</option>
+                                                    <option value="OBSERVACION">Observación</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                         <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
@@ -338,55 +305,156 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-
                 <!--fin modal-->
 
                 <div class="card-body">
-                    <table id="example3" class="table table-striped table-bordered table-hover">
+                    <table id="example24" class="table table-striped table-bordered table-hover">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="50%">
+                            <col width="40%">
+                            <col width="5%">
+                        </colgroup>
                         <thead>
                             <tr>
-                                <th style="text-align: center">#</th>
-                                <th style="text-align: center">Codigo</th>
-                                <th style="text-align: center">Descripcion</th>
+                                <th style="text-align: center"></th>
+                                <th style="text-align: center">Descripción</th>
+                                <th style="text-align: center">Tipo</th>
                                 <th style="text-align: center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $contadormedidas = 0;
-                            foreach ($medidas_datos as $medidas_dato) {
-                                $contadormedidas = $contadormedidas + 1;
-                                $id_departamento = $medidas_dato['id_medida'];
+                            $contador_elemento = 0;
+                            foreach ($elementos_revision_datos as $elemento_dato) {
+                                $contador_elemento = $contador_elemento + 1;
+                                $id_elemento = $elemento_dato['id_elemento'];
                             ?>
                                 <tr>
-                                    <td><?php echo $contadormedidas; ?></td>
-                                    <td><?php echo $medidas_dato['codigomedida']; ?></td>
-                                    <td><?php echo $medidas_dato['frasemedida']; ?></td>
-
+                                    <td style="text-align: center"><?= $contador_elemento ?></td>
+                                    <td style="text-align: left"><?= htmlspecialchars($elemento_dato['descripcion']) ?></td>
+                                    <td style="text-align: left"><?= htmlspecialchars($elemento_dato['tipo']) ?></td>
                                     <td style="text-align: center">
                                         <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
-                                            <a href="update.php?id_departamento=<?php echo $id_departamento ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                            <a href="delete.php?id_departamento=<?php echo $id_departameto ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
-
+                                            <a href="../../../app/controllers/maestros/elementos_revision/delete_elementorevision.php?id_elemento=<?= $id_elemento ?>" class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash3-fill"></i>
+                                            </a>
                                         </div>
                                     </td>
-
                                 </tr>
                             <?php
                             }
                             ?>
-
                         </tbody>
-
                     </table>
+                </div>
+            </div>
+        </div>
 
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+        <div class="card card-outline card-primary">
+                <div class="card-header col-md-12">
+                    <h3 class="card-title"><b>Elementos de ARNES</b></h3>
+                    <style>
+                        .btn-text-right {
+                            text-align: right;
+                        }
+                    </style>
+                    <!-- Button trigger modal -->
+                    <div class="btn-text-right">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-nuevoelemento">Añadir Elemento</button>
+                    </div>
                 </div>
 
-            </div>
+                <!-- Modal -->
+                <div class="modal fade" id="modal-nuevoelemento">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#0080c0; color:white">
+                                <h5 class="modal-title" id="modal-nuevoelemento">Nuevo Elemento de Revisión</h5>
+                                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="../../../app/controllers/maestros/epis_equipos_pq/create_elementosrevision.php" method="post" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="descripcion">Descripción <b>*</b></label>
+                                                <input type="text" name="descripcion" id="descripcion" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="tipo">Tipo <b>*</b></label>
+                                                <select name="tipo" id="tipo" class="form-control" required>
+                                                    <option value="RESPUESTA">Respuesta</option>
+                                                    <option value="OBSERVACION">Observación</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--fin modal-->
+
+                <div class="card-body">
+                    <table id="example24" class="table table-striped table-bordered table-hover">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="50%">
+                            <col width="40%">
+                            <col width="5%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th style="text-align: center"></th>
+                                <th style="text-align: center">Descripción</th>
+                                <th style="text-align: center">Tipo</th>
+                                <th style="text-align: center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $contador_elemento = 0;
+                            foreach ($elementos_revision_datos as $elemento_dato) {
+                                $contador_elemento = $contador_elemento + 1;
+                                $id_elemento = $elemento_dato['id_elemento'];
+                            ?>
+                                <tr>
+                                    <td style="text-align: center"><?= $contador_elemento ?></td>
+                                    <td style="text-align: left"><?= htmlspecialchars($elemento_dato['descripcion']) ?></td>
+                                    <td style="text-align: left"><?= htmlspecialchars($elemento_dato['tipo']) ?></td>
+                                    <td style="text-align: center">
+                                        <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
+                                            <a href="../../../app/controllers/maestros/elementos_revision/delete_elementorevision.php?id_elemento=<?= $id_elemento ?>" class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash3-fill"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
         </div>
         <div class="col-md-3">
@@ -445,8 +513,6 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                                             </div>
                                         </div>
 
-
-
                                     </div>
 
                                     <div class="modal-footer">
@@ -459,7 +525,6 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
                     </div>
 
                 </div>
-
 
                 <!--fin modal-->
 
@@ -509,15 +574,12 @@ include('../../../app/controllers/maestros/estadisticas/listado_estadisticas.php
 
             </div>
 
-
         </div>
     </div>
 
 </div>
 
-
 </div>
-
 
 <?php
 include('../../../admin/layout/parte2.php');
@@ -653,7 +715,65 @@ include('../../../admin/layout/mensaje.php');
         }).buttons().container().appendTo("#example2_wrapper .col-md-6:eq(0)");
     });
 </script>
+<script>
+    $(function() {
+        $("#example24").DataTable({
+            "pageLength": 5,
+            "language": {
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",
+                "infoEmpty": "Mostrando 0 a 0 de 0 Usuarios",
+                "infoFiltered": "(Filtrado de MAX total Usuarios)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Usuarios",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscador:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            buttons: [{
+                    extend: "collection",
+                    text: "Reportes",
+                    orientation: "landscape",
+                    buttons: [{
+                            text: "Copiar",
+                            extend: "copy"
+                        },
+                        {
+                            extend: "pdf"
+                        },
+                        {
+                            extend: "csv"
+                        },
+                        {
+                            extend: "excel"
+                        },
+                        {
+                            text: "Imprimir",
+                            extend: "print"
+                        }
+                    ]
+                },
+                {
+                    extend: "colvis",
+                    text: "Visor de columnas",
+                    /*collectionLayout: "fixed three-column" */
 
+                }
+            ],
+        }).buttons().container().appendTo("#example2_wrapper .col-md-6:eq(0)");
+    });
+</script>
 <script>
     $(function() {
         $("#example3").DataTable({

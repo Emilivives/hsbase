@@ -25,6 +25,7 @@ $regimen = $_POST['regimen'];
 $generado = !empty($_POST['generado']) ? $_POST['generado'] : null;
 $comunicado = 'Si';
 $extra = $_POST['extra'];
+$usuario = $_SESSION['nombre_usr'];
 
 // Preparamos la consulta UPDATE
 $sentencia = $pdo->prepare("UPDATE vacacion_gen 
@@ -35,7 +36,9 @@ $sentencia = $pdo->prepare("UPDATE vacacion_gen
         regimen = :regimen,
         generado = :generado,
         comunicado = :comunicado,
-        extra = :extra
+        extra = :extra,
+        usuario = :usuario,
+        fyh_actualizacion = :fyh_actualizacion
     WHERE id_vac_generada = :id_vac_generada");
 
 // Vinculamos los parámetros
@@ -48,6 +51,8 @@ $sentencia->bindParam(':regimen', $regimen);
 $sentencia->bindParam(':generado', $generado, is_null($generado) ? PDO::PARAM_NULL : PDO::PARAM_STR);
 $sentencia->bindParam(':comunicado', $comunicado);
 $sentencia->bindParam(':extra', $extra);
+$sentencia->bindParam(':usuario', $usuario);
+$sentencia->bindParam(':fyh_actualizacion', $fechahora);
 
 // Ejecutamos la consulta y manejamos el resultado
 if ($sentencia->execute()) {

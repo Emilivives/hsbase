@@ -25,13 +25,14 @@ $comunicado = !empty($_POST['comunicado']) ? $_POST['comunicado'] : "Sin informa
 // Crear variables intermedias para los valores que pueden ser null
 $fecha_fin_param = $fecha_fin ?: null; // Asigna null si está vacío
 $consumido_param = $consumido ?: null; // Asigna null si está vacío
-
+$usuario = $_SESSION['nombre_usr'];
 
 try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sentencia = $pdo->prepare("INSERT INTO vacacion_con (id_trabajador, fecha_inicio, fecha_fin, consumido, descuenta, notas, comunicado) 
-    VALUES(:id_trabajador, :fecha_inicio, :fecha_fin, :consumido, :descuenta, :notas, :comunicado)");
+    $sentencia = $pdo->prepare("INSERT INTO vacacion_con (id_trabajador, fecha_inicio, fecha_fin, consumido, descuenta, notas, 
+    comunicado, usuario, fyh_creacion, fyh_actualizacion) 
+    VALUES(:id_trabajador, :fecha_inicio, :fecha_fin, :consumido, :descuenta, :notas, :comunicado,  :usuario, :fyh_creacion, :fyh_actualizacion)");
 
     $sentencia->bindParam(':id_trabajador', $id_trabajador);
     $sentencia->bindParam(':fecha_inicio', $fecha_inicio);
@@ -40,6 +41,9 @@ try {
     $sentencia->bindParam(':descuenta', $descuenta);
     $sentencia->bindParam(':notas', $notas);
     $sentencia->bindParam(':comunicado', $comunicado);
+    $sentencia->bindParam(':usuario', $usuario);
+    $sentencia->bindParam(':fyh_creacion', $fechahora);
+    $sentencia->bindParam(':fyh_actualizacion', $fechahora);
 
 
     if ($sentencia->execute()) {
@@ -57,6 +61,4 @@ try {
     $_SESSION['icono'] = 'danger';
 }
 
-header('Location: ' . $URL . '/admin/vacaciones/detalles_trabajador.php?id_trabajador='.$id_trabajador);
-
-?>
+header('Location: ' . $URL . '/admin/vacaciones/detalles_trabajador.php?id_trabajador=' . $id_trabajador);

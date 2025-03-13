@@ -16,6 +16,15 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
+<style>
+  .hover-effect {
+      transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  .hover-effect:hover {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      background-color:rgb(196, 196, 196); /* Cambia este color según tu preferencia */
+  }
+</style>
 
 <div class="content-header">
     <div class="container-fluid">
@@ -125,23 +134,23 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
     <!-- ./col -->
     <div class="col-lg-2 col-6">
         <!-- small box -->
-           <!-- contador trabajadores no formados -->
-           <?php
-                $contador_tr_no_formados = 0;
-                $contador_tr_formados = 0;
-                foreach ($trabajadores as $trabajador) {
-                    if ($trabajador['activo_tr'] == 1 and $trabajador['formacionpdt_tr'] == 'Si') {
-                        $contador_tr_formados = $contador_tr_formados + 1;
-                    } elseif ($trabajador['activo_tr'] == 1 and $trabajador['formacionpdt_tr'] == 'No') {
-                        $contador_tr_no_formados = $contador_tr_no_formados + 1;
-                    }
-                }
+        <!-- contador trabajadores no formados -->
+        <?php
+        $contador_tr_no_formados = 0;
+        $contador_tr_formados = 0;
+        foreach ($trabajadores as $trabajador) {
+            if ($trabajador['activo_tr'] == 1 and $trabajador['formacionpdt_tr'] == 'Si') {
+                $contador_tr_formados = $contador_tr_formados + 1;
+            } elseif ($trabajador['activo_tr'] == 1 and $trabajador['formacionpdt_tr'] == 'No') {
+                $contador_tr_no_formados = $contador_tr_no_formados + 1;
+            }
+        }
 
-                ?>
-                <!-- fin contador trabajadores no formados -->
+        ?>
+        <!-- fin contador trabajadores no formados -->
         <div class="small-box bg-<?php echo ($contador_tr_no_formados > 0) ? 'warning' : 'light'; ?> shadow-sm border">
-        <div class="inner">
-              
+            <div class="inner">
+
 
                 <h2><?php echo $contador_tr_no_formados; ?><sup style="font-size: 20px"></h2>
                 <p>Pendientes Formar</p>
@@ -194,9 +203,9 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
                                             <td style="text-align: center;"> <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $trabajador_noformados['id_trabajador']; ?>" class="btn btn-primary btn-sm" title="Ver detalles"></i> Ver</a>
 
 
-                                        <?php
-                                    }
-                                        ?>
+                                            <?php
+                                        }
+                                            ?>
                                 </tbody>
                             </table>
 
@@ -356,7 +365,7 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
                                             </label>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-3">
                                         <br>
                                         <div class="form-check">
@@ -381,7 +390,7 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
                                         <div class="form-group">
                                             <label for="">Centro Trabajo</label>
                                             <select name="centro_tr" id="" class="form-control">
-                                            <option value="0">--Seleccione centro--</option>
+                                                <option value="0">--Seleccione centro--</option>
                                                 <?php
                                                 foreach ($centros_datos as $centros_dato) { ?>
                                                     <option value="<?php echo $centros_dato['id_centro']; ?>"><?php echo $centros_dato['nombre_cen']; ?> - <?php echo $centros_dato['nombre_emp']; ?></option>
@@ -918,9 +927,9 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
                                         <td style="text-align: center"><?php echo $trabajador_informacion['tipoinfo_ifd']; ?></td>
                                         <td style="text-align: left"><?php echo $trabajador_informacion['nombre_ifd']; ?></td>
                                         <td style="text-align: center">
-                                                <a href="../maestros/documentos/pdf_infoprl_trasmapi.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
+                                            <a href="../maestros/documentos/pdf_infoprl_trasmapi.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>" class="btn btn-primary btn-sm btn-font-size" title="Ver detalles"><i class="bi bi-folder-fill"></i> Ver</a>
 
-                                                
+
                                         </td>
 
                                     <?php
@@ -1116,6 +1125,116 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
                                 <li><a class="dropdown-item" href="../maestros/documentos/pdf_epi_taller.php?id_trabajador=<?php echo $trabajador_dato['id_trabajador']; ?>">Epis Taller</a></li>
                             </ul>
                         </div>
+                        <!-- Botón que abre el modal -->
+                        <a href="#" class="btn btn-success btn-sm btn-font-size mr-2" title="Ver detalles"
+                            data-toggle="modal" data-target="#modalAutorizacion" style="margin-left: 10px;">
+                            Autorización equipos
+                        </a>
+
+                        <!-- Modal -->
+                        <!-- Modal -->
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalAutorizacion" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <!-- ENCABEZADO -->
+                                    <div class="modal-header bg-primary text-white">
+                                        <h5 class="modal-title" id="modalLabel"><i class="bi bi-check-square"></i> Seleccionar Centros</h5>
+                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+
+                                    <!-- Cuerpo del Modal -->
+                                    <div class="modal-body">
+                                        <?php
+                                        // Obtener centros activos de la empresa del trabajador
+                                        $id_empresa_trabajador = $trabajador_dato['id_empresa'];
+                                        $sql_centros = "SELECT cen.id_centro, cen.nombre_cen, cen.direccion_cen, cen.estado_cen, 
+                                       emp.nombre_emp, emp.razonsocial_emp, emp.modalidadprl_emp, 
+                                       tc.nombre_tc
+                                FROM centros AS cen
+                                INNER JOIN empresa AS emp ON cen.empresa_cen = emp.id_empresa
+                                INNER JOIN tipocentros AS tc ON cen.tipo_cen = tc.id_tipocentro
+                                WHERE emp.id_empresa = :id_empresa AND cen.estado_cen = 1
+                                ORDER BY cen.nombre_cen ASC";
+                                        $query_centros = $pdo->prepare($sql_centros);
+                                        $query_centros->execute([':id_empresa' => $id_empresa_trabajador]);
+                                        $centros_datos2 = $query_centros->fetchAll(PDO::FETCH_ASSOC);
+                                        ?>
+
+                                        <form id="formAutorizacion">
+                                            <input type="hidden" name="id_trabajador" value="<?php echo $trabajador_dato['id_trabajador']; ?>">
+
+                                            <!-- Botón para seleccionar todos -->
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h6 class="text-primary"><i class="bi bi-building"></i> Centros Disponibles</h6>
+                                                <div>
+                                                    <input type="checkbox" id="selectAll" class="form-check-input">
+                                                    <label for="selectAll" class="fw-bold ms-2">Seleccionar Todos</label>
+                                                </div>
+                                            </div>
+
+                                            <!-- Grid de centros más compacto con tarjetas clickables -->
+                                            <!-- Grid de centros con efecto hover -->
+<div class="row row-cols-2 row-cols-md-3 g-1">
+    <?php foreach ($centros_datos2 as $centro): ?>
+    <div class="col">
+        <div class="card hover-effect shadow-sm border-1 mb-1" style="font-size: 0.9rem; cursor: pointer;" onclick="document.getElementById('centro_<?php echo $centro['id_centro']; ?>').click();">
+            <div class="card-body p-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="centros[]" value="<?php echo $centro['id_centro']; ?>" id="centro_<?php echo $centro['id_centro']; ?>" onclick="event.stopPropagation();">
+                    <label class="form-check-label fw-semibold" for="centro_<?php echo $centro['id_centro']; ?>" style="line-height: 1.2;">
+                        <?php echo $centro['nombre_cen']; ?>
+                    </label>
+                </div>
+                <small class="text-muted d-block" style="font-size: 0.8rem;"><?php echo $centro['nombre_emp']; ?></small>
+            </div>
+        </div>
+    </div>
+    <?php endforeach; ?>
+</div>
+                                        </form>
+                                    </div>
+
+                                    <!-- Pie del Modal -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="bi bi-x-circle"></i> Cerrar</button>
+                                        <button type="button" class="btn btn-primary" id="btnGenerar"><i class="bi bi-file-earmark-check"></i> Generar Autorización</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <script>
+                            $(document).ready(function() {
+                                // Seleccionar todos
+                                $('#selectAll').change(function() {
+                                    $('input[name="centros[]"]').prop('checked', this.checked);
+                                });
+
+                                // Botón de generar autorización
+                                $('#btnGenerar').click(function() {
+                                    var centrosSeleccionados = $('input[name="centros[]"]:checked').map(function() {
+                                        return this.value;
+                                    }).get();
+
+                                    if (centrosSeleccionados.length === 0) {
+                                        alert('Debe seleccionar al menos un centro.');
+                                        return;
+                                    }
+
+                                    var idTrabajador = $('input[name="id_trabajador"]').val();
+                                    var url = '../maestros/documentos/autorizacion_equipos2.php?id_trabajador=' + idTrabajador + '&centros=' + centrosSeleccionados.join(',');
+
+                                    window.open(url, '_blank');
+                                    $('#modalAutorizacion').modal('hide');
+                                });
+                            });
+                        </script>
                     </div>
 
 

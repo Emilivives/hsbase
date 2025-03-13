@@ -89,6 +89,10 @@ function isTreeviewOpen($pages)
     <!-- javascript bootstrap -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/js/bootstrap.bundle.min.js">
     <script src="<?php echo $URL; ?>/public/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
     <!-- css bootstrap -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/public/css/bootstrap.min.css">
     <!-- chart js -->

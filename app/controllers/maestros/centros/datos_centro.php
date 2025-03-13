@@ -1,15 +1,32 @@
 <?php
+include(__DIR__ . '/../../../config.php'); // Ruta dinámica para evitar errores
 
-$sql_centros = "SELECT cen.id_centro as id_centro, cen.nombre_cen as nombre_cen, cen.direccion_cen as direccion_cen, emp.nombre_emp as nombre_emp, tc.nombre_tc as nombre_tc 
-FROM `centros` as cen INNER JOIN empresa as emp ON cen.empresa_cen = emp.id_empresa WHERE id_centro = $id_centro
-INNER JOIN tipocentros as tc ON cen.tipo_cen = tc.id_tipocentro WHERE id_centro = $id_centro";
-$query_centros = $pdo->prepare($sql_centros);
-$query_centros->execute();
-$centros_datos = $query_centros->fetchAll(PDO::FETCH_ASSOC);
-
-foreach ($centros_datos as $centros_dato) {
-    $nombre_cen = $centros_dato['nombre_cen'];
-    $empresa_cen = $centros_dato['nombre_cen'];
-    $tipo_cen = $centros_dato['nombre_tc'];
-    $direccion_cen = $centros_dato['direccion_cen'];
+if (!isset($pdo)) {
+    die("Error: No se pudo conectar a la base de datos.");
 }
+
+$id_centro = $_GET['id_centro']; // Se recibe el ID por GET
+
+$sql_centros = "SELECT 
+    cen.id_centro, 
+    cen.nombre_cen, 
+    cen.direccion_cen, 
+    emp.id_empresa, 
+    emp.nombre_emp, 
+    tc.id_tipocentro, 
+    tc.nombre_tc 
+FROM centros AS cen
+INNER JOIN empresa AS emp ON cen.empresa_cen = emp.id_empresa
+INNER JOIN tipocentros AS tc ON cen.tipo_cen = tc.id_tipocentro
+WHERE cen.id_centro = :id_centro";
+
+$query_centros = $pdo->prepare($sql_centros);
+$query_centros->bindParam(':id_centro', $id_centro, PDO::PARAM_INT);
+$query_centros->execute();
+$centro = $query_centros->fetch(PDO::FETCH_ASSOC);
+
+if (!$centro) {
+    echo "No se encontró el centro.";
+    exit;
+}
+?>

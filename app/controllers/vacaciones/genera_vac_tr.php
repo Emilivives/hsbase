@@ -24,13 +24,16 @@ $regimen = $_POST['regimen'];
 $generado = !empty($_POST['generado']) ? $_POST['generado'] : null;
 $comunicado = !empty($_POST['comunicado']) ? $_POST['comunicado'] : "Si"; // Valor predeterminado
 $extra = !empty($_POST['extra']) ? $_POST['extra'] : "No"; // Valor predeterminado
+$usuario = $_SESSION['nombre_usr'];
 
 // Crear variables intermedias para los valores que pueden ser null
 $fecha_fin_param = $fecha_fin ?: null; // Asigna null si está vacío
 $generado_param = $generado ?: null; // Asigna null si está vacío
 
-$sentencia = $pdo->prepare("INSERT INTO vacacion_gen (id_trabajador, id_centro, fecha_inicio, fecha_fin, concepto, regimen, generado, comunicado, extra) 
-VALUES(:id_trabajador, :id_centro, :fecha_inicio, :fecha_fin, :concepto, :regimen, :generado, :comunicado, :extra)");
+$sentencia = $pdo->prepare("INSERT INTO vacacion_gen (id_trabajador, id_centro, fecha_inicio, fecha_fin, concepto, regimen, generado, 
+comunicado, extra, usuario, fyh_creacion, fyh_actualizacion) 
+VALUES(:id_trabajador, :id_centro, :fecha_inicio, :fecha_fin, :concepto, :regimen, :generado, :comunicado, 
+:extra, :usuario, :fyh_creacion, :fyh_actualizacion)");
 
 $sentencia->bindParam(':id_trabajador', $id_trabajador);    
 $sentencia->bindParam(':id_centro', $id_centro);
@@ -41,6 +44,9 @@ $sentencia->bindParam(':regimen', $regimen);
 $sentencia->bindParam(':generado', $generado_param, PDO::PARAM_STR); // Usamos la variable intermedia
 $sentencia->bindParam(':comunicado', $comunicado, PDO::PARAM_STR); // Siempre tendrá un valor
 $sentencia->bindParam(':extra', $extra, PDO::PARAM_STR); // Siempre tendrá un valor
+$sentencia->bindParam(':usuario', $usuario);
+$sentencia->bindParam(':fyh_creacion', $fechahora);
+$sentencia->bindParam(':fyh_actualizacion', $fechahora);
 
 if ($sentencia->execute()) {
     session_start();

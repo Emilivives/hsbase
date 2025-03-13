@@ -23,32 +23,32 @@ $consumido = $_POST['consumido'];
 $descuenta = $_POST['descuenta'];
 $notas = $_POST['notas'];
 $comunicado = 'Si';
+$usuario = $_SESSION['nombre_usr'];
 
 
+$sentencia = $pdo->prepare("INSERT INTO vacacion_con (id_trabajador, fecha_inicio, fecha_fin, consumido, descuenta, notas, comunicado, 
+usuario, fyh_creacion, fyh_actualizacion) 
+VALUES(:id_trabajador, :fecha_inicio, :fecha_fin, :consumido, :descuenta, :notas, :comunicado, :usuario, :fyh_creacion, :fyh_actualizacion)");
 
-$sentencia = $pdo->prepare("INSERT INTO vacacion_con (id_trabajador, fecha_inicio, fecha_fin, consumido, descuenta, notas, comunicado) 
-VALUES(:id_trabajador, :fecha_inicio, :fecha_fin, :consumido, :descuenta, :notas, :comunicado)");
-
-$sentencia->bindParam(':id_trabajador', $id_trabajador);    
+$sentencia->bindParam(':id_trabajador', $id_trabajador);
 $sentencia->bindParam(':fecha_inicio', $fecha_inicio);
 $sentencia->bindParam(':fecha_fin', $fecha_fin);
 $sentencia->bindParam(':consumido', $consumido);
 $sentencia->bindParam(':descuenta', $descuenta);
 $sentencia->bindParam(':notas', $notas);
 $sentencia->bindParam(':comunicado', $comunicado);
-
+$sentencia->bindParam(':usuario', $usuario);
+$sentencia->bindParam(':fyh_creacion', $fechahora);
+$sentencia->bindParam(':fyh_actualizacion', $fechahora);
 
 if ($sentencia->execute()) {
-session_start();
-$_SESSION['mensaje'] = "Reconocimiento registrado correctamente";
-$_SESSION['icono'] = 'success';
-header('Location: ' . $URL . '/admin/vacaciones/detalles_trabajador.php?id_trabajador='.$id_trabajador.'');
+    session_start();
+    $_SESSION['mensaje'] = "Reconocimiento registrado correctamente";
+    $_SESSION['icono'] = 'success';
+    header('Location: ' . $URL . '/admin/vacaciones/detalles_trabajador.php?id_trabajador=' . $id_trabajador . '');
 } else {
-session_start();
-$_SESSION['mensaje'] = "Formacion NO creada";
-$_SESSION['icono'] = 'warning';
-header('Location: ' . $URL . '/admin/vacaciones/detalles_trabajador.php?id_trabajador='.$id_trabajador.'');
+    session_start();
+    $_SESSION['mensaje'] = "Formacion NO creada";
+    $_SESSION['icono'] = 'warning';
+    header('Location: ' . $URL . '/admin/vacaciones/detalles_trabajador.php?id_trabajador=' . $id_trabajador . '');
 }
-
-
-?>

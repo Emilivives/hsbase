@@ -24,10 +24,12 @@ $regimen = 1;
 $generado = $_POST['generado'];
 $comunicado = 'Si';
 $extra = $_POST['extra'];
+$usuario = $_SESSION['nombre_usr'];
 
-
-$sentencia = $pdo->prepare("INSERT INTO vacacion_gen (id_trabajador, id_centro, fecha_inicio, fecha_fin, concepto, regimen, generado, comunicado, extra) 
-VALUES(:id_trabajador, :id_centro, :fecha_inicio, :fecha_fin, :concepto, :regimen, :generado, :comunicado, :extra)");
+$sentencia = $pdo->prepare("INSERT INTO vacacion_gen (id_trabajador, id_centro, fecha_inicio, fecha_fin, concepto, regimen, generado, comunicado, extra,
+ usuario, fyh_creacion, fyh_actualizacion) 
+VALUES(:id_trabajador, :id_centro, :fecha_inicio, :fecha_fin, :concepto, :regimen, :generado, :comunicado, 
+:extra, :usuario, :fyh_creacion, :fyh_actualizacion)");
 
 $sentencia->bindParam(':id_trabajador', $id_trabajador);    
 $sentencia->bindParam(':id_centro', $id_centro);
@@ -38,6 +40,9 @@ $sentencia->bindParam(':regimen', $regimen);
 $sentencia->bindParam(':generado', $generado);
 $sentencia->bindParam(':comunicado', $comunicado);
 $sentencia->bindParam(':extra', $extra);
+$sentencia->bindParam(':usuario', $usuario);
+$sentencia->bindParam(':fyh_creacion', $fechahora);
+$sentencia->bindParam(':fyh_actualizacion', $fechahora);
 
 if ($sentencia->execute()) {
 session_start();

@@ -26,6 +26,7 @@ $consumido = !empty($_POST['consumido']) ? $_POST['consumido'] : null;
 $descuenta = isset($_POST['descuenta']) && $_POST['descuenta'] === "0" ? 0 : 1; // 0 si es "PERMISO JUSTIFICADO", 1 si es otro
 $notas = $_POST['notas'];
 $comunicado = $_POST['comunicado'];
+$usuario = $_SESSION['nombre_usr'];
 
 // Crear variables intermedias para valores opcionales
 $fecha_fin_param = $fecha_fin ?: null; // Null si vacío
@@ -39,8 +40,10 @@ try {
             fecha_fin = :fecha_fin,
             consumido = :consumido,
             descuenta = :descuenta,
-            notas = :notas,
-               comunicado = :comunicado
+            notas = :notas, 
+            comunicado = :comunicado, 
+            usuario = :usuario, 
+            fyh_actualizacion = :fyh_actualizacion
         WHERE id_vac_consumida = :id_vac_consumida");
 
     // Vinculamos los parámetros
@@ -52,6 +55,8 @@ try {
     $sentencia->bindParam(':descuenta', $descuenta, PDO::PARAM_INT);
     $sentencia->bindParam(':notas', $notas);
     $sentencia->bindParam(':comunicado', $comunicado);
+    $sentencia->bindParam(':usuario', $usuario);
+    $sentencia->bindParam(':fyh_actualizacion', $fechahora);
 
     // Ejecutamos la consulta
     if ($sentencia->execute()) {
@@ -92,4 +97,3 @@ try {
 
     header('Location: ' . $URL . '/admin/vacaciones/detalles_trabajador.php?id_trabajador=' . $id_trabajador);
 }
-?>

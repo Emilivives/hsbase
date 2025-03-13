@@ -147,6 +147,8 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 						 <th style="text-align: center">Empresa</th>
                         <th style="text-align: center">Tipo Form.</th>
                         <th style="text-align: center">Nombre trab.</th>
+                        <th style="text-align: center">H/M</th>
+                        <th style="text-align: center">Categoria</th>
                         <th style="text-align: center">Fecha Form.</th>
                         <th style="text-align: center">Fecha Caduc.</th>
                         <th style="text-align: center">Acciones</th>
@@ -226,6 +228,8 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
 
                             </td>
                             <td style="text-align: left"> <a href="../trabajadores/trabajadorshow.php?id_trabajador=<?php echo $formaciones_dato['idtrabajador_fas'];?>"> <?php echo $formaciones_dato['nombre_tr']; ?></a></td>
+                            <td style="text-align: left"> <?php echo $formaciones_dato['sexo_tr']; ?></a></td>
+                            <td style="text-align: left"> <?php echo $formaciones_dato['nombre_cat']; ?></a></td>
                             <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($formaciones_dato['fecha_fr'])); ?></td>
                             <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($formaciones_dato['fechacad_fr'])); ?></td>
 

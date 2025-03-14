@@ -29,7 +29,11 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href=https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 
+<!-- Incluir JS de Select2 y jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <style>
     .dropdown-font-size {
         font-size: 12px;
@@ -136,7 +140,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                     </div>
 
                                     <div class="row">
-                                        <div class="form-group row col-md-6">
+                                        <div class="form-group row col-md-5">
                                             <!-- Clase EPI -->
                                             <label for="clase_epi" class="col-form-label col-sm-2">Clase</label>
                                             <div class="col-sm-8">
@@ -149,18 +153,20 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                             </div>
                                         </div>
 
-                                        <div class="form-group row col-md-6">
+                                        <div class="form-group row col-md-7">
                                             <!-- Tipo EPI -->
-                                            <label for="centro" class="col-form-label col-sm-2">EPI: *</label>
-                                            <div class="col-sm-10">
-                                                <select name="tipo_epi" id="btn_centro" class="form-control" required>
-                                                    <option value="0">--Seleccione tipo epi--</option>
+                                            <label for="tipo_epi" class="col-form-label col-sm-2">EPI: *</label>
+                                            <div class="col-sm-8">
+                                                <select name="tipo_epi" id="tipo_epi" class="form-control select2" required>
+                                                    <option value="">--Seleccione tipo epi--</option>
                                                     <?php foreach ($epis_datos as $epis_dato) { ?>
-                                                        <option value="<?php echo $epis_dato['id_epi']; ?>" nombre_cen="<?php echo $epis_dato['nombre_epi']; ?>">
+                                                        <option value="<?php echo $epis_dato['id_epi']; ?>">
                                                             <?php echo $epis_dato['nombre_epi']; ?>
                                                         </option>
                                                     <?php } ?>
                                                 </select>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -1052,6 +1058,15 @@ include('../../admin/layout/mensaje.php');
             }
         });
     }
+
+    $(document).ready(function() {
+        $('#tipo_epi').select2({
+            dropdownParent: $('#modal-nuevoepi .modal-body'),
+            theme: 'bootstrap4',
+            width: '100%'
+        });
+    });
+</script>
 </script>
 <script>
     $(function() {

@@ -60,9 +60,9 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                 <div class="card-body">
                     <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="">Tipo de Formación</label>
+                                <label for="">TIPO FORMACIÓN</label>
                                 <select name="tipo_fr" id="tipo_fr" class="form-control">
                                     <?php
                                     foreach ($tipoformaciones_datos as $tipoformaciones_dato) { ?>
@@ -79,20 +79,20 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="">Fecha Formacion</label>
+                                <label for="">FECHA FORMACIÓN</label>
                                 <input type="date" name="fecha_fr" id="fecha_fr" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="">Valido hasta</label>
+                                <label for="">VALIDO HASTA</label>
                                 <input type="date" name="fechacad_fr" id="fechacad_fr" class="form-control">
                             </div>
 
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="">Formador</label>
+                                <label for="">FORMADOR</label>
                                 <select name="formador_fr" id="formador_fr" class="form-control">
                                     <?php
                                     foreach ($responsables_datos as $responsables_dato) { ?>
@@ -104,7 +104,17 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                             </div>
                         </div>
 
-                    </div> <br><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="">ANOTACIONES</label>
+                                <input type="text" name="detalle_fr" id="detalle_fr"class="form-control">
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
 
                     <!-- modal para visualizar datos de los trabajadores -->
                     <div class="modal-body" style="display: block;">
@@ -307,42 +317,43 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
                                 <div id="respuesta_registro_formacion"></div>
                                 <script>
                                     $('#btn_guardar_formacion').click(function() {
-                                            var nroformacion = '<?php echo $contador_formaciones ?>';
-                                            var tipo_fr = $('#tipo_fr').val();
-                                            var fecha_fr = $('#fecha_fr').val();
-                                            var fechacad_fr = $('#fechacad_fr').val();
-                                            var formador_fr = $('#formador_fr').val();
+                                        var nroformacion = '<?php echo $contador_formaciones ?>';
+                                        var tipo_fr = $('#tipo_fr').val();
+                                        var fecha_fr = $('#fecha_fr').val();
+                                        var fechacad_fr = $('#fechacad_fr').val();
+                                        var formador_fr = $('#formador_fr').val();
+                                        var detalle_fr = $('#detalle_fr').val();
 
 
-                                            if (fecha_fr == "") {
-                                                alert("debe indicar la fecha de formacion");
+                                        if (fecha_fr == "") {
+                                            alert("debe indicar la fecha de formacion");
 
-                                            } else if (nroformacion == "") {
-                                                alert("debe indicar el numero de formacion");
+                                        } else if (nroformacion == "") {
+                                            alert("debe indicar el numero de formacion");
 
-                                            } else{
-                                                var url = "../../app/controllers/formaciones/registrar_formacion.php";
-                                                $.get(url, {
-                                                    nroformacion: nroformacion,
-                                                    tipo_fr: tipo_fr,
-                                                    fecha_fr: fecha_fr,
-                                                    fechacad_fr: fechacad_fr,
-                                                    formador_fr: formador_fr
-                                                }, function(datos) {
-                                                    $('#respuesta_registro_formacion').html(datos);
-                                                })
+                                        } else {
+                                            var url = "../../app/controllers/formaciones/registrar_formacion.php";
+                                            $.get(url, {
+                                                nroformacion: nroformacion,
+                                                tipo_fr: tipo_fr,
+                                                fecha_fr: fecha_fr,
+                                                fechacad_fr: fechacad_fr,
+                                                formador_fr: formador_fr,
+                                                detalle_fr: detalle_fr
+                                            }, function(datos) {
+                                                $('#respuesta_registro_formacion').html(datos);
+                                            })
                                             /*} else($tipo_fr == 1) {
                                                 <?php
-                                                $sentencia2 = $pdo -> prepare("UPDATE trabajadores as tr SET tr.formacionpdt_tr = $fecha_tr 
+                                                $sentencia2 = $pdo->prepare("UPDATE trabajadores as tr SET tr.formacionpdt_tr = $fecha_tr 
                                                 INNER JOIN form_asistencia as fas ON tr.id_trabajador = fas.idtrabajador_fas
                                                 INNER JOIN formacion as fr ON fas.nroformacion = fr.nroformacion WHERE tr.id_trabajador = fas.idtrabajador_fas");
-                                                $sentencia2 -> bindParam('formacionpdt_tr', $fecha_fr);
+                                                $sentencia2->bindParam('formacionpdt_tr', $fecha_fr);
                                                 ?>
                                             }*/
 
                                         }
-                                    }
-                                    );
+                                    });
                                 </script>
 
                             </div>
@@ -355,12 +366,12 @@ include('../../app/controllers/maestros/categorias/listado_categorias.php');
 
             </div>
         </div>
-			
+
     </div>
-		<div class="btn-text-center">
-            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador" title="Añadir nuevo trabajador"><i class="bi bi-person-plus-fill"></i>AÑADIR NUEVO TRABAJADOR</button>
-        </div>
-		<!-- inicio modal nuevo trabajador-->
+    <div class="btn-text-center">
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modal-nuevotrabajador" title="Añadir nuevo trabajador"><i class="bi bi-person-plus-fill"></i>AÑADIR NUEVO TRABAJADOR</button>
+    </div>
+    <!-- inicio modal nuevo trabajador-->
     <div class="modal fade" id="modal-nuevotrabajador">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">

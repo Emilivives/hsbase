@@ -840,7 +840,8 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
 
                         <table id="" class="table table-sm">
                             <colgroup>
-                                <col width="60%">
+                                <col width="50%">
+                                <col width="10%">
                                 <col width="15%">
                                 <col width="15%">
                                 <col width="10%">
@@ -849,6 +850,7 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
                                 <tr>
 
                                     <th style="text-align: center">Tipo Form.</th>
+                                    <th style="text-align: center">Detalle</th>
                                     <th style="text-align: center">Fecha Form.</th>
                                     <th style="text-align: center">Fecha Caduc.</th>
                                     <th style="text-align: center">Acciones</th>
@@ -863,6 +865,8 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
 
                                     <tr>
                                         <td style="text-align: center"><?php echo $trabajador_formacion['nombre_tf']; ?></td>
+                                        <td style="text-align: center"><?php echo $trabajador_formacion['detalle_fr']; ?></td>
+
                                         <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($trabajador_formacion['fecha_fr'])) ?></td>
                                         <td style="text-align: center"><?php echo $newdate = date("d-m-Y", strtotime($trabajador_formacion['fechacad_fr'])) ?></td>
 

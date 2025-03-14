@@ -2,7 +2,7 @@
 
 include('../../../app/config.php');
 
-$id_formacion = $_POST['id_formacion'];
+$id_formacion = $_GET['id_formacion'];
 
 
     $sentencia = $pdo->prepare("DELETE FROM formacion WHERE id_formacion = '$id_formacion'");

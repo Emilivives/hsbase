@@ -111,10 +111,18 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                             </div>
                         </div>
 
-                    </div> <br><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="">ANOTACIONES</label>
+                                <input type="text" name="detalle_fr" value="<?php echo htmlspecialchars($detalle_fr, ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
+                            </div>
+                        </div>
+                    </div> <br>
 
-                    <br>
 
+                    <label for="">ASISTENTES: </label>
                     <div class="table-responsive">
                         <table class="table table-bordered table-sm table-hover table-stripped">
                             <thead>
@@ -162,9 +170,10 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                             <center>
 
                                                 <form action="../../app/controllers/formaciones/borrar_trabajadorformacion.php" method="POST">
-                                                    <input type="text" name="id_formasistencia" value="<?php echo $id_formasistencia ?>" hidden>
+                                                    <input type="hidden" name="id_formasistencia" value="<?php echo $id_formasistencia; ?>">
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Borrar</button>
                                                 </form>
+
                                                 <a href="../maestros/documentos/pdf_titulo_formacion.php?id_formacion=<?php echo $id_formacion; ?>&id_trabajador=<?php echo $formasistencia_dato['id_trabajador'] ?>" class="btn btn-warning btn-sm" title="Generar titulo" target="_blank"><i class="fa-regular fa-file-lines"></i> Titulo</a>
 
                                             </center>
@@ -189,6 +198,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                         var fecha_fr = $('input[name="fecha_fr"]').val();
                                         var fechacad_fr = $('input[name="fechacad_fr"]').val();
                                         var formador_fr = $('select[name="formador_fr"]').val();
+                                        var detalle_fr = $('input[name="detalle_fr"]').val();
 
                                         // Validation
                                         if (!fecha_fr) {
@@ -212,7 +222,8 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                                 tipo_fr: tipo_fr,
                                                 fecha_fr: fecha_fr,
                                                 fechacad_fr: fechacad_fr,
-                                                formador_fr: formador_fr
+                                                formador_fr: formador_fr,
+                                                detalle_fr: detalle_fr,
                                             },
                                             success: function(response) {
                                                 // Primero intentamos parsear la respuesta como JSON
@@ -233,6 +244,7 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
                                                         $('input[name="fecha_fr"]').val(response.data.fecha_fr);
                                                         $('input[name="fechacad_fr"]').val(response.data.fechacad_fr);
                                                         $('select[name="formador_fr"]').val(response.data.formador_fr);
+                                                        $('input[name="detalle_fr"]').val(response.data.detalle_fr);
                                                     }
 
                                                     // Recargamos la página después de 1.5 segundos

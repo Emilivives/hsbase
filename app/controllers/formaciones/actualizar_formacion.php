@@ -20,7 +20,7 @@ try {
     $fecha_fr = isset($_POST['fecha_fr']) ? $_POST['fecha_fr'] : '';
     $fechacad_fr = isset($_POST['fechacad_fr']) ? $_POST['fechacad_fr'] : '';
     $formador_fr = isset($_POST['formador_fr']) ? $_POST['formador_fr'] : '';
-
+    $detalle_fr = isset($_POST['detalle_fr']) ? $_POST['detalle_fr'] : '';
     // Start transaction
     $pdo->beginTransaction();
 
@@ -29,7 +29,8 @@ try {
         SET tipo_fr = :tipo_fr, 
             fecha_fr = :fecha_fr, 
             fechacad_fr = :fechacad_fr, 
-            formador_fr = :formador_fr
+            formador_fr = :formador_fr,
+            detalle_fr = :detalle_fr
         WHERE nroformacion = :nroformacion");
 
     // Bind parameters
@@ -38,6 +39,7 @@ try {
     $sentencia->bindParam(':fecha_fr', $fecha_fr);
     $sentencia->bindParam(':fechacad_fr', $fechacad_fr);
     $sentencia->bindParam(':formador_fr', $formador_fr);
+    $sentencia->bindParam(':detalle_fr', $detalle_fr);
 
     // Execute and check result
     if ($sentencia->execute()) {

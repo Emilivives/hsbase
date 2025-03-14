@@ -30,6 +30,11 @@ include('../../app/controllers/maestros/evaluacion/listado_riesgos.php');
 <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+<!-- Incluir JS de Select2 y jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
 <style>
     .dropdown-font-size {
@@ -180,16 +185,13 @@ include('../../app/controllers/maestros/evaluacion/listado_riesgos.php');
                                                 <div class="form-group row">
                                                     <label for="" class="col-form-label col-sm-3">Clase / Tipo *</label>
                                                     <div class="col-sm-7">
-                                                        <select name="tipo_maq" id="" class="form-control" required>
-                                                            <option value="">--Seleccione Responsable--</option>
-                                                            <?php
-                                                            foreach ($tipomaquina_datos as $tipomaquina_dato) { ?>
+                                                        <select name="tipo_maq" id="tipo_maq" class="form-control select2" required>
+                                                            <option value="">--Seleccione tipo máquina--</option>
+                                                            <?php foreach ($tipomaquina_datos as $tipomaquina_dato) { ?>
                                                                 <option value="<?php echo $tipomaquina_dato['id_tipomaquina']; ?>">
                                                                     <?php echo $tipomaquina_dato['clase_tm']; ?> | <?php echo $tipomaquina_dato['nombre_tm']; ?>
                                                                 </option>
-                                                            <?php
-                                                            }
-                                                            ?>
+                                                            <?php } ?>
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-2">
@@ -638,12 +640,13 @@ include('../../app/controllers/maestros/evaluacion/listado_riesgos.php');
                             <col width="7%">
                             <col width="7%">
                             <col width="7%">
-                            <col width="5%">
-                            <col width="5%">
-                            <col width="5%">
+                            <col width="7%">
+                            <col width="3%">
+                            <col width="3%">
+                            <col width="3%">
                             <col width="5%">
 
-                            <col width="5%">
+                            <col width="6%">
 
 
                         </colgroup>
@@ -652,8 +655,9 @@ include('../../app/controllers/maestros/evaluacion/listado_riesgos.php');
                                 <th style="text-align: center">#</th>
                                 <th style="text-align: left">Tipo</th>
                                 <th style="text-align: left">Clase</th>
-                                <th style="text-align: center">Marca</th>
+                                <th style="text-align: left">Marca</th>
                                 <th style="text-align: left">Modelo</th>
+                                <th style="text-align: left">Num. Serie</th>
                                 <th style="text-align: left">Centro tº</th>
                                 <th style="text-align: left">Manual </th>
                                 <th style="text-align: left">CE</th>
@@ -678,6 +682,7 @@ include('../../app/controllers/maestros/evaluacion/listado_riesgos.php');
                                     <td style="text-align: left"><b><?php echo $maquinas_dato['clase_tm']; ?></b></td>
                                     <td style="text-align: left"><b><?php echo $maquinas_dato['marca_maq']; ?></b></td>
                                     <td style="text-align: left"><b><?php echo $maquinas_dato['modelo_maq']; ?></b></td>
+                                    <td style="text-align: left"><b><?php echo $maquinas_dato['numserie_maq']; ?></b></td>
                                     <td style="text-align: left"><?php echo $maquinas_dato['nombre_cen']; ?></td>
                                     <td style="text-align: left"><?php $maquinas_dato['manual_maq']; ?>
                                         <?php if ($maquinas_dato['manual_maq'] == "Si") { ?>
@@ -1272,68 +1277,74 @@ include('../../admin/layout/mensaje.php');
             }
         });
     }
+    //select2 seleccion equipos
+    $(document).ready(function() {
+        $('#tipo_maq').select2({
+            dropdownParent: $('#nuevo-equipotrabajo .modal-body'),
+            theme: 'bootstrap4',
+            width: '100%'
+        });
+    });
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.modal').forEach(modal => {
-        const form = modal.querySelector('#form-riesgo');
-        const guardarSeguirBtn = modal.querySelector('#guardar-seguir');
-        const guardarSalirBtn = modal.querySelector('#guardar-salir');
-        
-        // Variable para controlar si debemos cerrar el modal
-        let shouldCloseModal = false;
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.modal').forEach(modal => {
+            const form = modal.querySelector('#form-riesgo');
+            const guardarSeguirBtn = modal.querySelector('#guardar-seguir');
+            const guardarSalirBtn = modal.querySelector('#guardar-salir');
 
-        if (form) {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                // Determinar qué botón fue presionado
-                shouldCloseModal = event.submitter.id === 'guardar-salir';
-                
-                const formData = new FormData(form);
+            // Variable para controlar si debemos cerrar el modal
+            let shouldCloseModal = false;
 
-                fetch(form.action, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Riesgo agregado correctamente');
-                        
-                        if (shouldCloseModal) {
-                            // Forzar el cierre del modal usando Bootstrap
-                            const modalInstance = bootstrap.Modal.getInstance(modal);
-                            if (modalInstance) {
-                                modalInstance.hide();
+            if (form) {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    // Determinar qué botón fue presionado
+                    shouldCloseModal = event.submitter.id === 'guardar-salir';
+
+                    const formData = new FormData(form);
+
+                    fetch(form.action, {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Riesgo agregado correctamente');
+
+                                if (shouldCloseModal) {
+                                    // Forzar el cierre del modal usando Bootstrap
+                                    const modalInstance = bootstrap.Modal.getInstance(modal);
+                                    if (modalInstance) {
+                                        modalInstance.hide();
+                                    } else {
+                                        // Fallback a jQuery si el método de Bootstrap no funciona
+                                        $(modal).modal('hide');
+                                    }
+
+                                    // Recargar después de un breve delay
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 500);
+                                } else {
+                                    // Solo resetear el formulario si no vamos a cerrar
+                                    form.reset();
+                                }
                             } else {
-                                // Fallback a jQuery si el método de Bootstrap no funciona
-                                $(modal).modal('hide');
+                                alert('Error al agregar riesgo');
                             }
-                            
-                            // Recargar después de un breve delay
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 500);
-                        } else {
-                            // Solo resetear el formulario si no vamos a cerrar
-                            form.reset();
-                        }
-                    } else {
-                        alert('Error al agregar riesgo');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error al procesar la solicitud');
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error al procesar la solicitud');
+                        });
                 });
-            });
-        }
+            }
+        });
     });
-});
-
-
 </script>
 
 

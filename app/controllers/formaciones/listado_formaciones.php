@@ -1,6 +1,6 @@
 <?php
 
-$sql = "SELECT *, tf.nombre_tf as nombre_tf, fr.fecha_fr as fecha_fr, fr.fechacad_fr as fechacad_fr, 
+$sql = "SELECT *, tf.nombre_tf as nombre_tf, fr.fecha_fr as fecha_fr, fr.fechacad_fr as fechacad_fr, fr.detalle_fr as detalle_fr,
 fas.idtrabajador_fas as idtrabajador_fas, tf.duracion_tf as duracion_tf, tf.detalles_tf as detalles_tf, cat.nombre_cat as nombre_cat, emp.nombre_emp as nombre_emp, 
 resp.nombre_resp as nombre_resp FROM formacion as fr 
 INNER JOIN tipoformacion as tf ON fr.tipo_fr = tf.id_tipoformacion

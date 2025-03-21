@@ -5,8 +5,10 @@ $id_trabajador = $_GET['id_trabajador'];
 
 include('../../admin/layout/parte1.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
+include('../../app/controllers/maestros/empresas/listado_empresas.php');
 include('../../app/controllers/trabajadores/listado_trabajadores.php');
 include('../../app/controllers/trabajadores/listado_tr_noformado.php');
+include('../../app/controllers/trabajadores/listado_tr_formacioncaducada.php');
 include('../../app/controllers/maestros/categorias/listado_categorias.php');
 include('../../app/controllers/maestros/documentos/listado_infoprl.php');
 ?>
@@ -17,13 +19,15 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
 <style>
-  .hover-effect {
-      transition: box-shadow 0.3s ease, background-color 0.3s ease;
-  }
-  .hover-effect:hover {
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-      background-color:rgb(196, 196, 196); /* Cambia este color según tu preferencia */
-  }
+    .hover-effect {
+        transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+
+    .hover-effect:hover {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        background-color: rgb(196, 196, 196);
+        /* Cambia este color según tu preferencia */
+    }
 </style>
 
 <div class="content-header">
@@ -84,7 +88,8 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
 
         </div>
     </div>
-    <!-- ./col -->
+
+
     <div class="col-lg-1 col-6">
         <!-- small box -->
         <div class="small-box bg-light shadow-sm border">
@@ -160,6 +165,7 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
                 <i class="fas fa-book" data-toggle="modal" data-target="#modal-pendientesformar"></i>
             </div>
 
+            <!-- inicio modal pendientes formar-->
             <!-- inicio modal nuevo trabajador-->
             <div class="modal fade" id="modal-pendientesformar">
                 <div class="modal-dialog modal-xl">
@@ -169,23 +175,23 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
                             <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
+
                         </div>
                         <div class="modal-body">
-                            <table id="" class="table table-sm">
+                            <table id="modal-table" class="table table-sm">
                                 <colgroup>
-                                    <col width="40%">
+                                    <col width="35%">
                                     <col width="20%">
                                     <col width="30%">
-                                    <col width="10%">
+                                    <col width="15%">
                                 </colgroup>
                                 <thead>
                                     <tr>
-
-                                        <th style="text-align: center">Nombre</th>
-                                        <th style="text-align: center">Categoria</th>
-                                        <th style="text-align: center">Centro</th>
-                                        <th style="text-align: center">Empresa</th>
-                                        <th style="text-align: center">-</th>
+                                        <th style="text-align: left">Nombre</th>
+                                        <th style="text-align: left">Categoria</th>
+                                        <th style="text-align: left">Centro</th>
+                                        <th style="text-align: left">Empresa</th>
+                                        <th style="text-align: left">-</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -194,55 +200,134 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
                                     foreach ($trabajadores_noformados as $trabajador_noformados) {
                                         $contador = $contador + 1;
                                     ?>
-
                                         <tr>
-                                            <td style="text-align: center"><?php echo $trabajador_noformados['nombre_tr']; ?></td>
-                                            <td style="text-align: center"><?php echo $trabajador_noformados['nombre_cat']; ?></td>
-                                            <td style="text-align: center"><?php echo $trabajador_noformados['nombre_cen']; ?></td>
-                                            <td style="text-align: center"><?php echo $trabajador_noformados['nombre_emp']; ?></td>
-                                            <td style="text-align: center;"> <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $trabajador_noformados['id_trabajador']; ?>" class="btn btn-primary btn-sm" title="Ver detalles"></i> Ver</a>
-
-
-                                            <?php
-                                        }
-                                            ?>
+                                            <td style="text-align: left"><?php echo $trabajador_noformados['nombre_tr']; ?></td>
+                                            <td style="text-align: left"><?php echo $trabajador_noformados['nombre_cat']; ?></td>
+                                            <td style="text-align: left"><?php echo $trabajador_noformados['nombre_cen']; ?></td>
+                                            <td style="text-align: left"><?php echo $trabajador_noformados['nombre_emp']; ?></td>
+                                            <td style="text-align: left;">
+                                                <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $trabajador_noformados['id_trabajador']; ?>" class="btn btn-primary btn-sm" title="Ver detalles">Ver</a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
-
                         </div>
-
                     </div>
                 </div>
             </div>
+            <!--fin modal-->
+
             <!--fin modal-->
 
         </div>
     </div>
 
     <!-- ./col -->
-    <div class="col-lg-3 col-6">
+    <div class="col-lg-1 col-6">
         <!-- small box -->
         <div class="small-box bg-light shadow-sm border">
             <div class="inner">
                 <?php
-                $contador_de_trabajadores = 0;
-                foreach ($trabajadores as $trabajador) {
-                    if ($trabajador['activo_tr'] == 1) {
-                        $contador_de_trabajadores = $contador_de_trabajadores + 1;
-                    }
-                }
+                $sql = "SELECT COUNT(DISTINCT fas.idtrabajador_fas) AS expiring_count
+        FROM form_asistencia fas
+        INNER JOIN formacion fr ON fas.nroformacion = fr.nroformacion
+        INNER JOIN tipoformacion tf ON fr.tipo_fr = tf.id_tipoformacion
+        WHERE tf.art19_tf = 1
+          AND fr.fechacad_fr BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 3 MONTH)";
+
+                $query = $pdo->prepare($sql);
+                $query->execute();
+                $result = $query->fetch(PDO::FETCH_ASSOC);
+                $expiring_count = $result['expiring_count'];
                 ?>
 
-                <h2><?php echo $contador_de_trabajadores; ?><sup style="font-size: 20px"></h2>
-                <p>Trabajadores activos</p>
+                <h2><?php echo $expiring_count; ?><sup style="font-size: 20px"></h2>
+                <p>Formaciones vencidas</p>
             </div>
             <div class="icon">
-                <i class="ion bi-person-arms-up"></i>
+                <i class="fas bi-calendar-x" data-toggle="modal" data-target="#modal-formacioncaducada"></i>
             </div>
 
+            <!--  modal mostrar trabajadores con formacion a caducar-->
+            <!--  modal mostrar trabajadores con formacion a caducar-->
+            <div class="modal fade" id="modal-formacioncaducada">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#138fec; color:black">
+                            <h5 class="modal-title" id="modal-formacioncaducada">FORMACION CADUCADA</h5>
+                            <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
+                        </div>
+                        <div class="modal-body">
+                            <table id="modal-table-caducada" class="table table-sm">
+                                <colgroup>
+                                    <col width="30%">
+                                    <col width="10%">
+                                    <col width="20%">
+                                    <col width="25%">
+                                    <col width="15%">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left">Nombre</th>
+                                        <th style="text-align: left">Fecha cad</th>
+                                        <th style="text-align: left">Categoria</th>
+                                        <th style="text-align: left">Centro</th>
+                                        <th style="text-align: left">Empresa</th>
+                                        <th style="text-align: left">-</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $contador = 0;
+                                    foreach ($trabajadores_formacioncaducada as $trabajador_formacioncaducada) {
+                                        $contador++;
+                                        // Convertir la fecha de caducidad y la fecha actual a timestamp
+                                        $fechaCad = strtotime($trabajador_formacioncaducada['fechacad_fr']);
+                                        $hoy = strtotime(date("Y-m-d"));
+                                        // Asignar clase de Bootstrap si la fecha de caducidad es anterior a hoy
+                                        $class = ($fechaCad < $hoy) ? 'table-danger' : '';
+                                        // Para la fecha, si es caducada se subraya
+                                        $estiloFecha = ($fechaCad < $hoy) ? 'text-decoration: underline;' : '';
+                                    ?>
+                                        <tr class="<?php echo $class; ?>">
+                                            <td style="text-align: left"><?php echo $trabajador_formacioncaducada['nombre_tr']; ?></td>
+                                            <td style="text-align: left; <?php echo $estiloFecha; ?>">
+                                                <?php echo date("d/m/Y", strtotime($trabajador_formacioncaducada['fechacad_fr'])); ?>
+                                            </td>
+                                            <td style="text-align: left"><?php echo $trabajador_formacioncaducada['nombre_cat']; ?></td>
+                                            <td style="text-align: left"><?php echo $trabajador_formacioncaducada['nombre_cen']; ?></td>
+                                            <td style="text-align: left"><?php echo $trabajador_formacioncaducada['nombre_emp']; ?></td>
+                                            <td style="text-align: left">
+                                                <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $trabajador_formacioncaducada['id_trabajador']; ?>" class="btn btn-primary btn-sm" title="Ver detalles">Ver</a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <!--fin modal-->
         </div>
     </div>
-    <div class="col-lg-1 col-6">
+
+    <!-- ./col -->
+
+    <div class="col-lg-3 col-6">
 
 
 
@@ -386,23 +471,31 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
 
 
                                 <div class="row">
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label for="">Centro Trabajo</label>
-                                            <select name="centro_tr" id="" class="form-control">
-                                                <option value="0">--Seleccione centro--</option>
-                                                <?php
-                                                foreach ($centros_datos as $centros_dato) { ?>
-                                                    <option value="<?php echo $centros_dato['id_centro']; ?>"><?php echo $centros_dato['nombre_cen']; ?> - <?php echo $centros_dato['nombre_emp']; ?></option>
-                                                <?php
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
+                                    <div class="col-md-3">
+                                        <!-- Select de Empresa (solo para mostrar, no se envía en el formulario) -->
+                                        <label for="empresa">Empresa:</label>
+                                        <select id="empresa_cen" class="form-control" required>
+                                            <option value="">Seleccione una empresa</option>
+                                            <?php foreach ($empresas_datos as $empresa) { ?>
+                                                <option value="<?php echo $empresa['id_empresa']; ?>">
+                                                    <?php echo $empresa['nombre_emp']; ?>
+                                                </option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
-                                    <div class="col-md-2">
+
+                                    <div class="col-md-4">
+                                        <!-- Select de Centros (se enviará en el formulario) -->
+                                        <label for="centro">Centro de Trabajo:</label>
+                                        <select name="centro_tr" id="centro_cen" class="form-control" required>
+                                            <option value="">Seleccione una empresa primero</option>
+                                        </select>
                                     </div>
-                                    <div class="col-md-5">
+
+
+                                    <div class="col-md-1">
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Categoria</label>
                                             <select name="categoria_tr" id="" class="form-control">
@@ -471,12 +564,23 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
                     <?php
                                                                                                                             }
                     ?>
-                    <?php $trabajador_dato['formacionpdt_tr'];
-                    if ($trabajador_dato['formacionpdt_tr'] == 'No') { ?>
-                        <span class='badge badge-danger'>NO FORMADO</span>
-                    <?php
-                    }
+                    <?php $sql = "SELECT COUNT(*) AS count_puesto
+                    FROM formacion fr
+                    INNER JOIN tipoformacion tf ON fr.tipo_fr = tf.id_tipoformacion
+                    INNER JOIN form_asistencia fas ON fas.nroformacion = fr.nroformacion
+                    WHERE fas.idtrabajador_fas = :id_trabajador AND tf.art19_tf = 1";
+                    $query = $pdo->prepare($sql);
+                    $query->bindValue(':id_trabajador', $id_trabajador, PDO::PARAM_INT);
+                    $query->execute();
+                    $result = $query->fetch(PDO::FETCH_ASSOC);
+                    $countPuesto = $result['count_puesto'];
                     ?>
+                    <?php if ($countPuesto > 0) { ?>
+                        <span class='badge badge-success'>Formado</span><?php
+                                                                    } else { ?>
+                        <span class='badge badge-danger'>No Formado</span><?php
+                                                                        } ?>
+
                     <?php $trabajador_dato['informacion_tr'];
                     if ($trabajador_dato['informacion_tr'] <> 'Si') { ?>
                         <span class='badge badge-danger'>NO INFORMADO</span>
@@ -1180,23 +1284,23 @@ include('../../app/controllers/maestros/documentos/listado_infoprl.php');
 
                                             <!-- Grid de centros más compacto con tarjetas clickables -->
                                             <!-- Grid de centros con efecto hover -->
-<div class="row row-cols-2 row-cols-md-3 g-1">
-    <?php foreach ($centros_datos2 as $centro): ?>
-    <div class="col">
-        <div class="card hover-effect shadow-sm border-1 mb-1" style="font-size: 0.9rem; cursor: pointer;" onclick="document.getElementById('centro_<?php echo $centro['id_centro']; ?>').click();">
-            <div class="card-body p-2">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="centros[]" value="<?php echo $centro['id_centro']; ?>" id="centro_<?php echo $centro['id_centro']; ?>" onclick="event.stopPropagation();">
-                    <label class="form-check-label fw-semibold" for="centro_<?php echo $centro['id_centro']; ?>" style="line-height: 1.2;">
-                        <?php echo $centro['nombre_cen']; ?>
-                    </label>
-                </div>
-                <small class="text-muted d-block" style="font-size: 0.8rem;"><?php echo $centro['nombre_emp']; ?></small>
-            </div>
-        </div>
-    </div>
-    <?php endforeach; ?>
-</div>
+                                            <div class="row row-cols-2 row-cols-md-3 g-1">
+                                                <?php foreach ($centros_datos2 as $centro): ?>
+                                                    <div class="col">
+                                                        <div class="card hover-effect shadow-sm border-1 mb-1" style="font-size: 0.9rem; cursor: pointer;" onclick="document.getElementById('centro_<?php echo $centro['id_centro']; ?>').click();">
+                                                            <div class="card-body p-2">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" name="centros[]" value="<?php echo $centro['id_centro']; ?>" id="centro_<?php echo $centro['id_centro']; ?>" onclick="event.stopPropagation();">
+                                                                    <label class="form-check-label fw-semibold" for="centro_<?php echo $centro['id_centro']; ?>" style="line-height: 1.2;">
+                                                                        <?php echo $centro['nombre_cen']; ?>
+                                                                    </label>
+                                                                </div>
+                                                                <small class="text-muted d-block" style="font-size: 0.8rem;"><?php echo $centro['nombre_emp']; ?></small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php endforeach; ?>
+                                            </div>
                                         </form>
                                     </div>
 
@@ -1559,24 +1663,6 @@ include('../../admin/layout/parte2.php');
 include('../../admin/layout/mensaje.php');
 ?>
 
-<!--<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>-->
-
 <script>
     $(function() {
         $("#example2").DataTable({
@@ -1603,6 +1689,10 @@ include('../../admin/layout/mensaje.php');
             "responsive": true,
             "lengthChange": true,
             "autoWidth": false,
+            // Aquí definimos la estructura para que "l", "B" y "f" estén en la misma fila
+            dom: '<"row"<"col-sm-4"l><"col-sm-4"B><"col-sm-4"f>>' +
+                '<"row"<"col-sm-12"tr>>' +
+                '<"row"<"col-sm-5"i><"col-sm-7"p>>',
             buttons: [{
                     extend: "collection",
                     text: "Reportes",
@@ -1628,11 +1718,82 @@ include('../../admin/layout/mensaje.php');
                 },
                 {
                     extend: "colvis",
-                    text: "Visor de columnas",
-                    /*collectionLayout: "fixed three-column" */
-
+                    text: "Visor de columnas"
                 }
-            ],
-        }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
+            ]
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        var table = $('#modal-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+
+        $('#print-modal').on('click', function() {
+            table.button('.buttons-print').trigger();
+        });
+
+        $('#export-modal').on('click', function() {
+            table.button('.buttons-excel').trigger();
+        });
+    });
+
+
+    $(document).ready(function() {
+        // Definir un tipo de orden personalizado para fechas en formato dd/mm/yyyy
+        $.fn.dataTable.ext.type.order['date-dd-mm-yyyy-pre'] = function(d) {
+            if (d === 'NUEVO') { // Maneja el caso cuando la fecha es 'NUEVO'
+                return Infinity; // Para que 'NUEVO' siempre aparezca al final o al principio
+            }
+
+            var dateParts = d.split('/');
+            return dateParts[2] + dateParts[1] + dateParts[0];
+        };
+
+        var tableCaducada = $('#modal-table-caducada').DataTable({
+            "columnDefs": [{
+                "targets": 1, // Índice de la columna de caducidad (segunda columna)
+                "type": 'date-dd-mm-yyyy'
+            }],
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+
+        $('#print-modal-caducada').on('click', function() {
+            tableCaducada.button('.buttons-print').trigger();
+        });
+
+        $('#export-modal-caducada').on('click', function() {
+            tableCaducada.button('.buttons-excel').trigger();
+        });
+    });
+
+
+    $(document).ready(function() {
+        $('#empresa_cen').change(function() {
+            var empresa_id = $(this).val(); // Obtener el ID de la empresa seleccionada
+
+            if (empresa_id != '') {
+                $.ajax({
+                    url: '../../app/controllers/maestros/centros/get_centros.php', // Archivo PHP que procesará la solicitud
+                    type: 'POST',
+                    data: {
+                        empresa_id: empresa_id
+                    },
+                    success: function(response) {
+                        $('#centro_cen').html(response); // Rellenar el select de centros
+                    }
+                });
+            } else {
+                $('#centro_cen').html('<option value="">Seleccione una empresa primero</option>');
+            }
+        });
     });
 </script>

@@ -1,6 +1,6 @@
 <?php
 
-include('../../../app/config.php');
+include('../../../config.php');
 
 $id_centro = $_POST['id_centro'];
 

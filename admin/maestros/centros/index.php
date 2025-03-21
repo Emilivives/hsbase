@@ -170,7 +170,7 @@ include('../../../app/controllers/maestros/tipocentros/listado_tipocentros.php')
                                                     <div class="row">
                                                         <div class="col-md-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="activo_tr" id="flexRadioDefault3" value="1" <?php if ($centros_dato['estado_cen'] == "1") {
+                                                                <input class="form-check-input" type="radio" name="estado_cen" id="flexRadioDefault3" value="1" <?php if ($centros_dato['estado_cen'] == "1") {
                                                                                                                                                                     echo 'Checked';
                                                                                                                                                                 } ?>>
                                                                 <label class="form-check-label" for="flexRadioDefault3">
@@ -185,7 +185,7 @@ include('../../../app/controllers/maestros/tipocentros/listado_tipocentros.php')
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="activo_tr" id="flexRadioDefault4" value="0" <?php if ($centros_dato['estado_cen'] == "0") {
+                                                                <input class="form-check-input" type="radio" name="estado_cen" id="flexRadioDefault4" value="0" <?php if ($centros_dato['estado_cen'] == "0") {
                                                                                                                                                                     echo 'Checked';
                                                                                                                                                                 } ?>>
                                                                 <label class="form-check-label" for="flexRadioDefault4">

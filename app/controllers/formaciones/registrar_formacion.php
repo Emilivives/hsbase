@@ -23,12 +23,28 @@ $sentencia->bindParam('detalle_fr', $detalle_fr);
 
 if ($sentencia->execute()) {
 
-    $pdo->commit();
+// Get the art19_tf value for this formation type
+$query = $pdo->prepare("SELECT art19_tf FROM tipoformacion WHERE id_tipoformacion = :tipo_fr");
+$query->bindParam(':tipo_fr', $tipo_fr, PDO::PARAM_INT);
+$query->execute();
+$art19_tf = $query->fetchColumn();
 
-    session_start();
-    $_SESSION['mensaje'] = "Formacion registrada correctamente";
-    $_SESSION['icono'] = 'success';
-  
+// If it's a workplace training (art19_tf = 1), update all workers in this formation
+if ($art19_tf == 1) {
+    $updateWorkers = $pdo->prepare("
+        UPDATE trabajadores t
+        JOIN form_asistencia fa ON t.id_trabajador = fa.idtrabajador_fas
+        SET t.formacionpdt_tr = 'Si'
+        WHERE fa.nroformacion = :nroformacion
+    ");
+    $updateWorkers->bindParam(':nroformacion', $nroformacion, PDO::PARAM_INT);
+    $updateWorkers->execute();
+}
+
+$pdo->commit();
+session_start();
+$_SESSION['mensaje'] = "Formacion registrada correctamente";
+$_SESSION['icono'] = 'success';
 ?>
     <script>
         location.href = "<?php echo $URL;?>/admin/formacion";

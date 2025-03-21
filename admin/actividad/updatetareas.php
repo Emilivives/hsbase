@@ -24,6 +24,7 @@ include('../../app/controllers/actividad/listado_actividades.php');
 include('../../app/controllers/actividad/listado_accionprl.php');
 include('../../app/controllers/actividad/listado_proyectos.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
+include('../../app/controllers/maestros/empresas/listado_empresas.php');
 include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
 ?>
@@ -32,7 +33,8 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
     .dropdown-font-size {
         font-size: 12px;
@@ -73,30 +75,57 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                     <div class="row">
 
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="">Tarea <b>*</b></label>
                                 <input type="text" name="nombre_ta" value="<?php echo $nombre_ta; ?>" class="form-control" required>
                             </div>
                         </div>
+                        <?php // Obtener la empresa asociada al centro actual
+                        $sql_empresa_centro = "SELECT empresa_cen FROM centros WHERE id_centro = :centro_ta";
+                        $query_empresa_centro = $pdo->prepare($sql_empresa_centro);
+                        $query_empresa_centro->bindParam(':centro_ta', $centro_ta, PDO::PARAM_INT);
+                        $query_empresa_centro->execute();
+                        $empresa_ta = $query_empresa_centro->fetchColumn(); // Guarda el ID de la empresa 
+                        ?>
+
                         <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="">Centro <b>*</b></label>
-                                <select name="centro_ta" id="" class="form-control">
-                                    <?php
-                                    foreach ($centros_datos as $centro_dato) {
-                                        $centro_tabla = $centro_dato['nombre_cen'];
-                                        $id_centro = $centro_dato['id_centro']; ?>
-                                        <option value="<?php echo $id_centro; ?>" <?php if ($centro_tabla == $centro_ta) { ?> selected="selected" <?php } ?>>
-                                            <?php echo  $centro_tabla; ?>
-                                        </option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
+                            <label for="empresa_ta">Empresa:</label>
+                            <select name="empresa_ta" id="empresa_ta" class="form-control">
+                                <option value="">Seleccione una empresa</option>
+                                <?php foreach ($empresas_datos as $empresa) { ?>
+                                    <option value="<?php echo $empresa['id_empresa']; ?>"
+                                        <?php if ($empresa['id_empresa'] == $id_empresa_ta) {
+                                            echo 'selected';
+                                        } ?>>
+                                        <?php echo $empresa['nombre_emp']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
                         </div>
+
                         <div class="col-md-2">
+                            <label for="centro_ta">Centro de Trabajo:</label>
+                            <select name="centro_ta" id="centro_ta" class="form-control" required>
+                                <option value="">Seleccione un centro</option>
+                                <?php
+                                $sql_centros = "SELECT id_centro, nombre_cen FROM centros WHERE empresa_cen = :empresa_id ORDER BY nombre_cen ASC";
+                                $query_centros = $pdo->prepare($sql_centros);
+                                $query_centros->bindParam(':empresa_id', $id_empresa_ta, PDO::PARAM_INT);
+                                $query_centros->execute();
+                                $centros = $query_centros->fetchAll(PDO::FETCH_ASSOC);
+
+                                foreach ($centros as $centro) { ?>
+                                    <option value="<?php echo $centro['id_centro']; ?>"
+                                        <?php if ($centro['id_centro'] == $id_centro_ta) echo 'selected'; ?>>
+                                        <?php echo $centro['nombre_cen']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-1">
                             <div class="form-group">
                                 <label for="">Responsable <b>*</b></label>
                                 <select name="responsable_ta" id="" class="form-control">
@@ -128,13 +157,13 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="">Proyecto <b>*</b></label>
-                                <select name="id_proyecto" id="" class="form-control">
+                                <label for="id_proyecto">Proyecto <b>*</b></label>
+                                <select name="id_proyecto" id="id_proyecto" class="form-control">
                                     <?php
                                     foreach ($proyectos as $proyecto) {
                                         $proyecto_tabla = $proyecto['nombre_py'];
-                                        $id_proyecto = $proyecto['id_proyecto']; ?>
-                                        <option value="<?php echo $id_proyecto; ?>" <?php if ($id_proyecto == $id_proyecto1) { ?> selected="selected" <?php } ?>>
+                                        $id_proyecto = $proyecto['id_proyecto'] ?>
+                                        <option value="<?php echo $id_proyecto; ?>" <?php if ($proyecto_tabla == $proyecto_ta) { ?> selected="selected" <?php } ?>>
                                             <?php echo $proyecto_tabla; ?>
                                         </option>
                                     <?php
@@ -148,20 +177,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                 <label for="">Progrmada <b>*</b></label>
                                 <input type="text" name="programada_ta" value="<?php echo $programada_ta; ?>" class="form-control" required>
                             </div>
-                            <!--<select class="form-select form-select-sm" name="prioridad_ta" aria-label=".form-select-sm example">
-                                    <option value="<?php $programada_ta ?>" selected="selected"><?php $programada_ta;
-                                                                                                if ($programada_ta == '1') { ?>
-                                        <span class='badge badge-success'>Si</span>
-                                    <?php
-                                                                                                } else { ?>
-                                        <span class='badge badge-warning'>No</span>
-                                    <?php
-                                                                                                }
-                                    ?></option>
-                                    <option>Seleccione</option>
-                                    <option value="1">Si</option>
-                                    <option value="0">No</option>
-                                </select>-->
+
                         </div>
                         <div class="row">
 
@@ -237,9 +253,10 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                         <input type="text" name="id_tarea" value="<?php echo $id_tarea; ?>" hidden>
                         <hr>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 text-right">
                                 <a href="show.php?id_proyecto=<?php echo $id_proyecto1 ?>" class="btn btn-secondary" role="button">Cancelar</a>
                                 <input type="submit" class="btn btn-warning" value="Actualizar datos">
+
                             </div>
                         </div>
 
@@ -269,22 +286,23 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                 </div>
 
                 <!--inicio modal nueva tarea-->
+                <!-- Inicio modal nueva actividad -->
                 <div class="modal fade" id="modal-nuevaactividad">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
-                            <div class="modal-header" style="background-color:#eeeeee ;color:black">
-                                <h5 class="modal-title" id="modal-nuevaactividad">Nueva actividad de la tarea - <?php echo $nombre_ta ?></h5>
-                                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                            <div class="modal-header" style="background-color:#eeeeee; color:black">
+                                <h5 class="modal-title">Nueva actividad de la tarea - <?php echo $nombre_ta; ?></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
-
-                                <form action="../../app/controllers/actividad/create_actividad.php" method="post" enctype="multipart/form-data">
-
-
-
+                            <form action="../../app/controllers/actividad/create_actividad.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
                                     <div class="row">
+
+                                        <input type="text" name="id_proyecto" value="<?php echo $id_proyecto ?>" hidden>
+                                        <input type="text" name="id_tarea" value="<?php echo $id_tarea ?>" hidden>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Fecha <b>*</b></label>
@@ -317,86 +335,21 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
                                             </div>
                                         </div>
                                     </div>
-
-
-                            </div>
-                            <div class="modal-footer">
-
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
-
-                            </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
                 </div>
+                <!-- Fin modal -->
+
 
                 <!--fin modal-->
 
-                <!--inicio modal nueva actividad de tarea-->
-                <div class="modal fade" id="modal-nuevaactividad">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header" style="background-color:#eeeeee ;color:black">
-                                <h5 class="modal-title" id="modal-nuevaactividad">Nueva actividad de la tarea - <?php echo $nombre_ta ?></h5>
-                                <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
 
-                                <form action="../../app/controllers/actividad/create_actividad.php" method="post" enctype="multipart/form-data">
-
-
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Fecha <b>*</b></label>
-                                                <input type="date" name="fecha_acc" class="form-control" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Responsable</label>
-                                                <input type="text" name="responsable_acc" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Hora Inicio <b>*</b></label>
-                                                <input type="time" name="horain_acc" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Hora Fin <b>*</b></label>
-                                                <input type="time" name="horafin_acc" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Detalles <b>*</b></label>
-                                                <textarea class="form-control" name="detalles_acc" rows="5"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                            </div>
-                            <div class="modal-footer">
-
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!--fin modal-->
 
             </div>
             <div class="card-body">
@@ -430,7 +383,7 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
                         foreach ($actividades as $actividad) {
                             $contador = $contador + 1;
-
+                            $id_actividad = $actividad['id_actividad'];
                         ?>
 
                             <tr>
@@ -444,20 +397,9 @@ include('../../app/controllers/maestros/responsables/listado_responsables.php');
 
 
                                 <td style="text-align: center">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-font-size" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Opciones
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-dark dropdown-font-size" aria-labelledby="dropdownMenuButton2">
-                                            <li><a class="dropdown-item" href="#">Ver</a></li>
-                                            <li><a class="dropdown-item" href="#">Editar</a></li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
-                                        </ul>
+                                    <div class="d-grid gap-2 d-md-block" role="group" aria-label="Basic mixed styles example">
+                                        <a href="../../app/controllers/actividad/delete_actividad.php?id_actividad=<?php echo $id_actividad; ?>& id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $id_proyecto; ?>" class="btn btn-danger btn-sm btn-font-size" onclick="return confirm('¿Realmente desea eliminar el registro?')" title="Eliminar actividad"><i class="bi bi-trash-fill"></i> </a>
                                     </div>
-
                                 </td>
 
                             </tr>
@@ -485,23 +427,7 @@ include('../../admin/layout/parte2.php');
 include('../../admin/layout/mensaje.php');
 ?>
 
-<!--<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>-->
+
 
 <script>
     $(function() {
@@ -560,5 +486,34 @@ include('../../admin/layout/mensaje.php');
                 }
             ],
         }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#empresa_ta").change(function() {
+            var empresa_id = $(this).val();
+
+            if (empresa_id !== "") { // Evitar resetear si no hay empresa seleccionada
+                $.ajax({
+                    url: "../../app/controllers/maestros/centros/get_centros.php",
+                    type: "POST",
+                    data: {
+                        empresa_id: empresa_id
+                    },
+                    beforeSend: function() {
+                        $("#centro_ta").html('<option value="">Cargando...</option>'); // Muestra mensaje de carga
+                    },
+                    success: function(data) {
+                        $("#centro_ta").html(data); // Inserta las opciones correctas
+                    },
+                    error: function() {
+                        $("#centro_ta").html('<option value="">Error al cargar</option>');
+                    }
+                });
+            } else {
+                $("#centro_ta").html('<option value="">Seleccione una empresa primero</option>');
+            }
+        });
     });
 </script>

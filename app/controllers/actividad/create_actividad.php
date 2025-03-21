@@ -35,13 +35,13 @@ if ($sentencia->execute()) {
 session_start();
 $_SESSION['mensaje'] = "Actividad registrada correctamente";
 $_SESSION['icono'] = 'success';
-header("Location: " . $URL . "/admin/actividad/showtareas.php?id_tarea=$id_tarea&id_proyecto=$id_proyecto");
+header("Location: " . $URL . "/admin/actividad/updatetareas.php?id_tarea=$id_tarea&id_proyecto=$id_proyecto");
 
 } else {
 session_start();
 $_SESSION['mensaje'] = "Formacion NO creada";
 $_SESSION['icono'] = 'warning';
-header("Location: " . $URL . "/admin/actividad/showtareas.php?id_tarea=$id_tarea&id_proyecto=$id_proyecto");
+header("Location: " . $URL . "/admin/actividad/updatetareas.php?id_tarea=$id_tarea&id_proyecto=$id_proyecto");
 }
 
 

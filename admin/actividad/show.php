@@ -113,6 +113,9 @@ include('../../app/controllers/actividad/listado_accionprl.php');
         text-align: center;
         border-radius: 5px;
     }
+ 
+
+ 
 </style>
 
 <div class="col-lg-12">
@@ -365,7 +368,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                 <div class="modal-content">
                     <div class="modal-header" style="background-color:whitesmoke">
                         <h5 class="modal-title" id="modal-nuevtrabajador"><i class="bi bi-plus-lg"></i> Nueva Tarea</h5>
-                        <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" style="color: grey;" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -391,13 +394,10 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                                 </div>
                                 <div class="col-md-3">
                                     <label for="">Centro Trabajo</label>
-                                    <select name="centro_ta" id="" class="form-control">
-                                        <?php
-                                        foreach ($centros_datos as $centros_dato) { ?>
-                                            <option value="<?php echo $centros_dato['id_centro']; ?>"><?php echo $centros_dato['nombre_cen']; ?></option>
-                                        <?php
-                                        }
-                                        ?>
+                                    <select name="centro_ta" class="form-control">
+                                        <?php foreach ($centros_datos as $centro) { ?>
+                                            <option value="<?php echo $centro['id_centro']; ?>"><?php echo $centro['nombre_cen']; ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
@@ -506,7 +506,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                             </div>
                             <div class="modal-footer">
 
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
 
                             </div>
@@ -521,7 +521,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
 
         </div>
         <div class="card-body">
-            <table id="example1" class="table compact hover table-striped">
+        <table id="example1" class="table compact hover table-striped table-hover">
 
                 <colgroup>
 
@@ -576,7 +576,7 @@ include('../../app/controllers/actividad/listado_accionprl.php');
                             <td style="text-align: left"><b><?php echo $tarea_proyecto['nombre_ta']; ?></b></td>
 
 
-                            <td style="text-align: left"> <a href="showtareas.php?id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $tarea_proyecto['id_proyecto']; ?>" style="text-align: right;" class="btn btn-outline-link btn-sm" title="Ver detalles"><i class="fa-solid fa-up-right-from-square"></i></a></td>
+                            <td style="text-align: left"> <a href="updatetareas.php?id_tarea=<?php echo $id_tarea; ?>& id_proyecto=<?php echo $tarea_proyecto['id_proyecto']; ?>" style="text-align: right;" class="btn btn-outline-link btn-sm" title="Ver detalles"><i class="fa-solid fa-up-right-from-square"></i></a></td>
                             <td style="text-align: left"><?php echo $tarea_proyecto['nombre_cen']; ?></td>
                             <td style="text-align: left"><?php $tarea_proyecto['prioridad_ta'];
                                                             if ($tarea_proyecto['prioridad_ta'] == 'Alta') { ?>
@@ -896,7 +896,7 @@ foreach ($tareas_proyectos as $tarea_proyecto) {
 <script>
     $(function() {
         // Definir el tipo de ordenación para fechas en formato dd-mm-yyyy
-        $.fn.dataTable.ext.type.order['date-dd-mm-yyyy-pre'] = function (data) {
+        $.fn.dataTable.ext.type.order['date-dd-mm-yyyy-pre'] = function(data) {
             if (!data) return 0; // Si no hay datos, devolver 0
             // Quitar etiquetas HTML (como <span>, <h6>, etc.)
             let cleanData = data.replace(/<[^>]+>/g, '');
@@ -907,58 +907,79 @@ foreach ($tareas_proyectos as $tarea_proyecto) {
         };
 
         // Inicializar la tabla DataTable
-        $("#example1").DataTable({
-            "pageLength": 25,
-            "order": [
-                [9, 'desc'], // Primera columna para ordenación (ajusta si es necesario)
-                [7, "asc"],
-                [0, "asc"]
-            ],
-            "columnDefs": [
-                {
-                    targets: 7, // Índice de la columna donde está la fecha (ajusta si es necesario)
-                    type: 'date-dd-mm-yyyy' // Usa el tipo de ordenación personalizado
-                }
-            ],
-            "language": {
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ tareas",
-                "infoEmpty": "Mostrando 0 a 0 de 0 tareas",
-                "infoFiltered": "(Filtrado de MAX total Usuarios)",
-                "lengthMenu": "Mostrar _MENU_ tareas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscador:",
-                "zeroRecords": "Sin resultados encontrados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Último",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            },
-            "responsive": true,
-            "lengthChange": true,
-            "autoWidth": false,
-            buttons: [ // Configuración de botones
-                {
-                    extend: "collection",
-                    text: "Reportes",
-                    orientation: "landscape",
-                    buttons: [
-                        { text: "Copiar", extend: "copy" },
-                        { extend: "pdf", orientation: "landscape" },
-                        { extend: "csv" },
-                        { extend: "excel" },
-                        { text: "Imprimir", extend: "print" }
-                    ]
+     $("#example1").DataTable({
+    "hover": true,
+    "pageLength": 25,
+    "order": [
+        [9, 'desc'],
+        [7, "asc"],
+        [0, "asc"]
+    ],
+    "columnDefs": [{
+        targets: 7,
+        type: 'date-dd-mm-yyyy'
+    }],
+    "language": {
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ tareas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 tareas",
+        "infoFiltered": "(Filtrado de MAX total Usuarios)",
+        "lengthMenu": "Mostrar _MENU_ tareas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscador:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Último",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+    "responsive": true,
+    "lengthChange": true,
+    "autoWidth": false,
+    "rowCallback": function(row, data, index) {
+        $(row).on('mouseenter', function() {
+            $(this).css('background-color', 'rgb(236, 37, 37)');
+        });
+        $(row).on('mouseleave', function() {
+            // Restaurar el color original o dejarlo en blanco para usar el estilo por defecto
+            $(this).css('background-color', '');
+        });
+    },
+    buttons: [
+        {
+            extend: "collection",
+            text: "Reportes",
+            orientation: "landscape",
+            buttons: [{
+                    text: "Copiar",
+                    extend: "copy"
                 },
                 {
-                    extend: "colvis",
-                    text: "Visor de columnas",
+                    extend: "pdf",
+                    orientation: "landscape"
+                },
+                {
+                    extend: "csv"
+                },
+                {
+                    extend: "excel"
+                },
+                {
+                    text: "Imprimir",
+                    extend: "print"
                 }
-            ],
-        }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
+            ]
+        },
+        {
+            extend: "colvis",
+            text: "Visor de columnas",
+        }
+    ],
+}).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
+        
 
         // Añadir el botón y los contadores en el contenedor flotante
         var btnContainer = $('<div class="btn-container" style="float: right; margin-bottom: 5px; text-align: right;"></div>');

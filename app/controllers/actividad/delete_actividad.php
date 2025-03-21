@@ -14,7 +14,7 @@ $id_proyecto = $_GET['id_proyecto'];
         session_start();
         $_SESSION['mensaje'] = "Actividad eliminada correctamente";
         $_SESSION['icono'] = 'success';
-        header('Location: ' . $URL . '/admin/actividad/showtareas.php?id_tarea='.$id_tarea.'& id_proyecto='.$id_proyecto.'');
+        header('Location: ' . $URL . '/admin/actividad/updatetareas.php?id_tarea='.$id_tarea.'& id_proyecto='.$id_proyecto.'');
 
     } else {
         session_start();

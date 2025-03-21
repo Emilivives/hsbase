@@ -154,6 +154,30 @@ $pdf->SetFont('Arial', '', '11');
 $pdf->SetXY(20, 48);
 $pdf->Write(10, $razonsocial_ace);
 
+// Definir coordenadas en base al valor de tipoaccidente_ace
+$x_tac = 0;
+$y_tac = 0;
+
+if ($tipoaccidente_ace == "Accidente con baja") {
+    $x_tac = 19; 
+    $y_tac = 61;
+} elseif ($tipoaccidente_ace == "Accidente sin baja") {
+    $x_tac = 19; 
+    $y_tac = 61;
+} elseif ($tipoaccidente_ace == "Accidente in itinere con baja") {
+    $x_tac = 52; 
+    $y_tac = 60;
+} elseif ($tipoaccidente_ace == "Accidente in itiener sin baja") {
+    $x_tac = 52; 
+    $y_tac = 60;
+}
+
+// Colocar la "X" en la posición determinada
+$pdf->SetFont('Arial', 'B', 10); // Fuente en negrita para resaltar
+$pdf->SetXY($x_tac, $y_tac);
+$pdf->Write(10, 'X');
+
+
 
 $pdf->SetFont('Arial', '', '10');
 $pdf->SetXY(20, 83);

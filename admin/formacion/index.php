@@ -21,6 +21,9 @@ include('../../admin/layout/parte1.php');
 // Cargar los datos necesarios
 include('../../app/controllers/formaciones/listado_formaciones.php');
 include('../../app/controllers/pruebas/listado_trabajadores.php');
+include('../../app/controllers/trabajadores/listado_tr_formacioncaducada.php');
+include('../../app/controllers/trabajadores/listado_tr_noformado.php');
+include('../../app/controllers/trabajadores/listado_trabajadores.php');
 include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones.php');
 ?>
 <html>
@@ -70,6 +73,177 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
         </div>
     </div>
 
+    <div class="col-lg-2 col-6">
+        <!-- small box -->
+        <!-- contador trabajadores no formados -->
+        <?php
+        $contador_tr_no_formados = 0;
+        $contador_tr_formados = 0;
+        foreach ($trabajadores as $trabajador) {
+            if ($trabajador['activo_tr'] == 1 and $trabajador['formacionpdt_tr'] == 'Si') {
+                $contador_tr_formados = $contador_tr_formados + 1;
+            } elseif ($trabajador['activo_tr'] == 1 and $trabajador['formacionpdt_tr'] == 'No') {
+                $contador_tr_no_formados = $contador_tr_no_formados + 1;
+            }
+        }
+
+        ?>
+        <!-- fin contador trabajadores no formados -->
+        <div class="small-box bg-<?php echo ($contador_tr_no_formados > 0) ? 'warning' : 'light'; ?> shadow-sm border">
+            <div class="inner">
+
+
+                <h2><?php echo $contador_tr_no_formados; ?><sup style="font-size: 20px"></h2>
+                <p>Pendientes Formar</p>
+
+            </div>
+            <div class="icon">
+                <i class="fas fa-book" data-toggle="modal" data-target="#modal-pendientesformar"></i>
+            </div>
+
+            <!-- inicio modal nuevo trabajador-->
+            <div class="modal fade" id="modal-pendientesformar">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#138fec ;color:black">
+                            <h5 class="modal-title" id="modal-pendientesformar">TRABAJADORES PENDIENTES FORMAR</h5>
+                            <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table id="" class="table table-sm">
+                                <colgroup>
+                                    <col width="40%">
+                                    <col width="20%">
+                                    <col width="30%">
+                                    <col width="10%">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+
+                                        <th style="text-align: center">Nombre</th>
+                                        <th style="text-align: center">Categoria</th>
+                                        <th style="text-align: center">Centro</th>
+                                        <th style="text-align: center">Empresa</th>
+                                        <th style="text-align: center">-</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $contador = 0;
+                                    foreach ($trabajadores_noformados as $trabajador_noformados) {
+                                        $contador = $contador + 1;
+                                    ?>
+
+                                        <tr>
+                                            <td style="text-align: center"><?php echo $trabajador_noformados['nombre_tr']; ?></td>
+                                            <td style="text-align: center"><?php echo $trabajador_noformados['nombre_cat']; ?></td>
+                                            <td style="text-align: center"><?php echo $trabajador_noformados['nombre_cen']; ?></td>
+                                            <td style="text-align: center"><?php echo $trabajador_noformados['nombre_emp']; ?></td>
+                                            <td style="text-align: center;"> <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $trabajador_noformados['id_trabajador']; ?>" class="btn btn-primary btn-sm" title="Ver detalles"></i> Ver</a>
+
+
+                                            <?php
+                                        }
+                                            ?>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--fin modal-->
+
+        </div>
+    </div>
+
+     <!-- ./col -->
+     <div class="col-lg-1 col-6">
+        <!-- small box -->
+        <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+                <?php
+                $sql = "SELECT COUNT(DISTINCT fas.idtrabajador_fas) AS expiring_count
+        FROM form_asistencia fas
+        INNER JOIN formacion fr ON fas.nroformacion = fr.nroformacion
+        INNER JOIN tipoformacion tf ON fr.tipo_fr = tf.id_tipoformacion
+        WHERE tf.art19_tf = 1
+          AND fr.fechacad_fr BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 3 MONTH)";
+
+                $query = $pdo->prepare($sql);
+                $query->execute();
+                $result = $query->fetch(PDO::FETCH_ASSOC);
+                $expiring_count = $result['expiring_count'];
+                ?>
+
+                <h2><?php echo $expiring_count; ?><sup style="font-size: 20px"></h2>
+                <p>Formaciones vencidas</p>
+            </div>
+            <div class="icon">
+            <i class="fas bi-calendar-x" data-toggle="modal" data-target="#modal-formacioncaducada"></i>
+            </div>
+           
+             <!--  modal mostrar trabajadores con formacion a caducar-->
+             <div class="modal fade" id="modal-formacioncaducada">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#138fec ;color:black">
+                            <h5 class="modal-title" id="modal-formacioncaducada">FORMACION CADUCADA</h5>
+                            <button type="button" class="close" style="color: white;" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table id="" class="table table-sm">
+                                <colgroup>
+                                    <col width="40%">
+                                    <col width="20%">
+                                    <col width="30%">
+                                    <col width="10%">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+
+                                        <th style="text-align: center">Nombre</th>
+                                        <th style="text-align: center">Categoria</th>
+                                        <th style="text-align: center">Centro</th>
+                                        <th style="text-align: center">Empresa</th>
+                                        <th style="text-align: center">-</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $contador = 0;
+                                    foreach ($trabajadores_formacioncaducada as $trabajador_formacioncaducada) {
+                                        $contador = $contador + 1;
+                                    ?>
+
+                                        <tr>
+                                            <td style="text-align: center"><?php echo $trabajador_formacioncaducada['nombre_tr']; ?></td>
+                                            <td style="text-align: center"><?php echo $trabajador_formacioncaducada['nombre_cat']; ?></td>
+                                            <td style="text-align: center"><?php echo $trabajador_formacioncaducada['nombre_cen']; ?></td>
+                                            <td style="text-align: center"><?php echo $trabajador_formacioncaducada['nombre_emp']; ?></td>
+                                            <td style="text-align: center;"> <a href="../../admin/trabajadores/trabajadorshow.php?id_trabajador=<?php echo $trabajador_formacioncaducada['id_trabajador']; ?>" class="btn btn-primary btn-sm" title="Ver detalles"></i> Ver</a>
+
+
+                                            <?php
+                                        }
+                                            ?>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--fin modal-->
+        </div>
+    </div>
+
 
     <!-- ./col -->
     <div class="col-lg-2 col-6">
@@ -96,29 +270,6 @@ include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones
     </div>
 
 
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-light shadow-sm border">
-            <div class="inner">
-                <?php
-                $contador_de_trabajadores = 0;
-                foreach ($trabajadores as $trabajador) {
-                    if ($trabajador['activo_tr'] == 1) {
-                        $contador_de_trabajadores = $contador_de_trabajadores + 1;
-                    }
-                }
-                ?>
-
-                <h2><?php echo $contador_de_trabajadores; ?><sup style="font-size: 20px"></h2>
-                <p>Trabajadores activos</p>
-            </div>
-            <div class="icon">
-                <i class="ion bi-person-arms-up"></i>
-            </div>
-
-        </div>
-    </div>
 </div>
 <!-- /.content-header -->
 

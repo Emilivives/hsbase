@@ -6,6 +6,8 @@ INNER JOIN tipoformacion as tf ON fr.tipo_fr = tf.id_tipoformacion
 INNER JOIN form_asistencia as fas ON fas.nroformacion = fr.nroformacion
 INNER JOIN trabajadores as tr ON tr.id_trabajador = fas.idtrabajador_fas
 INNER JOIN responsables as resp ON fr.formador_fr = resp.id_responsable
+INNER JOIN centros as cen ON cen.id_centro = tr.centro_tr
+INNER JOIN empresa as emp ON emp.id_empresa = cen.empresa_cen
 WHERE fr.id_formacion = $id_formacion_get";
 
 
@@ -23,5 +25,9 @@ $fechacad_fr = $formaciondetalle_dato['fechacad_fr'];
 $formador_fr = $formaciondetalle_dato['nombre_resp'];
 $detalles_fr = $formaciondetalle_dato['detalles_tf'];
 $detalle_fr = $formaciondetalle_dato['detalle_fr'];
+
+$empresa_fr = $formaciondetalle_dato['razonsocial_emp'];
+$direccionemp_fr = $formaciondetalle_dato['direccion_emp'];
+$logo_emp = $formaciondetalle_dato['logo_emp'];
 
 }

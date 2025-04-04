@@ -66,7 +66,8 @@ function isTreeviewOpen($pages)
     <!-- icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
     <!-- libreria iconos fontawesome -->
-    <script src="https://kit.fontawesome.com/f1e1a05e58.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="<?php echo $URL; ?>/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->

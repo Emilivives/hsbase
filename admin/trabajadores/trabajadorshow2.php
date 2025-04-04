@@ -50,7 +50,7 @@ include('../../admin/layout/parte1.php');
                         <h3 class="card-title">Trabajadores</h3>
                     </div>
                     <div class="card-body">
-                   
+
                         <div id="workersList">
                             <!-- Lista de trabajadores se cargará dinámicamente -->
                         </div>
@@ -103,7 +103,7 @@ include('../../admin/layout/parte1.php');
                         <td>
                             <button class="btn btn-sm btn-primary worker-details" 
                                     data-id="${worker.id_trabajador}">
-                                Ver Detalles
+                                Ver
                             </button>
                         </td>
                     </tr>`;
@@ -360,16 +360,48 @@ include('../../admin/layout/parte1.php');
             }
 
             // Funciones auxiliares para generar HTML
+            function formatFecha(fecha) {
+                if (!fecha) return 'Sin fecha';
+
+                const date = new Date(fecha);
+                return date.toLocaleDateString('es-ES', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                });
+            }
+
             function generateFormacionHTML(formaciones) {
                 if (!formaciones || formaciones.length === 0) {
                     return '<p>No hay formaciones registradas</p>';
                 }
-                return formaciones.map(f => `
-                <div class="mb-2">
-                    <strong>${f.nombre_tf}</strong>
-                    <p>Fecha: ${f.fecha_fr} | Caducidad: ${f.fechacad_fr}</p>
-                </div>
-            `).join('');
+
+                let tableHTML = `
+        <table border="1" cellspacing="0" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Caducidad</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+                tableHTML += formaciones.map(f => `
+        <tr>
+            <td>${f.nombre_tf}</td>
+            <td>${formatFecha(f.fecha_fr)}</td>
+            <td>${formatFecha(f.fechacad_fr)}</td>
+        </tr>
+    `).join('');
+
+                tableHTML += `
+            </tbody>
+        </table>
+    `;
+
+                return tableHTML;
             }
 
             function generateInformacionPRLHTML(informaciones) {
@@ -388,10 +420,12 @@ include('../../admin/layout/parte1.php');
                 if (!reconocimientos || reconocimientos.length === 0) {
                     return '<p>No hay reconocimientos médicos registrados</p>';
                 }
+
+
                 return reconocimientos.map(r => `
                 <div class="mb-2">
                     <strong>Reconocimiento Médico</strong>
-                    <p>Fecha: ${r.fecha_rm} | Caducidad: ${r.caducidad_rm}</p>
+                    <p>Fecha: ${formatFecha(r.fecha_rm)} | Caducidad: ${formatFecha(r.caducidad_rm)}</p>
                 </div>
             `).join('');
             }

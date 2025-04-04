@@ -15,7 +15,6 @@ if ($_SESSION['perfil_usr'] !== 'ADMINISTRADOR' && $_SESSION['perfil_usr'] !== '
     exit();
 }
 include('../../admin/layout/parte1.php');
-include('../../app/controllers/pruebas/listado_trabajadores.php');
 include('../../app/controllers/maestros/centros/listado_centros.php');
 include('../../app/controllers/actividad/listado_proyectos.php');
 include('../../app/controllers/actividad/listado_accionprl.php');

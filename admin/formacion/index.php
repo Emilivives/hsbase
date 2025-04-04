@@ -20,7 +20,7 @@ include('../../admin/layout/parte1.php');
 
 // Cargar los datos necesarios
 include('../../app/controllers/formaciones/listado_formaciones.php');
-include('../../app/controllers/pruebas/listado_trabajadores.php');
+include('../../app/controllers/trabajadores/listado_trabajadores_alfabet.php');
 include('../../app/controllers/trabajadores/listado_tr_formacioncaducada.php');
 include('../../app/controllers/trabajadores/listado_tr_noformado.php');
 include('../../app/controllers/trabajadores/listado_trabajadores.php');

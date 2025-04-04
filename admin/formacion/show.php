@@ -4,7 +4,7 @@ include('../../app/config.php');
 include('../../admin/layout/parte1.php');
 include('../../app/controllers/formaciones/cargar_formacion.php');
 include('../../app/controllers/maestros/responsables/listado_responsables.php');
-include('../../app/controllers/pruebas/listado_trabajadores.php');
+include('../../app/controllers/trabajadores/listado_trabajadores_alfabet.php');
 include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones.php');
 ?>
 <html>

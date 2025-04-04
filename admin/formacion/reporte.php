@@ -1,32 +1,4 @@
 <?php
-//============================================================+
-// File name   : example_001.php
-// Begin       : 2008-03-04
-// Last Update : 2013-05-14
-//
-// Description : Example 001 for TCPDF class
-//               Default Header and Footer
-//
-// Author: Nicola Asuni
-//
-// (c) Copyright:
-//               Nicola Asuni
-//               Tecnick.com LTD
-//               www.tecnick.com
-//               info@tecnick.com
-//============================================================+
-
-/**
- * Creates an example PDF TEST document using TCPDF
- * @package com.tecnick.tcpdf
- * @abstract TCPDF - Example: Default Header and Footer
- * @author Nicola Asuni
- * @since 2008-03-04
- * @group header
- * @group footer
- * @group page
- * @group pdf
- */
 
 // Include the main TCPDF library (search for installation path).
 require_once('../../public/TCPDF/tcpdf.php');
@@ -34,13 +6,13 @@ $id_formacion_get = $_GET['id_formacion'];
 include('../../app/config.php');
 include('../../app/controllers/formaciones/cargar_formacion.php');
 include('../../app/controllers/maestros/responsables/listado_responsables.php');
-include('../../app/controllers/pruebas/listado_trabajadores.php');
+include('../../app/controllers/trabajadores/listado_trabajadores.php');
 include('../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones.php');
 
 
 ///// traer datos de la formacion
 
-foreach($formaciondetalle_datos as $formaciondetalle_dato){
+foreach ($formaciondetalle_datos as $formaciondetalle_dato) {
     $nroformacion = $formaciondetalle_dato['nroformacion'];
     $id_formacion = $formaciondetalle_dato['id_formacion'];
     $tipo_fr = $formaciondetalle_dato['nombre_tf'];
@@ -51,18 +23,74 @@ foreach($formaciondetalle_datos as $formaciondetalle_dato){
     $formador_fr = $formaciondetalle_dato['nombre_resp'];
     $cargoresp_fr = $formaciondetalle_dato['cargo_resp'];
     $detalles_fr = $formaciondetalle_dato['detalles_tf'];
-    
-    }
 
-    $nroformacion = $formaciondetalle_dato['nroformacion'];
+    $empresa_fr = $formaciondetalle_dato['razonsocial_emp'];
+    $direccionemp_fr = $formaciondetalle_dato['direccion_emp'];
+    $logo_emp = $formaciondetalle_dato['logo_emp'];
+}
 
+$nroformacion = $formaciondetalle_dato['nroformacion'];
 
+$logo_path = '../maestros/centros/img/' . $formaciondetalle_dato['logo_emp'];
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-$PDF_HEADER_TITLE = 'SERVICIOS Y CONCESIONES MARITIMAS IBICENCAS S.A.';
-$PDF_HEADER_STRING ='C/ Aragón 71 - 07800 Ibiza';
-$PDF_HEADER_LOGO = 'LOGO TRASMAPI.jpg';
+
+class CustomPDF extends TCPDF {
+    public $logo_path;
+    public $empresa_fr;
+    public $direccionemp_fr;
+
+    public function setHeaderInfo($logo_path, $empresa_fr, $direccionemp_fr) {
+        $this->logo_path = $logo_path;
+        $this->empresa_fr = $empresa_fr;
+        $this->direccionemp_fr = $direccionemp_fr;
+    }
+    public function Header() {
+        // Obtener dimensiones de la página
+        $pageWidth = $this->getPageWidth();
+        $leftMargin = $this->original_lMargin; // Margen izquierdo original
+        $rightMargin = $this->original_rMargin; // Margen derecho original
+        
+        // Logo (posición ajustada)
+        if (file_exists($this->logo_path)) {
+            $this->Image($this->logo_path, 10, 10, 30);
+        }
+        
+        // Texto de la cabecera
+        $this->SetY(10);
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 5, $this->empresa_fr, 0, 1, 'C');
+        $this->SetFont('helvetica', '', 10);
+        $this->Cell(0, 5, $this->direccionemp_fr, 0, 1, 'C');
+        
+        // Posición Y después del texto
+        $currentY = $this->GetY();
+        
+        // Líneas decorativas que van de borde a borde
+        $fullWidth = $pageWidth - $leftMargin - $rightMargin;
+        
+        // Línea principal azul (de borde a borde)
+        $this->SetLineWidth(0.5);
+        $this->SetDrawColor(0, 51, 153);
+        $this->Line($leftMargin, $currentY + 2, $pageWidth - $rightMargin, $currentY + 2);
+        
+        // Línea secundaria gris (de borde a borde)
+        $this->SetLineWidth(0.2);
+        $this->SetDrawColor(128, 128, 128);
+        $this->Line($leftMargin, $currentY + 3, $pageWidth - $rightMargin, $currentY + 3);
+        
+        // Restaurar configuración
+        $this->SetDrawColor(0, 0, 0);
+        $this->SetLineWidth(0.2);
+        
+        // Espacio después de las líneas
+        $this->SetY($currentY + 10);
+    }
+}
+
+
+
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('HS BASE');
@@ -71,11 +99,12 @@ $pdf->SetSubject('HSBASE');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
 // set default header data
-$pdf->SetHeaderData($PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, $PDF_HEADER_TITLE, $PDF_HEADER_STRING);
+$pdf = new CustomPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf->setHeaderInfo($logo_path, $empresa_fr, $direccionemp_fr);
 
 // set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -92,8 +121,8 @@ $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 // set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-    require_once(dirname(__FILE__).'/lang/eng.php');
+if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+    require_once(dirname(__FILE__) . '/lang/eng.php');
     $pdf->setLanguageArray($l);
 }
 
@@ -106,7 +135,7 @@ $pdf->SetFont('helvetica', '', 9);
 
 
 //create some HTML content
-$html ='
+$html = '
 
 <h1 style="text-align: center">CERTIFICADO DE FORMACIÓN</h1>
 
@@ -116,23 +145,23 @@ $html ='
 <table border="0">
 <tr>
 <td style="height: 30px; background-color: #ffffff; text-align: left"><b>Cod. Formación:</b></td>
-<td>'.$nroformacion.' / '.$fecha2_fr.'</td>
+<td>' . $nroformacion . ' / ' . $fecha2_fr . '</td>
 
 <td style="height: 30px; background-color: #ffffff; text-align: right"><b>Formación:</b></td>
-<td>'.$tipo_fr.'</td>
+<td>' . $tipo_fr . '</td>
 </tr>
 <tr>
 <td style="height: 30px; background-color: #ffffff; text-align: left"><b>Fecha formación:</b></td>
-<td>'.$fecha_fr.'</td>
+<td>' . $fecha_fr . '</td>
 
 <td style="height: 30px; background-color: #ffffff; text-align: right"><b>Vigente hasta:</b></td>
-<td>'.$fechacad_fr.'</td>
+<td>' . $fechacad_fr . '</td>
 </tr>
 <tr>
 <td style="height: 30px; background-color: #ffffff; text-align: left"><b>Formador:</b></td>
-<td>'.$formador_fr.' / '.$cargoresp_fr.'</td>
-<td style="height: 30px; background-color: #ffffff; text-align: right"><b>Formación:</b></td>
-<td>'.$duracion_fr.' hrs.</td>
+<td>' . $formador_fr . ' / ' . $cargoresp_fr . '</td>
+<td style="height: 30px; background-color: #ffffff; text-align: right"><b>Duración:</b></td>
+<td>' . $duracion_fr . ' hrs.</td>
 </tr>
 </table>
 <table border="0">
@@ -140,7 +169,7 @@ $html ='
 <td style="width: 630px;  background-color: #ffffff; text-align: left"><b>Temario:</b></td>
 </tr>
 <tr>
-<td style="width: 630px;height: 100px;">'.$detalles_fr.'</td>
+<td style="width: 630px;height: 100px;">' . $detalles_fr . '</td>
 </tr>
 </table>
 <br><br>
@@ -149,9 +178,10 @@ $html ='
 
 <table border="0">
 <tr>
-<td style="height: 30px; width: 100px; background-color: #ffffff; text-align: center"><b>Nº.</b></td>
-<td style="height: 30px; width: 400px; background-color: #ffffff; text-align: center"><b>APELLIDOS, NOMBRE</b></td>
+<td style="height: 30px; width: 50px; background-color: #ffffff; text-align: center"><b>Nº.</b></td>
+<td style="height: 30px; width: 300px; background-color: #ffffff; text-align: left"><b>APELLIDOS, NOMBRE</b></td>
 <td style="height: 30px; width: 150px; background-color: #ffffff; text-align: center"><b>DNI/NIE</b></td>
+<td style="height: 30px; width: 150px; background-color: #ffffff; text-align: center"><b>PUESTO Tº</b></td>
 </tr>
 ';
 $contador_formasistencia = 0;
@@ -166,16 +196,17 @@ $formasistencia_datos = $query_formasistencia->fetchAll(PDO::FETCH_ASSOC);
 foreach ($formasistencia_datos as $formasistencia_dato) {
     $id_formasistencia = $formasistencia_dato['id_formasistencia'];
     $contador_formasistencia = $contador_formasistencia + 1;
-    $html .='
+    $html .= '
     <tr>
-<td style="height: 20px; width: 100px; background-color: #ffffff; text-align: center">'.$contador_formasistencia.'</td>
-<td style="height: 20px; width: 400px; background-color: #ffffff; text-align: left">'.$formasistencia_dato['nombre_tr'].'</td>
-<td style="height: 20px; width: 150px; background-color: #ffffff; text-align: center">'.$formasistencia_dato['dni_tr'].'</td>
+<td style="height: 30px; width: 50px; background-color: #ffffff; text-align: center">' . $contador_formasistencia . '</td>
+<td style="height: 20px; width: 300px; background-color: #ffffff; text-align: left">' . $formasistencia_dato['nombre_tr'] . '</td>
+<td style="height: 20px; width: 150px; background-color: #ffffff; text-align: center">' . $formasistencia_dato['dni_tr'] . '</td>
+<td style="height: 20px; width: 150px; background-color: #ffffff; text-align: center">' . $formasistencia_dato['nombre_cat'] . '</td>
 </tr>
     ';
 }
 
-$html .='
+$html .= '
 
 </table>
 ';

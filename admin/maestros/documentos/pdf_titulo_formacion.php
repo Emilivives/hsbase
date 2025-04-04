@@ -13,7 +13,7 @@ $id_trabajador_get = $_GET['id_trabajador'];
 
 include('../../../app/controllers/formaciones/cargar_formacion.php');
 include('../../../app/controllers/maestros/responsables/listado_responsables.php');
-include('../../../app/controllers/pruebas/listado_trabajadores.php');
+include('../../../app/controllers/trabajadores/listado_trabajadores.php');
 include('../../../app/controllers/formaciones/tipoformacion/listado_tipoformaciones.php');
 
 
@@ -76,9 +76,15 @@ $pdf->Write(10, $dni);
 
 
 $pdf->SetFont('Arial', 'B', '18');
-$pdf->SetXY(50, 102);
+$pdf->SetXY(20, 102);
 $trabajador_ace = mb_convert_encoding($tipo_fr, 'ISO-8859-1', 'UTF-8');
 $pdf->Write(5, $tipo_fr);
+
+if (strpos(mb_strtolower($tipo_fr, 'UTF-8'), 'puesto de trabajo') !== false) {
+    $nombre_cat =":     ". mb_convert_encoding($formasistencia_dato['nombre_cat'], 'ISO-8859-1', 'UTF-8');
+    $pdf->SetXY(180, 102);
+    $pdf->Write(5, $nombre_cat);
+}
 
 $pdf->SetFont('Arial', '', '15');
 $pdf->SetXY(65, 128);

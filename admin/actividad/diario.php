@@ -96,7 +96,8 @@ include('../../app/controllers/actividad/listado_total_actividades.php');
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="proyecto">Proyecto</label>
-                                            <select id="proyecto" class="form-control" onchange="filtrarTareas()">
+                                                                                     <select id="proyecto" name="id_proyecto" class="form-control" style="width: 100%;" onchange="filtrarTareas()">
+
                                                 <option value="">Seleccione un proyecto</option>
                                                 <?php
                                                 foreach ($proyectos as $proyecto) { ?>
@@ -263,42 +264,48 @@ include('../../admin/layout/mensaje.php');
 ?>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-     $(document).ready(function() {
-        $('#id_tarea').select2({
-            dropdownParent: $('#modal-nuevaactividad .modal-body'),
-            theme: 'bootstrap4',
-        });
+  $(document).ready(function() {
+    // Inicializar Select2 para el proyecto
+    $('#proyecto').select2({
+        dropdownParent: $('#modal-nuevaactividad .modal-body'),
+        theme: 'bootstrap4',
+        width: '100%',
+        closeOnSelect: true // <- Esto evita que se cierre automáticamente
     });
-
-    function filtrarTareas() {
-        var proyectoSelect = document.getElementById('proyecto');
-        var tareaSelect = document.getElementById('tarea');
-        var proyectoId = proyectoSelect.value;
-
-        // Ocultar todas las opciones primero
-        for (var i = 0; i < tareaSelect.options.length; i++) {
-            var option = tareaSelect.options[i];
-            option.style.display = 'none';
-
-            // Mostrar las opciones que coinciden con el proyecto seleccionado
-            if (option.getAttribute('data-proyecto') === proyectoId || option.value === "") {
-                option.style.display = 'block';
+    
+    // Inicializar Select2 para las tareas con filtrado
+    $('#id_tarea').select2({
+        dropdownParent: $('#modal-nuevaactividad .modal-body'),
+        theme: 'bootstrap4',
+        templateResult: function(data) {
+            if (!data.id) {
+                return data.text;
             }
+            
+            var $option = $(data.element);
+            var proyectoId = $('#proyecto').val();
+            
+            // Si hay un proyecto seleccionado y esta tarea no pertenece a ese proyecto, ocultar
+            if (proyectoId && $option.data('proyecto') != proyectoId) {
+                return null;
+            }
+            
+            return data.text;
         }
-
-        // Resetear el valor del select de tareas
-        tareaSelect.value = "";
-    }
-</script>
-<script>
-    document.getElementById('proyecto').addEventListener('change', function() {
-        var proyectoId = this.value;
-        var addTaskButton = document.getElementById('add-task-button');
-
-        // Actualiza el href del botón para redirigir a la página de añadir tarea con el id_proyecto seleccionado
-        addTaskButton.href = "../actividad/show.php?id_proyecto=" + proyectoId;
-
     });
+    
+    // Vincular el evento change al select de proyectos
+    $('#proyecto').on('change', function() {
+        // Cerrar el dropdown después de seleccionar
+        $('#proyecto').select2('close');
+        
+        filtrarTareas();
+        
+        // Actualizar el href del botón para añadir tarea
+        var proyectoId = $(this).val();
+        $('#add-task-button').attr('href', '../actividad/show.php?id_proyecto=' + proyectoId);
+    });
+});
 </script>
 
 <script>

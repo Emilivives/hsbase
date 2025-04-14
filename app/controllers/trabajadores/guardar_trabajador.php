@@ -44,11 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql_trabajador = "INSERT INTO trabajadores (
             codigo_tr, dni_tr, nombre_tr, sexo_tr, fechanac_tr, 
             inicio_tr, formacionpdt_tr, informacion_tr, 
-            centro_tr, categoria_tr, anotaciones_tr
+            centro_tr, categoria_tr, anotaciones_tr, fyh_creacion, fyh_actualizacion
         ) VALUES (
             :codigo, :dni, :nombre, :sexo, :fechanac, 
             :inicio, :formacionpdt, :informacion, 
-            :centro, :categoria, :anotaciones
+            :centro, :categoria, :anotaciones, :fyh_creacion, :fyh_actualizacion
         )";
         
         $stmt = $pdo->prepare($sql_trabajador);
@@ -63,7 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':informacion' => $informacion_tr,
             ':centro' => $centro_tr,
             ':categoria' => $categoria_tr,
-            ':anotaciones' => $anotaciones_tr
+            ':anotaciones' => $anotaciones_tr,
+            ':fyh_creacion' => $fechahora,
+            ':fyh_actualizacion' => $fechahora
         ]);          
 
         // Obtener el ID del trabajador recién insertado         
@@ -71,24 +73,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Guardar Formaciones         
         if (!empty($_POST['formaciones'])) {             
-            $sql_formacion = "INSERT INTO formacion_trabajador (id_trabajador, id_tipoformacion) VALUES (:id_trabajador, :id_tipoformacion)";             
+            $sql_formacion = "INSERT INTO formacion_trabajador (id_trabajador, id_tipoformacion, fecha_asignacion) VALUES (:id_trabajador, :id_tipoformacion, :fecha_asignacion)";             
             $stmt_formacion = $pdo->prepare($sql_formacion);             
             foreach ($_POST['formaciones'] as $id_tipoformacion) {                 
                 $stmt_formacion->execute([
                     ':id_trabajador' => $id_trabajador, 
-                    ':id_tipoformacion' => $id_tipoformacion
+                    ':id_tipoformacion' => $id_tipoformacion,
+                    ':fecha_asignacion' => $fecha
                 ]);             
             }         
         }          
 
         // Guardar Información PRL         
         if (!empty($_POST['info_prl'])) {             
-            $sql_info = "INSERT INTO informacion_trabajador (id_trabajador, id_infodoc) VALUES (:id_trabajador, :id_infodoc)";             
+            $sql_info = "INSERT INTO informacion_trabajador (id_trabajador, id_infodoc, fecha_asignacion) VALUES (:id_trabajador, :id_infodoc, :fecha_asignacion)";             
             $stmt_info = $pdo->prepare($sql_info);             
             foreach ($_POST['info_prl'] as $id_infodoc) {                 
                 $stmt_info->execute([
                     ':id_trabajador' => $id_trabajador, 
-                    ':id_infodoc' => $id_infodoc
+                    ':id_infodoc' => $id_infodoc,
+                    ':fecha_asignacion' => $fecha
                 ]);             
             }         
         }          

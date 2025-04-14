@@ -1,7 +1,11 @@
-<?php 
+<?php
 ob_start();
 include('../../../app/config.php');  
 header('Content-Type: application/json');
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {     
     try {         
@@ -26,6 +30,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             throw new Exception("ID de trabajador no proporcionado");
         }
 
+        // Validar formatos de datos
+        if (!preg_match('/^[A-Za-z0-9]{8}[A-Za-z]$/', $dni_tr)) {
+            throw new Exception("DNI/NIE no válido.");
+        }
+
+        if (!strtotime($fechanac_tr)) {
+            throw new Exception("Fecha de nacimiento no válida.");
+        }
+
+        // Validar campos obligatorios
         $required_fields = [
             'codigo_tr' => $codigo_tr, 
             'dni_tr' => $dni_tr, 
@@ -74,11 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Eliminar formaciones anteriores si es necesario y agregar nuevas
         if (!empty($_POST['formaciones'])) {
             $pdo->prepare("DELETE FROM formacion_trabajador WHERE id_trabajador = ?")->execute([$id_trabajador]);
-            $sql_formacion = "INSERT INTO formacion_trabajador (id_trabajador, id_tipoformacion) VALUES (:id_trabajador, :id_tipoformacion)";
+            $sql_formacion = "INSERT INTO formacion_trabajador (id_trabajador, id_tipoformacion, fecha_asignacion) VALUES (:id_trabajador, :id_tipoformacion, NOW())";
             $stmt_formacion = $pdo->prepare($sql_formacion);
 
             foreach ($_POST['formaciones'] as $id_tipoformacion) {
-                $stmt_formacion->execute([
+                $stmt_formacion->execute([ 
                     ':id_trabajador' => $id_trabajador, 
                     ':id_tipoformacion' => $id_tipoformacion
                 ]);
@@ -88,11 +102,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Eliminar información PRL anterior si es necesario y agregar nueva
         if (!empty($_POST['info_prl'])) {
             $pdo->prepare("DELETE FROM informacion_trabajador WHERE id_trabajador = ?")->execute([$id_trabajador]);
-            $sql_info = "INSERT INTO informacion_trabajador (id_trabajador, id_infodoc) VALUES (:id_trabajador, :id_infodoc)";
+            $sql_info = "INSERT INTO informacion_trabajador (id_trabajador, id_infodoc, fecha_asignacion) VALUES (:id_trabajador, :id_infodoc, NOW())";
             $stmt_info = $pdo->prepare($sql_info);
 
             foreach ($_POST['info_prl'] as $id_infodoc) {
-                $stmt_info->execute([
+                $stmt_info->execute([ 
                     ':id_trabajador' => $id_trabajador, 
                     ':id_infodoc' => $id_infodoc
                 ]);
@@ -103,23 +117,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $pdo->commit();
 
         ob_end_clean();
-        echo json_encode([
+        echo json_encode([ 
             'status' => 'success', 
-            'message' => 'Trabajador actualizado correctamente'
+            'message' => 'Trabajador actualizado correctamente' 
         ]);
     } catch (Exception $e) {         
         $pdo->rollBack();  
         ob_end_clean();
-        echo json_encode([
+        echo json_encode([ 
             'status' => 'error', 
-            'message' => 'Error al actualizar: ' . $e->getMessage()
+            'message' => 'Error al actualizar: ' . $e->getMessage() 
         ]);
     } 
 } else {     
     ob_end_clean();
-    echo json_encode([
+    echo json_encode([ 
         'status' => 'error', 
-        'message' => 'Método no permitido'
+        'message' => 'Método no permitido' 
     ]);
-} 
+}
 ?>

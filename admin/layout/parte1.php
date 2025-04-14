@@ -270,7 +270,7 @@ function isTreeviewOpen($pages)
                         <?php if ($_SESSION['perfil_usr'] === 'ADMINISTRADOR' || $_SESSION['perfil_usr'] === 'USUARIO_PRL'): ?>
 
                         <li class="nav-item">
-                            <a href="<?php echo $URL; ?>/admin/trabajadores/trabajadorshow.php?id_trabajador=1" class="nav-link <?php echo isActive('/admin/trabajadores/trabajadorshow.php?id_trabajador='); ?>">
+                            <a href="<?php echo $URL; ?>/admin/trabajadores/index.php" class="nav-link <?php echo isActive('/admin/trabajadores/index.php'); ?>">
                                 <i class="nav-icon fas fa-people-arrows"></i>
                                 <p>Trabajadores</p>
                             </a>
@@ -576,6 +576,7 @@ function isTreeviewOpen($pages)
             <div class="content">
 
                 <script>
+                    
                     // Tiempo máximo de inactividad en milisegundos (ejemplo: 10 minutos)
                     const tiempoMaxInactividad = 600000; // 10 minutos en milisegundos
 

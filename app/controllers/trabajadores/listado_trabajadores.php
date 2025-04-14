@@ -6,7 +6,7 @@ $sql = "SELECT tr.id_trabajador as id_trabajador, tr.codigo_tr as codigo_tr,
         tr.activo_tr as activo_tr, tr.formacionpdt_tr as formacionpdt_tr, 
         tr.informacion_tr as informacion_tr, cat.nombre_cat as nombre_cat, 
         dpo.nombre_dpo as nombre_dpo, cat.departamento_cat as departamento_cat,  
-        cen.nombre_cen as nombre_cen, emp.nombre_emp as nombre_emp, 
+        cen.nombre_cen as nombre_cen, emp.nombre_emp as nombre_emp, emp.id_empresa as id_empresa,
         tc.nombre_tc as nombre_tc 
         FROM trabajadores as tr  
         INNER JOIN categorias as cat ON tr.categoria_tr = cat.id_categoria 

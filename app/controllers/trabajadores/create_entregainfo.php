@@ -32,10 +32,11 @@ try {
         WHERE id_infodoc = ?
     ");
     $stmtTipoinfo->execute([$id_infodoc]);
-    $tipoinfo = $stmtTipoinfo->fetch();
+    $tipoinfo = $stmtTipoinfo->fetch(PDO::FETCH_ASSOC);
 
-    // Comprobar si el valor de tipoinfo_ifd es 'puesto de trabajo'
-    $debeActualizarTrabajadores = ($tipoinfo && $tipoinfo['tipoinfo_ifd'] === 'puesto de trabajo');
+    // Comprobar si el valor de tipoinfo_ifd contiene 'puesto de trabajo'
+    $debeActualizarTrabajadores = ($tipoinfo && isset($tipoinfo['tipoinfo_ifd']) && 
+                                  stripos($tipoinfo['tipoinfo_ifd'], 'puesto de trabajo') !== false);
 
     if ($existe) {
         // Actualizar fecha_completado
@@ -46,14 +47,14 @@ try {
         ");
         $stmt->execute([$fecha_completado, $existe['id_infoprl_tr']]);
 
-        // Si tipoinfo_ifd es 'puesto de trabajo', actualizar la tabla trabajadores
+        // Si tipoinfo_ifd contiene 'puesto de trabajo', actualizar la tabla trabajadores
         if ($debeActualizarTrabajadores) {
             $stmt = $pdo->prepare("
                 UPDATE trabajadores 
                 SET informacion_tr = 'Si' 
                 WHERE id_trabajador = ?
             ");
-            $stmt->execute([$existe['id_trabajador']]);
+            $stmt->execute([$id_trabajador]);
         }
     } else {
         // Insertar nuevo registro
@@ -69,7 +70,7 @@ try {
             $fecha_completado
         ]);
 
-        // Si tipoinfo_ifd es 'puesto de trabajo', actualizar la tabla trabajadores
+        // Si tipoinfo_ifd contiene 'puesto de trabajo', actualizar la tabla trabajadores
         if ($debeActualizarTrabajadores) {
             $stmt = $pdo->prepare("
                 UPDATE trabajadores 

@@ -44,6 +44,7 @@ function isTreeviewOpen($pages)
     }
     return '';
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -152,10 +153,12 @@ function isTreeviewOpen($pages)
         hr {
             border-color: white;
         }
+
         .brand-image {
-    width: 120px; /* Ajusta el tamaño como desees */
-    opacity: 0.9;
-}
+            width: 120px;
+            /* Ajusta el tamaño como desees */
+            opacity: 0.9;
+        }
     </style>
 </head>
 
@@ -181,25 +184,45 @@ function isTreeviewOpen($pages)
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <span class="badge badge-warning navbar-badge" title="Avisos">15</span>
+                        <span class="badge badge-warning navbar-badge" title="Avisos">
+                            <?= $contador_total_notificaciones ?>
+                        </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
+                        <span class="dropdown-item dropdown-header"><?= $contador_total_notificaciones ?> Notificaciones</span>
                         <div class="dropdown-divider"></div>
 
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                        <?php if ($contador_tr_no_formados > 0): ?>
+                            <a href="<?= $URL ?>/admin/trabajadores/index.php" class="dropdown-item">
+                                <i class="fas fa-user-times mr-2"></i> <?= $contador_tr_no_formados ?> trabajadores sin formar
+                            </a>
+                            <div class="dropdown-divider"></div>
+                        <?php endif; ?>
+
+                        <?php if ($contador_accidentes_sin_comunicar > 0): ?>
+                            <a href="<?= $URL ?>/admin/accidentes/index.php" class="dropdown-item">
+                                <i class="fas fa-ambulance mr-2"></i> <?= $contador_accidentes_sin_comunicar ?> accidentes sin comunicar
+                            </a>
+                            <div class="dropdown-divider"></div>
+                        <?php endif; ?>
+
+                        <?php if ($contador_tr_no_citarm > 0): ?>
+                            <a href="<?= $URL ?>/admin/reconocimientos/index.php" class="dropdown-item">
+                                <i class="fas fa-stethoscope mr-2"></i> <?= $contador_tr_no_citarm ?> RM pendientes
+                            </a>
+                            <div class="dropdown-divider"></div>
+                        <?php endif; ?>
+
+                        <?php if ($contador_mantenimientos_caducados > 0): ?>
+                            <a href="<?= $URL ?>/admin/inventario/revisionoficial.php" class="dropdown-item">
+                                <i class="fas fa-tools mr-2"></i> <?= $contador_mantenimientos_caducados ?> revisiones caducadas
+                            </a>
+                            <div class="dropdown-divider"></div>
+                        <?php endif; ?>
+
+                        <a href="<?= $URL ?>/admin/avisos/index.php" class="dropdown-item dropdown-footer">Ver todas las notificaciones</a>
                     </div>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -269,12 +292,12 @@ function isTreeviewOpen($pages)
                         <!-- Trabajadores -->
                         <?php if ($_SESSION['perfil_usr'] === 'ADMINISTRADOR' || $_SESSION['perfil_usr'] === 'USUARIO_PRL'): ?>
 
-                        <li class="nav-item">
-                            <a href="<?php echo $URL; ?>/admin/trabajadores/index.php" class="nav-link <?php echo isActive('/admin/trabajadores/index.php'); ?>">
-                                <i class="nav-icon fas fa-people-arrows"></i>
-                                <p>Trabajadores</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="<?php echo $URL; ?>/admin/trabajadores/index.php" class="nav-link <?php echo isActive('/admin/trabajadores/index.php'); ?>">
+                                    <i class="nav-icon fas fa-people-arrows"></i>
+                                    <p>Trabajadores</p>
+                                </a>
+                            </li>
                         <?php endif; ?>
                         <?php if ($_SESSION['perfil_usr'] === 'ADMINISTRADOR' || $_SESSION['perfil_usr'] === 'USUARIO_PRL'): ?>
 
@@ -530,13 +553,13 @@ function isTreeviewOpen($pages)
                             </li>
                         <?php endif; ?>
                         <?php if ($_SESSION['perfil_usr'] === 'ADMINISTRADOR' || $_SESSION['perfil_usr'] === 'USUARIO_RRHH' || $_SESSION['perfil_usr'] === 'USUARIO_RRHH_BASICO'): ?>
-                        <!-- Vacaciones -->
-                        <li class="nav-item">
-                            <a href="<?php echo $URL; ?>/admin/vacaciones/index.php" class="nav-link <?php echo isActive('/admin/vacaciones/index.php'); ?>">
-                                <i class="nav-icon fas bi bi-clock-history"></i>
-                                <p>Vacaciones</p>
-                            </a>
-                        </li>
+                            <!-- Vacaciones -->
+                            <li class="nav-item">
+                                <a href="<?php echo $URL; ?>/admin/vacaciones/index.php" class="nav-link <?php echo isActive('/admin/vacaciones/index.php'); ?>">
+                                    <i class="nav-icon fas bi bi-clock-history"></i>
+                                    <p>Vacaciones</p>
+                                </a>
+                            </li>
                         <?php endif; ?>
 
 
@@ -576,7 +599,6 @@ function isTreeviewOpen($pages)
             <div class="content">
 
                 <script>
-                    
                     // Tiempo máximo de inactividad en milisegundos (ejemplo: 10 minutos)
                     const tiempoMaxInactividad = 600000; // 10 minutos en milisegundos
 

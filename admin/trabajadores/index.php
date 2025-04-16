@@ -25,7 +25,7 @@ if (empty($trabajadores)) {
 
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
 
- 
+
 
     <!-- DataTables Buttons -->
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
@@ -37,7 +37,8 @@ if (empty($trabajadores)) {
     <!--mensajes toast -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         /* Añadimos estilos para mejorar la visualización de los detalles */
         .details-row {
@@ -1202,11 +1203,13 @@ if (empty($trabajadores)) {
                                                             <p><strong>Nombre:</strong> ${t.nombre_tr || 'N/A'}</p>
                                                             <p><strong>DNI:</strong> ${t.dni_tr || 'N/A'}</p>
                                                             <p><strong>Teléfono:</strong> ${t.telefono_tr || 'N/A'}</p>
+                                                         <p><strong>Sexo:</strong> ${t.sexo_tr || 'N/A'}</p>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <p><strong>Email:</strong> ${t.email_tr || 'N/A'}</p>
                                                             <p><strong>Categoría:</strong> ${t.categoria_nombre || 'N/A'}</p>
                                                             <p><strong>Estado:</strong> ${t.activo_tr == 1 ? 'Activo' : 'Inactivo'}</p>
+                                             <p><strong>Inicio empresa:</strong> ${formatDate(t.inicio_tr) || 'N/A'}</p>
                                                         </div>
                                                         <div class="col-md-7">
                                                             <div class="row">
@@ -1709,10 +1712,13 @@ if (empty($trabajadores)) {
                 close: true,
                 gravity: "top",
                 position: "right",
-                backgroundColor: "#dc3545",
+                style: {
+                    background: "#dc3545"
+                }
             }).showToast();
         }
-        // Funciones actualizadas de notificación
+
+        // Función actualizada de notificación de éxito
         function mostrarMensajeExito(mensaje) {
             Toastify({
                 text: mensaje,
@@ -1720,9 +1726,12 @@ if (empty($trabajadores)) {
                 close: true,
                 gravity: "top",
                 position: "right",
-                backgroundColor: "#28a745",
+                style: {
+                    background: "#28a745"
+                }
             }).showToast();
         }
+
 
         function cerrarModal() {
             const modalElement = document.getElementById('modalEntregaInfo');
@@ -2086,11 +2095,11 @@ if (empty($trabajadores)) {
         });
     </script>
     <script>
-  // Reinicializa el menú lateral
-  document.addEventListener('DOMContentLoaded', function() {
-    $('[data-widget="treeview"]').Treeview('init');
-  });
-</script>
+        // Reinicializa el menú lateral
+        document.addEventListener('DOMContentLoaded', function() {
+            $('[data-widget="treeview"]').Treeview('init');
+        });
+    </script>
 </body>
 
 </html>

@@ -894,12 +894,12 @@ if (empty($trabajadores)) {
                             <!-- Contenido de las pestañas -->
                             <div class="tab-content mt-3">
                                 <!-- Tab: Formaciones a Realizar -->
+                                <!-- Tab: Formaciones a Realizar -->
                                 <div class="tab-pane fade show active" id="formaciones-edit">
+                                    <input type="hidden" name="procesar_formaciones" value="1">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h6 class="text-primary"><i class="bi bi-mortarboard"></i> Formaciones a Realizar</h6>
-
                                     </div>
-
                                     <!-- Grid de formaciones con efecto hover -->
                                     <div class="row row-cols-2 row-cols-md-3 g-1" id="formaciones-container">
                                         <!-- Se llenará dinámicamente -->
@@ -908,11 +908,10 @@ if (empty($trabajadores)) {
 
                                 <!-- Tab: Información PRL -->
                                 <div class="tab-pane fade" id="informacion-edit">
+                                    <input type="hidden" name="procesar_info_prl" value="1">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h6 class="text-primary"><i class="bi bi-file-earmark-text"></i> Información PRL a Entregar</h6>
-
                                     </div>
-
                                     <!-- Grid de información PRL con efecto hover -->
                                     <div class="row row-cols-2 row-cols-md-3 g-1" id="info-prl-container">
                                         <!-- Se llenará dinámicamente -->
@@ -1868,35 +1867,55 @@ if (empty($trabajadores)) {
 
         // Evento para enviar el formulario de edición
         $('#formEditar').submit(function(event) {
-            event.preventDefault();
+    event.preventDefault();
 
-            // Crear un objeto FormData con los datos del formulario
-            let formData = new FormData(this);
+    // Crear un objeto FormData con los datos del formulario
+    let formData = new FormData(this);
+    
+    // Asegurarse de que estos campos siempre estén presentes
+    if (!formData.has('procesar_formaciones')) {
+        formData.append('procesar_formaciones', '1');
+    }
+    
+    if (!formData.has('procesar_info_prl')) {
+        formData.append('procesar_info_prl', '1');
+    }
+    
+    // Si no hay formaciones seleccionadas, asegurarse de que el campo existe para indicar que se procesó
+    if (!formData.has('formaciones[]')) {
+        // Añadimos un campo vacío para indicar que este array debe estar presente
+        formData.append('formaciones_empty', '1');
+    }
+    
+    // Si no hay información PRL seleccionada, asegurarse de que el campo existe para indicar que se procesó
+    if (!formData.has('info_prl[]')) {
+        // Añadimos un campo vacío para indicar que este array debe estar presente
+        formData.append('info_prl_empty', '1');
+    }
 
-            // Enviar los datos al servidor
-            fetch('../../app/controllers/trabajadores/actualizar_trabajador.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        alert('✅ ' + data.message);
-                        // Cerrar el modal
-                        var modal = new bootstrap.Modal(document.getElementById('modalEditar'));
-                        modal.hide();
-                        // Recargar la página para ver los cambios
-                        location.reload();
-                    } else {
-                        alert('❌ ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('❌ Error en la solicitud: ' + error.message);
-                });
+    // Enviar los datos al servidor
+    fetch('../../app/controllers/trabajadores/actualizar_trabajador.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('✅ ' + data.message);
+                // Cerrar el modal
+                var modal = new bootstrap.Modal(document.getElementById('modalEditar'));
+                modal.hide();
+                // Recargar la página para ver los cambios
+                location.reload();
+            } else {
+                alert('❌ ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('❌ Error en la solicitud: ' + error.message);
         });
-
+});
 
         ////funcion cargardocumentos entrega info prl///
         // Función para cargar documentos via AJAX

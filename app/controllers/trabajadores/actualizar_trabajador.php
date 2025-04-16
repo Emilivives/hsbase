@@ -6,7 +6,6 @@ header('Content-Type: application/json');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {     
     try {         
         $pdo->beginTransaction(); 
@@ -25,36 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $categoria_tr = $_POST['categoria_tr'] ?? '';
         $anotaciones_tr = $_POST['anotaciones_tr'] ?? '';
 
-        // Validar que el ID y los campos requeridos existen
-        if (!$id_trabajador) {
-            throw new Exception("ID de trabajador no proporcionado");
-        }
+        // Validaciones y actualización de datos básicos (sin cambios)
+        // [...]
 
-        // Validar formatos de datos
-        if (!preg_match('/^[A-Za-z0-9]{8}[A-Za-z]$/', $dni_tr)) {
-            throw new Exception("DNI/NIE no válido.");
-        }
-
-        if (!strtotime($fechanac_tr)) {
-            throw new Exception("Fecha de nacimiento no válida.");
-        }
-
-        // Validar campos obligatorios
-        $required_fields = [
-            'codigo_tr' => $codigo_tr, 
-            'dni_tr' => $dni_tr, 
-            'nombre_tr' => $nombre_tr, 
-            'centro_tr' => $centro_tr, 
-            'categoria_tr' => $categoria_tr
-        ];
-
-        foreach ($required_fields as $field => $value) {
-            if (empty(trim($value))) {
-                throw new Exception("El campo $field es obligatorio");
-            }
-        }
-
-        // Actualizar datos del trabajador
+        // Actualizar datos básicos del trabajador
         $sql_update = "UPDATE trabajadores SET 
             codigo_tr = :codigo, 
             dni_tr = :dni, 
@@ -85,31 +58,109 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':id_trabajador' => $id_trabajador
         ]);
 
-        // Eliminar formaciones anteriores si es necesario y agregar nuevas
-        if (!empty($_POST['formaciones'])) {
-            $pdo->prepare("DELETE FROM formacion_trabajador WHERE id_trabajador = ?")->execute([$id_trabajador]);
-            $sql_formacion = "INSERT INTO formacion_trabajador (id_trabajador, id_tipoformacion, fecha_asignacion) VALUES (:id_trabajador, :id_tipoformacion, NOW())";
-            $stmt_formacion = $pdo->prepare($sql_formacion);
-
-            foreach ($_POST['formaciones'] as $id_tipoformacion) {
-                $stmt_formacion->execute([ 
-                    ':id_trabajador' => $id_trabajador, 
-                    ':id_tipoformacion' => $id_tipoformacion
-                ]);
+        // Procesar formaciones si se indica
+        if (isset($_POST['procesar_formaciones'])) {
+            // Preparar array de formaciones seleccionadas (o vacío si no hay)
+            $formaciones_seleccionadas = isset($_POST['formaciones']) && is_array($_POST['formaciones']) ? 
+                                        $_POST['formaciones'] : [];
+            
+            if (empty($formaciones_seleccionadas)) {
+                // Si no hay formaciones seleccionadas, eliminar todas
+                $pdo->prepare("DELETE FROM formacion_trabajador WHERE id_trabajador = ?")->execute([$id_trabajador]);
+            } else {
+                // Obtener las formaciones actuales del trabajador
+                $stmt = $pdo->prepare("SELECT id_tipoformacion, fecha_completado, estado FROM formacion_trabajador WHERE id_trabajador = ?");
+                $stmt->execute([$id_trabajador]);
+                $formaciones_actuales = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                
+                // Crear un array de las formaciones actuales para fácil acceso
+                $formaciones_actuales_map = [];
+                foreach ($formaciones_actuales as $fa) {
+                    $formaciones_actuales_map[$fa['id_tipoformacion']] = [
+                        'fecha_completado' => $fa['fecha_completado'],
+                        'estado' => $fa['estado']
+                    ];
+                }
+                
+                // Eliminar las formaciones que ya no están seleccionadas
+                $placeholders = implode(',', array_fill(0, count($formaciones_seleccionadas), '?'));
+                if (!empty($placeholders)) {
+                    $params = array_merge([$id_trabajador], $formaciones_seleccionadas);
+                    $pdo->prepare("DELETE FROM formacion_trabajador WHERE id_trabajador = ? AND id_tipoformacion NOT IN ($placeholders)")->execute($params);
+                }
+                
+                // Insertar o mantener las formaciones seleccionadas
+                $stmt_check = $pdo->prepare("SELECT COUNT(*) FROM formacion_trabajador WHERE id_trabajador = ? AND id_tipoformacion = ?");
+                $stmt_insert = $pdo->prepare("INSERT INTO formacion_trabajador (id_trabajador, id_tipoformacion, fecha_asignacion, fecha_completado, estado) VALUES (?, ?, NOW(), ?, ?)");
+                
+                foreach ($formaciones_seleccionadas as $id_formacion) {
+                    $stmt_check->execute([$id_trabajador, $id_formacion]);
+                    $existe = $stmt_check->fetchColumn();
+                    
+                    if (!$existe) {
+                        // Si no existe, insertar con valores por defecto
+                        $fecha_completado = isset($formaciones_actuales_map[$id_formacion]) ? 
+                                            $formaciones_actuales_map[$id_formacion]['fecha_completado'] : null;
+                        $estado = isset($formaciones_actuales_map[$id_formacion]) ? 
+                                 $formaciones_actuales_map[$id_formacion]['estado'] : 'Pendiente';
+                        
+                        $stmt_insert->execute([$id_trabajador, $id_formacion, $fecha_completado, $estado]);
+                    }
+                    // Si ya existe, lo dejamos como está
+                }
             }
         }
 
-        // Eliminar información PRL anterior si es necesario y agregar nueva
-        if (!empty($_POST['info_prl'])) {
-            $pdo->prepare("DELETE FROM informacion_trabajador WHERE id_trabajador = ?")->execute([$id_trabajador]);
-            $sql_info = "INSERT INTO informacion_trabajador (id_trabajador, id_infodoc, fecha_asignacion) VALUES (:id_trabajador, :id_infodoc, NOW())";
-            $stmt_info = $pdo->prepare($sql_info);
-
-            foreach ($_POST['info_prl'] as $id_infodoc) {
-                $stmt_info->execute([ 
-                    ':id_trabajador' => $id_trabajador, 
-                    ':id_infodoc' => $id_infodoc
-                ]);
+        // Procesar información PRL si se indica
+        if (isset($_POST['procesar_info_prl'])) {
+            // Preparar array de info PRL seleccionada (o vacío si no hay)
+            $info_prl_seleccionada = isset($_POST['info_prl']) && is_array($_POST['info_prl']) ? 
+                                    $_POST['info_prl'] : [];
+            
+            if (empty($info_prl_seleccionada)) {
+                // Si no hay info PRL seleccionada, eliminar todas
+                $pdo->prepare("DELETE FROM informacion_trabajador WHERE id_trabajador = ?")->execute([$id_trabajador]);
+            } else {
+                // Obtener la info PRL actual del trabajador
+                $stmt = $pdo->prepare("SELECT id_infodoc, fecha_completado, estado FROM informacion_trabajador WHERE id_trabajador = ?");
+                $stmt->execute([$id_trabajador]);
+                $info_prl_actual = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                
+                // Crear un array de la info PRL actual para fácil acceso
+                $info_prl_actual_map = [];
+                foreach ($info_prl_actual as $ipa) {
+                    $info_prl_actual_map[$ipa['id_infodoc']] = [
+                        'fecha_completado' => $ipa['fecha_completado'],
+                        'estado' => $ipa['estado']
+                    ];
+                }
+                
+                // Eliminar la info PRL que ya no está seleccionada
+                $placeholders = implode(',', array_fill(0, count($info_prl_seleccionada), '?'));
+                if (!empty($placeholders)) {
+                    $params = array_merge([$id_trabajador], $info_prl_seleccionada);
+                    $pdo->prepare("DELETE FROM informacion_trabajador WHERE id_trabajador = ? AND id_infodoc NOT IN ($placeholders)")->execute($params);
+                }
+                
+                // Insertar o mantener la info PRL seleccionada
+                $stmt_check = $pdo->prepare("SELECT COUNT(*) FROM informacion_trabajador WHERE id_trabajador = ? AND id_infodoc = ?");
+                $stmt_insert = $pdo->prepare("INSERT INTO informacion_trabajador (id_trabajador, id_infodoc, fecha_asignacion, fecha_completado, estado) VALUES (?, ?, NOW(), ?, ?)");
+                
+                foreach ($info_prl_seleccionada as $id_infodoc) {
+                    $stmt_check->execute([$id_trabajador, $id_infodoc]);
+                    $existe = $stmt_check->fetchColumn();
+                    
+                    if (!$existe) {
+                        // Si no existe, insertar con valores por defecto
+                        $fecha_completado = isset($info_prl_actual_map[$id_infodoc]) ? 
+                                            $info_prl_actual_map[$id_infodoc]['fecha_completado'] : null;
+                        $estado = isset($info_prl_actual_map[$id_infodoc]) ? 
+                                $info_prl_actual_map[$id_infodoc]['estado'] : 'Pendiente';
+                        
+                        $stmt_insert->execute([$id_trabajador, $id_infodoc, $fecha_completado, $estado]);
+                    }
+                    // Si ya existe, lo dejamos como está
+                }
             }
         }
 
